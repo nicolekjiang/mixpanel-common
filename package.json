@@ -1,0 +1,50 @@
+{
+  "name": "mixpanel-common",
+  "main": "index.js",
+  "version": "0.1.0",
+  "description": "Reusable Mixpanel styles and components",
+  "scripts": {
+    "build": "webpack",
+    "build-watch": "webpack -w",
+    "lint": "eslint ./buttons.js",
+    "validate": "npm ls"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:mixpanel/mixpanel-common.git"
+  },
+  "keywords": [
+    "web components",
+    "components",
+    "styles"
+  ],
+  "author": "dev@mixpanel.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mixpanel/mixpanel-common/issues"
+  },
+  "homepage": "https://github.com/mixpanel/mixpanel-common",
+  "devDependencies": {
+    "autoprefixer-loader": "^3.2.0",
+    "babel-core": "^6.9.1",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "css-loader": "^0.23.1",
+    "eslint": "^2.11.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "precommit-hook-eslint": "^3.0.0",
+    "style-loader": "^0.13.1",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^2.1.0",
+    "webpack": "^1.13.1"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.9.1",
+    "webcomponent": "^0.1.2",
+    "webcomponents.js": "^0.7.22"
+  },
+  "pre-commit": [
+    "lint",
+    "validate"
+  ]
+}
