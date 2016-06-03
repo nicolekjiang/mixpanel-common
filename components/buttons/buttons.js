@@ -7,7 +7,7 @@ document.registerElement('mp-button', class MPButton extends WebComponent {
     this.root = this.createShadowRoot();
     this.main = document.createElement('div');
     this.main.classList.add('mp-button');
-    this.main.classList.add(this.getAttribute('type'));
+    this.getAttribute('type').split(' ').forEach(type => this.main.classList.add(type));
   }
 
   attachedCallback() {

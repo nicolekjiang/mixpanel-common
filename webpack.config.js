@@ -2,7 +2,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var path = require('path');
 
 var webpackConfig = {
-  entry: './buttons.js',
+  entry: './components/index.js',
   output: {
     filename: 'examples/build/bundle.js',
   },
