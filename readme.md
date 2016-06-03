@@ -1,1 +1,1 @@
-Reusable components.
+# Mixpanel Common: reusable styles and components
