@@ -2,7 +2,7 @@ import WebComponent from 'webcomponent';
 
 import css from './buttons.styl';
 
-document.registerElement('mp-button', class MPCButton extends WebComponent {
+document.registerElement('mp-button', class MPButton extends WebComponent {
   createdCallback() {
     this.root = this.createShadowRoot();
     this.main = document.createElement('div');
