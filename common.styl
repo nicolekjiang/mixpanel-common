@@ -1,56 +1,63 @@
-active = '&:active,&[active]'
-
-background-color-dark = #3391e9
-background-color-light = #50aaff
+/* Baseline measurements (in px) */
 
 baseline-vertical = 6
 baseline-horizontal = 20
 
-color-dark = #4c6072
-color-light = #ffffff
-color-med-dark = #6e859d
-color-med-light = #9cacbb
 
+/* Color palettte */
+
+blue-100 = #6cb8ff
+blue-300 = #50aaff
+blue-500 = #3b99f0
+blue-700 = #3391e9
+blue-900 = #2788e3
+grey-100 = #f0f3f5
+grey-200 = #d8e0e7
+grey-300 = #c1ccd6
+grey-500 = #9cacbb
+grey-700 = #6e859d
+grey-900 = #4c6072
+mp-red = #e4567b
+mp-yellow = #ffd209
+
+
+/* Text styles */
+
+font-list-item()
+  font-family Helvetica Neue Medium
+  font-size 13px
+  line-height 1.7
+  color grey-700
+
+font-paragraph()
+  font-family Helvetica Neue Medium
+  font-size 14px
+  line-height 1.6
+  color grey-700
+
+font-subtitle()
+  font-family Proxima Nova Bold
+  font-size 15px
+  line-height 1.5
+  letter-spacing 0.1px
+  color grey-900
+
+font-title()
+  font-family Proxima Nova Bold
+  font-size 18px
+  line-height 1.4
+  letter-spacing 0.2px
+  color grey-900
+
+
+/* Button states */
+
+active = '&:active,&[active]'
 disabled = '&:disabled,&[disabled]'
 
-font-family-button = 'Helvetica Neue'
-font-family-list-item = 'Helvetica Neue'
-font-family-paragraph = 'Helvetica Neue'
-font-family-subtitle = 'Proxima Nova'
-font-family-title = 'Proxima Nova'
 
-font-size-list-item = 13px
-font-size-paragraph = 14px
-font-size-subtitle = 15px
-font-size-title = 18px
-
-font-weight-bold = 700
-font-weight-medium = 500
-font-weight-semi-bold = 600
+/* Misc */
 
 *:focus
   outline 0
 
-font-list-item()
-  color color-med-dark
-  font-family font-family-list-item
-  font-size font-size-list-item
-  font-weight font-weight-medium
-
-font-paragraph()
-  color color-med-dark
-  font-family font-family-paragraph
-  font-size font-size-paragraph
-  font-weight font-weight-medium
-
-font-subtitle()
-  color color-dark
-  font-family font-family-subtitle
-  font-size font-size-subtitle
-  font-weight font-weight-semi-bold
-
-font-title()
-  color color-dark
-  font-family font-family-title
-  font-size font-size-title
-  font-weight font-weight-semi-bold
