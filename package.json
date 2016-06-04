@@ -8,6 +8,7 @@
     "build-example": "webpack",
     "build-example-watch": "webpack -w",
     "lint": "eslint ./buttons.js",
+    "preinstall": "npm run build",
     "prepublish": "npm run build",
     "validate": "npm ls"
   },

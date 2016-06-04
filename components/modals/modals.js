@@ -20,7 +20,7 @@ document.registerElement('mp-modal', class MPModal extends WebComponent {
   }
 
   render() {
-    this.root.innerHTML = `<style>${css[0][1]}</style>`;
+    this.root.innerHTML = `<style>${css}</style>`;
     this.root.appendChild(this.main);
   }
 });

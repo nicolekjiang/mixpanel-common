@@ -15,7 +15,7 @@ document.registerElement('mp-button', class MPButton extends WebComponent {
   }
 
   render() {
-    this.root.innerHTML = `<style>${css[0][1]}</style>`;
+    this.root.innerHTML = `<style>${css}</style>`;
     this.main.innerHTML = `<span class="${this.getAttribute('type')}-text"><content></content></span>`;
     if (this.isAttributeEnabled('disabled')) {
       this.main.setAttribute('disabled', true);
