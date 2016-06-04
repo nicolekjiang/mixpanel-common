@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack",
     "build-watch": "webpack -w",
-    "lint": "eslint components",
+    "lint": "eslint components util",
     "validate": "npm ls"
   },
   "repository": {
