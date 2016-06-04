@@ -7,15 +7,15 @@ document.registerElement('mp-button', class MPButton extends WebComponent {
     this.root = this.createShadowRoot();
     this.main = document.createElement('div');
     this.main.classList.add('mp-button');
-    this.main.classList.add(this.getAttribute('type'));
   }
 
   attachedCallback() {
+    this.getAttribute('type').split(' ').forEach(type => this.main.classList.add(type));
     this.render();
   }
 
   render() {
-    this.root.innerHTML = `<style>${css[0][1]}</style>`;
+    this.root.innerHTML = `<style>${css}</style>`;
     this.main.innerHTML = `<span class="${this.getAttribute('type')}-text"><content></content></span>`;
     if (this.isAttributeEnabled('disabled')) {
       this.main.setAttribute('disabled', true);

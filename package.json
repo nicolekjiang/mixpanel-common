@@ -1,12 +1,14 @@
 {
   "name": "mixpanel-common",
-  "main": "index.js",
-  "version": "0.1.0",
+  "main": "build/index.js",
+  "version": "0.1.1",
   "description": "Reusable Mixpanel styles and components",
   "scripts": {
-    "build": "webpack",
-    "build-watch": "webpack -w",
+    "build": "babel components -d build",
+    "build-example": "webpack",
+    "build-example-watch": "webpack -w",
     "lint": "eslint ./buttons.js",
+    "prepublish": "npm run build",
     "validate": "npm ls"
   },
   "repository": {
@@ -26,8 +28,10 @@
   "homepage": "https://github.com/mixpanel/mixpanel-common",
   "devDependencies": {
     "autoprefixer-loader": "^3.2.0",
+    "babel-cli": "^6.9.0",
     "babel-core": "^6.9.1",
     "babel-loader": "^6.2.4",
+    "babel-plugin-stylus-compiler": "^1.0.5",
     "babel-preset-es2015": "^6.9.0",
     "css-loader": "^0.23.1",
     "eslint": "^2.11.1",

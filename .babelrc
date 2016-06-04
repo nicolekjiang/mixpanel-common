@@ -1,0 +1,4 @@
+{
+  "plugins": ["babel-plugin-stylus-compiler"],
+  "presets": ["es2015"]
+}
