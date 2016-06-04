@@ -2,11 +2,11 @@
   "name": "mixpanel-common",
   "main": "index.js",
   "version": "0.1.0",
-  "description": "Reusable Mixpanel styles and components",
+  "description": "Mixpanel shared JS",
   "scripts": {
     "build": "webpack",
     "build-watch": "webpack -w",
-    "lint": "eslint ./buttons.js",
+    "lint": "eslint components",
     "validate": "npm ls"
   },
   "repository": {
