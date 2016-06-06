@@ -1,7 +1,9 @@
 @import '../../common'
 
 background-primary = blue-300 linear-gradient(to bottom, #50AEFF, #46A2FF)
-background-primary-acitve = blue-100 linear-gradient(#73bdff, #65b3ff)
+background-primary-hover = blue-100 linear-gradient(#73bdff, #65b3ff)
+background-primary-on-blue = blue-300 linear-gradient(to bottom, #7fc1ff, #6fb9ff)
+background-primary-on-blue-hover = blue-100 linear-gradient(#8cc7ff, #7bbfff)
 
 .mp-button
   border-radius 2px
@@ -11,6 +13,7 @@ background-primary-acitve = blue-100 linear-gradient(#73bdff, #65b3ff)
   font-size 13px
   font-weight 700
   letter-spacing 0.2px
+  line-height 15px
   padding 12px 20px
   text-align center
   text-transform uppercase
@@ -27,7 +30,7 @@ background-primary-acitve = blue-100 linear-gradient(#73bdff, #65b3ff)
     text-transform none
 
     &:hover
-      background background-primary-acitve
+      background background-primary-hover
 
   &.primary
     background background-primary
@@ -36,12 +39,19 @@ background-primary-acitve = blue-100 linear-gradient(#73bdff, #65b3ff)
     color #ffffff
 
     &:hover
-      background background-primary-acitve
+      background background-primary-hover
 
     {disabled}
       cursor default
       .primary-text
         opacity 0.6
+
+    &.on-blue
+      background background-primary-on-blue
+      box-shadow 0px 1px 1px 0px rgba(0, 0, 0, 0.06)
+
+      &:hover
+        background background-primary-on-blue-hover
 
   &.secondary
     background-color #fff
@@ -50,5 +60,16 @@ background-primary-acitve = blue-100 linear-gradient(#73bdff, #65b3ff)
     color grey-700
 
     &:hover
-      border: 1px solid #d2d9e4;
+      border 1px solid grey-200;
       box-shadow 0px 1px 2px 0px rgba(0, 0, 0, 0.1), inset 0px 0px 0px 2px rgba(255, 255, 255, 0.17)
+
+    &.on-blue
+      background-color blue-300
+      border-color blue-700
+      box-shadow 0px 1px 1px 0px rgba(0, 0, 0, 0.06)
+      color #ffffff
+
+      &:hover
+        border-color blue-900
+
+
