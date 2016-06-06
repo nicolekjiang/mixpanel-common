@@ -6,7 +6,8 @@ document.registerElement('mp-modal', class MPModal extends WebComponent {
   createdCallback() {
     this.root = this.createShadowRoot();
     this.main = document.createElement('div');
-    this.main.className = 'mp-modal';
+    this.main.classList = this.classList;
+    this.main.classList.add('mp-modal');
     const top = document.createElement('div');
     top.className = 'top-container';
     top.appendChild(this.getElementsByClassName('mp-modal-title')[0]);
