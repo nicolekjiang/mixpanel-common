@@ -3,14 +3,11 @@ import WebComponent from 'webcomponent';
 import css from './buttons.styl';
 
 document.registerElement('mp-button', class MPButton extends WebComponent {
-  createdCallback() {
+  attachedCallback() {
     this.root = this.createShadowRoot();
     this.main = document.createElement('div');
-    this.main.classList = this.classList;
+    this.main.className = this.className;
     this.main.classList.add('mp-button');
-  }
-
-  attachedCallback() {
     this.getAttribute('type').split(' ').forEach(type => this.main.classList.add(type));
     this.render();
   }
