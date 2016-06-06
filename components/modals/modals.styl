@@ -1,14 +1,27 @@
 @import '../../common'
 
 .mp-modal
-  border-radius 6px
-  box-shadow 0 1px 3px 0 rgba(1, 1, 1, 0.28)
-  max-width 530px
-  .top-container
-    padding 30px 60px
-    text-align center
-    .mp-modal-title
-      font-title()
-    .mp-modal-subtitle
-      font-subtitle()
-      margin 20px 0
+  .backdrop
+    background #45566d
+    height 100%
+    opacity 0.9
+    position fixed
+    width 100%
+    .modal-container
+      box-shadow 0 1px 3px 0 rgba(1, 1, 1, 0.28)
+      left 50%
+      max-width 530px
+      position absolute
+      top 50%
+      transform translate(-50%, -50%)
+      width 530px
+      .top-container
+        background #fff
+        border-radius 6px 6px 0 0
+        padding 30px 60px
+        text-align center
+        .mp-modal-title
+          font-title()
+        .mp-modal-subtitle
+          font-subtitle()
+          margin 20px 0

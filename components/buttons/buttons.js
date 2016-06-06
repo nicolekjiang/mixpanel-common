@@ -8,7 +8,6 @@ document.registerElement('mp-button', class MPButton extends WebComponent {
     this.main = document.createElement('div');
     this.main.className = this.className;
     this.main.classList.add('mp-button');
-    this.getAttribute('type').split(' ').forEach(type => this.main.classList.add(type));
     this.render();
   }
 

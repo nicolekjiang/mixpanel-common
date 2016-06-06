@@ -7,15 +7,15 @@
         <script src="./build/bundle.js"></script>
     </head>
     <body>
-        <mp-button type="primary" style="position: absolute; top: 20px;">Save</mp-button>
-        <mp-button type="secondary" style="position: absolute; top: 20px; left: 100px;">Cancel</mp-button>
-        <mp-modal style="position: absolute; top: 20px; left: 220px;">
+        <mp-modal>
             <div class="mp-modal-title">This is my modal title</div>
             <div class="mp-modal-subtitle">
                 This is my modal subtitle. A bunch of text can go here. It can be
                 descriptive (maybe).
             </div>
-            <mp-button type="modal">Click to proceed</mp-button>
+            <mp-button class="modal">Click to proceed</mp-button>
         </mp-modal>
+        <mp-button class="primary" style="position: absolute; top: 20px;">Save</mp-button>
+        <mp-button class="secondary" style="position: absolute; top: 20px; left: 100px;">Cancel</mp-button>
     </body>
 </html>
