@@ -1,2 +1,2 @@
-import './buttons/buttons.js';
-import './modals/modals.js';
+import './buttons/button.js';
+import './modals/modal.js';

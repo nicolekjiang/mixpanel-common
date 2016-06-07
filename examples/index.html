@@ -1,21 +1,18 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Hello world</title>
-        <script src="../node_modules/babel-polyfill/dist/polyfill.js"></script>
-        <script src="../node_modules/webcomponents.js/webcomponents.js"></script>
-        <script src="./build/bundle.js"></script>
-    </head>
-    <body>
-        <mp-button type="primary" style="position: absolute; top: 20px;">Save</mp-button>
-        <mp-button type="secondary" style="position: absolute; top: 20px; left: 100px;">Cancel</mp-button>
-        <mp-modal style="position: absolute; top: 20px; left: 220px;">
-            <div class="mp-modal-title">This is my modal title</div>
-            <div class="mp-modal-subtitle">
-                This is my modal subtitle. A bunch of text can go here. It can be
-                descriptive (maybe).
-            </div>
-            <mp-button type="modal">Click to proceed</mp-button>
-        </mp-modal>
-    </body>
+  <head>
+    <title>Hello world</title>
+    <script src="../node_modules/babel-polyfill/dist/polyfill.js"></script>
+    <script src="../node_modules/webcomponents.js/webcomponents.js"></script>
+    <script src="./build/bundle.js"></script>
+  </head>
+  <body>
+    <mp-modal>
+      <div class="mp-modal-title" slot-body>Easily track events</div>
+      <div class="mp-modal-subtitle" slot-body>Click on any element on your page (ex. the buy button) to create an event and access all historical data for that event.</div>
+      <mp-button class="modal" slot-button>Create your first event</mp-button>
+    </mp-modal>
+    <mp-button class="primary" style="position: absolute; top: 20px;" disabled>Save</mp-button>
+    <mp-button class="secondary" style="position: absolute; top: 20px; left: 100px;">Cancel</mp-button>
+  </body>
 </html>

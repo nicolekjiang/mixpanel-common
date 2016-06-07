@@ -18,7 +18,13 @@ var webpackConfig = {
       },
       {
         test: /\.styl$/,
+        exclude: /node_modules/,
         loader: 'css-loader!autoprefixer-loader!stylus-loader',
+      },
+      {
+        test: /\.jade$/,
+        exclude: /node_modules/,
+        loader: 'babel?presets[]=es2015!virtual-jade-loader',
       },
     ],
   },
