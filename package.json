@@ -1,7 +1,7 @@
 {
   "name": "mixpanel-common",
   "main": "build/index.js",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Reusable Mixpanel styles and components",
   "scripts": {
     "build": "babel components -d build",
