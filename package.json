@@ -1,10 +1,10 @@
 {
   "name": "mixpanel-common",
   "main": "build/index.js",
-  "version": "0.3.0",
+  "version": "0.3.2",
   "description": "Mixpanel shared JS",
   "scripts": {
-    "build": "babel components -d build",
+    "build": "babel lib -d build",
     "build-example": "webpack",
     "build-example-watch": "webpack -w",
     "lint": "eslint components report util",
