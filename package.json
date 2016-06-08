@@ -1,9 +1,8 @@
 {
   "name": "mixpanel-common",
   "main": "build/index.js",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Mixpanel shared JS",
-  "files": "build",
   "scripts": {
     "build": "babel lib -d build",
     "build-example": "webpack",
