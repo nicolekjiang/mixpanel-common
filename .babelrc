@@ -1,4 +1,4 @@
 {
-  "plugins": ["babel-plugin-stylus-compiler"],
+  "plugins": ["babel-plugin-stylus-compiler", "babel-plugin-virtual-jade"],
   "presets": ["es2015"]
 }
