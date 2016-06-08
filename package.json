@@ -2,12 +2,12 @@
   "name": "mixpanel-common",
   "main": "build/index.js",
   "version": "0.2.0",
-  "description": "Reusable Mixpanel styles and components",
+  "description": "Mixpanel shared JS",
   "scripts": {
     "build": "babel components -d build",
     "build-example": "webpack",
     "build-example-watch": "webpack -w",
-    "lint": "eslint ./buttons.js",
+    "lint": "eslint components report util",
     "prepublish": "npm run build",
     "validate": "npm ls"
   },
@@ -32,10 +32,10 @@
     "babel-core": "^6.9.1",
     "babel-loader": "^6.2.4",
     "babel-plugin-stylus-compiler": "^1.0.5",
+    "babel-polyfill": "^6.9.1",
     "babel-preset-es2015": "^6.9.0",
     "css-loader": "^0.23.1",
     "eslint": "^2.11.1",
-    "extract-text-webpack-plugin": "^1.0.1",
     "js-beautify": "^1.6.3",
     "precommit-hook-eslint": "^3.0.0",
     "style-loader": "^0.13.1",
@@ -43,13 +43,12 @@
     "stylus-loader": "^2.1.0",
     "virtual-jade": "^0.3.1",
     "virtual-jade-loader": "^0.2.2",
+    "webcomponents.js": "^0.7.22",
     "webpack": "^1.13.1"
   },
   "dependencies": {
-    "babel-polyfill": "^6.9.1",
     "panel": "^0.8.0",
-    "virtual-dom": "^2.1.1",
-    "webcomponents.js": "^0.7.22"
+    "virtual-dom": "^2.1.1"
   },
   "pre-commit": [
     "lint",

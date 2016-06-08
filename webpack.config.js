@@ -1,8 +1,7 @@
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var path = require('path');
 
 var webpackConfig = {
-  entry: './components/index.js',
+  entry: './index.js',
   output: {
     filename: 'examples/build/bundle.js',
   },
@@ -13,7 +12,7 @@ var webpackConfig = {
         exclude: /node_modules/,
         loader: 'babel',
         query: {
-            presets: ['es2015'],
+          presets: ['es2015'],
         },
       },
       {

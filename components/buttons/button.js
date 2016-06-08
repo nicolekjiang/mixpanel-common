@@ -12,7 +12,7 @@ document.registerElement('mp-button', class extends Component {
         getButtonAttrs: () => {
           const attrs = {};
           if (this.isAttributeEnabled('disabled')) {
-             attrs.disabled = true;
+            attrs.disabled = true;
           }
           return attrs;
         },
