@@ -1,1 +1,60 @@
-../lib/components/common.styl
+/* Color palettte */
+
+blue-100 = #6cb8ff
+blue-300 = #4ba8ff
+blue-500 = #3b99f0
+blue-700 = #3391e9
+blue-900 = #2788e3
+grey-100 = #f0f3f5
+grey-200 = #d8e0e7
+grey-300 = #c1ccd6
+grey-500 = #9cacbb
+grey-700 = #6e859d
+grey-900 = #4c6072
+mp-red = #e4567b
+mp-yellow = #ffd209
+
+
+/* Text styles */
+
+font-list-item()
+  font-family 'Helvetica Neue'
+  font-size 13px
+  line-height 1.7
+  color grey-700
+
+font-paragraph()
+  font-family 'Helvetica Neue'
+  font-size 14px
+  font-weight 500
+  line-height 18px
+  color grey-700
+
+font-subtitle()
+  font-family 'Proxima Nova'
+  font-size 15px
+  font-weight 600
+  line-height 1.5
+  letter-spacing 0.1px
+  color grey-700
+
+font-title()
+  font-family 'Proxima Nova'
+  font-size 18px
+  font-weight 700
+  line-height 1.4
+  letter-spacing 0.2px
+  color grey-900
+
+
+/* Button states */
+
+active = '&:active,&[active]'
+disabled = '&:disabled,&[disabled]'
+not-disabled = ':not([disabled]):not(:disabled)'
+
+
+/* Misc */
+
+*:focus
+  outline 0
