@@ -4,7 +4,7 @@
   "version": "0.3.0",
   "description": "Mixpanel shared JS",
   "scripts": {
-    "build": "babel components -d build",
+    "build": "babel lib -d build",
     "build-example": "webpack",
     "build-example-watch": "webpack -w",
     "lint": "eslint components report util",
