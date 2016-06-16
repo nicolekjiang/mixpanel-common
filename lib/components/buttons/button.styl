@@ -4,6 +4,8 @@ background-primary = blue-300 linear-gradient(to bottom, #50AEFF, #46A2FF)
 background-primary-hover = blue-100 linear-gradient(#73bdff, #65b3ff)
 background-primary-on-blue = blue-300 linear-gradient(to bottom, #7fc1ff, #6fb9ff)
 background-primary-on-blue-hover = blue-100 linear-gradient(#8cc7ff, #7bbfff)
+background-primary-red = mp-red linear-gradient(#EA8499, #E4687D)
+background-primary-red-hover = mp-red linear-gradient(to bottom, #ED92A4, #EA8499)
 
 .mp-button
   border-radius 2px
@@ -53,6 +55,15 @@ background-primary-on-blue-hover = blue-100 linear-gradient(#8cc7ff, #7bbfff)
 
       &:hover
         background background-primary-on-blue-hover
+
+    &.red
+      background background-primary-red
+      border 1px solid #FF5400
+      border-image-source linear-gradient(to top, #d15269, #e46d83)
+      border-image-slice 1
+
+      &:hover{not-disabled}
+        background background-primary-red-hover
 
   &.secondary
     background-color #fff
