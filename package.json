@@ -9,6 +9,7 @@
     "build-example-watch": "webpack -w",
     "lint": "eslint components report util",
     "prepublish": "npm run build",
+    "test": "mocha --require babel-core/register",
     "validate": "npm ls"
   },
   "repository": {
