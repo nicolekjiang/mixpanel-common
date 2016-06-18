@@ -23,7 +23,7 @@ var webpackConfig = {
       {
         test: /\.jade$/,
         exclude: /node_modules/,
-        loader: 'babel?presets[]=es2015!virtual-jade-loader',
+        loader: 'babel?presets[]=es2015&babelrc=false!virtual-jade-loader',
       },
     ],
   },
