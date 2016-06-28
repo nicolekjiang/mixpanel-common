@@ -7,7 +7,7 @@
     "build": "babel lib -d build",
     "build-example": "webpack",
     "build-example-watch": "webpack -w",
-    "lint": "eslint components report util",
+    "lint": "eslint lib",
     "prepublish": "npm run build",
     "test": "mocha --require babel-core/register",
     "validate": "npm ls"
