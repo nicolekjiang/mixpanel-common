@@ -8,18 +8,25 @@ background-primary-red = mp-red linear-gradient(#EA8499, #E4687D)
 background-primary-red-hover = mp-red linear-gradient(to bottom, #ED92A4, #EA8499)
 
 .mp-button
+  align-items center
   border-radius 2px
   box-sizing border-box
   cursor pointer
-  display inline-block
+  display inline-flex
+  flex 1
   font-family 'Helvetica Neue'
   font-size 13px
   font-weight 700
-  letter-spacing 0.2px
+  justify-content center
   line-height 15px
   padding 12px 20px
   text-align center
   text-transform uppercase
+
+  .text
+    display inline-flex
+    align-items center
+    justify-content center
 
   &.modal
     background background-primary
@@ -27,9 +34,7 @@ background-primary-red-hover = mp-red linear-gradient(to bottom, #ED92A4, #EA849
     border none
     box-shadow inset 0 1px 0 0 #3b99f0
     color #fff
-    display block
     height 60px
-    line-height @height
     padding 0
     text-transform none
 
