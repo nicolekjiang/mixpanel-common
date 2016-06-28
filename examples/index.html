@@ -12,26 +12,27 @@
     </style>
   </head>
   <body>
-    <mp-button class="primary" onclick="showModal();">Show modal</mp-button>
-    <mp-button class="secondary" onclick="showPopup();">Show popup</mp-button>
+    <mp-button class="primary" onclick="toggleModal(true);">Show modal</mp-button>
+    <mp-button class="secondary" onclick="togglePopup(true);">Show popup</mp-button>
+    <mp-button class="primary blue" onclick="alert('clicked');">Confirm</mp-button>
     <mp-button class="primary red" onclick="alert('clicked');" disabled>Delete</mp-button>
     <mp-modal id="modal" style="display: none" closable>
       <div class="mp-modal-title" slot-body>Easily track events</div>
       <div class="mp-modal-subtitle" slot-body>Click on any element on your page (ex. the buy button) to create an event and access all historical data for that event.</div>
-      <mp-button class="modal" slot-button>Create your first event</mp-button>
+      <mp-button class="modal" onclick="toggleModal(false);" slot-button>Create your first event</mp-button>
     </mp-modal>
     <mp-modal id="popup" width="500px" modal-type="popup" style="display: none" closeable>
       <div class="mp-modal-title" slot-body>Easily track events</div>
       <div class="mp-modal-subtitle" slot-body>Click on any element on your page (ex. the buy button) to create an event and access all historical data for that event.</div>
-      <mp-button class="modal" slot-button>Create your first event</mp-button>
+      <mp-button class="modal" onclick="togglePopup(false);" slot-button>Create your first event</mp-button>
     </mp-modal>
 
     <script type="application/javascript">
-      var showModal = function() {
-        document.getElementById('modal').style.display = 'block';
+      var toggleModal = function(show) {
+        document.getElementById('modal').style.display = show ? 'block': 'none';
       }
-      var showPopup = function() {
-        document.getElementById('popup').style.display = 'block';
+      var togglePopup = function(show) {
+        document.getElementById('popup').style.display = show ? 'block' : 'none';
       }
    </script>
   </body>
