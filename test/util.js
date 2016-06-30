@@ -66,7 +66,7 @@ describe('immutableSplice()', function() {
     for (let start = -3; start < 3; start++) {
       for (let deleteCount = -3; deleteCount < 3; deleteCount++) {
         for (let item = -3; item < 3; item++) {
-          for (let itemCount = 0; itemCount < 4; itemCount++) {
+          for (let itemCount = 1; itemCount < 3; itemCount++) {
             expected = new Array(5).fill(5);
             actual = expected.slice(0);
             items = new Array(itemCount).fill(item);
