@@ -91,9 +91,9 @@ describe('removeIndex()', function() {
     expect(removeIndex([1, 2, 3, 4, 5], -2)).to.eql([1,2,3,5]);
   });
 
-  it('does not remove anything if index is out of range', function() {
-    expect(removeIndex([1, 2, 3, 4, 5], 10)).to.eql([1, 2, 3, 4, 5]);
-    expect(removeIndex([1, 2, 3, 4, 5], -10)).to.eql([1, 2, 3, 4, 5]);
+  it('throws an exception if index is out of range', function() {
+    expect(() => removeIndex([1, 2, 3, 4, 5], 10)).to.throwException(/IndexError/);
+    expect(() => removeIndex([1, 2, 3, 4, 5], -10)).to.throwException(/IndexError/);
   });
 });
 
@@ -102,8 +102,8 @@ describe('removeValue()', function() {
     expect(removeValue([1, 2, 3, 4, 5], 3)).to.eql([1, 2, 4, 5]);
   });
 
-  it('does not remove anything if value is not present in array', function() {
-    expect(removeValue([1, 2, 3, 4, 5], 10)).to.eql([1, 2, 3, 4, 5]);
+  it('throws an exception if value is not present in array', function() {
+    expect(() => removeValue([1, 2, 3, 4, 5], 10)).to.throwException(/ValueError/);
   });
 });
 
@@ -116,9 +116,9 @@ describe('replaceIndex()', function() {
     expect(replaceIndex([1, 2, 3, 4, 5], -2, 8)).to.eql([1, 2, 3, 8, 5]);
   });
 
-  it('does not replace anything if index is out of range', function() {
-    expect(replaceIndex([1, 2, 3, 4, 5], 10, 8)).to.eql([1, 2, 3, 4, 5]);
-    expect(replaceIndex([1, 2, 3, 4, 5], -10, 8)).to.eql([1, 2, 3, 4, 5]);
+  it('throws an exception if index is out of range', function() {
+    expect(() => replaceIndex([1, 2, 3, 4, 5], 10, 8)).to.throwException(/IndexError/);
+    expect(() => replaceIndex([1, 2, 3, 4, 5], -10, 8)).to.throwException(/IndexError/);
   });
 });
 
@@ -131,8 +131,8 @@ describe('insertAtIndex()', function() {
     expect(insertAtIndex([1, 2, 3, 4, 5], -2, 8)).to.eql([1, 2, 3, 8, 4, 5]);
   });
 
-  it('does not insert anything if index is out of range', function() {
-    expect(insertAtIndex([1, 2, 3, 4, 5], 10, 8)).to.eql([1, 2, 3, 4, 5]);
-    expect(insertAtIndex([1, 2, 3, 4, 5], -10, 8)).to.eql([1, 2, 3, 4, 5]);
+  it('throws an exception if index is out of range', function() {
+    expect(() => insertAtIndex([1, 2, 3, 4, 5], 10, 8)).to.throwException(/IndexError/);
+    expect(() => insertAtIndex([1, 2, 3, 4, 5], -10, 8)).to.throwException(/IndexError/);
   });
 });
