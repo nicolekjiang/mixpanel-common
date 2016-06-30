@@ -28,6 +28,22 @@ describe('pluralize()', function() {
 });
 
 describe('immutableSplice()', function() {
+  it('removes items by positive index', function() {
+    expect(immutableSplice([1, 2, 3, 4, 5], 1, 2)).to.eql([1, 4, 5]);
+  });
+
+  it('removes items by negative index', function() {
+    expect(immutableSplice([1, 2, 3, 4, 5], -3, 2)).to.eql([1, 2, 5]);
+  });
+
+  it('inserts items by positive index', function() {
+    expect(immutableSplice([1, 2, 3, 4, 5], 1, 1, 8, 8)).to.eql([1, 8, 8, 3, 4, 5]);
+  });
+
+  it('inserts items by negative index', function() {
+    expect(immutableSplice([1, 2, 3, 4, 5], -3, 1, 8, 8)).to.eql([1, 2, 8, 8, 4, 5]);
+  });
+
   it('behaves the same way as Array.prototype.splice when removing', function() {
     let expected, actual;
 
@@ -68,55 +84,55 @@ describe('immutableSplice()', function() {
 
 describe('removeIndex()', function() {
   it('removes items by positive index', function() {
-    expect(removeIndex([1,2,3,4,5], 2)).to.eql([1,2,4,5]);
+    expect(removeIndex([1, 2, 3, 4, 5], 2)).to.eql([1,2,4,5]);
   });
 
   it('removes items by negative index', function() {
-    expect(removeIndex([1,2,3,4,5], -2)).to.eql([1,2,3,5]);
+    expect(removeIndex([1, 2, 3, 4, 5], -2)).to.eql([1,2,3,5]);
   });
 
   it('does not remove anything if index is out of range', function() {
-    expect(removeIndex([1,2,3,4,5], 10)).to.eql([1,2,3,4,5]);
-    expect(removeIndex([1,2,3,4,5], -10)).to.eql([1,2,3,4,5]);
+    expect(removeIndex([1, 2, 3, 4, 5], 10)).to.eql([1, 2, 3, 4, 5]);
+    expect(removeIndex([1, 2, 3, 4, 5], -10)).to.eql([1, 2, 3, 4, 5]);
   });
 });
 
 describe('removeValue()', function() {
   it('removes items by value', function() {
-    expect(removeValue([1,2,3,4,5], 3)).to.eql([1,2,4,5]);
+    expect(removeValue([1, 2, 3, 4, 5], 3)).to.eql([1, 2, 4, 5]);
   });
 
   it('does not remove anything if value is not present in array', function() {
-    expect(removeValue([1,2,3,4,5], 10)).to.eql([1,2,3,4,5]);
+    expect(removeValue([1, 2, 3, 4, 5], 10)).to.eql([1, 2, 3, 4, 5]);
   });
 });
 
 describe('replaceIndex()', function() {
   it('replaces items by positive index', function() {
-    expect(replaceIndex([1,2,3,4,5], 2, 8)).to.eql([1,2,8,4,5]);
+    expect(replaceIndex([1, 2, 3, 4, 5], 2, 8)).to.eql([1, 2, 8, 4, 5]);
   });
 
   it('replaces items by negative index', function() {
-    expect(replaceIndex([1,2,3,4,5], -2, 8)).to.eql([1,2,3,8,5]);
+    expect(replaceIndex([1, 2, 3, 4, 5], -2, 8)).to.eql([1, 2, 3, 8, 5]);
   });
 
   it('does not replace anything if index is out of range', function() {
-    expect(replaceIndex([1,2,3,4,5], 10, 8)).to.eql([1,2,3,4,5]);
-    expect(replaceIndex([1,2,3,4,5], -10, 8)).to.eql([1,2,3,4,5]);
+    expect(replaceIndex([1, 2, 3, 4, 5], 10, 8)).to.eql([1, 2, 3, 4, 5]);
+    expect(replaceIndex([1, 2, 3, 4, 5], -10, 8)).to.eql([1, 2, 3, 4, 5]);
   });
 });
 
 describe('insertAtIndex()', function() {
   it('inserts items by positive index', function() {
-    expect(insertAtIndex([1,2,3,4,5], 2, 8)).to.eql([1,2,8,3,4,5]);
+    expect(insertAtIndex([1, 2, 3, 4, 5], 2, 8)).to.eql([1, 2, 8, 3, 4, 5]);
   });
 
   it('inserts items by negative index', function() {
-    expect(insertAtIndex([1,2,3,4,5], -2, 8)).to.eql([1,2,3,8,4,5]);
+    expect(insertAtIndex([1, 2, 3, 4, 5], -2, 8)).to.eql([1, 2, 3, 8, 4, 5]);
   });
 
   it('does not insert anything if index is out of range', function() {
-    expect(insertAtIndex([1,2,3,4,5], 10, 8)).to.eql([1,2,3,4,5]);
-    expect(insertAtIndex([1,2,3,4,5], -10, 8)).to.eql([1,2,3,4,5]);
+    expect(insertAtIndex([1, 2, 3, 4, 5], 10, 8)).to.eql([1, 2, 3, 4, 5]);
+    expect(insertAtIndex([1, 2, 3, 4, 5], -10, 8)).to.eql([1, 2, 3, 4, 5]);
   });
 });
