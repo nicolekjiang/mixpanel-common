@@ -29,19 +29,19 @@ describe('pluralize()', function() {
 
 describe('immutableSplice()', function() {
   it('removes items by positive index', function() {
-    expect(immutableSplice([1, 2, 3, 4, 5], 1, 2)).to.eql([1, 4, 5]);
+    expect(immutableSplice(['a', 'b', 'c', 'd', 'e'], 1, 2)).to.eql(['a', 'd', 'e']);
   });
 
   it('removes items by negative index', function() {
-    expect(immutableSplice([1, 2, 3, 4, 5], -3, 2)).to.eql([1, 2, 5]);
+    expect(immutableSplice(['a', 'b', 'c', 'd', 'e'], -3, 2)).to.eql(['a', 'b', 'e']);
   });
 
   it('inserts items by positive index', function() {
-    expect(immutableSplice([1, 2, 3, 4, 5], 1, 1, 8, 8)).to.eql([1, 8, 8, 3, 4, 5]);
+    expect(immutableSplice(['a', 'b', 'c', 'd', 'e'], 1, 1, '$', '*')).to.eql(['a', '$', '*', 'c', 'd', 'e']);
   });
 
   it('inserts items by negative index', function() {
-    expect(immutableSplice([1, 2, 3, 4, 5], -3, 1, 8, 8)).to.eql([1, 2, 8, 8, 4, 5]);
+    expect(immutableSplice(['a', 'b', 'c', 'd', 'e'], -3, 1, '$', '*')).to.eql(['a', 'b', '$', '*', 'd', 'e']);
   });
 
   it('behaves the same way as Array.prototype.splice when removing', function() {
@@ -84,55 +84,55 @@ describe('immutableSplice()', function() {
 
 describe('removeIndex()', function() {
   it('removes items by positive index', function() {
-    expect(removeIndex([1, 2, 3, 4, 5], 2)).to.eql([1,2,4,5]);
+    expect(removeIndex(['a', 'b', 'c', 'd', 'e'], 2)).to.eql(['a','b','d','e']);
   });
 
   it('removes items by negative index', function() {
-    expect(removeIndex([1, 2, 3, 4, 5], -2)).to.eql([1,2,3,5]);
+    expect(removeIndex(['a', 'b', 'c', 'd', 'e'], -2)).to.eql(['a','b','c','e']);
   });
 
   it('throws an exception if index is out of range', function() {
-    expect(() => removeIndex([1, 2, 3, 4, 5], 10)).to.throwException(/IndexError/);
-    expect(() => removeIndex([1, 2, 3, 4, 5], -10)).to.throwException(/IndexError/);
+    expect(() => removeIndex(['a', 'b', 'c', 'd', 'e'], 10)).to.throwException(/IndexError/);
+    expect(() => removeIndex(['a', 'b', 'c', 'd', 'e'], -10)).to.throwException(/IndexError/);
   });
 });
 
 describe('removeValue()', function() {
   it('removes items by value', function() {
-    expect(removeValue([1, 2, 3, 4, 5], 3)).to.eql([1, 2, 4, 5]);
+    expect(removeValue(['a', 'b', 'c', 'd', 'e'], 'c')).to.eql(['a', 'b', 'd', 'e']);
   });
 
   it('throws an exception if value is not present in array', function() {
-    expect(() => removeValue([1, 2, 3, 4, 5], 10)).to.throwException(/ValueError/);
+    expect(() => removeValue(['a', 'b', 'c', 'd', 'e'], '$')).to.throwException(/ValueError/);
   });
 });
 
 describe('replaceIndex()', function() {
   it('replaces items by positive index', function() {
-    expect(replaceIndex([1, 2, 3, 4, 5], 2, 8)).to.eql([1, 2, 8, 4, 5]);
+    expect(replaceIndex(['a', 'b', 'c', 'd', 'e'], 2, '$')).to.eql(['a', 'b', '$', 'd', 'e']);
   });
 
   it('replaces items by negative index', function() {
-    expect(replaceIndex([1, 2, 3, 4, 5], -2, 8)).to.eql([1, 2, 3, 8, 5]);
+    expect(replaceIndex(['a', 'b', 'c', 'd', 'e'], -2, '$')).to.eql(['a', 'b', 'c', '$', 'e']);
   });
 
   it('throws an exception if index is out of range', function() {
-    expect(() => replaceIndex([1, 2, 3, 4, 5], 10, 8)).to.throwException(/IndexError/);
-    expect(() => replaceIndex([1, 2, 3, 4, 5], -10, 8)).to.throwException(/IndexError/);
+    expect(() => replaceIndex(['a', 'b', 'c', 'd', 'e'], 10, '$')).to.throwException(/IndexError/);
+    expect(() => replaceIndex(['a', 'b', 'c', 'd', 'e'], -10, '$')).to.throwException(/IndexError/);
   });
 });
 
 describe('insertAtIndex()', function() {
   it('inserts items by positive index', function() {
-    expect(insertAtIndex([1, 2, 3, 4, 5], 2, 8)).to.eql([1, 2, 8, 3, 4, 5]);
+    expect(insertAtIndex(['a', 'b', 'c', 'd', 'e'], 2, '$')).to.eql(['a', 'b', '$', 'c', 'd', 'e']);
   });
 
   it('inserts items by negative index', function() {
-    expect(insertAtIndex([1, 2, 3, 4, 5], -2, 8)).to.eql([1, 2, 3, 8, 4, 5]);
+    expect(insertAtIndex(['a', 'b', 'c', 'd', 'e'], -2, '$')).to.eql(['a', 'b', 'c', '$', 'd', 'e']);
   });
 
   it('throws an exception if index is out of range', function() {
-    expect(() => insertAtIndex([1, 2, 3, 4, 5], 10, 8)).to.throwException(/IndexError/);
-    expect(() => insertAtIndex([1, 2, 3, 4, 5], -10, 8)).to.throwException(/IndexError/);
+    expect(() => insertAtIndex(['a', 'b', 'c', 'd', 'e'], 10, '$')).to.throwException(/IndexError/);
+    expect(() => insertAtIndex(['a', 'b', 'c', 'd', 'e'], -10, '$')).to.throwException(/IndexError/);
   });
 });
