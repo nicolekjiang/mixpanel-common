@@ -4,11 +4,11 @@
   "version": "0.6.7",
   "description": "Mixpanel shared JS",
   "scripts": {
-    "build": "babel lib -d build",
+    "build": "babel lib -d build && cp -r build/report . && cp -r build/util .",
     "build-example": "webpack",
     "build-example-watch": "webpack -w",
     "lint": "eslint lib",
-    "prepublish": "npm run build && cp -r build/report report && cp -r build/util util",
+    "prepublish": "npm run build",
     "test": "mocha --require babel-core/register",
     "validate": "npm ls"
   },
