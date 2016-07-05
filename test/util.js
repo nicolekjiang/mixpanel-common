@@ -7,6 +7,7 @@ import {
   removeValue,
   replaceIndex,
   insertAtIndex,
+  truncateMiddle
 } from '../lib/util';
 
 describe('pluralize()', function() {
@@ -134,5 +135,33 @@ describe('insertAtIndex()', function() {
   it('throws an exception if index is out of range', function() {
     expect(() => insertAtIndex(['a', 'b', 'c', 'd', 'e'], 10, '$')).to.throwException(/IndexError/);
     expect(() => insertAtIndex(['a', 'b', 'c', 'd', 'e'], -10, '$')).to.throwException(/IndexError/);
+  });
+});
+
+describe('truncateMiddle()', function() {
+  it('works when string.length is len+1', function() {
+    expect(truncateMiddle('frogs', 4)).to.eql('f...');
+  })
+
+  it('only truncates if necessary', function() {
+    expect(truncateMiddle('mixpanel', 8)).to.eql('mixpanel');
+  });
+
+  it('truncates intelligently if length is small', function() {
+    expect(truncateMiddle('mixpanel', 2)).to.eql('mi');
+  });
+
+  it('returns empty string if length is 0', function() {
+    expect(truncateMiddle('mixpanel', 0)).to.eql('');
+  });
+
+  it('truncates in middle of long text', function() {
+    const loremIpsum = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+    expect(truncateMiddle(loremIpsum, 20)).to.eql('Lorem ips...laborum.');
+  });
+
+  it('handles newlines and whitespace well', function() {
+    const whiteSpace = 'Lorem \n ipsum \t dolor \r sit \w amet,';
+    expect(truncateMiddle(whiteSpace, 20)).to.eql('Lorem \n i... w amet,');
   });
 });
