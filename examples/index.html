@@ -39,7 +39,7 @@
         modal.open();
       };
       var closeModal = function() {
-        modal.close();
+        modal.close().then(function() { alert('modal closed!'); });
       }
       var openPopup = function() {
         popup.open();
