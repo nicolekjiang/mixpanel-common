@@ -158,10 +158,11 @@ describe('truncateMiddle()', function() {
   it('truncates in middle of long text', function() {
     const loremIpsum = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
     expect(truncateMiddle(loremIpsum, 20)).to.eql('Lorem ips...laborum.');
+    expect(truncateMiddle(loremIpsum, 12).length).to.eql(12);
   });
 
   it('handles newlines and whitespace well', function() {
     const whiteSpace = 'Lorem \n ipsum \t dolor \r sit \w amet,';
-    expect(truncateMiddle(whiteSpace, 20)).to.eql('Lorem \n i... w amet,');
+    expect(truncateMiddle(whiteSpace, 17).length).to.eql(17);
   });
 });
