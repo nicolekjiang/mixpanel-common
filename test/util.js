@@ -3,9 +3,9 @@ import expect from 'expect.js';
 import {
   pluralize,
   immutableSplice,
-  removeIndex,
-  removeValue,
-  replaceIndex,
+  removeByIndex,
+  removeByValue,
+  replaceByIndex,
   insertAtIndex,
   truncateMiddle
 } from '../lib/util';
@@ -83,43 +83,43 @@ describe('immutableSplice()', function() {
   });
 });
 
-describe('removeIndex()', function() {
+describe('removeByIndex()', function() {
   it('removes items by positive index', function() {
-    expect(removeIndex(['a', 'b', 'c', 'd', 'e'], 2)).to.eql(['a','b','d','e']);
+    expect(removeByIndex(['a', 'b', 'c', 'd', 'e'], 2)).to.eql(['a','b','d','e']);
   });
 
   it('removes items by negative index', function() {
-    expect(removeIndex(['a', 'b', 'c', 'd', 'e'], -2)).to.eql(['a','b','c','e']);
+    expect(removeByIndex(['a', 'b', 'c', 'd', 'e'], -2)).to.eql(['a','b','c','e']);
   });
 
   it('throws an exception if index is out of range', function() {
-    expect(() => removeIndex(['a', 'b', 'c', 'd', 'e'], 10)).to.throwException(/IndexError/);
-    expect(() => removeIndex(['a', 'b', 'c', 'd', 'e'], -10)).to.throwException(/IndexError/);
+    expect(() => removeByIndex(['a', 'b', 'c', 'd', 'e'], 10)).to.throwException(/IndexError/);
+    expect(() => removeByIndex(['a', 'b', 'c', 'd', 'e'], -10)).to.throwException(/IndexError/);
   });
 });
 
-describe('removeValue()', function() {
+describe('removeByValue()', function() {
   it('removes items by value', function() {
-    expect(removeValue(['a', 'b', 'c', 'd', 'e'], 'c')).to.eql(['a', 'b', 'd', 'e']);
+    expect(removeByValue(['a', 'b', 'c', 'd', 'e'], 'c')).to.eql(['a', 'b', 'd', 'e']);
   });
 
   it('throws an exception if value is not present in array', function() {
-    expect(() => removeValue(['a', 'b', 'c', 'd', 'e'], '$')).to.throwException(/ValueError/);
+    expect(() => removeByValue(['a', 'b', 'c', 'd', 'e'], '$')).to.throwException(/ValueError/);
   });
 });
 
-describe('replaceIndex()', function() {
+describe('replaceByIndex()', function() {
   it('replaces items by positive index', function() {
-    expect(replaceIndex(['a', 'b', 'c', 'd', 'e'], 2, '$')).to.eql(['a', 'b', '$', 'd', 'e']);
+    expect(replaceByIndex(['a', 'b', 'c', 'd', 'e'], 2, '$')).to.eql(['a', 'b', '$', 'd', 'e']);
   });
 
   it('replaces items by negative index', function() {
-    expect(replaceIndex(['a', 'b', 'c', 'd', 'e'], -2, '$')).to.eql(['a', 'b', 'c', '$', 'e']);
+    expect(replaceByIndex(['a', 'b', 'c', 'd', 'e'], -2, '$')).to.eql(['a', 'b', 'c', '$', 'e']);
   });
 
   it('throws an exception if index is out of range', function() {
-    expect(() => replaceIndex(['a', 'b', 'c', 'd', 'e'], 10, '$')).to.throwException(/IndexError/);
-    expect(() => replaceIndex(['a', 'b', 'c', 'd', 'e'], -10, '$')).to.throwException(/IndexError/);
+    expect(() => replaceByIndex(['a', 'b', 'c', 'd', 'e'], 10, '$')).to.throwException(/IndexError/);
+    expect(() => replaceByIndex(['a', 'b', 'c', 'd', 'e'], -10, '$')).to.throwException(/IndexError/);
   });
 });
 
@@ -135,6 +135,11 @@ describe('insertAtIndex()', function() {
   it('throws an exception if index is out of range', function() {
     expect(() => insertAtIndex(['a', 'b', 'c', 'd', 'e'], 10, '$')).to.throwException(/IndexError/);
     expect(() => insertAtIndex(['a', 'b', 'c', 'd', 'e'], -10, '$')).to.throwException(/IndexError/);
+  });
+
+  it('appends item if given index === array.length', function() {
+    const array = ['a', 'b', 'c', 'd', 'e'];
+    expect(insertAtIndex(array, array.length, '$')).to.eql(['a', 'b', 'c', 'd', 'e', '$']);
   });
 });
 
