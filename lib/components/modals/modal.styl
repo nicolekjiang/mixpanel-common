@@ -1,18 +1,18 @@
 @import '../../../stylesheets/common'
 
-@keyframes fadeIn
+@keyframes fadeOverlayIn
   from
     opacity 0
   to
-    opacity 1
+    opacity 0.9
 
-@keyframes fadeOut
+@keyframes fadeOverlayOut
   from
-    opacity 1
+    opacity 0.9
   to
     opacity 0
 
-@keyframes fadeInAndScale
+@keyframes fadeModalIn
   from
     transform scale(1.1, 1.1)
     opacity 0
@@ -20,7 +20,7 @@
     transform scale(1, 1)
     opacity 1
 
-@keyframes fadeOutAndScale
+@keyframes fadeModalOut
   from
     transform scale(1, 1)
     opacity 1
@@ -43,7 +43,7 @@
       position absolute
 
   .backdrop
-    animation fadeIn 200ms forwards
+    animation fadeOverlayIn 500ms forwards
     background #45566d
     height 100%
     opacity 0.9
@@ -53,7 +53,7 @@
     z-index 1
 
     &.closing
-      animation-name fadeOut
+      animation-name fadeOverlayOut
 
   .modal-container
     display flex
@@ -66,16 +66,20 @@
     z-index 2
 
     .modal
-      animation fadeInAndScale 200ms forwards
+      animation fadeModalIn 500ms forwards 200ms
       border-radius 6px
       box-shadow 0 1px 3px 0 rgba(1, 1, 1, 0.28)
       max-width 530px
+      opacity 0
       pointer-events auto
       position relative
       z-index 2
 
       &.closing
-        animation-name fadeOutAndScale
+        animation-name fadeModalOut
+        animation-delay 0ms
+        animation-speed 200mx
+        opacity 0
 
       .close-btn
         cursor pointer

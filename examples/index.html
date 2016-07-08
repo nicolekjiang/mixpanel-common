@@ -32,6 +32,8 @@
       <mp-button class="modal" onclick="closePopup();" slot-button>Create your first event</mp-button>
     </mp-modal>
 
+    <input type="text" placeholder="I'm a placeholder" />
+
     <script type="application/javascript">
       var modal = document.getElementById('modal');
       var popup = document.getElementById('popup');
@@ -39,7 +41,7 @@
         modal.open();
       };
       var closeModal = function() {
-        modal.close().then(function() { alert('modal closed!'); });
+        modal.close().then(function() { console.log('modal closed!'); });
       }
       var openPopup = function() {
         popup.open();
