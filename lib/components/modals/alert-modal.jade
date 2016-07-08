@@ -1,0 +1,13 @@
+.alert-modal
+  if $helpers.getType() === 'modal'
+    .backdrop(onclick=$helpers.backdropClicked)
+  .modal-container
+    .modal(style=$helpers.getModalStyles())
+      if $component.isAttributeEnabled('closeable')
+        .close-btn(onclick=$helpers.closeClicked)
+          .close-icon
+            include ./close.svg
+      .top-container
+        content(select='[slot-body]')
+      .button-container
+        content(select='[slot-button]')
