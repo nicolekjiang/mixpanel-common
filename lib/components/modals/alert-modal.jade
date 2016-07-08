@@ -8,6 +8,9 @@
           .close-icon
             include ./close.svg
       .top-container
-        content(select='[slot-body]')
+        .content-row
+          .alert-icon
+            include ./alert.svg
+          content(select='[slot-body]')
       .button-container
         content(select='[slot-button]')
