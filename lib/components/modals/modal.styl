@@ -105,14 +105,29 @@
     border-radius 6px 6px 0 0
     padding 30px 60px
     text-align center
+    &.round-bottom
+      border-radius 6px
 
   content::content
-    .mp-modal-title, .alert-modal-title
+    display block
+    white-space normal
+    .mp-modal-title
       font-title()
 
-    .mp-modal-subtitle, .alert-modal-subtitle
+    .mp-modal-subtitle
       font-subtitle()
       margin 20px 0
+
+    .alert-modal-title
+      font-title()
+      line-height 25.2px
+      text-align left
+
+    .alert-modal-subtitle
+      font-subtitle()
+      font-weight normal
+      text-align left
+      white-space pre-wrap
 
   .content-row
     white-space nowrap
@@ -121,8 +136,8 @@
 
     .alert-icon
       height 30px
-      margin-top 3px
-      margin-right 9px
+      margin-top 10px
+      margin-right 15px
       white-space normal
       width 33px
 

@@ -7,10 +7,8 @@
         .close-btn(onclick=$helpers.closeClicked)
           .close-icon
             include ./close.svg
-      .top-container
+      .top-container(class="round-bottom")
         .content-row
           .alert-icon
             include ./alert.svg
           content(select='[slot-body]')
-      .button-container
-        content(select='[slot-button]')
