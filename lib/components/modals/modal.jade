@@ -1,4 +1,4 @@
-.mp-modal
+.mp-modal(class=alertIcon?"alert":"")
   if $helpers.getType() === 'modal'
     .backdrop(onclick=$helpers.backdropClicked)
   .modal-container
@@ -7,7 +7,14 @@
         .close-btn(onclick=$helpers.closeClicked)
           .close-icon
             include ./close.svg
-      .top-container
-        content(select='[slot-body]')
-      .button-container
-        content(select='[slot-button]')
+      .top-container(class=alertIcon?"round-bottom":"")
+        if alertIcon
+          .content-row(class="dialog")
+            .alert-icon
+              include ./alert.svg
+            content(select='[slot-body]')
+        else
+         content(select='[slot-body]')
+      if !alertIcon
+        .button-container
+          content(select='[slot-button]')
