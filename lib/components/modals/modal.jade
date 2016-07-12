@@ -10,8 +10,8 @@
         .close-btn(onclick=$helpers.closeClicked)
           .close-icon
             include ./close.svg
-      .top-container(class=hasAlertIcon ? "alert" : "")
-        if hasAlertIcon
+      .top-container(class={'alert': $component.isAttributeEnabled('alert')})
+        if $component.isAttributeEnabled('alert')
           .content-row
             .alert-icon
               include ./alert.svg
