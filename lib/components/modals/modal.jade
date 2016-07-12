@@ -7,9 +7,9 @@
         .close-btn(onclick=$helpers.closeClicked)
           .close-icon
             include ./close.svg
-      .top-container(class=alertIcon?"round-bottom":"")
+      .top-container
         if alertIcon
-          .content-row(class="dialog")
+          .content-row
             .alert-icon
               include ./alert.svg
             content(select='[slot-body]')
