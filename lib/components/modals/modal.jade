@@ -1,4 +1,4 @@
-.mp-modal(class=alertIcon?"alert":"")
+.mp-modal(class=hasAlertIcon ? "alert" : "")
   if $helpers.getType() === 'modal'
     .backdrop(onclick=$helpers.backdropClicked)
   .modal-container
@@ -7,8 +7,8 @@
         .close-btn(onclick=$helpers.closeClicked)
           .close-icon
             include ./close.svg
-      .top-container
-        if alertIcon
+      .top-container(class=hasAlertIcon ? "alert" : "")
+        if hasAlertIcon
           .content-row
             .alert-icon
               include ./alert.svg
