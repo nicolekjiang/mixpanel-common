@@ -1,4 +1,7 @@
-.mp-modal(class=hasAlertIcon ? "alert" : "")
+.mp-modal(class={
+  'alert': $component.isAttributeEnabled('alert'),
+  'absolute': $component.isAttributeEnabled('relative'),
+})
   if $helpers.getType() === 'modal'
     .backdrop(onclick=$helpers.backdropClicked)
   .modal-container
