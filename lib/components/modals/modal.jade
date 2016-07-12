@@ -1,6 +1,6 @@
 .mp-modal(class={
   'alert': $component.isAttributeEnabled('alert'),
-  'absolute': $component.isAttributeEnabled('relative'),
+  'absolute': $component.isAttributeEnabled('not-fullscreen'),
 })
   if $helpers.getType() === 'modal'
     .backdrop(onclick=$helpers.backdropClicked)
