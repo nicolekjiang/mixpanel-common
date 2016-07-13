@@ -15,6 +15,7 @@
   <body>
     <mp-button class="primary" onclick="openModal();">Show modal</mp-button>
     <mp-button class="secondary" onclick="openPopup();">Show popup</mp-button>
+    <mp-button class="primary red" onclick="openAlertModal();">Show alert modal</mp-button>
     <mp-button class="primary blue" onclick="alert('clicked');">Confirm</mp-button>
     <mp-button class="primary red" onclick="alert('clicked');" disabled>Delete</mp-button>
     <mp-button class="primary blue">
@@ -31,12 +32,19 @@
       <div class="mp-modal-subtitle" slot-body>Click on any element on your page (ex. the buy button) to create an event and access all historical data for that event.</div>
       <mp-button class="modal" onclick="closePopup();" slot-button>Create your first event</mp-button>
     </mp-modal>
+    <mp-modal id="alert-modal" modal-type="popup" style="display: none" closeable alert>
+      <div slot-body>
+        <div class="alert-modal-title">Your event failed to save</div>
+        <div class="alert-modal-subtitle">If your issue persists please contact our support team at support@mixpanel.com to get help quickly</div>
+      </div>
+    </mp-modal>
 
     <input type="text" placeholder="I'm a placeholder" />
 
     <script type="application/javascript">
       var modal = document.getElementById('modal');
       var popup = document.getElementById('popup');
+      var alertModal = document.getElementById('alert-modal');
       var openModal = function() {
         modal.open();
       };
@@ -48,6 +56,12 @@
       };
       var closePopup = function() {
         popup.close();
+      };
+      var openAlertModal = function() {
+        alertModal.open();
+      };
+      var closeAlertModal = function() {
+        alertModal.close();
       };
    </script>
   </body>
