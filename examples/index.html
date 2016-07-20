@@ -10,6 +10,14 @@
         margin: 0;
         margin-top: 50px;
       }
+      .button-box {
+        background: white;
+        border: 1px solid #9cacbb;
+        border-radius: 4px;
+        display: inline-block;
+        margin: 40px;
+        padding: 20px 40px;
+      }
     </style>
   </head>
   <body>
@@ -40,6 +48,17 @@
     </mp-modal>
 
     <input type="text" placeholder="I'm a placeholder" />
+
+    <div class="button-box">
+      <mp-button class="primary" disabled>primary</mp-button>
+      <mp-button class="primary">primary</mp-button>
+      <mp-button class="secondary">secondary</mp-button>
+    </div>
+
+    <div class="button-box" style="background: #6cb8ff;">
+      <mp-button class="primary on-blue">primary</mp-button>
+      <mp-button class="secondary on-blue">secondary</mp-button>
+    </div>
 
     <script type="application/javascript">
       var modal = document.getElementById('modal');
