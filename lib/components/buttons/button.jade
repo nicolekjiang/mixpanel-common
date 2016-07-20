@@ -1,3 +1,6 @@
 div(class='mp-button #{$component.className}' attributes=$helpers.getButtonAttrs())
   .text
     content
+    if $component.isAttributeEnabled('arrow-next')
+        .arrow-next
+            include ./arrow.svg
