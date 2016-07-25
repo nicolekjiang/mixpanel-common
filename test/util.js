@@ -2,6 +2,7 @@ import expect from 'expect.js';
 
 import {
   pluralize,
+  sum,
   truncateMiddle,
 
   immutableSplice,
@@ -26,6 +27,20 @@ describe('pluralize()', function() {
 
   it('uses third argument to pluralize', function() {
     expect(pluralize('die', 4, 'dice')).to.equal('dice');
+  });
+});
+
+describe('sum()', function() {
+  it('adds all array members together', function() {
+    expect(sum([5, 10, 20])).to.equal(35);
+  });
+
+  it('returns 0 for empty arrays', function() {
+    expect(sum([])).to.equal(0);
+  });
+
+  it('works for array-like non-array objects', function() {
+    expect(sum({length: 2, 0: 15, 1: 3})).to.equal(18);
   });
 });
 
