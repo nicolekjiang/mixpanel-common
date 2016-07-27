@@ -19,6 +19,11 @@ input[type=text], textarea
     font-size 13px
     font-weight 500
     placeholder(grey-500, 400)
+    transition border-color 150ms ease-out
 
     &:focus
       border-color blue-700
+      transition border-color 250ms ease-in
+
+*:focus
+  outline 0
