@@ -51,7 +51,7 @@
     "webpack": "^1.13.1"
   },
   "dependencies": {
-    "mixpanel-browser": "^2.8.1",
+    "mixpanel-browser": "^2.9.6",
     "panel": "^0.8.4",
     "rollbar-browser": "^1.9.1",
     "virtual-dom": "^2.1.1"
