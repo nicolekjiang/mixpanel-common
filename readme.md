@@ -4,3 +4,9 @@
 - components: reusable styles and web components
 - report: mixpanel-specific app utilities
 - util: data manipulation utilities
+
+### Local development of components
+
+- Install dependencies: `npm install`
+- Build continuously: `npm run build-example-watch`
+- Open `examples/index.html` in browser
