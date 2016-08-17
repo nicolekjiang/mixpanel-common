@@ -113,7 +113,7 @@
         border-radius 6px
         padding 20px 40px 30px
 
-    content::content
+    slot-styles()
       .title
         font-title()
         font-weight 600
@@ -133,6 +133,14 @@
         font-weight normal
         text-align left
         white-space pre-wrap
+
+    // these have to be defined separately because content::content isn't a valid
+    // selector on webkit and will cause it to not apply the styles at all
+    &
+      slot-styles()
+
+    content::content
+      slot-styles()
 
     .content-row
       align-items flex-start
