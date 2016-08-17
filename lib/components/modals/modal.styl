@@ -28,125 +28,126 @@
     transform scale(1.1, 1.1)
     opacity 0
 
-.mp-modal
-  bottom 0
-  box-sizing border-box
-  left 0
-  pointer-events none
-  position fixed
-  right 0
-  top 0
-  z-index 10
-
-  &.closed
-    display none
-
-  &.absolute
-    &, backdrop, .modal-container
-      position absolute
-
-  .backdrop
-    animation fadeOverlayIn 500ms forwards
-    background #45566d
-    height 100%
-    opacity 0.9
-    position fixed
-    pointer-events auto
-    width 100%
-    z-index 1
-
-    &.closing
-      animation-name fadeOverlayOut
-
-  .modal-container
-    display flex
-    height 100%
-    justify-content center
-    align-items center
++prefix-classes('mp-modal-')
+  .stage
+    bottom 0
+    box-sizing border-box
+    left 0
     pointer-events none
     position fixed
-    width 100%
-    z-index 2
+    right 0
+    top 0
+    z-index 10
 
-    .modal
-      animation fadeModalIn 500ms forwards 200ms
-      border-radius 6px
-      box-shadow 0 1px 3px 0 rgba(1, 1, 1, 0.28)
-      max-width 530px
-      opacity 0
+    &.closed
+      display none
+
+    &.absolute
+      &, .backdrop, .wrapper
+        position absolute
+
+    .backdrop
+      animation fadeOverlayIn 500ms forwards
+      background #45566d
+      height 100%
+      opacity 0.9
+      position fixed
       pointer-events auto
-      position relative
-      z-index 2
+      width 100%
+      z-index 1
 
       &.closing
-        animation-name fadeModalOut
-        animation-delay 0ms
-        animation-speed 200mx
+        animation-name fadeOverlayOut
+
+    .wrapper
+      display flex
+      height 100%
+      justify-content center
+      align-items center
+      pointer-events none
+      position fixed
+      width 100%
+      z-index 2
+
+      .main
+        animation fadeModalIn 500ms forwards 200ms
+        border-radius 6px
+        box-shadow 0 1px 3px 0 rgba(1, 1, 1, 0.28)
+        max-width 530px
         opacity 0
+        pointer-events auto
+        position relative
+        z-index 2
 
-      .close-btn
-        cursor pointer
-        float right
-        height 10px
-        position absolute
-        right 15px
-        top 15px
+        &.closing
+          animation-name fadeModalOut
+          animation-delay 0ms
+          animation-speed 200mx
+          opacity 0
 
-        .close-icon svg
-          width 10px
-          .x
-            fill grey-200
+        .close-btn
+          cursor pointer
+          float right
+          height 10px
+          position absolute
+          right 15px
+          top 15px
 
-        &:hover
-          .close-icon svg .x
-            fill grey-300
+          .close-icon svg
+            width 10px
+            path
+              fill grey-200
 
-  // keep these styles as general as possible to make them easier to override
-  // i.e. don't indent them further
-  .top-container
-    background #fff
-    border-radius 6px 6px 0 0
-    padding 30px 60px
-    text-align center
-    &.alert
-      border-radius 6px
-      padding 20px 40px 30px
+          &:hover
+            .close-icon svg path
+              fill grey-300
 
-  content::content
-    .mp-modal-title
-      font-title()
-      font-weight 600
+    // keep these styles as general as possible to make them easier to override
+    // i.e. don't indent them further
+    .top-container
+      background #fff
+      border-radius 6px 6px 0 0
+      padding 30px 60px
+      text-align center
+      &.alert
+        border-radius 6px
+        padding 20px 40px 30px
 
-    .mp-modal-subtitle
-      font-subtitle()
-      color grey-700
-      font-weight 500
-      margin 20px 0
+    content::content
+      .title
+        font-title()
+        font-weight 600
 
-    .alert-modal-title
-      font-title()
-      text-align left
+      .subtitle
+        font-subtitle()
+        color grey-700
+        font-weight 500
+        margin 20px 0
 
-    .alert-modal-subtitle
-      font-subtitle()
-      font-weight normal
-      text-align left
-      white-space pre-wrap
+      .alert-title
+        font-title()
+        text-align left
 
-  .content-row
-    align-items flex-start
-    display flex
-    white-space nowrap
-    width 340px
+      .alert-subtitle
+        font-subtitle()
+        font-weight normal
+        text-align left
+        white-space pre-wrap
 
-    .alert-icon
-      height 30px
-      margin-top 10px
-      margin-right 15px
-      white-space normal
-      width 33px
+    .content-row
+      align-items flex-start
+      display flex
+      white-space nowrap
+      width 340px
 
-      svg
-        height 29px
-        .fill
-         fill mp-red
+      .alert-icon
+        height 30px
+        margin-top 10px
+        margin-right 15px
+        white-space normal
+        width 33px
+
+        svg
+          height 29px
+          .alert-icon-fill
+            fill mp-red
