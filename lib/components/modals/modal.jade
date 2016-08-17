@@ -1,24 +1,24 @@
-.mp-modal(class={
-  alert: $component.isAttributeEnabled('alert'),
-  absolute: $component.isAttributeEnabled('not-fullscreen'),
-  closed: $component.isAttributeEnabled('closed'),
+.mp-modal-stage(class={
+  'mp-modal-alert': $component.isAttributeEnabled('alert'),
+  'mp-modal-absolute': $component.isAttributeEnabled('not-fullscreen'),
+  'mp-modal-closed': $component.isAttributeEnabled('closed'),
 })
   if $helpers.getType() === 'modal'
-    .backdrop(onclick=$helpers.backdropClicked)
-  .modal-container
-    .modal(style=$helpers.getModalStyles())
+    .mp-modal-backdrop(onclick=$helpers.backdropClicked)
+  .mp-modal-wrapper
+    .mp-modal-main(style=$helpers.getModalStyles())
       if $component.isAttributeEnabled('closeable')
-        .close-btn(onclick=$helpers.closeClicked)
-          .close-icon
+        .mp-modal-close-btn(onclick=$helpers.closeClicked)
+          .mp-modal-close-icon
             include ./close.svg
-      .top-container(class={'alert': $component.isAttributeEnabled('alert')})
+      .mp-modal-top-container(class={'mp-modal-alert': $component.isAttributeEnabled('alert')})
         if $component.isAttributeEnabled('alert')
-          .content-row
-            .alert-icon
+          .mp-modal-content-row
+            .mp-modal-alert-icon
               include ./alert.svg
             content(select='[slot-body]')
         else
          content(select='[slot-body]')
       if !alertIcon
-        .button-container
+        .mp-modal-button-container
           content(select='[slot-button]')
