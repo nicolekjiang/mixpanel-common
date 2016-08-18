@@ -2,6 +2,7 @@ import expect from 'expect.js';
 
 import {
   pluralize,
+  sorted,
   sum,
   truncateMiddle,
 
@@ -27,6 +28,33 @@ describe('pluralize()', function() {
 
   it('uses third argument to pluralize', function() {
     expect(pluralize('die', 4, 'dice')).to.equal('dice');
+  });
+});
+
+describe('sorted()', function() {
+  it('defaults to normal ascending sort() behavior', function() {
+    expect(sorted([5, 2, 4, 1])).to.eql([1, 2, 4, 5]);
+  });
+
+  it('does not mutate its array argument', function() {
+    const arr = [5, 2, 4, 1];
+    expect(sorted(arr)).to.eql([1, 2, 4, 5]);
+    expect(arr).to.eql([5, 2, 4, 1]);
+  });
+
+  it('sorts strings', function() {
+    expect(sorted(['a', 'zzz', 'moo'])).to.eql(['a', 'moo', 'zzz']);
+  });
+
+  it('can sort descending', function() {
+    expect(sorted(['a', 'zzz', 'moo'], {order: 'desc'})).to.eql(['zzz', 'moo', 'a']);
+  });
+
+  it('can sort based on a given transformation', function() {
+    expect(sorted(['a', 'zzz', 'MOO'], {
+      order: 'desc',
+      transform: s => s.toLowerCase(),
+    })).to.eql(['zzz', 'MOO', 'a']);
   });
 });
 
