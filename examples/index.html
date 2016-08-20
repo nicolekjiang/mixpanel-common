@@ -62,18 +62,24 @@
 
     <script type="application/javascript">
       var modal = document.getElementById('modal');
-      modal.addEventListener('close', function() {
-        modal.setAttribute('closed', true);
+      modal.addEventListener('change', function(e) {
+        if (e.detail.state === 'closed') {
+            modal.setAttribute('closed', true);
+        }
       });
 
       var popup = document.getElementById('popup');
-      popup.addEventListener('close', function() {
-        popup.setAttribute('closed', true);
+      popup.addEventListener('change', function(e) {
+          if (e.detail.state === 'closed') {
+              popup.setAttribute('closed', true);
+          }
       });
 
       var alertModal = document.getElementById('alert-modal');
-      alertModal.addEventListener('close', function() {
-        alertModal.setAttribute('closed', true);
+      alertModal.addEventListener('change', function() {
+          if (e.detail.state === 'closed') {
+              alertModal.setAttribute('closed', true);
+          }
       });
 
       var openModal = function() {
