@@ -1,9 +1,13 @@
 var path = require('path');
 
 var webpackConfig = {
-  entry: './lib/index.js',
+  entry: {
+    'mixpanel-common': './lib/index.js',
+    'virtual-jade-example': './examples/virtual-jade/index.js'
+  },
   output: {
-    filename: 'examples/build/bundle.js',
+    filename: '[name].js',
+    path: path.join(__dirname, '/examples/build/')
   },
   module: {
     loaders: [

@@ -1,0 +1,13 @@
+.container
+  if buttonSet === 1
+    .inner.one
+      mp-button.mp-button-primary(onclick=$helpers.nextState) Oh sick
+      mp-button.mp-button-secondary(onclick=$helpers.nextState) Oh sick
+  else if buttonSet === 2
+    .inner.two
+      mp-button.mp-button-secondary(onclick=$helpers.prevState) Oh sick 2
+      mp-button.mp-button-primary(onclick=$helpers.prevState) Oh sick 2
+    .inner.one
+      mp-button.mp-button-primary(onclick=$helpers.nextState) Oh sick
+      mp-button.mp-button-secondary(onclick=$helpers.nextState) Oh sick
+
