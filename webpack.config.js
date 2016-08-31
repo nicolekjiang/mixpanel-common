@@ -3,7 +3,7 @@ var path = require('path');
 var webpackConfig = {
   entry: {
     'mixpanel-common': './lib/index.js',
-    'virtual-jade-example': './examples/virtual-jade/index.js'
+    'panel-example': './examples/panel/index.js'
   },
   output: {
     filename: '[name].js',
