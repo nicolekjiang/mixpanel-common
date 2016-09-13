@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>profile_large</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="16 16.0004485 16 -3.55271368e-15 0.0005 -3.55271368e-15 0.0005 16.0004485 16 16.0004485"></polygon>
+    </defs>
+    <g id="16-x-16-solid" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="profile_large">
+            <g id="Page-1" transform="translate(3.000000, 3.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <g id="Clip-2"></g>
+                <path d="M9.9805,9.04 C9.9805,8.17 10.7005,8.46 11.0205,6.87 C11.1505,6.21 11.7805,6.86 11.9105,5.36 C11.9525,5.063 11.8155,4.768 11.5605,4.61 C11.5605,4.61 11.7405,3.73 11.8005,3.04 C11.8905,2.2 11.2805,-3.55271368e-15 8.0005,-3.55271368e-15 C4.7205,-3.55271368e-15 4.1105,2.2 4.2005,3.04 C4.2605,3.73 4.4405,4.61 4.4405,4.61 C4.1855,4.768 4.0475,5.063 4.0905,5.36 C4.2205,6.86 4.8505,6.21 4.9805,6.87 C5.3005,8.46 6.0205,8.17 6.0205,9.04 C6.0205,10.48 5.2705,11.16 2.9095,11.95 C0.5395,12.76 0.0005,13.57 0.0005,14.13 L0.0005,15.07 C0.0225,15.602 0.4685,16.016 1.0005,16 L15.0005,16 C15.5325,16.016 15.9775,15.602 16.0005,15.07 L16.0005,14.13 C16.0005,13.57 15.4595,12.76 13.0905,11.95 C10.7305,11.16 9.9805,10.48 9.9805,9.04" id="Fill-1" fill="#000000" mask="url(#mask-2)"></path>
+            </g>
+        </g>
+    </g>
+</svg>

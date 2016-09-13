@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>type_number</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="0.0002 18 18 18 18 0.0005 0.0002 0.0005"></polygon>
+    </defs>
+    <g id="16-x-16-solid" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="type_number">
+            <g id="Page-1" transform="translate(2.000000, 2.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <g id="Clip-2"></g>
+                <path d="M11.5652,13.0695 L6.6222,13.0695 L6.6222,11.6995 L8.2082,11.6995 L8.2082,6.6195 L6.6912,6.7225 L6.5652,5.3865 L9.2362,4.8725 L10.1152,4.8725 L10.1152,11.6995 L11.5652,11.6995 L11.5652,13.0695 Z M17.0002,0.0005 L1.0002,0.0005 C0.4482,0.0005 0.0002,0.4475 0.0002,1.0005 L0.0002,17.0005 C0.0002,17.5525 0.4482,18.0005 1.0002,18.0005 L17.0002,18.0005 C17.5522,18.0005 18.0002,17.5525 18.0002,17.0005 L18.0002,1.0005 C18.0002,0.4475 17.5522,0.0005 17.0002,0.0005 L17.0002,0.0005 Z" id="Fill-1" fill="#9CACBB" mask="url(#mask-2)"></path>
+            </g>
+        </g>
+    </g>
+</svg>
