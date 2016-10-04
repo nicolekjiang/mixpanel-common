@@ -89,15 +89,6 @@ background-primary-red-hover = mp-red linear-gradient(to bottom, #ED92A4, #EA849
           border solid 1px #1d85e7
           box-shadow inset 0 1px 2px 0 rgba(0, 0, 0, 0.2)
 
-      &.red
-        background background-primary-red
-        border 1px solid #FF5400
-        border-image-source linear-gradient(to top, #d15269, #e46d83)
-        border-image-slice 1
-
-        &:hover{not-disabled}
-          background background-primary-red-hover
-
     &.secondary
       background-color #fff
       border 1px solid grey-200
@@ -124,3 +115,21 @@ background-primary-red-hover = mp-red linear-gradient(to bottom, #ED92A4, #EA849
         &:active
           border-color #2583dd
           box-shadow 0 1px 1px 0 rgba(0, 0, 0, 0.06), inset 0 1px 2px 0 rgba(0, 0, 0, 0.2)
+
+    &.red
+      background background-primary-red
+      border 1px solid #FF5400
+      border-image-source linear-gradient(to top, #d15269, #e46d83)
+      border-image-slice 1
+
+      &:hover{not-disabled}
+        background background-primary-red-hover
+
+    &.purple
+      background mp-purple
+      border 1px solid #7858b8
+      box-shadow none
+
+      &:hover{not-disabled}
+        background #b299ea
+        border 1px solid #9270e2
