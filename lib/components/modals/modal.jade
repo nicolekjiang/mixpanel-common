@@ -1,12 +1,12 @@
 .mp-modal-stage(class={
   'mp-modal-alert': $component.isAttributeEnabled('alert'),
   'mp-modal-absolute': $component.isAttributeEnabled('not-fullscreen'),
-  'mp-modal-closed': $component.isAttributeEnabled('closed'),
+  'mp-modal-closed': closed,
 })
   if $helpers.getType() === 'modal'
-    .mp-modal-backdrop(onclick=$helpers.backdropClicked)
+    .mp-modal-backdrop(onclick=$helpers.backdropClicked class={'mp-modal-closing': closing})
   .mp-modal-wrapper
-    .mp-modal-main(style=$helpers.getModalStyles())
+    .mp-modal-main(style=$helpers.getModalStyles() class={'mp-modal-closing': closing})
       if $component.isAttributeEnabled('closeable')
         .mp-modal-close-btn(onclick=$helpers.closeClicked)
           .mp-modal-close-icon

@@ -11,16 +11,27 @@ document.registerElement('demo-app', class extends Component {
       css,
 
       defaultState: {
-        buttonSet: 1,
+        modalOpen: true,
       },
 
       helpers: {
-        nextState: () => {
-          this.update({buttonSet: 2});
+        openModal: () => {
+          this.update({modalOpen: true});
         },
 
-        prevState: () => {
-          this.update({buttonSet: 1});
+        closeModal: () => {
+          this.update({modalOpen: false});
+        },
+
+        handleModalChange: (e) => {
+          switch(e.detail.state) {
+            case 'closed':
+              this.update({modalOpen: false});
+              break;
+            case 'open':
+              this.update({modalOpen: true});
+              break;
+          }
         },
       },
 
@@ -29,5 +40,4 @@ document.registerElement('demo-app', class extends Component {
       useShadowDom: true,
     };
   }
-
 });
