@@ -1,111 +1,99 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Hello world</title>
-    <script src="../node_modules/babel-polyfill/dist/polyfill.js"></script>
-    <script src="../node_modules/webcomponents.js/webcomponents.js"></script>
-    <script src="./build/mixpanel-common.js"></script>
-    <style type="text/css">
-      body {
-        margin: 0;
-        margin-top: 50px;
-      }
-      .button-box {
-        background: white;
-        border: 1px solid #9cacbb;
-        border-radius: 4px;
-        display: inline-block;
-        margin: 40px;
-        padding: 20px 40px;
-      }
-    </style>
-  </head>
-  <body>
-    <mp-button class="mp-button-primary" onclick="openModal();">Show modal</mp-button>
-    <mp-button class="mp-button-secondary" onclick="openPopup();">Show popup</mp-button>
-    <mp-button class="mp-button-primary mp-button-red" onclick="openAlertModal();">Show alert modal</mp-button>
-    <mp-button class="mp-button-primary mp-button-purple" onclick="openPurpleModal();">Show purple modal</mp-button>
-    <mp-button class="mp-button-primary mp-button-blue" onclick="alert('clicked');">Confirm</mp-button>
-    <mp-button class="mp-button-primary mp-button-red" onclick="alert('clicked');" disabled>Delete</mp-button>
-    <mp-button class="mp-button-primary mp-button-blue">
-      Mouse over me!
-      <mp-tooltip>This is my tooltip</mp-tooltip>
-    </mp-button>
-    <mp-modal id="modal" closeable>
-      <div class="mp-modal-title" slot-body>Easily track events</div>
-      <div class="mp-modal-subtitle" slot-body>Click on any element on your page (ex. the buy button) to create an event and access all historical data for that event.</div>
-      <mp-button class="mp-button-modal mp-button-primary" onclick="closeModal();" slot-button arrow-next>Create your first event</mp-button>
-    </mp-modal>
-    <mp-modal id="popup" width="500px" modal-type="popup" closeable>
-      <div class="mp-modal-title" slot-body>Easily track events</div>
-      <div class="mp-modal-subtitle" slot-body>Click on any element on your page (ex. the buy button) to create an event and access all historical data for that event.</div>
-      <mp-button class="mp-button-modal mp-button-primary" onclick="closePopup();" slot-button>Create your first event</mp-button>
-    </mp-modal>
-    <mp-modal id="alert-modal" modal-type="popup" closeable alert>
-      <div slot-body>
-        <div class="mp-modal-alert-title">Your event failed to save</div>
-        <div class="mp-modal-alert-subtitle">If your issue persists please contact our support team at support@mixpanel.com to get help quickly</div>
-      </div>
-    </mp-modal>
-    <mp-modal id="purple-modal" width="500px" closeable>
-      <div class="mp-modal-title" slot-body>I'm a modal with a purple button</div>
-      <div class="mp-modal-subtitle" slot-body>We use this for upsell dialogs</div>
-      <mp-button class="mp-button-modal mp-button-purple" onclick="closePurpleModal();" slot-button arrow-next>Upgrade</mp-button>
-    </mp-modal>
+    <head>
+        <title>Mixpanel product style guide</title>
+        <script src="../node_modules/babel-polyfill/dist/polyfill.js"></script>
+        <script src="../node_modules/webcomponents.js/webcomponents.js"></script>
+        <script src="./build/mixpanel-common.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/typography.css">
+        <link rel="stylesheet" type="text/css" href="css/forms.css">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+    </head>
+    <body class="mp-font-paragraph">
+        <div class="section">
+            <h1>Colors</h1>
+            <p class="color-palette mp-font-list-item">loading...</p>
+        </div>
 
-    <input type="text" placeholder="I'm a placeholder" />
+        <div class="section">
+            <h1>Typography</h1>
+            <p class="mp-font-title">.mp-font-title | Mixpanel helps you learn from your data</p>
+            <p class="mp-font-subtitle">.mp-font-subtitle | Mixpanel helps you learn from your data</p>
+            <p class="mp-font-paragraph">.mp-font-paragraph | Mixpanel helps you learn from your data</p>
+            <p class="mp-font-list-item">.mp-font-list-item | Mixpanel helps you learn from your data</p>
+        </div>
 
-    <div class="button-box">
-      <mp-button class="mp-button-primary" disabled>primary</mp-button>
-      <mp-button class="mp-button-primary">primary</mp-button>
-      <mp-button class="mp-button-secondary">secondary</mp-button>
-    </div>
+        <div class="section">
+            <h1>Tooltips</h1>
+            <p class="mp-font-paragraph">
+                <a>
+                    Hover me
+                    <mp-tooltip>This is my tooltip</mp-tooltip>
+                </a>
+            </p>
+        </div>
 
-    <div class="button-box" style="background: #6cb8ff;">
-      <mp-button class="mp-button-primary mp-button-on-blue">primary</mp-button>
-      <mp-button class="mp-button-secondary mp-button-on-blue">secondary</mp-button>
-    </div>
+        <div class="section">
+            <h1>Forms</h1>
+            <p>To do...</p> 
+            <p><input type="text" placeholder="I'm a placeholder" /></p>
+        </div>
 
-    <script type="application/javascript">
-      var modal = document.getElementById('modal');
-      var popup = document.getElementById('popup');
-      var alertModal = document.getElementById('alert-modal');
-      var purpleModal = document.getElementById('purple-modal');
+        <div class="section">
+            <h1>Buttons</h1>
+            <p>
+                <mp-button class="mp-button-primary">.mp-button-primary</mp-button>
+                <mp-button class="mp-button-primary" disabled>disabled</mp-button>
+            </p>
+            <p>
+                <mp-button class="mp-button-secondary">.mp-button-secondary</mp-button>
+                <mp-button class="mp-button-secondary" disabled>disabled</mp-button>
+            </p>
+            <p>
+                <mp-button class="mp-button-red">.mp-button-red</mp-button>
+                <mp-button class="mp-button-red" disabled>disabled</mp-button>
+            </p>
+            <p>
+                <mp-button class="mp-button-purple">.mp-button-purple</mp-button>
+                <mp-button class="mp-button-purple" disabled>disabled</mp-button>
+            </p>
+            <p style="background: #6cb8ff; padding: 10px; display: table;">
+                <mp-button class="mp-button-primary mp-button-on-blue">primary on-blue</mp-button>
+                <mp-button class="mp-button-primary mp-button-on-blue" disabled>disabled</mp-button>
+            </p>
+            <p style="background: #6cb8ff; padding: 10px; display: table;">
+                <mp-button class="mp-button-secondary mp-button-on-blue">secondary on-blue</mp-button>
+                <mp-button class="mp-button-secondary mp-button-on-blue" disabled>disabled</mp-button>
+            </p>
+        </div>
 
-      var openPurpleModal = function() {
-        purpleModal.open();
-      };
-
-      var closePurpleModal = function() {
-        purpleModal.close();
-      };
-
-      var openModal = function() {
-        modal.open();
-      };
-
-      var closeModal = function() {
-        modal.close().then(function() {
-          console.log('modal!');
-        });
-      }
-
-      var openPopup = function() {
-        popup.open();
-      };
-
-      var closePopup = function() {
-        popup.close();
-      };
-
-      var openAlertModal = function() {
-        alertModal.open();
-      };
-
-      var closeAlertModal = function() {
-        alertModal.close();
-      };
-
-   </script>
-  </body>
+        <div class="section">
+            <h1>Modals</h1>
+            <p><a href="#" onclick="openModal(); return false;">Open modal</a></p>
+            <p><a href="#" onclick="openPopup(); return false;">Open popup</a></p>
+            <p><a href="#" onclick="openAlertModal(); return false;">Open alert</a></p>
+            <mp-modal id="modal" closeable>
+                  <div class="mp-modal-title" slot-body>Easily track events</div>
+                  <div class="mp-modal-subtitle" slot-body>Click on any element on your page (ex. the buy button) to create an event and access all historical data for that event.</div>
+                  <mp-button class="mp-button-modal mp-button-primary" onclick="closeModal();" slot-button arrow-next>Create your first event</mp-button>
+            </mp-modal>
+            <mp-modal id="popup" width="500px" modal-type="popup" closeable>
+                  <div class="mp-modal-title" slot-body>Easily track events</div>
+                  <div class="mp-modal-subtitle" slot-body>Click on any element on your page (ex. the buy button) to create an event and access all historical data for that event.</div>
+                  <mp-button class="mp-button-modal mp-button-primary" onclick="closePopup();" slot-button>Create your first event</mp-button>
+            </mp-modal>
+            <mp-modal id="alert-modal" modal-type="popup" closeable alert>
+                  <div slot-body>
+                        <div class="mp-modal-alert-title">Your event failed to save</div>
+                        <div class="mp-modal-alert-subtitle">If your issue persists please contact our support team at support@mixpanel.com to get help quickly</div>
+                  </div>
+            </mp-modal>
+            <mp-modal id="purple-modal" width="500px" closeable>
+                  <div class="mp-modal-title" slot-body>I'm a modal with a purple button</div>
+                  <div class="mp-modal-subtitle" slot-body>We use this for upsell dialogs</div>
+                  <mp-button class="mp-button-modal mp-button-purple" onclick="closePurpleModal();" slot-button arrow-next>Upgrade</mp-button>
+            </mp-modal>
+        </div>
+        <script src="js/index.js"></script>
+    </body>
 </html>

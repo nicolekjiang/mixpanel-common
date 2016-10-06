@@ -1,0 +1,57 @@
+json('colors.json')
+
+family-helvetica = 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif
+family-proxima-nova = 'Proxima Nova', 'proxima-nova', sans-serif
+
+font-list-item()
+  font-family family-helvetica
+  font-size 13px
+  line-height 1.7
+  color grey-700
+
+font-paragraph()
+  font-family family-helvetica
+  font-size 14px
+  font-weight normal
+  line-height 18px
+  color grey-700
+
+font-subtitle()
+  font-family family-proxima-nova
+  font-size 15px
+  font-weight 600
+  line-height 18px
+  color grey-900
+
+font-title()
+  font-family family-proxima-nova
+  font-size 18px
+  font-weight 700
+  line-height 1.4
+  color grey-900
+
+mp-link()
+  &, &:visited
+    color blue-500
+    text-decoration none
+
+  &:hover
+    color blue-300
+
+a
+  mp-link()
+
++prefix-classes('mp-font-')
+  .title
+    font-title()
+
+  .subtitle
+    font-subtitle()
+
+  .list-item
+    font-list-item()
+
+  .paragraph
+    font-paragraph()
+
+

@@ -43,7 +43,7 @@
     "mocha": "^3.1.2",
     "precommit-hook-eslint": "^3.0.0",
     "style-loader": "^0.13.1",
-    "stylus": "^0.54.5",
+    "stylus": "0.52.4",
     "stylus-loader": "^2.1.0",
     "virtual-jade": "^0.3.3",
     "virtual-jade-loader": "^0.3.2",
