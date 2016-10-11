@@ -8,7 +8,7 @@
     "build-example": "webpack --context examples --config examples/webpack.config.js && mkdir build/css && ./node_modules/stylus/bin/stylus --out build/css --compress stylesheets/*.styl",
     "lint": "eslint lib",
     "prepublish": "npm run build",
-    "test": "webpack --context test --config test/webpack.config.js; DISPLAY=:30 wct --plugin local",
+    "test": "webpack --context test --config test/webpack.config.js; DISPLAY=:99.0 wct --plugin local",
     "validate": "npm ls"
   },
   "repository": {

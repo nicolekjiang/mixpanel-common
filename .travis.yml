@@ -3,5 +3,5 @@ node_js:
   - "6.2"
 language: node_js
 before_install:
-  - "export DISPLAY=:30"
+  - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
