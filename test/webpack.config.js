@@ -2,7 +2,8 @@ var path = require('path');
 
 var webpackConfig = {
   entry: {
-    'components/modal': './components/modal.js'
+    'components/modal': './components/modal.js',
+    'util': './util.js'
   },
   output: {
     filename: '[name].js',

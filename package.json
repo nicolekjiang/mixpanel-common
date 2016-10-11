@@ -6,11 +6,9 @@
   "scripts": {
     "build": "babel lib -d build && cp -r build/report . && cp -r build/util .",
     "build-example": "webpack --context examples --config examples/webpack.config.js && mkdir build/css && ./node_modules/stylus/bin/stylus --out build/css --compress stylesheets/*.styl",
-    "build-example-watch": "webpack --context examples --config examples/webpack.config.js -w",
     "lint": "eslint lib",
     "prepublish": "npm run build",
-    "test": "mocha --require babel-core/register test/**",
-    "integration-tests": "webpack --context test --config test/webpack.config.js; DISPLAY=:30 wct --plugin local",
+    "test": "webpack --context test --config test/webpack.config.js; DISPLAY=:30 wct --plugin local",
     "validate": "npm ls"
   },
   "repository": {
@@ -41,7 +39,6 @@
     "eslint": "^2.11.1",
     "expect.js": "^0.3.1",
     "js-beautify": "^1.6.3",
-    "mocha": "^2.5.3",
     "precommit-hook-eslint": "^3.0.0",
     "style-loader": "^0.13.1",
     "stylus": "^0.54.5",
