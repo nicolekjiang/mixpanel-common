@@ -47,17 +47,25 @@
         position absolute
 
     .backdrop
-      animation fadeOverlayIn 300ms forwards
       background #45566d
       height 100%
-      opacity 0.9
       position fixed
       pointer-events auto
       width 100%
       z-index 1
 
+      &.opening
+        animation fadeOverlayIn 300ms forwards
+        opacity 0
+
+      &.open
+        opacity 0.9
+
       &.closing
-        animation-name fadeOverlayOut
+        animation fadeOverlayOut 300ms forwards
+
+      &.closed
+        opacity 0
 
     .wrapper
       display flex
@@ -70,19 +78,24 @@
       z-index 2
 
       .main
-        animation fadeModalIn 300ms forwards 100ms
         border-radius 6px
         box-shadow 0 1px 3px 0 rgba(1, 1, 1, 0.28)
         max-width 530px
-        opacity 0
         pointer-events auto
         position relative
         z-index 2
 
+        &.opening
+          animation fadeModalIn 300ms forwards 100ms
+          opacity 0
+
+        &.open
+          opacity 1
+
         &.closing
-          animation-name fadeModalOut
-          animation-delay 0ms
-          animation-speed 200mx
+          animation fadeModalOut 200ms forwards
+
+        &.closed
           opacity 0
 
         .close-btn
