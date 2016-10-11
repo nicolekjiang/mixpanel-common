@@ -1,6 +1,6 @@
 {
   "verbose": false,
-  "suites": ["test/build/components/modal.js"],
+  "suites": ["test/index.html"],
   "plugins": {
     "local": {
       "disabled": true,

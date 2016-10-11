@@ -1,5 +1,6 @@
 /* global beforeEach, describe, it */
 import expect from 'expect.js';
+import 'webcomponents.js/webcomponents';
 
 import '../../lib/components/modals/modal'
 import { onAnimationEnd, offAnimationEnd } from '../../lib/components/utils';
@@ -11,9 +12,10 @@ const STATE_CLOSING = 'closing';
 
 describe('Test mixpanel-common modal component', () => {
   let modal;
-  beforeEach(() => {
+  beforeEach(done => {
     modal = document.createElement('mp-modal');
     document.body.appendChild(modal);
+    window.requestAnimationFrame(() => done());
   });
 
   afterEach(() => {
@@ -194,12 +196,12 @@ describe('Test mixpanel-common modal component', () => {
     it('is visible after "open()" is called', done => {
       modal.addEventListener('change', e => {
         if (e.detail.state === STATE_OPEN) {
-          setTimeout(() => {
+          window.requestAnimationFrame(() => {
             const modalRoot = modal.shadowRoot.querySelector('.mp-modal-stage');
             expect(modalRoot.classList.contains('mp-modal-closed')).to.equal(false);
             expect(window.getComputedStyle(modalRoot).display).to.equal('block');
             done();
-          }, 0);
+          });
         }
       });
       modal.open();
@@ -209,12 +211,12 @@ describe('Test mixpanel-common modal component', () => {
       modal.update({state: STATE_OPEN});
       modal.addEventListener('change', e => {
         if (e.detail.state === STATE_CLOSED) {
-          setTimeout(() => {
+          window.requestAnimationFrame(() => {
             const modalRoot = modal.shadowRoot.querySelector('.mp-modal-stage');
             expect(modalRoot.classList.contains('mp-modal-closed')).to.equal(true);
             expect(window.getComputedStyle(modalRoot).display).to.equal('none');
             done();
-          }, 0);
+          });
         }
       });
       modal.close();
