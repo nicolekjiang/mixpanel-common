@@ -1,0 +1,30 @@
+{
+  "verbose": false,
+  "suites": ["test/build/components/modal.js"],
+  "plugins": {
+    "local": {
+      "disabled": true,
+      "browsers": [
+        "chrome"
+      ]
+    },
+    "sauce": {
+      "disabled": true,
+      "browsers": [
+        {
+          "browserName": "chrome",
+          "version": "latest",
+          "platform": "OS X 10.11"
+        }, {
+          "browserName": "firefox",
+          "version": "latest",
+          "platform": "OS X 10.11"
+        }, {
+          "browserName": "safari",
+          "version": "latest",
+          "platform": "OS X 10.11"
+        }
+      ]
+    }
+  }
+}

@@ -9,6 +9,10 @@ background-primary-on-blue-hover = blue-100 linear-gradient(#8cc7ff, #7bbfff)
 background-primary-red = mp-red linear-gradient(#EA8499, #E4687D)
 background-primary-red-hover = mp-red linear-gradient(to bottom, #ED92A4, #EA8499)
 
+active = '&:active,&[active]'
+disabled = '&:disabled,&[disabled]'
+not-disabled = ':not([disabled]):not(:disabled)'
+
 +prefix-classes('mp-button-')
   .container
     align-items center
@@ -113,7 +117,7 @@ background-primary-red-hover = mp-red linear-gradient(to bottom, #ED92A4, #EA849
       border 1px solid #7858b8
 
       &:hover{not-disabled}
-        background #b299ea
+        background #A081EA
         border 1px solid #9270e2
 
     /* END COLOR THEMES */

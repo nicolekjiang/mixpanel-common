@@ -4,12 +4,13 @@
   "version": "0.14.0",
   "description": "Mixpanel shared JS",
   "scripts": {
-    "build": "babel lib -d build && cp -r build/report . && cp -r build/util .",
-    "build-example": "webpack",
-    "build-example-watch": "webpack -w",
+    "build": "babel lib -d build && cp -r build/report . && cp -r build/util . && ./node_modules/stylus/bin/stylus --out build/css --compress stylesheets/*.styl",
+    "build-example": "webpack --context examples --config examples/webpack.config.js; ./node_modules/stylus/bin/stylus --out build/css --compress stylesheets/*.styl",
+    "build-example-watch": "webpack --context examples --config examples/webpack.config.js -w",
     "lint": "eslint lib",
     "prepublish": "npm run build",
-    "test": "mocha --require babel-core/register",
+    "test": "mocha --require babel-core/register test/**",
+    "integration-tests": "webpack --context test --config test/webpack.config.js; DISPLAY=:30 wct --plugin local",
     "validate": "npm ls"
   },
   "repository": {
@@ -47,6 +48,7 @@
     "stylus-loader": "^2.1.0",
     "virtual-jade": "^0.3.3",
     "virtual-jade-loader": "^0.3.2",
+    "web-component-tester": "^4.3.4",
     "webcomponents.js": "^0.7.22",
     "webpack": "^1.13.1"
   },
