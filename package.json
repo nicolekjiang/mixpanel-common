@@ -4,8 +4,8 @@
   "version": "0.14.0",
   "description": "Mixpanel shared JS",
   "scripts": {
-    "build": "babel lib -d build && cp -r build/report . && cp -r build/util . && ./node_modules/stylus/bin/stylus --out build/css --compress stylesheets/*.styl",
-    "build-example": "webpack --context examples --config examples/webpack.config.js; ./node_modules/stylus/bin/stylus --out build/css --compress stylesheets/*.styl",
+    "build": "babel lib -d build && cp -r build/report . && cp -r build/util . && mkdir build/css && ./node_modules/stylus/bin/stylus --out build/css --compress stylesheets/*.styl",
+    "build-example": "webpack --context examples --config examples/webpack.config.js && mkdir build/css && ./node_modules/stylus/bin/stylus --out build/css --compress stylesheets/*.styl",
     "build-example-watch": "webpack --context examples --config examples/webpack.config.js -w",
     "lint": "eslint lib",
     "prepublish": "npm run build",
