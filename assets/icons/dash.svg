@@ -4,8 +4,8 @@
     <title>dash</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
-    <g id="16-x-16-solid" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="dash" fill="#000000">
+    <g id="16-x-16-solid" stroke="none" stroke-width="1">
+        <g id="dash">
             <polygon id="Page-1" points="5 12 17 12 17 10 5 10"></polygon>
         </g>
     </g>

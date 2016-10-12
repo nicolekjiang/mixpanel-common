@@ -4,8 +4,8 @@
     <title>sort_value_asc</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
-    <g id="16-x-16-solid" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="sort_value_asc" fill="#231F1F">
+    <g id="16-x-16-solid" stroke="none" stroke-width="1">
+        <g id="sort_value_asc">
             <path d="M3,8 L8,8 L8,6 L3,6 L3,8 Z M3,12 L13,12 L13,9.999 L3,9.999 L3,12 Z M3,16 L18,16 L18,14 L3,14 L3,16 Z" id="Page-1"></path>
         </g>
     </g>

@@ -4,8 +4,8 @@
     <title>sort_alpha_asc</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
-    <g id="16-x-16-solid" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="sort_alpha_asc" fill="#000000">
+    <g id="16-x-16-solid" stroke="none" stroke-width="1">
+        <g id="sort_alpha_asc">
             <g id="Page-1" transform="translate(0.000000, 6.000000)">
                 <polygon id="Fill-1" points="11 6 13 6 13 4 11 4"></polygon>
                 <path d="M3.5199,0 L-0.0001,9 L2.7299,9 L3.1899,8 L6.8799,8 L7.3399,9 L10.0699,9 L6.5599,0 L3.5199,0 Z M5.0399,2 L6.2199,6 L3.8499,6 L5.0399,2 Z" id="Fill-2"></path>
