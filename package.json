@@ -9,6 +9,7 @@
     "lint": "eslint lib",
     "prepublish": "npm run build",
     "test": "webpack --context test --config test/webpack.config.js; DISPLAY=:30 wct --plugin local",
+    "unit-test": "mocha --require babel-core/register",
     "validate": "npm ls"
   },
   "repository": {
@@ -39,6 +40,7 @@
     "eslint": "^2.11.1",
     "expect.js": "^0.3.1",
     "js-beautify": "^1.6.3",
+    "mocha": "^3.1.2",
     "precommit-hook-eslint": "^3.0.0",
     "style-loader": "^0.13.1",
     "stylus": "^0.54.5",
