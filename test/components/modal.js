@@ -22,7 +22,7 @@ describe('Test mixpanel-common modal component', () => {
     document.body.innerHTML = '';
   });
 
-  describe('test imperative API', () => {
+  describe('imperative API', () => {
     it('opens when "open()" is called', () => {
       modal.open();
       expect(modal.state.visibility).to.equal(VISIBILITY_OPENING);
@@ -50,7 +50,7 @@ describe('Test mixpanel-common modal component', () => {
     });
   });
 
-  describe('test "closed" attribute', () => {
+  describe('"closed" attribute', () => {
    it('immediately opens when set to "false" before it is attached', () => {
       document.body.removeChild(modal);
       modal.setAttribute('closed', 'false');
@@ -71,7 +71,7 @@ describe('Test mixpanel-common modal component', () => {
     });
   });
 
-  describe('test "closeable" attribute', () => {
+  describe('"closeable" attribute', () => {
     it('does not close when clicked outside when not enabled', done => {
       modal.setAttribute('closeable', 'false');
       modal.update({state: VISIBILITY_OPEN});
@@ -111,7 +111,7 @@ describe('Test mixpanel-common modal component', () => {
     });
   });
 
-  describe('test "modal-type" attribute', () => {
+  describe('"modal-type" attribute', () => {
     it('does take over the screen if the "modal-type" is modal', done => {
       modal.setAttribute('modal-type', 'modal');
       modal.update({state: VISIBILITY_OPEN});
@@ -131,7 +131,7 @@ describe('Test mixpanel-common modal component', () => {
     });
   });
 
-  describe('test life-cycle', () => {
+  describe('life-cycle', () => {
 
     it('animates open', done => {
       const animations = ['fadeModalIn', 'fadeOverlayIn'];
@@ -188,7 +188,7 @@ describe('Test mixpanel-common modal component', () => {
     });
   });
 
-  describe('test full integration', () => {
+  describe('full integration', () => {
     it('attaches in a closed state', () => {
       expect(modal.state.visibility).to.equal(VISIBILITY_CLOSED);
     });
