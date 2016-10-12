@@ -24,7 +24,11 @@
           "browserName": "safari",
           "version": "latest",
           "platform": "OS X 10.11"
-        }
+        }, {
+          "browserName": "microsoftedge",
+          "version": "latest",
+          "platform": "Windows 10"
+        },
       ]
     }
   }
