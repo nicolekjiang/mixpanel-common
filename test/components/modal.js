@@ -5,10 +5,10 @@ import 'webcomponents.js/webcomponents';
 import '../../lib/components/modals/modal'
 import { onAnimationEnd, offAnimationEnd } from '../../lib/components/utils';
 
-const STATE_OPEN = 'open';
-const STATE_OPENING = 'opening';
-const STATE_CLOSED = 'closed';
-const STATE_CLOSING = 'closing';
+const VISIBILITY_OPEN = 'open';
+const VISIBILITY_OPENING = 'opening';
+const VISIBILITY_CLOSED = 'closed';
+const VISIBILITY_CLOSING = 'closing';
 
 describe('Test mixpanel-common modal component', () => {
   let modal;
@@ -25,28 +25,28 @@ describe('Test mixpanel-common modal component', () => {
   describe('test imperative API', () => {
     it('opens when "open()" is called', () => {
       modal.open();
-      expect(modal.state.state).to.equal(STATE_OPENING);
+      expect(modal.state.visibility).to.equal(VISIBILITY_OPENING);
     });
 
     it('closes when "close()" is called', () => {
-      modal.update({state: STATE_OPEN});
+      modal.update({state: VISIBILITY_OPEN});
       modal.close();
-      expect(modal.state.state).to.equal(STATE_CLOSING);
+      expect(modal.state.visibility).to.equal(VISIBILITY_CLOSING);
     });
 
     it('opens when "open()" is called before close animation completes', () => {
-      modal.update({state: STATE_OPEN});
+      modal.update({state: VISIBILITY_OPEN});
       modal.close();
-      expect(modal.state.state).to.equal(STATE_CLOSING);
+      expect(modal.state.visibility).to.equal(VISIBILITY_CLOSING);
       modal.open();
-      expect(modal.state.state).to.equal(STATE_OPEN);
+      expect(modal.state.visibility).to.equal(VISIBILITY_OPEN);
     });
 
     it('closes when "close()" is called before open animation completes', () => {
       modal.open();
-      expect(modal.state.state).to.equal(STATE_OPENING);
+      expect(modal.state.visibility).to.equal(VISIBILITY_OPENING);
       modal.close();
-      expect(modal.state.state).to.equal(STATE_CLOSED);
+      expect(modal.state.visibility).to.equal(VISIBILITY_CLOSED);
     });
   });
 
@@ -55,46 +55,46 @@ describe('Test mixpanel-common modal component', () => {
       document.body.removeChild(modal);
       modal.setAttribute('closed', 'false');
       document.body.appendChild(modal);
-      expect(modal.state.state).to.equal(STATE_OPENING);
+      expect(modal.state.visibility).to.equal(VISIBILITY_OPENING);
     });
 
     it('opens when set to "false"', () => {
       modal.setAttribute('closed', 'false');
-      expect(modal.state.state).to.equal(STATE_OPENING);
+      expect(modal.state.visibility).to.equal(VISIBILITY_OPENING);
     });
 
     it('closes when set to "true"', () => {
       modal.setAttribute('closed', 'false');
-      modal.update({state: STATE_OPEN});
+      modal.update({state: VISIBILITY_OPEN});
       modal.setAttribute('closed', 'true');
-      expect(modal.state.state).to.equal(STATE_CLOSING);
+      expect(modal.state.visibility).to.equal(VISIBILITY_CLOSING);
     });
   });
 
   describe('test "closeable" attribute', () => {
     it('does not close when clicked outside when not enabled', done => {
       modal.setAttribute('closeable', 'false');
-      modal.update({state: STATE_OPEN});
+      modal.update({state: VISIBILITY_OPEN});
       window.requestAnimationFrame(() => {
         modal.shadowRoot.querySelector('.mp-modal-backdrop').dispatchEvent(new MouseEvent('click'));
-        expect(modal.state.state).to.equal(STATE_OPEN);
+        expect(modal.state.visibility).to.equal(VISIBILITY_OPEN);
         done();
       });
     });
 
     it('closes when clicked outside when enabled', done => {
       modal.setAttribute('closeable', 'true');
-      modal.update({state: STATE_OPEN});
+      modal.update({state: VISIBILITY_OPEN});
       window.requestAnimationFrame(() => {
         modal.shadowRoot.querySelector('.mp-modal-backdrop').dispatchEvent(new MouseEvent('click'));
-        expect(modal.state.state).to.equal(STATE_CLOSING);
+        expect(modal.state.visibility).to.equal(VISIBILITY_CLOSING);
         done();
       });
     });
 
     it('does not have a close button when not enabled', done => {
       modal.setAttribute('closeable', 'false');
-      modal.update({state: STATE_OPEN});
+      modal.update({state: VISIBILITY_OPEN});
       window.requestAnimationFrame(() => {
         expect(modal.shadowRoot.querySelector('mp-modal-close-btn')).to.equal(null);
         done();
@@ -103,7 +103,7 @@ describe('Test mixpanel-common modal component', () => {
 
     it('has a close button when enabled', done => {
       modal.setAttribute('closeable', 'true');
-      modal.update({state: STATE_OPEN});
+      modal.update({state: VISIBILITY_OPEN});
       window.requestAnimationFrame(() => {
         expect(modal.shadowRoot.querySelector('.mp-modal-close-btn')).to.not.equal(null);
         done();
@@ -114,7 +114,7 @@ describe('Test mixpanel-common modal component', () => {
   describe('test "modal-type" attribute', () => {
     it('does take over the screen if the "modal-type" is modal', done => {
       modal.setAttribute('modal-type', 'modal');
-      modal.update({state: STATE_OPEN});
+      modal.update({state: VISIBILITY_OPEN});
       window.requestAnimationFrame(() => {
         expect(modal.shadowRoot.querySelector('.mp-modal-backdrop')).to.not.equal(null);
         done();
@@ -123,7 +123,7 @@ describe('Test mixpanel-common modal component', () => {
 
     it('does not take over the screen if the "modal-type" is popup', done => {
       modal.setAttribute('modal-type', 'popup');
-      modal.update({state: STATE_OPEN});
+      modal.update({state: VISIBILITY_OPEN});
       window.requestAnimationFrame(() => {
         expect(modal.shadowRoot.querySelector('.mp-modal-backdrop')).to.equal(null);
         done();
@@ -151,7 +151,7 @@ describe('Test mixpanel-common modal component', () => {
     });
 
     it('animates closed', done => {
-      modal.update({state: STATE_OPEN});
+      modal.update({state: VISIBILITY_OPEN});
       const animations = ['fadeModalOut', 'fadeOverlayOut'];
       const animationEnd = e => {
         const idx = animations.indexOf(e.animationName)
@@ -170,7 +170,7 @@ describe('Test mixpanel-common modal component', () => {
 
     it('fires "change" event when open is complete', done => {
       modal.addEventListener('change', e => {
-        if (e.detail.state === STATE_OPEN) {
+        if (e.detail.state === VISIBILITY_OPEN) {
           done();
         }
       });
@@ -178,9 +178,9 @@ describe('Test mixpanel-common modal component', () => {
     });
 
     it('fires "change" event when close is complete', done => {
-      modal.update({state: STATE_OPEN});
+      modal.update({state: VISIBILITY_OPEN});
       modal.addEventListener('change', e => {
-        if (e.detail.state === STATE_CLOSED) {
+        if (e.detail.state === VISIBILITY_CLOSED) {
           done();
         }
       });
@@ -190,12 +190,12 @@ describe('Test mixpanel-common modal component', () => {
 
   describe('test full integration', () => {
     it('attaches in a closed state', () => {
-      expect(modal.state.state).to.equal(STATE_CLOSED);
+      expect(modal.state.visibility).to.equal(VISIBILITY_CLOSED);
     });
 
     it('is visible after "open()" is called', done => {
       modal.addEventListener('change', e => {
-        if (e.detail.state === STATE_OPEN) {
+        if (e.detail.state === VISIBILITY_OPEN) {
           window.requestAnimationFrame(() => {
             const modalRoot = modal.shadowRoot.querySelector('.mp-modal-stage');
             expect(modalRoot.classList.contains('mp-modal-closed')).to.equal(false);
@@ -208,9 +208,9 @@ describe('Test mixpanel-common modal component', () => {
     });
 
     it('is invisible after "close()" is called', done => {
-      modal.update({state: STATE_OPEN});
+      modal.update({state: VISIBILITY_OPEN});
       modal.addEventListener('change', e => {
-        if (e.detail.state === STATE_CLOSED) {
+        if (e.detail.state === VISIBILITY_CLOSED) {
           window.requestAnimationFrame(() => {
             const modalRoot = modal.shadowRoot.querySelector('.mp-modal-stage');
             expect(modalRoot.classList.contains('mp-modal-closed')).to.equal(true);

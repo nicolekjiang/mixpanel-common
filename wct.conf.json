@@ -28,7 +28,7 @@
           "browserName": "microsoftedge",
           "version": "latest",
           "platform": "Windows 10"
-        },
+        }
       ]
     }
   }
