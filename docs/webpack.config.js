@@ -2,8 +2,8 @@ var path = require('path');
 
 var webpackConfig = {
   entry: {
-    'panel-example/build/index': './panel-example/index.js',
-    'style-guide/build/index': './style-guide/index.js',
+    'panel-example/compiled/index': './panel-example/index.js',
+    'style-guide/compiled/index': './style-guide/index.js',
   },
   output: {
     filename: '[name].js',
