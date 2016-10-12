@@ -4,8 +4,8 @@
     <title>lock_locked</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
-    <g id="16-x-16-solid" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="lock_locked" fill="#000000">
+    <g id="16-x-16-solid" stroke="none" stroke-width="1">
+        <g id="lock_locked">
             <path d="M8,10 L8,8 C8,6.346 9.346,5 11,5 C12.654,5 14,6.346 14,8 L14,10 L8,10 Z M17,10 L16,10 L16,8 C16,5.243 13.757,3 11,3 C8.243,3 6,5.243 6,8 L6,10 L5,10 C4.448,10 4,10.448 4,11 L4,18 C4,18.552 4.448,19 5,19 L17,19 C17.552,19 18,18.552 18,18 L18,11 C18,10.448 17.552,10 17,10 L17,10 Z" id="Page-1"></path>
         </g>
     </g>

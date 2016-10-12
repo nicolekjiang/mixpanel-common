@@ -4,8 +4,8 @@
     <title>flag</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
-    <g id="16-x-16-solid" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="flag" fill="#000000">
+    <g id="16-x-16-solid" stroke="none" stroke-width="1">
+        <g id="flag">
             <path d="M17,8 L15,8 L15,10 L17,10 L17,12 L15,12 L15,10 L13,10 L13,12 L11,12 L11,10 L9,10 L9,12 L7,12 L7,10 L5,10 L5,8 L7,8 L7,6 L9,6 L9,8 L11,8 L11,6 L13,6 L13,8 L15,8 L15,6 L17,6 L17,8 Z M18,4 L5,4 C5,3.448 4.553,3 4,3 C3.447,3 3,3.448 3,4 L3,5 L3,13 L3,18 C3,18.552 3.447,19 4,19 C4.553,19 5,18.552 5,18 L5,14 L18,14 C18.553,14 19,13.552 19,13 L19,5 C19,4.448 18.553,4 18,4 L18,4 Z" id="Page-1"></path>
             <g id="Page-1" transform="translate(7.000000, 8.000000)">
                 <polygon id="Fill-1" points="0 2 2 2 2 0 0 0"></polygon>

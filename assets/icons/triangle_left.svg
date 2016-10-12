@@ -4,8 +4,8 @@
     <title>triangle_left</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
-    <g id="16-x-16-solid" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="triangle_left" fill="#000000">
+    <g id="16-x-16-solid" stroke="none" stroke-width="1">
+        <g id="triangle_left">
             <polygon id="Page-1" points="14 7 8 11.001 14 15"></polygon>
         </g>
     </g>
