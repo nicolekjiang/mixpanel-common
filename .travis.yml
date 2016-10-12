@@ -2,7 +2,4 @@ node_js:
   - "4.2"
   - "6.2"
 language: node_js
-before_install:
-  - "export DISPLAY=:30"
-  - "sh -e /etc/init.d/xvfb :30 start"
-script: "webpack --context test --config test/webpack.config.js && wct --plugin local"
+script: "webpack --context test --config test/webpack.config.js && wct --plugin sauce"
