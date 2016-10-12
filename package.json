@@ -5,7 +5,7 @@
   "description": "Mixpanel shared JS",
   "scripts": {
     "build": "babel lib -d build && cp -r build/report . && cp -r build/util .",
-    "build-example": "webpack --context examples --config examples/webpack.config.js && mkdir -p build/css && ./node_modules/stylus/bin/stylus --out build/css stylesheets/*.styl",
+    "build-example": "webpack --context docs --config docs/webpack.config.js",
     "lint": "eslint lib",
     "prepublish": "npm run build",
     "test": "webpack --context test --config test/webpack.config.js; DISPLAY=:30 wct --plugin local",
@@ -59,6 +59,7 @@
   },
   "pre-commit": [
     "lint",
-    "validate"
+    "validate",
+    "build-examples"
   ]
 }

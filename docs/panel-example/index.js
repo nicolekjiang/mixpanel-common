@@ -1,4 +1,9 @@
+import 'babel-polyfill'
+import 'webcomponents.js/webcomponents';
+
 import { Component } from 'panel';
+
+import '../../lib/index'; // import mixpanel-common
 
 import template from './index.jade';
 
@@ -11,7 +16,7 @@ document.registerElement('demo-app', class extends Component {
       css,
 
       defaultState: {
-        modalOpen: true,
+        modalOpen: false,
       },
 
       helpers: {
