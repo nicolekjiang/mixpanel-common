@@ -19,7 +19,7 @@ describe('Test mixpanel-common modal component', () => {
   });
 
   afterEach(() => {
-    document.body.removeChild(modal);
+    document.body.innerHTML = '';
   });
 
   describe('test imperative API', () => {
