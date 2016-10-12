@@ -60,6 +60,6 @@
   "pre-commit": [
     "lint",
     "validate",
-    "build-examples"
+    "build-example"
   ]
 }
