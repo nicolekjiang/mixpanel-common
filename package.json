@@ -6,6 +6,7 @@
   "scripts": {
     "build": "babel lib -d build && cp -r build/report . && cp -r build/util .",
     "build-docs": "webpack --context docs --config docs/webpack.config.js",
+    "watch-docs": "webpack --context docs --config docs/webpack.config.js -w",
     "lint": "eslint lib",
     "prepublish": "npm run build",
     "test": "webpack --context test --config test/webpack.config.js; DISPLAY=:30 wct --plugin local",
