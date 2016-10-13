@@ -12,13 +12,10 @@ const VISIBILITY_CLOSING = 'closing';
 
 describe('Test mixpanel-common modal component', function() {
   beforeEach(function(done) {
+    document.body.innerHTML = '';
     this.modal = document.createElement('mp-modal');
     document.body.appendChild(this.modal);
     window.requestAnimationFrame(() => done());
-  });
-
-  afterEach(() => {
-    document.body.innerHTML = '';
   });
 
   describe('imperative API', function() {
