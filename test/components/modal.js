@@ -10,11 +10,10 @@ const VISIBILITY_OPENING = 'opening';
 const VISIBILITY_CLOSED = 'closed';
 const VISIBILITY_CLOSING = 'closing';
 
-describe('Test mixpanel-common modal component', () => {
-  let modal;
-  beforeEach(done => {
-    modal = document.createElement('mp-modal');
-    document.body.appendChild(modal);
+describe('Test mixpanel-common modal component', function() {
+  beforeEach(function(done) {
+    this.modal = document.createElement('mp-modal');
+    document.body.appendChild(this.modal);
     window.requestAnimationFrame(() => done());
   });
 
@@ -22,118 +21,118 @@ describe('Test mixpanel-common modal component', () => {
     document.body.innerHTML = '';
   });
 
-  describe('imperative API', () => {
-    it('opens when "open()" is called', () => {
-      modal.open();
-      expect(modal.state.visibility).to.equal(VISIBILITY_OPENING);
+  describe('imperative API', function() {
+    it('opens when "open()" is called', function() {
+      this.modal.open();
+      expect(this.modal.state.visibility).to.equal(VISIBILITY_OPENING);
     });
 
-    it('closes when "close()" is called', () => {
-      modal.update({visibility: VISIBILITY_OPEN});
-      modal.close();
-      expect(modal.state.visibility).to.equal(VISIBILITY_CLOSING);
+    it('closes when "close()" is called', function() {
+      this.modal.update({visibility: VISIBILITY_OPEN});
+      this.modal.close();
+      expect(this.modal.state.visibility).to.equal(VISIBILITY_CLOSING);
     });
 
-    it('opens when "open()" is called before close animation completes', () => {
-      modal.update({visibility: VISIBILITY_OPEN});
-      modal.close();
-      expect(modal.state.visibility).to.equal(VISIBILITY_CLOSING);
-      modal.open();
-      expect(modal.state.visibility).to.equal(VISIBILITY_OPEN);
+    it('opens when "open()" is called before close animation completes', function() {
+      this.modal.update({visibility: VISIBILITY_OPEN});
+      this.modal.close();
+      expect(this.modal.state.visibility).to.equal(VISIBILITY_CLOSING);
+      this.modal.open();
+      expect(this.modal.state.visibility).to.equal(VISIBILITY_OPEN);
     });
 
-    it('closes when "close()" is called before open animation completes', () => {
-      modal.open();
-      expect(modal.state.visibility).to.equal(VISIBILITY_OPENING);
-      modal.close();
-      expect(modal.state.visibility).to.equal(VISIBILITY_CLOSED);
-    });
-  });
-
-  describe('"closed" attribute', () => {
-   it('immediately opens when set to "false" before it is attached', () => {
-      document.body.removeChild(modal);
-      modal.setAttribute('closed', 'false');
-      document.body.appendChild(modal);
-      expect(modal.state.visibility).to.equal(VISIBILITY_OPENING);
-    });
-
-    it('opens when set to "false"', () => {
-      modal.setAttribute('closed', 'false');
-      expect(modal.state.visibility).to.equal(VISIBILITY_OPENING);
-    });
-
-    it('closes when set to "true"', () => {
-      modal.setAttribute('closed', 'false');
-      modal.update({visibility: VISIBILITY_OPEN});
-      modal.setAttribute('closed', 'true');
-      expect(modal.state.visibility).to.equal(VISIBILITY_CLOSING);
+    it('closes when "close()" is called before open animation completes', function() {
+      this.modal.open();
+      expect(this.modal.state.visibility).to.equal(VISIBILITY_OPENING);
+      this.modal.close();
+      expect(this.modal.state.visibility).to.equal(VISIBILITY_CLOSED);
     });
   });
 
-  describe('"closeable" attribute', () => {
-    it('does not close when clicked outside when not enabled', done => {
-      modal.setAttribute('closeable', 'false');
-      modal.update({visibility: VISIBILITY_OPEN});
-      window.requestAnimationFrame(() => {
-        modal.shadowRoot.querySelector('.mp-modal-backdrop').dispatchEvent(new MouseEvent('click'));
-        expect(modal.state.visibility).to.equal(VISIBILITY_OPEN);
-        done();
-      });
+  describe('"closed" attribute', function() {
+   it('immediately opens when set to "false" before it is attached', function() {
+      document.body.removeChild(this.modal);
+      this.modal.setAttribute('closed', 'false');
+      document.body.appendChild(this.modal);
+      expect(this.modal.state.visibility).to.equal(VISIBILITY_OPENING);
     });
 
-    it('closes when clicked outside when enabled', done => {
-      modal.setAttribute('closeable', 'true');
-      modal.update({visibility: VISIBILITY_OPEN});
-      window.requestAnimationFrame(() => {
-        modal.shadowRoot.querySelector('.mp-modal-backdrop').dispatchEvent(new MouseEvent('click'));
-        expect(modal.state.visibility).to.equal(VISIBILITY_CLOSING);
-        done();
-      });
+    it('opens when set to "false"', function() {
+      this.modal.setAttribute('closed', 'false');
+      expect(this.modal.state.visibility).to.equal(VISIBILITY_OPENING);
     });
 
-    it('does not have a close button when not enabled', done => {
-      modal.setAttribute('closeable', 'false');
-      modal.update({visibility: VISIBILITY_OPEN});
-      window.requestAnimationFrame(() => {
-        expect(modal.shadowRoot.querySelector('mp-modal-close-btn')).to.equal(null);
-        done();
-      });
-    });
-
-    it('has a close button when enabled', done => {
-      modal.setAttribute('closeable', 'true');
-      modal.update({visibility: VISIBILITY_OPEN});
-      window.requestAnimationFrame(() => {
-        expect(modal.shadowRoot.querySelector('.mp-modal-close-btn')).to.not.equal(null);
-        done();
-      });
+    it('closes when set to "true"', function() {
+      this.modal.setAttribute('closed', 'false');
+      this.modal.update({visibility: VISIBILITY_OPEN});
+      this.modal.setAttribute('closed', 'true');
+      expect(this.modal.state.visibility).to.equal(VISIBILITY_CLOSING);
     });
   });
 
-  describe('"modal-type" attribute', () => {
-    it('does take over the screen if the "modal-type" is modal', done => {
-      modal.setAttribute('modal-type', 'modal');
-      modal.update({visibility: VISIBILITY_OPEN});
+  describe('"closeable" attribute', function() {
+    it('does not close when clicked outside when not enabled', function(done) {
+      this.modal.setAttribute('closeable', 'false');
+      this.modal.update({visibility: VISIBILITY_OPEN});
       window.requestAnimationFrame(() => {
-        expect(modal.shadowRoot.querySelector('.mp-modal-backdrop')).to.not.equal(null);
+        this.modal.shadowRoot.querySelector('.mp-modal-backdrop').dispatchEvent(new MouseEvent('click'));
+        expect(this.modal.state.visibility).to.equal(VISIBILITY_OPEN);
         done();
       });
     });
 
-    it('does not take over the screen if the "modal-type" is popup', done => {
-      modal.setAttribute('modal-type', 'popup');
-      modal.update({visibility: VISIBILITY_OPEN});
+    it('closes when clicked outside when enabled', function(done) {
+      this.modal.setAttribute('closeable', 'true');
+      this.modal.update({visibility: VISIBILITY_OPEN});
       window.requestAnimationFrame(() => {
-        expect(modal.shadowRoot.querySelector('.mp-modal-backdrop')).to.equal(null);
+        this.modal.shadowRoot.querySelector('.mp-modal-backdrop').dispatchEvent(new MouseEvent('click'));
+        expect(this.modal.state.visibility).to.equal(VISIBILITY_CLOSING);
+        done();
+      });
+    });
+
+    it('does not have a close button when not enabled', function(done) {
+      this.modal.setAttribute('closeable', 'false');
+      this.modal.update({visibility: VISIBILITY_OPEN});
+      window.requestAnimationFrame(() => {
+        expect(this.modal.shadowRoot.querySelector('mp-modal-close-btn')).to.equal(null);
+        done();
+      });
+    });
+
+    it('has a close button when enabled', function(done) {
+      this.modal.setAttribute('closeable', 'true');
+      this.modal.update({visibility: VISIBILITY_OPEN});
+      window.requestAnimationFrame(() => {
+        expect(this.modal.shadowRoot.querySelector('.mp-modal-close-btn')).to.not.equal(null);
         done();
       });
     });
   });
 
-  describe('life-cycle', () => {
+  describe('"modal-type" attribute', function() {
+    it('does take over the screen if the "modal-type" is modal', function(done) {
+      this.modal.setAttribute('modal-type', 'modal');
+      this.modal.update({visibility: VISIBILITY_OPEN});
+      window.requestAnimationFrame(() => {
+        expect(this.modal.shadowRoot.querySelector('.mp-modal-backdrop')).to.not.equal(null);
+        done();
+      });
+    });
 
-    it('animates open', done => {
+    it('does not take over the screen if the "modal-type" is popup', function(done) {
+      this.modal.setAttribute('modal-type', 'popup');
+      this.modal.update({visibility: VISIBILITY_OPEN});
+      window.requestAnimationFrame(() => {
+        expect(this.modal.shadowRoot.querySelector('.mp-modal-backdrop')).to.equal(null);
+        done();
+      });
+    });
+  });
+
+  describe('life-cycle', function() {
+
+    it('animates open', function(done) {
       const animations = ['fadeModalIn', 'fadeOverlayIn'];
       const animationEnd = e => {
         const idx = animations.indexOf(e.animationName)
@@ -142,16 +141,16 @@ describe('Test mixpanel-common modal component', () => {
         }
         animations.splice(idx, 1);
         if (animations.length === 0) {
-          offAnimationEnd(modal, animationEnd);
+          offAnimationEnd(this.modal, animationEnd);
           done();
         }
       };
-      onAnimationEnd(modal, animationEnd);
-      modal.open();
+      onAnimationEnd(this.modal, animationEnd);
+      this.modal.open();
     });
 
-    it('animates closed', done => {
-      modal.update({visibility: VISIBILITY_OPEN});
+    it('animates closed', function(done) {
+      this.modal.update({visibility: VISIBILITY_OPEN});
       const animations = ['fadeModalOut', 'fadeOverlayOut'];
       const animationEnd = e => {
         const idx = animations.indexOf(e.animationName)
@@ -160,66 +159,66 @@ describe('Test mixpanel-common modal component', () => {
         }
         animations.splice(idx, 1);
         if (animations.length === 0) {
-          offAnimationEnd(modal, animationEnd);
+          offAnimationEnd(this.modal, animationEnd);
           done();
         }
       };
-      onAnimationEnd(modal, animationEnd);
-      modal.close();
+      onAnimationEnd(this.modal, animationEnd);
+      this.modal.close();
     });
 
-    it('fires "change" event when open is complete', done => {
-      modal.addEventListener('change', e => {
+    it('fires "change" event when open is complete', function(done) {
+      this.modal.addEventListener('change', e => {
         if (e.detail.state === VISIBILITY_OPEN) {
           done();
         }
       });
-      modal.open();
+      this.modal.open();
     });
 
-    it('fires "change" event when close is complete', done => {
-      modal.update({visibility: VISIBILITY_OPEN});
-      modal.addEventListener('change', e => {
+    it('fires "change" event when close is complete', function(done) {
+      this.modal.update({visibility: VISIBILITY_OPEN});
+      this.modal.addEventListener('change', e => {
         if (e.detail.state === VISIBILITY_CLOSED) {
           done();
         }
       });
-      modal.close();
+      this.modal.close();
     });
   });
 
-  describe('full integration', () => {
-    it('attaches in a closed state', () => {
-      expect(modal.state.visibility).to.equal(VISIBILITY_CLOSED);
+  describe('full integration', function() {
+    it('attaches in a closed state', function() {
+      expect(this.modal.state.visibility).to.equal(VISIBILITY_CLOSED);
     });
 
-    it('is visible after "open()" is called', done => {
-      modal.addEventListener('change', e => {
+    it('is visible after "open()" is called', function(done) {
+      this.modal.addEventListener('change', e => {
         if (e.detail.state === VISIBILITY_OPEN) {
           window.requestAnimationFrame(() => {
-            const modalRoot = modal.shadowRoot.querySelector('.mp-modal-stage');
+            const modalRoot = this.modal.shadowRoot.querySelector('.mp-modal-stage');
             expect(modalRoot.classList.contains('mp-modal-closed')).to.equal(false);
             expect(window.getComputedStyle(modalRoot).display).to.equal('block');
             done();
           });
         }
       });
-      modal.open();
+      this.modal.open();
     });
 
-    it('is invisible after "close()" is called', done => {
-      modal.update({visibility: VISIBILITY_OPEN});
-      modal.addEventListener('change', e => {
+    it('is invisible after "close()" is called', function(done) {
+      this.modal.update({visibility: VISIBILITY_OPEN});
+      this.modal.addEventListener('change', e => {
         if (e.detail.state === VISIBILITY_CLOSED) {
           window.requestAnimationFrame(() => {
-            const modalRoot = modal.shadowRoot.querySelector('.mp-modal-stage');
+            const modalRoot = this.modal.shadowRoot.querySelector('.mp-modal-stage');
             expect(modalRoot.classList.contains('mp-modal-closed')).to.equal(true);
             expect(window.getComputedStyle(modalRoot).display).to.equal('none');
             done();
           });
         }
       });
-      modal.close();
+      this.modal.close();
     });
   });
 });
