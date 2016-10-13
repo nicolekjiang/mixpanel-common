@@ -1,7 +1,7 @@
 {
   "name": "mixpanel-common",
   "main": "build/index.js",
-  "version": "0.16.0",
+  "version": "0.17.0",
   "description": "Mixpanel shared JS",
   "scripts": {
     "build": "babel lib -d build && cp -r build/report . && cp -r build/util .",
