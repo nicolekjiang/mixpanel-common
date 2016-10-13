@@ -5,11 +5,11 @@
   "description": "Mixpanel shared JS",
   "scripts": {
     "build": "babel lib -d build && cp -r build/report . && cp -r build/util .",
-    "build-example": "webpack",
-    "build-example-watch": "webpack -w",
+    "build-example": "webpack --context examples --config examples/webpack.config.js && mkdir build/css && ./node_modules/stylus/bin/stylus --out build/css --compress stylesheets/*.styl",
     "lint": "eslint lib",
     "prepublish": "npm run build",
-    "test": "mocha --require babel-core/register",
+    "test": "webpack --context test --config test/webpack.config.js; DISPLAY=:30 wct --plugin local",
+    "unit-test": "mocha --require babel-core/register",
     "validate": "npm ls"
   },
   "repository": {
@@ -40,13 +40,14 @@
     "eslint": "^2.11.1",
     "expect.js": "^0.3.1",
     "js-beautify": "^1.6.3",
-    "mocha": "^2.5.3",
+    "mocha": "^3.1.2",
     "precommit-hook-eslint": "^3.0.0",
     "style-loader": "^0.13.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^2.1.0",
     "virtual-jade": "^0.3.3",
     "virtual-jade-loader": "^0.3.2",
+    "web-component-tester": "^4.3.4",
     "webcomponents.js": "^0.7.22",
     "webpack": "^1.13.1"
   },

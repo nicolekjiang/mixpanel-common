@@ -2,12 +2,12 @@ var path = require('path');
 
 var webpackConfig = {
   entry: {
-    'mixpanel-common': './lib/index.js',
-    'panel-example': './examples/panel/index.js'
+    'mixpanel-common': '../lib/index.js',
+    'panel-example': './panel/index.js',
   },
   output: {
     filename: '[name].js',
-    path: path.join(__dirname, '/examples/build/')
+    path: path.join(__dirname, '/build/')
   },
   module: {
     loaders: [
