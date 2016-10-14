@@ -1,7 +1,7 @@
 {
   "name": "mixpanel-common",
   "main": "build/index.js",
-  "version": "0.18.1",
+  "version": "0.18.2",
   "description": "Mixpanel shared JS",
   "scripts": {
     "build": "babel lib -d build && cp -r build/report . && cp -r build/util .",
@@ -52,7 +52,7 @@
     "webpack": "1.13.1"
   },
   "dependencies": {
-    "mixpanel-browser": "2.9.8",
+    "mixpanel-browser": "2.9.16",
     "panel": "0.8.4",
     "rollbar-browser": "1.9.1",
     "virtual-dom": "2.1.1"
