@@ -1,8 +1,0 @@
-.container
-  mp-button.mp-button-primary(onclick=$helpers.openModal) Open a modal
-  mp-modal(attributes={closeable: true, closed: !modalOpen} onchange=$helpers.handleModalChange)
-    .mp-modal-title(attributes={'slot-body': true}) Look I'm a declarative modal
-    .mp-modal-subtitle(attributes={'slot-body': true})
-      | I open or close based on the value of the "closed" attribute
-    mp-button.mp-button-modal.mp-button-primary(onclick=$helpers.closeModal attributes={'slot-button': true})
-      | Done
