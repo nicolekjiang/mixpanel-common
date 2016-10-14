@@ -18591,8 +18591,8 @@
 	      };
 	      (0, _utils.onAnimationEnd)(this.el, this._onAnimationEnd);
 
-	      // open the modal if "closed" is explicitly set to false
-	      if (this.getAttribute('closed') === 'false') {
+	      if (!this.isAttributeEnabled('closed')) {
+	        // open the modal if it's not explicitly closed
 	        this.open();
 	      }
 	    }
