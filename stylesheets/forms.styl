@@ -1,16 +1,5 @@
 @import 'colors.styl'
 
-placeholder(color, weight)
-  &::-webkit-input-placeholder
-    color color !important
-    weight weight !important
-  &::-moz-placeholder
-    color color !important
-    weight weight !important
-  &:-ms-input-placeholder
-    color color !important
-    weight weight !important
-
 input[type=text], textarea
     border 1px solid grey-200
     border-radius 4px
@@ -18,8 +7,11 @@ input[type=text], textarea
     display inline-block
     font-size 13px
     font-weight 500
-    placeholder(grey-500, 400)
     transition border-color 150ms ease-out
+
+    ::placeholder
+      color color !important
+      font-weight weight !important
 
     &:focus
       border-color blue-700
