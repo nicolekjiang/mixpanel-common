@@ -1,8 +1,55 @@
-.section
-  h1 Colors
-  p.color-palette.mp-font-list-item
-    each color in Object.keys(colors)
-      .color-block
-        .square(style={'background-color': colors[color]})
-        .label= color
-        mp-tooltip= colors[color]
+.style-guide
+
+  .section
+    h1 Colors
+    p.color-palette.mp-font-list-item
+      each color in Object.keys(colors)
+        .color-block
+          .square(style={'background-color': colors[color]})
+          .label= color
+          mp-tooltip= colors[color]
+
+  .section
+    h1 Icons
+    p.icon-palette
+
+  .section
+    h1 Typography
+    p.mp-font-title .mp-font-title | Mixpanel helps you learn from your data
+    p.mp-font-subtitle .mp-font-subtitle | Mixpanel helps you learn from your data
+    p.mp-font-paragraph .mp-font-paragraph | Mixpanel helps you learn from your data
+    p.mp-font-list-item .mp-font-list-item | Mixpanel helps you learn from your data
+
+  .section
+    h1 Tooltips
+    p.mp-font-paragraph
+      a
+        | Hover me
+        mp-tooltip This is my tooltip
+
+  .section
+    h1 Forms
+    p To do...
+    p
+      input(type="text" placeholder="I'm a placeholder")
+
+  .section.buttons
+    h1 Buttons
+    p
+      mp-button.mp-button-primary .mp-button-primary
+      mp-button.mp-button-primary(disabled) disabled
+    p
+      mp-button.mp-button-secondary .mp-button-secondary
+      mp-button.mp-button-secondary(disabled) disabled
+    p
+      mp-button.mp-button-red .mp-button-red
+      mp-button.mp-button-red(disabled) disabled
+    p
+      mp-button.mp-button-purple .mp-button-purple
+      mp-button.mp-button-purple(disabled) disabled
+    p.button-field
+      mp-button.mp-button-primary.mp-button-on-blue primary on-blue
+      mp-button.mp-button-primary.mp-button-on-blue(disabled) disabled
+    p.button-field
+      mp-button.mp-button-secondary.mp-button-on-blue secondary on-blue
+      mp-button.mp-button-secondary.mp-button-on-blue(disabled) disabled
