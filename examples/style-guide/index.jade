@@ -1,0 +1,8 @@
+.section
+  h1 Colors
+  p.color-palette.mp-font-list-item
+    each color in Object.keys(colors)
+      .color-block
+        .square(style={'background-color': colors[color]})
+        .label= color
+        mp-tooltip= colors[color]
