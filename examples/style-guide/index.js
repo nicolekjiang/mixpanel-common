@@ -2,7 +2,7 @@ import 'babel-polyfill'
 import 'webcomponents.js/webcomponents';
 
 import '../../lib/index';
-import colors from './colors.json';
+import colors from '../../stylesheets/colors.json';
 
 import 'index.styl'
 
