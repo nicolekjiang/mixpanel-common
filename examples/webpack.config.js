@@ -20,6 +20,11 @@ var webpackConfig = {
         },
       },
       {
+        test: /\.json$/,
+        exclude: /node_modules/,
+        loader: 'json',
+      },
+      {
         test: /\.styl$/,
         exclude: /node_modules/,
         loader: 'css-loader!autoprefixer-loader!stylus-loader',
