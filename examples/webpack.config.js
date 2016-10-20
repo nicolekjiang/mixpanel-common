@@ -1,4 +1,3 @@
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var path = require('path');
 
 var webpackConfig = {
@@ -18,7 +17,6 @@ var webpackConfig = {
         loader: 'babel',
         query: {
           presets: ['es2015'],
-          babelrc: false,
         },
       },
       {
@@ -26,26 +24,8 @@ var webpackConfig = {
         exclude: /node_modules/,
         loader: 'json',
       },
-      {
-        test: /\.styl$/,
-        include: /examples/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!autoprefixer-loader!stylus-loader'),
-      },
-      {
-        test: /\.styl$/,
-        exclude: /examples/,
-        loader: 'css-loader!autoprefixer-loader!stylus-loader',
-      },
-      {
-        test: /\.jade$/,
-        exclude: /node_modules/,
-        loader: 'babel?presets[]=es2015&babelrc=false!virtual-jade-loader',
-      },
     ],
   },
-  plugins: [
-    new ExtractTextPlugin('[name].css'),
-  ],
   resolveLoader: {
     root: path.join(__dirname, 'node_modules'),
   },
