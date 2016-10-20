@@ -7,28 +7,5 @@
     </head>
     <body class="mp-font-paragraph">
         <style-guide></style-guide>
-
-        <div class="section">
-            <h1>Modals</h1>
-            <p><a href="#" onclick="modal.open(); return false;">Open modal</a></p>
-            <p><a href="#" onclick="popup.open(); return false;">Open popup</a></p>
-            <p><a href="#" onclick="alertModal.open(); return false;">Open alert</a></p>
-            <mp-modal id="modal" closeable closed>
-                  <div class="mp-modal-title" slot-body>Easily track events</div>
-                  <div class="mp-modal-subtitle" slot-body>Click on any element on your page (ex. the buy button) to create an event and access all historical data for that event.</div>
-                  <mp-button class="mp-button-modal mp-button-primary" onclick="modal.close();" slot-button arrow-next>Create your first event</mp-button>
-            </mp-modal>
-            <mp-modal id="popup" width="500px" modal-type="popup" closeable closed>
-                  <div class="mp-modal-title" slot-body>Easily track events</div>
-                  <div class="mp-modal-subtitle" slot-body>Click on any element on your page (ex. the buy button) to create an event and access all historical data for that event.</div>
-                  <mp-button class="mp-button-modal mp-button-primary" onclick="popup.close();" slot-button>Create your first event</mp-button>
-            </mp-modal>
-            <mp-modal id="alert-modal" modal-type="popup" closeable closed alert>
-                  <div slot-body>
-                        <div class="mp-modal-alert-title">Your event failed to save</div>
-                        <div class="mp-modal-alert-subtitle">If your issue persists please contact our support team at support@mixpanel.com to get help quickly</div>
-                  </div>
-            </mp-modal>
-        </div>
     </body>
 </html>

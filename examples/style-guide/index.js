@@ -15,13 +15,14 @@ document.registerElement('style-guide', class extends Component {
       defaultState: {
         colors,
       },
+      helpers: {
+        closeModal: selector => this.el.querySelector(selector).close(),
+        openModal: selector => {
+          this.el.querySelector(selector).open();
+          return false;
+        },
+      },
       template,
     };
   }
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  window.modal = document.getElementById('modal');
-  window.popup = document.getElementById('popup');
-  window.alertModal = document.getElementById('alert-modal');
 });

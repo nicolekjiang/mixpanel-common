@@ -53,3 +53,33 @@
     p.button-field
       mp-button.mp-button-secondary.mp-button-on-blue secondary on-blue
       mp-button.mp-button-secondary.mp-button-on-blue(disabled) disabled
+
+  .section
+    h1 Modals
+    p
+      a(href="#" onclick=() => $helpers.openModal('#modal')) Open modal
+    p
+      a(href="#" onclick=() => $helpers.openModal('#popup')) Open popup
+    p
+      a(href="#" onclick=() => $helpers.openModal('#alert-modal')) Open alert
+
+    mp-modal(id="modal" attributes={closeable: true, closed: true})
+      .mp-modal-title(attributes={'slot-body': true}) Easily track events
+      .mp-modal-subtitle(attributes={'slot-body': true}) Click on any element on your page (e.g. the buy button) to create an event and access all historical data for that event.
+      mp-button.mp-button-modal.mp-button-primary(
+        onclick=() => $helpers.closeModal('#modal')
+        attributes={'slot-button': true, 'arrow-next': true}
+      ) Create your first event
+
+    mp-modal(id="popup" width="500px" attributes={'modal-type': "popup", closeable: true, closed: true})
+      .mp-modal-title(attributes={'slot-body': true}) Easily track events
+      .mp-modal-subtitle(attributes={'slot-body': true}) Click on any element on your page (e.g. the buy button) to create an event and access all historical data for that event.
+      mp-button.mp-button-modal.mp-button-primary(
+        onclick=() => $helpers.closeModal('#popup')
+        attributes={'slot-button': true}
+      ) Create your first event
+
+    mp-modal(id="alert-modal" attributes={'modal-type': "popup", closeable: true, closed: true, alert: true})
+      div(attributes={'slot-body': true})
+        .mp-modal-alert-title Your event failed to save
+        .mp-modal-alert-subtitle If your issue persists please contact our support team at support@mixpanel.com to get help quickly
