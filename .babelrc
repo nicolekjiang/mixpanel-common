@@ -1,4 +1,10 @@
 {
-  "plugins": ["babel-plugin-stylus-compiler", "babel-plugin-virtual-jade"],
+  "plugins": [
+    "babel-plugin-stylus-compiler",
+    "babel-plugin-virtual-jade",
+    ["babel-plugin-inline-import", {
+      "extensions": [".svg"]
+    }]
+  ],
   "presets": ["es2015"]
 }
