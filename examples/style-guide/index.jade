@@ -3,15 +3,17 @@
   .section
     h1 Colors
     p.color-palette.mp-font-list-item
-      each color in Object.keys(colors)
+      each color in Object.keys(COLORS)
         .color-block
-          .square(style={'background-color': colors[color]})
+          .square(style={'background-color': COLORS[color]})
           .label= color
-          mp-tooltip= colors[color]
+          mp-tooltip= COLORS[color]
 
   .section
     h1 Icons
     p.icon-palette
+      each icon in Object.keys(SVG_ICONS)
+        svg-icon(attributes={icon})
 
   .section
     h1 Typography

@@ -4,7 +4,8 @@ import 'webcomponents.js/webcomponents';
 import { Component, h } from 'panel';
 
 import '../../lib/index';
-import colors from '../../stylesheets/colors.json';
+import COLORS from '../../stylesheets/colors.json';
+import { SVG_ICONS } from '../../lib/components/svg-icon';
 
 import template from './index.jade';
 import './index.styl';
@@ -13,7 +14,8 @@ document.registerElement('style-guide', class extends Component {
   get config() {
     return {
       defaultState: {
-        colors,
+        COLORS,
+        SVG_ICONS,
       },
       helpers: {
         closeModal: selector => this.el.querySelector(selector).close(),
