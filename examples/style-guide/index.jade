@@ -2,18 +2,20 @@
 
   .section
     h1 Colors
-    p.color-palette.mp-font-list-item
+    p.item-palette.color-palette.mp-font-list-item
       each color in Object.keys(COLORS)
-        .color-block
+        .list-block
           .square(style={'background-color': COLORS[color]})
           .label= color
           mp-tooltip= COLORS[color]
 
   .section
     h1 Icons
-    p.icon-palette
+    p.item-palette.icon-palette
       each icon in Object.keys(SVG_ICONS)
-        svg-icon(attributes={icon})
+        .list-block
+          svg-icon(attributes={icon})
+          .label= icon
 
   .section
     h1 Typography
