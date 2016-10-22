@@ -6,8 +6,9 @@
       each color in Object.keys(COLORS)
         .list-block
           .square(style={'background-color': COLORS[color]})
-          .label= color
-          mp-tooltip= COLORS[color]
+          .label
+            = color
+            mp-tooltip= COLORS[color]
 
   .section
     h1 Icons
