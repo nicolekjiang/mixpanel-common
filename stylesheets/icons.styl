@@ -1,8 +1,12 @@
-svg-icon-style(base-color=null, hover-color=null, speed=0.2s, size=22px, pos-left=0, pos-top=0)
+svg-icon-style(base-color=null, hover-color=null, speed=0.2s, size=null, pos-left=0, pos-top=0)
   svg-icon
-    svg
+    if size != null
       height size
       width size
+    svg
+      if size != null
+        height size
+        width size
       if pos-left
         left pos-left
       if pos-top
