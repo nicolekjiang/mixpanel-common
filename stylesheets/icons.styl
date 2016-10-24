@@ -1,16 +1,20 @@
-svg-icon-style(base-color, hover-color, speed=0.2s, size=22px, pos-left=0, pos-top=0)
+svg-icon-style(base-color=null, hover-color=null, speed=0.2s, size=22px, pos-left=0, pos-top=0)
   svg-icon
     svg
       height size
-      left pos-left
-      top pos-top
       width size
-    svg, path
-      color base-color
-      fill base-color
-      transition speed
-  &:hover
-    svg-icon
+      if pos-left
+        left pos-left
+      if pos-top
+        top pos-top
+    if base-color != null
       svg, path
-        color hover-color
-        fill hover-color
+        color base-color
+        fill base-color
+        transition speed
+  if hover-color != null
+    &:hover
+      svg-icon
+        svg, path
+          color hover-color
+          fill hover-color
