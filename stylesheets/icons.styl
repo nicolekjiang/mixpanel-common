@@ -1,13 +1,16 @@
 svg-icon-style(base-color, hover-color, speed=0.2s, size=22px, pos-left=0, pos-top=0)
-  svg-icon svg
-    color base-color
-    fill base-color
-    height size
-    left pos-left
-    top pos-top
-    transition speed
-    width size
+  svg-icon
+    svg
+      height size
+      left pos-left
+      top pos-top
+      width size
+    svg, path
+      color base-color
+      fill base-color
+      transition speed
   &:hover
-    svg-icon svg
-      color hover-color
-      fill hover-color
+    svg-icon
+      svg, path
+        color hover-color
+        fill hover-color
