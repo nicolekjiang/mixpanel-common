@@ -4,7 +4,7 @@
   "version": "0.18.4",
   "description": "Mixpanel shared JS",
   "scripts": {
-    "build": "babel lib -d build && cp -r build/report . && cp -r build/util .",
+    "build": "babel lib -d build && cp -r build/components . && cp -r build/report . && cp -r build/util .",
     "build-examples": "webpack --context examples --config examples/webpack.config.js",
     "watch-examples": "webpack --context examples --config examples/webpack.config.js -w",
     "lint": "eslint lib",
