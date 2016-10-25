@@ -1,8 +1,8 @@
 .DS_Store
 build
-components
 examples/index.css
 node_modules
 npm-debug.log
-report
-util
+/components
+/report
+/util
