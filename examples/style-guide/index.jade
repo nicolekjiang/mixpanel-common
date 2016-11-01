@@ -86,6 +86,13 @@
         .mp-modal-alert-subtitle If your issue persists please contact our support team at support@mixpanel.com to get help quickly
 
   .section
+    h1 Toggles
+    p One element out of a set of two or more is always selected.
+    mp-toggle(attributes={selected: 'option1'})
+      mp-toggle-option(attributes={value: 'option1'}) Option 1
+      mp-toggle-option(attributes={value: 'option2'}) Option 2
+
+  .section
     h1 Tooltips
     p.mp-font-paragraph
       a

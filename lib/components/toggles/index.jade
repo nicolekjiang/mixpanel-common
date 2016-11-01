@@ -1,0 +1,6 @@
+.mp-toggle
+  for toggleOption in $helpers.toggleOptions()
+    .mp-toggle-option(
+      class={'mp-toggle-selected': toggleOption.value === $component.value}
+      onclick=() => $helpers.selectOption(toggleOption.value)
+    )= toggleOption.text
