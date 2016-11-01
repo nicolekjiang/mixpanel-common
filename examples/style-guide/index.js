@@ -1,7 +1,7 @@
 import 'babel-polyfill'
 import 'webcomponents.js/webcomponents';
 
-import { Component, h } from 'panel';
+import { Component } from 'panel';
 
 import '../../lib/index';
 import COLORS from '../../stylesheets/colors.json';
