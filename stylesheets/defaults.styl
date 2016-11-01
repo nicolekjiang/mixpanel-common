@@ -1,0 +1,59 @@
+@import 'common.styl'
+
+*
+  -webkit-font-smoothing: antialiased;
+
+body
+  color grey-700
+  font-family family-helvetica
+  font-weight weight-regular
+  font-size-default()
+  font-stretch normal
+
+a, .mp-link
+  cursor pointer
+  text-decoration none
+
+  &, &:visited
+    color blue-500
+
+  &:hover
+    color blue-300
+
++prefix-classes('mp-font-')
+  .xl
+    font-family family-helvetica
+    font-size-xl()
+    font-stretch normal
+
+  .large
+    font-family family-helvetica
+    font-size-large()
+    font-stretch normal
+
+  .medium
+    font-family family-helvetica
+    font-size-medium()
+    font-stretch normal
+
+  .default
+    font-family family-helvetica
+    font-size-default()
+    font-stretch normal
+
+  .xs
+    font-family family-helvetica
+    font-size-xs()
+    font-stretch normal
+
+  .weight-bold
+    font-weight weight-bold
+   
+  .weight-medium
+    font-weight weight-medium
+
+  .weight-regular
+    font-weight weight-regular
+
+  .paragraph
+    font-paragraph()
