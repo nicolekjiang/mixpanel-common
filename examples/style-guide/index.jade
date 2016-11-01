@@ -28,19 +28,6 @@
     p.mp-font-paragraph .mp-font-paragraph | Mixpanel helps you learn from your data
     p.mp-font-list-item .mp-font-list-item | Mixpanel helps you learn from your data
 
-  .section
-    h1 Tooltips
-    p.mp-font-paragraph
-      a
-        | Hover me
-        mp-tooltip This is my tooltip
-
-  .section
-    h1 Forms
-    p To do...
-    p
-      input(type="text" placeholder="I'm a placeholder")
-
   .section.buttons
     h1 Buttons
     p
@@ -61,6 +48,12 @@
     p.button-field
       mp-button.mp-button-secondary.mp-button-on-blue secondary on-blue
       mp-button.mp-button-secondary.mp-button-on-blue(disabled) disabled
+
+  .section
+    h1 Forms
+    p To do...
+    p
+      input(type="text" placeholder="I'm a placeholder")
 
   .section
     h1 Modals
@@ -91,3 +84,10 @@
       div(attributes={'slot-body': true})
         .mp-modal-alert-title Your event failed to save
         .mp-modal-alert-subtitle If your issue persists please contact our support team at support@mixpanel.com to get help quickly
+
+  .section
+    h1 Tooltips
+    p.mp-font-paragraph
+      a
+        | Hover me
+        mp-tooltip This is my tooltip
