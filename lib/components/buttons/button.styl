@@ -1,14 +1,26 @@
-json('../../../stylesheets/colors.json')
-@import '../../../stylesheets/typography'
+@import '../defaults'
 
-background-primary = blue-300 linear-gradient(to bottom, #50AEFF, #46A2FF)
-background-primary-hover = blue-100 linear-gradient(#73bdff, #65b3ff)
+:host
+  vertical-align middle
+
+icon-color(color)
+  svg-icon
+      svg, path
+        color color
+        fill color
+        transition 0s
+ 
+icon-size(size, pos-left=0, pos-top=0)
+  svg
+    height size
+    min-height size
+    min-width size
+    width size
+    left pos-left
+    top pos-top
+
 background-primary-modal = blue-300
 background-primary-modal-hover = blue-100
-background-primary-on-blue = blue-300 linear-gradient(to bottom, #7fc1ff, #6fb9ff)
-background-primary-on-blue-hover = blue-100 linear-gradient(#8cc7ff, #7bbfff)
-background-primary-red = mp-red linear-gradient(#EA8499, #E4687D)
-background-primary-red-hover = mp-red linear-gradient(to bottom, #ED92A4, #EA8499)
 
 active = '&:active,&[active]'
 disabled = '&:disabled,&[disabled]'
@@ -18,33 +30,41 @@ not-disabled = ':not([disabled]):not(:disabled)'
   .container
     align-items center
     border 1px solid
-    border-radius 4px
+    border-radius 5px
     box-shadow 0px 1px 1px 0px rgba(0,0,0,0.2)
     box-sizing border-box
     cursor pointer
     display inline-flex
+    height 44px
     flex 1
     font-family family-helvetica
     font-size-medium()
     font-weight weight-bold
     justify-content center
     letter-spacing 0
-    line-height 14px
-    padding 15px 25px 13px 25px
+    overflow hidden
+    padding 15px 25px 15px 25px
     text-align center
-    text-transform uppercase
     user-select none
 
-    .text
-      display inline-flex
-      align-items center
-      justify-content center
+    * 
+      vertical-align middle
 
+    .text
+      align-items center
+      display inline-flex
+      overflow hidden
+      justify-content center
+     
       .arrow-next
-        margin-left: 10px;
-        width: 15px;
+        margin-left 10px
+        width 15px
         svg path
           fill #fff
+         
+    +content-styles()
+      svg-icon
+        margin-right 6px
 
     {disabled}
       box-shadow none
@@ -60,25 +80,31 @@ not-disabled = ':not([disabled]):not(:disabled)'
       border-color blue-500
       color white
 
+      +content-styles()
+        icon-color(white)
+
       &:hover{not-disabled}
         background-image linear-gradient(0deg, blue-100 0%, blue-100 100%)
         box-shadow 0 1.5px 2.5px 0 rgba(0,0,0,0.3)
 
-      &:active{not-disabled}
+      &:active{not-disabled}, &.active{not-disabled}
         background-image linear-gradient(0deg, mp-blue 0%, blue-100 100%)
         border-color mp-blue
         box-shadow 0px 1px 1px 0px rgba(0,0,0,0.0), inset 0px 2px 2px 0px rgba(0,0,0,0.2)
-        color rgba(255,255,255,0.6)
+
+        +content-styles()
+          color rgba(255,255,255,0.6)
+          icon-color(rgba(255,255,255,0.6))
 
       &.on-blue
         border-color blue-900
         box-shadow none
-
+      
         &:hover{not-disabled}
           background-image linear-gradient(0deg, mp-blue 0%, blue-100 100%)
           box-shadow 0px 1px 1px 0px rgba(0,0,0,0.2)
 
-        &:active{not-disabled}
+        &:active{not-disabled}, &.active{not-disabled}
           border-color blue-700
           box-shadow 0px 1px 1px 0px rgba(0,0,0,0.0), inset 0px 2px 2px 0px rgba(0,0,0,0.2)
 
@@ -88,15 +114,23 @@ not-disabled = ':not([disabled]):not(:disabled)'
       box-shadow 0px 1px 1px 0px rgba(0,0,0,0.1)
       color grey-700
 
+      +content-styles()
+        icon-color(grey-700)
+
       &:hover{not-disabled}
         background-image linear-gradient(0deg, white 0%, white 100%)
         box-shadow 0 1px 2px 0 rgba(0,0,0,0.23)
         color mp-blue
 
-      &:active{not-disabled}
+        +content-styles()
+          icon-color(mp-blue)
+
+      &:active{not-disabled}, &.active{not-disabled}
         border-color grey-200
         box-shadow 0px 1px 0px 0px grey-150, inset 0px 2px 3px 0px grey-200
-        color rgba(110,133,157,0.8)
+        +content-styles()
+          color rgba(110,133,157,0.8)
+          icon-color(rgba(110,133,157,0.8))
 
       &.on-blue
         background-image none
@@ -104,6 +138,9 @@ not-disabled = ':not([disabled]):not(:disabled)'
         border-color rgba(0,0,0,0)
         box-shadow none
         color white
+      
+        +content-styles()
+          icon-color(white)
 
         &:hover{not-disabled}
           background-image none
@@ -111,24 +148,32 @@ not-disabled = ':not([disabled]):not(:disabled)'
           border-color rgba(255,255,255,0.6)
           color white
 
-        &:active{not-disabled}
+        &:active{not-disabled}, &.active{not-disabled}
           background-color mp-blue
           border 1px solid rgba(255,255,255,0.3)
           box-shadow 0px 1px 0px 0px mp-blue, inset 0px 2px 3px 0px blue-500
-          color rgba(255,255,255,.6)
+
+          +content-styles()
+            color rgba(255,255,255,0.6)
+            icon-color(rgba(255,255,255,0.6))
 
     &.red
       background-image linear-gradient(0deg, mp-red 0%, red-300 100%)
       border-color red-700
       color white
+        
+      +content-styles()
+        icon-color(white)
 
       &:hover{not-disabled}
         background-image linear-gradient(0deg, red-300 0%, red-300 100%)
     
-      &:active{not-disabled}
+      &:active{not-disabled}, &.active{not-disabled}
         background-image linear-gradient(0deg, mp-red 0%, red-300 100%)
         box-shadow 0px 1px 1px 0px rgba(0,0,0,0.0), inset 0px 2px 2px 0px rgba(0,0,0,0.2)
-        color rgba(255,255,255,0.6)
+        +content-styles()
+          color rgba(255,255,255,0.6)
+          icon-color(rgba(255,255,255,0.6))
     
     // deprecated
     &.purple 
@@ -141,6 +186,22 @@ not-disabled = ':not([disabled]):not(:disabled)'
         border 1px solid #9270e2
 
     /* END COLOR THEMES */
+
+
+    /* ICON STYLES */
+
+    +content-styles()
+      svg-icon
+        &[icon='x']
+          margin-right 0px
+
+        &[icon='plus']
+          icon-size(size: 30px, pos-top: -4px)
+
+        &[icon='caret-up'], &[icon='caret-down']
+          margin-right 2px
+
+    /* END ICON STYLES */
 
 
     /* BEGIN SPECIAL STYLES FOR MODAL BUTTONS */
