@@ -1,10 +1,17 @@
 @import '../defaults'
 
-:host
-  vertical-align middle
+//TODO: refactor and remove
+background-primary-modal = blue-300
+background-primary-modal-hover = blue-100
 
-icon-color(color)
-  svg-icon
+active = '&:active,&[active]'
+disabled = '&:disabled,&[disabled]'
+not-disabled = ':not([disabled]):not(:disabled)'
+
+content-color(color)
+  +content-styles()
+    color color
+    svg-icon
       svg, path
         color color
         fill color
@@ -19,12 +26,12 @@ icon-size(size, pos-left=0, pos-top=0)
     left pos-left
     top pos-top
 
-background-primary-modal = blue-300
-background-primary-modal-hover = blue-100
++host-styles(mp-button)
+  height 44px
+  vertical-align middle
 
-active = '&:active,&[active]'
-disabled = '&:disabled,&[disabled]'
-not-disabled = ':not([disabled]):not(:disabled)'
++host-styles(mp-button, '.mp-button-modal')
+   width 100%
 
 +prefix-classes('mp-button-')
   .container
@@ -35,7 +42,6 @@ not-disabled = ':not([disabled]):not(:disabled)'
     box-sizing border-box
     cursor pointer
     display inline-flex
-    max-height 44px
     flex 1
     font-family family-helvetica
     font-size-medium()
@@ -43,7 +49,7 @@ not-disabled = ':not([disabled]):not(:disabled)'
     justify-content center
     letter-spacing 0
     overflow hidden
-    padding 15px 25px 15px 25px
+    padding 0px 25px 
     text-align center
     user-select none
 
@@ -78,10 +84,7 @@ not-disabled = ':not([disabled]):not(:disabled)'
     &.primary, &.blue
       background-image linear-gradient(0deg, mp-blue 0%, blue-100 100%)
       border-color blue-500
-      color white
-
-      +content-styles()
-        icon-color(white)
+      content-color(white)
 
       &:hover{not-disabled}
         background-image linear-gradient(0deg, blue-100 0%, blue-100 100%)
@@ -91,10 +94,7 @@ not-disabled = ':not([disabled]):not(:disabled)'
         background-image linear-gradient(0deg, mp-blue 0%, blue-100 100%)
         border-color mp-blue
         box-shadow 0px 1px 1px 0px rgba(0,0,0,0.0), inset 0px 2px 2px 0px rgba(0,0,0,0.2)
-
-        +content-styles()
-          color rgba(255,255,255,0.6)
-          icon-color(rgba(255,255,255,0.6))
+        content-color(rgba(255,255,255,0.6))
 
       &.on-blue
         border-color blue-900
@@ -112,35 +112,24 @@ not-disabled = ':not([disabled]):not(:disabled)'
       background-image linear-gradient(0deg, grey-50 0%, white 100%)
       border-color grey-300
       box-shadow 0px 1px 1px 0px rgba(0,0,0,0.1)
-      color grey-700
-
-      +content-styles()
-        icon-color(grey-700)
+      content-color(grey-700)
 
       &:hover{not-disabled}
         background-image linear-gradient(0deg, white 0%, white 100%)
         box-shadow 0 1px 2px 0 rgba(0,0,0,0.23)
-        color mp-blue
-
-        +content-styles()
-          icon-color(mp-blue)
+        content-color(mp-blue)
 
       &:active{not-disabled}, &.active{not-disabled}
         border-color grey-200
         box-shadow 0px 1px 0px 0px grey-150, inset 0px 2px 3px 0px grey-200
-        +content-styles()
-          color rgba(110,133,157,0.8)
-          icon-color(rgba(110,133,157,0.8))
+        content-color(rgba(110,133,157,0.8))
 
       &.on-blue
         background-image none
         background-color transparent
         border-color rgba(0,0,0,0)
         box-shadow none
-        color white
-      
-        +content-styles()
-          icon-color(white)
+        content-color(white)
 
         &:hover{not-disabled}
           background-image none
@@ -152,18 +141,12 @@ not-disabled = ':not([disabled]):not(:disabled)'
           background-color mp-blue
           border 1px solid rgba(255,255,255,0.3)
           box-shadow 0px 1px 0px 0px mp-blue, inset 0px 2px 3px 0px blue-500
-
-          +content-styles()
-            color rgba(255,255,255,0.6)
-            icon-color(rgba(255,255,255,0.6))
+          content-color(rgba(255,255,255,0.6))
 
     &.red
       background-image linear-gradient(0deg, mp-red 0%, red-300 100%)
       border-color red-700
-      color white
-        
-      +content-styles()
-        icon-color(white)
+      content-color(white)
 
       &:hover{not-disabled}
         background-image linear-gradient(0deg, red-300 0%, red-300 100%)
@@ -171,9 +154,7 @@ not-disabled = ':not([disabled]):not(:disabled)'
       &:active{not-disabled}, &.active{not-disabled}
         background-image linear-gradient(0deg, mp-red 0%, red-300 100%)
         box-shadow 0px 1px 1px 0px rgba(0,0,0,0.0), inset 0px 2px 2px 0px rgba(0,0,0,0.2)
-        +content-styles()
-          color rgba(255,255,255,0.6)
-          icon-color(rgba(255,255,255,0.6))
+        content-color(rgba(255,255,255,0.6))
     
     // deprecated
     &.purple 
