@@ -8,5 +8,5 @@
 ### Local development of components
 
 - Install dependencies: `npm install`
-- Build continuously: `npm run build-example-watch`
+- Build continuously: `npm run watch-examples`
 - Open `examples/index.html` in browser
