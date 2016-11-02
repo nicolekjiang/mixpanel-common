@@ -4,6 +4,13 @@
 *
   -webkit-font-smoothing: antialiased;
 
+*:focus
+  outline 0
+
+*::-ms-clear
+  height 0
+  width 0
+
 body
   color grey-700
   font-family family-helvetica
@@ -76,10 +83,3 @@ input[type=text], textarea
   &:focus
     border-color blue-700
     transition border-color 250ms ease-in
-
-*:focus
-  outline 0
-
-*::-ms-clear
-  height 0
-  width 0
