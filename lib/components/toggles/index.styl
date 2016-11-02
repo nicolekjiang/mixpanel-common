@@ -19,9 +19,21 @@
     justify-content center
     text-align center
     text-transform uppercase
+    transition background-color 0.2s
     &.mp-toggle-selected
       background-color #fff
     &:not(.mp-toggle-selected)
       cursor pointer
       &:hover
         color blue-300
+
+  &.mp-toggle-blue
+    background-color blue-700
+    .mp-toggle-option
+      background-color blue-700
+      color lighten(blue-100, 50%)
+      &.mp-toggle-selected
+        background-color blue-100
+        color #fff
+      &:not(.mp-toggle-selected):hover
+        color #fff

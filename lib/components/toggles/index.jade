@@ -1,4 +1,4 @@
-.mp-toggle
+.mp-toggle(class=$component.className)
   for toggleOption in $helpers.toggleOptions()
     .mp-toggle-option(
       class={'mp-toggle-selected': toggleOption.value === $component.value}
