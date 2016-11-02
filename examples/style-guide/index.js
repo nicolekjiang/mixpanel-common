@@ -14,10 +14,13 @@ document.registerElement('style-guide', class extends Component {
   get config() {
     return {
       defaultState: {
+        blueToggleValue: 'option1',
+
         COLORS,
         SVG_ICONS,
       },
       helpers: {
+        blueToggleChanged: ev => this.update({blueToggleValue: ev.detail.selected}),
         closeModal: selector => this.el.querySelector(selector).close(),
         openModal: selector => {
           this.el.querySelector(selector).open();

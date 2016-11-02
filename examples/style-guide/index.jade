@@ -85,12 +85,16 @@
         .mp-modal-alert-title Your event failed to save
         .mp-modal-alert-subtitle If your issue persists please contact our support team at support@mixpanel.com to get help quickly
 
-  .section
+  .section.toggles
     h1 Toggles
     p One element out of a set of two or more is always selected.
-    mp-toggle.mp-toggle-blue.inline-toggle(attributes={selected: 'option1'})
+    mp-toggle.mp-toggle-blue.inline-toggle(
+      attributes={selected: blueToggleValue}
+      onchange=$helpers.blueToggleChanged
+    )
       mp-toggle-option(attributes={value: 'option1'}) Option 1
       mp-toggle-option(attributes={value: 'option2'}) Option 2
+    span.toggle-val Selected: #{blueToggleValue}
     mp-toggle.full-width(attributes={selected: 'option1'})
       mp-toggle-option(attributes={value: 'option1'}) Option 1
       mp-toggle-option(attributes={value: 'option2'}) Option 2
