@@ -62,11 +62,18 @@
     h1 Buttons w/ icons
     p
       mp-button.mp-button-secondary(attributes={icon: 'x'}) Close
+      mp-button.mp-button-secondary(attributes={icon: 'logout'}) Exit
       mp-button.mp-button-primary(attributes={icon: 'caret-down'}) Menu closed
       mp-button.mp-button-primary(attributes={icon: 'plus'}) Create
       mp-button.mp-button-primary.mp-button-active(attributes={icon: 'caret-up'}) Menu open
-      mp-button.mp-button-red(attributes={icon: 'trashcan'}) Delete 
+      mp-button.mp-button-red(attributes={icon: 'trashcan'}) Delete
       mp-button.mp-button-primary No icon
+    p.button-field
+      mp-button.mp-button-primary.mp-button-on-blue(attributes={icon: 'plus'}) Create
+      mp-button.mp-button-primary.mp-button-on-blue(attributes={icon: 'plus'} disabled) Create
+    p.button-field
+      mp-button.mp-button-secondary.mp-button-on-blue(attributes={icon: 'x'}) Cancel
+      mp-button.mp-button-secondary.mp-button-on-blue(attributes={icon: 'x'} disabled) Cancel
 
   .section
     h1 Forms

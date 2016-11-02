@@ -16,19 +16,19 @@ content-color(color)
         color color
         fill color
         transition 0s
- 
-icon-size(size, pos-left=0, pos-top=0)
+
+icon-size(size=none, pos-left=0, pos-top=0)
   svg
-    height size
-    min-height size
-    min-width size
-    width size
+    if size != none
+      height size
+      min-height size
+      min-width size
+      width size
     left pos-left
     top pos-top
 
 +host-styles(mp-button)
   height 44px
-  vertical-align middle
 
 +host-styles(mp-button, '.mp-button-modal')
    width 100%
@@ -42,6 +42,7 @@ icon-size(size, pos-left=0, pos-top=0)
     box-sizing border-box
     cursor pointer
     display inline-flex
+    height 100%
     flex 1
     font-family family-helvetica
     font-size-medium()
@@ -49,25 +50,26 @@ icon-size(size, pos-left=0, pos-top=0)
     justify-content center
     letter-spacing 0
     overflow hidden
-    padding 0px 25px 
+    padding 0px 25px
     text-align center
     user-select none
 
-    * 
+    *
       vertical-align middle
 
     .text
       align-items center
       display inline-flex
+      line-height 18px
       overflow hidden
       justify-content center
-     
+
       .arrow-next
         margin-left 10px
         width 15px
         svg path
           fill #fff
-         
+
     +content-styles()
       svg-icon
         margin-right 6px
@@ -99,7 +101,7 @@ icon-size(size, pos-left=0, pos-top=0)
       &.on-blue
         border-color blue-900
         box-shadow none
-      
+
         &:hover{not-disabled}
           background-image linear-gradient(0deg, mp-blue 0%, blue-100 100%)
           box-shadow 0px 1px 1px 0px rgba(0,0,0,0.2)
@@ -135,7 +137,7 @@ icon-size(size, pos-left=0, pos-top=0)
           background-image none
           box-shadow none
           border-color rgba(255,255,255,0.6)
-          color white
+          content-color white
 
         &:active{not-disabled}, &.active{not-disabled}
           background-color mp-blue
@@ -150,14 +152,14 @@ icon-size(size, pos-left=0, pos-top=0)
 
       &:hover{not-disabled}
         background-image linear-gradient(0deg, red-300 0%, red-300 100%)
-    
+
       &:active{not-disabled}, &.active{not-disabled}
         background-image linear-gradient(0deg, mp-red 0%, red-300 100%)
         box-shadow 0px 1px 1px 0px rgba(0,0,0,0.0), inset 0px 2px 2px 0px rgba(0,0,0,0.2)
         content-color(rgba(255,255,255,0.6))
-    
+
     // deprecated
-    &.purple 
+    &.purple
       background mp-purple
       border 1px solid #7858b8
       color #fff
@@ -174,13 +176,16 @@ icon-size(size, pos-left=0, pos-top=0)
     +content-styles()
       svg-icon
         &[icon='x']
-          margin-right 0px
+          margin-right 2px
 
         &[icon='plus']
           icon-size(size: 30px, pos-top: -4px)
 
         &[icon='caret-up'], &[icon='caret-down']
           margin-right 2px
+
+        &[icon='logout']
+          icon-size(pos-top: 6px, pos-left: 5px)
 
     /* END ICON STYLES */
 
