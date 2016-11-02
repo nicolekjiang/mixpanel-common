@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
+    <title>logout</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="16-x-16" stroke="none">
+        <g id="logout">
+            <g transform="translate(4.000000, 6.000000)">
+                <g>
+                    <path d="M12.5,0 L10,0 C9.447,0 9,0.448 9,1 C9,1.552 9.447,2 10,2 L12,2 L12,8 L10,8 C9.447,8 9,8.447 9,9 C9,9.553 9.447,10 10,10 L12.5,10 C13.328,10 14,9.328 14,8.5 L14,1.5 C14,0.672 13.328,0 12.5,0" id="door"></path>
+                    <path d="M4.8124,1.6498 C4.4854,1.3878 4.0004,1.6208 4.0004,2.0398 L4.0004,3.9998 L0.5004,3.9998 C0.2234,3.9998 0.0004,4.2238 0.0004,4.4998 L0.0004,5.4998 C0.0004,5.7758 0.2234,5.9998 0.5004,5.9998 L4.0004,5.9998 L4.0004,7.9598 C4.0004,8.3788 4.4854,8.6118 4.8124,8.3498 L8.6094,5.3118 C8.8094,5.1518 8.8094,4.8478 8.6094,4.6878 L4.8124,1.6498 Z" id="arrow"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
