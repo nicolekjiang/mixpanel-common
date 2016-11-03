@@ -1,5 +1,5 @@
 div(class='mp-button-container #{$component.className}' attributes=$helpers.getButtonAttrs())
-  .mp-button-text
+  .mp-button-content
     if $component.getAttribute('icon')
       svg-icon(attributes={icon: $component.getAttribute('icon')})
     content
