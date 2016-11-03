@@ -18228,11 +18228,7 @@
 	        var h = __webpack_require__(348);var host = document.createElement('div');host.appendChild(this.init());
 	        return h('text', host.innerHTML);
 	      };return new LiteralWidget(id, contents);
-<<<<<<< 4369d56706273bb1250393d70814d2feffd19a49
-	    };return { value: h("div", { "attributes": $helpers.getButtonAttrs(), "className": [].concat('mp-button-container ' + $component.className + '').filter(Boolean).join(' ') }, [h("div", { "className": [].concat('mp-button-text').filter(Boolean).join(' ') }, function () {
-=======
 	    };return { value: h("div", { "attributes": $helpers.getButtonAttrs(), "className": [].concat('mp-button-container ' + $component.className + '').filter(Boolean).join(' ') }, [h("div", { "className": [].concat('mp-button-content').filter(Boolean).join(' ') }, function () {
->>>>>>> small cleanup
 	        var __jade_nodes = [];__jade_nodes = __jade_nodes.concat($component.getAttribute('icon') ? h("svg-icon", { "attributes": { icon: $component.getAttribute('icon') } }) : undefined);__jade_nodes = __jade_nodes.concat(h("content"));__jade_nodes = __jade_nodes.concat($component.isAttributeEnabled('arrow-next') ? h("div", { "className": [].concat('mp-button-arrow-next').filter(Boolean).join(' ') }, [generateLiteralWidget(0, '<?xml version="1.0" encoding="utf-8"?><!-- Generator: Adobe Illustrator 19.2.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  --><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"	 viewBox="0 0 14 10.5" style="enable-background:new 0 0 14 10.5;" xml:space="preserve"><style type="text/css">	.st0{fill:#D8E0E7;}</style><path class="st0" d="M13,6.2H1c-0.5,0-1-0.4-1-1v0c0-0.5,0.4-1,1-1h12c0.5,0,1,0.4,1,1v0C14,5.8,13.6,6.2,13,6.2z"/><path class="st0" d="M12.3,5.9L8.1,1.7c-0.4-0.4-0.4-1,0-1.4l0,0c0.4-0.4,1-0.4,1.4,0l4.2,4.2c0.4,0.4,0.4,1,0,1.4l0,0	C13.3,6.3,12.7,6.3,12.3,5.9z"/><path class="st0" d="M12.3,4.5L8.1,8.8c-0.4,0.4-0.4,1,0,1.4l0,0c0.4,0.4,1,0.4,1.4,0l4.2-4.2c0.4-0.4,0.4-1,0-1.4l0,0	C13.3,4.1,12.7,4.1,12.3,4.5z"/></svg>')].filter(Boolean)) : undefined);;return __jade_nodes;
 	      }.call(this).filter(Boolean))].filter(Boolean)) };
 	  }.call(this, "$component" in locals ? locals.$component : typeof $component !== "undefined" ? $component : undefined, "$helpers" in locals ? locals.$helpers : typeof $helpers !== "undefined" ? $helpers : undefined, "document" in locals ? locals.document : typeof document !== "undefined" ? document : undefined);if (result_of_with) return result_of_with.value;
@@ -18393,7 +18389,6 @@
 	      return Object.keys(o).map(function (k) {
 	        return o[k] ? k : false;
 	      });
-<<<<<<< 4369d56706273bb1250393d70814d2feffd19a49
 	    };return { value: h("div", { "className": [].concat('mp-modal-stage').concat(__objToAttrs({ 'mp-modal-alert': $component.isAttributeEnabled('alert'), 'mp-modal-absolute': $component.isAttributeEnabled('not-fullscreen'), 'mp-modal-closed': visibility === 'closed' })).filter(Boolean).join(' ') }, function () {
 	        var __jade_nodes = [];__jade_nodes = __jade_nodes.concat($helpers.getType() === 'modal' ? h("div", { "onclick": $helpers.backdropClicked, "className": [].concat('mp-modal-backdrop').concat('mp-modal-' + visibility + '').filter(Boolean).join(' ') }) : undefined);__jade_nodes = __jade_nodes.concat(h("div", { "className": [].concat('mp-modal-wrapper').filter(Boolean).join(' ')
 	        }, [h("div", {
@@ -18401,12 +18396,6 @@
 	          "style": $helpers.getModalStyles(), "className": [].concat('mp-modal-main').concat('mp-modal-' + visibility + '').filter(Boolean).join(' ') }, function () {
 	          var __jade_nodes = [];__jade_nodes = __jade_nodes.concat($component.isAttributeEnabled('closeable') ? h("div", { "onclick": $helpers.closeClicked, "className": [].concat('mp-modal-close-btn').filter(Boolean).join(' ') }, [h("div", { "className": [].concat('mp-modal-close-icon').filter(Boolean).join(' ') }, [generateLiteralWidget(1, '<?xml version="1.0" encoding="utf-8"?><!-- Generator: Adobe Illustrator 19.2.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  --><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"	 viewBox="0 0 10.6 10.5" style="enable-background:new 0 0 10.6 10.5;" xml:space="preserve"><style type="text/css">	.x{fill-rule:evenodd;clip-rule:evenodd;fill:#D8E0E7;}</style><path class="x" d="M8.6,0L5.3,3.3L2,0L0,2l3.3,3.3L0,8.5l2,2l3.2-3.2l3.2,3.2l2-2L7.3,5.3L10.6,2L8.6,0z"/></svg>')].filter(Boolean))].filter(Boolean)) : undefined);
 	          __jade_nodes = __jade_nodes.concat(h("div", { "className": [].concat('mp-modal-top-container').concat(__objToAttrs({ 'mp-modal-alert': $component.isAttributeEnabled('alert') })).filter(Boolean).join(' ') }, function () {
-=======
-	    };
-	    return { value: h("div", { "className": [].concat('mp-modal-stage').concat(__objToAttrs({ 'mp-modal-alert': $component.isAttributeEnabled('alert'), 'mp-modal-absolute': $component.isAttributeEnabled('not-fullscreen'), 'mp-modal-closed': visibility === 'closed' })).filter(Boolean).join(' ') }, function () {
-	        var __jade_nodes = [];__jade_nodes = __jade_nodes.concat($helpers.getType() === 'modal' ? h("div", { "onclick": $helpers.backdropClicked, "className": [].concat('mp-modal-backdrop').concat('mp-modal-' + visibility + '').filter(Boolean).join(' ') }) : undefined);__jade_nodes = __jade_nodes.concat(h("div", { "className": [].concat('mp-modal-wrapper').filter(Boolean).join(' ') }, [h("div", { "style": $helpers.getModalStyles(), "className": [].concat('mp-modal-main').concat('mp-modal-' + visibility + '').filter(Boolean).join(' ') }, function () {
-	          var __jade_nodes = [];__jade_nodes = __jade_nodes.concat($component.isAttributeEnabled('closeable') ? h("div", { "onclick": $helpers.closeClicked, "className": [].concat('mp-modal-close-btn').filter(Boolean).join(' ') }, [h("div", { "className": [].concat('mp-modal-close-icon').filter(Boolean).join(' ') }, [generateLiteralWidget(1, '<?xml version="1.0" encoding="utf-8"?><!-- Generator: Adobe Illustrator 19.2.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  --><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"	 viewBox="0 0 10.6 10.5" style="enable-background:new 0 0 10.6 10.5;" xml:space="preserve"><style type="text/css">	.x{fill-rule:evenodd;clip-rule:evenodd;fill:#D8E0E7;}</style><path class="x" d="M8.6,0L5.3,3.3L2,0L0,2l3.3,3.3L0,8.5l2,2l3.2-3.2l3.2,3.2l2-2L7.3,5.3L10.6,2L8.6,0z"/></svg>')].filter(Boolean))].filter(Boolean)) : undefined);__jade_nodes = __jade_nodes.concat(h("div", { "className": [].concat('mp-modal-top-container').concat(__objToAttrs({ 'mp-modal-alert': $component.isAttributeEnabled('alert') })).filter(Boolean).join(' ') }, function () {
->>>>>>> small cleanup
 	            var __jade_nodes = [];__jade_nodes = __jade_nodes.concat($component.isAttributeEnabled('alert') ? h("div", { "className": [].concat('mp-modal-content-row').filter(Boolean).join(' ') }, [h("div", { "className": [].concat('mp-modal-alert-icon').filter(Boolean).join(' ') }, [generateLiteralWidget(2, '<?xml version="1.0" encoding="utf-8"?><!-- Generator: Adobe Illustrator 19.2.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  --><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"	 viewBox="0 0 33 30" style="enable-background:new 0 0 33 30;" xml:space="preserve"><style type="text/css">	.mp-modal-alert-icon-fill{fill:#D8E0E7;}</style><path class="mp-modal-alert-icon-fill" d="M32.2,24L20,2.5c-1.9-3.3-5-3.3-6.9,0L0.8,23.6C-1.1,26.9,0.5,30,4.2,30h24.5C32.5,30,34.1,27.3,32.2,24z	 M16.6,26c-1.2,0-2.1-0.9-2.1-2.1c0-1.2,0.9-2.1,2.1-2.1c1.2,0,2.1,0.9,2.1,2.1C18.7,25.1,17.8,26,16.6,26z M18.1,20.4h-3l-1-12.3h5	L18.1,20.4z"/></svg>')].filter(Boolean)), h("content", { "select": '[slot-body]' })].filter(Boolean)) : h("content", { "select": '[slot-body]' }));;return __jade_nodes;
 	          }.call(this).filter(Boolean)));__jade_nodes = __jade_nodes.concat(!alertIcon ? h("div", { "className": [].concat('mp-modal-button-container').filter(Boolean).join(' ') }, [h("content", { "select": '[slot-button]' })].filter(Boolean)) : undefined);;return __jade_nodes;
 	        }.call(this).filter(Boolean))].filter(Boolean)));;return __jade_nodes;
@@ -18655,10 +18644,7 @@
 	var _iconMap_lineStacked = '<?xml version="1.0" encoding="utf-8"?>\n<!-- Generated by IcoMoon.io -->\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22" viewBox="0 0 22 22">\n<path fill="#000" d="M20.707 9.293c-0.391-0.391-1.023-0.391-1.414 0l-4.564 4.562-5.413-1.803c-0.321-0.109-0.676-0.045-0.941 0.167l-5 4c-0.431 0.345-0.501 0.974-0.156 1.406 0.197 0.247 0.488 0.375 0.781 0.375 0.22 0 0.44-0.071 0.624-0.219l4.576-3.66 5.484 1.827c0.359 0.122 0.755 0.027 1.023-0.241l5-5c0.391-0.391 0.391-1.023 0-1.414z"></path>\n<path fill="#000" d="M8.2 9.12l5.484 1.828c0.359 0.121 0.757 0.026 1.023-0.242l5-5c0.391-0.39 0.391-1.023 0-1.414-0.39-0.39-1.023-0.39-1.414 0l-4.563 4.563-5.413-1.804c-0.323-0.105-0.676-0.044-0.941 0.168l-5 4c-0.432 0.344-0.502 0.974-0.156 1.405 0.197 0.247 0.487 0.375 0.781 0.375 0.219 0 0.44-0.071 0.624-0.218l4.575-3.661z"></path>\n</svg>\n';
 	var _iconMap_line = '<?xml version="1.0" encoding="utf-8"?>\n<!-- Generated by IcoMoon.io -->\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22" viewBox="0 0 22 22">\n<path fill="#000" d="M2 12c-1.105 0-2 0.895-2 2s0.895 2 2 2c1.105 0 2-0.895 2-2s-0.895-2-2-2v0z"></path>\n<path fill="#000" d="M8 6c-1.105 0-2 0.895-2 2s0.895 2 2 2c1.105 0 2-0.895 2-2s-0.895-2-2-2z"></path>\n<path fill="#000" d="M14 12c-1.105 0-2 0.895-2 2s0.895 2 2 2c1.105 0 2-0.895 2-2s-0.895-2-2-2z"></path>\n<path fill="#000" d="M20 6c-1.105 0-2 0.895-2 2s0.895 2 2 2c1.105 0 2-0.895 2-2s-0.895-2-2-2z"></path>\n<path fill="#000" d="M4 12h2v-2h-2z"></path>\n<path fill="#000" d="M10 12h2v-2h-2z"></path>\n<path fill="#000" d="M16 12h2v-2h-2z"></path>\n</svg>\n';
 	var _iconMap_lockLocked = '<?xml version="1.0" encoding="utf-8"?>\n<!-- Generated by IcoMoon.io -->\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22" viewBox="0 0 22 22">\n<path fill="#000" d="M8 10v-2c0-1.654 1.346-3 3-3s3 1.346 3 3v2h-6zM17 10h-1v-2c0-2.757-2.243-5-5-5s-5 2.243-5 5v2h-1c-0.552 0-1 0.448-1 1v7c0 0.552 0.448 1 1 1h12c0.552 0 1-0.448 1-1v-7c0-0.552-0.448-1-1-1v0z"></path>\n</svg>\n';
-<<<<<<< b778d22c54d8989919e92e78c55113e2cc0630ad
-=======
 	var _iconMap_logout = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">\n    <!-- Generator: Sketch 40.3 (33839) - http://www.bohemiancoding.com/sketch -->\n    <title>logout</title>\n    <desc>Created with Sketch.</desc>\n    <defs></defs>\n    <g id="16-x-16" stroke="none">\n        <g id="logout">\n            <g transform="translate(4.000000, 6.000000)">\n                <g>\n                    <path d="M12.5,0 L10,0 C9.447,0 9,0.448 9,1 C9,1.552 9.447,2 10,2 L12,2 L12,8 L10,8 C9.447,8 9,8.447 9,9 C9,9.553 9.447,10 10,10 L12.5,10 C13.328,10 14,9.328 14,8.5 L14,1.5 C14,0.672 13.328,0 12.5,0" id="door"></path>\n                    <path d="M4.8124,1.6498 C4.4854,1.3878 4.0004,1.6208 4.0004,2.0398 L4.0004,3.9998 L0.5004,3.9998 C0.2234,3.9998 0.0004,4.2238 0.0004,4.4998 L0.0004,5.4998 C0.0004,5.7758 0.2234,5.9998 0.5004,5.9998 L4.0004,5.9998 L4.0004,7.9598 C4.0004,8.3788 4.4854,8.6118 4.8124,8.3498 L8.6094,5.3118 C8.8094,5.1518 8.8094,4.8478 8.6094,4.6878 L4.8124,1.6498 Z" id="arrow"></path>\n                </g>\n            </g>\n        </g>\n    </g>\n</svg>\n';
->>>>>>> update icon position
 	var _iconMap_plusLarge = '<?xml version="1.0" encoding="utf-8"?>\n<!-- Generated by IcoMoon.io -->\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22" viewBox="0 0 22 22">\n<path fill="#000" d="M17 9h-4v-4c0-0.552-0.448-1-1-1h-2c-0.552 0-1 0.448-1 1v4h-4c-0.552 0-1 0.448-1 1v2c0 0.552 0.448 1 1 1h4v4c0 0.552 0.448 1 1 1h2c0.552 0 1-0.448 1-1v-4h4c0.552 0 1-0.448 1-1v-2c0-0.552-0.448-1-1-1z"></path>\n</svg>\n';
 	var _iconMap_plus = '<?xml version="1.0" encoding="utf-8"?>\n<!-- Generated by IcoMoon.io -->\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22" viewBox="0 0 22 22">\n<path fill="#000" d="M14 10h-2v-2c0-0.552-0.448-1-1-1s-1 0.448-1 1v2h-2c-0.552 0-1 0.448-1 1s0.448 1 1 1h2v2c0 0.552 0.448 1 1 1s1-0.448 1-1v-2h2c0.552 0 1-0.448 1-1s-0.448-1-1-1z"></path>\n</svg>\n';
 	var _iconMap_profileLarge = '<?xml version="1.0" encoding="utf-8"?>\n<!-- Generated by IcoMoon.io -->\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22" viewBox="0 0 22 22">\n<path fill="#000" d="M12.981 12.040c0-0.87 0.72-0.58 1.040-2.17 0.13-0.66 0.76-0.010 0.89-1.51 0.042-0.297-0.095-0.592-0.35-0.75 0 0 0.18-0.88 0.24-1.57 0.090-0.84-0.52-3.040-3.8-3.040s-3.89 2.2-3.8 3.040c0.060 0.69 0.24 1.57 0.24 1.57-0.255 0.158-0.393 0.453-0.35 0.75 0.13 1.5 0.76 0.85 0.89 1.51 0.32 1.59 1.040 1.3 1.040 2.17 0 1.44-0.75 2.12-3.111 2.91-2.37 0.81-2.909 1.62-2.909 2.18v0.94c0.022 0.532 0.468 0.946 1 0.93h14c0.532 0.016 0.977-0.398 1-0.93v-0.94c0-0.56-0.541-1.37-2.91-2.18-2.36-0.79-3.11-1.47-3.11-2.91z"></path>\n</svg>\n';
@@ -18724,6 +18710,7 @@
 	  lineStacked: _iconMap_lineStacked,
 	  line: _iconMap_line,
 	  lockLocked: _iconMap_lockLocked,
+	  logout: _iconMap_logout,
 	  plusLarge: _iconMap_plusLarge,
 	  plus: _iconMap_plus,
 	  profileLarge: _iconMap_profileLarge,
@@ -18771,16 +18758,16 @@
 	  return k.replace(/([a-z])([A-Z])/g, '$1-$2').replace(/_/g, '').toLowerCase();
 	});
 
-	var SVGIcon = function (_WebComponent) {
-	  _inherits(SVGIcon, _WebComponent);
+	(0, _registration.registerMPComponent)('svg-icon', function (_WebComponent) {
+	  _inherits(_class, _WebComponent);
 
-	  function SVGIcon() {
-	    _classCallCheck(this, SVGIcon);
+	  function _class() {
+	    _classCallCheck(this, _class);
 
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(SVGIcon).apply(this, arguments));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(_class).apply(this, arguments));
 	  }
 
-	  _createClass(SVGIcon, [{
+	  _createClass(_class, [{
 	    key: 'attachedCallback',
 	    value: function attachedCallback() {
 	      this.render();
@@ -18809,13 +18796,8 @@
 	    }
 	  }]);
 
-	  return SVGIcon;
-	}(_webcomponent2.default);
-
-	if (window['mp-common-registered-components']['svg-icon'] !== true) {
-	  document.registerElement('svg-icon', SVGIcon);
-	  window['mp-common-registered-components']['svg-icon'] = true;
-	}
+	  return _class;
+	}(_webcomponent2.default));
 
 	exports.SVG_ICONS = SVG_ICONS;
 
