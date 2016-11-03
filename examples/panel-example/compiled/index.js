@@ -18734,7 +18734,7 @@
 	// Option 2: Use ShadowDOM for this component
 	//   Problem: This makes it a poor experience for styling the icons
 	//   from the "outside" which we'll often want to do for colors and
-	//   positioning..
+	//   positioning.
 	// Option 3: Expect the styles to be handled separately. This is choice
 	//   we've made here. They come "for free" when you include "default" styles for mixpanel-common
 	//   which should happen for pretty much every page and every component.
