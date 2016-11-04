@@ -28,7 +28,7 @@ icon-size(size=none, pos-left=0, pos-top=0)
     top pos-top
 
 +host-styles(mp-button)
-  height 44px
+  height 45px
 
 +host-styles(mp-button, '.mp-button-modal')
    width 100%
@@ -49,14 +49,18 @@ icon-size(size=none, pos-left=0, pos-top=0)
     font-weight weight-bold
     justify-content center
     letter-spacing 0
-    padding 0px 25px
+    padding 0 25px
     text-align center
     user-select none
+
+    /* requires markup change */
+    //.container.has-icon 
+    // padding: 0 25px 0 15px
 
     .content
       align-items center
       display inline-flex
-      line-height 18px
+      // line-height 18px 
       justify-content center
 
       .arrow-next
@@ -74,7 +78,6 @@ icon-size(size=none, pos-left=0, pos-top=0)
       cursor default
       .content
         opacity 0.6
-
 
     /* BEGIN COLOR THEMES */
 
@@ -108,7 +111,6 @@ icon-size(size=none, pos-left=0, pos-top=0)
     &.secondary, &.grey
       background-image linear-gradient(0deg, grey-50 0%, white 100%)
       border-color grey-300
-      box-shadow 0px 1px 1px 0px rgba(0,0,0,0.1)
       content-color(grey-700)
 
       &:hover{not-disabled}
@@ -126,18 +128,17 @@ icon-size(size=none, pos-left=0, pos-top=0)
         background-color transparent
         border-color rgba(0,0,0,0)
         box-shadow none
-        content-color(white)
+        content-color(rgba(255,255,255,0.6))
 
         &:hover{not-disabled}
           background-image none
           box-shadow none
-          border-color rgba(255,255,255,0.6)
           content-color white
 
         &:active{not-disabled}, &.active{not-disabled}
-          background-color mp-blue
-          border 1px solid rgba(255,255,255,0.3)
-          box-shadow 0px 1px 0px 0px mp-blue, inset 0px 2px 3px 0px blue-500
+          background-image none
+          border-color rgba(0,0,0,0)
+          box-shadow none
           content-color(rgba(255,255,255,0.6))
 
     &.red
@@ -153,15 +154,16 @@ icon-size(size=none, pos-left=0, pos-top=0)
         box-shadow 0px 1px 1px 0px rgba(0,0,0,0.0), inset 0px 2px 2px 0px rgba(0,0,0,0.2)
         content-color(rgba(255,255,255,0.6))
 
-    // deprecated
+    /* DEPRECATED */
+      
     &.purple
       background mp-purple
-      border 1px solid #7858b8
+      border 1px solid purple-700
       color #fff
 
       &:hover{not-disabled}
-        background #A081EA
-        border 1px solid #9270e2
+        background purple-300 
+        border 1px solid mp-purple
 
     /* END COLOR THEMES */
 
@@ -188,11 +190,11 @@ icon-size(size=none, pos-left=0, pos-top=0)
       background-image none
       border-radius 0 0 6px 6px
       border none
+      box-shadow none
       color #fff
-      font-size 15px
+      font-size-medium()
       font-weight bold
       height 60px
-      letter-spacing .7px
       padding 0
       display flex
       text-transform none
@@ -200,6 +202,7 @@ icon-size(size=none, pos-left=0, pos-top=0)
 
       &:hover{not-disabled}
         border none
+        box-shadow none
 
       &.primary, &.blue
         background background-primary-modal
@@ -209,6 +212,6 @@ icon-size(size=none, pos-left=0, pos-top=0)
           background background-primary-modal-hover
 
       &.purple
-        box-shadow inset 0 1px 0 0 #7858b8
+        box-shadow inset 0 1px 0 0 #7858b8  // Deprecated
 
     /* END SPECIAL STYLES FOR MODAL BUTTONS */

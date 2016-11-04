@@ -7,25 +7,29 @@
 .mp-toggle
   background-color grey-100
   border-radius 50px
+  box-shadow inset 0px 1px 0px 0px grey-150
   display flex
-  padding 2px
+  padding 3px
 
   .mp-toggle-option
     align-items center
     background-color grey-100
     border-radius 50px
-    color grey-700
+    color grey-500
     display flex
     flex-grow 1
-    font-size 11px
+    font-size-xs()
     font-weight bold
-    height 40px
+    height 30px
+    // Need a second variation that has a height of 40px for the "large toggle bar"
     justify-content center
     text-align center
     text-transform uppercase
     transition background-color 0.2s
     &.mp-toggle-selected
       background-color #fff
+      box-shadow 0px 1px 0px 0px (rgba(0,0,0,0.05))
+      color blue-300
     &:not(.mp-toggle-selected)
       cursor pointer
       &:hover
@@ -33,11 +37,13 @@
 
   &.mp-toggle-blue
     background-color blue-700
+    box-shadow inset 0px 1px 0px 0px blue-900
     .mp-toggle-option
       background-color blue-700
       color lighten(blue-100, 50%)
       &.mp-toggle-selected
         background-color blue-100
+        box-shadow 0px 1px 0px 0px (rgba(0,0,0,0.05))
         color #fff
       &:not(.mp-toggle-selected):hover
         color #fff
