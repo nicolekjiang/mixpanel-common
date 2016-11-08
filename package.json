@@ -10,8 +10,7 @@
     "lint": "eslint lib",
     "prepublish": "npm run build",
     "test": "webpack --context test --config test/webpack.config.js; DISPLAY=:30 wct --plugin local",
-    "unit-test": "mocha --require babel-core/register",
-    "validate": "npm ls"
+    "unit-test": "mocha --require babel-core/register"
   },
   "repository": {
     "type": "git",
