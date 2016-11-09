@@ -2,7 +2,7 @@
 import expect from 'expect.js';
 import 'webcomponents.js/webcomponents';
 
-import '../../lib/components/modals/modal'
+import '../../lib/components/modal';
 import { onAnimationEnd, offAnimationEnd } from '../../lib/components/utils';
 
 const VISIBILITY_OPEN = 'open';
