@@ -18786,11 +18786,13 @@
 	        this.innerHTML = '';
 	      } else {
 	        var icon = this.getAttribute('icon');
-	        var markup = SVG_ICONS[icon];
-	        if (!markup) {
-	          throw new Error('No svg-icon "' + icon + '" found.');
+	        if (icon) {
+	          var markup = SVG_ICONS[icon];
+	          if (!markup) {
+	            throw new Error('No svg-icon "' + icon + '" found.');
+	          }
+	          this.innerHTML = markup;
 	        }
-	        this.innerHTML = markup;
 	      }
 	    }
 	  }]);
