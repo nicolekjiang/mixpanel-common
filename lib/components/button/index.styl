@@ -75,7 +75,6 @@ icon-size(size=none, pos-left=0, pos-top=0)
       .content
         opacity 0.6
 
-
     /* BEGIN COLOR THEMES */
 
     &.primary, &.blue
@@ -108,7 +107,6 @@ icon-size(size=none, pos-left=0, pos-top=0)
     &.secondary, &.grey
       background-image linear-gradient(0deg, grey-50 0%, white 100%)
       border-color grey-300
-      box-shadow 0px 1px 1px 0px rgba(0,0,0,0.1)
       content-color(grey-700)
 
       &:hover{not-disabled}
@@ -124,20 +122,20 @@ icon-size(size=none, pos-left=0, pos-top=0)
       &.on-blue
         background-image none
         background-color transparent
-        border-color rgba(0,0,0,0)
+        border-color transparent
         box-shadow none
-        content-color(white)
+        content-color(rgba(255,255,255,0.6))
 
         &:hover{not-disabled}
           background-image none
           box-shadow none
-          border-color rgba(255,255,255,0.6)
+          border-color transparent
           content-color white
 
         &:active{not-disabled}, &.active{not-disabled}
           background-color mp-blue
-          border 1px solid rgba(255,255,255,0.3)
-          box-shadow 0px 1px 0px 0px mp-blue, inset 0px 2px 3px 0px blue-500
+          border-color transparent
+          box-shadow none
           content-color(rgba(255,255,255,0.6))
 
     &.red
@@ -153,7 +151,7 @@ icon-size(size=none, pos-left=0, pos-top=0)
         box-shadow 0px 1px 1px 0px rgba(0,0,0,0.0), inset 0px 2px 2px 0px rgba(0,0,0,0.2)
         content-color(rgba(255,255,255,0.6))
 
-    // deprecated
+    /* DEPRECATED */
     &.purple
       background mp-purple
       border 1px solid #7858b8
@@ -165,9 +163,10 @@ icon-size(size=none, pos-left=0, pos-top=0)
 
     /* END COLOR THEMES */
 
+    &.with-icon
+      padding 0 25px 0 16px
 
     /* ICON STYLES */
-
     +content-styles()
       svg-icon
         &[icon='x']
