@@ -18361,7 +18361,7 @@
 
 	function _jade_template_fn(locals) {
 	  locals = locals || {};;;
-	  var result_of_with = (function($component, $helpers, document) {
+	  var result_of_with = (function($component, $helpers, Object, document) {
 	    var h = __webpack_require__(348);
 
 	    function generateLiteralWidget(id, contents) {
@@ -18394,10 +18394,20 @@
 	      }
 	      return new LiteralWidget(id, contents)
 	    };
+
+	    var __objToAttrs = function(o) {
+	      return Object.keys(o).map(function(k) {
+	        return o[k] ? k : false
+	      });
+	    };
 	    return {
 	      value: (h("div", {
 	        "attributes": $helpers.getButtonAttrs(),
-	        "className": [].concat('mp-button-container ' + ($component.className) + '').filter(Boolean).join(' '),
+	        "className": [].concat(__objToAttrs({
+	          'mp-button-container': true,
+	          [$component.className]: true,
+	          'mp-button-with-icon': !!$component.getAttribute('icon'),
+	        })).filter(Boolean).join(' '),
 	      }, [h("div", {
 	        "className": [].concat('mp-button-content').filter(Boolean).join(' '),
 	      }, (function() {
@@ -18414,7 +18424,8 @@
 	        return __jade_nodes
 	      }).call(this).filter(Boolean))].filter(Boolean)))
 	    };
-	  }.call(this, "$component" in locals ? locals.$component : typeof $component !== "undefined" ? $component : undefined, "$helpers" in locals ? locals.$helpers : typeof $helpers !== "undefined" ? $helpers : undefined, "document" in locals ? locals.document : typeof document !== "undefined" ? document : undefined));
+
+	  }.call(this, "$component" in locals ? locals.$component : typeof $component !== "undefined" ? $component : undefined, "$helpers" in locals ? locals.$helpers : typeof $helpers !== "undefined" ? $helpers : undefined, "Object" in locals ? locals.Object : typeof Object !== "undefined" ? Object : undefined, "document" in locals ? locals.document : typeof document !== "undefined" ? document : undefined));
 	  if (result_of_with) return result_of_with.value;
 	}
 	module.exports = _jade_template_fn;
@@ -26294,35 +26305,35 @@
 	        "attributes": {
 	          icon: 'x'
 	        },
-	        "className": [].concat('mp-button-secondary').concat('mp-button-with-icon').filter(Boolean).join(' ')
+	        "className": [].concat('mp-button-secondary').filter(Boolean).join(' ')
 	      }, ["Close"].filter(Boolean)), h("mp-button", {
 	        "attributes": {
 	          icon: 'logout'
 	        },
-	        "className": [].concat('mp-button-secondary').concat('mp-button-with-icon').filter(Boolean).join(' ')
+	        "className": [].concat('mp-button-secondary').filter(Boolean).join(' ')
 	      }, ["Exit"].filter(Boolean)), h("mp-button", {
 	        "attributes": {
 	          icon: 'plus'
 	        },
-	        "className": [].concat('mp-button-primary').concat('mp-button-with-icon').filter(Boolean).join(' ')
+	        "className": [].concat('mp-button-primary').filter(Boolean).join(' ')
 	      }, ["Create"].filter(Boolean)), h("mp-button", {
 	        "attributes": {
 	          icon: 'trashcan'
 	        },
-	        "className": [].concat('mp-button-red').concat('mp-button-with-icon').filter(Boolean).join(' ')
+	        "className": [].concat('mp-button-red').filter(Boolean).join(' ')
 	      }, ["Delete"].filter(Boolean))].filter(Boolean)), h("p", {
 	        "className": [].concat('button-field').filter(Boolean).join(' ')
 	      }, [h("mp-button", {
 	        "attributes": {
 	          icon: 'plus'
 	        },
-	        "className": [].concat('mp-button-primary').concat('mp-button-with-icon').concat('mp-button-on-blue').filter(Boolean).join(' ')
+	        "className": [].concat('mp-button-primary').concat('mp-button-on-blue').filter(Boolean).join(' ')
 	      }, ["Create"].filter(Boolean)), h("mp-button", {
 	        "attributes": {
 	          icon: 'plus'
 	        },
 	        "disabled": true,
-	        "className": [].concat('mp-button-primary').concat('mp-button-with-icon').concat('mp-button-on-blue').filter(Boolean).join(' ')
+	        "className": [].concat('mp-button-primary').concat('mp-button-on-blue').filter(Boolean).join(' ')
 	      }, ["Create"].filter(Boolean))].filter(Boolean)), h("p", {
 	        "className": [].concat('button-field').filter(Boolean).join(' ')
 	      }, [h("mp-button", {
