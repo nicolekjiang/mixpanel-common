@@ -1,0 +1,30 @@
+@import '../../../stylesheets/defaults'
+
+*
+  box-sizing border-box
+
++host-styles('mp-input-group')
+  width 300px
+
++prefix-classes('mp-input-group-')
+  .container
+    align-items center
+    display inline-flex
+    width 100%
+
+    .input, .btn
+      display inline-flex
+
+    .input
+      border-top-left-radius 5px
+      border-bottom-left-radius 5px
+      border-top-right-radius 0px
+      border-bottom-right-radius 0px
+      height 44px
+      width 100%
+      margin 0 -2px 0 0
+      margin-right -2px
+      padding-left 10px
+
+    .spinner
+      width 12px

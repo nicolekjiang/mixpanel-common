@@ -74,11 +74,18 @@
 
   .section
     h1 Forms
-    p Please add:
-    p     1.) form field with icon fixed left,
-    p     2.) form field with button affixed to the right
+    h2 Input
     p
       input(type="text" placeholder="I'm a placeholder")
+    h2 Input with icon
+    p -- to do --
+    h2 Input group
+    p
+      mp-input-group(
+        attributes={placeholder: "Type a name...", busy: inputGroupSaving}
+        onchange=$helpers.handleNamerChange
+        onsubmit=$helpers.handleNamerSubmit
+      )
 
   .section
     h1 Modals

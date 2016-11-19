@@ -20,6 +20,7 @@ document.registerElement('style-guide', class extends Component {
 
         COLORS,
         SVG_ICONS,
+        inputGroupSaving: false,
       },
       helpers: {
         blueToggleChanged: ev => this.update({blueToggleValue: ev.detail.selected}),
@@ -27,6 +28,16 @@ document.registerElement('style-guide', class extends Component {
         openModal: selector => {
           this.el.querySelector(selector).open();
           return false;
+        },
+        handleNamerChange: e => {
+          console.log('mp-input-group value changed to: ', e.target.value);
+        },
+        handleNamerSubmit: () => {
+          this.update({inputGroupSaving: true});
+          setTimeout(() => {
+            this.update({inputGroupSaving: false});
+            alert('Saved!');
+          }, 2000);
         },
       },
       template,

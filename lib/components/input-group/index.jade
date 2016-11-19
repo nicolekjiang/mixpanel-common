@@ -1,0 +1,23 @@
+.mp-input-group-container
+    - const disabled = $component.isAttributeEnabled('disabled')
+    - const busy = $component.isAttributeEnabled('busy');
+    - const inputAttrs = { type: 'text', placeholder: $component.getAttribute('placeholder') || '', value }
+    if disabled || busy
+      - inputAttrs.disabled = true
+    input.mp-input-group-input(
+      oninput=$helpers.setValue
+      onkeyup=$helpers.submitIfEnter
+      attributes=inputAttrs
+    )
+    mp-button.mp-button-primary.mp-input-group-btn(
+      onclick=$helpers.submit
+      attributes={
+        disabled: disabled || value.trim() === '',
+        'style-override': '.mp-input-group-btn.mp-button-container { border-top-left-radius: 0px; border-bottom-left-radius: 0px; width: 90px; }',
+      }
+    )
+      if $component.isAttributeEnabled('busy')
+        .mp-input-group-spinner
+          include ./spinner.svg
+      else
+        = $component.getAttribute('label') || 'Save'
