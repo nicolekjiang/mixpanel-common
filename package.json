@@ -59,7 +59,8 @@
     "watch": "^1.0.1",
     "web-component-tester": "4.3.4",
     "webcomponents.js": "0.7.22",
-    "webpack": "1.13.1"
+    "webpack": "1.13.1",
+    "webpack-dev-server": "^1.16.2"
   },
   "dependencies": {
     "mixpanel-browser": "2.9.16",
