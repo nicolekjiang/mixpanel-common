@@ -1,14 +1,16 @@
-import 'babel-polyfill'
+import 'babel-polyfill';
+
 import 'webcomponents.js/webcomponents';
 
 import { Component } from 'panel';
 
-import '../../lib/index';
+import '../../build/index';
 import COLORS from '../../stylesheets/colors.json';
-import { SVG_ICONS } from '../../lib/components/svg-icon';
+import { SVG_ICONS } from '../../build/components/svg-icon';
 
 import template from './index.jade';
 import './index.styl';
+
 
 document.registerElement('style-guide', class extends Component {
   get config() {

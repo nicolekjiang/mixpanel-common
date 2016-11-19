@@ -4,8 +4,6 @@
     ["babel-plugin-inline-import", {
       "extensions": [".svg"]
     }],
-    "babel-plugin-stylus-compiler",
-    "babel-plugin-virtual-jade"
   ],
   "presets": ["es2015"]
 }

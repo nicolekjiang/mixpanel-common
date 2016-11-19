@@ -8,5 +8,5 @@
 ### Local development of components
 
 - Install dependencies: `npm install`
-- Build continuously: `npm run watch-examples`
-- Open `examples/index.html` in browser
+- Start a server and build continuously: `npm start`
+- Open [http://localhost:8080/examples/style-guide/index.html](http://localhost:8080/examples/style-guide/index.html)
