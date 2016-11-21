@@ -57,7 +57,7 @@
     "virtual-jade": "0.5.0",
     "virtual-jade-loader": "0.5.0",
     "watch": "^1.0.1",
-    "web-component-tester": "4.3.4",
+    "web-component-tester": "5.0.0",
     "webcomponents.js": "0.7.22",
     "webpack": "1.13.1",
     "webpack-dev-server": "^1.16.2"

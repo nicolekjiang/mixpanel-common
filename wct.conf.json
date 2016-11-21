@@ -28,7 +28,10 @@
           "version": "latest",
           "platform": "Windows 10"
         }
-      ]
+      ],
+      "tunnelOptions": {
+        "connectRetries": 5
+      }
     }
   }
 }
