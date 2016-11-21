@@ -36,7 +36,7 @@ const transpilers = {
       .use(autoprefixer())
       .render()
       .replace(/\n/g, ' ')
-      .replace(/"/g, /\/"/);
+      .replace(/"/g, '\\"');
     return 'module.exports = "' + css + '";\n';
   },
 };
