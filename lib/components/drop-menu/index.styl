@@ -1,0 +1,38 @@
+json('../../../stylesheets/colors.json')
+@import '../../../stylesheets/typography'
+
+@keyframes fadeOverlayIn
+  from
+    transform translateY(-10px)
+    opacity 0
+  to
+    opacity 0.9
+
+@keyframes fadeOverlayOut
+  from
+    opacity 0.9
+  to
+    transform translateY(-10px)
+    opacity 0
+  
++prefix-classes('mp-drop-menu-')
+  .body
+    background-color white
+    border 1px solid white
+    border-radius 5px
+    box-shadow 0 10px 40px rgba(0, 0, 0, 0.15)
+    position absolute
+    z-index 100
+
+  &.closed
+    display none
+  
+  &.opening
+    animation fadeOverlayIn 200ms forwards
+    opacity 0
+
+  &.open
+    opacity 1
+
+  &.closing
+    animation fadeOverlayOut 200ms forwards

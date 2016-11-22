@@ -17,6 +17,7 @@ document.registerElement('style-guide', class extends Component {
     return {
       defaultState: {
         blueToggleValue: 'option1',
+        menuOpen: false,
 
         COLORS,
         SVG_ICONS,
@@ -39,6 +40,10 @@ document.registerElement('style-guide', class extends Component {
             alert('Saved!');
           }, 2000);
         },
+        toggleMenu: () => {
+          const menuOpen = !this.state.menuOpen;
+          this.update({menuOpen});
+        }
       },
       template,
     };

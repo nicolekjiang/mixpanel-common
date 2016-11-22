@@ -138,6 +138,16 @@
       mp-toggle-option(attributes={value: 'option2'}) Longer Option 2
 
   .section
+    h1 Menus
+    p
+      a(onclick=$helpers.toggleMenu) Open Menu
+      mp-drop-menu(attributes={open: menuOpen})
+        .text-container(attributes={'slot-body': true})
+          .text there is text here
+          .text there is text here
+          .text there is text here
+
+  .section
     h1 Tooltips
     p.mp-font-paragraph
       a
