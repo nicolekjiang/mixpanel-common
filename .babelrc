@@ -3,7 +3,7 @@
     "babel-plugin-import-glob",
     ["babel-plugin-inline-import", {
       "extensions": [".svg"]
-    }],
+    }]
   ],
   "presets": ["es2015"]
 }

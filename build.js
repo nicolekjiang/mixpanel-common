@@ -9,10 +9,12 @@ const watch = require('watch');
 const INPUT_DIR = 'lib';
 const OUTPUT_DIR = 'build';
 
+const babel = require('babel-core');
+const babelrc = JSON.parse(fs.readFileSync('./.babelrc', 'utf8'));
+
 const transpilers = {
   js: file => {
-    const babel = require('babel-core');
-    return babel.transformFileSync(file).code;
+    return babel.transformFileSync(file, babelrc).code;
   },
 
   jade: file => {
@@ -23,7 +25,9 @@ const transpilers = {
       name: '_jade_template_fn',
       pretty: true,
     };
-    return vjade(source, vjadeOptions) + '\nmodule.exports = _jade_template_fn;';
+    const compiled = vjade(source, vjadeOptions) + '\nmodule.exports = _jade_template_fn;';
+    const transpiled = babel.transform(compiled, babelrc).code;
+    return transpiled;
   },
 
   styl: file => {
@@ -82,7 +86,11 @@ function watchFiles() {
       // file was removed
     } else {
       // file was changed
-      transpileFile(file);
+      try {
+        transpileFile(file);
+      } catch (e) {
+        console.error(e);
+      }
     }
   });
 }
