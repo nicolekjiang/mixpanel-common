@@ -51,9 +51,11 @@ const CONFIGS = [
   },
 
   {
-    matches: /lib\/stylesheets/,
+    matches: /lib\/stylesheets\/mixins/,
     transpilers: {
-      // styl
+      styl: file => {
+        return fs.readFileSync(file).toString();
+      },
     },
   },
 ];
