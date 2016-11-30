@@ -1,5 +1,4 @@
-json('../../../stylesheets/colors.json')
-@import '../../../stylesheets/typography'
+@import '../../../stylesheets/defaults/index.styl'
 
 @keyframes fadeOverlayIn
   from
@@ -14,19 +13,22 @@ json('../../../stylesheets/colors.json')
   to
     transform translateY(-10px)
     opacity 0
-  
+
++host-styles(mp-drop-menu)
+  left 0
+  position absolute
+  top 0
+  z-index 100
+
 +prefix-classes('mp-drop-menu-')
   .body
     background-color white
-    border 1px solid white
     border-radius 5px
     box-shadow 0 10px 40px rgba(0, 0, 0, 0.15)
-    position absolute
-    z-index 100
 
   &.closed
     display none
-  
+
   &.opening
     animation fadeOverlayIn 200ms forwards
     opacity 0
