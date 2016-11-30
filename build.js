@@ -35,18 +35,18 @@ const CONFIGS = [
       },
 
       styl: file => {
-        const source = fs.readFileSync(file).toString();
-        const stylus = require('stylus');
-        const autoprefixer = require('autoprefixer-stylus');
-        const css = stylus(source)
-          .include(path.dirname(file))
-          .include(path.resolve('./node_modules'))
-          .use(autoprefixer())
-          .render()
+        const css = compileStylus(file)
           .replace(/\n/g, ' ')
           .replace(/"/g, '\\"');
         return 'module.exports = "' + css + '";\n';
       },
+    },
+  },
+
+  {
+    matches: /lib\/stylesheets\/(?!mixins)/,
+    transpilers: {
+      styl: compileStylus,
     },
   },
 
@@ -59,6 +59,17 @@ const CONFIGS = [
     },
   },
 ];
+
+function compileStylus(filename) {
+  const source = fs.readFileSync(filename).toString();
+  const stylus = require('stylus');
+  const autoprefixer = require('autoprefixer-stylus');
+  return stylus(source)
+    .include(path.dirname(filename))
+    .include(path.resolve('./node_modules'))
+    .use(autoprefixer())
+    .render();
+}
 
 function transpileFile(file) {
   const config = CONFIGS.find(config => config.matches.test(file));
