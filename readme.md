@@ -5,6 +5,10 @@
 - report: mixpanel-specific app utilities
 - util: data manipulation utilities
 
+### Style guide
+
+[https://mixpanel.github.io/mixpanel-common/examples/style-guide/index.html](https://mixpanel.github.io/mixpanel-common/examples/style-guide/index.html)
+
 ### Local development of components
 
 - Install dependencies: `npm install`
