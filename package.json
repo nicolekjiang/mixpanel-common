@@ -4,7 +4,7 @@
   "version": "0.24.1",
   "description": "Mixpanel shared JS",
   "scripts": {
-    "build": "node build.js && cp -r build/components . && cp -r build/report . && cp -r build/util .",
+    "build": "node build.js && cp -r build/{components,report,util} .",
     "build-examples": "npm run build && webpack --context examples --config examples/webpack.config.js",
     "watch": "concurrently 'node build.js -w' 'webpack --context examples --config examples/webpack.config.js -w'",
     "start": "concurrently 'node build.js -w' 'webpack-dev-server --context examples --config examples/webpack.config.js --colors --inline'",
