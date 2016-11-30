@@ -17,15 +17,15 @@ const CONFIGS = [
   {
     matches: /lib\/(?!stylesheets)/,
     transpilers: {
-      js: file => {
-        return babel.transformFileSync(file, babelrc).code;
+      js: filename => {
+        return babel.transformFileSync(filename, babelrc).code;
       },
 
-      jade: file => {
-        const source = fs.readFileSync(file).toString();
+      jade: filename => {
+        const source = fs.readFileSync(filename).toString();
         const vjade = require('virtual-jade');
         const vjadeOptions = {
-          filename: file,
+          filename: filename,
           name: '_jade_template_fn',
           pretty: true,
         };
@@ -34,8 +34,8 @@ const CONFIGS = [
         return transpiled;
       },
 
-      styl: file => {
-        const css = compileStylus(file)
+      styl: filename => {
+        const css = compileStylus(filename)
           .replace(/\n/g, ' ')
           .replace(/"/g, '\\"');
         return 'module.exports = "' + css + '";\n';
@@ -53,8 +53,8 @@ const CONFIGS = [
   {
     matches: /lib\/stylesheets\/mixins/,
     transpilers: {
-      styl: file => {
-        return fs.readFileSync(file).toString();
+      styl: filename => {
+        return fs.readFileSync(filename).toString();
       },
     },
   },
@@ -71,24 +71,24 @@ function compileStylus(filename) {
     .render();
 }
 
-function transpileFile(file) {
-  const config = CONFIGS.find(config => config.matches.test(file));
+function transpileFile(filename) {
+  const config = CONFIGS.find(config => config.matches.test(filename));
   if (!config) {
-    console.log(`No matching config found for ${file}`);
+    console.log(`No matching config found for ${filename}`);
     return;
   }
 
-  const ext = file.split('.').pop();
+  const ext = filename.split('.').pop();
   const transpiler = config.transpilers[ext];
   if (!transpiler) {
-    console.log(`No transpiler found for ${file}`);
+    console.log(`No transpiler found for ${filename}`);
     return;
   }
 
-  const outputFile = file.replace(INPUT_DIR, OUTPUT_DIR);
+  const outputFile = filename.replace(INPUT_DIR, OUTPUT_DIR);
   ensureDir(path.dirname(outputFile));
-  fs.writeFileSync(outputFile, transpiler(file));
-  console.log(file, '=>', outputFile);
+  fs.writeFileSync(outputFile, transpiler(filename));
+  console.log(filename, '=>', outputFile);
 }
 
 function ensureDir(target) {
@@ -107,7 +107,7 @@ function compileFiles() {
     if (err) {
       throw err;
     } else {
-      files.forEach(file => transpileFile(file)) ;
+      files.forEach(filename => transpileFile(filename)) ;
     }
   });
 }
