@@ -46,16 +46,17 @@ const CONFIGS = [
   {
     matches: /lib\/stylesheets\/(?!mixins)/,
     transpilers: {
-      styl: compileStylus,
+      styl: filename => ({
+        filename: filename.replace(/\.styl$/, '.css'),
+        output: compileStylus(filename),
+      }),
     },
   },
 
   {
     matches: /lib\/stylesheets\/mixins/,
     transpilers: {
-      styl: filename => {
-        return fs.readFileSync(filename).toString();
-      },
+      styl: filename => fs.readFileSync(filename).toString(),
     },
   },
 ];
@@ -85,9 +86,15 @@ function transpileFile(filename) {
     return;
   }
 
+  let result = transpiler(filename);
+  if (result.filename) {
+    filename = result.filename;
+    result = result.output;
+  }
   const outputFile = filename.replace(INPUT_DIR, OUTPUT_DIR);
   ensureDir(path.dirname(outputFile));
-  fs.writeFileSync(outputFile, transpiler(filename));
+
+  fs.writeFileSync(outputFile, result);
   console.log(filename, '=>', outputFile);
 }
 
