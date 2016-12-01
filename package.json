@@ -4,7 +4,7 @@
   "version": "0.24.1",
   "description": "Mixpanel shared JS",
   "scripts": {
-    "build": "node build.js && cp -r build/{components,report,stylesheets,util} .",
+    "build": "node build.js",
     "build-examples": "npm run build && webpack --context examples --config examples/webpack.config.js",
     "watch": "concurrently 'node build.js -w' 'webpack --context examples --config examples/webpack.config.js -w'",
     "start": "concurrently 'node build.js -w' 'webpack-dev-server --context examples --config examples/webpack.config.js --colors --inline'",
@@ -44,6 +44,7 @@
     "css-loader": "0.23.1",
     "eslint": "2.11.1",
     "expect.js": "0.3.1",
+    "fs-extra": "^1.0.0",
     "glob": "^7.1.1",
     "js-beautify": "1.6.3",
     "json-loader": "^0.5.4",

@@ -2,16 +2,16 @@
 
 'use strict';
 
-const fs = require('fs');
+const fs = require('fs-extra');
 const glob = require('glob');
 const path = require('path');
 const watch = require('watch');
 
-const INPUT_DIR = 'lib';
-const OUTPUT_DIR = 'build';
-
 const babel = require('babel-core');
 const babelrc = JSON.parse(fs.readFileSync('./.babelrc', 'utf8'));
+
+const INPUT_DIR = 'lib';
+const OUTPUT_DIR = 'build';
 
 const CONFIGS = [
   {
@@ -110,12 +110,15 @@ function ensureDir(target) {
 }
 
 function compileFiles() {
-  glob(INPUT_DIR + '/**/*.?(js|jade|styl)', (err, files) => {
-    if (err) {
-      throw err;
-    } else {
-      files.forEach(filename => transpileFile(filename)) ;
-    }
+  return new Promise((resolve, reject) => {
+    glob(INPUT_DIR + '/**/*.?(js|jade|styl)', (err, files) => {
+      if (err) {
+        reject(err);
+      } else {
+        files.forEach(filename => transpileFile(filename));
+        resolve(files);
+      }
+    });
   });
 }
 
@@ -138,8 +141,23 @@ function watchFiles() {
   });
 }
 
+fs.removeSync(OUTPUT_DIR);
+compileFiles()
+  .then(() => {
+    fs.readdirSync(OUTPUT_DIR)
+      .filter(fn => fs.lstatSync(`${OUTPUT_DIR}/${fn}`).isDirectory())
+      .forEach(dir => {
+        console.log(`Recreating publishable dir: ${dir}`);
+        fs.removeSync(dir);
+        fs.copySync(`${OUTPUT_DIR}/${dir}`, dir);
+      });
+  })
+  .catch(err => {
+    console.error(err.stack);
+  });
+
+
 const argv = require('minimist')(process.argv.slice(2));
-compileFiles();
 if (argv['w'] || argv['watch']) {
   watchFiles();
 }
