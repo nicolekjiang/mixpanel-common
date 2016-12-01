@@ -56,10 +56,15 @@ const CONFIGS = [
   {
     matches: /lib\/stylesheets\/mixins/,
     transpilers: {
-      styl: filename => fs.readFileSync(filename).toString(),
+      json: passThrough,
+      styl: passThrough,
     },
   },
 ];
+
+function passThrough(filename) {
+  return fs.readFileSync(filename).toString();
+}
 
 function compileStylus(filename) {
   const source = fs.readFileSync(filename).toString();
@@ -111,7 +116,7 @@ function ensureDir(target) {
 
 function compileFiles() {
   return new Promise((resolve, reject) => {
-    glob(INPUT_DIR + '/**/*.?(js|jade|styl)', (err, files) => {
+    glob(INPUT_DIR + '/**/*.?(jade|js|json|styl)', (err, files) => {
       if (err) {
         reject(err);
       } else {
@@ -141,23 +146,31 @@ function watchFiles() {
   });
 }
 
-fs.removeSync(OUTPUT_DIR);
-compileFiles()
-  .then(() => {
-    fs.readdirSync(OUTPUT_DIR)
-      .filter(fn => fs.lstatSync(`${OUTPUT_DIR}/${fn}`).isDirectory())
-      .forEach(dir => {
-        console.log(`Recreating publishable dir: ${dir}`);
-        fs.removeSync(dir);
-        fs.copySync(`${OUTPUT_DIR}/${dir}`, dir);
-      });
-  })
-  .catch(err => {
-    console.error(err.stack);
-  });
-
 
 const argv = require('minimist')(process.argv.slice(2));
 if (argv['w'] || argv['watch']) {
+
+  // watch pre-built files
+
   watchFiles();
+
+} else {
+
+  // build and copy
+
+  fs.removeSync(OUTPUT_DIR);
+  compileFiles()
+    .then(() => {
+      fs.readdirSync(OUTPUT_DIR)
+        .filter(fn => fs.lstatSync(`${OUTPUT_DIR}/${fn}`).isDirectory())
+        .forEach(dir => {
+          console.log(`Recreating publishable dir: ${dir}`);
+          fs.removeSync(dir);
+          fs.copySync(`${OUTPUT_DIR}/${dir}`, dir);
+        });
+    })
+    .catch(err => {
+      console.error(err.stack);
+    });
+
 }

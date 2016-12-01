@@ -6,8 +6,8 @@
   "scripts": {
     "build": "node build.js",
     "build-examples": "npm run build && webpack --context examples --config examples/webpack.config.js",
-    "watch": "concurrently 'node build.js -w' 'webpack --context examples --config examples/webpack.config.js -w'",
-    "start": "concurrently 'node build.js -w' 'webpack-dev-server --context examples --config examples/webpack.config.js --colors --inline'",
+    "watch": "npm run build && concurrently 'node build.js -w' 'webpack --context examples --config examples/webpack.config.js -w'",
+    "start": "npm run build && concurrently 'node build.js -w' 'webpack-dev-server --context examples --config examples/webpack.config.js --colors --inline'",
     "lint": "eslint lib",
     "prepublish": "npm run build",
     "test": "webpack --context test --config test/webpack.config.js; DISPLAY=:30 wct --plugin local",

@@ -32,7 +32,7 @@ var webpackConfig = {
       },
       {
         test: /\.json$/,
-        exclude: /node_modules|build/,
+        exclude: /node_modules/,
         loader: 'json',
       },
     ],

@@ -5,7 +5,7 @@ import 'webcomponents.js/webcomponents';
 import { Component } from 'panel';
 
 import '../../build/index';
-import COLORS from '../../build/stylesheets/colors.json';
+import COLORS from '../../build/stylesheets/mixins/colors.json';
 import { SVG_ICONS } from '../../build/components/svg-icon';
 
 import template from './index.jade';
