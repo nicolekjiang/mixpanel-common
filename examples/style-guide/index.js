@@ -22,13 +22,21 @@ document.registerElement('style-guide', class extends Component {
         COLORS,
         SVG_ICONS,
         inputGroupSaving: false,
+        open: {},
       },
       helpers: {
         blueToggleChanged: ev => this.update({blueToggleValue: ev.detail.selected}),
-        closeModal: selector => this.el.querySelector(selector).close(),
-        openModal: selector => {
-          this.el.querySelector(selector).open();
-          return false;
+        closeModal: key => {
+          this.state.open[key] = false;
+          this.update();
+        },
+        openModal: key => {
+          this.state.open[key] = true;
+          this.update();
+        },
+        handleModalChange: (key, state) => {
+          this.state.open[key] = state === 'open';
+          this.update();
         },
         handleNamerChange: e => {
           console.log('mp-input-group value changed to: ', e.target.value);
@@ -43,7 +51,7 @@ document.registerElement('style-guide', class extends Component {
         toggleMenu: () => {
           const menuOpen = !this.state.menuOpen;
           this.update({menuOpen});
-        }
+        },
       },
       template,
     };

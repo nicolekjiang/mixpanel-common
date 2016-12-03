@@ -1,7 +1,9 @@
-json('../../stylesheets/mixins/colors.json')
-@import '../../stylesheets/mixins/typography'
+@import '../../stylesheets/defaults'
 
 +prefix-classes('mp-tooltip-')
+  .wrapper, .wrapper *
+    box-sizing border-box
+
   .wrapper
     &.hidden
       pointer-events none

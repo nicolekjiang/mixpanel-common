@@ -1,25 +1,11 @@
 @import 'colors.styl'
 @import 'typography.styl'
 @import 'icons.styl'
+@import 'shadowdom.styl'
 
-content-styles()
-  &
-    {block}
-  content::content
-    {block}
+disabled = '&:disabled,&[disabled]'
+not-disabled = ':not([disabled]):not(:disabled)'
 
-host-styles(tagName, additionalSelector='')
-  // apply host styles for FF, Safari, IE
-  // :host doesn't work with webcomponents polyfill, so we have to use the tag name
-  {tagName}{additionalSelector}
-    display inline-flex
-    {block}
-
-  // since :host is a pseudo selector we need to wrap any additional selector with parens
-  if additionalSelector != ''
-    additionalSelector = '(' + additionalSelector + ')'
-
-  // apply host styles
-  :host{additionalSelector}
-    display inline-flex
-    {block}
+z-modal = 9000
+z-overlay = 8000
+z-dropdown = 7000

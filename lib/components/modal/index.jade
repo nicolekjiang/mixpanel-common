@@ -1,5 +1,4 @@
 .mp-modal-stage(class={
-  'mp-modal-alert': $component.isAttributeEnabled('alert'),
   'mp-modal-absolute': $component.isAttributeEnabled('not-fullscreen'),
   'mp-modal-closed': visibility === 'closed',
 })
@@ -11,14 +10,4 @@
         .mp-modal-close-btn(onclick=$helpers.closeClicked)
           .mp-modal-close-icon
             include ./close.svg
-      .mp-modal-top-container(class={'mp-modal-alert': $component.isAttributeEnabled('alert')})
-        if $component.isAttributeEnabled('alert')
-          .mp-modal-content-row
-            .mp-modal-alert-icon
-              include ./alert.svg
-            content(select='[slot-body]')
-        else
-         content(select='[slot-body]')
-      if !alertIcon
-        .mp-modal-button-container
-          content(select='[slot-button]')
+      content(select='[slot-body]')

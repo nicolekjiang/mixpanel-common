@@ -1,0 +1,10 @@
+div(class={
+  'mp-button-bar-container': true,
+  [$component.className]: true,
+  'mp-button-bar-with-icon': !!$component.getAttribute('icon'),
+})
+  .mp-button-bar-content
+    content
+    if $component.isAttributeEnabled('arrow-next')
+      .mp-button-bar-arrow-next
+        svg-icon(attributes={icon: 'arrow-right'})

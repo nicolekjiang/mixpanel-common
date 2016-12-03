@@ -4,10 +4,6 @@
 background-primary-modal = blue-300
 background-primary-modal-hover = blue-100
 
-active = '&:active,&[active]'
-disabled = '&:disabled,&[disabled]'
-not-disabled = ':not([disabled]):not(:disabled)'
-
 content-color(color)
   +content-styles()
     color color
@@ -30,16 +26,15 @@ icon-size(size=none, pos-left=0, pos-top=0)
 +host-styles(mp-button)
   height 44px
 
-+host-styles(mp-button, '.mp-button-modal')
-   width 100%
-
 +prefix-classes('mp-button-')
+  .container, .container *
+    box-sizing border-box
+
   .container
     align-items center
     border 1px solid
     border-radius 5px
-    box-shadow 0px 1px 1px 0px rgba(0,0,0,0.2)
-    box-sizing border-box
+    box-shadow 0px 1px 1px 0px alpha(black, 0.2)
     cursor pointer
     display inline-flex
     height 100%
@@ -58,12 +53,6 @@ icon-size(size=none, pos-left=0, pos-top=0)
       display inline-flex
       line-height 18px
       justify-content center
-
-      .arrow-next
-        margin-left 10px
-        width 15px
-        svg path
-          fill #fff
 
     +content-styles()
       svg-icon
@@ -84,13 +73,13 @@ icon-size(size=none, pos-left=0, pos-top=0)
 
       &:hover{not-disabled}
         background-image linear-gradient(0deg, blue-100 0%, blue-100 100%)
-        box-shadow 0 1.5px 2.5px 0 rgba(0,0,0,0.3)
+        box-shadow 0 1.5px 2.5px 0 alpha(black, 0.3)
 
       &:active{not-disabled}, &.active{not-disabled}
         background-image linear-gradient(0deg, mp-blue 0%, blue-100 100%)
         border-color mp-blue
-        box-shadow 0px 1px 1px 0px rgba(0,0,0,0.0), inset 0px 2px 2px 0px rgba(0,0,0,0.2)
-        content-color(rgba(255,255,255,0.6))
+        box-shadow 0px 1px 1px 0px alph(black, 0.0), inset 0px 2px 2px 0px alpha(black, 0.2)
+        content-color(alpha(white, 0.6))
 
       &.on-blue
         border-color blue-900
@@ -98,11 +87,11 @@ icon-size(size=none, pos-left=0, pos-top=0)
 
         &:hover{not-disabled}
           background-image linear-gradient(0deg, mp-blue 0%, blue-100 100%)
-          box-shadow 0px 1px 1px 0px rgba(0,0,0,0.2)
+          box-shadow 0px 1px 1px 0px alpha(black,0.2)
 
         &:active{not-disabled}, &.active{not-disabled}
           border-color blue-700
-          box-shadow 0px 1px 1px 0px rgba(0,0,0,0.0), inset 0px 2px 2px 0px rgba(0,0,0,0.2)
+          box-shadow 0px 1px 1px 0px alpha(black,0.0), inset 0px 2px 2px 0px alpha(black,0.2)
 
     &.secondary, &.grey
       background-image linear-gradient(0deg, grey-50 0%, white 100%)
@@ -111,7 +100,7 @@ icon-size(size=none, pos-left=0, pos-top=0)
 
       &:hover{not-disabled}
         background-image linear-gradient(0deg, white 0%, white 100%)
-        box-shadow 0 1px 2px 0 rgba(0,0,0,0.23)
+        box-shadow 0 1px 2px 0 alpha(black,0.23)
         content-color(mp-blue)
 
       &:active{not-disabled}, &.active{not-disabled}
@@ -124,7 +113,7 @@ icon-size(size=none, pos-left=0, pos-top=0)
         background-color transparent
         border-color transparent
         box-shadow none
-        content-color(rgba(255,255,255,0.6))
+        content-color(alpha(white,0.6))
 
         &:hover{not-disabled}
           background-image none
@@ -136,7 +125,7 @@ icon-size(size=none, pos-left=0, pos-top=0)
           background-color mp-blue
           border-color transparent
           box-shadow none
-          content-color(rgba(255,255,255,0.6))
+          content-color(alpha(white,0.6))
 
     &.red
       background-image linear-gradient(0deg, mp-red 0%, red-300 100%)
@@ -148,21 +137,8 @@ icon-size(size=none, pos-left=0, pos-top=0)
 
       &:active{not-disabled}, &.active{not-disabled}
         background-image linear-gradient(0deg, mp-red 0%, red-300 100%)
-        box-shadow 0px 1px 1px 0px rgba(0,0,0,0.0), inset 0px 2px 2px 0px rgba(0,0,0,0.2)
-        content-color(rgba(255,255,255,0.6))
-
-    /* DEPRECATED */
-    &.purple
-      background mp-purple
-      border 1px solid #7858b8
-      color #fff
-
-      &:hover{not-disabled}
-        background #A081EA
-        border 1px solid #9270e2
-
-    /* END COLOR THEMES */
-
+        box-shadow 0px 1px 1px 0px alpha(black,0.0), inset 0px 2px 2px 0px alpha(black,0.2)
+        content-color(alpha(white,0.6))
 
     /* ICON STYLES */
 
@@ -181,35 +157,3 @@ icon-size(size=none, pos-left=0, pos-top=0)
           margin-right 2px
 
     /* END ICON STYLES */
-
-
-    /* BEGIN SPECIAL STYLES FOR MODAL BUTTONS */
-
-    &.modal
-      background-image none
-      border-radius 0 0 6px 6px
-      border none
-      color #fff
-      font-size 15px
-      font-weight bold
-      height 60px
-      letter-spacing .7px
-      padding 0
-      display flex
-      text-transform none
-      transition background 200ms
-
-      &:hover{not-disabled}
-        border none
-
-      &.primary, &.blue
-        background background-primary-modal
-        box-shadow inset 0 1px 0 0 #3b99f0
-
-        &:hover{not-disabled}
-          background background-primary-modal-hover
-
-      &.purple
-        box-shadow inset 0 1px 0 0 #7858b8
-
-    /* END SPECIAL STYLES FOR MODAL BUTTONS */

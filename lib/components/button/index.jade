@@ -7,6 +7,3 @@ div(attributes=$helpers.getButtonAttrs() class={
     if $component.getAttribute('icon')
       svg-icon(attributes={icon: $component.getAttribute('icon')})
     content
-    if $component.isAttributeEnabled('arrow-next')
-      .mp-button-arrow-next
-        include ./arrow.svg

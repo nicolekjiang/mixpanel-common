@@ -46,23 +46,16 @@ describe('Test mixpanel-common modal component', function() {
     });
   });
 
-  describe('"closed" attribute', function() {
-   it('does not open when set to "true" before it is attached', function() {
-      document.body.removeChild(this.modal);
-      this.modal.setAttribute('closed', 'true');
-      document.body.appendChild(this.modal);
-      expect(this.modal.state.visibility).to.equal(VISIBILITY_CLOSED);
-    });
-
-    it('opens when set to "false"', function() {
-      this.modal.setAttribute('closed', 'false');
+  describe('"open" attribute', function() {
+    it('opens when set to "true"', function() {
+      this.modal.setAttribute('open', 'true');
       expect(this.modal.state.visibility).to.equal(VISIBILITY_OPENING);
     });
 
-    it('closes when set to "true"', function() {
-      this.modal.setAttribute('closed', 'false');
+    it('closes when set to "false"', function() {
+      this.modal.setAttribute('open', 'true');
       this.modal.update({visibility: VISIBILITY_OPEN});
-      this.modal.setAttribute('closed', 'true');
+      this.modal.setAttribute('open', 'false');
       expect(this.modal.state.visibility).to.equal(VISIBILITY_CLOSING);
     });
   });
@@ -185,8 +178,8 @@ describe('Test mixpanel-common modal component', function() {
   });
 
   describe('full integration', function() {
-    it('attaches in an opening state by default', function() {
-      expect(this.modal.state.visibility).to.equal(VISIBILITY_OPENING);
+    it('attaches in closed state by default', function() {
+      expect(this.modal.state.visibility).to.equal(VISIBILITY_CLOSED);
     });
 
     it('is visible after "open()" is called', function(done) {

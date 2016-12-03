@@ -1,4 +1,4 @@
-@import '../../stylesheets/defaults/index.styl'
+@import '../../stylesheets/defaults'
 
 @keyframes fadeOverlayIn
   from
@@ -21,6 +21,9 @@
   z-index 100
 
 +prefix-classes('mp-drop-menu-')
+  .body, .body *
+    box-sizing border-box
+
   .body
     background-color white
     border-radius 5px
