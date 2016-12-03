@@ -1,9 +1,9 @@
 - const proxyAttrs = {};
 - ['closeable', 'open', 'width'].forEach(attr => proxyAttrs[attr] = $component.getAttribute(attr));
 mp-modal(attributes=proxyAttrs)
-  .mp-confirm-container(attributes={'slot-body': true})
+  .mp-confirm-container
     .mp-confirm-body
-      content(select='[slot-body]')
+      content
     .mp-confirm-buttons
       mp-button.mp-button-secondary(onclick=$helpers.cancel)= $component.getAttribute('cancel-button-label') || 'Cancel'
       mp-button.mp-button-primary(onclick=$helpers.confirm)= $component.getAttribute('confirm-button-label') || 'Ok'

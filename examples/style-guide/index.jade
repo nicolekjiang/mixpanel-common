@@ -103,13 +103,13 @@
         attributes={closeable: true, open: open['modal']}
         onchange=e => $helpers.handleModalChange('modal', e.detail.state)
       )
-        div(attributes={'slot-body': true})
+        div
           .mp-modal-content
             .mp-modal-title Easily track events
             .mp-modal-subtitle Click on any element on your page (e.g. the buy button) to create an event and access all historical data for that event.
           mp-button-bar.mp-button-bar-primary(
             onclick=() => $helpers.closeModal('modal')
-            attributes={'slot-body': true, 'arrow-next': true, width: '100%'}
+            attributes={'arrow-next': true}
           ) Create your first event
 
 
@@ -120,13 +120,12 @@
         attributes={'modal-type': 'popup', closeable: true, open: open['popup']}
         onchange=e => $helpers.handleModalChange('popup', e.detail.state)
       )
-        div(attributes={'slot-body': true})
+        div
           .mp-modal-content
             .mp-modal-title Easily track events
             .mp-modal-subtitle Click on any element on your page (e.g. the buy button) to create an event and access all historical data for that event.
           mp-button-bar.mp-button-bar-primary(
             onclick=() => $helpers.closeModal('popup')
-            attributes={'slot-button': true, width: '100%'}
           ) Create your first event
 
 
@@ -138,7 +137,7 @@
         onsubmit=e => console.log(e.detail)
         onchange=e => $helpers.handleModalChange('confirm', e.detail.state)
       )
-        div(attributes={'slot-body': true})
+        div
           .mp-confirm-title Unsaved changes
           .mp-confirm-description If you navigate away from this page you will lose your changes. Would you like to continue?
 
@@ -151,7 +150,7 @@
         onsubmit=e => console.log(e.detail)
         onchange=e => $helpers.handleModalChange('confirm-delete', e.detail.state)
       )
-        div(attributes={'slot-body': true})
+        div
           .mp-confirm-title Delete Bookmark
           .mp-confirm-description Are you sure you want to delete this bookmark?
 

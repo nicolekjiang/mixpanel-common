@@ -18700,15 +18700,10 @@
 	      value: h("mp-modal", {
 	        "attributes": proxyAttrs
 	      }, [h("div", {
-	        "attributes": {
-	          'slot-body': true
-	        },
 	        "className": [].concat('mp-confirm-container').filter(Boolean).join(' ')
 	      }, [h("div", {
 	        "className": [].concat('mp-confirm-body').filter(Boolean).join(' ')
-	      }, [h("content", {
-	        "select": '[slot-body]'
-	      })].filter(Boolean)), h("div", {
+	      }, [h("content")].filter(Boolean)), h("div", {
 	        "className": [].concat('mp-confirm-buttons').filter(Boolean).join(' ')
 	      }, [h("mp-button", {
 	        "onclick": $helpers.cancel,
@@ -18802,9 +18797,6 @@
 	      value: h("mp-modal", {
 	        "attributes": proxyAttrs
 	      }, [h("div", {
-	        "attributes": {
-	          'slot-body': true
-	        },
 	        "className": [].concat('mp-confirm-container').filter(Boolean).join(' ')
 	      }, [h("div", {
 	        "className": [].concat('mp-confirm-body').filter(Boolean).join(' ')
@@ -18816,9 +18808,7 @@
 	        }
 	      })].filter(Boolean)), h("div", {
 	        "className": [].concat('mp-confirm-copy').filter(Boolean).join(' ')
-	      }, [h("content", {
-	        "select": '[slot-body]'
-	      })].filter(Boolean))].filter(Boolean)), h("div", {
+	      }, [h("content")].filter(Boolean))].filter(Boolean)), h("div", {
 	        "className": [].concat('mp-confirm-buttons').filter(Boolean).join(' ')
 	      }, [h("mp-button", {
 	        "onclick": $helpers.cancel,
@@ -19297,9 +19287,7 @@
 	          }, [h("div", {
 	            "className": [].concat('mp-modal-close-icon').filter(Boolean).join(' ')
 	          }, [generateLiteralWidget(1, '<?xml version="1.0" encoding="utf-8"?><!-- Generator: Adobe Illustrator 19.2.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  --><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"	 viewBox="0 0 10.6 10.5" style="enable-background:new 0 0 10.6 10.5;" xml:space="preserve"><style type="text/css">	.x{fill-rule:evenodd;clip-rule:evenodd;fill:#D8E0E7;}</style><path class="x" d="M8.6,0L5.3,3.3L2,0L0,2l3.3,3.3L0,8.5l2,2l3.2-3.2l3.2,3.2l2-2L7.3,5.3L10.6,2L8.6,0z"/></svg>')].filter(Boolean))].filter(Boolean)) : undefined);
-	          __jade_nodes = __jade_nodes.concat(h("content", {
-	            "select": '[slot-body]'
-	          }));;
+	          __jade_nodes = __jade_nodes.concat(h("content"));;
 	          return __jade_nodes;
 	        }.call(this).filter(Boolean))].filter(Boolean)));;
 	        return __jade_nodes;
@@ -26939,11 +26927,7 @@
 	        "onchange": function onchange(e) {
 	          return $helpers.handleModalChange('modal', e.detail.state);
 	        }
-	      }, [h("div", {
-	        "attributes": {
-	          'slot-body': true
-	        }
-	      }, [h("div", {
+	      }, [h("div", [h("div", {
 	        "className": [].concat('mp-modal-content').filter(Boolean).join(' ')
 	      }, [h("div", {
 	        "className": [].concat('mp-modal-title').filter(Boolean).join(' ')
@@ -26954,9 +26938,7 @@
 	          return $helpers.closeModal('modal');
 	        },
 	        "attributes": {
-	          'slot-body': true,
-	          'arrow-next': true,
-	          width: '100%'
+	          'arrow-next': true
 	        },
 	        "className": [].concat('mp-button-bar-primary').filter(Boolean).join(' ')
 	      }, ["Create your first event"].filter(Boolean))].filter(Boolean))].filter(Boolean))].filter(Boolean)), h("p", [h("button", {
@@ -26972,11 +26954,7 @@
 	        "onchange": function onchange(e) {
 	          return $helpers.handleModalChange('popup', e.detail.state);
 	        }
-	      }, [h("div", {
-	        "attributes": {
-	          'slot-body': true
-	        }
-	      }, [h("div", {
+	      }, [h("div", [h("div", {
 	        "className": [].concat('mp-modal-content').filter(Boolean).join(' ')
 	      }, [h("div", {
 	        "className": [].concat('mp-modal-title').filter(Boolean).join(' ')
@@ -26985,10 +26963,6 @@
 	      }, ["Click on any element on your page (e.g. the buy button) to create an event and access all historical data for that event."].filter(Boolean))].filter(Boolean)), h("mp-button-bar", {
 	        "onclick": function onclick() {
 	          return $helpers.closeModal('popup');
-	        },
-	        "attributes": {
-	          'slot-button': true,
-	          width: '100%'
 	        },
 	        "className": [].concat('mp-button-bar-primary').filter(Boolean).join(' ')
 	      }, ["Create your first event"].filter(Boolean))].filter(Boolean))].filter(Boolean))].filter(Boolean)), h("p", [h("button", {
@@ -27006,11 +26980,7 @@
 	        "onchange": function onchange(e) {
 	          return $helpers.handleModalChange('confirm', e.detail.state);
 	        }
-	      }, [h("div", {
-	        "attributes": {
-	          'slot-body': true
-	        }
-	      }, [h("div", {
+	      }, [h("div", [h("div", {
 	        "className": [].concat('mp-confirm-title').filter(Boolean).join(' ')
 	      }, ["Unsaved changes"].filter(Boolean)), h("div", {
 	        "className": [].concat('mp-confirm-description').filter(Boolean).join(' ')
@@ -27031,11 +27001,7 @@
 	        "onchange": function onchange(e) {
 	          return $helpers.handleModalChange('confirm-delete', e.detail.state);
 	        }
-	      }, [h("div", {
-	        "attributes": {
-	          'slot-body': true
-	        }
-	      }, [h("div", {
+	      }, [h("div", [h("div", {
 	        "className": [].concat('mp-confirm-title').filter(Boolean).join(' ')
 	      }, ["Delete Bookmark"].filter(Boolean)), h("div", {
 	        "className": [].concat('mp-confirm-description').filter(Boolean).join(' ')
