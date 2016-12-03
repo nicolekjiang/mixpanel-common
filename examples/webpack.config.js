@@ -28,7 +28,7 @@ var webpackConfig = {
       {
         test: /\.styl$/,
         exclude: /node_modules|build/,
-        loader: 'style!raw!autoprefixer!stylus',
+        loader: 'style!css!autoprefixer!stylus',
       },
       {
         test: /\.json$/,
