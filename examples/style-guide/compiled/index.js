@@ -20273,9 +20273,7 @@
 	    return {
 	      value: h("div", {
 	        "className": [].concat('mp-drop-menu-body').concat('mp-drop-menu-' + visibility + '').filter(Boolean).join(' ')
-	      }, [h("content", {
-	        "select": '[slot-body]'
-	      })].filter(Boolean))
+	      }, [h("content")].filter(Boolean))
 	    };
 	  }.call(this, "visibility" in locals ? locals.visibility : typeof visibility !== "undefined" ? visibility : undefined);
 	  if (result_of_with) return result_of_with.value;
@@ -27064,9 +27062,6 @@
 	          open: menuOpen
 	        }
 	      }, [h("div", {
-	        "attributes": {
-	          'slot-body': true
-	        },
 	        "className": [].concat('text-container').filter(Boolean).join(' ')
 	      }, [h("div", {
 	        "className": [].concat('text').filter(Boolean).join(' ')
