@@ -1,8 +1,9 @@
 # Mixpanel Common
 [![Build Status](https://travis-ci.org/mixpanel/mixpanel-common.svg?branch=master)](https://travis-ci.org/mixpanel/mixpanel-common)
 
-- components: reusable styles and web components
+- components: low-level pre-styled web components
 - report: mixpanel-specific app utilities
+- stylesheets: default CSS and importable Stylus mixins
 - util: data manipulation utilities
 
 ### Style guide
