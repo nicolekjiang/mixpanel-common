@@ -1,0 +1,21 @@
+@import '../../stylesheets/defaults'
+
+// Much of these styles taken from https://github.com/lukehaas/css-loaders (MIT license)
+.mp-loader, .mp-loader:after
+  border-radius 50%
+  width 10px
+  height 10px
+
+.mp-loader
+  position relative
+  border 3px solid mp-blue
+  border-right-color #fff
+  transform translateZ(0)
+  animation load 0.7s infinite linear
+
+@keyframes load
+  0%
+    transform rotate(0deg)
+
+  100%
+    transform rotate(360deg)
