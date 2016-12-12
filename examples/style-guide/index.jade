@@ -72,12 +72,16 @@
       mp-button.mp-button-secondary.mp-button-on-blue(attributes={icon: 'x'}) Cancel
       mp-button.mp-button-secondary.mp-button-on-blue(attributes={icon: 'x'} disabled) Cancel
 
-  .section
+  .section.button-bars
     h1 Button bar
-    p
+    p.button-bar-container
       mp-button-bar.mp-button-bar-secondary I'm a button bar
-    p
+    p.button-bar-container
+      mp-button-bar.mp-button-bar-secondary(attributes={disabled: true}) I'm a disabled button bar
+    p.button-bar-container
       mp-button-bar.mp-button-bar-primary(attributes={'arrow-next': true}) Next step
+    p.button-bar-container
+      mp-button-bar.mp-button-bar-primary(attributes={'arrow-next': true, disabled: true}) Next step
 
   .section.forms
     h1 Forms
@@ -85,7 +89,12 @@
     p
       input(type="text" placeholder="I'm a placeholder")
     h2 Input with icon
-    p -- to do --
+    p
+      .mp-icon-input
+        .mp-icon
+          svg-icon(attributes={icon: "search"})
+        input(type="text" placeholder="Some placeholder text")
+
     h2 Input group
     p
       mp-input-group(
@@ -94,13 +103,13 @@
         onsubmit=$helpers.handleNamerSubmit
       )
 
-  .section
+  .section.modals
     h1 Modals
     p
       button(onclick=() => $helpers.openModal('modal')) Open modal
 
-      mp-modal(
-        attributes={closeable: true, open: open['modal']}
+      mp-modal.modal(
+        attributes={closeable: true, open: open.modal}
         onchange=e => $helpers.handleModalChange('modal', e.detail.state)
       )
         div
@@ -116,8 +125,8 @@
     p
       button(onclick=() => $helpers.openModal('popup')) Open popup
 
-      mp-modal(
-        attributes={'modal-type': 'popup', closeable: true, open: open['popup']}
+      mp-modal.popup(
+        attributes={'modal-type': 'popup', closeable: true, open: open.popup}
         onchange=e => $helpers.handleModalChange('popup', e.detail.state)
       )
         div
@@ -133,7 +142,7 @@
       button(onclick=() => $helpers.openModal('confirm')) Open confirm
 
       mp-confirm(
-        attributes={open: open['confirm'], width: '400px'}
+        attributes={open: open.confirm}
         onsubmit=e => console.log(e.detail)
         onchange=e => $helpers.handleModalChange('confirm', e.detail.state)
       )
@@ -143,16 +152,16 @@
 
 
     p
-      button(onclick=() => $helpers.openModal('confirm-delete')) Open confirm-delete
+      button(onclick=() => $helpers.openModal('confirmDelete')) Open confirm-delete
 
       mp-confirm-delete(
-        attributes={id: 'confirmDelete', 'delete-button-label': 'Delete it', closeable: true, open: open['confirm-delete']}
+        attributes={id: 'confirmDelete', 'delete-button-label': 'Delete it', closeable: true, open: open.confirmDelete}
         onsubmit=e => console.log(e.detail)
-        onchange=e => $helpers.handleModalChange('confirm-delete', e.detail.state)
+        onchange=e => $helpers.handleModalChange('confirmDelete', e.detail.state)
       )
         div
-          .mp-confirm-title Delete Bookmark
-          .mp-confirm-description Are you sure you want to delete this bookmark?
+          .mp-confirm-delete-title Delete Bookmark
+          .mp-confirm-delete-description Are you sure you want to delete this bookmark?
 
   .section.toggles
     h1 Toggles
@@ -179,7 +188,7 @@
     p
       button(onclick=$helpers.toggleMenu) Open Menu
       .drop-menu-container
-        mp-drop-menu(attributes={open: menuOpen})
+        mp-drop-menu(attributes={open: open.menu})
           .text-container
             .text there is text here
             .text there is text here
@@ -191,3 +200,21 @@
       a
         | Hover me
         mp-tooltip This is my tooltip
+
+
+  .section.widgets
+    h1 Widgets
+    p
+      .bookmarks-widget
+        mp-bookmarks-widget(
+          attributes={
+            bookmarks: JSON.stringify(bookmarks),
+            'create-disabled': false,
+            open: open.bookmarksWidget,
+            saving: savingBookmark,
+            'selected-bookmark-id': selectedBookmarkId,
+            'user-id': 1,
+          }
+          onsubmit=$helpers.handleBookmarksMenuSubmit
+          onchange=$helpers.handleBookmarksMenuChange
+        )

@@ -1,6 +1,7 @@
 @import '../../stylesheets/defaults'
 
 +host-styles('mp-input-group')
+  height 40px
   width 300px
 
 +prefix-classes('mp-input-group-')
@@ -18,13 +19,21 @@
     .input
       border-top-left-radius 5px
       border-bottom-left-radius 5px
-      border-top-right-radius 0px
-      border-bottom-right-radius 0px
-      height 44px
-      width 100%
+      border-top-right-radius 0
+      border-bottom-right-radius 0
+      height 100%
       margin 0 -2px 0 0
       margin-right -2px
       padding-left 10px
+      width 80%
+
+    .btn
+      border-top-left-radius 0
+      border-bottom-left-radius 0
+      height 100%
+      max-width 180px
+      min-width 90px
+      width 20%
 
     .spinner
       width 12px

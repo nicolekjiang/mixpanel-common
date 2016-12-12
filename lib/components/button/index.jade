@@ -1,8 +1,11 @@
-div(attributes=$helpers.getButtonAttrs() class={
-  'mp-button-container': true,
-  [$component.className]: true,
-  'mp-button-with-icon': !!$component.getAttribute('icon'),
-})
+div(
+  attributes=$helpers.getButtonAttrs()
+  class={
+    'mp-button-container': true,
+    [$component.className]: true,
+    'mp-button-with-icon': !!$component.getAttribute('icon'),
+  }
+)
   .mp-button-content
     if $component.getAttribute('icon')
       svg-icon(attributes={icon: $component.getAttribute('icon')})

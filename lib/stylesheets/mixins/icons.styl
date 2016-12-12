@@ -24,3 +24,28 @@ svg-icon-style(base-color=null, hover-color=null, speed=0.2s, size=null, pos-lef
         svg, path
           color hover-color
           fill hover-color
+
+icon-input(icon-color=grey-500, icon-color-focus=grey-700)
+  align-items center
+  display inline-flex
+  position relative
+
+  input
+    padding 6px
+    padding-left 36px
+    padding-right 18px
+    width 100%
+
+    if icon-color-focus
+      &:focus + .mp-icon
+        svg-icon-style(icon-color-focus)
+
+  .mp-icon
+    align-items center
+    display flex
+    position absolute
+    top 0
+    bottom 0
+    left 8px
+
+    svg-icon-style(icon-color)

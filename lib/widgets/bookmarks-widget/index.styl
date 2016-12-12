@@ -1,0 +1,174 @@
+@import '../../stylesheets/defaults'
+
+*
+  box-sizing border-box
+
++prefix-classes('mp-bm-')
+
+  +host-styles(mp-bookmarks-widget)
+    background-color grey-100
+    background-image linear-gradient(grey-50 0%, grey-100 100%)
+    box-shadow 0 1px rgba(0, 0, 0, 0.05)
+    box-sizing border-box
+    width 145px
+    height 54px
+
+  .container
+    color grey-700
+    display inline-flex
+    flex-direction column
+    height 100%
+    width 100%
+
+    .btn
+      align-items center
+      cursor pointer
+      display inline-flex
+      font-family family-helvetica
+      font-size-default()
+      font-weight weight-bold
+      height 100%
+      justify-content center
+      user-select none
+      width 100%
+
+      svg-icon-style(grey-700, grey-900, speed: 0)
+
+      .btn-icon
+        height 22px
+        margin-right 4px
+
+      &:hover
+        background-color rgba(255, 255, 255, 0.35)
+        color grey-900
+
+    .menu
+      height 0px
+      position relative
+      width 100%
+
+      mp-drop-menu
+        left initial
+        right -8px
+        top -10px
+
++prefix-classes('mp-bm-menu-')
+  .container
+    background-color white
+    border-radius 5px
+    width 320px
+
+    &.open
+      display block
+
+    .search
+      align-items center
+      background-color white
+      border 1px solid grey-150
+      border-top-left-radius 5px
+      border-top-right-radius 5px
+      display flex
+      height 60px
+      justify-content center
+      padding 12px 15px
+      width 100%
+
+      icon-input(icon-color: grey-500, icon-size: 22px)
+
+      .mp-icon
+        left 24px
+        top -1px
+
+    .list
+      border-bottom-left-radius 5px
+      border-bottom-right-radius 5px
+      max-height 360px
+      margin 0px 10px
+      overflow-y auto
+      position relative
+
+      & > :first-child:not(.section-header):not(.empty)
+        margin-top 10px
+
+      .empty
+        color grey-500
+        font-style italic
+        padding 20px
+
+      .section-header
+        color grey-500
+        font-size-xs()
+        font-weight weight-bold
+        padding 20px 10px 8px 10px
+
+      .list-item
+        align-items center
+        border-radius 5px
+        cursor pointer
+        display flex
+        height 54px
+        padding 10px
+
+        &:only-child
+          margin: 10px 0
+
+        &:last-child
+          margin-bottom: 10px
+
+        &.list-item-active
+          background-color grey-100
+
+          .list-item-content
+            .name, .creator
+              color blue-500
+
+        .list-item-content
+          display flex
+          flex 1
+          flex-direction column
+
+          .name, .creator
+            font-size-default()
+            max-width 260px
+            overflow hidden
+            text-overflow ellipsis
+            white-space nowrap
+
+          .name
+            color grey-700
+            font-weight weight-medium
+            margin-bottom 4px
+
+            .highlight
+              font-weight weight-bold
+
+          .creator
+            color grey-300
+            font-weight weight-regular
+
+        .delete-button
+          display none
+          flex 0
+          height 22px
+          margin-right 6px
+
+          svg-icon-style(grey-200, mp-red, speed: 0.1s)
+
+        &:hover .delete-button
+          display block
+
+  .add
+    align-items center
+    display flex
+    height 48px
+    justify-content center
+    width 100%
+
+    mp-button-bar
+      height 100%
+
+    mp-input-group
+      border-top 1px solid grey-200
+      height 100%
+      width 100%
+      padding 6px

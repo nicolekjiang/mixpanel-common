@@ -43,6 +43,16 @@
       display table
       padding 10px
 
+  &.button-bars
+    .button-bar-container
+      max-width 600px
+
+  &.modals
+    .modal
+      width 500px
+    mp-confirm
+      width 480px
+
   &.toggles
     mp-toggle
       margin-bottom 10px
@@ -57,3 +67,23 @@
   &.menus
     .drop-menu-container
       position relative
+
+  &.forms
+    .mp-icon-input
+      icon-input()
+
+  &.widgets
+    padding-bottom 500px
+
+    .bookmarks-widget
+      background-color grey-100
+      border 1px solid grey-300
+      display flex
+      height 54px
+      justify-content flex-end
+      width  100%
+
+      mp-bookmarks-widget
+        border-left 1px solid grey-200
+        border-right 1px solid grey-200
+        margin-right 50px

@@ -59,11 +59,13 @@ a, .mp-link
 /* FORMS */
 input[type=text], textarea
   border 1px solid grey-200
-  border-radius 4px
-  color grey-700
+  border-radius 5px
+  box-sizing border-box
+  color grey-900
   display inline-block
-  font-size 13px
-  font-weight 500
+  font-size-default()
+  font-weight weight-regular
+  padding 8px
   transition border-color 150ms ease-out
 
   &::placeholder
@@ -72,4 +74,7 @@ input[type=text], textarea
 
   &:focus
     border-color blue-700
-    transition border-color 250ms ease-in
+    transition border-color 200ms ease-in
+
+input[type=text]
+  height 36px

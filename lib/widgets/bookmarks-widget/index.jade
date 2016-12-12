@@ -1,0 +1,74 @@
+mixin list-item(bookmark)
+  .mp-bm-menu-list-item(
+    onclick=() => $helpers.selectBookmark(bookmark)
+    onmouseover=() => $helpers.activateBookmark(bookmark)
+    class={
+      'mp-bm-menu-list-item-active': activeBookmark && bookmark.id === activeBookmark.id
+    }
+  )
+    .mp-bm-menu-list-item-content
+      .mp-bm-menu-name(attributes={title: bookmark.name})
+        +highlight(bookmark.name, filterText, 'mp-bm-menu-highlight')
+      .mp-bm-menu-creator= bookmark.user
+    .mp-bm-menu-delete-button(onclick=e => $helpers.openConfirmDeleteDialog(e, bookmark))
+      svg-icon(attributes={icon: 'trashcan'})
+
+mixin highlight(target, search, highlightClass)
+  - const searchRegex = new RegExp(`(${search})`, 'gi');
+  - const tokens = target.replace(searchRegex, '<>$1<>').split('<>');
+  for token in tokens.filter(Boolean)
+    span(class={[highlightClass]: token.toLowerCase() === search.toLowerCase()})= token
+
+.mp-bm-container(onscroll=$helpers.stopPropagation)
+  .mp-bm-btn(onclick=$helpers.toggleBookmarksMenu)
+    .mp-bm-btn-icon
+      svg-icon(attributes={icon: 'bookmarks'})
+    span Bookmarks
+  .mp-bm-menu(attributes={tabindex: 0})
+    mp-drop-menu(attributes={open} onchange=$helpers.handleDropMenuChange)
+      .mp-bm-menu-container(attributes={'slot-body': true})
+        .mp-bm-menu-search
+          .mp-bm-menu-mp-icon.mp-icon
+            svg-icon(attributes={icon: "search"})
+          input(type="text" placeholder='Filter bookmarks' oninput=$helpers.setFilterText onchange=$helpers.stopPropagation)
+        .mp-bm-menu-list
+          if filteredBookmarks.length === 0
+            .mp-bm-menu-empty No bookmarks found.
+          else
+            - const showSectionHeader = filteredBookmarks[0].user_id === userId && filteredBookmarks[filteredBookmarks.length - 1].userId !== userId
+            for bookmark, idx in filteredBookmarks
+              if showSectionHeader
+                if idx === 0
+                  .mp-bm-menu-section-header Your Bookmarks
+                else if bookmark.user_id !== userId && filteredBookmarks[idx - 1].user_id === userId
+                  .mp-bm-menu-section-header Other bookmarks
+              +list-item(bookmark)
+        .mp-bm-menu-add
+          if !$component.isAttributeEnabled('create-disabled') && (createMode || saving)
+            mp-input-group(
+              attributes={autofocus: true, placeholder: 'Name your bookmark', busy: saving}
+              onkeydown=$helpers.stopPropagation
+              onchange=$helpers.stopPropagation
+              oninput=$helpers.setName
+              onsubmit=$helpers.createBookmark
+            )
+          else
+            mp-button-bar.mp-button-bar-secondary(
+              attributes={
+                disabled: $component.isAttributeEnabled('create-disabled')
+              }
+              onclick=$helpers.goToCreateMode
+            ) Create new bookmark
+
+  if confirmDeleteBookmark
+    mp-confirm-delete(
+      attributes={closeable: true, open: true}
+      onchange=$helpers.handleConfirmModalChange
+      onsubmit=$helpers.handleConfirmSubmit
+    )
+      .mp-bm-menu-confirm-delete-container(attributes={'slot-body': true})
+        .mp-confirm-delete-title Delete Bookmark
+        if confirmDeleteBookmark.include_in_dashboard
+          .mp-confirm-delete-description Are you sure you want to delete the bookmark named “#{confirmDeleteBookmark.name}”? Deleting it will also remove it from all dashboards.
+        else
+          .mp-confirm-delete-description Are you sure you want to delete the bookmark named “#{confirmDeleteBookmark.name}”?
