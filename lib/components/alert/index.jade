@@ -1,0 +1,9 @@
+- const proxyAttrs = {'modal-type': 'popup'};
+- ['closeable', 'open', 'width'].forEach(attr => proxyAttrs[attr] = $component.getAttribute(attr));
+mp-modal(attributes=proxyAttrs)
+  .mp-alert-container
+    .mp-alert-body
+      .mp-alert-icon
+        svg-icon(attributes={icon: 'alert'})
+      .mp-alert-copy
+        content
