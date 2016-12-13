@@ -101,8 +101,16 @@
 	          COLORS: _colors2.default,
 	          SVG_ICONS: _svgIcon.SVG_ICONS,
 	          inputGroupSaving: false,
-	          open: {},
-	          savingBookmark: false
+	          open: {
+	            bookmarksWidget: false,
+	            confirm: false,
+	            confirmDelete: false,
+	            menu: false,
+	            modal: false,
+	            popup: false
+	          },
+	          savingBookmark: false,
+	          selectedBookmarkId: null
 	        },
 	        helpers: {
 	          blueToggleChanged: function blueToggleChanged(ev) {
@@ -131,31 +139,40 @@
 	            }, 2000);
 	          },
 	          toggleMenu: function toggleMenu() {
-	            _this2.state.open['menu'] = !_this2.state.open['menu'];
+	            _this2.state.open.menu = !_this2.state.open.menu;
 	            _this2.update();
 	          },
 	          toggleBookmarksMenu: function toggleBookmarksMenu() {
-	            _this2.state.open['bookmarks-widget'] = !_this2.state.open['bookmarks-widget'];
+	            _this2.state.open.bookmarksWidget = !_this2.state.open.bookmarksWidget;
 	            _this2.update();
 	          },
 	          handleBookmarksMenuSubmit: function handleBookmarksMenuSubmit(e) {
 	            switch (e.detail.action) {
 	              case 'select':
-	                console.log('Selected:' + e.detail.value.id);
+	                console.log('Selected:', e.detail.value.id);
 	                break;
 	              case 'delete':
-	                console.log('Delete: ' + e.detail.bookmarkId);
+	                _this2.update({ bookmarks: _this2.state.bookmarks.filter(function (b) {
+	                    return b.id !== e.detail.bookmarkId;
+	                  }) });
 	                break;
 	              case 'create':
 	                _this2.update({ savingBookmark: true });
 	                setTimeout(function () {
-	                  console.log('Created: ' + e.detail.name);
-	                  _this2.update({ savingBookmark: false });
+	                  console.log('Created:', e.detail.name);
+	                  var newBookmark = {
+	                    id: new Date().getTime(),
+	                    user_id: 1,
+	                    name: e.detail.name,
+	                    user: 'John D.'
+	                  };
+	                  _this2.state.bookmarks.push(newBookmark);
+	                  _this2.update({ savingBookmark: false, selectedBookmarkId: newBookmark.id });
 	                }, 2000);
 	            }
 	          },
 	          handleBookmarksMenuChange: function handleBookmarksMenuChange(e) {
-	            _this2.state.open['bookmarks-widget'] = e.detail.open;
+	            _this2.state.open.bookmarksWidget = e.detail.open;
 	            _this2.update();
 	          }
 	        },
@@ -18284,11 +18301,13 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
 	var _button = __webpack_require__(346);
 
 	var _button2 = _interopRequireDefault(_button);
 
-	var _registration = __webpack_require__(347);
+	var _registerElement = __webpack_require__(347);
 
 	var _index = __webpack_require__(348);
 
@@ -18306,7 +18325,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	(0, _registration.registerMPComponent)('mp-button', function (_Button) {
+	(0, _registerElement.registerMPElement)('mp-button', function (_Button) {
 	  _inherits(_class, _Button);
 
 	  function _class() {
@@ -18318,22 +18337,10 @@
 	  _createClass(_class, [{
 	    key: 'config',
 	    get: function get() {
-	      var _this2 = this;
-
-	      return {
+	      return Object.assign(_get(_class.prototype.__proto__ || Object.getPrototypeOf(_class.prototype), 'config', this), {
 	        css: _index4.default,
-	        helpers: {
-	          getButtonAttrs: function getButtonAttrs() {
-	            var attrs = {};
-	            if (_this2.isAttributeEnabled('disabled')) {
-	              attrs.disabled = true;
-	            }
-	            return attrs;
-	          }
-	        },
-	        template: _index2.default,
-	        useShadowDom: true
-	      };
+	        template: _index2.default
+	      });
 	    }
 	  }]);
 
@@ -18394,6 +18401,24 @@
 	      this._clickHandler = null;
 	    }
 	  }, {
+	    key: 'config',
+	    get: function get() {
+	      var _this3 = this;
+
+	      return {
+	        useShadowDom: true,
+	        helpers: {
+	          getButtonAttrs: function getButtonAttrs() {
+	            var attrs = {};
+	            if (_this3.isAttributeEnabled('disabled')) {
+	              attrs.disabled = true;
+	            }
+	            return attrs;
+	          }
+	        }
+	      };
+	    }
+	  }, {
 	    key: 'disabled',
 	    get: function get() {
 	      return this.isAttributeEnabled('disabled');
@@ -18417,13 +18442,13 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.registerMPComponent = registerMPComponent;
+	exports.registerMPElement = registerMPElement;
 	/**
 	 * Supports registering MP web components safely even when multiple
 	 * copies of this library are loaded separately on the same page
 	 * (e.g., autotrack editor on a page which already has these components).
 	 */
-	function registerMPComponent(tagName, componentClass) {
+	function registerMPElement(tagName, componentClass) {
 	  var registry = window['mp-common-registered-components'];
 	  if (!registry) {
 	    window['mp-common-registered-components'] = registry = {};
@@ -18501,11 +18526,13 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
 	var _button = __webpack_require__(346);
 
 	var _button2 = _interopRequireDefault(_button);
 
-	var _registration = __webpack_require__(347);
+	var _registerElement = __webpack_require__(347);
 
 	var _index = __webpack_require__(352);
 
@@ -18523,7 +18550,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	(0, _registration.registerMPComponent)('mp-button-bar', function (_Button) {
+	(0, _registerElement.registerMPElement)('mp-button-bar', function (_Button) {
 	  _inherits(_class, _Button);
 
 	  function _class() {
@@ -18535,11 +18562,10 @@
 	  _createClass(_class, [{
 	    key: 'config',
 	    get: function get() {
-	      return {
+	      return Object.assign(_get(_class.prototype.__proto__ || Object.getPrototypeOf(_class.prototype), 'config', this), {
 	        css: _index4.default,
-	        template: _index2.default,
-	        useShadowDom: true
-	      };
+	        template: _index2.default
+	      });
 	    }
 	  }]);
 
@@ -18556,7 +18582,7 @@
 
 	function _jade_template_fn(locals) {
 	  locals = locals || {};;;
-	  var result_of_with = function ($component, Object) {
+	  var result_of_with = function ($component, $helpers, Object) {
 	    var _objToAttrs;
 
 	    var h = __webpack_require__(349);
@@ -18567,6 +18593,7 @@
 	    };
 	    return {
 	      value: h("div", {
+	        "attributes": $helpers.getButtonAttrs(),
 	        "className": [].concat(__objToAttrs((_objToAttrs = {
 	          'mp-button-bar-container': true
 	        }, _defineProperty(_objToAttrs, $component.className, true), _defineProperty(_objToAttrs, 'mp-button-bar-with-icon', !!$component.getAttribute('icon')), _objToAttrs))).filter(Boolean).join(' ')
@@ -18585,7 +18612,7 @@
 	        return __jade_nodes;
 	      }.call(this).filter(Boolean))
 	    };
-	  }.call(this, "$component" in locals ? locals.$component : typeof $component !== "undefined" ? $component : undefined, "Object" in locals ? locals.Object : typeof Object !== "undefined" ? Object : undefined);
+	  }.call(this, "$component" in locals ? locals.$component : typeof $component !== "undefined" ? $component : undefined, "$helpers" in locals ? locals.$helpers : typeof $helpers !== "undefined" ? $helpers : undefined, "Object" in locals ? locals.Object : typeof Object !== "undefined" ? Object : undefined);
 	  if (result_of_with) return result_of_with.value;
 	}
 	module.exports = _jade_template_fn;
@@ -18611,7 +18638,7 @@
 
 	var _confirm2 = _interopRequireDefault(_confirm);
 
-	var _registration = __webpack_require__(347);
+	var _registerElement = __webpack_require__(347);
 
 	var _index = __webpack_require__(356);
 
@@ -18629,7 +18656,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	(0, _registration.registerMPComponent)('mp-confirm', function (_Confirm) {
+	(0, _registerElement.registerMPElement)('mp-confirm', function (_Confirm) {
 	  _inherits(_class, _Confirm);
 
 	  function _class() {
@@ -18723,7 +18750,7 @@
 	  var result_of_with = function ($component, $helpers) {
 	    var h = __webpack_require__(349);
 	    var proxyAttrs = {};
-	    ['closeable', 'open', 'width'].forEach(function (attr) {
+	    ['closeable', 'open'].forEach(function (attr) {
 	      return proxyAttrs[attr] = $component.getAttribute(attr);
 	    });
 	    return {
@@ -18752,7 +18779,7 @@
 /* 357 */
 /***/ function(module, exports) {
 
-	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6e859d;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-weight: 400;   font-size: 12px;   font-stretch: normal; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 12px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-size: 12px;   font-weight: 400;   padding: 8px;   -webkit-transition: border-color 150ms ease-out;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus {   border-color: #3391e9;   -webkit-transition: border-color 200ms ease-in;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } .mp-confirm-container, .mp-confirm-container * {   box-sizing: border-box; } .mp-confirm-container {   display: -webkit-box;   display: -ms-flexbox;   display: flex;   -webkit-box-orient: vertical;   -webkit-box-direction: normal;       -ms-flex-direction: column;           flex-direction: column; } .mp-confirm-container .mp-confirm-body {   display: -webkit-box;   display: -ms-flexbox;   display: flex;   -webkit-box-orient: horizontal;   -webkit-box-direction: normal;       -ms-flex-direction: row;           flex-direction: row;   text-align: left;   min-height: 92px;   padding: 15px 30px 0 20px; } .mp-confirm-container .mp-confirm-buttons {   border-top: 1px solid #d8e0e6;   margin-top: 15px;   padding: 15px 20px 15px 0;   text-align: right; } .mp-confirm-container .mp-confirm-buttons mp-button {   margin-left: 15px;   min-width: 90px; } .mp-confirm-container .mp-confirm-title {   color: #4c6072;   font-size: 16px;   font-weight: 600;   line-height: 1.4;   margin-bottom: 10px; } .mp-confirm-container .mp-confirm-description {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } .mp-confirm-container content::content .mp-confirm-title {   color: #4c6072;   font-size: 16px;   font-weight: 600;   line-height: 1.4;   margin-bottom: 10px; } .mp-confirm-container content::content .mp-confirm-description {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } ";
+	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6e859d;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-weight: 400;   font-size: 12px;   font-stretch: normal; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 12px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-size: 12px;   font-weight: 400;   padding: 8px;   -webkit-transition: border-color 150ms ease-out;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus {   border-color: #3391e9;   -webkit-transition: border-color 200ms ease-in;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } mp-confirm {   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   width: 400px; } :host {   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   width: 400px; } mp-modal {   width: inherit; } .mp-confirm-container, .mp-confirm-container * {   box-sizing: border-box; } .mp-confirm-container {   display: -webkit-box;   display: -ms-flexbox;   display: flex;   -webkit-box-orient: vertical;   -webkit-box-direction: normal;       -ms-flex-direction: column;           flex-direction: column; } .mp-confirm-container .mp-confirm-body {   display: -webkit-box;   display: -ms-flexbox;   display: flex;   -webkit-box-orient: horizontal;   -webkit-box-direction: normal;       -ms-flex-direction: row;           flex-direction: row;   text-align: left;   min-height: 92px;   padding: 15px 30px 0 20px; } .mp-confirm-container .mp-confirm-buttons {   border-top: 1px solid #d8e0e6;   margin-top: 15px;   padding: 15px 20px 15px 0;   text-align: right; } .mp-confirm-container .mp-confirm-buttons mp-button {   margin-left: 15px;   min-width: 90px; } .mp-confirm-container .mp-confirm-title {   color: #4c6072;   font-size: 16px;   font-weight: 600;   line-height: 1.4;   margin-bottom: 10px; } .mp-confirm-container .mp-confirm-description {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } .mp-confirm-container content::content .mp-confirm-title {   color: #4c6072;   font-size: 16px;   font-weight: 600;   line-height: 1.4;   margin-bottom: 10px; } .mp-confirm-container content::content .mp-confirm-description {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } ";
 
 
 /***/ },
@@ -18769,7 +18796,7 @@
 
 	var _confirm2 = _interopRequireDefault(_confirm);
 
-	var _registration = __webpack_require__(347);
+	var _registerElement = __webpack_require__(347);
 
 	var _index = __webpack_require__(359);
 
@@ -18787,7 +18814,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	(0, _registration.registerMPComponent)('mp-confirm-delete', function (_Confirm) {
+	(0, _registerElement.registerMPElement)('mp-confirm-delete', function (_Confirm) {
 	  _inherits(_class, _Confirm);
 
 	  function _class() {
@@ -18820,26 +18847,26 @@
 	  var result_of_with = function ($component, $helpers) {
 	    var h = __webpack_require__(349);
 	    var proxyAttrs = {};
-	    ['closeable', 'open', 'width'].forEach(function (attr) {
+	    ['closeable', 'open'].forEach(function (attr) {
 	      return proxyAttrs[attr] = $component.getAttribute(attr);
 	    });
 	    return {
 	      value: h("mp-modal", {
 	        "attributes": proxyAttrs
 	      }, [h("div", {
-	        "className": [].concat('mp-confirm-container').filter(Boolean).join(' ')
+	        "className": [].concat('mp-confirm-delete-container').filter(Boolean).join(' ')
 	      }, [h("div", {
-	        "className": [].concat('mp-confirm-body').filter(Boolean).join(' ')
+	        "className": [].concat('mp-confirm-delete-body').filter(Boolean).join(' ')
 	      }, [h("div", {
-	        "className": [].concat('mp-confirm-icon').filter(Boolean).join(' ')
+	        "className": [].concat('mp-confirm-delete-icon').filter(Boolean).join(' ')
 	      }, [h("svg-icon", {
 	        "attributes": {
 	          icon: 'alert'
 	        }
 	      })].filter(Boolean)), h("div", {
-	        "className": [].concat('mp-confirm-copy').filter(Boolean).join(' ')
+	        "className": [].concat('mp-confirm-delete-copy').filter(Boolean).join(' ')
 	      }, [h("content")].filter(Boolean))].filter(Boolean)), h("div", {
-	        "className": [].concat('mp-confirm-buttons').filter(Boolean).join(' ')
+	        "className": [].concat('mp-confirm-delete-buttons').filter(Boolean).join(' ')
 	      }, [h("mp-button", {
 	        "onclick": $helpers.cancel,
 	        "className": [].concat('mp-button-secondary').filter(Boolean).join(' ')
@@ -18857,7 +18884,7 @@
 /* 360 */
 /***/ function(module, exports) {
 
-	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6e859d;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-weight: 400;   font-size: 12px;   font-stretch: normal; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 12px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-size: 12px;   font-weight: 400;   padding: 8px;   -webkit-transition: border-color 150ms ease-out;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus {   border-color: #3391e9;   -webkit-transition: border-color 200ms ease-in;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } .mp-confirm-container, .mp-confirm-container * {   box-sizing: border-box; } .mp-confirm-container {   display: -webkit-box;   display: -ms-flexbox;   display: flex;   -webkit-box-orient: vertical;   -webkit-box-direction: normal;       -ms-flex-direction: column;           flex-direction: column; } .mp-confirm-container .mp-confirm-body {   display: -webkit-box;   display: -ms-flexbox;   display: flex;   -webkit-box-orient: horizontal;   -webkit-box-direction: normal;       -ms-flex-direction: row;           flex-direction: row;   text-align: left;   min-height: 92px;   padding: 15px 30px 0 20px; } .mp-confirm-container .mp-confirm-body .mp-confirm-icon {   width: 22px; } .mp-confirm-container .mp-confirm-body .mp-confirm-icon svg-icon {   height: 22px;   min-height: 22px;   min-width: 22px;   width: 22px; } .mp-confirm-container .mp-confirm-body .mp-confirm-icon svg-icon svg {   height: 22px;   min-height: 22px;   min-width: 22px;   width: 22px;   left: 0;   top: 0; } .mp-confirm-container .mp-confirm-body .mp-confirm-icon svg-icon svg, .mp-confirm-container .mp-confirm-body .mp-confirm-icon svg-icon path {   color: #e4567b;   fill: #e4567b;   -webkit-transition: 0.2s;   transition: 0.2s; } .mp-confirm-container .mp-confirm-body .mp-confirm-copy {   margin-left: 6px; } .mp-confirm-container .mp-confirm-buttons {   border-top: 1px solid #d8e0e6;   margin-top: 15px;   padding: 15px 20px 15px 0;   text-align: right; } .mp-confirm-container .mp-confirm-buttons mp-button {   margin-left: 15px; } .mp-confirm-container .mp-confirm-title {   color: #4c6072;   font-size: 16px;   font-weight: 600;   line-height: 1.4;   margin-bottom: 10px; } .mp-confirm-container .mp-confirm-description {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } .mp-confirm-container content::content .mp-confirm-title {   color: #4c6072;   font-size: 16px;   font-weight: 600;   line-height: 1.4;   margin-bottom: 10px; } .mp-confirm-container content::content .mp-confirm-description {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } ";
+	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6e859d;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-weight: 400;   font-size: 12px;   font-stretch: normal; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 12px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-size: 12px;   font-weight: 400;   padding: 8px;   -webkit-transition: border-color 150ms ease-out;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus {   border-color: #3391e9;   -webkit-transition: border-color 200ms ease-in;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } mp-confirm-delete {   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   width: 400px; } :host {   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   width: 400px; } mp-modal {   width: inherit; } .mp-confirm-delete-container, .mp-confirm-delete-container * {   box-sizing: border-box; } .mp-confirm-delete-container {   display: -webkit-box;   display: -ms-flexbox;   display: flex;   -webkit-box-orient: vertical;   -webkit-box-direction: normal;       -ms-flex-direction: column;           flex-direction: column; } .mp-confirm-delete-container .mp-confirm-delete-body {   display: -webkit-box;   display: -ms-flexbox;   display: flex;   -webkit-box-orient: horizontal;   -webkit-box-direction: normal;       -ms-flex-direction: row;           flex-direction: row;   text-align: left;   min-height: 92px;   padding: 15px 30px 0 20px; } .mp-confirm-delete-container .mp-confirm-delete-body .mp-confirm-delete-icon {   width: 22px; } .mp-confirm-delete-container .mp-confirm-delete-body .mp-confirm-delete-icon svg-icon {   height: 22px;   min-height: 22px;   min-width: 22px;   width: 22px; } .mp-confirm-delete-container .mp-confirm-delete-body .mp-confirm-delete-icon svg-icon svg {   height: 22px;   min-height: 22px;   min-width: 22px;   width: 22px;   left: 0;   top: 0; } .mp-confirm-delete-container .mp-confirm-delete-body .mp-confirm-delete-icon svg-icon svg, .mp-confirm-delete-container .mp-confirm-delete-body .mp-confirm-delete-icon svg-icon path {   color: #e4567b;   fill: #e4567b;   -webkit-transition: 0.2s;   transition: 0.2s; } .mp-confirm-delete-container .mp-confirm-delete-body .mp-confirm-delete-copy {   margin-left: 6px; } .mp-confirm-delete-container .mp-confirm-delete-buttons {   border-top: 1px solid #d8e0e6;   margin-top: 15px;   padding: 15px 20px 15px 0;   text-align: right; } .mp-confirm-delete-container .mp-confirm-delete-buttons mp-button {   margin-left: 15px; } .mp-confirm-delete-container .mp-confirm-delete-title {   color: #4c6072;   font-size: 16px;   font-weight: 600;   line-height: 1.4;   margin-bottom: 10px; } .mp-confirm-delete-container .mp-confirm-delete-description {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } .mp-confirm-delete-container content::content .mp-confirm-delete-title {   color: #4c6072;   font-size: 16px;   font-weight: 600;   line-height: 1.4;   margin-bottom: 10px; } .mp-confirm-delete-container content::content .mp-confirm-delete-description {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } ";
 
 
 /***/ },
@@ -18872,7 +18899,7 @@
 
 	var _panel = __webpack_require__(299);
 
-	var _registration = __webpack_require__(347);
+	var _registerElement = __webpack_require__(347);
 
 	var _index = __webpack_require__(362);
 
@@ -18890,7 +18917,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	(0, _registration.registerMPComponent)('mp-input-group', function (_Component) {
+	(0, _registerElement.registerMPElement)('mp-input-group', function (_Component) {
 	  _inherits(_class, _Component);
 
 	  function _class() {
@@ -19066,7 +19093,7 @@
 /* 363 */
 /***/ function(module, exports) {
 
-	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6e859d;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-weight: 400;   font-size: 12px;   font-stretch: normal; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 12px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-size: 12px;   font-weight: 400;   padding: 8px;   -webkit-transition: border-color 150ms ease-out;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus {   border-color: #3391e9;   -webkit-transition: border-color 200ms ease-in;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } mp-input-group {   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   width: 300px; } :host {   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   width: 300px; } .mp-input-group-container, .mp-input-group-container * {   box-sizing: border-box; } .mp-input-group-container {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   width: 100%; } .mp-input-group-container .mp-input-group-input, .mp-input-group-container .mp-input-group-btn {   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex; } .mp-input-group-container .mp-input-group-input {   border-top-left-radius: 5px;   border-bottom-left-radius: 5px;   border-top-right-radius: 0;   border-bottom-right-radius: 0;   height: 100%;   margin: 0 -2px 0 0;   margin-right: -2px;   padding-left: 10px;   width: 80%; } .mp-input-group-container .mp-input-group-btn {   border-top-left-radius: 0;   border-bottom-left-radius: 0;   height: 100%;   max-width: 180px;   min-width: 90px;   width: 20%; } .mp-input-group-container .mp-input-group-spinner {   width: 12px; } ";
+	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6e859d;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-weight: 400;   font-size: 12px;   font-stretch: normal; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 12px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-size: 12px;   font-weight: 400;   padding: 8px;   -webkit-transition: border-color 150ms ease-out;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus {   border-color: #3391e9;   -webkit-transition: border-color 200ms ease-in;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } mp-input-group {   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   height: 40px;   width: 300px; } :host {   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   height: 40px;   width: 300px; } .mp-input-group-container, .mp-input-group-container * {   box-sizing: border-box; } .mp-input-group-container {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   width: 100%; } .mp-input-group-container .mp-input-group-input, .mp-input-group-container .mp-input-group-btn {   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex; } .mp-input-group-container .mp-input-group-input {   border-top-left-radius: 5px;   border-bottom-left-radius: 5px;   border-top-right-radius: 0;   border-bottom-right-radius: 0;   height: 100%;   margin: 0 -2px 0 0;   margin-right: -2px;   padding-left: 10px;   width: 80%; } .mp-input-group-container .mp-input-group-btn {   border-top-left-radius: 0;   border-bottom-left-radius: 0;   height: 100%;   max-width: 180px;   min-width: 90px;   width: 20%; } .mp-input-group-container .mp-input-group-spinner {   width: 12px; } ";
 
 
 /***/ },
@@ -19081,7 +19108,7 @@
 
 	var _panel = __webpack_require__(299);
 
-	var _registration = __webpack_require__(347);
+	var _registerElement = __webpack_require__(347);
 
 	var _index = __webpack_require__(365);
 
@@ -19106,7 +19133,7 @@
 	var VISIBILITY_CLOSED = 'closed';
 	var VISIBILITY_CLOSING = 'closing';
 
-	(0, _registration.registerMPComponent)('mp-modal', function (_Component) {
+	(0, _registerElement.registerMPElement)('mp-modal', function (_Component) {
 	  _inherits(_class, _Component);
 
 	  function _class() {
@@ -19236,13 +19263,6 @@
 	          closeClicked: function closeClicked() {
 	            _this3.close();
 	          },
-	          getModalStyles: function getModalStyles() {
-	            var style = {};
-	            if (_this3.getAttribute('width')) {
-	              style.width = _this3.getAttribute('width');
-	            }
-	            return style;
-	          },
 	          getType: function getType() {
 	            return _this3.getAttribute('modal-type') || 'modal';
 	          }
@@ -19316,7 +19336,6 @@
 	        __jade_nodes = __jade_nodes.concat(h("div", {
 	          "className": [].concat('mp-modal-wrapper').filter(Boolean).join(' ')
 	        }, [h("div", {
-	          "style": $helpers.getModalStyles(),
 	          "className": [].concat('mp-modal-main').concat('mp-modal-' + visibility + '').filter(Boolean).join(' ')
 	        }, function () {
 	          var __jade_nodes = [];
@@ -19341,7 +19360,7 @@
 /* 366 */
 /***/ function(module, exports) {
 
-	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6e859d;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-weight: 400;   font-size: 12px;   font-stretch: normal; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 12px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-size: 12px;   font-weight: 400;   padding: 8px;   -webkit-transition: border-color 150ms ease-out;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus {   border-color: #3391e9;   -webkit-transition: border-color 200ms ease-in;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } mp-modal {   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   position: absolute;   z-index: 9000; } :host {   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   position: absolute;   z-index: 9000; } .mp-modal-stage, .mp-modal-stage * {   box-sizing: border-box; } .mp-modal-stage {   bottom: 0;   left: 0;   pointer-events: none;   position: fixed;   right: 0;   top: 0; } .mp-modal-stage.mp-modal-closed {   display: none; } .mp-modal-stage.mp-modal-absolute, .mp-modal-stage.mp-modal-absolute .mp-modal-backdrop, .mp-modal-stage.mp-modal-absolute .mp-modal-wrapper {   position: absolute; } .mp-modal-stage .mp-modal-backdrop {   background: #4c6072;   height: 100%;   position: fixed;   pointer-events: auto;   width: 100%; } .mp-modal-stage .mp-modal-backdrop.mp-modal-opening {   -webkit-animation: fadeOverlayIn 300ms forwards;           animation: fadeOverlayIn 300ms forwards;   opacity: 0; } .mp-modal-stage .mp-modal-backdrop.mp-modal-open {   opacity: 0.8; } .mp-modal-stage .mp-modal-backdrop.mp-modal-closing {   -webkit-animation: fadeOverlayOut 300ms forwards;           animation: fadeOverlayOut 300ms forwards; } .mp-modal-stage .mp-modal-backdrop.mp-modal-closed {   opacity: 0; } .mp-modal-stage .mp-modal-backdrop + .mp-modal-wrapper .mp-modal-main {   box-shadow: 0px 17px 50px 0px rgba(0,0,0,0.19); } .mp-modal-stage .mp-modal-wrapper {   display: -webkit-box;   display: -ms-flexbox;   display: flex;   height: 100%;   -webkit-box-pack: center;       -ms-flex-pack: center;           justify-content: center;   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   pointer-events: none;   position: fixed;   width: 100%; } .mp-modal-stage .mp-modal-wrapper .mp-modal-main {   background: #fff;   border: 1px solid #eff3f5;   border-radius: 5px;   box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.14);   max-width: 530px;   pointer-events: auto;   position: relative;   z-index: 2; } .mp-modal-stage .mp-modal-wrapper .mp-modal-main.mp-modal-opening {   -webkit-animation: fadeModalIn 300ms forwards 100ms;           animation: fadeModalIn 300ms forwards 100ms;   opacity: 0; } .mp-modal-stage .mp-modal-wrapper .mp-modal-main.mp-modal-open {   opacity: 1; } .mp-modal-stage .mp-modal-wrapper .mp-modal-main.mp-modal-closing {   -webkit-animation: fadeModalOut 200ms forwards;           animation: fadeModalOut 200ms forwards; } .mp-modal-stage .mp-modal-wrapper .mp-modal-main.mp-modal-closed {   opacity: 0; } .mp-modal-stage .mp-modal-wrapper .mp-modal-main .mp-modal-close-btn {   cursor: pointer;   float: right;   height: 10px;   position: absolute;   right: 15px;   top: 15px; } .mp-modal-stage .mp-modal-wrapper .mp-modal-main .mp-modal-close-btn .mp-modal-close-icon svg {   width: 10px; } .mp-modal-stage .mp-modal-wrapper .mp-modal-main .mp-modal-close-btn .mp-modal-close-icon svg path {   fill: #d8e0e6; } .mp-modal-stage .mp-modal-wrapper .mp-modal-main .mp-modal-close-btn:hover .mp-modal-close-icon svg path {   fill: #c1ccd5; } .mp-modal-content {   padding: 15px 30px; } .mp-modal-title {   color: #4c6072;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 18px;   font-weight: 600;   line-height: 1.4; } .mp-modal-subtitle {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px;   margin: 12px 0; } content::content .mp-modal-content {   padding: 15px 30px; } content::content .mp-modal-title {   color: #4c6072;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 18px;   font-weight: 600;   line-height: 1.4; } content::content .mp-modal-subtitle {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px;   margin: 12px 0; } @-webkit-keyframes fadeOverlayIn {   from {     opacity: 0;   }   to {     opacity: 0.8;   } } @keyframes fadeOverlayIn {   from {     opacity: 0;   }   to {     opacity: 0.8;   } } @-webkit-keyframes fadeOverlayOut {   from {     opacity: 0.8;   }   to {     opacity: 0;   } } @keyframes fadeOverlayOut {   from {     opacity: 0.8;   }   to {     opacity: 0;   } } @-webkit-keyframes fadeModalIn {   from {     -webkit-transform: scale(1.1, 1.1);             transform: scale(1.1, 1.1);     opacity: 0;   }   to {     -webkit-transform: scale(1, 1);             transform: scale(1, 1);     opacity: 1;   } } @keyframes fadeModalIn {   from {     -webkit-transform: scale(1.1, 1.1);             transform: scale(1.1, 1.1);     opacity: 0;   }   to {     -webkit-transform: scale(1, 1);             transform: scale(1, 1);     opacity: 1;   } } @-webkit-keyframes fadeModalOut {   from {     -webkit-transform: scale(1, 1);             transform: scale(1, 1);     opacity: 1;   }   to {     -webkit-transform: scale(1.1, 1.1);             transform: scale(1.1, 1.1);     opacity: 0;   } } @keyframes fadeModalOut {   from {     -webkit-transform: scale(1, 1);             transform: scale(1, 1);     opacity: 1;   }   to {     -webkit-transform: scale(1.1, 1.1);             transform: scale(1.1, 1.1);     opacity: 0;   } } ";
+	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6e859d;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-weight: 400;   font-size: 12px;   font-stretch: normal; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 12px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-size: 12px;   font-weight: 400;   padding: 8px;   -webkit-transition: border-color 150ms ease-out;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus {   border-color: #3391e9;   -webkit-transition: border-color 200ms ease-in;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } mp-modal {   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   position: absolute;   width: 400px;   z-index: 9000; } :host {   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   position: absolute;   width: 400px;   z-index: 9000; } .mp-modal-stage, .mp-modal-stage * {   box-sizing: border-box; } .mp-modal-stage {   bottom: 0;   left: 0;   min-width: 100%;   pointer-events: none;   position: fixed;   right: 0;   top: 0;   width: inherit; } .mp-modal-stage.mp-modal-closed {   display: none; } .mp-modal-stage.mp-modal-absolute, .mp-modal-stage.mp-modal-absolute .mp-modal-backdrop, .mp-modal-stage.mp-modal-absolute .mp-modal-wrapper {   position: absolute; } .mp-modal-stage .mp-modal-backdrop {   background: #4c6072;   height: 100%;   position: fixed;   pointer-events: auto;   width: 100%; } .mp-modal-stage .mp-modal-backdrop.mp-modal-opening {   -webkit-animation: fadeOverlayIn 300ms forwards;           animation: fadeOverlayIn 300ms forwards;   opacity: 0; } .mp-modal-stage .mp-modal-backdrop.mp-modal-open {   opacity: 0.8; } .mp-modal-stage .mp-modal-backdrop.mp-modal-closing {   -webkit-animation: fadeOverlayOut 300ms forwards;           animation: fadeOverlayOut 300ms forwards; } .mp-modal-stage .mp-modal-backdrop.mp-modal-closed {   opacity: 0; } .mp-modal-stage .mp-modal-backdrop + .mp-modal-wrapper .mp-modal-main {   box-shadow: 0px 17px 50px 0px rgba(0,0,0,0.19); } .mp-modal-stage .mp-modal-wrapper {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   height: 100%;   -webkit-box-pack: center;       -ms-flex-pack: center;           justify-content: center;   min-width: 100%;   pointer-events: none;   position: fixed;   width: inherit; } .mp-modal-stage .mp-modal-wrapper .mp-modal-main {   background: #fff;   border: 1px solid #eff3f5;   border-radius: 5px;   box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.14);   pointer-events: auto;   position: relative;   width: inherit;   z-index: 2; } .mp-modal-stage .mp-modal-wrapper .mp-modal-main.mp-modal-opening {   -webkit-animation: fadeModalIn 300ms forwards 100ms;           animation: fadeModalIn 300ms forwards 100ms;   opacity: 0; } .mp-modal-stage .mp-modal-wrapper .mp-modal-main.mp-modal-open {   opacity: 1; } .mp-modal-stage .mp-modal-wrapper .mp-modal-main.mp-modal-closing {   -webkit-animation: fadeModalOut 200ms forwards;           animation: fadeModalOut 200ms forwards; } .mp-modal-stage .mp-modal-wrapper .mp-modal-main.mp-modal-closed {   opacity: 0; } .mp-modal-stage .mp-modal-wrapper .mp-modal-main .mp-modal-close-btn {   cursor: pointer;   float: right;   height: 10px;   position: absolute;   right: 15px;   top: 15px; } .mp-modal-stage .mp-modal-wrapper .mp-modal-main .mp-modal-close-btn .mp-modal-close-icon svg {   width: 10px; } .mp-modal-stage .mp-modal-wrapper .mp-modal-main .mp-modal-close-btn .mp-modal-close-icon svg path {   fill: #d8e0e6; } .mp-modal-stage .mp-modal-wrapper .mp-modal-main .mp-modal-close-btn:hover .mp-modal-close-icon svg path {   fill: #c1ccd5; } .mp-modal-content {   padding: 15px 30px; } .mp-modal-title {   color: #4c6072;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 18px;   font-weight: 600;   line-height: 1.4; } .mp-modal-subtitle {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px;   margin: 12px 0; } content::content .mp-modal-content {   padding: 15px 30px; } content::content .mp-modal-title {   color: #4c6072;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 18px;   font-weight: 600;   line-height: 1.4; } content::content .mp-modal-subtitle {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px;   margin: 12px 0; } @-webkit-keyframes fadeOverlayIn {   from {     opacity: 0;   }   to {     opacity: 0.8;   } } @keyframes fadeOverlayIn {   from {     opacity: 0;   }   to {     opacity: 0.8;   } } @-webkit-keyframes fadeOverlayOut {   from {     opacity: 0.8;   }   to {     opacity: 0;   } } @keyframes fadeOverlayOut {   from {     opacity: 0.8;   }   to {     opacity: 0;   } } @-webkit-keyframes fadeModalIn {   from {     -webkit-transform: scale(1.1, 1.1);             transform: scale(1.1, 1.1);     opacity: 0;   }   to {     -webkit-transform: scale(1, 1);             transform: scale(1, 1);     opacity: 1;   } } @keyframes fadeModalIn {   from {     -webkit-transform: scale(1.1, 1.1);             transform: scale(1.1, 1.1);     opacity: 0;   }   to {     -webkit-transform: scale(1, 1);             transform: scale(1, 1);     opacity: 1;   } } @-webkit-keyframes fadeModalOut {   from {     -webkit-transform: scale(1, 1);             transform: scale(1, 1);     opacity: 1;   }   to {     -webkit-transform: scale(1.1, 1.1);             transform: scale(1.1, 1.1);     opacity: 0;   } } @keyframes fadeModalOut {   from {     -webkit-transform: scale(1, 1);             transform: scale(1, 1);     opacity: 1;   }   to {     -webkit-transform: scale(1.1, 1.1);             transform: scale(1.1, 1.1);     opacity: 0;   } } ";
 
 
 /***/ },
@@ -19384,7 +19403,7 @@
 
 	var _webcomponent2 = _interopRequireDefault(_webcomponent);
 
-	var _registration = __webpack_require__(347);
+	var _registerElement = __webpack_require__(347);
 
 	var _util = __webpack_require__(369);
 
@@ -19563,7 +19582,7 @@
 	  return k.replace(/([a-z])([A-Z])/g, '$1-$2').replace(/_/g, '').toLowerCase();
 	});
 
-	(0, _registration.registerMPComponent)('svg-icon', function (_WebComponent) {
+	(0, _registerElement.registerMPElement)('svg-icon', function (_WebComponent) {
 	  _inherits(_class, _WebComponent);
 
 	  function _class() {
@@ -19939,7 +19958,7 @@
 
 	var _panel = __webpack_require__(299);
 
-	var _registration = __webpack_require__(347);
+	var _registerElement = __webpack_require__(347);
 
 	var _index = __webpack_require__(372);
 
@@ -19957,7 +19976,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	(0, _registration.registerMPComponent)('mp-toggle', function (_Component) {
+	(0, _registerElement.registerMPElement)('mp-toggle', function (_Component) {
 	  _inherits(_class, _Component);
 
 	  function _class() {
@@ -20067,7 +20086,7 @@
 
 	var _panel = __webpack_require__(299);
 
-	var _registration = __webpack_require__(347);
+	var _registerElement = __webpack_require__(347);
 
 	var _index = __webpack_require__(375);
 
@@ -20085,7 +20104,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	(0, _registration.registerMPComponent)('mp-tooltip', function (_Component) {
+	(0, _registerElement.registerMPElement)('mp-tooltip', function (_Component) {
 	  _inherits(_class, _Component);
 
 	  function _class() {
@@ -20179,7 +20198,7 @@
 
 	var _panel = __webpack_require__(299);
 
-	var _registration = __webpack_require__(347);
+	var _registerElement = __webpack_require__(347);
 
 	var _utils = __webpack_require__(367);
 
@@ -20204,7 +20223,7 @@
 	var VISIBILITY_CLOSED = 'closed';
 	var VISIBILITY_CLOSING = 'closing';
 
-	(0, _registration.registerMPComponent)('mp-drop-menu', function (_Component) {
+	(0, _registerElement.registerMPElement)('mp-drop-menu', function (_Component) {
 	  _inherits(_class, _Component);
 
 	  function _class() {
@@ -26748,7 +26767,7 @@
 
 	var _panel = __webpack_require__(299);
 
-	var _registration = __webpack_require__(347);
+	var _registerElement = __webpack_require__(347);
 
 	var _index = __webpack_require__(391);
 
@@ -26766,7 +26785,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	(0, _registration.registerMPComponent)('mp-bookmarks-widget', function (_Component) {
+	(0, _registerElement.registerMPElement)('mp-bookmarks-widget', function (_Component) {
 	  _inherits(_class, _Component);
 
 	  function _class() {
@@ -26776,10 +26795,19 @@
 	  }
 
 	  _createClass(_class, [{
-	    key: '_closeMenu',
-	    value: function _closeMenu() {
-	      this.dispatchEvent(new CustomEvent('change', { detail: { open: false } }));
-	      this.setAttribute('open', false);
+	    key: '_sortBookmarks',
+	    value: function _sortBookmarks(a, b) {
+	      // put all bookmarks for the logged in "userId" at the top
+	      // then sort by name
+	      var aIsLoggedInUser = a.user_id === this.state.userId;
+	      var bIsLoggedInUser = b.user_id === this.state.userId;
+	      if (aIsLoggedInUser === bIsLoggedInUser) {
+	        var nameA = a.name.toUpperCase();
+	        var nameB = b.name.toUpperCase();
+	        return nameA < nameB ? -1 : nameA > nameB ? 1 : 0;
+	      } else {
+	        return aIsLoggedInUser ? -1 : 1;
+	      }
 	    }
 	  }, {
 	    key: '_filterBookmarks',
@@ -26792,29 +26820,6 @@
 	        return _this2._sortBookmarks(a, b);
 	      });
 	      this.update({ filteredBookmarks: filteredBookmarks });
-	    }
-	  }, {
-	    key: '_sortBookmarks',
-	    value: function _sortBookmarks(a, b) {
-	      // put all bookmarks for the logged in "userId" at the top
-	      // then sort by name
-	      var aIsLoggedInUser = a.user_id === this.state.userId;
-	      var bIsLoggedInUser = b.user_id === this.state.userId;
-	      if (aIsLoggedInUser === bIsLoggedInUser) {
-	        var nameA = a.name.toUpperCase();
-	        var nameB = b.name.toUpperCase();
-	        if (nameA < nameB) {
-	          return -1;
-	        } else if (nameA > nameB) {
-	          return 1;
-	        } else {
-	          return 0;
-	        }
-	      } else if (aIsLoggedInUser) {
-	        return -1;
-	      } else {
-	        return 1;
-	      }
 	    }
 	  }, {
 	    key: '_setActiveBookmark',
@@ -26849,11 +26854,7 @@
 	      var selectedBookmark = this.state.filteredBookmarks.find(function (b) {
 	        return b.id === parseInt(_this4.getAttribute('selected-bookmark-id'));
 	      });
-	      if (selectedBookmark) {
-	        this._setActiveBookmark(selectedBookmark);
-	      } else {
-	        this._setActiveBookmark(this.state.filteredBookmarks[0]);
-	      }
+	      this._setActiveBookmark(selectedBookmark || this.state.filteredBookmarks[0]);
 	    }
 	  }, {
 	    key: '_selectBookmark',
@@ -26866,8 +26867,6 @@
 	  }, {
 	    key: '_parseAttribute',
 	    value: function _parseAttribute(name) {
-	      var _this5 = this;
-
 	      switch (name) {
 	        case 'bookmarks':
 	          {
@@ -26888,20 +26887,11 @@
 	            this._resetActiveBookmark();
 	            break;
 	          }
-	        case 'create-mode':
-	          {
-	            var createMode = this.isAttributeEnabled('create-mode');
-	            this.update({ createMode: createMode });
-	            if (createMode) {
-	              window.requestAnimationFrame(function () {
-	                return _this5.el.querySelector('mp-input-group').focus();
-	              });
-	            }
-	            break;
-	          }
 	        case 'open':
 	          {
-	            this.update({ open: this.isAttributeEnabled('open') });
+	            var open = this.isAttributeEnabled('open');
+	            this.dispatchEvent(new CustomEvent('change', { detail: { open: open } }));
+	            this.update({ open: open });
 	            break;
 	          }
 	        case 'saving':
@@ -26914,47 +26904,54 @@
 	  }, {
 	    key: 'attachedCallback',
 	    value: function attachedCallback() {
-	      var _this6 = this;
+	      var _this5 = this;
 
 	      _get(_class.prototype.__proto__ || Object.getPrototypeOf(_class.prototype), 'attachedCallback', this).call(this);
 
 	      this.clickOutsideListener = function (e) {
-	        if (_this6.state.open && e.target !== _this6) {
-	          _this6._closeMenu();
+	        if (_this5.state.open && e.target !== _this5) {
+	          _this5.setAttribute('open', false);
 	        }
 	      };
 	      document.addEventListener('click', this.clickOutsideListener);
 
 	      this.windowKeydownListener = function (e) {
-	        if (_this6.state.open && e.keyCode === 27) {
+	        if (_this5.state.open && e.keyCode === 27) {
 	          // esc key
-	          _this6._closeMenu();
+	          _this5.setAttribute('open', false);
 	        }
 	      };
 	      window.addEventListener('keydown', this.windowKeydownListener);
 
 	      this.localKeydownListener = function (e) {
-	        if (_this6.state.open) {
-	          var bookmarks = _this6.state.filteredBookmarks;
-	          var activeIdx = bookmarks.indexOf(_this6.state.activeBookmark);
-	          var activeBookmark = void 0;
+	        if (_this5.state.open) {
 	          switch (e.keyCode) {
 	            case 13:
 	              // enter
-	              _this6._selectBookmark(_this6.state.activeBookmark);
+	              _this5._selectBookmark(_this5.state.activeBookmark);
 	              break;
 	            case 38:
-	              // up arrow
-	              e.preventDefault();
-	              activeBookmark = _this6.state.filteredBookmarks[activeIdx === 0 ? bookmarks.length - 1 : activeIdx - 1];
-	              _this6._setActiveBookmark(activeBookmark);
-	              break;
+	              {
+	                // up arrow
+	                e.preventDefault();
+	                var bookmarks = _this5.state.filteredBookmarks;
+	                var activeIdx = bookmarks.indexOf(_this5.state.activeBookmark);
+	                if (activeIdx !== 0) {
+	                  _this5._setActiveBookmark(bookmarks[activeIdx - 1]);
+	                }
+	                break;
+	              }
 	            case 40:
-	              // down arrow
-	              e.preventDefault();
-	              activeBookmark = _this6.state.filteredBookmarks[activeIdx === bookmarks.length - 1 ? 0 : activeIdx + 1];
-	              _this6._setActiveBookmark(activeBookmark);
-	              break;
+	              {
+	                // down arrow
+	                e.preventDefault();
+	                var _bookmarks = _this5.state.filteredBookmarks;
+	                var _activeIdx = _bookmarks.indexOf(_this5.state.activeBookmark);
+	                if (_activeIdx < _bookmarks.length - 1) {
+	                  _this5._setActiveBookmark(_bookmarks[_activeIdx + 1]);
+	                }
+	                break;
+	              }
 	          }
 	        }
 	      };
@@ -26964,7 +26961,6 @@
 	      this.update({
 	        bookmarks: this.getJSONAttribute('bookmarks'),
 	        userId: parseInt(this.getAttribute('user-id')),
-	        createMode: this.isAttributeEnabled('create-mode'),
 	        open: this.isAttributeEnabled('open'),
 	        saving: this.isAttributeEnabled('saving')
 	      });
@@ -26992,14 +26988,14 @@
 	  }, {
 	    key: 'config',
 	    get: function get() {
-	      var _this7 = this;
+	      var _this6 = this;
 
 	      return {
 	        css: _index4.default,
 	        template: _index2.default,
 	        useShadowDom: true,
 	        defaultState: {
-	          activeBookmark: {},
+	          activeBookmark: null,
 	          bookmarks: [],
 	          confirmDeleteBookmarkId: null,
 	          createMode: false,
@@ -27012,60 +27008,65 @@
 	        },
 	        helpers: {
 	          toggleBookmarksMenu: function toggleBookmarksMenu() {
-	            return _this7.setAttribute('open', !_this7.state.open);
+	            return _this6.setAttribute('open', !_this6.state.open);
 	          },
 	          handleDropMenuChange: function handleDropMenuChange(e) {
 	            e.stopImmediatePropagation();
 	            if (e.detail.state === 'open') {
-	              _this7.el.querySelector('.mp-bm-menu-search input').focus();
-	            } else {
-	              _this7.setAttribute('create-mode', false);
+	              _this6.el.querySelector('.mp-bm-menu-search input').focus();
 	            }
 	          },
 	          handleSubmit: function handleSubmit(e) {
 	            if (e.detail.action === 'select') {
-	              _this7._closeMenu();
+	              _this6.setAttribute('open', false);
 	            }
 	          },
 	          setFilterText: function setFilterText(e) {
-	            _this7.update({ filterText: e.target.value });
-	            _this7._filterBookmarks();
-	            _this7._setActiveBookmark(_this7.state.filteredBookmarks[0]);
+	            _this6.update({ filterText: e.target.value });
+	            _this6._filterBookmarks();
+	            _this6._setActiveBookmark(_this6.state.filteredBookmarks[0]);
 	          },
 	          activateBookmark: function activateBookmark(bookmark) {
-	            _this7._setActiveBookmark(bookmark, false);
+	            _this6._setActiveBookmark(bookmark, false);
 	          },
 	          selectBookmark: function selectBookmark(bookmark) {
-	            _this7.update({ activeBookmark: bookmark });
-	            _this7._selectBookmark(bookmark);
+	            _this6._selectBookmark(bookmark);
 	          },
-	          confirmDeleteBookmark: function confirmDeleteBookmark(e, bookmark) {
+	          openConfirmDeleteDialog: function openConfirmDeleteDialog(e, bookmark) {
 	            e.stopImmediatePropagation();
-	            _this7.update({ confirmDeleteBookmark: bookmark });
+	            _this6.update({ confirmDeleteBookmark: bookmark });
 	          },
 	          handleConfirmModalChange: function handleConfirmModalChange(e) {
 	            e.stopImmediatePropagation();
 	            if (e.detail.state === 'closed') {
-	              _this7.update({ confirmDeleteBookmark: null });
+	              _this6.update({ confirmDeleteBookmark: null });
 	            }
 	          },
 	          handleConfirmSubmit: function handleConfirmSubmit(e) {
 	            if (e.detail.action === 'confirm') {
-	              _this7.dispatchEvent(new CustomEvent('submit', { detail: { action: 'delete', bookmarkId: _this7.state.confirmDeleteBookmark.id } }));
+	              _this6.dispatchEvent(new CustomEvent('submit', {
+	                detail: {
+	                  action: 'delete',
+	                  bookmarkId: _this6.state.confirmDeleteBookmark.id
+	                }
+	              }));
 	            }
 	          },
 	          goToCreateMode: function goToCreateMode() {
-	            _this7.setAttribute('create-mode', true);
+	            _this6.update({ createMode: true });
+	            window.requestAnimationFrame(function () {
+	              return _this6.el.querySelector('mp-input-group').focus();
+	            });
 	          },
 	          createBookmark: function createBookmark(e) {
 	            e.stopImmediatePropagation();
-	            _this7.setAttribute('create-mode', false);
-	            _this7.setAttribute('saving', true);
-	            _this7.dispatchEvent(new CustomEvent('submit', { detail: { action: 'create', name: _this7.state.name } }));
+	            _this6.update({ createMode: false });
+	            _this6.setAttribute('saving', true);
+	            _this6.dispatchEvent(new CustomEvent('submit', { detail: { action: 'create', name: _this6.state.name } }));
 	          },
 	          setName: function setName(e) {
 	            e.stopImmediatePropagation();
-	            _this7.update({ name: e.target.value });
+	            _this6.update({ name: e.target.value });
 	          },
 	          stopPropagation: function stopPropagation(e) {
 	            e.stopImmediatePropagation();
@@ -27114,9 +27115,9 @@
 	        "className": [].concat('mp-bm-menu-name').filter(Boolean).join(' ')
 	      }, [jade_mixins['highlight'].call(this, bookmark.name, filterText, 'mp-bm-menu-highlight')].filter(Boolean)), h("div", {
 	        "className": [].concat('mp-bm-menu-creator').filter(Boolean).join(' ')
-	      }, ["" + bookmark.user + ""].filter(Boolean))].filter(Boolean)), h("div", {
+	      }, [bookmark.user])].filter(Boolean)), h("div", {
 	        "onclick": function onclick(e) {
-	          return $helpers.confirmDeleteBookmark(e, bookmark);
+	          return $helpers.openConfirmDeleteDialog(e, bookmark);
 	        },
 	        "className": [].concat('mp-bm-menu-delete-button').filter(Boolean).join(' ')
 	      }, [h("svg-icon", {
@@ -27181,18 +27182,18 @@
 	          "className": [].concat('mp-bm-menu-container').filter(Boolean).join(' ')
 	        }, [h("div", {
 	          "className": [].concat('mp-bm-menu-search').filter(Boolean).join(' ')
-	        }, [h("input", {
-	          "type": "text",
-	          "placeholder": 'Filter bookmarks',
-	          "oninput": $helpers.setFilterText,
-	          "onchange": $helpers.stopPropagation
-	        }), h("div", {
+	        }, [h("div", {
 	          "className": [].concat('mp-bm-menu-mp-icon').concat('mp-icon').filter(Boolean).join(' ')
 	        }, [h("svg-icon", {
 	          "attributes": {
 	            icon: "search"
 	          }
-	        })].filter(Boolean))].filter(Boolean)), h("div", {
+	        })].filter(Boolean)), h("input", {
+	          "type": "text",
+	          "placeholder": 'Filter bookmarks',
+	          "oninput": $helpers.setFilterText,
+	          "onchange": $helpers.stopPropagation
+	        })].filter(Boolean)), h("div", {
 	          "className": [].concat('mp-bm-menu-list').filter(Boolean).join(' ')
 	        }, function () {
 	          var __jade_nodes = [];
@@ -27200,7 +27201,7 @@
 	            "className": [].concat('mp-bm-menu-empty').filter(Boolean).join(' ')
 	          }, ["No bookmarks found."].filter(Boolean)) : function () {
 	            var __jade_nodes = [];
-	            var showSectionHeader = filteredBookmarks[0].user_id === userId && filteredBookmarks[filteredBookmarks.length - 1] !== userId;
+	            var showSectionHeader = filteredBookmarks[0].user_id === userId && filteredBookmarks[filteredBookmarks.length - 1].userId !== userId;
 	            __jade_nodes = __jade_nodes.concat(filteredBookmarks.map(function (bookmark, idx) {
 	              return function () {
 	                var __jade_nodes = [];
@@ -27236,7 +27237,7 @@
 	            "onsubmit": $helpers.createBookmark
 	          }) : h("mp-button-bar", {
 	            "attributes": {
-	              'disabled': $component.isAttributeEnabled('create-disabled')
+	              disabled: $component.isAttributeEnabled('create-disabled')
 	            },
 	            "onclick": $helpers.goToCreateMode,
 	            "className": [].concat('mp-button-bar-secondary').filter(Boolean).join(' ')
@@ -27246,8 +27247,7 @@
 	        __jade_nodes = __jade_nodes.concat(confirmDeleteBookmark ? h("mp-confirm-delete", {
 	          "attributes": {
 	            closeable: true,
-	            open: true,
-	            width: '400px'
+	            open: true
 	          },
 	          "onchange": $helpers.handleConfirmModalChange,
 	          "onsubmit": $helpers.handleConfirmSubmit
@@ -27259,12 +27259,12 @@
 	        }, function () {
 	          var __jade_nodes = [];
 	          __jade_nodes = __jade_nodes.concat(h("div", {
-	            "className": [].concat('mp-confirm-title').filter(Boolean).join(' ')
+	            "className": [].concat('mp-confirm-delete-title').filter(Boolean).join(' ')
 	          }, ["Delete Bookmark"].filter(Boolean)));
 	          __jade_nodes = __jade_nodes.concat(confirmDeleteBookmark.include_in_dashboard ? h("div", {
-	            "className": [].concat('mp-confirm-description').filter(Boolean).join(' ')
+	            "className": [].concat('mp-confirm-delete-description').filter(Boolean).join(' ')
 	          }, ["Are you sure you want to delete the bookmark named “" + confirmDeleteBookmark.name + "”? Deleting it will also remove it from all dashboards."].filter(Boolean)) : h("div", {
-	            "className": [].concat('mp-confirm-description').filter(Boolean).join(' ')
+	            "className": [].concat('mp-confirm-delete-description').filter(Boolean).join(' ')
 	          }, ["Are you sure you want to delete the bookmark named “" + confirmDeleteBookmark.name + "”?"].filter(Boolean)));;
 	          return __jade_nodes;
 	        }.call(this).filter(Boolean))].filter(Boolean)) : undefined);;
@@ -27280,7 +27280,7 @@
 /* 392 */
 /***/ function(module, exports) {
 
-	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6e859d;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-weight: 400;   font-size: 12px;   font-stretch: normal; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 12px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-size: 12px;   font-weight: 400;   padding: 8px;   -webkit-transition: border-color 150ms ease-out;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus {   border-color: #3391e9;   -webkit-transition: border-color 200ms ease-in;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } * {   box-sizing: border-box; } mp-bookmarks-widget {   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   background-color: #f6f7f9;   background-image: -webkit-linear-gradient(#f9fafb 0%, #f2f3f6 100%);   background-image: linear-gradient(#f9fafb 0%, #f2f3f6 100%);   box-shadow: 0 1px rgba(0,0,0,0.05);   box-sizing: border-box;   width: 145px;   height: 54px; } :host {   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   background-color: #f6f7f9;   background-image: -webkit-linear-gradient(#f9fafb 0%, #f2f3f6 100%);   background-image: linear-gradient(#f9fafb 0%, #f2f3f6 100%);   box-shadow: 0 1px rgba(0,0,0,0.05);   box-sizing: border-box;   width: 145px;   height: 54px; } .mp-bm-container {   color: #6e859d;   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   -webkit-box-orient: vertical;   -webkit-box-direction: normal;       -ms-flex-direction: column;           flex-direction: column;   height: 100%;   width: 100%; } .mp-bm-container .mp-bm-btn {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   cursor: pointer;   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 12px;   font-weight: 600;   height: 100%;   -webkit-box-pack: center;       -ms-flex-pack: center;           justify-content: center;   -webkit-user-select: none;      -moz-user-select: none;       -ms-user-select: none;           user-select: none;   width: 100%; } .mp-bm-container .mp-bm-btn .mp-bm-btn-icon {   height: 22px;   margin-right: 4px; } .mp-bm-container .mp-bm-btn .mp-bm-btn-icon svg-icon svg {   left: 0;   top: 0; } .mp-bm-container .mp-bm-btn .mp-bm-btn-icon svg-icon svg, .mp-bm-container .mp-bm-btn .mp-bm-btn-icon svg-icon path {   color: #6e859d;   fill: #6e859d;   -webkit-transition: 0.2s;   transition: 0.2s; } .mp-bm-container .mp-bm-btn:hover {   background-color: rgba(255,255,255,0.35);   color: #4c6072; } .mp-bm-container .mp-bm-btn:hover .mp-bm-btn-icon svg-icon svg {   left: 0;   top: 0; } .mp-bm-container .mp-bm-btn:hover .mp-bm-btn-icon svg-icon svg, .mp-bm-container .mp-bm-btn:hover .mp-bm-btn-icon svg-icon path {   color: #4c6072;   fill: #4c6072;   -webkit-transition: 0s;   transition: 0s; } .mp-bm-container .mp-bm-menu {   height: 0px;   position: relative;   width: 100%; } .mp-bm-container .mp-bm-menu mp-drop-menu {   left: initial;   right: -8px;   top: -10px; } .mp-bm-menu-container {   background-color: #fff;   border-radius: 5px;   width: 320px; } .mp-bm-menu-container.mp-bm-menu-open {   display: block; } .mp-bm-menu-container .mp-bm-menu-search {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   background-color: #fff;   border: 1px solid #e5eaef;   border-top-left-radius: 5px;   border-top-right-radius: 5px;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   height: 60px;   -webkit-box-pack: center;       -ms-flex-pack: center;           justify-content: center;   padding: 12px 15px;   width: 100%;   align-items: center;   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   position: relative; } .mp-bm-menu-container .mp-bm-menu-search input {   padding: 6px;   padding-left: 36px;   padding-right: 18px;   width: 100%; } .mp-bm-menu-container .mp-bm-menu-search input:focus + .mp-bm-menu-mp-icon svg-icon svg {   left: 0;   top: 0; } .mp-bm-menu-container .mp-bm-menu-search input:focus + .mp-bm-menu-mp-icon svg-icon svg, .mp-bm-menu-container .mp-bm-menu-search input:focus + .mp-bm-menu-mp-icon svg-icon path {   color: #6e859d;   fill: #6e859d;   -webkit-transition: 0.2s;   transition: 0.2s; } .mp-bm-menu-container .mp-bm-menu-search .mp-bm-menu-mp-icon {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   position: absolute;   top: 0;   bottom: 0;   left: 8px; } .mp-bm-menu-container .mp-bm-menu-search .mp-bm-menu-mp-icon svg-icon svg {   left: 0;   top: 0; } .mp-bm-menu-container .mp-bm-menu-search .mp-bm-menu-mp-icon svg-icon svg, .mp-bm-menu-container .mp-bm-menu-search .mp-bm-menu-mp-icon svg-icon path {   color: #9cacbb;   fill: #9cacbb;   -webkit-transition: 0.2s;   transition: 0.2s; } .mp-bm-menu-container .mp-bm-menu-search .mp-bm-menu-mp-icon {   left: 24px;   top: -1px; } .mp-bm-menu-container .mp-bm-menu-list {   border-bottom-left-radius: 5px;   border-bottom-right-radius: 5px;   max-height: 360px;   margin: 0px 10px;   overflow-y: auto;   position: relative; } .mp-bm-menu-container .mp-bm-menu-list > :first-child:not(.mp-bm-menu-section-header):not(.mp-bm-menu-empty) {   margin-top: 10px; } .mp-bm-menu-container .mp-bm-menu-list .mp-bm-menu-empty {   color: #9cacbb;   font-style: italic;   padding: 20px; } .mp-bm-menu-container .mp-bm-menu-list .mp-bm-menu-section-header {   color: #9cacbb;   font-size: 11px;   text-transform: uppercase;   font-weight: 600;   padding: 20px 10px 8px 10px; } .mp-bm-menu-container .mp-bm-menu-list .mp-bm-menu-list-item {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   border-radius: 5px;   cursor: pointer;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   height: 54px;   padding: 10px; } .mp-bm-menu-container .mp-bm-menu-list .mp-bm-menu-list-item:only-child {   margin: 10px 0; } .mp-bm-menu-container .mp-bm-menu-list .mp-bm-menu-list-item:last-child {   margin-bottom: 10px; } .mp-bm-menu-container .mp-bm-menu-list .mp-bm-menu-list-item.mp-bm-menu-list-item-active {   background-color: #eff3f5; } .mp-bm-menu-container .mp-bm-menu-list .mp-bm-menu-list-item.mp-bm-menu-list-item-active .mp-bm-menu-list-item-content .mp-bm-menu-name, .mp-bm-menu-container .mp-bm-menu-list .mp-bm-menu-list-item.mp-bm-menu-list-item-active .mp-bm-menu-list-item-content .mp-bm-menu-creator {   color: #3b99f0; } .mp-bm-menu-container .mp-bm-menu-list .mp-bm-menu-list-item .mp-bm-menu-list-item-content {   display: -webkit-box;   display: -ms-flexbox;   display: flex;   -webkit-box-flex: 1;       -ms-flex: 1;           flex: 1;   -webkit-box-orient: vertical;   -webkit-box-direction: normal;       -ms-flex-direction: column;           flex-direction: column; } .mp-bm-menu-container .mp-bm-menu-list .mp-bm-menu-list-item .mp-bm-menu-list-item-content .mp-bm-menu-name, .mp-bm-menu-container .mp-bm-menu-list .mp-bm-menu-list-item .mp-bm-menu-list-item-content .mp-bm-menu-creator {   font-size: 12px;   max-width: 260px;   overflow: hidden;   text-overflow: ellipsis;   white-space: nowrap; } .mp-bm-menu-container .mp-bm-menu-list .mp-bm-menu-list-item .mp-bm-menu-list-item-content .mp-bm-menu-name {   color: #6e859d;   font-weight: 500;   margin-bottom: 4px; } .mp-bm-menu-container .mp-bm-menu-list .mp-bm-menu-list-item .mp-bm-menu-list-item-content .mp-bm-menu-name .mp-bm-menu-highlight {   font-weight: 600; } .mp-bm-menu-container .mp-bm-menu-list .mp-bm-menu-list-item .mp-bm-menu-list-item-content .mp-bm-menu-creator {   color: #c1ccd5;   font-weight: 400; } .mp-bm-menu-container .mp-bm-menu-list .mp-bm-menu-list-item .mp-bm-menu-delete-button {   display: none;   -webkit-box-flex: 0;       -ms-flex: 0;           flex: 0;   height: 22px;   margin-right: 6px; } .mp-bm-menu-container .mp-bm-menu-list .mp-bm-menu-list-item .mp-bm-menu-delete-button svg-icon {   height: 22px;   min-height: 22px;   min-width: 22px;   width: 22px; } .mp-bm-menu-container .mp-bm-menu-list .mp-bm-menu-list-item .mp-bm-menu-delete-button svg-icon svg {   height: 22px;   min-height: 22px;   min-width: 22px;   width: 22px;   left: 0;   top: 0; } .mp-bm-menu-container .mp-bm-menu-list .mp-bm-menu-list-item .mp-bm-menu-delete-button svg-icon svg, .mp-bm-menu-container .mp-bm-menu-list .mp-bm-menu-list-item .mp-bm-menu-delete-button svg-icon path {   color: #d8e0e6;   fill: #d8e0e6;   -webkit-transition: 0.1s;   transition: 0.1s; } .mp-bm-menu-container .mp-bm-menu-list .mp-bm-menu-list-item .mp-bm-menu-delete-button:hover svg-icon svg, .mp-bm-menu-container .mp-bm-menu-list .mp-bm-menu-list-item .mp-bm-menu-delete-button:hover svg-icon path {   color: #e4567b;   fill: #e4567b; } .mp-bm-menu-container .mp-bm-menu-list .mp-bm-menu-list-item:hover .mp-bm-menu-delete-button {   display: block; } .mp-bm-menu-add {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   height: 48px;   -webkit-box-pack: center;       -ms-flex-pack: center;           justify-content: center;   width: 100%; } .mp-bm-menu-add mp-button-bar {   height: 100%; } .mp-bm-menu-add mp-input-group {   border-top: 1px solid #d8e0e6;   height: 100%;   width: 100%;   padding: 6px; } ";
+	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6e859d;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-weight: 400;   font-size: 12px;   font-stretch: normal; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 12px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-size: 12px;   font-weight: 400;   padding: 8px;   -webkit-transition: border-color 150ms ease-out;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus {   border-color: #3391e9;   -webkit-transition: border-color 200ms ease-in;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } * {   box-sizing: border-box; } mp-bookmarks-widget {   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   background-color: #eff3f5;   background-image: -webkit-linear-gradient(#f9fafc 0%, #eff3f5 100%);   background-image: linear-gradient(#f9fafc 0%, #eff3f5 100%);   box-shadow: 0 1px rgba(0,0,0,0.05);   box-sizing: border-box;   width: 145px;   height: 54px; } :host {   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   background-color: #eff3f5;   background-image: -webkit-linear-gradient(#f9fafc 0%, #eff3f5 100%);   background-image: linear-gradient(#f9fafc 0%, #eff3f5 100%);   box-shadow: 0 1px rgba(0,0,0,0.05);   box-sizing: border-box;   width: 145px;   height: 54px; } .mp-bm-container {   color: #6e859d;   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   -webkit-box-orient: vertical;   -webkit-box-direction: normal;       -ms-flex-direction: column;           flex-direction: column;   height: 100%;   width: 100%; } .mp-bm-container .mp-bm-btn {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   cursor: pointer;   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 12px;   font-weight: 600;   height: 100%;   -webkit-box-pack: center;       -ms-flex-pack: center;           justify-content: center;   -webkit-user-select: none;      -moz-user-select: none;       -ms-user-select: none;           user-select: none;   width: 100%; } .mp-bm-container .mp-bm-btn svg-icon svg {   left: 0;   top: 0; } .mp-bm-container .mp-bm-btn svg-icon svg, .mp-bm-container .mp-bm-btn svg-icon path {   color: #6e859d;   fill: #6e859d;   -webkit-transition: 0;   transition: 0; } .mp-bm-container .mp-bm-btn:hover svg-icon svg, .mp-bm-container .mp-bm-btn:hover svg-icon path {   color: #4c6072;   fill: #4c6072; } .mp-bm-container .mp-bm-btn .mp-bm-btn-icon {   height: 22px;   margin-right: 4px; } .mp-bm-container .mp-bm-btn:hover {   background-color: rgba(255,255,255,0.35);   color: #4c6072; } .mp-bm-container .mp-bm-menu {   height: 0px;   position: relative;   width: 100%; } .mp-bm-container .mp-bm-menu mp-drop-menu {   left: initial;   right: -8px;   top: -10px; } .mp-bm-menu-container {   background-color: #fff;   border-radius: 5px;   width: 320px; } .mp-bm-menu-container.mp-bm-menu-open {   display: block; } .mp-bm-menu-container .mp-bm-menu-search {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   background-color: #fff;   border: 1px solid #e5eaef;   border-top-left-radius: 5px;   border-top-right-radius: 5px;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   height: 60px;   -webkit-box-pack: center;       -ms-flex-pack: center;           justify-content: center;   padding: 12px 15px;   width: 100%;   align-items: center;   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   position: relative; } .mp-bm-menu-container .mp-bm-menu-search input {   padding: 6px;   padding-left: 36px;   padding-right: 18px;   width: 100%; } .mp-bm-menu-container .mp-bm-menu-search input:focus + .mp-bm-menu-mp-icon svg-icon svg {   left: 0;   top: 0; } .mp-bm-menu-container .mp-bm-menu-search input:focus + .mp-bm-menu-mp-icon svg-icon svg, .mp-bm-menu-container .mp-bm-menu-search input:focus + .mp-bm-menu-mp-icon svg-icon path {   color: #6e859d;   fill: #6e859d;   -webkit-transition: 0.2s;   transition: 0.2s; } .mp-bm-menu-container .mp-bm-menu-search .mp-bm-menu-mp-icon {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   position: absolute;   top: 0;   bottom: 0;   left: 8px; } .mp-bm-menu-container .mp-bm-menu-search .mp-bm-menu-mp-icon svg-icon svg {   left: 0;   top: 0; } .mp-bm-menu-container .mp-bm-menu-search .mp-bm-menu-mp-icon svg-icon svg, .mp-bm-menu-container .mp-bm-menu-search .mp-bm-menu-mp-icon svg-icon path {   color: #9cacbb;   fill: #9cacbb;   -webkit-transition: 0.2s;   transition: 0.2s; } .mp-bm-menu-container .mp-bm-menu-search .mp-bm-menu-mp-icon {   left: 24px;   top: -1px; } .mp-bm-menu-container .mp-bm-menu-list {   border-bottom-left-radius: 5px;   border-bottom-right-radius: 5px;   max-height: 360px;   margin: 0px 10px;   overflow-y: auto;   position: relative; } .mp-bm-menu-container .mp-bm-menu-list > :first-child:not(.mp-bm-menu-section-header):not(.mp-bm-menu-empty) {   margin-top: 10px; } .mp-bm-menu-container .mp-bm-menu-list .mp-bm-menu-empty {   color: #9cacbb;   font-style: italic;   padding: 20px; } .mp-bm-menu-container .mp-bm-menu-list .mp-bm-menu-section-header {   color: #9cacbb;   font-size: 11px;   text-transform: uppercase;   font-weight: 600;   padding: 20px 10px 8px 10px; } .mp-bm-menu-container .mp-bm-menu-list .mp-bm-menu-list-item {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   border-radius: 5px;   cursor: pointer;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   height: 54px;   padding: 10px; } .mp-bm-menu-container .mp-bm-menu-list .mp-bm-menu-list-item:only-child {   margin: 10px 0; } .mp-bm-menu-container .mp-bm-menu-list .mp-bm-menu-list-item:last-child {   margin-bottom: 10px; } .mp-bm-menu-container .mp-bm-menu-list .mp-bm-menu-list-item.mp-bm-menu-list-item-active {   background-color: #eff3f5; } .mp-bm-menu-container .mp-bm-menu-list .mp-bm-menu-list-item.mp-bm-menu-list-item-active .mp-bm-menu-list-item-content .mp-bm-menu-name, .mp-bm-menu-container .mp-bm-menu-list .mp-bm-menu-list-item.mp-bm-menu-list-item-active .mp-bm-menu-list-item-content .mp-bm-menu-creator {   color: #3b99f0; } .mp-bm-menu-container .mp-bm-menu-list .mp-bm-menu-list-item .mp-bm-menu-list-item-content {   display: -webkit-box;   display: -ms-flexbox;   display: flex;   -webkit-box-flex: 1;       -ms-flex: 1;           flex: 1;   -webkit-box-orient: vertical;   -webkit-box-direction: normal;       -ms-flex-direction: column;           flex-direction: column; } .mp-bm-menu-container .mp-bm-menu-list .mp-bm-menu-list-item .mp-bm-menu-list-item-content .mp-bm-menu-name, .mp-bm-menu-container .mp-bm-menu-list .mp-bm-menu-list-item .mp-bm-menu-list-item-content .mp-bm-menu-creator {   font-size: 12px;   max-width: 260px;   overflow: hidden;   text-overflow: ellipsis;   white-space: nowrap; } .mp-bm-menu-container .mp-bm-menu-list .mp-bm-menu-list-item .mp-bm-menu-list-item-content .mp-bm-menu-name {   color: #6e859d;   font-weight: 500;   margin-bottom: 4px; } .mp-bm-menu-container .mp-bm-menu-list .mp-bm-menu-list-item .mp-bm-menu-list-item-content .mp-bm-menu-name .mp-bm-menu-highlight {   font-weight: 600; } .mp-bm-menu-container .mp-bm-menu-list .mp-bm-menu-list-item .mp-bm-menu-list-item-content .mp-bm-menu-creator {   color: #c1ccd5;   font-weight: 400; } .mp-bm-menu-container .mp-bm-menu-list .mp-bm-menu-list-item .mp-bm-menu-delete-button {   display: none;   -webkit-box-flex: 0;       -ms-flex: 0;           flex: 0;   height: 22px;   margin-right: 6px; } .mp-bm-menu-container .mp-bm-menu-list .mp-bm-menu-list-item .mp-bm-menu-delete-button svg-icon svg {   left: 0;   top: 0; } .mp-bm-menu-container .mp-bm-menu-list .mp-bm-menu-list-item .mp-bm-menu-delete-button svg-icon svg, .mp-bm-menu-container .mp-bm-menu-list .mp-bm-menu-list-item .mp-bm-menu-delete-button svg-icon path {   color: #d8e0e6;   fill: #d8e0e6;   -webkit-transition: 0.1s;   transition: 0.1s; } .mp-bm-menu-container .mp-bm-menu-list .mp-bm-menu-list-item .mp-bm-menu-delete-button:hover svg-icon svg, .mp-bm-menu-container .mp-bm-menu-list .mp-bm-menu-list-item .mp-bm-menu-delete-button:hover svg-icon path {   color: #e4567b;   fill: #e4567b; } .mp-bm-menu-container .mp-bm-menu-list .mp-bm-menu-list-item:hover .mp-bm-menu-delete-button {   display: block; } .mp-bm-menu-add {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   height: 48px;   -webkit-box-pack: center;       -ms-flex-pack: center;           justify-content: center;   width: 100%; } .mp-bm-menu-add mp-button-bar {   height: 100%; } .mp-bm-menu-add mp-input-group {   border-top: 1px solid #d8e0e6;   height: 100%;   width: 100%;   padding: 6px; } ";
 
 
 /***/ },
@@ -27345,54 +27345,61 @@
 			"id": 1,
 			"user_id": 1,
 			"include_in_dashboard": true,
-			"user": "Josh W.",
+			"user": "John D.",
 			"name": "most addicted users"
 		},
 		{
 			"id": 2,
 			"user_id": 1,
 			"include_in_dashboard": false,
-			"user": "Josh W.",
+			"user": "John D.",
 			"name": "least addicted users"
 		},
 		{
 			"id": 3,
 			"user_id": 1,
 			"include_in_dashboard": true,
-			"user": "Josh W.",
+			"user": "John D.",
 			"name": "Growth line graph"
+		},
+		{
+			"id": 13,
+			"user_id": 2,
+			"include_in_dashboard": false,
+			"user": "Josh W.",
+			"name": "Signups better"
 		},
 		{
 			"id": 4,
 			"user_id": 1,
 			"include_in_dashboard": false,
-			"user": "Josh W.",
+			"user": "John D.",
 			"name": "Signups"
 		},
 		{
 			"id": 5,
-			"user_id": 2,
+			"user_id": 4,
 			"include_in_dashboard": true,
 			"user": "Ilya K.",
 			"name": "Some bookmark 1"
 		},
 		{
 			"id": 6,
-			"user_id": 2,
+			"user_id": 4,
 			"include_in_dashboard": false,
 			"user": "Ilya K.",
 			"name": "Some bookmark 2"
 		},
 		{
 			"id": 7,
-			"user_id": 2,
+			"user_id": 4,
 			"include_in_dashboard": true,
 			"user": "Ilya K.",
 			"name": "Another bookmark 1"
 		},
 		{
 			"id": 8,
-			"user_id": 2,
+			"user_id": 4,
 			"include_in_dashboard": false,
 			"user": "Ilya K.",
 			"name": "Another bookmark 2"
@@ -27435,7 +27442,7 @@
 
 	function _jade_template_fn(locals) {
 	  locals = locals || {};;;
-	  var result_of_with = function ($helpers, COLORS, JSON, Object, SVG_ICONS, blueToggleValue, bookmarks, console, inputGroupSaving, open, savingBookmark) {
+	  var result_of_with = function ($helpers, COLORS, JSON, Object, SVG_ICONS, blueToggleValue, bookmarks, console, inputGroupSaving, open, savingBookmark, selectedBookmarkId) {
 	    var h = __webpack_require__(349);
 	    return {
 	      value: h("div", {
@@ -27580,12 +27587,31 @@
 	        "disabled": true,
 	        "className": [].concat('mp-button-secondary').concat('mp-button-on-blue').filter(Boolean).join(' ')
 	      }, ["Cancel"].filter(Boolean))].filter(Boolean))].filter(Boolean)), h("div", {
-	        "className": [].concat('section').filter(Boolean).join(' ')
-	      }, [h("h1", ["Button bar"].filter(Boolean)), h("p", [h("mp-button-bar", {
+	        "className": [].concat('section').concat('button-bars').filter(Boolean).join(' ')
+	      }, [h("h1", ["Button bar"].filter(Boolean)), h("p", {
+	        "className": [].concat('button-bar-container').filter(Boolean).join(' ')
+	      }, [h("mp-button-bar", {
 	        "className": [].concat('mp-button-bar-secondary').filter(Boolean).join(' ')
-	      }, ["I'm a button bar"].filter(Boolean))].filter(Boolean)), h("p", [h("mp-button-bar", {
+	      }, ["I'm a button bar"].filter(Boolean))].filter(Boolean)), h("p", {
+	        "className": [].concat('button-bar-container').filter(Boolean).join(' ')
+	      }, [h("mp-button-bar", {
+	        "attributes": {
+	          disabled: true
+	        },
+	        "className": [].concat('mp-button-bar-secondary').filter(Boolean).join(' ')
+	      }, ["I'm a disabled button bar"].filter(Boolean))].filter(Boolean)), h("p", {
+	        "className": [].concat('button-bar-container').filter(Boolean).join(' ')
+	      }, [h("mp-button-bar", {
 	        "attributes": {
 	          'arrow-next': true
+	        },
+	        "className": [].concat('mp-button-bar-primary').filter(Boolean).join(' ')
+	      }, ["Next step"].filter(Boolean))].filter(Boolean)), h("p", {
+	        "className": [].concat('button-bar-container').filter(Boolean).join(' ')
+	      }, [h("mp-button-bar", {
+	        "attributes": {
+	          'arrow-next': true,
+	          disabled: true
 	        },
 	        "className": [].concat('mp-button-bar-primary').filter(Boolean).join(' ')
 	      }, ["Next step"].filter(Boolean))].filter(Boolean))].filter(Boolean)), h("div", {
@@ -27595,16 +27621,16 @@
 	        "placeholder": "I'm a placeholder"
 	      })].filter(Boolean)), h("h2", ["Input with icon"].filter(Boolean)), h("p", [h("div", {
 	        "className": [].concat('mp-icon-input').filter(Boolean).join(' ')
-	      }, [h("input", {
-	        "type": "text",
-	        "placeholder": "Some placeholder text"
-	      }), h("div", {
+	      }, [h("div", {
 	        "className": [].concat('mp-icon').filter(Boolean).join(' ')
 	      }, [h("svg-icon", {
 	        "attributes": {
 	          icon: "search"
 	        }
-	      })].filter(Boolean))].filter(Boolean))].filter(Boolean)), h("h2", ["Input group"].filter(Boolean)), h("p", [h("mp-input-group", {
+	      })].filter(Boolean)), h("input", {
+	        "type": "text",
+	        "placeholder": "Some placeholder text"
+	      })].filter(Boolean))].filter(Boolean)), h("h2", ["Input group"].filter(Boolean)), h("p", [h("mp-input-group", {
 	        "attributes": {
 	          placeholder: "Type a name...",
 	          busy: inputGroupSaving
@@ -27612,7 +27638,7 @@
 	        "onchange": $helpers.handleNamerChange,
 	        "onsubmit": $helpers.handleNamerSubmit
 	      })].filter(Boolean))].filter(Boolean)), h("div", {
-	        "className": [].concat('section').filter(Boolean).join(' ')
+	        "className": [].concat('section').concat('modals').filter(Boolean).join(' ')
 	      }, [h("h1", ["Modals"].filter(Boolean)), h("p", [h("button", {
 	        "onclick": function onclick() {
 	          return $helpers.openModal('modal');
@@ -27620,11 +27646,12 @@
 	      }, ["Open modal"].filter(Boolean)), h("mp-modal", {
 	        "attributes": {
 	          closeable: true,
-	          open: open['modal']
+	          open: open.modal
 	        },
 	        "onchange": function onchange(e) {
 	          return $helpers.handleModalChange('modal', e.detail.state);
-	        }
+	        },
+	        "className": [].concat('modal').filter(Boolean).join(' ')
 	      }, [h("div", [h("div", {
 	        "className": [].concat('mp-modal-content').filter(Boolean).join(' ')
 	      }, [h("div", {
@@ -27647,11 +27674,12 @@
 	        "attributes": {
 	          'modal-type': 'popup',
 	          closeable: true,
-	          open: open['popup']
+	          open: open.popup
 	        },
 	        "onchange": function onchange(e) {
 	          return $helpers.handleModalChange('popup', e.detail.state);
-	        }
+	        },
+	        "className": [].concat('popup').filter(Boolean).join(' ')
 	      }, [h("div", [h("div", {
 	        "className": [].concat('mp-modal-content').filter(Boolean).join(' ')
 	      }, [h("div", {
@@ -27669,8 +27697,7 @@
 	        }
 	      }, ["Open confirm"].filter(Boolean)), h("mp-confirm", {
 	        "attributes": {
-	          open: open['confirm'],
-	          width: '400px'
+	          open: open.confirm
 	        },
 	        "onsubmit": function onsubmit(e) {
 	          return console.log(e.detail);
@@ -27684,25 +27711,25 @@
 	        "className": [].concat('mp-confirm-description').filter(Boolean).join(' ')
 	      }, ["If you navigate away from this page you will lose your changes. Would you like to continue?"].filter(Boolean))].filter(Boolean))].filter(Boolean))].filter(Boolean)), h("p", [h("button", {
 	        "onclick": function onclick() {
-	          return $helpers.openModal('confirm-delete');
+	          return $helpers.openModal('confirmDelete');
 	        }
 	      }, ["Open confirm-delete"].filter(Boolean)), h("mp-confirm-delete", {
 	        "attributes": {
 	          id: 'confirmDelete',
 	          'delete-button-label': 'Delete it',
 	          closeable: true,
-	          open: open['confirm-delete']
+	          open: open.confirmDelete
 	        },
 	        "onsubmit": function onsubmit(e) {
 	          return console.log(e.detail);
 	        },
 	        "onchange": function onchange(e) {
-	          return $helpers.handleModalChange('confirm-delete', e.detail.state);
+	          return $helpers.handleModalChange('confirmDelete', e.detail.state);
 	        }
 	      }, [h("div", [h("div", {
-	        "className": [].concat('mp-confirm-title').filter(Boolean).join(' ')
+	        "className": [].concat('mp-confirm-delete-title').filter(Boolean).join(' ')
 	      }, ["Delete Bookmark"].filter(Boolean)), h("div", {
-	        "className": [].concat('mp-confirm-description').filter(Boolean).join(' ')
+	        "className": [].concat('mp-confirm-delete-description').filter(Boolean).join(' ')
 	      }, ["Are you sure you want to delete this bookmark?"].filter(Boolean))].filter(Boolean))].filter(Boolean))].filter(Boolean))].filter(Boolean)), h("div", {
 	        "className": [].concat('section').concat('toggles').filter(Boolean).join(' ')
 	      }, [h("h1", ["Toggles"].filter(Boolean)), h("p", ["One element out of a set of two or more is always selected."].filter(Boolean)), h("mp-toggle", {
@@ -27759,7 +27786,7 @@
 	        "className": [].concat('drop-menu-container').filter(Boolean).join(' ')
 	      }, [h("mp-drop-menu", {
 	        "attributes": {
-	          open: open['menu']
+	          open: open.menu
 	        }
 	      }, [h("div", {
 	        "className": [].concat('text-container').filter(Boolean).join(' ')
@@ -27780,16 +27807,17 @@
 	      }, [h("mp-bookmarks-widget", {
 	        "attributes": {
 	          bookmarks: JSON.stringify(bookmarks),
-	          open: open['bookmarks-widget'],
+	          'create-disabled': false,
+	          open: open.bookmarksWidget,
 	          saving: savingBookmark,
-	          'user-id': 1,
-	          'create-disabled': false
+	          'selected-bookmark-id': selectedBookmarkId,
+	          'user-id': 1
 	        },
 	        "onsubmit": $helpers.handleBookmarksMenuSubmit,
 	        "onchange": $helpers.handleBookmarksMenuChange
 	      })].filter(Boolean))].filter(Boolean))].filter(Boolean))].filter(Boolean))
 	    };
-	  }.call(this, "$helpers" in locals ? locals.$helpers : typeof $helpers !== "undefined" ? $helpers : undefined, "COLORS" in locals ? locals.COLORS : typeof COLORS !== "undefined" ? COLORS : undefined, "JSON" in locals ? locals.JSON : typeof JSON !== "undefined" ? JSON : undefined, "Object" in locals ? locals.Object : typeof Object !== "undefined" ? Object : undefined, "SVG_ICONS" in locals ? locals.SVG_ICONS : typeof SVG_ICONS !== "undefined" ? SVG_ICONS : undefined, "blueToggleValue" in locals ? locals.blueToggleValue : typeof blueToggleValue !== "undefined" ? blueToggleValue : undefined, "bookmarks" in locals ? locals.bookmarks : typeof bookmarks !== "undefined" ? bookmarks : undefined, "console" in locals ? locals.console : typeof console !== "undefined" ? console : undefined, "inputGroupSaving" in locals ? locals.inputGroupSaving : typeof inputGroupSaving !== "undefined" ? inputGroupSaving : undefined, "open" in locals ? locals.open : typeof open !== "undefined" ? open : undefined, "savingBookmark" in locals ? locals.savingBookmark : typeof savingBookmark !== "undefined" ? savingBookmark : undefined);
+	  }.call(this, "$helpers" in locals ? locals.$helpers : typeof $helpers !== "undefined" ? $helpers : undefined, "COLORS" in locals ? locals.COLORS : typeof COLORS !== "undefined" ? COLORS : undefined, "JSON" in locals ? locals.JSON : typeof JSON !== "undefined" ? JSON : undefined, "Object" in locals ? locals.Object : typeof Object !== "undefined" ? Object : undefined, "SVG_ICONS" in locals ? locals.SVG_ICONS : typeof SVG_ICONS !== "undefined" ? SVG_ICONS : undefined, "blueToggleValue" in locals ? locals.blueToggleValue : typeof blueToggleValue !== "undefined" ? blueToggleValue : undefined, "bookmarks" in locals ? locals.bookmarks : typeof bookmarks !== "undefined" ? bookmarks : undefined, "console" in locals ? locals.console : typeof console !== "undefined" ? console : undefined, "inputGroupSaving" in locals ? locals.inputGroupSaving : typeof inputGroupSaving !== "undefined" ? inputGroupSaving : undefined, "open" in locals ? locals.open : typeof open !== "undefined" ? open : undefined, "savingBookmark" in locals ? locals.savingBookmark : typeof savingBookmark !== "undefined" ? savingBookmark : undefined, "selectedBookmarkId" in locals ? locals.selectedBookmarkId : typeof selectedBookmarkId !== "undefined" ? selectedBookmarkId : undefined);
 	  if (result_of_with) return result_of_with.value;
 	}
 	module.exports = _jade_template_fn;
@@ -27829,7 +27857,7 @@
 	exports.i(__webpack_require__(399), "");
 
 	// module
-	exports.push([module.id, ".section {\n  margin-bottom: 10px;\n  padding-bottom: 10px;\n  border-bottom: 1px solid #eff3f5;\n}\n.section .item-palette {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: column wrap;\n      flex-flow: column wrap;\n}\n.section .item-palette.color-palette {\n  height: 180px;\n}\n.section .item-palette.icon-palette {\n  height: 320px;\n}\n.section .list-block {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  margin: 5px;\n}\n.section .list-block svg-icon svg {\n  left: 0;\n  top: 0;\n}\n.section .list-block svg-icon svg,\n.section .list-block svg-icon path {\n  color: #4c6072;\n  fill: #4c6072;\n  -webkit-transition: 0.2s;\n  transition: 0.2s;\n}\n.section .list-block:hover svg-icon svg,\n.section .list-block:hover svg-icon path {\n  color: #6cb8ff;\n  fill: #6cb8ff;\n}\n.section .list-block .square {\n  display: inline-block;\n  vertical-align: middle;\n  margin-right: 4px;\n  width: 20px;\n  height: 20px;\n}\n.section .list-block .label {\n  display: inline-block;\n  margin-left: 10px;\n  vertical-align: middle;\n}\n.section.buttons mp-button {\n  margin-right: 4px;\n  vertical-align: middle;\n}\n.section.buttons p.button-field {\n  background: #4ba8ff;\n  display: table;\n  padding: 10px;\n}\n.section.toggles mp-toggle {\n  margin-bottom: 10px;\n}\n.section.toggles mp-toggle.inline-toggle {\n  width: 300px;\n}\n.section.toggles mp-toggle.full-width-toggle {\n  display: block;\n}\n.section.toggles .toggle-val {\n  margin-left: 10px;\n}\n.section.menus .drop-menu-container {\n  position: relative;\n}\n.section.forms .mp-icon-input {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  position: relative;\n}\n.section.forms .mp-icon-input input {\n  padding: 6px;\n  padding-left: 36px;\n  padding-right: 18px;\n  width: 100%;\n}\n.section.forms .mp-icon-input input:focus + .mp-icon svg-icon svg {\n  left: 0;\n  top: 0;\n}\n.section.forms .mp-icon-input input:focus + .mp-icon svg-icon svg,\n.section.forms .mp-icon-input input:focus + .mp-icon svg-icon path {\n  color: #6e859d;\n  fill: #6e859d;\n  -webkit-transition: 0.2s;\n  transition: 0.2s;\n}\n.section.forms .mp-icon-input .mp-icon {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 8px;\n}\n.section.forms .mp-icon-input .mp-icon svg-icon svg {\n  left: 0;\n  top: 0;\n}\n.section.forms .mp-icon-input .mp-icon svg-icon svg,\n.section.forms .mp-icon-input .mp-icon svg-icon path {\n  color: #9cacbb;\n  fill: #9cacbb;\n  -webkit-transition: 0.2s;\n  transition: 0.2s;\n}\n.section.widgets {\n  padding-bottom: 500px;\n}\n.section.widgets .bookmarks-widget {\n  background-color: #eff3f5;\n  border: 1px solid #c1ccd5;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 54px;\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n  width: 100%;\n}\n.section.widgets .bookmarks-widget mp-bookmarks-widget {\n  border-left: 1px solid #d8e0e6;\n  border-right: 1px solid #d8e0e6;\n  margin-right: 50px;\n}\n", ""]);
+	exports.push([module.id, ".section {\n  margin-bottom: 10px;\n  padding-bottom: 10px;\n  border-bottom: 1px solid #eff3f5;\n}\n.section .item-palette {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: column wrap;\n      flex-flow: column wrap;\n}\n.section .item-palette.color-palette {\n  height: 180px;\n}\n.section .item-palette.icon-palette {\n  height: 320px;\n}\n.section .list-block {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  margin: 5px;\n}\n.section .list-block svg-icon svg {\n  left: 0;\n  top: 0;\n}\n.section .list-block svg-icon svg,\n.section .list-block svg-icon path {\n  color: #4c6072;\n  fill: #4c6072;\n  -webkit-transition: 0.2s;\n  transition: 0.2s;\n}\n.section .list-block:hover svg-icon svg,\n.section .list-block:hover svg-icon path {\n  color: #6cb8ff;\n  fill: #6cb8ff;\n}\n.section .list-block .square {\n  display: inline-block;\n  vertical-align: middle;\n  margin-right: 4px;\n  width: 20px;\n  height: 20px;\n}\n.section .list-block .label {\n  display: inline-block;\n  margin-left: 10px;\n  vertical-align: middle;\n}\n.section.buttons mp-button {\n  margin-right: 4px;\n  vertical-align: middle;\n}\n.section.buttons p.button-field {\n  background: #4ba8ff;\n  display: table;\n  padding: 10px;\n}\n.section.button-bars .button-bar-container {\n  max-width: 600px;\n}\n.section.modals .modal {\n  width: 500px;\n}\n.section.modals mp-confirm {\n  width: 480px;\n}\n.section.toggles mp-toggle {\n  margin-bottom: 10px;\n}\n.section.toggles mp-toggle.inline-toggle {\n  width: 300px;\n}\n.section.toggles mp-toggle.full-width-toggle {\n  display: block;\n}\n.section.toggles .toggle-val {\n  margin-left: 10px;\n}\n.section.menus .drop-menu-container {\n  position: relative;\n}\n.section.forms .mp-icon-input {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  position: relative;\n}\n.section.forms .mp-icon-input input {\n  padding: 6px;\n  padding-left: 36px;\n  padding-right: 18px;\n  width: 100%;\n}\n.section.forms .mp-icon-input input:focus + .mp-icon svg-icon svg {\n  left: 0;\n  top: 0;\n}\n.section.forms .mp-icon-input input:focus + .mp-icon svg-icon svg,\n.section.forms .mp-icon-input input:focus + .mp-icon svg-icon path {\n  color: #6e859d;\n  fill: #6e859d;\n  -webkit-transition: 0.2s;\n  transition: 0.2s;\n}\n.section.forms .mp-icon-input .mp-icon {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 8px;\n}\n.section.forms .mp-icon-input .mp-icon svg-icon svg {\n  left: 0;\n  top: 0;\n}\n.section.forms .mp-icon-input .mp-icon svg-icon svg,\n.section.forms .mp-icon-input .mp-icon svg-icon path {\n  color: #9cacbb;\n  fill: #9cacbb;\n  -webkit-transition: 0.2s;\n  transition: 0.2s;\n}\n.section.widgets {\n  padding-bottom: 500px;\n}\n.section.widgets .bookmarks-widget {\n  background-color: #eff3f5;\n  border: 1px solid #c1ccd5;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 54px;\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n  width: 100%;\n}\n.section.widgets .bookmarks-widget mp-bookmarks-widget {\n  border-left: 1px solid #d8e0e6;\n  border-right: 1px solid #d8e0e6;\n  margin-right: 50px;\n}\n", ""]);
 
 	// exports
 
