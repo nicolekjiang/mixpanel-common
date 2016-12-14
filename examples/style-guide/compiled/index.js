@@ -20233,8 +20233,8 @@
 	  }
 
 	  _createClass(_class, [{
-	    key: 'closeMenu',
-	    value: function closeMenu() {
+	    key: '_closeMenu',
+	    value: function _closeMenu() {
 	      switch (this.state.visibility) {
 	        case VISIBILITY_CLOSED:
 	        case VISIBILITY_CLOSING:
@@ -20248,8 +20248,8 @@
 	      }
 	    }
 	  }, {
-	    key: 'openMenu',
-	    value: function openMenu() {
+	    key: '_openMenu',
+	    value: function _openMenu() {
 	      switch (this.state.visibility) {
 	        case VISIBILITY_OPEN:
 	        case VISIBILITY_OPENING:
@@ -20268,9 +20268,9 @@
 	      _get(_class.prototype.__proto__ || Object.getPrototypeOf(_class.prototype), 'attributeChangedCallback', this).apply(this, arguments);
 	      if (attr === 'open' && this.initialized) {
 	        if (this.isAttributeEnabled('open')) {
-	          this.openMenu();
+	          this._openMenu();
 	        } else {
-	          this.closeMenu();
+	          this._closeMenu();
 	        }
 	      }
 	    }
@@ -20281,8 +20281,7 @@
 
 	      _get(_class.prototype.__proto__ || Object.getPrototypeOf(_class.prototype), 'attachedCallback', this).apply(this, arguments);
 	      if (this.isAttributeEnabled('open')) {
-	        // open the menu if it's not explicitly closed
-	        this.openMenu();
+	        this._openMenu();
 	      }
 	      this._onAnimationEnd = function () {
 	        switch (_this2.state.visibility) {
