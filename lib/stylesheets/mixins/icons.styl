@@ -1,5 +1,3 @@
-@import 'colors.styl'
-
 svg-icon-style(base-color=null, hover-color=null, speed=0.2s, size=null, pos-left=0, pos-top=0)
   svg-icon
     if size != null
@@ -51,24 +49,3 @@ icon-input(icon-color=grey-500, icon-color-focus=grey-700)
     left 8px
 
     svg-icon-style(icon-color)
-
-// Much of these styles taken from https://github.com/lukehaas/css-loaders (MIT license)
-loader-styles(size=10px, time=1.1s, spinner-color=mp-blue, background-color=white, spinner-width=3px)
-  .mp-loader, .mp-loader:after
-    border-radius 50%
-    width size
-    height size
-
-  .mp-loader
-    position relative
-    border spinner-width solid spinner-color
-    border-right-color background-color
-    transform translateZ(0)
-    animation load time infinite linear
-
-  @keyframes load
-    0%
-      transform rotate(0deg)
-
-    100%
-      transform rotate(360deg)
