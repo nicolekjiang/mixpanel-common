@@ -11,7 +11,7 @@ import {
   removeByValue,
   replaceByIndex,
   insertAtIndex,
-} from '../lib/util';
+} from '../../lib/util';
 
 describe('pluralize()', function() {
   it('defaults to adding s', function() {

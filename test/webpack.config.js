@@ -1,13 +1,14 @@
+/* global require */
 var path = require('path');
+var glob = require('glob');
 
 var webpackConfig = {
   entry: {
-    'components/modal': './components/modal.js',
-    'util': './util.js'
+    'suites': glob.sync(path.join(__dirname, '/!(build)/**.js')),
   },
   output: {
     filename: '[name].js',
-    path: path.join(__dirname, '/build/')
+    path: path.join(__dirname, '/build/'),
   },
   module: {
     loaders: [
@@ -29,6 +30,12 @@ var webpackConfig = {
         exclude: /node_modules/,
         loader: 'babel?presets[]=es2015&babelrc=false!virtual-jade-loader',
       },
+      {
+        test: /\.json$/,
+        exclude: /node_modules/,
+        loader: 'json',
+      },
+
     ],
   },
   resolveLoader: {

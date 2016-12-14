@@ -1,6 +1,5 @@
 /* global beforeEach, describe, it */
 import expect from 'expect.js';
-import 'webcomponents.js/webcomponents';
 
 import '../../lib/components/modal';
 import { onAnimationEnd, offAnimationEnd } from '../../lib/components/utils';
