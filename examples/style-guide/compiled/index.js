@@ -18285,7 +18285,7 @@
 
 	__webpack_require__(364);
 
-	__webpack_require__(367);
+	__webpack_require__(368);
 
 	__webpack_require__(371);
 
@@ -19106,6 +19106,8 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
 	var _panel = __webpack_require__(299);
 
 	var _registerElement = __webpack_require__(347);
@@ -19118,89 +19120,7 @@
 
 	var _index4 = _interopRequireDefault(_index3);
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	(0, _registerElement.registerMPElement)('mp-spinner', function (_Component) {
-	  _inherits(_class, _Component);
-
-	  function _class() {
-	    _classCallCheck(this, _class);
-
-	    return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).apply(this, arguments));
-	  }
-
-	  _createClass(_class, [{
-	    key: 'config',
-	    get: function get() {
-	      return {
-	        css: _index4.default,
-	        template: _index2.default,
-	        useShadowDom: true
-	      };
-	    }
-	  }]);
-
-	  return _class;
-	}(_panel.Component));
-
-/***/ },
-/* 365 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	function _jade_template_fn(locals) {
-	  locals = locals || {};;;
-	  var result_of_with = function (colorClass) {
-	    var h = __webpack_require__(349);
-	    return {
-	      value: h("div", {
-	        "className": [].concat('mp-spinner').concat(colorClass).filter(Boolean).join(' ')
-	      }, [h("div", {
-	        "className": [].concat('spinner').filter(Boolean).join(' ')
-	      })].filter(Boolean))
-	    };
-	  }.call(this, "colorClass" in locals ? locals.colorClass : typeof colorClass !== "undefined" ? colorClass : undefined);
-	  if (result_of_with) return result_of_with.value;
-	}
-	module.exports = _jade_template_fn;
-
-/***/ },
-/* 366 */
-/***/ function(module, exports) {
-
-	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6e859d;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-weight: 400;   font-size: 12px;   font-stretch: normal; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 12px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-size: 12px;   font-weight: 400;   padding: 8px;   -webkit-transition: border-color 150ms ease-out;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus {   border-color: #3391e9;   -webkit-transition: border-color 200ms ease-in;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } .spinner, .spinner:after {   border-radius: 50%;   width: 100%;   height: 100%; } .spinner {   position: relative;   border: 3px solid #4ba8ff;   border-right-color: #fff;   -webkit-transform: translateZ(0);           transform: translateZ(0);   -webkit-animation: load 1s infinite linear;           animation: load 1s infinite linear; } @-webkit-keyframes load {   0% {     -webkit-transform: rotate(0deg);             transform: rotate(0deg);   }   100% {     -webkit-transform: rotate(360deg);             transform: rotate(360deg);   } } @keyframes load {   0% {     -webkit-transform: rotate(0deg);             transform: rotate(0deg);   }   100% {     -webkit-transform: rotate(360deg);             transform: rotate(360deg);   } } ";
-
-
-/***/ },
-/* 367 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
-
-	var _panel = __webpack_require__(299);
-
-	var _registerElement = __webpack_require__(347);
-
-	var _index = __webpack_require__(368);
-
-	var _index2 = _interopRequireDefault(_index);
-
-	var _index3 = __webpack_require__(369);
-
-	var _index4 = _interopRequireDefault(_index3);
-
-	var _utils = __webpack_require__(370);
+	var _utils = __webpack_require__(367);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -19357,7 +19277,7 @@
 	}(_panel.Component));
 
 /***/ },
-/* 368 */
+/* 365 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -19439,14 +19359,14 @@
 	module.exports = _jade_template_fn;
 
 /***/ },
-/* 369 */
+/* 366 */
 /***/ function(module, exports) {
 
 	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6e859d;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-weight: 400;   font-size: 12px;   font-stretch: normal; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 12px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-size: 12px;   font-weight: 400;   padding: 8px;   -webkit-transition: border-color 150ms ease-out;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus {   border-color: #3391e9;   -webkit-transition: border-color 200ms ease-in;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } mp-modal {   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   position: absolute;   width: 400px;   z-index: 9000; } :host {   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   position: absolute;   width: 400px;   z-index: 9000; } .mp-modal-stage, .mp-modal-stage * {   box-sizing: border-box; } .mp-modal-stage {   bottom: 0;   left: 0;   min-width: 100%;   pointer-events: none;   position: fixed;   right: 0;   top: 0;   width: inherit; } .mp-modal-stage.mp-modal-closed {   display: none; } .mp-modal-stage.mp-modal-absolute, .mp-modal-stage.mp-modal-absolute .mp-modal-backdrop, .mp-modal-stage.mp-modal-absolute .mp-modal-wrapper {   position: absolute; } .mp-modal-stage .mp-modal-backdrop {   background: #4c6072;   height: 100%;   position: fixed;   pointer-events: auto;   width: 100%; } .mp-modal-stage .mp-modal-backdrop.mp-modal-opening {   -webkit-animation: fadeOverlayIn 300ms forwards;           animation: fadeOverlayIn 300ms forwards;   opacity: 0; } .mp-modal-stage .mp-modal-backdrop.mp-modal-open {   opacity: 0.8; } .mp-modal-stage .mp-modal-backdrop.mp-modal-closing {   -webkit-animation: fadeOverlayOut 300ms forwards;           animation: fadeOverlayOut 300ms forwards; } .mp-modal-stage .mp-modal-backdrop.mp-modal-closed {   opacity: 0; } .mp-modal-stage .mp-modal-backdrop + .mp-modal-wrapper .mp-modal-main {   box-shadow: 0px 17px 50px 0px rgba(0,0,0,0.19); } .mp-modal-stage .mp-modal-wrapper {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   height: 100%;   -webkit-box-pack: center;       -ms-flex-pack: center;           justify-content: center;   min-width: 100%;   pointer-events: none;   position: fixed;   width: inherit; } .mp-modal-stage .mp-modal-wrapper .mp-modal-main {   background: #fff;   border: 1px solid #eff3f5;   border-radius: 5px;   box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.14);   pointer-events: auto;   position: relative;   width: inherit;   z-index: 2; } .mp-modal-stage .mp-modal-wrapper .mp-modal-main.mp-modal-opening {   -webkit-animation: fadeModalIn 300ms forwards 100ms;           animation: fadeModalIn 300ms forwards 100ms;   opacity: 0; } .mp-modal-stage .mp-modal-wrapper .mp-modal-main.mp-modal-open {   opacity: 1; } .mp-modal-stage .mp-modal-wrapper .mp-modal-main.mp-modal-closing {   -webkit-animation: fadeModalOut 200ms forwards;           animation: fadeModalOut 200ms forwards; } .mp-modal-stage .mp-modal-wrapper .mp-modal-main.mp-modal-closed {   opacity: 0; } .mp-modal-stage .mp-modal-wrapper .mp-modal-main .mp-modal-close-btn {   cursor: pointer;   float: right;   height: 10px;   position: absolute;   right: 15px;   top: 15px; } .mp-modal-stage .mp-modal-wrapper .mp-modal-main .mp-modal-close-btn .mp-modal-close-icon svg {   width: 10px; } .mp-modal-stage .mp-modal-wrapper .mp-modal-main .mp-modal-close-btn .mp-modal-close-icon svg path {   fill: #d8e0e6; } .mp-modal-stage .mp-modal-wrapper .mp-modal-main .mp-modal-close-btn:hover .mp-modal-close-icon svg path {   fill: #c1ccd5; } .mp-modal-content {   padding: 15px 30px; } .mp-modal-title {   color: #4c6072;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 18px;   font-weight: 600;   line-height: 1.4; } .mp-modal-subtitle {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px;   margin: 12px 0; } content::content .mp-modal-content {   padding: 15px 30px; } content::content .mp-modal-title {   color: #4c6072;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 18px;   font-weight: 600;   line-height: 1.4; } content::content .mp-modal-subtitle {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px;   margin: 12px 0; } @-webkit-keyframes fadeOverlayIn {   from {     opacity: 0;   }   to {     opacity: 0.8;   } } @keyframes fadeOverlayIn {   from {     opacity: 0;   }   to {     opacity: 0.8;   } } @-webkit-keyframes fadeOverlayOut {   from {     opacity: 0.8;   }   to {     opacity: 0;   } } @keyframes fadeOverlayOut {   from {     opacity: 0.8;   }   to {     opacity: 0;   } } @-webkit-keyframes fadeModalIn {   from {     -webkit-transform: scale(1.1, 1.1);             transform: scale(1.1, 1.1);     opacity: 0;   }   to {     -webkit-transform: scale(1, 1);             transform: scale(1, 1);     opacity: 1;   } } @keyframes fadeModalIn {   from {     -webkit-transform: scale(1.1, 1.1);             transform: scale(1.1, 1.1);     opacity: 0;   }   to {     -webkit-transform: scale(1, 1);             transform: scale(1, 1);     opacity: 1;   } } @-webkit-keyframes fadeModalOut {   from {     -webkit-transform: scale(1, 1);             transform: scale(1, 1);     opacity: 1;   }   to {     -webkit-transform: scale(1.1, 1.1);             transform: scale(1.1, 1.1);     opacity: 0;   } } @keyframes fadeModalOut {   from {     -webkit-transform: scale(1, 1);             transform: scale(1, 1);     opacity: 1;   }   to {     -webkit-transform: scale(1.1, 1.1);             transform: scale(1.1, 1.1);     opacity: 0;   } } ";
 
 
 /***/ },
-/* 370 */
+/* 367 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -19467,6 +19387,83 @@
 	    return el.removeEventListener(e, callback);
 	  });
 	};
+
+/***/ },
+/* 368 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _panel = __webpack_require__(299);
+
+	var _registerElement = __webpack_require__(347);
+
+	var _index = __webpack_require__(369);
+
+	var _index2 = _interopRequireDefault(_index);
+
+	var _index3 = __webpack_require__(370);
+
+	var _index4 = _interopRequireDefault(_index3);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	(0, _registerElement.registerMPElement)('mp-spinner', function (_Component) {
+	  _inherits(_class, _Component);
+
+	  function _class() {
+	    _classCallCheck(this, _class);
+
+	    return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).apply(this, arguments));
+	  }
+
+	  _createClass(_class, [{
+	    key: 'config',
+	    get: function get() {
+	      return {
+	        css: _index4.default,
+	        template: _index2.default,
+	        useShadowDom: true
+	      };
+	    }
+	  }]);
+
+	  return _class;
+	}(_panel.Component));
+
+/***/ },
+/* 369 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	function _jade_template_fn(locals) {
+	  locals = locals || {};
+	  var h = __webpack_require__(349);
+	  return h("div", {
+	    "className": [].concat('mp-spinner').filter(Boolean).join(' ')
+	  }, [h("svg-icon", {
+	    "attributes": {
+	      icon: "spinner"
+	    }
+	  })].filter(Boolean));
+	}
+	module.exports = _jade_template_fn;
+
+/***/ },
+/* 370 */
+/***/ function(module, exports) {
+
+	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6e859d;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-weight: 400;   font-size: 12px;   font-stretch: normal; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 12px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-size: 12px;   font-weight: 400;   padding: 8px;   -webkit-transition: border-color 150ms ease-out;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus {   border-color: #3391e9;   -webkit-transition: border-color 200ms ease-in;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } mp-spinner {   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   height: 22px;   width: 22px; } :host {   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   height: 22px;   width: 22px; } .mp-spinner {   width: 100%;   height: 100%;   -webkit-transform: translateZ(0);           transform: translateZ(0);   -webkit-animation: spin 0.7s infinite linear;           animation: spin 0.7s infinite linear; } .mp-spinner svg-icon {   height: 100%;   min-height: 100%;   min-width: 100%;   width: 100%; } .mp-spinner svg-icon svg {   height: 100%;   min-height: 100%;   min-width: 100%;   width: 100%;   left: 0;   top: 0; } .mp-spinner svg-icon svg, .mp-spinner svg-icon path {   color: #4ba8ff;   fill: #4ba8ff;   -webkit-transition: 0.2s;   transition: 0.2s; } @-webkit-keyframes spin {   0% {     -webkit-transform: rotate(0deg);             transform: rotate(0deg);   }   100% {     -webkit-transform: rotate(360deg);             transform: rotate(360deg);   } } @keyframes spin {   0% {     -webkit-transform: rotate(0deg);             transform: rotate(0deg);   }   100% {     -webkit-transform: rotate(360deg);             transform: rotate(360deg);   } } ";
+
 
 /***/ },
 /* 371 */
@@ -19554,7 +19551,7 @@
 	var _iconMap_sortAlphaDesc = '<?xml version="1.0" encoding="utf-8"?>\n<!-- Generated by IcoMoon.io -->\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22" viewBox="0 0 22 22">\n<path fill="#000" d="M9.010 12h2v-2h-2z"></path>\n<path fill="#000" d="M0 6v2h3.98l-3.98 5.099v1.901h7.010v-2h-3.84l3.83-5.099v-1.901z"></path>\n<path fill="#000" d="M15.531 6l-3.521 9h2.731l0.46-1h3.69l0.46 1h2.729l-3.51-9h-3.039zM17.049 8l1.181 4h-2.371l1.19-4z"></path>\n</svg>\n';
 	var _iconMap_sortValueAsc = '<?xml version="1.0" encoding="utf-8"?>\n<!-- Generated by IcoMoon.io -->\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22" viewBox="0 0 22 22">\n<path fill="#000" d="M3 8h5v-2h-5v2zM3 12h10v-2.001h-10v2.001zM3 16h15v-2h-15v2z"></path>\n</svg>\n';
 	var _iconMap_sortValueDesc = '<?xml version="1.0" encoding="utf-8"?>\n<!-- Generated by IcoMoon.io -->\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22" viewBox="0 0 22 22">\n<path fill="#000" d="M3 8h15v-2h-15v2zM3 12h10v-2.001h-10v2.001zM3 16h5v-2h-5v2z"></path>\n</svg>\n';
-	var _iconMap_spinner = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n<svg width="17px" height="17px" viewBox="0 0 17 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">\n    <!-- Generator: sketchtool 41 (35326) - http://www.bohemiancoding.com/sketch -->\n    <title>5E1A2829-942B-4FA0-AD5C-251E702B60DC</title>\n    <desc>Created with sketchtool.</desc>\n    <defs></defs>\n    <g id="Add-Report---Final" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">\n        <g id="Dashboard---Add-flow---Feedback-for-adding-label" transform="translate(-938.000000, -223.000000)">\n            <g id="Add-Menu---label-saving" transform="translate(908.000000, 130.000000)">\n                <g id="Label-input" transform="translate(19.000000, 83.000000)">\n                    <g id="loader_small" transform="translate(12.000000, 11.000000)">\n                        <circle id="Oval" stroke="#50AAFF" stroke-width="2" cx="6.85714286" cy="6.85714286" r="6.85714286"></circle>\n                        <rect id="Rectangle-9" fill="#FFFFFF" x="8.11687452" y="7.71783996" width="7.88312548" height="7.83099017"></rect>\n                    </g>\n                </g>\n            </g>\n        </g>\n    </g>\n</svg>';
+	var _iconMap_spinner = '<svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"\n      viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve" width="22" height="22">\n  <path fill="#000" d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z">\n  </path>\n</svg>\n';
 	var _iconMap_starTopEvents = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n<svg viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">\n    <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->\n    <title>star-top-events</title>\n    <desc>Created with Sketch.</desc>\n    <defs></defs>\n    <g id="16-x-16" stroke="none" stroke-width="1" fill-rule="evenodd">\n        <g id="star-top-events">\n            <g transform="translate(3.000000, 3.000000)">\n                <path d="M7.99982887,0 C7.21782887,0 6.50682887,0.456 6.18082887,1.168 L4.78082887,4.228 L1.71182887,4.674 C0.958828873,4.783 0.332828873,5.311 0.0978288727,6.035 C-0.137171127,6.759 0.0588288727,7.554 0.603828873,8.085 L2.80182887,10.228 L2.04882887,13.559 C1.87482887,14.33 2.17082887,15.13 2.80382887,15.603 C3.15682887,15.866 3.57782887,16 3.99982887,16 C4.33582887,16 4.67282887,15.916 4.97782887,15.744 L7.99982887,14.05 L11.0218289,15.744 C11.3268289,15.916 11.6638289,16 11.9998289,16 C12.4218289,16 12.8428289,15.866 13.1958289,15.603 C13.8288289,15.13 14.1248289,14.33 13.9508289,13.559 L13.1978289,10.228 L15.3958289,8.085 C15.9408289,7.554 16.1368289,6.759 15.9018289,6.035 C15.6668289,5.311 15.0408289,4.783 14.2878289,4.674 L11.2188289,4.228 L9.81882887,1.168 C9.49282887,0.456 8.78182887,0 7.99982887,0 M7.99982887,2 L9.62682887,5.555 C9.76882887,5.864 10.0568289,6.08 10.3928289,6.129 L13.9998289,6.653 L11.4008289,9.187 C11.1518289,9.429 11.0468289,9.784 11.1228289,10.123 L11.9998289,14 L8.48882887,12.031 C8.33682887,11.946 8.16882887,11.903 7.99982887,11.903 C7.83082887,11.903 7.66282887,11.946 7.51082887,12.031 L3.99982887,14 L4.87682887,10.123 C4.95282887,9.784 4.84782887,9.429 4.59882887,9.187 L1.99982887,6.653 L5.60682887,6.129 C5.94282887,6.08 6.23082887,5.864 6.37282887,5.555 L7.99982887,2"></path>\n            </g>\n        </g>\n    </g>\n</svg>';
 	var _iconMap_table = '<?xml version="1.0" encoding="utf-8"?>\n<!-- Generated by IcoMoon.io -->\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22" viewBox="0 0 22 22">\n<path fill="#000" d="M6 4h-2c-0.552 0-1 0.448-1 1v1c0 0.552 0.448 1 1 1h2c0.552 0 1-0.448 1-1v-1c0-0.552-0.448-1-1-1z"></path>\n<path fill="#000" d="M12 4h-2c-0.552 0-1 0.448-1 1v1c0 0.552 0.448 1 1 1h2c0.552 0 1-0.448 1-1v-1c0-0.552-0.448-1-1-1z"></path>\n<path fill="#000" d="M18 4h-2c-0.552 0-1 0.448-1 1v1c0 0.552 0.448 1 1 1h2c0.552 0 1-0.448 1-1v-1c0-0.552-0.448-1-1-1z"></path>\n<path fill="#000" d="M6 9h-2c-0.552 0-1 0.448-1 1v1c0 0.552 0.448 1 1 1h2c0.552 0 1-0.448 1-1v-1c0-0.552-0.448-1-1-1z"></path>\n<path fill="#000" d="M12 9h-2c-0.552 0-1 0.448-1 1v1c0 0.552 0.448 1 1 1h2c0.552 0 1-0.448 1-1v-1c0-0.552-0.448-1-1-1z"></path>\n<path fill="#000" d="M18 9h-2c-0.552 0-1 0.448-1 1v1c0 0.552 0.448 1 1 1h2c0.552 0 1-0.448 1-1v-1c0-0.552-0.448-1-1-1z"></path>\n<path fill="#000" d="M6 14h-2c-0.552 0-1 0.448-1 1v1c0 0.552 0.448 1 1 1h2c0.552 0 1-0.448 1-1v-1c0-0.552-0.448-1-1-1z"></path>\n<path fill="#000" d="M12 14h-2c-0.552 0-1 0.448-1 1v1c0 0.552 0.448 1 1 1h2c0.552 0 1-0.448 1-1v-1c0-0.552-0.448-1-1-1z"></path>\n<path fill="#000" d="M18 14h-2c-0.552 0-1 0.448-1 1v1c0 0.552 0.448 1 1 1h2c0.552 0 1-0.448 1-1v-1c0-0.552-0.448-1-1-1z"></path>\n</svg>\n';
 	var _iconMap_trashcan = '<?xml version="1.0" encoding="utf-8"?>\n<!-- Generated by IcoMoon.io -->\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22" viewBox="0 0 22 22">\n<path fill="#000" d="M16.5 9h-11c-0.276 0-0.5 0.224-0.5 0.5v8.5c0 0.552 0.448 1 1 1h10c0.552 0 1-0.448 1-1v-8.5c0-0.276-0.224-0.5-0.5-0.5z"></path>\n<path fill="#000" d="M10 6v-1h2v1h-2zM17.001 6h-3v-2c0-0.552-0.448-1-1-1h-4c-0.553 0-1 0.448-1 1v2h-3c-0.553 0-1 0.448-1 1s0.447 1 1 1h12c0.552 0 1-0.448 1-1s-0.448-1-1-1v0z"></path>\n</svg>\n';
@@ -20284,7 +20281,7 @@
 
 	var _registerElement = __webpack_require__(347);
 
-	var _utils = __webpack_require__(370);
+	var _utils = __webpack_require__(367);
 
 	var _index = __webpack_require__(381);
 
