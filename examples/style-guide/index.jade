@@ -163,6 +163,17 @@
           .mp-confirm-delete-title Delete Bookmark
           .mp-confirm-delete-description Are you sure you want to delete this bookmark?
 
+
+    p
+      button(onclick=() => $helpers.openModal('alert')) Open alert
+
+      mp-alert(
+        attributes={id: 'alert', closeable: true, open: open['alert']}
+        onchange=e => $helpers.handleModalChange('alert', e.detail.state)
+      )
+        div
+          .text AHHH DANGER DANGER There is currently an error
+
   .section.toggles
     h1 Toggles
     p One element out of a set of two or more is always selected.
