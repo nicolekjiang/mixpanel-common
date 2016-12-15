@@ -3,6 +3,7 @@ var path = require('path');
 var webpackConfig = {
   entry: {
     'style-guide/compiled/index': './style-guide/index.js',
+    'style-guide-new/compiled/index': './style-guide-new/index.js',
   },
   output: {
     filename: '[name].js',
@@ -34,6 +35,10 @@ var webpackConfig = {
         test: /\.json$/,
         exclude: /node_modules/,
         loader: 'json',
+      },
+      {
+        test: /\.(png|svg)$/,
+        loader: 'url-loader',
       },
     ],
   },

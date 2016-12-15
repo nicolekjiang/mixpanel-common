@@ -62,15 +62,13 @@
 
 	var _svgIcon = __webpack_require__(371);
 
-	var _bookmarkData = __webpack_require__(416);
-
-	var _bookmarkData2 = _interopRequireDefault(_bookmarkData);
-
-	var _index = __webpack_require__(417);
+	var _index = __webpack_require__(400);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	__webpack_require__(418);
+	__webpack_require__(401);
+
+	__webpack_require__(415);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -79,6 +77,40 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	// COLOR GROUP SWATCHES
+	var COLOR_GROUPS = {
+	  'Mixpanel UI Colors': ['blue-900', 'blue-700', 'blue-500', 'mp-blue', 'blue-100', 'grey-900', 'grey-700', 'grey-500', 'grey-300', 'grey-200', 'grey-150', 'grey-100', 'grey-50', 'white', 'mp-red'],
+	  'Data Visualization': ['mp-navy', 'mp-ultramarine', 'mp-blue', 'mp-turquoise', 'mp-seafoam', 'mp-aquamarine', 'mp-orange', 'mp-yellow']
+	};
+
+	// COLOR LIBRARIRES
+	var COLOR_LIBRARIES = {
+	  'MP-red': ['red-700', 'mp-red', 'red-300', 'red-200', 'red-100'],
+	  'MP-orange': ['orange-700', 'mp-orange', 'orange-300', 'orange-200', 'orange-100'],
+	  'MP-yellow': ['yellow-700', 'mp-yellow', 'yellow-300', 'yellow-200', 'yellow-100'],
+	  'MP-green': ['green-700', 'mp-green', 'green-300', 'green-200', 'green-100'],
+	  'MP-blue': ['blue-900', 'blue-700', 'blue-500', 'mp-blue', 'blue-100'],
+	  'MP-purple': ['purple-700', 'mp-purple', 'purple-300', 'purple-200', 'purple-100']
+	};
+
+	// map the relative colors to their hex values for color groups
+	for (var group in COLOR_GROUPS) {
+	  var labels = COLOR_GROUPS[group];
+	  var colorMap = COLOR_GROUPS[group] = {};
+	  labels.forEach(function (label) {
+	    colorMap[label] = _colors2.default[label];
+	  });
+	}
+
+	// map the relative colors to their hex values for color libraries
+	for (var _group in COLOR_LIBRARIES) {
+	  var _labels = COLOR_LIBRARIES[_group];
+	  var colorMap = COLOR_LIBRARIES[_group] = {};
+	  _labels.forEach(function (label) {
+	    colorMap[label] = _colors2.default[label];
+	  });
+	}
 
 	document.registerElement('style-guide', function (_Component) {
 	  _inherits(_class, _Component);
@@ -97,20 +129,13 @@
 	      return {
 	        defaultState: {
 	          blueToggleValue: 'option1',
-	          bookmarks: _bookmarkData2.default,
+	          menuOpen: false,
 	          COLORS: _colors2.default,
+	          COLOR_GROUPS: COLOR_GROUPS,
+	          COLOR_LIBRARIES: COLOR_LIBRARIES,
 	          SVG_ICONS: _svgIcon.SVG_ICONS,
 	          inputGroupSaving: false,
-	          open: {
-	            bookmarksWidget: false,
-	            confirm: false,
-	            confirmDelete: false,
-	            menu: false,
-	            modal: false,
-	            popup: false
-	          },
-	          savingBookmark: false,
-	          selectedBookmarkId: null
+	          open: {}
 	        },
 	        helpers: {
 	          blueToggleChanged: function blueToggleChanged(ev) {
@@ -139,41 +164,8 @@
 	            }, 2000);
 	          },
 	          toggleMenu: function toggleMenu() {
-	            _this2.state.open.menu = !_this2.state.open.menu;
-	            _this2.update();
-	          },
-	          toggleBookmarksMenu: function toggleBookmarksMenu() {
-	            _this2.state.open.bookmarksWidget = !_this2.state.open.bookmarksWidget;
-	            _this2.update();
-	          },
-	          handleBookmarksMenuSubmit: function handleBookmarksMenuSubmit(e) {
-	            switch (e.detail.action) {
-	              case 'select':
-	                console.log('Selected:', e.detail.value.id);
-	                break;
-	              case 'delete':
-	                _this2.update({ bookmarks: _this2.state.bookmarks.filter(function (b) {
-	                    return b.id !== e.detail.bookmarkId;
-	                  }) });
-	                break;
-	              case 'create':
-	                _this2.update({ savingBookmark: true });
-	                setTimeout(function () {
-	                  console.log('Created:', e.detail.name);
-	                  var newBookmark = {
-	                    id: new Date().getTime(),
-	                    user_id: 1,
-	                    name: e.detail.name,
-	                    user: 'John D.'
-	                  };
-	                  _this2.state.bookmarks.push(newBookmark);
-	                  _this2.update({ savingBookmark: false, selectedBookmarkId: newBookmark.id });
-	                }, 2000);
-	            }
-	          },
-	          handleBookmarksMenuChange: function handleBookmarksMenuChange(e) {
-	            _this2.state.open.bookmarksWidget = e.detail.open;
-	            _this2.update();
+	            var menuOpen = !_this2.state.menuOpen;
+	            _this2.update({ menuOpen: menuOpen });
 	          }
 	        },
 	        template: _index2.default
@@ -27515,9 +27507,297 @@
 	};
 
 /***/ },
-/* 400 */,
-/* 401 */,
-/* 402 */,
+/* 400 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	function _jade_template_fn(locals) {
+	  locals = locals || {};;;
+	  var result_of_with = function (COLORS, COLOR_GROUPS, COLOR_LIBRARIES, Object, description) {
+	    var h = __webpack_require__(349);
+	    var jade_mixins = {};
+	    jade_mixins['color-group'] = function (name, description, colors) {
+	      var block = this && this.block,
+	          attributes = this && this.attributes || {};
+
+	      return function () {
+	        var __jade_nodes = [];
+	        __jade_nodes = __jade_nodes.concat(h("label", {
+	          "className": [].concat('title').filter(Boolean).join(' ')
+	        }, ["" + name + ""].filter(Boolean)));
+	        __jade_nodes = __jade_nodes.concat(name === "Mixpanel UI Colors" ? function () {
+	          var __jade_nodes = [];
+	          description = "I love cheeseburgers. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id massa et libero condimentum dignissim at ut odio. Aliquam placerat libero metus, et fringilla nisl dictum vitae. Sed at lacus eu risus fermentum consequat.";;
+	          return __jade_nodes;
+	        }.call(this) : name === "Data Visualization" ? function () {
+	          var __jade_nodes = [];
+	          description = "I love hot dogs. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id massa et libero condimentum dignissim at ut odio. Aliquam placerat libero metus, et fringilla nisl dictum vitae. Sed at lacus eu risus fermentum consequat.";;
+	          return __jade_nodes;
+	        }.call(this) : undefined);
+	        __jade_nodes = __jade_nodes.concat(h("p", {
+	          "className": [].concat('desc').concat('max').filter(Boolean).join(' ')
+	        }, ["" + description + ""].filter(Boolean)));
+	        __jade_nodes = __jade_nodes.concat(h("ul", {
+	          "className": [].concat('color-swatches').filter(Boolean).join(' ')
+	        }, [Object.keys(colors).map(function (color, $index) {
+	          return h("li", {
+	            "className": [].concat('swatch').concat('swatch-misc').concat('swatch-all').filter(Boolean).join(' ')
+	          }, [h("samp", {
+	            "className": [].concat("sample " + color).filter(Boolean).join(' ')
+	          }), h("h3", {
+	            "className": [].concat('swatch-label').filter(Boolean).join(' ')
+	          }, [color]), h("label", {
+	            "className": [].concat('swatch-hex').filter(Boolean).join(' ')
+	          }, [colors[color]])].filter(Boolean));
+	        })].filter(Boolean)));
+	        __jade_nodes = __jade_nodes.concat(h("section", {
+	          "className": [].concat('code-snippet').filter(Boolean).join(' ')
+	        }, [h("div", {
+	          "className": [].concat('call-out').filter(Boolean).join(' ')
+	        }, [h("strong", {
+	          "className": [].concat('icon').filter(Boolean).join(' ')
+	        }, ["+"].filter(Boolean)), h("strong", ["Example Code"].filter(Boolean))].filter(Boolean)), h("div", {
+	          "className": [].concat('snippet-container').concat('min').concat('max').filter(Boolean).join(' ')
+	        }, [h("div", {
+	          "className": [].concat('snippet-header').filter(Boolean).join(' ')
+	        }, [h("label", ["Stylus"].filter(Boolean))].filter(Boolean)), h("div", {
+	          "className": [].concat('code-field').filter(Boolean).join(' ')
+	        }, [h("pre", ["1    /* Color Declarations */", h("br"), "2", h("br"), "3", h("b", ["    mp-red   ="].filter(Boolean)), h("span", [" #E4567B"].filter(Boolean)), h("br"), "4", h("b", ["    mp-blue  ="].filter(Boolean)), h("span", [" #4BA8FF"].filter(Boolean)), h("br"), "5", h("b", ["    blue-900 ="].filter(Boolean)), h("span", [" #2687E3"].filter(Boolean)), h("br"), "6", h("b", ["    blue-700 ="].filter(Boolean)), h("span", [" #3391E9"].filter(Boolean))].filter(Boolean))].filter(Boolean))].filter(Boolean))].filter(Boolean)));
+	        __jade_nodes = __jade_nodes.concat(h("div", {
+	          "className": [].concat('divider').filter(Boolean).join(' ')
+	        }, [h("sup", ["1.+"].filter(Boolean))].filter(Boolean)));;
+	        return __jade_nodes;
+	      }.call(this);
+	    };
+
+	    jade_mixins['library-group'] = function (name, colors) {
+	      var block = this && this.block,
+	          attributes = this && this.attributes || {};
+
+	      return h("ul", {
+	        "className": [].concat('color-library').filter(Boolean).join(' ')
+	      }, [h("strong", {
+	        "className": [].concat('call-out').concat('floating-label').filter(Boolean).join(' ')
+	      }, ["" + name + ""].filter(Boolean)), Object.keys(colors).map(function (color, $index) {
+	        return h("li", {
+	          "className": [].concat(color).filter(Boolean).join(' ')
+	        }, [h("input", {
+	          "value": COLORS[color],
+	          "className": [].concat('med').filter(Boolean).join(' ')
+	        }), h("label", {
+	          "className": [].concat('swatch-label').filter(Boolean).join(' ')
+	        }, [color])].filter(Boolean));
+	      })].filter(Boolean));
+	    };
+	    return {
+	      value: h("div", {
+	        "className": [].concat('wrapper').filter(Boolean).join(' ')
+	      }, [h("div", {
+	        "className": [].concat('version-bar').filter(Boolean).join(' ')
+	      }, [h("div", {
+	        "className": [].concat('version-label').filter(Boolean).join(' ')
+	      }, [h("label", ["Mixpanel Design"].filter(Boolean)), h("div", {
+	        "style": "height: 3px; width: 40px; background-color: #D8E0E6; margin: 0 10px 3px 10px;"
+	      }), h("strong", {
+	        "className": [].concat('version').filter(Boolean).join(' ')
+	      }, ["Chrome 2.0"].filter(Boolean))].filter(Boolean))].filter(Boolean)), h("div", {
+	        "id": 'header'
+	      }, [h("div", {
+	        "className": [].concat('logo').filter(Boolean).join(' ')
+	      })].filter(Boolean)), h("div", {
+	        "className": [].concat('style-guide').filter(Boolean).join(' ')
+	      }, [h("div", {
+	        "id": 'nav-strip'
+	      }), h("ul", {
+	        "id": 'nav'
+	      }, [h("li", {
+	        "dataset": {
+	          "goto": 'colors'
+	        }
+	      }, [h("sup", {
+	        "className": [].concat('nav-number').filter(Boolean).join(' ')
+	      }, ["01"].filter(Boolean)), h("label", {
+	        "className": [].concat('nav-label').concat('selected').filter(Boolean).join(' ')
+	      }, ["Colors"].filter(Boolean)), h("ul", {
+	        "className": [].concat('nav-children').concat('visible').filter(Boolean).join(' ')
+	      }, [h("li", [h("label", {
+	        "className": [].concat('child').filter(Boolean).join(' ')
+	      }, ["Mixpanel UI"].filter(Boolean)), h("mark", {
+	        "className": [].concat('selected').concat('visible').filter(Boolean).join(' ')
+	      }, [h("sup", {
+	        "className": [].concat('sub-section').filter(Boolean).join(' ')
+	      }, ["1.1"].filter(Boolean))].filter(Boolean))].filter(Boolean)), h("li", [h("label", {
+	        "className": [].concat('child').filter(Boolean).join(' ')
+	      }, ["Data Visualization"].filter(Boolean)), h("mark", {
+	        "className": [].concat('selected').filter(Boolean).join(' ')
+	      }, [h("sup", {
+	        "className": [].concat('sub-section').filter(Boolean).join(' ')
+	      }, ["1.2"].filter(Boolean))].filter(Boolean))].filter(Boolean)), h("li", [h("label", {
+	        "className": [].concat('child').filter(Boolean).join(' ')
+	      }, ["Gradients"].filter(Boolean)), h("mark", {
+	        "className": [].concat('selected').filter(Boolean).join(' ')
+	      }, [h("sup", {
+	        "className": [].concat('sub-section').filter(Boolean).join(' ')
+	      }, ["1.3"].filter(Boolean))].filter(Boolean))].filter(Boolean)), h("li", [h("label", {
+	        "className": [].concat('child').filter(Boolean).join(' ')
+	      }, ["Color use"].filter(Boolean)), h("mark", {
+	        "className": [].concat('selected').filter(Boolean).join(' ')
+	      }, [h("sup", {
+	        "className": [].concat('sub-section').filter(Boolean).join(' ')
+	      }, ["1.4"].filter(Boolean))].filter(Boolean))].filter(Boolean)), h("li", [h("label", {
+	        "className": [].concat('child').filter(Boolean).join(' ')
+	      }, ["Hue Library"].filter(Boolean)), h("mark", {
+	        "className": [].concat('selected').filter(Boolean).join(' ')
+	      }, [h("sup", {
+	        "className": [].concat('sub-section').filter(Boolean).join(' ')
+	      }, ["1.5"].filter(Boolean))].filter(Boolean))].filter(Boolean)), h("li", [h("label", {
+	        "className": [].concat('child').filter(Boolean).join(' ')
+	      })].filter(Boolean))].filter(Boolean))].filter(Boolean)), h("li", {
+	        "dataset": {
+	          "goto": 'typography'
+	        }
+	      }, [h("sup", {
+	        "className": [].concat('nav-number').filter(Boolean).join(' ')
+	      }, ["02"].filter(Boolean)), h("label", {
+	        "className": [].concat('nav-label').filter(Boolean).join(' ')
+	      }, ["Typography"].filter(Boolean)), h("ul", {
+	        "className": [].concat('nav-children').filter(Boolean).join(' ')
+	      }, [h("li", [h("label", {
+	        "className": [].concat('child').filter(Boolean).join(' ')
+	      }, ["Sizes"].filter(Boolean)), h("mark", {
+	        "className": [].concat('selected').concat('visible').filter(Boolean).join(' ')
+	      }, [h("sup", {
+	        "className": [].concat('sub-section').filter(Boolean).join(' ')
+	      }, ["2.1"].filter(Boolean))].filter(Boolean))].filter(Boolean)), h("li", [h("label", {
+	        "className": [].concat('child').filter(Boolean).join(' ')
+	      }, ["Weights"].filter(Boolean)), h("mark", {
+	        "className": [].concat('selected').concat('visible').filter(Boolean).join(' ')
+	      }, [h("sup", {
+	        "className": [].concat('sub-section').filter(Boolean).join(' ')
+	      }, ["2.2"].filter(Boolean))].filter(Boolean))].filter(Boolean)), h("li", [h("label", {
+	        "className": [].concat('child').filter(Boolean).join(' ')
+	      }, ["Colors"].filter(Boolean)), h("mark", {
+	        "className": [].concat('selected').concat('visible').filter(Boolean).join(' ')
+	      }, [h("sup", {
+	        "className": [].concat('sub-section').filter(Boolean).join(' ')
+	      }, ["2.3"].filter(Boolean))].filter(Boolean))].filter(Boolean)), h("li", [h("label", {
+	        "className": [].concat('child').filter(Boolean).join(' ')
+	      }, ["Pairings"].filter(Boolean)), h("mark", {
+	        "className": [].concat('selected').concat('visible').filter(Boolean).join(' ')
+	      }, [h("sup", {
+	        "className": [].concat('sub-section').filter(Boolean).join(' ')
+	      }, ["2.4"].filter(Boolean))].filter(Boolean))].filter(Boolean))].filter(Boolean))].filter(Boolean)), h("li", {
+	        "dataset": {
+	          "goto": 'icons'
+	        }
+	      }, [h("sup", {
+	        "className": [].concat('nav-number').filter(Boolean).join(' ')
+	      }, ["03"].filter(Boolean)), h("label", {
+	        "className": [].concat('nav-label').filter(Boolean).join(' ')
+	      }, ["Iconography"].filter(Boolean)), h("ul", {
+	        "className": [].concat('nav-children').filter(Boolean).join(' ')
+	      }, [h("li", [h("label", {
+	        "className": [].concat('child').filter(Boolean).join(' ')
+	      }, ["UI Icons"].filter(Boolean)), h("mark", {
+	        "className": [].concat('selected').concat('visible').filter(Boolean).join(' ')
+	      }, [h("sup", {
+	        "className": [].concat('sub-section').filter(Boolean).join(' ')
+	      }, ["3.1"].filter(Boolean))].filter(Boolean))].filter(Boolean)), h("li", [h("label", {
+	        "className": [].concat('child').filter(Boolean).join(' ')
+	      }, ["Legacy"].filter(Boolean)), h("mark", {
+	        "className": [].concat('selected').concat('visible').filter(Boolean).join(' ')
+	      }, [h("sup", {
+	        "className": [].concat('sub-section').filter(Boolean).join(' ')
+	      }, ["3.2"].filter(Boolean))].filter(Boolean))].filter(Boolean)), h("li", [h("label", {
+	        "className": [].concat('child').filter(Boolean).join(' ')
+	      }, ["Marketing"].filter(Boolean)), h("mark", {
+	        "className": [].concat('selected').concat('visible').filter(Boolean).join(' ')
+	      }, [h("sup", {
+	        "className": [].concat('sub-section').filter(Boolean).join(' ')
+	      }, ["3.3"].filter(Boolean))].filter(Boolean))].filter(Boolean)), h("li", [h("label", {
+	        "className": [].concat('child').filter(Boolean).join(' ')
+	      }, ["Pairings"].filter(Boolean)), h("mark", {
+	        "className": [].concat('selected').concat('visible').filter(Boolean).join(' ')
+	      }, [h("sup", {
+	        "className": [].concat('sub-section').filter(Boolean).join(' ')
+	      }, ["3.4"].filter(Boolean))].filter(Boolean))].filter(Boolean))].filter(Boolean))].filter(Boolean))].filter(Boolean)), h("div", {
+	        "className": [].concat('container').filter(Boolean).join(' ')
+	      }, [h("div", {
+	        "className": [].concat('section-header').concat('min').filter(Boolean).join(' ')
+	      }, [h("h1", ["Colors"].filter(Boolean)), h("sup", {
+	        "className": [].concat('section-number').filter(Boolean).join(' ')
+	      }, ["1.1"].filter(Boolean))].filter(Boolean)), /*  ul.section-nav.min */
+	      /*    li#swatch-all */
+	      /*    li#swatch-background */
+	      /*    li#swatch-header */
+	      /*    li#swatch-border */
+	      /*    li#swatch-type */
+	      /*    li#swatch-button */
+	      "", h("div", {
+	        "id": '1',
+	        "className": [].concat('section').concat('content').concat('min').concat('1').filter(Boolean).join(' ')
+	      }, [Object.keys(COLOR_GROUPS).map(function (group, $index) {
+	        return jade_mixins['color-group'].call(this, group, description, COLOR_GROUPS[group]);
+	      })].filter(Boolean)), h("section", {
+	        "id": '1',
+	        "className": [].concat('content').concat('min').concat('3').filter(Boolean).join(' ')
+	      }, [h("div", {
+	        "className": [].concat('divider').filter(Boolean).join(' ')
+	      }, [h("sup", ["1.3"].filter(Boolean))].filter(Boolean)), h("label", {
+	        "className": [].concat('title').filter(Boolean).join(' ')
+	      }, ["Color Library"].filter(Boolean)), h("p", {
+	        "className": [].concat('desc').concat('max').filter(Boolean).join(' ')
+	      }, ["My dog and I went to the park the other day and we had some fun chasing the ball."].filter(Boolean)), Object.keys(COLOR_LIBRARIES).map(function (group, $index) {
+	        return jade_mixins['library-group'].call(this, group, COLOR_LIBRARIES[group]);
+	      })].filter(Boolean))].filter(Boolean))].filter(Boolean))].filter(Boolean))
+	    };
+	  }.call(this, "COLORS" in locals ? locals.COLORS : typeof COLORS !== "undefined" ? COLORS : undefined, "COLOR_GROUPS" in locals ? locals.COLOR_GROUPS : typeof COLOR_GROUPS !== "undefined" ? COLOR_GROUPS : undefined, "COLOR_LIBRARIES" in locals ? locals.COLOR_LIBRARIES : typeof COLOR_LIBRARIES !== "undefined" ? COLOR_LIBRARIES : undefined, "Object" in locals ? locals.Object : typeof Object !== "undefined" ? Object : undefined, "description" in locals ? locals.description : typeof description !== "undefined" ? description : undefined);
+	  if (result_of_with) return result_of_with.value;
+	}
+	module.exports = _jade_template_fn;
+
+/***/ },
+/* 401 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(402);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(414)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/autoprefixer-loader/index.js!./../../node_modules/stylus-loader/index.js!./index.styl", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/autoprefixer-loader/index.js!./../../node_modules/stylus-loader/index.js!./index.styl");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 402 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(403)();
+	// imports
+	exports.i(__webpack_require__(404), "");
+
+	// module
+	exports.push([module.id, ".section {\n  margin-bottom: 10px;\n  padding-bottom: 10px;\n  border-bottom: 1px solid #eff3f5;\n}\n.section .item-palette {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: column wrap;\n      flex-flow: column wrap;\n}\n.section .item-palette.color-palette {\n  height: 180px;\n}\n.section .item-palette.icon-palette {\n  height: 320px;\n}\n.section .list-block {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  margin: 5px;\n}\n.section .list-block svg-icon svg {\n  left: 0;\n  top: 0;\n}\n.section .list-block svg-icon svg,\n.section .list-block svg-icon path {\n  color: #4c6072;\n  fill: #4c6072;\n  -webkit-transition: 0.2s;\n  transition: 0.2s;\n}\n.section .list-block:hover svg-icon svg,\n.section .list-block:hover svg-icon path {\n  color: #6cb8ff;\n  fill: #6cb8ff;\n}\n.section .list-block .square {\n  display: inline-block;\n  vertical-align: middle;\n  margin-right: 4px;\n  width: 20px;\n  height: 20px;\n}\n.section .list-block .label {\n  display: inline-block;\n  margin-left: 10px;\n  vertical-align: middle;\n}\n.section.buttons mp-button {\n  margin-right: 4px;\n  vertical-align: middle;\n}\n.section.buttons p.button-field {\n  background: #4ba8ff;\n  display: table;\n  padding: 10px;\n}\n.section.toggles mp-toggle {\n  margin-bottom: 10px;\n}\n.section.toggles mp-toggle.inline-toggle {\n  width: 300px;\n}\n.section.toggles mp-toggle.full-width-toggle {\n  display: block;\n}\n.section.toggles .toggle-val {\n  margin-left: 10px;\n}\nbody {\n  background-color: #fcfcfc;\n  font-stretch: normal;\n  -webkit-font-smoothing: antialiased;\n  margin: 0 75px 0 15px;\n  padding: 0;\n}\na {\n  color: #4ba8ff;\n  padding-bottom: 3px;\n  text-decoration: none;\n}\na:hover {\n  color: #3391e9;\n}\nlabel,\np,\nh5,\n.link {\n  font-family: \"HelveticaNeue\", \"Helvetica Neue\", \"HelveticaNeueRoman\", \"HelveticaNeue-Roman\", \"Helvetica Neue Roman\", \"Helvetica\", \"Tahoma\", \"Geneva\", \"Arial\", sans-serif;\n  font-weight: 400;\n}\nli,\nh3,\n.med,\n.title {\n  font-family: \"HelveticaNeueMedium\", \"HelveticaNeue-Medium\", \"Helvetica Neue Medium\", \"HelveticaNeue\", \"Helvetica Neue\", \"Helvetica\", \"Tahoma\", \"Geneva\", \"Arial\", sans-serif;\n  font-weight: 500;\n}\nsup,\nh1,\nstrong,\nbutton,\n.bold {\n  font-family: \"HelveticaNeueBold\", \"HelveticaNeue-Bold\", \"Helvetica Neue Bold\", \"HelveticaNeue\", \"Helvetica Neue\", \"Helvetica\", \"Tahoma\", \"Geneva\", \"Arial\", sans-serif;\n  font-weight: 600;\n}\n@-webkit-keyframes fadeIn {\n  from {\n    -webkit-transform: scale(1.1, 1.1);\n    opacity: 0;\n  }\n  to {\n    -webkit-transform: scale(1, 1);\n    opacity: 1;\n  }\n}\n@-webkit-keyframes fadeOut {\n  from {\n    -webkit-transform: scale(1, 1);\n    opacity: 1;\n  }\n  to {\n    -webkit-transform: scale(1.1, 1.1);\n    opacity: 0;\n  }\n}\n.blue-900 {\n  background-color: #2687e3;\n}\n.blue-700 {\n  background-color: #3391e9;\n}\n.blue-500 {\n  background-color: #3b99f0;\n}\n.mp-blue {\n  background-color: #4ba8ff;\n}\n.blue-100 {\n  background-color: #6cb8ff;\n}\n.grey-900 {\n  background-color: #4c6072;\n}\n.grey-700 {\n  background-color: #6e859d;\n}\n.grey-500 {\n  background-color: #9cacbb;\n}\n.grey-300 {\n  background-color: #c1ccd5;\n}\n.grey-200 {\n  background-color: #d8e0e6;\n}\n.grey-150 {\n  background-color: #e5eaef;\n}\n.grey-100 {\n  background-color: #eff3f5;\n}\n.grey-50 {\n  background-color: #f9fafc;\n}\n.white {\n  background-color: #fff;\n}\n.green-700 {\n  background-color: #19b264;\n}\n.mp-green {\n  background-color: #2dc376;\n}\n.green-300 {\n  background-color: #39d183;\n}\n.green-200 {\n  background-color: #87fcc0;\n}\n.green-100 {\n  background-color: #baffdb;\n}\n.red-700 {\n  background-color: #d64174;\n}\n.mp-red {\n  background-color: #e4567b;\n}\n.red-300 {\n  background-color: #ec7191;\n}\n.red-200 {\n  background-color: #fe9db6;\n}\n.red-100 {\n  background-color: #ffdbe4;\n}\n.orange-700 {\n  background-color: #dd731d;\n}\n.mp-orange {\n  background-color: #f1842b;\n}\n.orange-300 {\n  background-color: #f6a25d;\n}\n.orange-200 {\n  background-color: #ffd5b3;\n}\n.orange-100 {\n  background-color: #ffefe1;\n}\n.purple-700 {\n  background-color: #8260d1;\n}\n.mp-purple {\n  background-color: #9270e2;\n}\n.purple-300 {\n  background-color: #a081ea;\n}\n.purple-200 {\n  background-color: #d2c1f8;\n}\n.purple-100 {\n  background-color: #ece3ff;\n}\n.yellow-700 {\n  background-color: #f0c609;\n}\n.mp-yellow {\n  background-color: #ffd209;\n}\n.yellow-300 {\n  background-color: #fcde5c;\n}\n.yellow-200 {\n  background-color: #ffe9ad;\n}\n.yellow-100 {\n  background-color: #fff2ce;\n}\n.mp-seafoam {\n  background-color: #46b5ab;\n}\n.mp-aquamarine {\n  background-color: #6fe9aa;\n}\n.mp-ultramarine {\n  background-color: #106eca;\n}\n.mp-midnight {\n  background-color: #0e3963;\n}\n.mp-navy {\n  background-color: #23588c;\n}\n.mp-turquoise {\n  background-color: #24d2ef;\n}\n.mp-ultramarine {\n  background-color: #106eca;\n}\n.extra-large {\n  font-size: 18px;\n}\n.large {\n  font-size: 16px;\n}\n.medium {\n  font-size: 14px;\n}\n.default {\n  font-size: 12px;\n}\n.extra-small {\n  font-size: 11px;\n  text-transform: uppercase;\n}\n.s36 {\n  font-size: 36px;\n}\n.s32 {\n  font-size: 32px;\n}\n.s28 {\n  font-size: 28px;\n}\n.s24 {\n  font-size: 24px;\n}\n.s22 {\n  font-size: 22px;\n}\n.background {\n  border-left: 1px solid #d8e0e6;\n  border-right: 1px solid #d8e0e6;\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 15px;\n  z-index: 0;\n}\n.min {\n  min-width: 640px;\n}\n.max {\n  max-width: 850px;\n  width: 100%;\n}\n.version-bar {\n  background-color: #fff;\n  border-left: 1px solid #d8e0e6;\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  width: 75px;\n  z-index: 1000;\n}\n.version-label {\n  color: #4c6072;\n  font-size: 16px;\n  height: 75px;\n  position: fixed;\n  top: 145px;\n  right: -70px;\n  -webkit-transform: rotate(90deg);\n          transform: rotate(90deg);\n  transform: rotate(90deg);\n  -moz-transform: rotate(90deg);\n  -o-transform: rotate(90deg);\n  -ms-transform: rotate(90deg);\n}\n.version-label p,\n.version-label div {\n  display: inline-block;\n}\n.version {\n  color: #4ba8ff;\n}\n#header {\n  height: 200px;\n  position: relative;\n  top: 60px;\n  width: 100%;\n  z-index: 100;\n}\n.logo {\n  background: url(" + __webpack_require__(405) + ") no-repeat top center;\n  background-size: contain;\n  height: 90px;\n  margin: 0 auto;\n  width: 230px;\n}\n.container {\n  box-sizing: border-box;\n  margin-top: 45px;\n  padding: 0 0 75px 45px;\n  position: absolute;\n  right: 60px;\n  width: calc(80% - 60px);\n  max-width: calc(100% - 360px);\n  min-width: calc(100% - 460px);\n}\n.container-animation {\n  opacity: 0;\n  -webkit-transform: translateY(30px);\n          transform: translateY(30px);\n  -webkit-transition: all 400ms ease;\n  transition: all 400ms ease;\n}\n.container-animation.loaded {\n  opacity: 1;\n  -webkit-transform: translateY(0);\n          transform: translateY(0);\n}\n.section-header {\n  color: #4c6072;\n  border-bottom: 1px solid #d8e0e6;\n  padding: 0;\n  margin-right: 90px;\n  min-width: 860px;\n}\n.section-header h1 {\n  display: inline-block;\n  font-size: 64px;\n  line-height: 45px;\n  margin: 0 0 30px 0;\n  padding: 0;\n}\n.section-nav {\n  list-style-type: none;\n  padding: 0 0 30px 0;\n  overflow-x: scroll;\n  white-space: nowrap;\n}\n.section-nav li {\n  color: #4c6072;\n  cursor: pointer;\n  display: inline-block;\n  font-size: 16px;\n  margin: 30px 30px 0 0;\n  padding: 10px 30px;\n}\n.section-nav li.selected {\n  background-color: #4ba8ff;\n  border-radius: 30px;\n  -moz-border-radius: 30px;\n  -webkit-border-radius: 30px;\n  color: #fff;\n}\n.section-nav li.selected:hover {\n  color: #fff;\n}\n.section-nav li:hover {\n  color: #4ba8ff;\n}\n.section-number {\n  color: #c1ccd5;\n  display: inline-block;\n  font-size: 24px;\n  height: 60px;\n  padding-left: 10px;\n  position: absolute;\n}\n.divider {\n  border-top: 1px solid #d8e0e6;\n  margin: 60px 30px 45px 0;\n  position: relative;\n  width: 90%;\n}\n.divider sup {\n  color: #c1ccd5;\n  right: -30px;\n  position: absolute;\n  top: -10px;\n}\n.content {\n  color: #6e859d;\n  margin-top: 30px;\n}\n.title {\n  color: #4c6072;\n  display: block;\n  font-size: 24px;\n}\n.desc {\n  font-size: 16px;\n  line-height: 24px;\n  margin-bottom: 45px;\n}\n#nav-strip {\n  background-color: #fff;\n  border-right: 1px solid #d8e0e6;\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  width: 15px;\n  z-index: 0;\n}\n#nav {\n  box-sizing: border-box;\n  height: 100%;\n  list-style-type: none;\n  margin: 0;\n  overflow-y: scroll;\n  padding: 180px 0 60px 0;\n  position: fixed;\n  left: 0;\n  top: 0;\n  width: 20%;\n  min-width: 300px;\n  max-width: 400px;\n  z-index: 900;\n}\n#nav .nav-children {\n  display: none;\n  list-style-type: none;\n  margin: 0 0 0 -60px;\n  padding: 12px 0 0;\n}\n#nav .nav-children li {\n  border-left: 15px solid #89c6ff;\n  color: #6e859d;\n  padding-left: 45px;\n  cursor: pointer;\n}\n#nav .nav-children li:hover .child + .selected:not(.visible) {\n  background-color: inherit;\n  display: block;\n}\n#nav .nav-children li .child {\n  display: block;\n  font-size: 16px;\n  padding: 6px 0 6px 23px;\n  cursor: pointer;\n}\n#nav .nav-children li .child:last-child {\n  border-bottom: 1px solid #d8e0e6;\n}\n#nav .nav-children .selected {\n  background-color: #eff3f5;\n  border-radius: 30px;\n  -moz-border-radius: 30px;\n  -webkit-border-radius: 30px;\n  display: none;\n  height: 30px;\n  margin-top: -30px;\n  width: 90%;\n}\n#nav li {\n  border-left: 15px solid #4ba8ff;\n  color: #4c6072;\n  cursor: pointer;\n  padding: 12px 0 0 45px;\n}\n#nav li .nav-label {\n  border-bottom: 1px solid #d8e0e6;\n  display: block;\n  font-size: 20px;\n  line-height: 15px;\n  padding: 0 0 19px 23px;\n}\n#nav li .nav-number {\n  color: #c1ccd5;\n  font-size: 14px;\n}\n#nav li .selected {\n  color: #4ba8ff;\n}\n.sub-section {\n  color: #4c6072;\n  display: block;\n  font-size: 14px;\n  padding-top: 7px;\n  text-align: right;\n  width: 92%;\n}\n.visible {\n  display: block !important;\n}\n.color-swatches {\n  list-style-type: none;\n  padding: 0;\n  margin: 60px 0 0 60px;\n}\n.color-swatches .visible {\n  display: inline-block !important;\n}\n.code-snippet {\n  padding-left: 15px;\n}\n.call-out {\n  color: #4c6072;\n  display: inline-block;\n  text-transform: uppercase;\n}\n.call-out.extra {\n  margin-top: 30px;\n}\n.call-out > strong {\n  margin-left: 15px;\n}\n.call-out label {\n  text-transform: none;\n}\n.call-out p {\n  line-height: 4px;\n  margin-left: 45px;\n  text-transform: none;\n}\n.floating-label {\n  margin-top: 0;\n  margin-left: 0;\n  position: absolute;\n  top: -35px;\n  left: 0;\n}\n.icon {\n  font-size: 14pt;\n  position: relative;\n  top: -1px;\n  left: -5px;\n}\n.snippet-container {\n  background-color: #f9fafc;\n  border: 1px solid #d8e0e6;\n  border-radius: 6px;\n  -moz-border-radius: 6px;\n  -webkit-border-radius: 6px;\n  font-size: 14px;\n  margin: 30px 0 0 45px;\n  position: relative;\n}\n.snippet-header {\n  color: #6e859d;\n  border-bottom: 1px solid #d8e0e6;\n  border-radius: 6px 6px 0px 0px;\n  -moz-border-radius: 6px 6px 0px 0px;\n  -webkit-border-radius: 6px 6px 0px 0px;\n  padding: 15px;\n}\n.snippet-header label {\n  text-transform: uppercase;\n  letter-spacing: 1.2px;\n}\n.code-field {\n  background-color: #fff;\n  border-left: 1px solid #d8e0e6;\n  border-radius: 0px 0px 6px 0px;\n  -moz-border-radius: 0px 0px 6px 0px;\n  -webkit-border-radius: 0px 0px 6px 0px;\n  font-family: monospace;\n  margin: 0 0 0 45px;\n  padding: 15px;\n}\n.code-field pre {\n  color: #4c6072;\n  display: inline-block;\n  letter-spacing: 1.5px;\n  line-height: 20px;\n  margin: -2px 0 0 -45px;\n  white-space: pre-wrap;\n}\n.code-field pre:nth-child(2n) {\n  margin-left: 45px;\n}\npre span {\n  color: #e4567b;\n}\npre b {\n  color: #4c6072;\n  font-weight: 400;\n}\n.swatch {\n  background-color: #fff;\n  border: 1px solid #e5eaef;\n  border-radius: 6px;\n  -moz-border-radius: 6px;\n  -webkit-border-radius: 6px;\n  box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.05);\n  -moz-box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.05);\n  -webkit-box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.05);\n  display: inline-block;\n  height: 250px;\n  margin: 0 30px 45px 0;\n  width: 200px;\n}\n.color-library {\n  list-style-type: none;\n  display: inline-block;\n  text-align: left;\n  width: 40%;\n  min-width: 375px;\n  margin-right: 15px;\n  margin-bottom: 45px;\n}\n.color-library .swatch-label {\n  color: #fff;\n  position: absolute;\n  top: 10px;\n  right: 30px;\n  font-size: 16px;\n}\n.color-library .floating-label {\n  position: relative;\n  top: -15px;\n}\n.color-library li {\n  padding-left: 30px;\n  min-width: 400px;\n  position: relative;\n}\n.color-library .sample {\n  height: 140px;\n}\n.color-library .med {\n  font-size: 18px;\n  padding: 20px 0;\n}\n.color-library .med:hover {\n  color: #fff;\n}\n.color-library input {\n  background: transparent;\n  border: none;\n  box-sizing: border-box;\n  color: rgba(255,255,255,0.3);\n  outline: none;\n  text-align: left;\n  width: 100%;\n}\n.color-library input.dark {\n  color: rgba(76,96,114,0.3);\n}\n.swatch label,\n.swatch h3 {\n  display: block;\n  margin-left: 15px;\n}\n.sample {\n  background-size: contain;\n  border-bottom: 1px solid #e5eaef;\n  border-radius: 6px 6px 0px 0px;\n  -moz-border-radius: 6px 6px 0px 0px;\n  -webkit-border-radius: 6px 6px 0px 0px;\n  display: block;\n  height: 180px;\n  width: 100%;\n}\n.swatch-label,\nh3 {\n  color: #4c6072;\n  font-size: 18px;\n  margin: 12px 0 0 0;\n}\n.swatch-hex {\n  color: #4c6072;\n  font-size: 16px;\n  margin-top: 3px;\n}\n.weight-samples {\n  margin-top: 60px;\n}\n.weight-samples:last-child {\n  margin-bottom: 75px;\n}\n.specimen-container {\n  margin: 0 0 0 60px;\n  position: relative;\n}\n.specimen-container p {\n  margin: 0;\n}\n.specimen {\n  height: 40px;\n  overflow: scroll;\n  position: absolute;\n  top: 60px;\n  right: 110px;\n  left: 135px;\n  white-space: nowrap;\n}\n.left-col h1,\n.left-col h3,\n.left-col h5 {\n  color: #6e859d;\n  font-size: 84px;\n  margin: 0;\n  padding: 0;\n}\n.left-col,\n.right-col,\n.specimen {\n  display: inline-block;\n  padding-bottom: 0px;\n}\n.left-col label,\n.left-col h1 {\n  width: 100%;\n}\n.left-col label {\n  margin-bottom: 30px;\n}\n.right-col {\n  background-color: #fcfcfc;\n  border-left: 1px solid #d8e0e6;\n  line-height: 20px;\n  padding: 5px 0 0 20px;\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  width: 120px;\n}\n.right-col a {\n  display: inline-block;\n  position: absolute;\n  bottom: 0px;\n  left: 20px;\n}\n.size-samples {\n  margin-top: 60px;\n}\n.size-samples .right-col {\n  border-left: none;\n  width: auto;\n}\n.size-samples .specimen-container {\n  border-bottom: 1px dashed #d8e0e6;\n  margin-top: 23px;\n  margin-bottom: 45px;\n  padding-bottom: 15px;\n}\n.size-samples .specimen-container label {\n  line-height: 42px;\n}\n.size-samples h1 {\n  color: #d8e0e6;\n  margin-top: 0;\n}\n.size-samples h1:hover {\n  color: #4ba8ff;\n}\n.floating-blue-bar {\n  background: #4ba8ff;\n  box-shadow: 0px 8px 22px 0px rgba(0,0,0,0.23);\n  -moz-box-shadow: 0px 8px 22px 0px rgba(0,0,0,0.23);\n  -webkit-box-shadow: 0px 8px 22px 0px rgba(0,0,0,0.23);\n  padding: 15px 0;\n  text-align: right;\n  width: auto;\n}\n.floating-blue-bar:last-child button {\n  margin-right: 20px;\n}\n.align-left {\n  text-align: left;\n}\n.card {\n  background: #fff;\n  border-radius: 6px;\n  -moz-border-radius: 6px;\n  -webkit-border-radius: 6px;\n  border: 1px solid #eff3f5;\n  box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.14);\n  -moz-box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.14);\n  -webkit-box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.14);\n  display: inline-block;\n  margin: 0 30px 20px 0;\n  position: relative;\n  min-height: 200px;\n  box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  -webkit-box-sizing: border-box;\n}\n.card.has-button-bar {\n  border-bottom: none;\n}\n.card.narrow {\n  display: inline-block;\n  width: auto;\n  max-width: 49%;\n  min-width: 365px;\n}\n.card.wide {\n  width: 100%;\n}\n.card.medium {\n  width: 75%;\n}\n.card.small {\n  width: 450px;\n}\n.card.truncated {\n  height: 90px;\n  min-height: 90px;\n}\n.card .primary {\n  background-image: none;\n  background-color: #4ba8ff;\n}\n.card .icon-button svg {\n  height: 10px;\n  margin: 0 0 2px 15px;\n}\n.card-stack {\n  display: inline-block;\n}\n.card-stack .card {\n  display: block;\n}\n.card-stack p {\n  margin-top: 39px;\n}\n.blue-top {\n  background-color: #4ba8ff;\n  border-bottom: 1px solid #3b99f0;\n  border-radius: 6px 6px 0px 0px;\n  -moz-border-radius: 6px 6px 0px 0px;\n  -webkit-border-radius: 6px 6px 0px 0px;\n  height: 60px;\n  position: absolute;\n  top: -1px;\n  right: -1px;\n  left: -1px;\n}\n.line-seperator {\n  border-right: 1px solid #3391e9;\n  border-left: 1px solid rgba(255,255,255,0.15);\n  display: inline-block;\n  height: 40px;\n  margin: 0 15px 0 30px;\n  vertical-align: middle;\n}\n.example-set {\n  padding-left: 45px;\n  margin-top: 5px;\n  width: 100%;\n}\n.example-set .desc {\n  margin-bottom: 75px;\n  margin-top: -30px;\n  max-width: 805px;\n  width: 70%;\n}\n.example {\n  border: 1px dashed #d8e0e6;\n  border-radius: 5px;\n  -moz-border-radius: 5px;\n  -webkit-border-radius: 5px;\n  display: inline-block;\n  margin: 10px 20px 45px 0;\n  padding: 14px 15px;\n  position: relative;\n}\n.example.no-border {\n  border: none;\n  padding: 14px 0 0 0;\n  margin: 10px 0 45px 0;\n}\n.example.no-border.card {\n  margin-bottom: 0;\n}\n.example.no-border p {\n  width: 90%;\n}\n.example.wrong {\n  background-color: rgba(228,86,123,0.1);\n  border-color: #e4567b;\n  margin-bottom: 65px;\n}\n.example button:nth-child(2),\n.example button:nth-child(3) {\n  margin-left: 15px;\n}\n.wrong button.secondary {\n  max-width: none;\n}\n.wrong p {\n  color: #4c6072;\n  position: absolute;\n  bottom: -50px;\n  left: 0;\n  white-space: nowrap;\n}\n.hidden {\n  display: none;\n}\n.modal-header {\n  color: #fff;\n  position: absolute;\n  top: 20px;\n  right: 0;\n  left: 0;\n  text-align: center;\n}\n.modal-demo-line {\n  border-bottom: 1px dashed #d8e0e6;\n  margin: -45px 0 30px 0;\n  padding-bottom: 15px;\n  text-align: right;\n}\n.icon-header svg {\n  background-color: #fff;\n  cursor: pointer;\n  height: 10px;\n  width: 12px;\n  margin: 26px 0 0 25px;\n}\n.modal {\n  -webkit-animation: fadeIn 300ms forwards 100ms;\n          animation: fadeIn 300ms forwards 100ms;\n  box-shadow: 0px 17px 50px 0px rgba(0,0,0,0.19);\n  height: auto;\n  margin-left: -280px;\n  opacity: 0;\n  padding: 105px 30px 30px 30px;\n  top: 25vh;\n  left: 50%;\n  width: 560px;\n}\n#dialogue-demo {\n  opacity: 0;\n  z-index: 1000;\n}\n#dialogue-demo.modal {\n  margin-left: -200px;\n  position: fixed;\n}\n.dialogue {\n  padding: 0;\n}\n.dialogue-menu {\n  border-top: 1px solid #d8e0e6;\n  margin-top: 15px;\n  padding: 15px 20px 15px 0;\n  text-align: right;\n}\n.dialogue-menu > button {\n  margin-left: 10px;\n}\n.dialogue-content {\n  min-height: 92px;\n  padding: 15px 30px 0 20px;\n}\n.dialogue-content h1 {\n  color: #4c6072;\n}\n.dialogue-content p {\n  color: #6e859d;\n  line-height: 18px;\n  margin-top: 0;\n  padding-left: 27px;\n}\n#popup-demo {\n  opacity: 0;\n  z-index: 1000;\n}\n#popup-demo * {\n  display: inline-block;\n}\n#popup-demo.modal {\n  box-shadow: 0 10px 40px rgba(0,0,0,0.15);\n  margin-left: -200px;\n  position: fixed;\n}\n.popup {\n  padding: 30px;\n}\n.popup button {\n  margin-left: 0 !important;\n}\n.popup h1 {\n  margin-top: -15px;\n}\n.popup a {\n  border-bottom: 1px dotted #4ba8ff;\n}\n.popup .left {\n  border-right: 1px solid #d8e0e6;\n  padding-left: 0;\n}\n.icon-warning {\n  height: 22px;\n  margin-bottom: -6px;\n  width: 22px;\n  background-image: url(" + __webpack_require__(406) + ");\n  -webkit-mask-image: url(" + __webpack_require__(406) + ");\n  background-repeat: no-repeat;\n}\n.popup-close svg {\n  cursor: pointer;\n  height: 12px;\n  position: absolute;\n  right: 30px;\n  top: 30px;\n  width: 12px;\n}\n.dialogue-content svg,\n.dialogue-content h1,\n.dialogue-content p {\n  display: inline-block;\n}\n.fade-in {\n  -webkit-animation: fadeIn 300ms forwards;\n          animation: fadeIn 300ms forwards;\n}\n.fade-out {\n  -webkit-animation: fadeOut 300ms forwards;\n          animation: fadeOut 300ms forwards;\n}\n.button-field {\n  background: #fff;\n  border: 1px solid #d8e0e6;\n  border-radius: 4px 4px 4px 4px;\n  -moz-border-radius: 4px 4px 4px 4px;\n  -webkit-border-radius: 4px 4px 4px 4px;\n  box-sizing: border-box;\n  color: #4c6072;\n  height: 44px;\n  margin-bottom: 30px;\n  outline: none;\n  width: 100%;\n  padding-left: 15px;\n}\ninput.button-field:focus {\n  color: #6e859d;\n  font-weight: 500;\n}\ninput.button-field::-webkit-input-placeholder {\n  color: #4c6072;\n  font-weight: 300 !important;\n}\n.button-field-container {\n  display: block !important;\n  margin: 0 auto;\n  position: relative;\n}\n.card-header {\n  color: #4c6072;\n}\n.icon-list {\n  color: #4c6072;\n  list-style-type: none;\n  padding-left: 0;\n}\n.icon-list li {\n  background-image: url(" + __webpack_require__(407) + ");\n  -webkit-mask-image: url(" + __webpack_require__(407) + ");\n  background-size: 16px;\n  background-repeat: no-repeat;\n  background-position: left 8px center;\n  margin-bottom: 3px;\n  padding: 8px 35px;\n}\n.icon-list li:hover {\n  color: #4ba8ff;\n}\n.icon-list .selected {\n  background-color: #eff3f5;\n  border-radius: 5px;\n  color: #6e859d;\n  display: block;\n}\n.link {\n  margin-left: 5px;\n}\n.subheader {\n  color: #6e859d;\n  margin-top: -30px;\n  margin-bottom: 30px;\n}\n.popup .left,\n.popup .right {\n  width: 45%;\n  color: #6e859d;\n  padding-left: 15px;\n}\nbutton {\n  border: 1px solid;\n  border-radius: 5px;\n  -moz-border-radius: 5px;\n  -webkit-border-radius: 5px;\n  box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.2);\n  -moz-box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.2);\n  -webkit-box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.2);\n  box-sizing: border-box;\n  cursor: pointer;\n  display: inline-block;\n  font-size: 14px;\n  letter-spacing: 0px;\n  line-height: 14px;\n  max-width: 165px;\n  min-width: 90px;\n  outline: none;\n  overflow: hidden;\n  padding: 15px 25px 13px 25px;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\nbutton:hover {\n  box-shadow: 0 1.5px 2.5px 0 rgba(0,0,0,0.3);\n  -moz-box-shadow: 0 1.5px 2.5px 0 rgba(0,0,0,0.3);\n  -webkit-box-shadow: 0 1.5px 2.5px 0 rgba(0,0,0,0.3);\n}\n.button-bar {\n  border-top: 1px solid;\n  border-right: none;\n  border-bottom: none;\n  border-left: none;\n  border-radius: 0px 0px 6px 6px;\n  -moz-border-radius: 0px 0px 6px 6px;\n  -webkit-border-radius: 0px 0px 6px 6px;\n  box-shadow: none;\n  line-height: 19px;\n  margin: 0;\n  max-width: none;\n  min-height: 50px;\n  padding: 15px 0;\n  position: absolute;\n  bottom: 0;\n  left: -1px;\n  width: calc(100% + 2px);\n}\n.button-bar.secondary {\n  background-image: -webkit-linear-gradient(bottom, #fff 0%, #fff 100%);\n  background-image: linear-gradient(0deg, #fff 0%, #fff 100%);\n  border-color: #d8e0e6;\n  box-shadow: none;\n  width: 100%;\n  left: 0;\n}\n.button-bar.secondary:active {\n  left: -1px;\n  padding: 3px 1px 0 0;\n  width: calc(100% + 3px);\n}\n.button-bar:active {\n  border: transparent;\n  padding-top: 16px;\n}\n.button-bar.primary:active {\n  background-image: -webkit-linear-gradient(bottom, #4ba8ff 0%, #4ba8ff 100%);\n  background-image: linear-gradient(0deg, #4ba8ff 0%, #4ba8ff 100%);\n}\n.bar-corner {\n  background-color: #4ba8ff;\n  border-radius: 6px 0px 0px 0px;\n  -moz-border-radius: 6px 0px 0px 0px;\n  -webkit-border-radius: 6px 0px 0px 0px;\n  border-right: 1px solid #3b99f0;\n  border-top: none;\n  border-bottom: none;\n  border-left: none;\n  box-shadow: none;\n  color: #fff;\n  min-width: 115px;\n  padding-top: 19px;\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n}\n.bar-corner.icon-button svg {\n  height: 19px;\n  margin: -3px 5px 0 -3px;\n  width: 22px;\n}\n.bar-corner.icon-button.primary {\n  margin: 0;\n}\n.bar-corner:hover {\n  background-image: -webkit-linear-gradient(bottom, #4ba8ff 0%, #6cb8ff 100%);\n  background-image: linear-gradient(0deg, #4ba8ff 0%, #6cb8ff 100%);\n  margin: 0;\n}\n.bar-corner:active {\n  background-image: -webkit-linear-gradient(bottom, #3b99f0 0%, #4ba8ff 100%);\n  background-image: linear-gradient(0deg, #3b99f0 0%, #4ba8ff 100%);\n  box-shadow: none;\n  border-right: 1px solid #3b99f0;\n  border-bottom: none;\n  border-top: none;\n  border-left: none;\n}\n.field-button {\n  border-radius: 0px 6px 6px 0px;\n  -moz-border-radius: 0px 6px 6px 0px;\n  -webkit-border-radius: 0px 6px 6px 0px;\n  margin: 0;\n  position: absolute;\n  top: 0;\n  right: 0;\n}\n.field-button.primary {\n  box-shadow: none;\n}\n.icon-arrowLeft {\n  mask-image: url(" + __webpack_require__(408) + ");\n  -webkit-mask-image: url(" + __webpack_require__(408) + ");\n}\n.icon-arrowRight {\n  mask-image: url(" + __webpack_require__(409) + ");\n  -webkit-mask-image: url(" + __webpack_require__(409) + ");\n}\n.icon-cancel {\n  mask-image: url(" + __webpack_require__(410) + ");\n  -webkit-mask-image: url(" + __webpack_require__(410) + ");\n}\n.icon-create {\n  mask-image: url(" + __webpack_require__(411) + ");\n  -webkit-mask-image: url(" + __webpack_require__(411) + ");\n}\n.icon-caret-down {\n  mask-image: url(" + __webpack_require__(412) + ");\n  -webkit-mask-image: url(" + __webpack_require__(412) + ");\n}\n.icon-overflow {\n  mask-image: url(" + __webpack_require__(413) + ");\n  -webkit-mask-image: url(" + __webpack_require__(413) + ");\n}\n.primary {\n  background-image: -webkit-linear-gradient(bottom, #4ba8ff 0%, #6cb8ff 100%);\n  background-image: linear-gradient(0deg, #4ba8ff 0%, #6cb8ff 100%);\n  border-color: #3b99f0;\n  color: #fff;\n}\n.primary.dark {\n  border: 1px solid #2687e3;\n  box-shadow: none;\n}\n.primary.dark:hover {\n  background-image: -webkit-linear-gradient(bottom, #4ba8ff 0%, #6cb8ff 100%);\n  background-image: linear-gradient(0deg, #4ba8ff 0%, #6cb8ff 100%);\n  box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.2);\n  -moz-box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.2);\n  -webkit-box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.2);\n}\n.primary.dark:active {\n  box-shadow: 0px 1px 1px 0px rgba(0,0,0,0), inset 0px 2px 2px 0px rgba(0,0,0,0.2);\n  -moz-box-shadow: 0px 1px 1px 0px rgba(0,0,0,0), inset 0px 2px 2px 0px rgba(0,0,0,0.2);\n  -webkit-box-shadow: 0px 1px 1px 0px rgba(0,0,0,0), inset 0px 2px 2px 0px rgba(0,0,0,0.2);\n  border: 1px solid #3391e9;\n}\n.primary:hover {\n  background-image: -webkit-linear-gradient(bottom, #6cb8ff 0%, #6cb8ff 100%);\n  background-image: linear-gradient(0deg, #6cb8ff 0%, #6cb8ff 100%);\n}\n.primary:active {\n  border: 1px solid #4ba8ff;\n  background-image: -webkit-linear-gradient(bottom, #4ba8ff 0%, #6cb8ff 100%);\n  background-image: linear-gradient(0deg, #4ba8ff 0%, #6cb8ff 100%);\n  box-shadow: 0px 1px 1px 0px rgba(0,0,0,0), inset 0px 2px 2px 0px rgba(0,0,0,0.2);\n  -moz-box-shadow: 0px 1px 1px 0px rgba(0,0,0,0), inset 0px 2px 2px 0px rgba(0,0,0,0.2);\n  -webkit-box-shadow: 0px 1px 1px 0px rgba(0,0,0,0), inset 0px 2px 2px 0px rgba(0,0,0,0.2);\n  color: rgba(255,255,255,0.6);\n}\n.secondary {\n  background-image: -webkit-linear-gradient(bottom, #f9fafc 0%, #fff 100%);\n  background-image: linear-gradient(0deg, #f9fafc 0%, #fff 100%);\n  border-color: #c1ccd5;\n  box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.1);\n  -moz-box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.1);\n  -webkit-box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.1);\n  color: #6e859d;\n  --main-color: #6e859d;\n  padding: 15.5px 25px 13.5px 25px;\n}\n.secondary.dark {\n  background-image: none;\n  background-color: transparent;\n  border: none;\n  box-shadow: none;\n  color: rgba(255,255,255,0.4);\n  padding: 13px 23px 12px 23px;\n}\n.secondary.dark:hover {\n  background-image: none;\n  box-shadow: none;\n  color: #fff;\n}\n.secondary.dark:active {\n  background-color: #4ba8ff;\n  border: none;\n  color: rgba(255,255,255,0.6);\n}\n.secondary:hover {\n  background-image: -webkit-linear-gradient(bottom, #fff 0%, #fff 100%);\n  background-image: linear-gradient(0deg, #fff 0%, #fff 100%);\n  color: #4ba8ff;\n  box-shadow: 0 1px 2px 0 rgba(0,0,0,0.23);\n  -moz-box-shadow: 0 1px 2px 0 rgba(0,0,0,0.23);\n  -webkit-box-shadow: 0 1px 2px 0 rgba(0,0,0,0.23);\n}\n.secondary:active {\n  border: 1px solid #d8e0e6;\n  box-shadow: 0px 1px 0px 0px #e5eaef, inset 0px 2px 3px 0px #d8e0e6;\n  -moz-box-shadow: 0px 1px 0px 0px #e5eaef, inset 0px 2px 3px 0px #d8e0e6;\n  -webkit-box-shadow: 0px 1px 0px 0px #e5eaef, inset 0px 2px 3px 0px #d8e0e6;\n  color: rgba(110,133,157,0.8);\n}\n.caution {\n  background-image: -webkit-linear-gradient(bottom, #e4567b 0%, #ec7191 100%);\n  background-image: linear-gradient(0deg, #e4567b 0%, #ec7191 100%);\n  border-color: #d64174;\n  color: #fff;\n}\n.caution:hover {\n  background-image: -webkit-linear-gradient(bottom, #ec7191 0%, #ec7191 100%);\n  background-image: linear-gradient(0deg, #ec7191 0%, #ec7191 100%);\n}\n.caution:active {\n  background-image: -webkit-linear-gradient(bottom, #e4567b 0%, #ec7191 100%);\n  background-image: linear-gradient(0deg, #e4567b 0%, #ec7191 100%);\n  box-shadow: 0px 1px 1px 0px rgba(0,0,0,0), inset 0px 2px 2px 0px rgba(0,0,0,0.2);\n  -moz-box-shadow: 0px 1px 1px 0px rgba(0,0,0,0), inset 0px 2px 2px 0px rgba(0,0,0,0.2);\n  -webkit-box-shadow: 0px 1px 1px 0px rgba(0,0,0,0), inset 0px 2px 2px 0px rgba(0,0,0,0.2);\n  color: rgba(255,255,255,0.6);\n}\n.icon-button svg {\n  background-color: currentColor;\n  height: 12px;\n  margin: 0 6px 2px -4px;\n  vertical-align: middle;\n  width: 12px;\n}\n.drop-button {\n  padding: 12.5px 20px 11.5px 20px;\n}\n.drop-button svg {\n  background-color: currentColor;\n  display: inline-block;\n  height: 6px;\n  margin: 0 45px 2px 30px;\n  width: 12px;\n  vertical-align: middle;\n}\n.drop-button.split {\n  max-width: none;\n  padding-right: 10px;\n  position: relative;\n}\n.drop-button:hover .drop-var svg {\n  background-color: var(--main-color);\n}\n.drop-var {\n  border-left: 1px solid #c1ccd5;\n  display: inline-block;\n  margin-left: 10px;\n  padding-left: 10px;\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  right: 0;\n}\n.drop-var svg {\n  background-repeat: no-repeat;\n  height: 18px;\n  margin: 10px 10px 0 0;\n  width: 18px;\n}\n.button-bar:hover,\n.bar-corner:hover {\n  box-shadow: none;\n}\n.primary:disabled,\n.secondary:disabled,\n.caution:disabled {\n  cursor: default;\n  box-shadow: none;\n}\n.primary:disabled:hover,\n.secondary:disabled:hover,\n.caution:disabled:hover {\n  box-shadow: none;\n}\n.primary:disabled,\n.primary:disabled:hover {\n  background-image: -webkit-linear-gradient(bottom, #4ba8ff 0%, #6cb8ff 100%);\n  background-image: linear-gradient(0deg, #4ba8ff 0%, #6cb8ff 100%);\n  color: rgba(255,255,255,0.6);\n}\n.secondary:disabled,\n.secondary:hover:disabled {\n  background-image: -webkit-linear-gradient(bottom, #f9fafc 0%, #fff 100%);\n  background-image: linear-gradient(0deg, #f9fafc 0%, #fff 100%);\n  color: rgba(110,133,157,0.6);\n}\n.caution:disabled,\n.caution:disabled:hover {\n  background-image: -webkit-linear-gradient(bottom, #e4567b 0%, #ec7191 100%);\n  background-image: linear-gradient(0deg, #e4567b 0%, #ec7191 100%);\n  color: rgba(255,255,255,0.6);\n}\n.secondary.dark:disabled,\n.secondary.dark:hover:disabled {\n  background-image: none;\n  background-color: rgba(255,255,255,0);\n  border: none;\n  color: rgba(255,255,255,0.4);\n}\n.toggle-bar {\n  background-color: #eff3f5;\n  border-radius: 50px;\n  box-shadow: inset 0px 1px 0px 0px #e5eaef;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  margin: 0;\n  padding: 3px;\n}\n.toggle-bar li {\n  border-radius: 50px;\n  color: #4c6072;\n  align-items: center;\n  -webkit-box-align: center;\n  -ms-flex-align: center;\n  display: flex;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  flex-grow: 1;\n  -webkit-box-flex: 1;\n  -ms-flex-positive: 1;\n  height: 30px;\n  justify-content: center;\n  -webkit-box-pack: center;\n  -ms-flex-pack: center;\n  text-align: center;\n}\n.toggle-bar.large li {\n  height: 40px;\n}\n.toggle-bar.dark {\n  background-color: #3391e9;\n  box-shadow: inset 0px 1px 0px 0px #2687e3;\n  margin: 0 30px;\n}\n.toggle-bar.dark li {\n  color: rgba(255,255,255,0.45);\n}\n.toggle-bar.dark li.selected {\n  color: #fff;\n  background-color: #6cb8ff;\n}\n.toggle-bar.dark li:hover {\n  color: #fff;\n}\n.toggle-bar li:hover,\n.toggle-bar {\n  color: #4ba8ff;\n}\nli.selected:hover,\n.toggle-bar {\n  color: currentColor;\n}\nli.selected {\n  color: #6e859d;\n  background-color: #fff;\n  box-shadow: 0px 1px 0px 0px rgba(0,0,0,0.05);\n}\n.drop-link {\n  margin: 11px 10px;\n  cursor: pointer;\n}\n.drop-link a {\n  color: #6e859d;\n}\n.drop-link a:hover {\n  color: #4ba8ff;\n}\n.drop-link svg {\n  background-color: currentColor;\n  display: inline-block;\n  height: 6px;\n  margin: 0 0 2px 10px;\n  width: 12px;\n  vertical-align: middle;\n}\n.overflow-button {\n  cursor: pointer;\n  position: absolute;\n  top: 15px;\n  right: 15px;\n}\n.overflow-button svg {\n  background-color: currentColor;\n  display: inline-block;\n  height: 15px;\n  margin: 10px;\n  width: 3px;\n  vertical-align: middle;\n}\n.overflow-button:hover {\n  color: #4ba8ff;\n}\n.example-header {\n  background-color: #eff3f5;\n  border-bottom: 1px solid #d8e0e6;\n  position: absolute;\n  top: 0;\n  right: -1px;\n  left: -1px;\n  height: 60px;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
 /* 403 */
 /***/ function(module, exports) {
 
@@ -27588,15 +27868,60 @@
 
 
 /***/ },
-/* 405 */,
-/* 406 */,
-/* 407 */,
-/* 408 */,
-/* 409 */,
-/* 410 */,
-/* 411 */,
-/* 412 */,
-/* 413 */,
+/* 405 */
+/***/ function(module, exports) {
+
+	module.exports = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMjMwcHgiIGhlaWdodD0iOTBweCIgdmlld0JveD0iMCAwIDIzMCA5MCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj4KICAgIDwhLS0gR2VuZXJhdG9yOiBTa2V0Y2ggMzkuMSAoMzE3MjApIC0gaHR0cDovL3d3dy5ib2hlbWlhbmNvZGluZy5jb20vc2tldGNoIC0tPgogICAgPHRpdGxlPm1wLWxvZ288L3RpdGxlPgogICAgPGRlc2M+Q3JlYXRlZCB3aXRoIFNrZXRjaC48L2Rlc2M+CiAgICA8ZGVmcz48L2RlZnM+CiAgICA8ZyBpZD0iUGFnZS0xIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj4KICAgICAgICA8ZyBpZD0ibXAtbG9nbyI+CiAgICAgICAgICAgIDxnIGlkPSJIZWFkZXIiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xMzcuMDAwMDAwLCAtMC41MDAwMDApIj4KICAgICAgICAgICAgICAgIDx0ZXh0IGlkPSJNaXhwYW5lbC1EZXNpZ24iIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2FOZXVlLCBIZWx2ZXRpY2EgTmV1ZSIgZm9udC1zaXplPSIzMSIgZm9udC13ZWlnaHQ9Im5vcm1hbCIgZmlsbD0iIzRDNjA3MiI+CiAgICAgICAgICAgICAgICAgICAgPHRzcGFuIHg9IjEzNi44ODE1IiB5PSI4NCI+TWl4cGFuZWwgRGVzaWduPC90c3Bhbj4KICAgICAgICAgICAgICAgIDwvdGV4dD4KICAgICAgICAgICAgICAgIDxnIGlkPSJHcm91cCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjAyLjAwMDAwMCwgMC41MDAwMDApIiBmaWxsPSIjNEJBOEZGIj4KICAgICAgICAgICAgICAgICAgICA8Y2lyY2xlIGlkPSJPdmFsLTUiIGN4PSIxMSIgY3k9IjExIiByPSIxMSI+PC9jaXJjbGU+CiAgICAgICAgICAgICAgICAgICAgPGNpcmNsZSBpZD0iT3ZhbC01LUNvcHkiIGN4PSI1MCIgY3k9IjExIiByPSI4Ij48L2NpcmNsZT4KICAgICAgICAgICAgICAgICAgICA8Y2lyY2xlIGlkPSJPdmFsLTUtQ29weS0yIiBjeD0iODEuNSIgY3k9IjExLjUiIHI9IjMuNSI+PC9jaXJjbGU+CiAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgIDwvZz4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPg=="
+
+/***/ },
+/* 406 */
+/***/ function(module, exports) {
+
+	module.exports = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0ZWQgYnkgSWNvTW9vbi5pbyAtLT4KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSIyMiIgaGVpZ2h0PSIyMiIgdmlld0JveD0iMCAwIDIyIDIyIj4KPHBhdGggZmlsbD0iIzAwMCIgZD0iTTkuNTEgNC44ODhsLTUuMjIzIDkuMDMxYy0wLjc3NCAxLjMzOCAwLjEwOSAzLjA4MSAxLjU2MiAzLjA4MWgxMC4zMzJjMS40MjkgMCAyLjI5OC0xLjcxNCAxLjUzNy0zLjAzMWwtNS4yNTItOS4wODFjLTAuNjg1LTEuMTg0LTIuMjcxLTEuMTg0LTIuOTU2IDB6TTEwIDcuNWgybC0wLjUgNWgtMWwtMC41LTV6TTEyIDE0LjVjMCAwLjU1Mi0wLjQ0OCAxLTEgMXMtMS0wLjQ0OC0xLTFjMC0wLjU1MiAwLjQ0OC0xIDEtMXMxIDAuNDQ4IDEgMXoiPjwvcGF0aD4KPC9zdmc+Cg=="
+
+/***/ },
+/* 407 */
+/***/ function(module, exports) {
+
+	module.exports = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+Cjxzdmcgd2lkdGg9IjIycHgiIGhlaWdodD0iMjJweCIgdmlld0JveD0iMCAwIDIyIDIyIiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPgogICAgPCEtLSBHZW5lcmF0b3I6IFNrZXRjaCA0MS4xICgzNTM3NikgLSBodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2ggLS0+CiAgICA8dGl0bGU+dHlwZS1saXN0PC90aXRsZT4KICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBTa2V0Y2guPC9kZXNjPgogICAgPGRlZnM+PC9kZWZzPgogICAgPGcgaWQ9IjE2LXgtMTYiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPgogICAgICAgIDxnIGlkPSJ0eXBlLWxpc3QiPgogICAgICAgICAgICA8ZyBpZD0idHlwZV9saXN0IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyLjAwMDAwMCwgMi4wMDAwMDApIj4KICAgICAgICAgICAgICAgIDxwYXRoIGQ9Ik0xNSw2LjUgQzE1LDYuNzc2IDE0Ljc3Niw3IDE0LjUsNyBMNi41LDcgQzYuMjI0LDcgNiw2Ljc3NiA2LDYuNSBMNiw1LjUgQzYsNS4yMjQgNi4yMjQsNSA2LjUsNSBMMTQuNSw1IEMxNC43NzYsNSAxNSw1LjIyNCAxNSw1LjUgTDE1LDYuNSBaIE0xNSw5LjUgQzE1LDkuNzc2IDE0Ljc3NiwxMCAxNC41LDEwIEw2LjUsMTAgQzYuMjI0LDEwIDYsOS43NzYgNiw5LjUgTDYsOC41IEM2LDguMjI0IDYuMjI0LDggNi41LDggTDE0LjUsOCBDMTQuNzc2LDggMTUsOC4yMjQgMTUsOC41IEwxNSw5LjUgWiBNMTUsMTIuNSBDMTUsMTIuNzc2IDE0Ljc3NiwxMyAxNC41LDEzIEw2LjUsMTMgQzYuMjI0LDEzIDYsMTIuNzc2IDYsMTIuNSBMNiwxMS41IEM2LDExLjIyNCA2LjIyNCwxMSA2LjUsMTEgTDE0LjUsMTEgQzE0Ljc3NiwxMSAxNSwxMS4yMjQgMTUsMTEuNSBMMTUsMTIuNSBaIE01LDYuNSBDNSw2Ljc3NiA0Ljc3Niw3IDQuNSw3IEwzLjUsNyBDMy4yMjQsNyAzLDYuNzc2IDMsNi41IEwzLDUuNSBDMyw1LjIyNCAzLjIyNCw1IDMuNSw1IEw0LjUsNSBDNC43NzYsNSA1LDUuMjI0IDUsNS41IEw1LDYuNSBaIE01LDkuNSBDNSw5Ljc3NiA0Ljc3NiwxMCA0LjUsMTAgTDMuNSwxMCBDMy4yMjQsMTAgMyw5Ljc3NiAzLDkuNSBMMyw4LjUgQzMsOC4yMjQgMy4yMjQsOCAzLjUsOCBMNC41LDggQzQuNzc2LDggNSw4LjIyNCA1LDguNSBMNSw5LjUgWiBNNSwxMi41IEM1LDEyLjc3NiA0Ljc3NiwxMyA0LjUsMTMgTDMuNSwxMyBDMy4yMjQsMTMgMywxMi43NzYgMywxMi41IEwzLDExLjUgQzMsMTEuMjI0IDMuMjI0LDExIDMuNSwxMSBMNC41LDExIEM0Ljc3NiwxMSA1LDExLjIyNCA1LDExLjUgTDUsMTIuNSBaIE0xNiwwIEwyLDAgQzAuODk1LDAgMCwwLjg5NSAwLDIgTDAsMTYgQzAsMTcuMTA1IDAuODk1LDE4IDIsMTggTDE2LDE4IEMxNy4xMDUsMTggMTgsMTcuMTA1IDE4LDE2IEwxOCwyIEMxOCwwLjg5NSAxNy4xMDUsMCAxNiwwIEwxNiwwIFoiPjwvcGF0aD4KICAgICAgICAgICAgPC9nPgogICAgICAgIDwvZz4KICAgIDwvZz4KPC9zdmc+"
+
+/***/ },
+/* 408 */
+/***/ function(module, exports) {
+
+	module.exports = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0ZWQgYnkgSWNvTW9vbi5pbyAtLT4KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSIyMiIgaGVpZ2h0PSIyMiIgdmlld0JveD0iMCAwIDIyIDIyIj4KPHBhdGggZmlsbD0iIzAwMCIgZD0iTTE2LjUgMTBoLTguMDg2bDIuNDM5LTIuNDM5YzAuMTk2LTAuMTk2IDAuMTk2LTAuNTEyIDAtMC43MDdsLTAuNzA2LTAuNzA3Yy0wLjE5Ni0wLjE5Ni0wLjUxMi0wLjE5Ni0wLjcwOCAwbC00LjE0NiA0LjE0NmMtMC4zOTEgMC4zOS0wLjM5MSAxLjAyNCAwIDEuNDE0bDQuMTQ2IDQuMTQ3YzAuMTk2IDAuMTk1IDAuNTEyIDAuMTk1IDAuNzA4IDBsMC43MDYtMC43MDdjMC4xOTYtMC4xOTYgMC4xOTYtMC41MTIgMC0wLjcwOGwtMi40MzktMi40MzloOC4wODZjMC4yNzYgMCAwLjUtMC4yMjQgMC41LTAuNXYtMWMwLTAuMjc2LTAuMjI0LTAuNS0wLjUtMC41eiI+PC9wYXRoPgo8L3N2Zz4K"
+
+/***/ },
+/* 409 */
+/***/ function(module, exports) {
+
+	module.exports = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0ZWQgYnkgSWNvTW9vbi5pbyAtLT4KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSIyMiIgaGVpZ2h0PSIyMiIgdmlld0JveD0iMCAwIDIyIDIyIj4KPHBhdGggZmlsbD0iIzAwMCIgZD0iTTE2LjcwNyAxMC4yOTNsLTQuMTQ2LTQuMTQ2Yy0wLjE5Ni0wLjE5Ni0wLjUxMi0wLjE5Ni0wLjcwOCAwbC0wLjcwNyAwLjcwNmMtMC4xOTUgMC4xOTYtMC4xOTUgMC41MTIgMCAwLjcwOGwyLjQ0IDIuNDM5aC04LjA4NmMtMC4yNzYgMC0wLjUgMC4yMjQtMC41IDAuNXYxYzAgMC4yNzYgMC4yMjQgMC41IDAuNSAwLjVoOC4wODZsLTIuNDQgMi40MzljLTAuMTk1IDAuMTk2LTAuMTk1IDAuNTEyIDAgMC43MDhsMC43MDcgMC43MDZjMC4xOTYgMC4xOTYgMC41MTIgMC4xOTYgMC43MDggMGw0LjE0Ni00LjE0NmMwLjM5LTAuMzkgMC4zOS0xLjAyNCAwLTEuNDE0eiI+PC9wYXRoPgo8L3N2Zz4K"
+
+/***/ },
+/* 410 */
+/***/ function(module, exports) {
+
+	module.exports = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0ZWQgYnkgSWNvTW9vbi5pbyAtLT4KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSIyMiIgaGVpZ2h0PSIyMiIgdmlld0JveD0iMCAwIDIyIDIyIj4KPHBhdGggZmlsbD0iIzAwMCIgZD0iTTE0LjMxOSA2bC0zLjMxOSAzLjMxOS0zLjMyLTMuMzE5LTEuNjggMS42OCAzLjMxOSAzLjMxOS0zLjMxOSAzLjMxOSAxLjY4IDEuNjggMy4zMi0zLjMxOSAzLjMxOSAzLjMxOSAxLjY4LTEuNjgtMy4zMTktMy4zMTkgMy4zMTktMy4zMTl6Ij48L3BhdGg+Cjwvc3ZnPgo="
+
+/***/ },
+/* 411 */
+/***/ function(module, exports) {
+
+	module.exports = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0ZWQgYnkgSWNvTW9vbi5pbyAtLT4KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSIyMiIgaGVpZ2h0PSIyMiIgdmlld0JveD0iMCAwIDIyIDIyIj4KPHBhdGggZmlsbD0iIzAwMCIgZD0iTTE0IDEwaC0ydi0yYzAtMC41NTItMC40NDgtMS0xLTFzLTEgMC40NDgtMSAxdjJoLTJjLTAuNTUyIDAtMSAwLjQ0OC0xIDFzMC40NDggMSAxIDFoMnYyYzAgMC41NTIgMC40NDggMSAxIDFzMS0wLjQ0OCAxLTF2LTJoMmMwLjU1MiAwIDEtMC40NDggMS0xcy0wLjQ0OC0xLTEtMXoiPjwvcGF0aD4KPC9zdmc+Cg=="
+
+/***/ },
+/* 412 */
+/***/ function(module, exports) {
+
+	module.exports = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0ZWQgYnkgSWNvTW9vbi5pbyAtLT4KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSIyMiIgaGVpZ2h0PSIyMiIgdmlld0JveD0iMCAwIDIyIDIyIj4KPHBhdGggZmlsbD0iIzAwMCIgZD0iTTEwLjI5MyAxMy43MDdsLTQtNGMtMC4zOTEtMC4zOTEtMC4zOTEtMS4wMjMgMC0xLjQxNHMxLjAyMy0wLjM5MSAxLjQxNCAwbDMuMjkzIDMuMjkzIDMuMjkzLTMuMjkzYzAuMzkxLTAuMzkxIDEuMDIzLTAuMzkxIDEuNDE0IDAgMC4xOTUgMC4xOTUgMC4yOTMgMC40NTEgMC4yOTMgMC43MDdzLTAuMDk4IDAuNTEyLTAuMjkzIDAuNzA3bC00IDRjLTAuMzkxIDAuMzkxLTEuMDIzIDAuMzkxLTEuNDE0IDB6Ij48L3BhdGg+Cjwvc3ZnPgo="
+
+/***/ },
+/* 413 */
+/***/ function(module, exports) {
+
+	module.exports = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+Cjxzdmcgd2lkdGg9IjIycHgiIGhlaWdodD0iMjJweCIgdmlld0JveD0iMCAwIDIyIDIyIiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPgogICAgPCEtLSBHZW5lcmF0b3I6IFNrZXRjaCA0MC4zICgzMzgzOSkgLSBodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2ggLS0+CiAgICA8dGl0bGU+ZWxsaXBzaXM8L3RpdGxlPgogICAgPGRlc2M+Q3JlYXRlZCB3aXRoIFNrZXRjaC48L2Rlc2M+CiAgICA8ZGVmcz48L2RlZnM+CiAgICA8ZyBpZD0iMTYteC0xNiIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGcgaWQ9ImVsbGlwc2lzIj4KICAgICAgICAgICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoOS4wMDAwMDAsIDMuMDAwMDAwKSIgaWQ9Ik92YWwiPgogICAgICAgICAgICAgICAgPGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiPjwvY2lyY2xlPgogICAgICAgICAgICAgICAgPGNpcmNsZSBjeD0iMiIgY3k9IjgiIHI9IjIiPjwvY2lyY2xlPgogICAgICAgICAgICAgICAgPGNpcmNsZSBjeD0iMiIgY3k9IjE0IiByPSIyIj48L2NpcmNsZT4KICAgICAgICAgICAgPC9nPgogICAgICAgIDwvZz4KICAgIDwvZz4KPC9zdmc+"
+
+/***/ },
 /* 414 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -27849,548 +28174,10 @@
 
 
 /***/ },
-/* 415 */,
-/* 416 */
+/* 415 */
 /***/ function(module, exports) {
 
-	module.exports = [
-		{
-			"id": 1,
-			"user_id": 1,
-			"include_in_dashboard": true,
-			"user": "John D.",
-			"name": "most addicted users"
-		},
-		{
-			"id": 2,
-			"user_id": 1,
-			"include_in_dashboard": false,
-			"user": "John D.",
-			"name": "least addicted users"
-		},
-		{
-			"id": 3,
-			"user_id": 1,
-			"include_in_dashboard": true,
-			"user": "John D.",
-			"name": "Growth line graph"
-		},
-		{
-			"id": 13,
-			"user_id": 2,
-			"include_in_dashboard": false,
-			"user": "Josh W.",
-			"name": "Signups better"
-		},
-		{
-			"id": 4,
-			"user_id": 1,
-			"include_in_dashboard": false,
-			"user": "John D.",
-			"name": "Signups"
-		},
-		{
-			"id": 5,
-			"user_id": 4,
-			"include_in_dashboard": true,
-			"user": "Ilya K.",
-			"name": "Some bookmark 1"
-		},
-		{
-			"id": 6,
-			"user_id": 4,
-			"include_in_dashboard": false,
-			"user": "Ilya K.",
-			"name": "Some bookmark 2"
-		},
-		{
-			"id": 7,
-			"user_id": 4,
-			"include_in_dashboard": true,
-			"user": "Ilya K.",
-			"name": "Another bookmark 1"
-		},
-		{
-			"id": 8,
-			"user_id": 4,
-			"include_in_dashboard": false,
-			"user": "Ilya K.",
-			"name": "Another bookmark 2"
-		},
-		{
-			"id": 9,
-			"user_id": 3,
-			"include_in_dashboard": true,
-			"user": "Ted D.",
-			"name": "Ted's most excellent adventure"
-		},
-		{
-			"id": 10,
-			"user_id": 3,
-			"include_in_dashboard": false,
-			"user": "Ted D.",
-			"name": "Down and to the left baby"
-		},
-		{
-			"id": 11,
-			"user_id": 3,
-			"include_in_dashboard": true,
-			"user": "Ted D.",
-			"name": "Hi my name is Ted and I'm a."
-		},
-		{
-			"id": 12,
-			"user_id": 3,
-			"include_in_dashboard": false,
-			"user": "Ted D.",
-			"name": "Retention retention retention retention!"
-		}
-	];
-
-/***/ },
-/* 417 */
-/***/ function(module, exports, __webpack_require__) {
-
 	"use strict";
-
-	function _jade_template_fn(locals) {
-	  locals = locals || {};;;
-	  var result_of_with = function ($helpers, COLORS, JSON, Object, SVG_ICONS, blueToggleValue, bookmarks, console, inputGroupSaving, open, savingBookmark, selectedBookmarkId) {
-	    var h = __webpack_require__(349);
-	    return {
-	      value: h("div", {
-	        "className": [].concat('style-guide').filter(Boolean).join(' ')
-	      }, [h("div", {
-	        "className": [].concat('section').filter(Boolean).join(' ')
-	      }, [h("h1", ["Colors"].filter(Boolean)), h("p", {
-	        "className": [].concat('item-palette').concat('color-palette').concat('mp-font-list-item').filter(Boolean).join(' ')
-	      }, [Object.keys(COLORS).map(function (color, $index) {
-	        return h("div", {
-	          "className": [].concat('list-block').filter(Boolean).join(' ')
-	        }, [h("div", {
-	          "style": {
-	            'background-color': COLORS[color]
-	          },
-	          "className": [].concat('square').filter(Boolean).join(' ')
-	        }), h("div", {
-	          "className": [].concat('label').filter(Boolean).join(' ')
-	        }, function () {
-	          var __jade_nodes = [];
-	          __jade_nodes = __jade_nodes.concat(color);
-	          __jade_nodes = __jade_nodes.concat(h("mp-tooltip", [COLORS[color]]));;
-	          return __jade_nodes;
-	        }.call(this).filter(Boolean))].filter(Boolean));
-	      })].filter(Boolean))].filter(Boolean)), h("div", {
-	        "className": [].concat('section').filter(Boolean).join(' ')
-	      }, [h("h1", ["Icons"].filter(Boolean)), h("p", {
-	        "className": [].concat('item-palette').concat('icon-palette').filter(Boolean).join(' ')
-	      }, [Object.keys(SVG_ICONS).map(function (icon, $index) {
-	        return h("div", {
-	          "className": [].concat('list-block').filter(Boolean).join(' ')
-	        }, [h("svg-icon", {
-	          "attributes": {
-	            icon: icon
-	          }
-	        }), h("div", {
-	          "className": [].concat('label').filter(Boolean).join(' ')
-	        }, [icon])].filter(Boolean));
-	      }), h("div", {
-	        "className": [].concat('list-block').filter(Boolean).join(' ')
-	      }, [h("svg-icon", {
-	        "attributes": {
-	          empty: true
-	        }
-	      }), h("div", {
-	        "className": [].concat('label').filter(Boolean).join(' ')
-	      }, ["<empty>"].filter(Boolean))].filter(Boolean))].filter(Boolean))].filter(Boolean)), h("div", {
-	        "className": [].concat('section').filter(Boolean).join(' ')
-	      }, [h("h1", ["Typography"].filter(Boolean)), h("h2", ["Sizes"].filter(Boolean)), h("p", {
-	        "className": [].concat('mp-font-size-xl').filter(Boolean).join(' ')
-	      }, [".mp-font-size-xl | Mixpanel helps you learn from your data"].filter(Boolean)), h("p", {
-	        "className": [].concat('mp-font-size-large').filter(Boolean).join(' ')
-	      }, [".mp-font-size-large | Mixpanel helps you learn from your data"].filter(Boolean)), h("p", {
-	        "className": [].concat('mp-font-size-medium').filter(Boolean).join(' ')
-	      }, [".mp-font-size-medium | Mixpanel helps you learn from your data"].filter(Boolean)), h("p", {
-	        "className": [].concat('mp-font-size-default').filter(Boolean).join(' ')
-	      }, [".mp-font-size-default | Mixpanel helps you learn from your data"].filter(Boolean)), h("p", {
-	        "className": [].concat('mp-font-size-xs').filter(Boolean).join(' ')
-	      }, [".mp-font-size-xs | Mixpanel helps you learn from your data"].filter(Boolean)), h("h2", ["Weights"].filter(Boolean)), h("p", {
-	        "className": [].concat('mp-font-weight-regular').filter(Boolean).join(' ')
-	      }, [".mp-font-weight-regular | Mixpanel helps you learn from your data"].filter(Boolean)), h("p", {
-	        "className": [].concat('mp-font-weight-medium').filter(Boolean).join(' ')
-	      }, [".mp-font-weight-medium | Mixpanel helps you learn from your data"].filter(Boolean)), h("p", {
-	        "className": [].concat('mp-font-weight-bold').filter(Boolean).join(' ')
-	      }, [".mp-font-weight-bold | Mixpanel helps you learn from your data"].filter(Boolean)), h("h2", ["Utility classes"].filter(Boolean)), h("p", {
-	        "className": [].concat('mp-font-paragraph').filter(Boolean).join(' ')
-	      }, [".mp-font-paragraph", h("p", ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dignissim sodales rhoncus. Cras rutrum nisl et sapien efficitur tempus. Sed sagittis sed lorem in efficitur. Morbi sollicitudin interdum sapien, vitae semper odio dapibus non. Aenean id massa id nunc cursus varius. Suspendisse congue leo ac ante egestas molestie. Phasellus nec arcu in dolor tincidunt ornare a sed nunc. Proin et dapibus augue, sit amet fermentum risus. Integer ornare convallis nulla, in condimentum lectus efficitur et. Fusce facilisis, ex vitae consequat scelerisque, enim nibh fringilla ligula, a bibendum orci lorem id felis. Mauris eget augue nibh. Ut quis pharetra velit. Donec tempor ante id risus porttitor venenatis. Proin id dictum arcu, pulvinar iaculis augue. Aliquam in nunc vitae urna feugiat condimentum."].filter(Boolean))].filter(Boolean))].filter(Boolean)), h("div", {
-	        "className": [].concat('section').concat('buttons').filter(Boolean).join(' ')
-	      }, [h("h1", ["Buttons"].filter(Boolean)), h("p", [h("mp-button", {
-	        "className": [].concat('mp-button-primary').filter(Boolean).join(' ')
-	      }, [".mp-button-primary"].filter(Boolean)), h("mp-button", {
-	        "disabled": true,
-	        "className": [].concat('mp-button-primary').filter(Boolean).join(' ')
-	      }, ["disabled"].filter(Boolean))].filter(Boolean)), h("p", [h("mp-button", {
-	        "className": [].concat('mp-button-secondary').filter(Boolean).join(' ')
-	      }, [".mp-button-secondary"].filter(Boolean)), h("mp-button", {
-	        "disabled": true,
-	        "className": [].concat('mp-button-secondary').filter(Boolean).join(' ')
-	      }, ["disabled"].filter(Boolean))].filter(Boolean)), h("p", [h("mp-button", {
-	        "className": [].concat('mp-button-red').filter(Boolean).join(' ')
-	      }, [".mp-button-red"].filter(Boolean)), h("mp-button", {
-	        "disabled": true,
-	        "className": [].concat('mp-button-red').filter(Boolean).join(' ')
-	      }, ["disabled"].filter(Boolean))].filter(Boolean)), h("p", {
-	        "className": [].concat('button-field').filter(Boolean).join(' ')
-	      }, [h("mp-button", {
-	        "className": [].concat('mp-button-primary').concat('mp-button-on-blue').filter(Boolean).join(' ')
-	      }, ["primary on-blue"].filter(Boolean)), h("mp-button", {
-	        "disabled": true,
-	        "className": [].concat('mp-button-primary').concat('mp-button-on-blue').filter(Boolean).join(' ')
-	      }, ["disabled"].filter(Boolean))].filter(Boolean)), h("p", {
-	        "className": [].concat('button-field').filter(Boolean).join(' ')
-	      }, [h("mp-button", {
-	        "className": [].concat('mp-button-secondary').concat('mp-button-on-blue').filter(Boolean).join(' ')
-	      }, ["secondary on-blue"].filter(Boolean)), h("mp-button", {
-	        "disabled": true,
-	        "className": [].concat('mp-button-secondary').concat('mp-button-on-blue').filter(Boolean).join(' ')
-	      }, ["disabled"].filter(Boolean))].filter(Boolean)), h("h1", ["Buttons w/ icons"].filter(Boolean)), h("p", [h("mp-button", {
-	        "attributes": {
-	          icon: 'x'
-	        },
-	        "className": [].concat('mp-button-secondary').filter(Boolean).join(' ')
-	      }, ["Close"].filter(Boolean)), h("mp-button", {
-	        "attributes": {
-	          icon: 'logout'
-	        },
-	        "className": [].concat('mp-button-secondary').filter(Boolean).join(' ')
-	      }, ["Exit"].filter(Boolean)), h("mp-button", {
-	        "attributes": {
-	          icon: 'plus'
-	        },
-	        "className": [].concat('mp-button-primary').filter(Boolean).join(' ')
-	      }, ["Create"].filter(Boolean)), h("mp-button", {
-	        "attributes": {
-	          icon: 'trashcan'
-	        },
-	        "className": [].concat('mp-button-red').filter(Boolean).join(' ')
-	      }, ["Delete"].filter(Boolean))].filter(Boolean)), h("p", {
-	        "className": [].concat('button-field').filter(Boolean).join(' ')
-	      }, [h("mp-button", {
-	        "attributes": {
-	          icon: 'plus'
-	        },
-	        "className": [].concat('mp-button-primary').concat('mp-button-on-blue').filter(Boolean).join(' ')
-	      }, ["Create"].filter(Boolean)), h("mp-button", {
-	        "attributes": {
-	          icon: 'plus'
-	        },
-	        "disabled": true,
-	        "className": [].concat('mp-button-primary').concat('mp-button-on-blue').filter(Boolean).join(' ')
-	      }, ["Create"].filter(Boolean))].filter(Boolean)), h("p", {
-	        "className": [].concat('button-field').filter(Boolean).join(' ')
-	      }, [h("mp-button", {
-	        "attributes": {
-	          icon: 'x'
-	        },
-	        "className": [].concat('mp-button-secondary').concat('mp-button-on-blue').filter(Boolean).join(' ')
-	      }, ["Cancel"].filter(Boolean)), h("mp-button", {
-	        "attributes": {
-	          icon: 'x'
-	        },
-	        "disabled": true,
-	        "className": [].concat('mp-button-secondary').concat('mp-button-on-blue').filter(Boolean).join(' ')
-	      }, ["Cancel"].filter(Boolean))].filter(Boolean))].filter(Boolean)), h("div", {
-	        "className": [].concat('section').concat('button-bars').filter(Boolean).join(' ')
-	      }, [h("h1", ["Button bar"].filter(Boolean)), h("p", {
-	        "className": [].concat('button-bar-container').filter(Boolean).join(' ')
-	      }, [h("mp-button-bar", {
-	        "className": [].concat('mp-button-bar-secondary').filter(Boolean).join(' ')
-	      }, ["I'm a button bar"].filter(Boolean))].filter(Boolean)), h("p", {
-	        "className": [].concat('button-bar-container').filter(Boolean).join(' ')
-	      }, [h("mp-button-bar", {
-	        "attributes": {
-	          disabled: true
-	        },
-	        "className": [].concat('mp-button-bar-secondary').filter(Boolean).join(' ')
-	      }, ["I'm a disabled button bar"].filter(Boolean))].filter(Boolean)), h("p", {
-	        "className": [].concat('button-bar-container').filter(Boolean).join(' ')
-	      }, [h("mp-button-bar", {
-	        "attributes": {
-	          'arrow-next': true
-	        },
-	        "className": [].concat('mp-button-bar-primary').filter(Boolean).join(' ')
-	      }, ["Next step"].filter(Boolean))].filter(Boolean)), h("p", {
-	        "className": [].concat('button-bar-container').filter(Boolean).join(' ')
-	      }, [h("mp-button-bar", {
-	        "attributes": {
-	          'arrow-next': true,
-	          disabled: true
-	        },
-	        "className": [].concat('mp-button-bar-primary').filter(Boolean).join(' ')
-	      }, ["Next step"].filter(Boolean))].filter(Boolean))].filter(Boolean)), h("div", {
-	        "className": [].concat('section').concat('forms').filter(Boolean).join(' ')
-	      }, [h("h1", ["Forms"].filter(Boolean)), h("h2", ["Input"].filter(Boolean)), h("p", [h("input", {
-	        "type": "text",
-	        "placeholder": "I'm a placeholder"
-	      })].filter(Boolean)), h("h2", ["Input with icon"].filter(Boolean)), h("p", [h("div", {
-	        "className": [].concat('mp-icon-input').filter(Boolean).join(' ')
-	      }, [h("div", {
-	        "className": [].concat('mp-icon').filter(Boolean).join(' ')
-	      }, [h("svg-icon", {
-	        "attributes": {
-	          icon: "search"
-	        }
-	      })].filter(Boolean)), h("input", {
-	        "type": "text",
-	        "placeholder": "Some placeholder text"
-	      })].filter(Boolean))].filter(Boolean)), h("h2", ["Input group"].filter(Boolean)), h("p", [h("mp-input-group", {
-	        "attributes": {
-	          placeholder: "Type a name...",
-	          busy: inputGroupSaving
-	        },
-	        "onchange": $helpers.handleNamerChange,
-	        "onsubmit": $helpers.handleNamerSubmit
-	      })].filter(Boolean))].filter(Boolean)), h("div", {
-	        "className": [].concat('section').concat('menus').filter(Boolean).join(' ')
-	      }, [h("h1", ["Menus"].filter(Boolean)), h("p", [h("button", {
-	        "onclick": $helpers.toggleMenu
-	      }, ["Open Menu"].filter(Boolean)), h("div", {
-	        "className": [].concat('drop-menu-container').filter(Boolean).join(' ')
-	      }, [h("mp-drop-menu", {
-	        "attributes": {
-	          open: open.menu
-	        }
-	      }, [h("div", {
-	        "className": [].concat('text-container').filter(Boolean).join(' ')
-	      }, [h("div", {
-	        "className": [].concat('text').filter(Boolean).join(' ')
-	      }, ["there is text here"].filter(Boolean)), h("div", {
-	        "className": [].concat('text').filter(Boolean).join(' ')
-	      }, ["there is text here"].filter(Boolean)), h("div", {
-	        "className": [].concat('text').filter(Boolean).join(' ')
-	      }, ["there is text here"].filter(Boolean))].filter(Boolean))].filter(Boolean))].filter(Boolean))].filter(Boolean))].filter(Boolean)), h("div", {
-	        "className": [].concat('section').concat('modals').filter(Boolean).join(' ')
-	      }, [h("h1", ["Modals"].filter(Boolean)), h("p", [h("button", {
-	        "onclick": function onclick() {
-	          return $helpers.openModal('modal');
-	        }
-	      }, ["Open modal"].filter(Boolean)), h("mp-modal", {
-	        "attributes": {
-	          closeable: true,
-	          open: open.modal
-	        },
-	        "onchange": function onchange(e) {
-	          return $helpers.handleModalChange('modal', e.detail.state);
-	        },
-	        "className": [].concat('modal').filter(Boolean).join(' ')
-	      }, [h("div", [h("div", {
-	        "className": [].concat('mp-modal-content').filter(Boolean).join(' ')
-	      }, [h("div", {
-	        "className": [].concat('mp-modal-title').filter(Boolean).join(' ')
-	      }, ["Easily track events"].filter(Boolean)), h("div", {
-	        "className": [].concat('mp-modal-subtitle').filter(Boolean).join(' ')
-	      }, ["Click on any element on your page (e.g. the buy button) to create an event and access all historical data for that event."].filter(Boolean))].filter(Boolean)), h("mp-button-bar", {
-	        "onclick": function onclick() {
-	          return $helpers.closeModal('modal');
-	        },
-	        "attributes": {
-	          'arrow-next': true
-	        },
-	        "className": [].concat('mp-button-bar-primary').filter(Boolean).join(' ')
-	      }, ["Create your first event"].filter(Boolean))].filter(Boolean))].filter(Boolean))].filter(Boolean)), h("p", [h("button", {
-	        "onclick": function onclick() {
-	          return $helpers.openModal('popup');
-	        }
-	      }, ["Open popup"].filter(Boolean)), h("mp-modal", {
-	        "attributes": {
-	          'modal-type': 'popup',
-	          closeable: true,
-	          open: open.popup
-	        },
-	        "onchange": function onchange(e) {
-	          return $helpers.handleModalChange('popup', e.detail.state);
-	        },
-	        "className": [].concat('popup').filter(Boolean).join(' ')
-	      }, [h("div", [h("div", {
-	        "className": [].concat('mp-modal-content').filter(Boolean).join(' ')
-	      }, [h("div", {
-	        "className": [].concat('mp-modal-title').filter(Boolean).join(' ')
-	      }, ["Easily track events"].filter(Boolean)), h("div", {
-	        "className": [].concat('mp-modal-subtitle').filter(Boolean).join(' ')
-	      }, ["Click on any element on your page (e.g. the buy button) to create an event and access all historical data for that event."].filter(Boolean))].filter(Boolean)), h("mp-button-bar", {
-	        "onclick": function onclick() {
-	          return $helpers.closeModal('popup');
-	        },
-	        "className": [].concat('mp-button-bar-primary').filter(Boolean).join(' ')
-	      }, ["Create your first event"].filter(Boolean))].filter(Boolean))].filter(Boolean))].filter(Boolean)), h("p", [h("button", {
-	        "onclick": function onclick() {
-	          return $helpers.openModal('confirm');
-	        }
-	      }, ["Open confirm"].filter(Boolean)), h("mp-confirm", {
-	        "attributes": {
-	          open: open.confirm
-	        },
-	        "onsubmit": function onsubmit(e) {
-	          return console.log(e.detail);
-	        },
-	        "onchange": function onchange(e) {
-	          return $helpers.handleModalChange('confirm', e.detail.state);
-	        }
-	      }, [h("div", [h("div", {
-	        "className": [].concat('mp-confirm-title').filter(Boolean).join(' ')
-	      }, ["Unsaved changes"].filter(Boolean)), h("div", {
-	        "className": [].concat('mp-confirm-description').filter(Boolean).join(' ')
-	      }, ["If you navigate away from this page you will lose your changes. Would you like to continue?"].filter(Boolean))].filter(Boolean))].filter(Boolean))].filter(Boolean)), h("p", [h("button", {
-	        "onclick": function onclick() {
-	          return $helpers.openModal('confirmDelete');
-	        }
-	      }, ["Open confirm-delete"].filter(Boolean)), h("mp-confirm-delete", {
-	        "attributes": {
-	          id: 'confirmDelete',
-	          'delete-button-label': 'Delete it',
-	          closeable: true,
-	          open: open.confirmDelete
-	        },
-	        "onsubmit": function onsubmit(e) {
-	          return console.log(e.detail);
-	        },
-	        "onchange": function onchange(e) {
-	          return $helpers.handleModalChange('confirmDelete', e.detail.state);
-	        }
-	      }, [h("div", [h("div", {
-	        "className": [].concat('mp-confirm-delete-title').filter(Boolean).join(' ')
-	      }, ["Delete Bookmark"].filter(Boolean)), h("div", {
-	        "className": [].concat('mp-confirm-delete-description').filter(Boolean).join(' ')
-	      }, ["Are you sure you want to delete this bookmark?"].filter(Boolean))].filter(Boolean))].filter(Boolean))].filter(Boolean)), h("p", [h("button", {
-	        "onclick": function onclick() {
-	          return $helpers.openModal('alert');
-	        }
-	      }, ["Open alert"].filter(Boolean)), h("mp-alert", {
-	        "attributes": {
-	          id: 'alert',
-	          closeable: true,
-	          open: open['alert']
-	        },
-	        "onchange": function onchange(e) {
-	          return $helpers.handleModalChange('alert', e.detail.state);
-	        }
-	      }, [h("div", [h("div", {
-	        "className": [].concat('text').filter(Boolean).join(' ')
-	      }, ["AHHH DANGER DANGER There is currently an error"].filter(Boolean))].filter(Boolean))].filter(Boolean))].filter(Boolean))].filter(Boolean)), h("div", {
-	        "className": [].concat('section').concat('toggles').filter(Boolean).join(' ')
-	      }, [h("h1", ["Toggles"].filter(Boolean)), h("p", ["One element out of a set of two or more is always selected."].filter(Boolean)), h("mp-toggle", {
-	        "attributes": {
-	          selected: blueToggleValue
-	        },
-	        "onchange": $helpers.blueToggleChanged,
-	        "className": [].concat('mp-toggle-blue').concat('inline-toggle').filter(Boolean).join(' ')
-	      }, [h("mp-toggle-option", {
-	        "attributes": {
-	          value: 'option1'
-	        }
-	      }, ["Longer Option 1"].filter(Boolean)), h("mp-toggle-option", {
-	        "attributes": {
-	          value: 'option2'
-	        }
-	      }, ["Opt2"].filter(Boolean))].filter(Boolean)), h("span", {
-	        "className": [].concat('toggle-val').filter(Boolean).join(' ')
-	      }, ["Selected: " + blueToggleValue + ""].filter(Boolean)), h("mp-toggle", {
-	        "attributes": {
-	          selected: 'option1'
-	        },
-	        "className": [].concat('full-width-toggle').filter(Boolean).join(' ')
-	      }, [h("mp-toggle-option", {
-	        "attributes": {
-	          value: 'option1'
-	        }
-	      }, ["Super long option text"].filter(Boolean)), h("mp-toggle-option", {
-	        "attributes": {
-	          value: 'option2'
-	        }
-	      }, ["Short"].filter(Boolean)), h("mp-toggle-option", {
-	        "attributes": {
-	          value: 'option3'
-	        }
-	      }, ["Medium text here"].filter(Boolean))].filter(Boolean)), h("mp-toggle", {
-	        "attributes": {
-	          selected: 'option2'
-	        },
-	        "className": [].concat('full-width-toggle').concat('large-toggle').filter(Boolean).join(' ')
-	      }, [h("mp-toggle-option", {
-	        "attributes": {
-	          value: 'option1'
-	        }
-	      }, ["Longer Option 1"].filter(Boolean)), h("mp-toggle-option", {
-	        "attributes": {
-	          value: 'option2'
-	        }
-	      }, ["Longer Option 2"].filter(Boolean))].filter(Boolean))].filter(Boolean)), h("div", {
-	        "className": [].concat('section').filter(Boolean).join(' ')
-	      }, [h("h1", ["Spinners"].filter(Boolean)), h("mp-spinner")].filter(Boolean)), h("div", {
-	        "className": [].concat('section').filter(Boolean).join(' ')
-	      }, [h("h1", ["Tooltips"].filter(Boolean)), h("p", {
-	        "className": [].concat('mp-font-paragraph').filter(Boolean).join(' ')
-	      }, [h("a", ["Hover me", h("mp-tooltip", ["This is my tooltip"].filter(Boolean))].filter(Boolean))].filter(Boolean))].filter(Boolean)), h("div", {
-	        "className": [].concat('section').concat('widgets').filter(Boolean).join(' ')
-	      }, [h("h1", ["Widgets"].filter(Boolean)), h("p", [h("div", {
-	        "className": [].concat('bookmarks-widget').filter(Boolean).join(' ')
-	      }, [h("mp-bookmarks-widget", {
-	        "attributes": {
-	          bookmarks: JSON.stringify(bookmarks),
-	          'create-disabled': false,
-	          open: open.bookmarksWidget,
-	          saving: savingBookmark,
-	          'selected-bookmark-id': selectedBookmarkId,
-	          'user-id': 1
-	        },
-	        "onsubmit": $helpers.handleBookmarksMenuSubmit,
-	        "onchange": $helpers.handleBookmarksMenuChange
-	      })].filter(Boolean))].filter(Boolean))].filter(Boolean))].filter(Boolean))
-	    };
-	  }.call(this, "$helpers" in locals ? locals.$helpers : typeof $helpers !== "undefined" ? $helpers : undefined, "COLORS" in locals ? locals.COLORS : typeof COLORS !== "undefined" ? COLORS : undefined, "JSON" in locals ? locals.JSON : typeof JSON !== "undefined" ? JSON : undefined, "Object" in locals ? locals.Object : typeof Object !== "undefined" ? Object : undefined, "SVG_ICONS" in locals ? locals.SVG_ICONS : typeof SVG_ICONS !== "undefined" ? SVG_ICONS : undefined, "blueToggleValue" in locals ? locals.blueToggleValue : typeof blueToggleValue !== "undefined" ? blueToggleValue : undefined, "bookmarks" in locals ? locals.bookmarks : typeof bookmarks !== "undefined" ? bookmarks : undefined, "console" in locals ? locals.console : typeof console !== "undefined" ? console : undefined, "inputGroupSaving" in locals ? locals.inputGroupSaving : typeof inputGroupSaving !== "undefined" ? inputGroupSaving : undefined, "open" in locals ? locals.open : typeof open !== "undefined" ? open : undefined, "savingBookmark" in locals ? locals.savingBookmark : typeof savingBookmark !== "undefined" ? savingBookmark : undefined, "selectedBookmarkId" in locals ? locals.selectedBookmarkId : typeof selectedBookmarkId !== "undefined" ? selectedBookmarkId : undefined);
-	  if (result_of_with) return result_of_with.value;
-	}
-	module.exports = _jade_template_fn;
-
-/***/ },
-/* 418 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(419);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(414)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/autoprefixer-loader/index.js!./../../node_modules/stylus-loader/index.js!./index.styl", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/autoprefixer-loader/index.js!./../../node_modules/stylus-loader/index.js!./index.styl");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 419 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(403)();
-	// imports
-	exports.i(__webpack_require__(404), "");
-
-	// module
-	exports.push([module.id, ".section {\n  margin-bottom: 10px;\n  padding-bottom: 10px;\n  border-bottom: 1px solid #eff3f5;\n}\n.section .item-palette {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: column wrap;\n      flex-flow: column wrap;\n}\n.section .item-palette.color-palette {\n  height: 180px;\n}\n.section .item-palette.icon-palette {\n  height: 320px;\n}\n.section .list-block {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  margin: 5px;\n}\n.section .list-block svg-icon svg {\n  left: 0;\n  top: 0;\n}\n.section .list-block svg-icon svg,\n.section .list-block svg-icon path {\n  color: #4c6072;\n  fill: #4c6072;\n  -webkit-transition: 0.2s;\n  transition: 0.2s;\n}\n.section .list-block:hover svg-icon svg,\n.section .list-block:hover svg-icon path {\n  color: #6cb8ff;\n  fill: #6cb8ff;\n}\n.section .list-block .square {\n  display: inline-block;\n  vertical-align: middle;\n  margin-right: 4px;\n  width: 20px;\n  height: 20px;\n}\n.section .list-block .label {\n  display: inline-block;\n  margin-left: 10px;\n  vertical-align: middle;\n}\n.section.buttons mp-button {\n  margin-right: 4px;\n  vertical-align: middle;\n}\n.section.buttons p.button-field {\n  background: #4ba8ff;\n  display: table;\n  padding: 10px;\n}\n.section.button-bars .button-bar-container {\n  max-width: 600px;\n}\n.section.modals .modal {\n  width: 500px;\n}\n.section.modals mp-confirm {\n  width: 480px;\n}\n.section.toggles mp-toggle {\n  margin-bottom: 10px;\n}\n.section.toggles mp-toggle.inline-toggle {\n  width: 300px;\n}\n.section.toggles mp-toggle.full-width-toggle {\n  display: block;\n}\n.section.toggles .toggle-val {\n  margin-left: 10px;\n}\n.section.menus .drop-menu-container {\n  position: relative;\n}\n.section.forms .mp-icon-input {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  position: relative;\n}\n.section.forms .mp-icon-input input {\n  padding: 6px;\n  padding-left: 36px;\n  padding-right: 18px;\n  width: 100%;\n}\n.section.forms .mp-icon-input input:focus + .mp-icon svg-icon svg {\n  left: 0;\n  top: 0;\n}\n.section.forms .mp-icon-input input:focus + .mp-icon svg-icon svg,\n.section.forms .mp-icon-input input:focus + .mp-icon svg-icon path {\n  color: #6e859d;\n  fill: #6e859d;\n  -webkit-transition: 0.2s;\n  transition: 0.2s;\n}\n.section.forms .mp-icon-input .mp-icon {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 8px;\n}\n.section.forms .mp-icon-input .mp-icon svg-icon svg {\n  left: 0;\n  top: 0;\n}\n.section.forms .mp-icon-input .mp-icon svg-icon svg,\n.section.forms .mp-icon-input .mp-icon svg-icon path {\n  color: #9cacbb;\n  fill: #9cacbb;\n  -webkit-transition: 0.2s;\n  transition: 0.2s;\n}\n.section.widgets {\n  padding-bottom: 500px;\n}\n.section.widgets .bookmarks-widget {\n  background-color: #eff3f5;\n  border: 1px solid #c1ccd5;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 54px;\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n  width: 100%;\n}\n.section.widgets .bookmarks-widget mp-bookmarks-widget {\n  border-left: 1px solid #d8e0e6;\n  border-right: 1px solid #d8e0e6;\n  margin-right: 50px;\n}\n", ""]);
-
-	// exports
-
 
 /***/ }
 /******/ ]);

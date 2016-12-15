@@ -1,0 +1,168 @@
+mixin color-group(name, description, colors)
+  label.title #{name}
+
+  if name === "Mixpanel UI Colors"
+    - description = "I love cheeseburgers. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id massa et libero condimentum dignissim at ut odio. Aliquam placerat libero metus, et fringilla nisl dictum vitae. Sed at lacus eu risus fermentum consequat."
+
+  else if name === "Data Visualization"
+    - description = "I love hot dogs. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id massa et libero condimentum dignissim at ut odio. Aliquam placerat libero metus, et fringilla nisl dictum vitae. Sed at lacus eu risus fermentum consequat."
+
+  p.desc.max #{description}
+
+  ul.color-swatches
+    each color in Object.keys(colors)
+      li.swatch.swatch-misc.swatch-all
+        samp(class="sample " + color)
+        h3.swatch-label= color
+        label.swatch-hex= colors[color]
+
+  section.code-snippet
+    .call-out
+      strong.icon +
+      strong Example Code
+    .snippet-container.min.max
+      .snippet-header
+        label Stylus
+      .code-field
+        pre
+          | 1    /* Color Declarations */
+          br
+          | 2
+          br
+          | 3
+          b     mp-red   =
+          span  #E4567B
+          br
+          | 4
+          b     mp-blue  =
+          span  #4BA8FF
+          br
+          | 5
+          b     blue-900 =
+          span  #2687E3
+          br
+          | 6
+          b     blue-700 =
+          span  #3391E9
+
+  .divider
+    sup 1.+
+
+mixin library-group(name, colors)
+
+  ul.color-library
+    strong.call-out.floating-label #{name}
+    each color in Object.keys(colors)
+      li(class=color)
+        input.med(value=COLORS[color])
+        label.swatch-label= color
+
+.wrapper
+
+  .version-bar
+    .version-label
+      label Mixpanel Design
+      div(style="height: 3px; width: 40px; background-color: #D8E0E6; margin: 0 10px 3px 10px;")
+      strong.version Chrome 2.0
+
+  #header
+    .logo
+
+  .style-guide
+
+    #nav-strip
+    ul#nav
+      li(data-goto='colors')
+        sup.nav-number 01
+        label.nav-label.selected Colors
+        ul.nav-children.visible
+          li
+            label.child Mixpanel UI
+            mark.selected.visible
+              sup.sub-section 1.1
+          li
+            label.child Data Visualization
+            mark.selected
+              sup.sub-section 1.2
+          li
+            label.child Gradients
+            mark.selected
+              sup.sub-section 1.3
+          li
+            label.child Color use
+            mark.selected
+              sup.sub-section 1.4
+          li
+            label.child Hue Library
+            mark.selected
+              sup.sub-section 1.5
+          li
+            label.child
+      li(data-goto='typography')
+        sup.nav-number 02
+        label.nav-label Typography
+        ul.nav-children
+          li
+            label.child Sizes
+            mark.selected.visible
+              sup.sub-section 2.1
+          li
+            label.child Weights
+            mark.selected.visible
+              sup.sub-section 2.2
+          li
+            label.child Colors
+            mark.selected.visible
+              sup.sub-section 2.3
+          li
+            label.child Pairings
+            mark.selected.visible
+              sup.sub-section 2.4
+      li(data-goto='icons')
+        sup.nav-number 03
+        label.nav-label Iconography
+        ul.nav-children
+          li
+            label.child UI Icons
+            mark.selected.visible
+              sup.sub-section 3.1
+          li
+            label.child Legacy
+            mark.selected.visible
+              sup.sub-section 3.2
+          li
+            label.child Marketing
+            mark.selected.visible
+              sup.sub-section 3.3
+          li
+            label.child Pairings
+            mark.selected.visible
+              sup.sub-section 3.4
+
+    .container
+
+      .section-header.min
+        h1 Colors
+        sup.section-number 1.1
+
+      // ul.section-nav.min
+      //   li#swatch-all
+      //   li#swatch-background
+      //   li#swatch-header
+      //   li#swatch-border
+      //   li#swatch-type
+      //   li#swatch-button
+
+      .section.content.min#1.1
+        each group in Object.keys(COLOR_GROUPS)
+          +color-group(group, description, COLOR_GROUPS[group])
+
+      section.content.min#1.3
+        .divider
+          sup 1.3
+
+        label.title Color Library
+        p.desc.max My dog and I went to the park the other day and we had some fun chasing the ball.
+
+        each group in Object.keys(COLOR_LIBRARIES)
+            +library-group(group, COLOR_LIBRARIES[group])
