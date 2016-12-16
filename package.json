@@ -8,7 +8,7 @@
     "build-examples": "npm run build && webpack --context examples --config examples/webpack.config.js",
     "watch": "npm run build && concurrently 'node build.js -w' 'webpack --context examples --config examples/webpack.config.js -w'",
     "start": "npm run build && concurrently 'node build.js -w' 'webpack-dev-server --context examples --config examples/webpack.config.js --colors --inline'",
-    "lint": "eslint lib",
+    "lint": "eslint lib && stylint lib/stylesheets",
     "prepublish": "npm run build",
     "test": "npm run lint && webpack --context test --config test/webpack.config.js; DISPLAY=:30 wct --plugin local",
     "unit-test": "npm run lint && mocha --require babel-core/register test/util/"
@@ -55,6 +55,7 @@
     "precommit-hook-eslint": "3.0.0",
     "raw-loader": "^0.5.1",
     "style-loader": "0.13.1",
+    "stylint": "^1.5.8",
     "stylus": "0.54.5",
     "stylus-loader": "2.1.0",
     "url-loader": "^0.5.7",

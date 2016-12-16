@@ -2,7 +2,7 @@
 @import 'svg-icon.styl'
 
 *
-  -webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing antialiased
 
 *:focus
   outline 0
@@ -14,9 +14,9 @@
 body
   color grey-700
   font-family family-helvetica
-  font-weight weight-regular
   font-size-default()
   font-stretch normal
+  font-weight weight-regular
 
 a, .mp-link
   cursor pointer
@@ -69,8 +69,8 @@ input[type=text], textarea
   transition border-color 150ms ease-out
 
   &::placeholder
-    color grey-500 !important
-    font-weight weight-normal !important
+    color grey-500 !important // @stylint ignore
+    font-weight weight-normal !important // @stylint ignore
 
   &:focus
     border-color blue-700
