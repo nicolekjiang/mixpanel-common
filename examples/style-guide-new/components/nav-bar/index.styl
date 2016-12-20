@@ -1,0 +1,77 @@
+@import '../../../../build/stylesheets/defaults/index.css'
+@import '../../../../build/stylesheets/mixins/common.styl'
+
+.nav-strip
+  background-color #FFFFFF
+  border-right 1px solid #D8E0E6
+  position fixed
+  top 0
+  bottom 0
+  left 0
+  width 15px
+  z-index 0
+
+.nav
+  box-sizing border-box
+  height 100%
+  left 0
+  list-style-type none
+  margin 0
+  width 20vw
+  min-width 300px
+  overflow-y scroll
+  padding 180px 0 60px 0
+  position fixed
+  top 0
+  z-index 900
+  
+  .nav-section
+    border-left 15px solid #4BA8FF
+    color #4C6072
+    cursor pointer
+    padding 12px 0 0 45px
+
+    &:hover
+      color #4BA8FF
+
+    &.selected
+      color #4BA8FF
+
+    .nav-number
+      color #C1CCD5
+      font-size 14px
+    
+    .nav-label
+      border-bottom 1px solid #D8E0E6
+      display block
+      font-size 20px
+      line-height 15px
+      padding 0 0 19px 23px
+
+  .sub-nav
+    display flex
+    flex-direction column
+    border-left 15px solid #89C6FF
+    color #6E859D
+    cursor pointer
+    padding 12px 0 0 45px
+    
+    .sub-nav-section
+      display flex
+      flex-direction row
+      justify-content space-between
+      font-size 16px
+      padding 6px 0 6px 23px
+      font-family family-helvetica
+
+      .sub-nav-number
+        color #9CACBB
+        display none
+        font-size 14px
+        font-weight weight-bold
+        left -30px
+        position relative
+
+      &:hover
+        .sub-nav-number
+          display block

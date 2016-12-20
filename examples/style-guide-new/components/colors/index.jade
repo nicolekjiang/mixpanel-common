@@ -1,0 +1,126 @@
+.colors
+  .section-title
+    .title-text Colors
+    .title-section 1.1
+  .section-nav
+    .nav-item(
+      onclick=$helpers.sectionChange
+      class=sectionFilter === 'show all' ? 'selected' : null
+      attributes={'data-filter-name': 'show all'}
+    ) Show All
+    .nav-item(
+      onclick=$helpers.sectionChange
+      class=sectionFilter === 'background' ? 'selected' : null
+      attributes={'data-filter-name': 'background'}
+    ) Background
+    .nav-item(
+      onclick=$helpers.sectionChange
+      class=sectionFilter === 'header' ? 'selected' : null
+      attributes={'data-filter-name': 'header'}
+    ) Header
+    .nav-item(
+      onclick=$helpers.sectionChange
+      class=sectionFilter === 'border' ? 'selected' : null
+      attributes={'data-filter-name': 'border'}
+    ) Border
+    .nav-item(
+      onclick=$helpers.sectionChange
+      class=sectionFilter === 'type' ? 'selected' : null
+      attributes={'data-filter-name': 'type'}
+    ) Type
+    .nav-item(
+      onclick=$helpers.sectionChange
+      class=sectionFilter === 'buttons' ? 'selected' : null
+      attributes={'data-filter-name': 'buttons'}
+    ) Buttons
+  .section-content
+    - const colorGroups = $helpers.getColorGroups()
+    .ui-colors
+      .color-title Mixpanel UI Colors
+      .color-description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id massa et libero condimentum dignissim at ut odio. Aliquam placerat libero metus, et fringilla nisl dictum vitae. Sed at lacus eu risus fermentum consequat.
+      .color-chips
+        for color in colorGroups['Mixpanel UI Colors']
+          .swatch
+            .swatch-color(style={'background-color': '#{COLORS[color]}'})
+            .swatch-label
+              .color-name #{color}
+              .color-hex #{COLORS[color]}
+      section.code-snippet
+        .call-out
+          strong.icon +
+          strong Example Code
+        .snippet-container.min.max
+          .snippet-header
+            label Stylus
+          .code-field
+            pre
+              | 1    /* Color Declarations */
+              br
+              | 2
+              br
+              | 3
+              b     mp-red   =
+              span  #E4567B
+              br
+              | 4
+              b     mp-blue  =
+              span  #4BA8FF
+              br
+              | 5
+              b     blue-900 =
+              span  #2687E3
+              br
+              | 6
+              b     blue-700 =
+              span  #3391E9
+    .data-viz-colors
+      .color-title Data Visualization
+      .color-description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id massa et libero condimentum dignissim at ut odio. Aliquam placerat libero metus, et fringilla nisl dictum vitae. Sed at lacus eu risus fermentum consequat.
+      .color-chips
+        for color in colorGroups['Data Visualization']
+          .swatch
+            .swatch-color(style={'background-color': '#{COLORS[color]}'})
+            .swatch-label
+              .color-name #{color}
+              .color-hex #{COLORS[color]}
+      section.code-snippet
+        .call-out
+          strong.icon +
+          strong Example Code
+        .snippet-container.min.max
+          .snippet-header
+            label Stylus
+          .code-field
+            pre
+              | 1    /* Color Declarations */
+              br
+              | 2
+              br
+              | 3
+              b     mp-red   =
+              span  #E4567B
+              br
+              | 4
+              b     mp-blue  =
+              span  #4BA8FF
+              br
+              | 5
+              b     blue-900 =
+              span  #2687E3
+              br
+              | 6
+              b     blue-700 =
+              span  #3391E9
+    .color-library-container
+      - const colorLibrary = $helpers.getColorLibraries()
+      .color-title Color Library
+      .color-description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id massa et libero condimentum dignissim at ut odio. Aliquam placerat libero metus, et fringilla nisl dictum vitae. Sed at lacus eu risus fermentum consequat.
+      .color-library
+        for colorGroup in Object.keys(colorLibrary)
+          .color-group-container
+            strong.color-group-title #{colorGroup}
+            .color-group
+              for color in colorLibrary[colorGroup]
+                .color-segment(style={'background-color': '#{COLORS[color]}'})
+                  .color-segment-hex #{COLORS[color]}
+                  .color-segment-name #{color}
