@@ -14,19 +14,19 @@
 
 @keyframes fadeModalIn
   from
-    transform scale(1.1, 1.1)
     opacity 0
+    transform scale(1.1, 1.1)
   to
-    transform scale(1, 1)
     opacity 1
+    transform scale(1, 1)
 
 @keyframes fadeModalOut
   from
-    transform scale(1, 1)
     opacity 1
+    transform scale(1, 1)
   to
-    transform scale(1.1, 1.1)
     opacity 0
+    transform scale(1.1, 1.1)
 
 +host-styles(mp-modal)
   position absolute
@@ -57,8 +57,8 @@
     .backdrop
       background grey-900
       height 100%
-      position fixed
       pointer-events auto
+      position fixed
       width 100%
 
       &.opening
@@ -76,7 +76,7 @@
 
     .backdrop + .wrapper
       .main
-        box-shadow 0px 17px 50px 0px alpha(black,0.19)
+        box-shadow 0 17px 50px 0 alpha(black, 0.19)
 
     .wrapper
       align-items center
@@ -89,14 +89,14 @@
       width inherit
 
       .main
-        background #fff
+        background white
         border 1px solid grey-100
         border-radius 5px
-        box-shadow 0px 1px 2px 0px alpha(black,0.14)
+        box-shadow 0 1px 2px 0 alpha(black, 0.14)
         pointer-events auto
         position relative
         width inherit
-        z-index 2
+        z-index 100
 
         &.opening
           animation fadeModalIn 300ms forwards 100ms
@@ -121,6 +121,7 @@
 
           .close-icon svg
             width 10px
+
             path
               fill grey-200
 

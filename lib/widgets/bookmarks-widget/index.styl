@@ -1,17 +1,16 @@
 @import '../../stylesheets/defaults'
 
-*
-  box-sizing border-box
-
 +prefix-classes('mp-bm-')
-
   +host-styles(mp-bookmarks-widget)
     background-color grey-100
-    background-image linear-gradient(grey-50 0%, grey-100 100%)
+    background-image linear-gradient(grey-50 0, grey-100 100%)
     box-shadow 0 1px rgba(0, 0, 0, 0.05)
     box-sizing border-box
-    width 145px
     height 54px
+    width 145px
+
+  .container, .container *
+    box-sizing border-box
 
   .container
     color grey-700
@@ -43,7 +42,7 @@
         color grey-900
 
     .menu
-      height 0px
+      height 0
       position relative
       width 100%
 
@@ -52,7 +51,10 @@
         right -8px
         top -10px
 
-+prefix-classes('mp-bm-menu-')
++prefix-classes('mp-bm-menu-') // @stylint ignore
+  .container, .container *
+    box-sizing border-box
+
   .container
     background-color white
     border-radius 5px
@@ -82,8 +84,8 @@
     .list
       border-bottom-left-radius 5px
       border-bottom-right-radius 5px
+      margin 0 10px
       max-height 360px
-      margin 0px 10px
       overflow-y auto
       position relative
 
@@ -99,7 +101,7 @@
         color grey-500
         font-size-xs()
         font-weight weight-bold
-        padding 20px 10px 8px 10px
+        padding 20px 10px 8px
 
       .list-item
         align-items center
@@ -110,10 +112,10 @@
         padding 10px
 
         &:only-child
-          margin: 10px 0
+          margin 10px 0
 
         &:last-child
-          margin-bottom: 10px
+          margin-bottom 10px
 
         &.list-item-active
           background-color grey-100
@@ -170,5 +172,5 @@
     mp-input-group
       border-top 1px solid grey-200
       height 100%
-      width 100%
       padding 6px
+      width 100%

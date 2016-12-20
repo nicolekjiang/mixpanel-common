@@ -11,9 +11,9 @@ content-color(color)
 
 +host-styles(mp-button-bar)
   height 45px
-  width calc(100% + 2px)
   margin-bottom -2px
   margin-left -1px
+  width calc(100% + 2px)
 
 +prefix-classes('mp-button-bar-')
   .container, .container *
@@ -51,9 +51,9 @@ content-color(color)
         opacity 0.6
 
     .arrow-next
+      height 22px
       margin-left 6px
       margin-top 1px
-      height 22px
       width 18px
 
     &.blue, &.primary
@@ -66,8 +66,8 @@ content-color(color)
 
       &:active{not-disabled}, &.active{not-disabled}
         background-color mp-blue
-        box-shadow 0px 1px 1px 0px alpha(black,0.0), inset 0px 2px 2px 0px alpha(black,0.2)
-        content-color(alpha(white,0.6))
+        box-shadow 0 1px 1px 0 alpha(black, 0.0), inset 0 2px 2px 0 alpha(black, 0.2)
+        content-color(alpha(white, 0.6))
 
     &.grey, &.secondary
       border-color grey-150
@@ -78,5 +78,5 @@ content-color(color)
 
       &:active{not-disabled}, &.active{not-disabled}
         border-color grey-150
-        box-shadow 0px 1px 0px 0px grey-150, inset 0px 2px 3px 0px grey-200
-        content-color(alpha(grey-700,0.8))
+        box-shadow 0 1px 0 0 grey-150, inset 0 2px 3px 0 grey-200
+        content-color(alpha(grey-700, 0.8))

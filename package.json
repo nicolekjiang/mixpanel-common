@@ -8,7 +8,7 @@
     "build-examples": "npm run build && webpack --context examples --config examples/webpack.config.js",
     "watch": "npm run build && concurrently 'node build.js -w' 'webpack --context examples --config examples/webpack.config.js -w'",
     "start": "npm run build && concurrently 'node build.js -w' 'webpack-dev-server --context examples --config examples/webpack.config.js --colors --inline'",
-    "lint": "eslint lib && stylint lib/stylesheets",
+    "lint": "eslint lib && stylint lib",
     "prepublish": "npm run build",
     "test": "npm run lint && webpack --context test --config test/webpack.config.js; DISPLAY=:30 wct --plugin local",
     "unit-test": "npm run lint && mocha --require babel-core/register test/util/"
