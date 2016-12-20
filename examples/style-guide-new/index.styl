@@ -62,10 +62,13 @@ section
 
 .subsection-title
   color #4C6072
+  font-family family-helvetica
   font-size 24px
 
 .subsection-description
   padding 16px 0px 45px 0px
+  font-family family-helvetica
+  font-size 16px
 
 .section-nav
   border-top 1px solid #D8E0E6
@@ -94,3 +97,64 @@ section
       background-color: #4BA8FF;
       border-radius: 30px;
       color: #FFFFFF;
+
+.code-snippet
+  left -60px
+  padding-left 15px
+  position relative
+
+  .call-out
+    color grey-900
+    display inline-block
+    text-transform uppercase
+    &.extra
+      margin-top 30px
+    & > strong
+      margin-left 15px
+    label
+      text-transform none
+    p
+      line-height 4px
+      margin-left 45px
+      text-transform none
+
+  .snippet-container
+    background-color grey-50
+    border 1px solid grey-200
+    border-radius 6px
+    font-size 14px
+    margin 30px 0 0 45px
+    position relative
+
+  .snippet-header
+    color grey-700
+    border-bottom 1px solid grey-200
+    border-radius 6px 6px 0px 0px
+    padding 15px
+    label
+      text-transform uppercase
+      letter-spacing 1.2px
+
+  .code-field
+    background-color white
+    border-left 1px solid grey-200
+    border-radius 0px 0px 6px 0px
+    font-family monospace
+    margin 0 0 0 45px
+    padding 15px
+    pre
+      color grey-900
+      display inline-block
+      letter-spacing 1.5px
+      line-height 20px
+      margin -2px 0 0 -45px
+      white-space pre-wrap
+      &:nth-child(2n)
+        margin-left 45px
+
+  pre
+    span
+      color mp-red
+    b
+      color grey-900
+      font-weight 400
