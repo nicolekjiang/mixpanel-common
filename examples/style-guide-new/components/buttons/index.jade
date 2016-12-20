@@ -1,0 +1,36 @@
+.section
+  .section-title
+    .title-text Buttons
+    .title-section 4.1
+  .section-nav
+    .nav-item(
+      onclick=$helpers.sectionChange
+      class=sectionFilter === 'show all' ? 'selected' : null
+      attributes={'data-filter-name': 'show all'}
+    ) Show All
+    .nav-item(
+      onclick=$helpers.sectionChange
+      class=sectionFilter === 'basics' ? 'selected' : null
+      attributes={'data-filter-name': 'basics'}
+    ) Basics
+    .nav-item(
+      onclick=$helpers.sectionChange
+      class=sectionFilter === 'bars' ? 'selected' : null
+      attributes={'data-filter-name': 'bars'}
+    ) Bars
+    .nav-item(
+      onclick=$helpers.sectionChange
+      class=sectionFilter === 'dropdowns' ? 'selected' : null
+      attributes={'data-filter-name': 'dropdowns'}
+    ) Drop-Downs
+    .nav-item(
+      onclick=$helpers.sectionChange
+      class=sectionFilter === 'toggles' ? 'selected' : null
+      attributes={'data-filter-name': 'toggles'}
+    ) Toggles
+    .nav-item(
+      onclick=$helpers.sectionChange
+      class=sectionFilter === 'misc' ? 'selected' : null
+      attributes={'data-filter-name': 'misc'}
+    ) Misc
+  .section-content

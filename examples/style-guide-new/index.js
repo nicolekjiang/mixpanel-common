@@ -10,6 +10,11 @@ import { SVG_ICONS } from '../../build/components/svg-icon';
 
 import './components/nav-bar';
 import './components/colors';
+import './components/typography';
+import './components/iconography';
+import './components/buttons';
+import './components/contextual';
+import './components/resources';
 
 import template from './index.jade';
 import './index.styl';

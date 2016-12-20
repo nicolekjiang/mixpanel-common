@@ -1,0 +1,25 @@
+.section
+  .section-title
+    .title-text Iconography
+    .title-section 3.1
+  .section-nav
+    .nav-item(
+      onclick=$helpers.sectionChange
+      class=sectionFilter === 'show all' ? 'selected' : null
+      attributes={'data-filter-name': 'show all'}
+    ) Show All
+    .nav-item(
+      onclick=$helpers.sectionChange
+      class=sectionFilter === 'ui' ? 'selected' : null
+      attributes={'data-filter-name': 'ui'}
+    ) UI
+    .nav-item(
+      onclick=$helpers.sectionChange
+      class=sectionFilter === 'marketing' ? 'selected' : null
+      attributes={'data-filter-name': 'marketing'}
+    ) Marketing
+    .nav-item(
+      onclick=$helpers.sectionChange
+      class=sectionFilter === 'legacy' ? 'selected' : null
+      attributes={'data-filter-name': 'legacy'}
+    ) Legacy
