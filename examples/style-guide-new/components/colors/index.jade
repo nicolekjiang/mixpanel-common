@@ -35,9 +35,9 @@
     ) Buttons
   .section-content
     - const colorGroups = $helpers.getColorGroups()
-    .ui-colors
-      .color-title Mixpanel UI Colors
-      .color-description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id massa et libero condimentum dignissim at ut odio. Aliquam placerat libero metus, et fringilla nisl dictum vitae. Sed at lacus eu risus fermentum consequat.
+    section.ui-colors
+      .subsection-title Mixpanel UI Colors
+      .subsection-description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id massa et libero condimentum dignissim at ut odio. Aliquam placerat libero metus, et fringilla nisl dictum vitae. Sed at lacus eu risus fermentum consequat.
       .color-chips
         for color in colorGroups['Mixpanel UI Colors']
           .swatch
@@ -45,7 +45,7 @@
             .swatch-label
               .color-name #{color}
               .color-hex #{COLORS[color]}
-      section.code-snippet
+      .code-snippet
         .call-out
           strong.icon +
           strong Example Code
@@ -73,9 +73,9 @@
               | 6
               b     blue-700 =
               span  #3391E9
-    .data-viz-colors
-      .color-title Data Visualization
-      .color-description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id massa et libero condimentum dignissim at ut odio. Aliquam placerat libero metus, et fringilla nisl dictum vitae. Sed at lacus eu risus fermentum consequat.
+    section.data-viz-colors
+      .subsection-title Data Visualization
+      .subsection-description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id massa et libero condimentum dignissim at ut odio. Aliquam placerat libero metus, et fringilla nisl dictum vitae. Sed at lacus eu risus fermentum consequat.
       .color-chips
         for color in colorGroups['Data Visualization']
           .swatch
@@ -83,7 +83,7 @@
             .swatch-label
               .color-name #{color}
               .color-hex #{COLORS[color]}
-      section.code-snippet
+      .code-snippet
         .call-out
           strong.icon +
           strong Example Code
@@ -111,10 +111,10 @@
               | 6
               b     blue-700 =
               span  #3391E9
-    .color-library-container
+    section.color-library-container
       - const colorLibrary = $helpers.getColorLibraries()
-      .color-title Color Library
-      .color-description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id massa et libero condimentum dignissim at ut odio. Aliquam placerat libero metus, et fringilla nisl dictum vitae. Sed at lacus eu risus fermentum consequat.
+      .subsection-title Color Library
+      .subsection-description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id massa et libero condimentum dignissim at ut odio. Aliquam placerat libero metus, et fringilla nisl dictum vitae. Sed at lacus eu risus fermentum consequat.
       .color-library
         for colorGroup in Object.keys(colorLibrary)
           .color-group-container

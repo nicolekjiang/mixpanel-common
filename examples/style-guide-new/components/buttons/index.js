@@ -14,4 +14,9 @@ document.registerElement('buttons-section', class extends Component {
       template,
     };
   }
+
+  attachedCallback() {
+    super.attachedCallback(...arguments);
+    this.update({sectionFilter: 'show all'});
+  }
 });

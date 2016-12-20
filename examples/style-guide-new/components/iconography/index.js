@@ -14,4 +14,9 @@ document.registerElement('iconography-section', class extends Component {
       template,
     };
   }
+
+  attachedCallback() {
+    super.attachedCallback(...arguments);
+    this.update({sectionFilter: 'show all'});
+  }
 });

@@ -23,3 +23,12 @@
       class=sectionFilter === 'legacy' ? 'selected' : null
       attributes={'data-filter-name': 'legacy'}
     ) Legacy
+  .section-content
+    section.icon-section
+      .subsection-title Mixpanel Icons
+      .subsection-description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id massa et libero condimentum dignissim at ut odio. Aliquam placerat libero metus, et fringilla nisl dictum vitae. Sed at lacus eu risus fermentum consequat.
+      .icons
+        for icon in Object.keys(SVG_ICONS)
+          .icon
+            svg-icon(attributes={icon})
+            .icon-name #{icon}
