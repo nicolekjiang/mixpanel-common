@@ -56,21 +56,21 @@
 
 	__webpack_require__(343);
 
-	var _colors = __webpack_require__(399);
+	var _colors = __webpack_require__(402);
 
 	var _colors2 = _interopRequireDefault(_colors);
 
 	var _svgIcon = __webpack_require__(371);
 
-	var _bookmarkData = __webpack_require__(416);
+	var _bookmarkData = __webpack_require__(419);
 
 	var _bookmarkData2 = _interopRequireDefault(_bookmarkData);
 
-	var _index = __webpack_require__(417);
+	var _index = __webpack_require__(420);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	__webpack_require__(418);
+	__webpack_require__(421);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -107,10 +107,16 @@
 	            confirmDelete: false,
 	            menu: false,
 	            modal: false,
-	            popup: false
+	            popup: false,
+	            tagSelector: false
 	          },
 	          savingBookmark: false,
-	          selectedBookmarkId: null
+	          selectedBookmarkId: null,
+	          tagSelectorLoadState: 'idle',
+	          tagSelectorData: {
+	            selectedTags: new Set(["My tag", "Another tag"]),
+	            allTags: new Set(["My tag", "Another tag", "Our tag", "His tag"])
+	          }
 	        },
 	        helpers: {
 	          blueToggleChanged: function blueToggleChanged(ev) {
@@ -174,6 +180,28 @@
 	          handleBookmarksMenuChange: function handleBookmarksMenuChange(e) {
 	            _this2.state.open.bookmarksWidget = e.detail.open;
 	            _this2.update();
+	          },
+	          handleTagSelectorChange: function handleTagSelectorChange(e) {
+	            var tagName = e.detail.tagName;
+	            var allTags = _this2.state.tagSelectorData.allTags;
+	            if (e.detail.action === 'addTag') {
+	              _this2.update({ tagSelectorLoadState: 'loading_tag' });
+	              setTimeout(function () {
+	                allTags = allTags.add(tagName);
+	                _this2.state.tagSelectorLoadState = 'loaded_tag';
+	                _this2.state.tagSelectorData.selectedTags.add(tagName);
+	                _this2.update();
+	              }, 700);
+	            } else if (e.detail.action === 'removeTag') {
+	              _this2.update({ tagSelectorLoadState: 'loading_tag' });
+	              setTimeout(function () {
+	                var selectedTags = _this2.state.tagSelectorData.selectedTags;
+	                selectedTags.delete(tagName);
+	                _this2.state.tagSelectorLoadState = 'loaded_tag';
+	                _this2.state.tagSelectorData.selectedTags.delete(tagName);
+	                _this2.update();
+	              }, 700);
+	            }
 	          }
 	        },
 	        template: _index2.default
@@ -19556,6 +19584,7 @@
 	var _iconMap_spinner = '<svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"\n      viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve" width="22" height="22">\n  <path fill="#000" d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z">\n  </path>\n</svg>\n';
 	var _iconMap_starTopEvents = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n<svg viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">\n    <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->\n    <title>star-top-events</title>\n    <desc>Created with Sketch.</desc>\n    <defs></defs>\n    <g id="16-x-16" stroke="none" stroke-width="1" fill-rule="evenodd">\n        <g id="star-top-events">\n            <g transform="translate(3.000000, 3.000000)">\n                <path d="M7.99982887,0 C7.21782887,0 6.50682887,0.456 6.18082887,1.168 L4.78082887,4.228 L1.71182887,4.674 C0.958828873,4.783 0.332828873,5.311 0.0978288727,6.035 C-0.137171127,6.759 0.0588288727,7.554 0.603828873,8.085 L2.80182887,10.228 L2.04882887,13.559 C1.87482887,14.33 2.17082887,15.13 2.80382887,15.603 C3.15682887,15.866 3.57782887,16 3.99982887,16 C4.33582887,16 4.67282887,15.916 4.97782887,15.744 L7.99982887,14.05 L11.0218289,15.744 C11.3268289,15.916 11.6638289,16 11.9998289,16 C12.4218289,16 12.8428289,15.866 13.1958289,15.603 C13.8288289,15.13 14.1248289,14.33 13.9508289,13.559 L13.1978289,10.228 L15.3958289,8.085 C15.9408289,7.554 16.1368289,6.759 15.9018289,6.035 C15.6668289,5.311 15.0408289,4.783 14.2878289,4.674 L11.2188289,4.228 L9.81882887,1.168 C9.49282887,0.456 8.78182887,0 7.99982887,0 M7.99982887,2 L9.62682887,5.555 C9.76882887,5.864 10.0568289,6.08 10.3928289,6.129 L13.9998289,6.653 L11.4008289,9.187 C11.1518289,9.429 11.0468289,9.784 11.1228289,10.123 L11.9998289,14 L8.48882887,12.031 C8.33682887,11.946 8.16882887,11.903 7.99982887,11.903 C7.83082887,11.903 7.66282887,11.946 7.51082887,12.031 L3.99982887,14 L4.87682887,10.123 C4.95282887,9.784 4.84782887,9.429 4.59882887,9.187 L1.99982887,6.653 L5.60682887,6.129 C5.94282887,6.08 6.23082887,5.864 6.37282887,5.555 L7.99982887,2"></path>\n            </g>\n        </g>\n    </g>\n</svg>';
 	var _iconMap_table = '<?xml version="1.0" encoding="utf-8"?>\n<!-- Generated by IcoMoon.io -->\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22" viewBox="0 0 22 22">\n<path fill="#000" d="M6 4h-2c-0.552 0-1 0.448-1 1v1c0 0.552 0.448 1 1 1h2c0.552 0 1-0.448 1-1v-1c0-0.552-0.448-1-1-1z"></path>\n<path fill="#000" d="M12 4h-2c-0.552 0-1 0.448-1 1v1c0 0.552 0.448 1 1 1h2c0.552 0 1-0.448 1-1v-1c0-0.552-0.448-1-1-1z"></path>\n<path fill="#000" d="M18 4h-2c-0.552 0-1 0.448-1 1v1c0 0.552 0.448 1 1 1h2c0.552 0 1-0.448 1-1v-1c0-0.552-0.448-1-1-1z"></path>\n<path fill="#000" d="M6 9h-2c-0.552 0-1 0.448-1 1v1c0 0.552 0.448 1 1 1h2c0.552 0 1-0.448 1-1v-1c0-0.552-0.448-1-1-1z"></path>\n<path fill="#000" d="M12 9h-2c-0.552 0-1 0.448-1 1v1c0 0.552 0.448 1 1 1h2c0.552 0 1-0.448 1-1v-1c0-0.552-0.448-1-1-1z"></path>\n<path fill="#000" d="M18 9h-2c-0.552 0-1 0.448-1 1v1c0 0.552 0.448 1 1 1h2c0.552 0 1-0.448 1-1v-1c0-0.552-0.448-1-1-1z"></path>\n<path fill="#000" d="M6 14h-2c-0.552 0-1 0.448-1 1v1c0 0.552 0.448 1 1 1h2c0.552 0 1-0.448 1-1v-1c0-0.552-0.448-1-1-1z"></path>\n<path fill="#000" d="M12 14h-2c-0.552 0-1 0.448-1 1v1c0 0.552 0.448 1 1 1h2c0.552 0 1-0.448 1-1v-1c0-0.552-0.448-1-1-1z"></path>\n<path fill="#000" d="M18 14h-2c-0.552 0-1 0.448-1 1v1c0 0.552 0.448 1 1 1h2c0.552 0 1-0.448 1-1v-1c0-0.552-0.448-1-1-1z"></path>\n</svg>\n';
+	var _iconMap_tag = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">\n    <!-- Generator: sketchtool 41 (35326) - http://www.bohemiancoding.com/sketch -->\n    <title>37BC1BD5-2085-42F1-A5D9-CF55A8657529</title>\n    <desc>Created with sketchtool.</desc>\n    <defs></defs>\n    <g id="Add-Report---Final" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">\n        <g id="Dashboard---Add-flow---Label-field-focused" transform="translate(-939.000000, -224.000000)" fill="#D8E0E7">\n            <g id="Add-Menu---input-focused" transform="translate(908.000000, 130.000000)">\n                <g id="Label-input" transform="translate(19.000000, 83.000000)">\n                    <path d="M24.4998751,15.985 C23.6718751,15.985 22.9998751,15.313 22.9998751,14.485 C22.9998751,13.657 23.6718751,12.985 24.4998751,12.985 C25.3278751,12.985 25.9998751,13.657 25.9998751,14.485 C25.9998751,15.313 25.3278751,15.985 24.4998751,15.985 M26.9738751,11 L21.6648751,11 C21.1198751,11 20.5978751,11.216 20.2128751,11.6 L12.3008751,19.506 C11.8998751,19.907 11.8998751,20.555 12.2998751,20.956 L18.0348751,26.698 C18.4358751,27.1 19.0868751,27.1 19.4878751,26.699 L27.3998751,18.78 C27.7838751,18.396 27.9998751,17.874 27.9998751,17.331 L27.9998751,12.025 C27.9998751,11.459 27.5398751,11 26.9738751,11" id="icon-/-label-copy"></path>\n                </g>\n            </g>\n        </g>\n    </g>\n</svg>';
 	var _iconMap_trashcan = '<?xml version="1.0" encoding="utf-8"?>\n<!-- Generated by IcoMoon.io -->\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22" viewBox="0 0 22 22">\n<path fill="#000" d="M16.5 9h-11c-0.276 0-0.5 0.224-0.5 0.5v8.5c0 0.552 0.448 1 1 1h10c0.552 0 1-0.448 1-1v-8.5c0-0.276-0.224-0.5-0.5-0.5z"></path>\n<path fill="#000" d="M10 6v-1h2v1h-2zM17.001 6h-3v-2c0-0.552-0.448-1-1-1h-4c-0.553 0-1 0.448-1 1v2h-3c-0.553 0-1 0.448-1 1s0.447 1 1 1h12c0.552 0 1-0.448 1-1s-0.448-1-1-1v0z"></path>\n</svg>\n';
 	var _iconMap_triangleDown = '<?xml version="1.0" encoding="utf-8"?>\n<!-- Generated by IcoMoon.io -->\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22" viewBox="0 0 22 22">\n<path fill="#000" d="M7 8l4 6 4-6z"></path>\n</svg>\n';
 	var _iconMap_triangleLeft = '<?xml version="1.0" encoding="utf-8"?>\n<!-- Generated by IcoMoon.io -->\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22" viewBox="0 0 22 22">\n<path fill="#000" d="M14 7l-6 4.001 6 3.999z"></path>\n</svg>\n';
@@ -19630,6 +19659,7 @@
 	  spinner: _iconMap_spinner,
 	  starTopEvents: _iconMap_starTopEvents,
 	  table: _iconMap_table,
+	  tag: _iconMap_tag,
 	  trashcan: _iconMap_trashcan,
 	  triangleDown: _iconMap_triangleDown,
 	  triangleLeft: _iconMap_triangleLeft,
@@ -26939,6 +26969,8 @@
 
 	__webpack_require__(396);
 
+	__webpack_require__(399);
+
 /***/ },
 /* 396 */
 /***/ function(module, exports, __webpack_require__) {
@@ -27469,6 +27501,296 @@
 
 /***/ },
 /* 399 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
+	var _panel = __webpack_require__(299);
+
+	var _registerElement = __webpack_require__(347);
+
+	var _index = __webpack_require__(400);
+
+	var _index2 = _interopRequireDefault(_index);
+
+	var _index3 = __webpack_require__(401);
+
+	var _index4 = _interopRequireDefault(_index3);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var LOADING_WIDGET = 'loading_widget';
+	var IDLE = 'idle';
+	var LOADING_TAG = 'loading_tag';
+	var LOADED_TAG = 'loaded_tag';
+	var ERROR = 'error';
+	var LOAD_STATES = [LOADING_WIDGET, IDLE, LOADING_TAG, LOADED_TAG, ERROR];
+
+	(0, _registerElement.registerMPElement)('mp-tag-selector', function (_Component) {
+	  _inherits(_class, _Component);
+
+	  function _class() {
+	    _classCallCheck(this, _class);
+
+	    return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).apply(this, arguments));
+	  }
+
+	  _createClass(_class, [{
+	    key: 'attachedCallback',
+	    value: function attachedCallback() {
+	      _get(_class.prototype.__proto__ || Object.getPrototypeOf(_class.prototype), 'attachedCallback', this).apply(this, arguments);
+	      this.update({
+	        selectedTags: this.getJSONAttribute('selected-tags'),
+	        allTags: this.getJSONAttribute('all-tags'),
+	        loadState: this.getAttribute('load-state')
+	      });
+	    }
+	  }, {
+	    key: 'attributeChangedCallback',
+	    value: function attributeChangedCallback(attr) {
+	      _get(_class.prototype.__proto__ || Object.getPrototypeOf(_class.prototype), 'attributeChangedCallback', this).apply(this, arguments);
+	      if (attr === 'load-state') {
+	        var loadState = this.getAttribute('load-state');
+	        if (LOAD_STATES.includes(loadState)) {
+	          this.update({ loadState: loadState });
+	        }
+	      } else if (attr === 'selected-tags') {
+	        this.update({ selectedTags: this.getJSONAttribute('selected-tags') });
+	      } else if (attr === 'all-tags') {
+	        this.update({ allTags: this.getJSONAttribute('all-tags') });
+	      }
+	    }
+	  }, {
+	    key: '_filterOptions',
+	    value: function _filterOptions(inputText) {
+	      var _this2 = this;
+
+	      return this.state.allTags.filter(function (tag) {
+	        return !_this2.state.selectedTags.includes(tag) && tag.toLowerCase().includes(inputText.toLowerCase());
+	      });
+	    }
+	  }, {
+	    key: '_removeTag',
+	    value: function _removeTag(tagName) {
+	      var _this3 = this;
+
+	      this.setAttribute('load_state', LOADING_TAG);
+	      this.dispatchEvent(new CustomEvent('change', { detail: { tagName: tagName, action: 'removeTag' } }));
+	      requestAnimationFrame(function () {
+	        return _this3.el.querySelector('.search-input').focus();
+	      });
+	    }
+	  }, {
+	    key: '_addTag',
+	    value: function _addTag(tagName) {
+	      if (!this.state.selectedTags.includes(tagName)) {
+	        this.setAttribute('load-state', LOADING_TAG);
+	        this.dispatchEvent(new CustomEvent('change', { detail: { tagName: tagName, action: 'addTag' } }));
+	      }
+	    }
+	  }, {
+	    key: 'config',
+	    get: function get() {
+	      var _this4 = this;
+
+	      return {
+	        defaultState: {
+	          selectedTags: [],
+	          allTags: [],
+	          inputText: '',
+	          loadState: IDLE
+	        },
+	        css: _index2.default,
+	        template: _index4.default,
+	        helpers: {
+	          shouldShowFooter: function shouldShowFooter() {
+	            return !_this4.isAttributeEnabled('read-only') && _this4.state.inputText && !_this4._filterOptions(_this4.state.inputText).length;
+	          },
+	          getSearchMatches: function getSearchMatches() {
+	            return _this4._filterOptions(_this4.state.inputText);
+	          },
+	          setInputText: function setInputText(e) {
+	            _this4.update({ inputText: e.target.value });
+	          },
+	          removeTag: function removeTag(tagName) {
+	            _this4._removeTag(tagName);
+	          },
+	          handleKeyActions: function handleKeyActions(e) {
+	            if (e.keyCode === 13) {
+	              _this4._addTag(_this4.state.inputText);
+	            } else if (e.keyCode === 8 && _this4.state.selectedTags.length) {
+	              // backspace
+	              if (_this4.state.inputText.length === 0) {
+	                _this4._removeTag(_this4.state.selectedTags[_this4.state.selectedTags.length - 1]);
+	              }
+	            }
+	          },
+	          addTag: function addTag(tagName) {
+	            return _this4._addTag(tagName);
+	          }
+	        },
+	        useShadowDom: true
+	      };
+	    }
+	  }]);
+
+	  return _class;
+	}(_panel.Component));
+
+/***/ },
+/* 400 */
+/***/ function(module, exports) {
+
+	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6e859d;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 12px;   font-stretch: normal;   font-weight: 400; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 12px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-size: 12px;   font-weight: 400;   padding: 8px;   -webkit-transition: border-color 150ms ease-out;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus {   border-color: #3391e9;   -webkit-transition: border-color 200ms ease-in;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } mp-drop-menu {   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   display: block;   width: 378px; } :host {   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   display: block;   width: 378px; } .mp-tag-selector-container {   border-radius: 5px;   box-shadow: 0 10px 15px 0 rgba(0,0,0,0.1), 0 15px 30px 0 rgba(0,0,0,0.2);   box-sizing: border-box;   width: 100%; } .mp-tag-selector-container .spinner {   display: -webkit-box;   display: -ms-flexbox;   display: flex;   height: 72px; } .mp-tag-selector-container .top-input-wrapper {   margin: 0 auto;   margin-bottom: 20px;   padding: 0 20px; } .mp-tag-selector-container .top-input-wrapper .input-wrapper {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   -webkit-box-orient: horizontal;   -webkit-box-direction: normal;       -ms-flex-direction: row;           flex-direction: row;   -ms-flex-wrap: wrap;       flex-wrap: wrap;   -webkit-box-pack: start;       -ms-flex-pack: start;           justify-content: flex-start;   margin: 0 auto;   padding: 0 7px 6px 10px;   position: relative; } .mp-tag-selector-container .top-input-wrapper .input-wrapper svg-icon {   height: 16px;   min-height: 16px;   min-width: 16px;   width: 16px; } .mp-tag-selector-container .top-input-wrapper .input-wrapper svg-icon svg {   height: 16px;   min-height: 16px;   min-width: 16px;   width: 16px;   left: 0;   top: 0; } .mp-tag-selector-container .top-input-wrapper .input-wrapper mp-spinner {   height: 16px;   width: 16px; } .mp-tag-selector-container .top-input-wrapper .input-wrapper svg-icon.tag-icon, .mp-tag-selector-container .top-input-wrapper .input-wrapper mp-spinner {   margin: 6px 12px 0 0; } .mp-tag-selector-container .top-input-wrapper .input-wrapper svg-icon.tag-icon.loaded svg, .mp-tag-selector-container .top-input-wrapper .input-wrapper mp-spinner.loaded svg, .mp-tag-selector-container .top-input-wrapper .input-wrapper svg-icon.tag-icon.loaded path, .mp-tag-selector-container .top-input-wrapper .input-wrapper mp-spinner.loaded path {   color: #39d183;   fill: #39d183; } .mp-tag-selector-container .top-input-wrapper .input-wrapper svg-icon.tag-icon.loaded-error svg, .mp-tag-selector-container .top-input-wrapper .input-wrapper mp-spinner.loaded-error svg, .mp-tag-selector-container .top-input-wrapper .input-wrapper svg-icon.tag-icon.loaded-error path, .mp-tag-selector-container .top-input-wrapper .input-wrapper mp-spinner.loaded-error path {   color: #e4567b;   fill: #e4567b; } .mp-tag-selector-container .top-input-wrapper .input-wrapper .arrow-return-icon {   border: 1px solid #d8e0e6;   cursor: pointer;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   height: 22px;   margin-left: auto;   position: absolute;   right: 7px;   top: 6px;   width: 30px; } .mp-tag-selector-container .top-input-wrapper .input-wrapper .arrow-return-icon svg-icon svg {   left: 0;   top: 0; } .mp-tag-selector-container .top-input-wrapper .input-wrapper .arrow-return-icon svg-icon svg, .mp-tag-selector-container .top-input-wrapper .input-wrapper .arrow-return-icon svg-icon path {   color: #4ba8ff;   fill: #4ba8ff;   -webkit-transition: 0.2s;   transition: 0.2s; } .mp-tag-selector-container .top-input-wrapper .input-wrapper .arrow-return-icon svg-icon {   margin: auto; } .mp-tag-selector-container .top-input-wrapper .input-wrapper .arrow-return-icon:hover {   border-color: #4ba8ff; } .mp-tag-selector-container .top-input-wrapper .input-wrapper .border {   border: 1px solid #d8e0e6;   border-radius: 3px;   height: calc(100% - 2px);   left: 0;   pointer-events: none;   position: absolute;   top: 0;   width: 100%; } .mp-tag-selector-container .top-input-wrapper .input-wrapper .border.loaded-error {   border-color: #e4567b; } .mp-tag-selector-container .top-input-wrapper .input-wrapper .tag {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   background-color: #4c6072;   border: 1px solid;   border-radius: 42px;   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   -webkit-box-orient: horizontal;   -webkit-box-direction: normal;       -ms-flex-direction: row;           flex-direction: row;   font-size: 11px;   font-weight: 600;   height: 24px;   -webkit-box-pack: center;       -ms-flex-pack: center;           justify-content: center;   margin: 6px 4px 0 0; } .mp-tag-selector-container .top-input-wrapper .input-wrapper .tag svg-icon {   height: 15px;   min-height: 15px;   min-width: 15px;   width: 15px; } .mp-tag-selector-container .top-input-wrapper .input-wrapper .tag svg-icon svg {   height: 15px;   min-height: 15px;   min-width: 15px;   width: 15px;   left: 0;   top: 0; } .mp-tag-selector-container .top-input-wrapper .input-wrapper .tag svg-icon svg, .mp-tag-selector-container .top-input-wrapper .input-wrapper .tag svg-icon path {   color: #9cacbb;   fill: #9cacbb;   -webkit-transition: 0.2s;   transition: 0.2s; } .mp-tag-selector-container .top-input-wrapper .input-wrapper .tag span {   color: #fff;   margin: auto;   padding: 0 8px;   vertical-align: middle; } .mp-tag-selector-container .top-input-wrapper .input-wrapper .tag .close-icon {   cursor: pointer;   padding-right: 5px; } .mp-tag-selector-container .top-input-wrapper .input-wrapper .search-input {   background-color: transparent;   border: 0;   -webkit-box-flex: 1;       -ms-flex: 1 1 auto;           flex: 1 1 auto;   font-size: 12px;   font-weight: normal;   line-height: 1.5;   margin-top: 6px;   max-width: 100%; } .mp-tag-selector-container .top-input-wrapper .input-wrapper .search-input:focus + .border:not(.loaded-error) {   border-color: #4ba8ff; } .mp-tag-selector-container .list-options-wrapper {   border-top: 1px solid #d8e0e6;   padding: 0 20px; } .mp-tag-selector-container .list-options-wrapper .option {   color: #9cacbb;   font-size: 12px;   font-style: normal;   font-weight: 500;   height: 18px;   line-height: 1.5;   padding: 8px 0 10px 9px; } .mp-tag-selector-container .list-options-wrapper .option:hover {   background-color: #eff3f5;   color: #4ba8ff;   cursor: pointer; } .mp-tag-selector-container .list-options-wrapper .option.active {   background-color: #eff3f5;   color: #4ba8ff; } .mp-tag-selector-container .list-options-wrapper .option .bold {   font-weight: 600; } .mp-tag-selector-container .footer {   box-sizing: border-box;   cursor: pointer;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   -webkit-box-orient: horizontal;   -webkit-box-direction: normal;       -ms-flex-direction: row;           flex-direction: row;   -ms-flex-wrap: wrap;       flex-wrap: wrap;   font-size: 14px;   font-weight: 600;   -webkit-box-pack: center;       -ms-flex-pack: center;           justify-content: center;   max-width: 100%;   padding: 14px 20px;   width: 100%;   word-wrap: break-word; } .mp-tag-selector-container .footer:hover {   background-color: #eff3f5; } .mp-tag-selector-container .footer .copy {   -ms-flex-item-align: center;       -ms-grid-row-align: center;       align-self: center;   color: #3391e9;   white-space: pre; } .mp-tag-selector-container .footer .label-name {   -ms-flex-item-align: center;       -ms-grid-row-align: center;       align-self: center;   color: #4c6072;   max-width: 100%;   word-wrap: break-word; } ";
+
+
+/***/ },
+/* 401 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	function _jade_template_fn(locals) {
+	  locals = locals || {};;;
+	  var result_of_with = function ($component, $helpers, Object, RegExp, inputText, loadState, selectedTags) {
+	    var h = __webpack_require__(349);
+	    var jade_mixins = {};
+	    jade_mixins['highlight'] = function (target, search, highlightClass) {
+	      var block = this && this.block,
+	          attributes = this && this.attributes || {};
+
+	      return function () {
+	        var __jade_nodes = [];
+	        var searchRegex = new RegExp('(' + search + ')', 'gi');;
+	        var tokens = target.replace(searchRegex, '<>$1<>').split('<>');;
+	        __jade_nodes = __jade_nodes.concat(tokens.filter(Boolean).map(function (token, $index) {
+	          return h("span", {
+	            "className": [].concat(__objToAttrs(_defineProperty({}, highlightClass, token.toLowerCase() === search.toLowerCase()))).filter(Boolean).join(' ')
+	          }, [token]);
+	        }));;
+	        return __jade_nodes;
+	      }.call(this);
+	    };
+
+	    var __objToAttrs = function __objToAttrs(o) {
+	      return Object.keys(o).map(function (k) {
+	        return o[k] ? k : false;
+	      });
+	    };
+	    return {
+	      value: h("div", {
+	        "className": [].concat('mp-tag-selector-container').filter(Boolean).join(' ')
+	      }, function () {
+	        var __jade_nodes = [];
+	        __jade_nodes = __jade_nodes.concat(loadState == 'loading_widget' ? h("div", {
+	          "className": [].concat('spinner').filter(Boolean).join(' ')
+	        }, [h("mp-spinner")].filter(Boolean)) : function () {
+	          var __jade_nodes = [];
+	          __jade_nodes = __jade_nodes.concat(h("content"));
+	          __jade_nodes = __jade_nodes.concat(h("div", {
+	            "className": [].concat('top-input-wrapper').filter(Boolean).join(' ')
+	          }, [h("div", {
+	            "className": [].concat('input-wrapper').filter(Boolean).join(' ')
+	          }, function () {
+	            var __jade_nodes = [];
+	            __jade_nodes = __jade_nodes.concat(" ");
+	            __jade_nodes = __jade_nodes.concat(loadState == 'loading_tag' ? h("mp-spinner") : loadState == 'loaded_tag' ? h("svg-icon", {
+	              "attributes": {
+	                icon: "tag"
+	              },
+	              "className": [].concat("tag-icon loaded").filter(Boolean).join(' ')
+	            }) : loadState == 'error' ? h("svg-icon", {
+	              "attributes": {
+	                icon: "tag"
+	              },
+	              "className": [].concat("tag-icon loaded-error").filter(Boolean).join(' ')
+	            }) : h("svg-icon", {
+	              "attributes": {
+	                icon: "tag"
+	              },
+	              "className": [].concat("tag-icon").filter(Boolean).join(' ')
+	            }));
+	            __jade_nodes = __jade_nodes.concat(!$component.isAttributeEnabled('read-only') ? selectedTags.map(function (tag, $index) {
+	              return h("div", {
+	                "className": [].concat('tag').filter(Boolean).join(' ')
+	              }, [h("span", [tag]), h("svg-icon", {
+	                "attributes": {
+	                  icon: "x"
+	                },
+	                "onclick": function onclick() {
+	                  return $helpers.removeTag(tag);
+	                },
+	                "className": [].concat("close-icon").filter(Boolean).join(' ')
+	              })].filter(Boolean));
+	            }) : undefined);
+	            __jade_nodes = __jade_nodes.concat(h("input", {
+	              "oninput": $helpers.setInputText,
+	              "onkeydown": $helpers.handleKeyActions,
+	              "type": "text",
+	              "className": [].concat("search-input").filter(Boolean).join(' ')
+	            }));
+	            __jade_nodes = __jade_nodes.concat(h("div", {
+	              "className": [].concat('border').concat(__objToAttrs({
+	                'loaded-error': loadState === 'error'
+	              })).filter(Boolean).join(' ')
+	            }));
+	            __jade_nodes = __jade_nodes.concat(h("div", {
+	              "className": [].concat('arrow-return-icon').filter(Boolean).join(' ')
+	            }, [h("svg-icon", {
+	              "attributes": {
+	                icon: "arrow-return"
+	              }
+	            })].filter(Boolean)));;
+	            return __jade_nodes;
+	          }.call(this).filter(Boolean))].filter(Boolean)));
+	          __jade_nodes = __jade_nodes.concat(h("div", {
+	            "className": [].concat('list-options-wrapper').filter(Boolean).join(' ')
+	          }, [$helpers.getSearchMatches().map(function (option, i) {
+	            return h("div", {
+	              "onclick": function onclick() {
+	                return $helpers.addTag(option);
+	              },
+	              "className": [].concat('option').concat(__objToAttrs({
+	                'active': i === 0 && inputText !== ''
+	              })).concat(__objToAttrs({
+	                'bold': inputText === ''
+	              })).filter(Boolean).join(' ')
+	            }, [jade_mixins['highlight'].call(this, option, inputText, 'bold')].filter(Boolean));
+	          })].filter(Boolean)));
+	          __jade_nodes = __jade_nodes.concat($helpers.shouldShowFooter() ? h("div", {
+	            "onclick": function onclick() {
+	              return $helpers.addTag(inputText);
+	            },
+	            "className": [].concat('footer').filter(Boolean).join(' ')
+	          }, [h("div", {
+	            "className": [].concat('copy').filter(Boolean).join(' ')
+	          }, ["Create new label for "].filter(Boolean)), h("div", {
+	            "className": [].concat('label-name').filter(Boolean).join(' ')
+	          }, ["" + inputText + ""].filter(Boolean))].filter(Boolean)) : undefined);;
+	          return __jade_nodes;
+	        }.call(this));;
+	        return __jade_nodes;
+	      }.call(this).filter(Boolean))
+	    };
+	  }.call(this, "$component" in locals ? locals.$component : typeof $component !== "undefined" ? $component : undefined, "$helpers" in locals ? locals.$helpers : typeof $helpers !== "undefined" ? $helpers : undefined, "Object" in locals ? locals.Object : typeof Object !== "undefined" ? Object : undefined, "RegExp" in locals ? locals.RegExp : typeof RegExp !== "undefined" ? RegExp : undefined, "inputText" in locals ? locals.inputText : typeof inputText !== "undefined" ? inputText : undefined, "loadState" in locals ? locals.loadState : typeof loadState !== "undefined" ? loadState : undefined, "selectedTags" in locals ? locals.selectedTags : typeof selectedTags !== "undefined" ? selectedTags : undefined);
+	  if (result_of_with) return result_of_with.value;
+	}
+	module.exports = _jade_template_fn;
+
+/***/ },
+/* 402 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -27521,10 +27843,10 @@
 	};
 
 /***/ },
-/* 400 */,
-/* 401 */,
-/* 402 */,
-/* 403 */
+/* 403 */,
+/* 404 */,
+/* 405 */,
+/* 406 */
 /***/ function(module, exports) {
 
 	/*
@@ -27580,10 +27902,10 @@
 
 
 /***/ },
-/* 404 */
+/* 407 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(403)();
+	exports = module.exports = __webpack_require__(406)();
 	// imports
 
 
@@ -27594,16 +27916,16 @@
 
 
 /***/ },
-/* 405 */,
-/* 406 */,
-/* 407 */,
 /* 408 */,
 /* 409 */,
 /* 410 */,
 /* 411 */,
 /* 412 */,
 /* 413 */,
-/* 414 */
+/* 414 */,
+/* 415 */,
+/* 416 */,
+/* 417 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -27855,8 +28177,8 @@
 
 
 /***/ },
-/* 415 */,
-/* 416 */
+/* 418 */,
+/* 419 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -27954,14 +28276,14 @@
 	];
 
 /***/ },
-/* 417 */
+/* 420 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	function _jade_template_fn(locals) {
 	  locals = locals || {};;;
-	  var result_of_with = function ($helpers, COLORS, JSON, Object, SVG_ICONS, blueToggleValue, bookmarks, console, inputGroupSaving, open, savingBookmark, selectedBookmarkId) {
+	  var result_of_with = function ($helpers, COLORS, JSON, Object, SVG_ICONS, blueToggleValue, bookmarks, console, inputGroupSaving, open, savingBookmark, selectedBookmarkId, tagSelectorData, tagSelectorLoadState) {
 	    var h = __webpack_require__(349);
 	    return {
 	      value: h("div", {
@@ -28351,24 +28673,45 @@
 	        },
 	        "onsubmit": $helpers.handleBookmarksMenuSubmit,
 	        "onchange": $helpers.handleBookmarksMenuChange
-	      })].filter(Boolean))].filter(Boolean))].filter(Boolean))].filter(Boolean))
+	      })].filter(Boolean))].filter(Boolean)), h("h2", ["tag-selector widget"].filter(Boolean)), h("div", {
+	        "className": [].concat('tag-selector-container').filter(Boolean).join(' ')
+	      }, [h("mp-tag-selector", {
+	        "attributes": {
+	          "selected-tags": JSON.stringify(tagSelectorData.selectedTags),
+	          "all-tags": JSON.stringify(tagSelectorData.allTags),
+	          "load-state": tagSelectorLoadState
+	        },
+	        "onchange": $helpers.handleTagSelectorChange
+	      }, [h("div", {
+	        "className": [].concat('title').filter(Boolean).join(' ')
+	      }, [h("div", {
+	        "className": [].concat('header').filter(Boolean).join(' ')
+	      }, [h("svg-icon", {
+	        "attributes": {
+	          icon: "check-success"
+	        }
+	      }), h("div", {
+	        "className": [].concat('header-text').filter(Boolean).join(' ')
+	      }, ["Report added to company dashboard"].filter(Boolean))].filter(Boolean)), h("div", {
+	        "className": [].concat('subtext').filter(Boolean).join(' ')
+	      }, ["Viewed report by type"].filter(Boolean))].filter(Boolean))].filter(Boolean))].filter(Boolean))].filter(Boolean))].filter(Boolean))
 	    };
-	  }.call(this, "$helpers" in locals ? locals.$helpers : typeof $helpers !== "undefined" ? $helpers : undefined, "COLORS" in locals ? locals.COLORS : typeof COLORS !== "undefined" ? COLORS : undefined, "JSON" in locals ? locals.JSON : typeof JSON !== "undefined" ? JSON : undefined, "Object" in locals ? locals.Object : typeof Object !== "undefined" ? Object : undefined, "SVG_ICONS" in locals ? locals.SVG_ICONS : typeof SVG_ICONS !== "undefined" ? SVG_ICONS : undefined, "blueToggleValue" in locals ? locals.blueToggleValue : typeof blueToggleValue !== "undefined" ? blueToggleValue : undefined, "bookmarks" in locals ? locals.bookmarks : typeof bookmarks !== "undefined" ? bookmarks : undefined, "console" in locals ? locals.console : typeof console !== "undefined" ? console : undefined, "inputGroupSaving" in locals ? locals.inputGroupSaving : typeof inputGroupSaving !== "undefined" ? inputGroupSaving : undefined, "open" in locals ? locals.open : typeof open !== "undefined" ? open : undefined, "savingBookmark" in locals ? locals.savingBookmark : typeof savingBookmark !== "undefined" ? savingBookmark : undefined, "selectedBookmarkId" in locals ? locals.selectedBookmarkId : typeof selectedBookmarkId !== "undefined" ? selectedBookmarkId : undefined);
+	  }.call(this, "$helpers" in locals ? locals.$helpers : typeof $helpers !== "undefined" ? $helpers : undefined, "COLORS" in locals ? locals.COLORS : typeof COLORS !== "undefined" ? COLORS : undefined, "JSON" in locals ? locals.JSON : typeof JSON !== "undefined" ? JSON : undefined, "Object" in locals ? locals.Object : typeof Object !== "undefined" ? Object : undefined, "SVG_ICONS" in locals ? locals.SVG_ICONS : typeof SVG_ICONS !== "undefined" ? SVG_ICONS : undefined, "blueToggleValue" in locals ? locals.blueToggleValue : typeof blueToggleValue !== "undefined" ? blueToggleValue : undefined, "bookmarks" in locals ? locals.bookmarks : typeof bookmarks !== "undefined" ? bookmarks : undefined, "console" in locals ? locals.console : typeof console !== "undefined" ? console : undefined, "inputGroupSaving" in locals ? locals.inputGroupSaving : typeof inputGroupSaving !== "undefined" ? inputGroupSaving : undefined, "open" in locals ? locals.open : typeof open !== "undefined" ? open : undefined, "savingBookmark" in locals ? locals.savingBookmark : typeof savingBookmark !== "undefined" ? savingBookmark : undefined, "selectedBookmarkId" in locals ? locals.selectedBookmarkId : typeof selectedBookmarkId !== "undefined" ? selectedBookmarkId : undefined, "tagSelectorData" in locals ? locals.tagSelectorData : typeof tagSelectorData !== "undefined" ? tagSelectorData : undefined, "tagSelectorLoadState" in locals ? locals.tagSelectorLoadState : typeof tagSelectorLoadState !== "undefined" ? tagSelectorLoadState : undefined);
 	  if (result_of_with) return result_of_with.value;
 	}
 	module.exports = _jade_template_fn;
 
 /***/ },
-/* 418 */
+/* 421 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(419);
+	var content = __webpack_require__(422);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(414)(content, {});
+	var update = __webpack_require__(417)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -28385,15 +28728,15 @@
 	}
 
 /***/ },
-/* 419 */
+/* 422 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(403)();
+	exports = module.exports = __webpack_require__(406)();
 	// imports
-	exports.i(__webpack_require__(404), "");
+	exports.i(__webpack_require__(407), "");
 
 	// module
-	exports.push([module.id, ".section {\n  margin-bottom: 10px;\n  padding-bottom: 10px;\n  border-bottom: 1px solid #eff3f5;\n}\n.section .item-palette {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: column wrap;\n      flex-flow: column wrap;\n}\n.section .item-palette.color-palette {\n  height: 180px;\n}\n.section .item-palette.icon-palette {\n  height: 320px;\n}\n.section .list-block {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  margin: 5px;\n}\n.section .list-block svg-icon svg {\n  left: 0;\n  top: 0;\n}\n.section .list-block svg-icon svg,\n.section .list-block svg-icon path {\n  color: #4c6072;\n  fill: #4c6072;\n  -webkit-transition: 0.2s;\n  transition: 0.2s;\n}\n.section .list-block:hover svg-icon svg,\n.section .list-block:hover svg-icon path {\n  color: #6cb8ff;\n  fill: #6cb8ff;\n}\n.section .list-block .square {\n  display: inline-block;\n  vertical-align: middle;\n  margin-right: 4px;\n  width: 20px;\n  height: 20px;\n}\n.section .list-block .label {\n  display: inline-block;\n  margin-left: 10px;\n  vertical-align: middle;\n}\n.section.buttons mp-button {\n  margin-right: 4px;\n  vertical-align: middle;\n}\n.section.buttons p.button-field {\n  background: #4ba8ff;\n  display: table;\n  padding: 10px;\n}\n.section.button-bars .button-bar-container {\n  max-width: 600px;\n}\n.section.modals .modal {\n  width: 500px;\n}\n.section.modals mp-confirm {\n  width: 480px;\n}\n.section.toggles mp-toggle {\n  margin-bottom: 10px;\n}\n.section.toggles mp-toggle.inline-toggle {\n  width: 300px;\n}\n.section.toggles mp-toggle.full-width-toggle {\n  display: block;\n}\n.section.toggles .toggle-val {\n  margin-left: 10px;\n}\n.section.menus .drop-menu-container {\n  position: relative;\n}\n.section.forms .mp-icon-input {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  position: relative;\n}\n.section.forms .mp-icon-input input {\n  padding: 6px;\n  padding-left: 36px;\n  padding-right: 18px;\n  width: 100%;\n}\n.section.forms .mp-icon-input input:focus + .mp-icon svg-icon svg {\n  left: 0;\n  top: 0;\n}\n.section.forms .mp-icon-input input:focus + .mp-icon svg-icon svg,\n.section.forms .mp-icon-input input:focus + .mp-icon svg-icon path {\n  color: #6e859d;\n  fill: #6e859d;\n  -webkit-transition: 0.2s;\n  transition: 0.2s;\n}\n.section.forms .mp-icon-input .mp-icon {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  bottom: 0;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  left: 8px;\n  position: absolute;\n  top: 0;\n}\n.section.forms .mp-icon-input .mp-icon svg-icon svg {\n  left: 0;\n  top: 0;\n}\n.section.forms .mp-icon-input .mp-icon svg-icon svg,\n.section.forms .mp-icon-input .mp-icon svg-icon path {\n  color: #9cacbb;\n  fill: #9cacbb;\n  -webkit-transition: 0.2s;\n  transition: 0.2s;\n}\n.section.widgets {\n  padding-bottom: 500px;\n}\n.section.widgets .bookmarks-widget {\n  background-color: #eff3f5;\n  border: 1px solid #c1ccd5;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 54px;\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n  width: 100%;\n}\n.section.widgets .bookmarks-widget mp-bookmarks-widget {\n  border-left: 1px solid #d8e0e6;\n  border-right: 1px solid #d8e0e6;\n  margin-right: 50px;\n}\n", ""]);
+	exports.push([module.id, ".section {\n  margin-bottom: 10px;\n  padding-bottom: 10px;\n  border-bottom: 1px solid #eff3f5;\n}\n.section .item-palette {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: column wrap;\n      flex-flow: column wrap;\n}\n.section .item-palette.color-palette {\n  height: 180px;\n}\n.section .item-palette.icon-palette {\n  height: 320px;\n}\n.section .list-block {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  margin: 5px;\n}\n.section .list-block svg-icon svg {\n  left: 0;\n  top: 0;\n}\n.section .list-block svg-icon svg,\n.section .list-block svg-icon path {\n  color: #4c6072;\n  fill: #4c6072;\n  -webkit-transition: 0.2s;\n  transition: 0.2s;\n}\n.section .list-block:hover svg-icon svg,\n.section .list-block:hover svg-icon path {\n  color: #6cb8ff;\n  fill: #6cb8ff;\n}\n.section .list-block .square {\n  display: inline-block;\n  vertical-align: middle;\n  margin-right: 4px;\n  width: 20px;\n  height: 20px;\n}\n.section .list-block .label {\n  display: inline-block;\n  margin-left: 10px;\n  vertical-align: middle;\n}\n.section.buttons mp-button {\n  margin-right: 4px;\n  vertical-align: middle;\n}\n.section.buttons p.button-field {\n  background: #4ba8ff;\n  display: table;\n  padding: 10px;\n}\n.section.button-bars .button-bar-container {\n  max-width: 600px;\n}\n.section.modals .modal {\n  width: 500px;\n}\n.section.modals mp-confirm {\n  width: 480px;\n}\n.section.toggles mp-toggle {\n  margin-bottom: 10px;\n}\n.section.toggles mp-toggle.inline-toggle {\n  width: 300px;\n}\n.section.toggles mp-toggle.full-width-toggle {\n  display: block;\n}\n.section.toggles .toggle-val {\n  margin-left: 10px;\n}\n.section.menus .drop-menu-container {\n  position: relative;\n}\n.section.forms .mp-icon-input {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  position: relative;\n}\n.section.forms .mp-icon-input input {\n  padding: 6px;\n  padding-left: 36px;\n  padding-right: 18px;\n  width: 100%;\n}\n.section.forms .mp-icon-input input:focus + .mp-icon svg-icon svg {\n  left: 0;\n  top: 0;\n}\n.section.forms .mp-icon-input input:focus + .mp-icon svg-icon svg,\n.section.forms .mp-icon-input input:focus + .mp-icon svg-icon path {\n  color: #6e859d;\n  fill: #6e859d;\n  -webkit-transition: 0.2s;\n  transition: 0.2s;\n}\n.section.forms .mp-icon-input .mp-icon {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  bottom: 0;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  left: 8px;\n  position: absolute;\n  top: 0;\n}\n.section.forms .mp-icon-input .mp-icon svg-icon svg {\n  left: 0;\n  top: 0;\n}\n.section.forms .mp-icon-input .mp-icon svg-icon svg,\n.section.forms .mp-icon-input .mp-icon svg-icon path {\n  color: #9cacbb;\n  fill: #9cacbb;\n  -webkit-transition: 0.2s;\n  transition: 0.2s;\n}\n.section.widgets {\n  padding-bottom: 500px;\n}\n.section.widgets .bookmarks-widget {\n  background-color: #eff3f5;\n  border: 1px solid #c1ccd5;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 54px;\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n  width: 100%;\n}\n.section.widgets .bookmarks-widget mp-bookmarks-widget {\n  border-left: 1px solid #d8e0e6;\n  border-right: 1px solid #d8e0e6;\n  margin-right: 50px;\n}\n.section.widgets .tag-selector-container {\n  position: relative;\n}\n.section.widgets .tag-selector-container .title {\n  padding-top: 20px;\n}\n.section.widgets .tag-selector-container .title .header {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  margin-left: 18px;\n}\n.section.widgets .tag-selector-container .title .header svg-icon svg {\n  left: 0;\n  top: 0;\n}\n.section.widgets .tag-selector-container .title .header svg-icon svg,\n.section.widgets .tag-selector-container .title .header svg-icon path {\n  color: #39d183;\n  fill: #39d183;\n  -webkit-transition: 0.2s;\n  transition: 0.2s;\n}\n.section.widgets .tag-selector-container .title .header svg-icon {\n  margin: auto 0;\n}\n.section.widgets .tag-selector-container .title .header .header-text {\n  color: #4c6072;\n  display: inline-block;\n  font-size: 16px;\n  font-weight: 600;\n  line-height: 1.12;\n  margin: auto 0;\n  padding-left: 10px;\n}\n.section.widgets .tag-selector-container .title .subtext {\n  color: mp-grey;\n  font-size: 12px;\n  font-weight: 500;\n  line-height: 1.5;\n  margin: 6px 0 24px 48px;\n}\n", ""]);
 
 	// exports
 

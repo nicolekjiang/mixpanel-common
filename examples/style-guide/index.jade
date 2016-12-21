@@ -233,3 +233,19 @@
           onsubmit=$helpers.handleBookmarksMenuSubmit
           onchange=$helpers.handleBookmarksMenuChange
         )
+
+    h2 tag-selector widget
+    .tag-selector-container
+        mp-tag-selector(
+          attributes={
+              "selected-tags": JSON.stringify(tagSelectorData.selectedTags),
+              "all-tags": JSON.stringify(tagSelectorData.allTags),
+              "load-state": tagSelectorLoadState,
+          }
+          onchange=$helpers.handleTagSelectorChange
+        )
+          .title
+            .header
+              svg-icon(attributes={icon: "check-success"})
+              .header-text Report added to company dashboard
+            .subtext Viewed report by type

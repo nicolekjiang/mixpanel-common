@@ -1,0 +1,53 @@
+mixin highlight(target, search, highlightClass)
+  - const searchRegex = new RegExp(`(${search})`, 'gi');
+  - const tokens = target.replace(searchRegex, '<>$1<>').split('<>');
+  for token in tokens.filter(Boolean)
+    span(class={[highlightClass]: token.toLowerCase() === search.toLowerCase()})= token
+
+.mp-tag-selector-container
+  if loadState == 'loading_widget'
+    .spinner
+      mp-spinner
+  else
+    content
+    .top-input-wrapper
+      .input-wrapper 
+        if loadState == 'loading_tag'
+          mp-spinner
+        else if loadState == 'loaded_tag'
+          svg-icon(attributes={icon: "tag"} class="tag-icon loaded")
+        else if loadState == 'error'
+          svg-icon(attributes={icon: "tag"} class="tag-icon loaded-error")
+        else
+          svg-icon(attributes={icon: "tag"} class="tag-icon")
+
+        if !$component.isAttributeEnabled('read-only')
+          for tag in selectedTags
+            .tag
+              span= tag
+              svg-icon(
+                attributes={icon: "x"}
+                class="close-icon"
+                onclick=() => $helpers.removeTag(tag)
+              )
+        input(
+          class="search-input"
+          oninput=$helpers.setInputText
+          onkeydown=$helpers.handleKeyActions
+          type="text"
+        )
+        .border(class={'loaded-error': loadState === 'error'})
+        .arrow-return-icon
+          svg-icon(attributes={icon: "arrow-return"})
+    .list-options-wrapper
+      for option, i in $helpers.getSearchMatches()
+        .option(
+          onclick=() => $helpers.addTag(option)
+          class={'active': i === 0 && inputText !== ''}
+          class={'bold': inputText === ''}
+        )
+          +highlight(option, inputText, 'bold')
+    if $helpers.shouldShowFooter()
+      .footer(onclick=() => $helpers.addTag(inputText))
+        div.copy Create new label for 
+        div.label-name #{inputText}

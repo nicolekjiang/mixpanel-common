@@ -28,9 +28,15 @@ document.registerElement('style-guide', class extends Component {
           menu: false,
           modal: false,
           popup: false,
+          tagSelector: false,
         },
         savingBookmark: false,
         selectedBookmarkId: null,
+        tagSelectorLoadState: 'idle',
+        tagSelectorData: {
+          selectedTags: new Set(["My tag", "Another tag"]),
+          allTags: new Set(["My tag", "Another tag", "Our tag", "His tag"]),
+        }
       },
       helpers: {
         blueToggleChanged: ev => this.update({blueToggleValue: ev.detail.selected}),
@@ -91,6 +97,28 @@ document.registerElement('style-guide', class extends Component {
           this.state.open.bookmarksWidget = e.detail.open;
           this.update();
         },
+        handleTagSelectorChange: (e) => {
+          const tagName = e.detail.tagName;
+          let allTags = this.state.tagSelectorData.allTags;
+          if (e.detail.action === 'addTag') {
+            this.update({tagSelectorLoadState: 'loading_tag'});
+            setTimeout(() => {
+              allTags = allTags.add(tagName);
+              this.state.tagSelectorLoadState = 'loaded_tag';
+              this.state.tagSelectorData.selectedTags.add(tagName);
+              this.update();
+            }, 700);
+          } else if (e.detail.action === 'removeTag') {
+            this.update({tagSelectorLoadState: 'loading_tag'});
+            setTimeout(() => {
+              const selectedTags = this.state.tagSelectorData.selectedTags;
+              selectedTags.delete(tagName);
+              this.state.tagSelectorLoadState = 'loaded_tag';
+              this.state.tagSelectorData.selectedTags.delete(tagName);
+              this.update();
+            }, 700);
+          }
+        }
       },
       template,
     };

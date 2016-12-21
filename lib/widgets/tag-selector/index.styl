@@ -1,0 +1,158 @@
+@import '../../stylesheets/defaults'
+
++host-styles(mp-drop-menu)
+  display block
+  width 378px
+
+.mp-tag-selector-container
+  border-radius 5px
+  box-shadow 0 10px 15px 0 rgba(0, 0, 0, 0.1), 0 15px 30px 0 rgba(0, 0, 0, 0.2)
+  box-sizing border-box
+  width 100%
+
+  .spinner
+    display flex
+    height 72px
+
+  .top-input-wrapper
+    margin 0 auto
+    margin-bottom 20px
+    padding 0 20px
+
+    .input-wrapper
+      align-items center
+      display flex
+      flex-direction row
+      flex-wrap wrap
+      justify-content flex-start
+      margin 0 auto
+      padding 0 7px 6px 10px
+      position relative
+
+      svg-icon-style(size: 16px)
+
+      mp-spinner
+        height 16px
+        width 16px
+
+      svg-icon.tag-icon, mp-spinner
+        margin 6px 12px 0 0
+        &.loaded
+          svg, path
+            color green-300
+            fill green-300
+        &.loaded-error
+          svg, path
+            color mp-red
+            fill mp-red
+
+      .arrow-return-icon
+        border 1px solid grey-200
+        cursor pointer
+        display flex
+        height 22px
+        margin-left auto
+        position absolute
+        right 7px
+        svg-icon-style(base-color: mp-blue)
+        top 6px
+        width 30px
+
+        svg-icon
+          margin auto
+        &:hover
+          border-color mp-blue
+
+      .border
+        border 1px solid grey-200
+        border-radius 3px
+        height calc(100% - 2px)
+        left 0
+        pointer-events none
+        position absolute
+        top 0
+        width 100%
+        &.loaded-error
+          border-color mp-red
+
+      .tag
+        align-items center
+        background-color grey-900
+        border 1px solid
+        border-radius 42px
+        display inline-flex
+        flex-direction row
+        font-size 11px
+        font-weight weight-bold
+        height 24px
+        justify-content center
+        margin 6px 4px 0 0
+        svg-icon-style(base-color: grey-500, size: 15px)
+
+        span
+          color white
+          margin auto
+          padding 0 8px
+          vertical-align middle
+        .close-icon
+          cursor pointer
+          padding-right 5px
+
+      .search-input
+        background-color transparent
+        border 0
+        flex 1 1 auto
+        font-size-default()
+        font-weight normal
+        line-height 1.5
+        margin-top 6px
+        max-width 100%
+        &:focus
+          + .border:not(.loaded-error)
+            border-color mp-blue
+
+  .list-options-wrapper
+    border-top 1px solid grey-200
+    padding 0 20px
+    .option
+      color grey-500
+      font-size-default()
+      font-style normal
+      font-weight weight-medium
+      height 18px
+      line-height 1.5
+      padding 8px 0 10px 9px
+      &:hover
+        background-color grey-100
+        color mp-blue
+        cursor pointer
+      &.active
+        background-color grey-100
+        color mp-blue
+      .bold
+        font-weight weight-bold
+
+  .footer
+    box-sizing border-box
+    cursor pointer
+    display flex
+    flex-direction row
+    flex-wrap wrap
+    font-size-medium()
+    font-weight weight-bold
+    justify-content center
+    max-width 100%
+    padding 14px 20px
+    width 100%
+    word-wrap break-word
+    &:hover
+      background-color grey-100
+    .copy
+      align-self center
+      color blue-700
+      white-space pre
+    .label-name
+      align-self center
+      color grey-900
+      max-width 100%
+      word-wrap break-word
