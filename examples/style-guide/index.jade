@@ -108,7 +108,10 @@
     p
       button(onclick=$helpers.toggleMenu) Open Menu
       .drop-menu-container
-        mp-drop-menu(attributes={open: open.menu})
+        mp-drop-menu(
+          attributes={open: open.menu} 
+          onchange=e => $helpers.handleModalChange('menu', e.detail.state)
+        )
           .text-container
             .text there is text here
             .text there is text here
