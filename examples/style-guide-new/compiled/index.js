@@ -20373,12 +20373,20 @@
 	        }
 	      };
 	      (0, _utils.onAnimationEnd)(this.el, this._onAnimationEnd);
+
+	      this.maybeCloseOnEscape = function (e) {
+	        if (e.keyCode === 27) {
+	          _this2._closeMenu();
+	        }
+	      };
+	      document.body.addEventListener('keydown', this.maybeCloseOnEscape);
 	    }
 	  }, {
 	    key: 'detachedCallback',
 	    value: function detachedCallback() {
 	      _get(_class.prototype.__proto__ || Object.getPrototypeOf(_class.prototype), 'detachedCallback', this).apply(this, arguments);
 	      (0, _utils.offAnimationEnd)(this.el, this._onAnimationEnd);
+	      document.body.removeEventListener('keydown', this.maybeCloseOnEscape);
 	    }
 	  }, {
 	    key: 'config',
@@ -27548,7 +27556,7 @@
 	    value: function _removeTag(tagName) {
 	      var _this3 = this;
 
-	      this.setAttribute('load_state', LOADING_TAG);
+	      this.setAttribute('load-state', LOADING_TAG);
 	      this.dispatchEvent(new CustomEvent('change', { detail: { tagName: tagName, action: 'removeTag' } }));
 	      requestAnimationFrame(function () {
 	        return _this3.el.querySelector('.search-input').focus();
