@@ -69,7 +69,7 @@
   },
   "dependencies": {
     "mixpanel-browser": "2.9.16",
-    "panel": "mixpanel/panel#99c28fa",
+    "panel": "mixpanel/panel#9b17d7e",
     "rollbar-browser": "1.9.1",
     "virtual-dom": "2.1.1",
     "webcomponent": "^0.1.2"
