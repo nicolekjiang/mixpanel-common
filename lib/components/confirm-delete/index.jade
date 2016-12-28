@@ -1,12 +1,14 @@
 - const proxyAttrs = {};
 - ['closeable', 'open'].forEach(attr => proxyAttrs[attr] = $component.getAttribute(attr));
-mp-modal(attributes=proxyAttrs)
+mp-modal(attrs=proxyAttrs)
   .mp-confirm-delete-container
     .mp-confirm-delete-body
       .mp-confirm-delete-icon
-        svg-icon(attributes={icon: 'alert'})
+        svg-icon(attrs={icon: 'alert'})
       .mp-confirm-delete-copy
         content
     .mp-confirm-delete-buttons
-      mp-button.mp-button-secondary(onclick=$helpers.cancel)= $component.getAttribute('cancel-button-label') || 'Cancel'
-      mp-button.mp-button-red(onclick=$helpers.confirm)= $component.getAttribute('delete-button-label') || 'Delete'
+      mp-button.mp-button-secondary(on={click: $helpers.cancel})
+        = $component.getAttribute('cancel-button-label') || 'Cancel'
+      mp-button.mp-button-red(on={click: $helpers.confirm})
+        = $component.getAttribute('delete-button-label') || 'Delete'

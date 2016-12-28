@@ -3,11 +3,14 @@
   'mp-modal-closed': visibility === 'closed',
 })
   if $helpers.getType() === 'modal'
-    .mp-modal-backdrop(onclick=$helpers.backdropClicked class=`mp-modal-${visibility}`)
+    .mp-modal-backdrop(
+      class={[`mp-modal-${visibility}`]: true}
+      on={click: $helpers.backdropClicked}
+    )
   .mp-modal-wrapper
-    .mp-modal-main(class=`mp-modal-${visibility}`)
+    .mp-modal-main(class={[`mp-modal-${visibility}`]: true})
       if $component.isAttributeEnabled('closeable')
-        .mp-modal-close-btn(onclick=$helpers.closeClicked)
+        .mp-modal-close-btn(on={click: $helpers.closeClicked})
           .mp-modal-close-icon
             include ./close.svg
       content
