@@ -1,5 +1,5 @@
 mixin color-group(name, description, colors)
-  label.title #{name}
+  label.title= name
 
   if name === "Mixpanel UI Colors"
     - description = "I love cheeseburgers. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id massa et libero condimentum dignissim at ut odio. Aliquam placerat libero metus, et fringilla nisl dictum vitae. Sed at lacus eu risus fermentum consequat."
@@ -7,12 +7,12 @@ mixin color-group(name, description, colors)
   else if name === "Data Visualization"
     - description = "I love hot dogs. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id massa et libero condimentum dignissim at ut odio. Aliquam placerat libero metus, et fringilla nisl dictum vitae. Sed at lacus eu risus fermentum consequat."
 
-  p.desc.max #{description}
+  p.desc.max= description
 
   ul.color-swatches
     each color in Object.keys(colors)
       li.swatch.swatch-misc.swatch-all
-        samp(class="sample " + color)
+        samp.sample(class={[color]: true})
         h3.swatch-label= color
         label.swatch-hex= colors[color]
 
@@ -49,12 +49,11 @@ mixin color-group(name, description, colors)
     sup 1.+
 
 mixin library-group(name, colors)
-
   ul.color-library
-    strong.call-out.floating-label #{name}
+    strong.call-out.floating-label= name
     each color in Object.keys(colors)
-      li(class=color)
-        input.med(value=COLORS[color])
+      li(class={[color]: true})
+        input.med(attrs={value: COLORS[color]})
         label.swatch-label= color
 
 .wrapper
@@ -62,7 +61,12 @@ mixin library-group(name, colors)
   .version-bar
     .version-label
       label Mixpanel Design
-      div(style="height: 3px; width: 40px; background-color: #D8E0E6; margin: 0 10px 3px 10px;")
+      div(style={
+        height: '3px',
+        width: '40px',
+        'background-color': '#D8E0E6',
+        margin: '0 10px 3px 10px',
+      })
       strong.version Chrome 2.0
 
   #header
@@ -72,7 +76,7 @@ mixin library-group(name, colors)
 
     #nav-strip
     ul#nav
-      li(data-goto='colors')
+      li(attrs={'data-goto': 'colors'})
         sup.nav-number 01
         label.nav-label.selected Colors
         ul.nav-children.visible
@@ -98,7 +102,7 @@ mixin library-group(name, colors)
               sup.sub-section 1.5
           li
             label.child
-      li(data-goto='typography')
+      li(attrs={'data-goto': 'typography'})
         sup.nav-number 02
         label.nav-label Typography
         ul.nav-children
@@ -118,7 +122,7 @@ mixin library-group(name, colors)
             label.child Pairings
             mark.selected.visible
               sup.sub-section 2.4
-      li(data-goto='icons')
+      li(attrs={'data-goto': 'icons'})
         sup.nav-number 03
         label.nav-label Iconography
         ul.nav-children
@@ -165,4 +169,4 @@ mixin library-group(name, colors)
         p.desc.max My dog and I went to the park the other day and we had some fun chasing the ball.
 
         each group in Object.keys(COLOR_LIBRARIES)
-            +library-group(group, COLOR_LIBRARIES[group])
+          +library-group(group, COLOR_LIBRARIES[group])
