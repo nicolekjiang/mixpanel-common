@@ -10,7 +10,7 @@
     "start": "npm run build && concurrently 'node build.js -w' 'webpack-dev-server --context examples --config examples/webpack.config.js --colors --inline'",
     "lint": "eslint lib && stylint lib",
     "prepublish": "npm run build",
-    "test": "npm run lint && webpack --context test --config test/webpack.config.js; DISPLAY=:30 wct --plugin local",
+    "test": "npm run lint && webpack --context test --config test/webpack.config.js; wct --plugin local",
     "unit-test": "npm run lint && mocha --require babel-core/register test/util/"
   },
   "repository": {
@@ -59,7 +59,7 @@
     "stylus": "0.54.5",
     "stylus-loader": "2.1.0",
     "url-loader": "^0.5.7",
-    "virtual-jade": "tdumitrescu/virtual-jade#d677166",
+    "virtual-jade": "0.8.0",
     "virtual-jade-loader": "0.5.0",
     "watch": "^1.0.1",
     "web-component-tester": "5.0.0",
@@ -69,9 +69,8 @@
   },
   "dependencies": {
     "mixpanel-browser": "2.9.16",
-    "panel": "mixpanel/panel#9b17d7e",
+    "panel": "0.10.0-rc1",
     "rollbar-browser": "1.9.1",
-    "virtual-dom": "2.1.1",
     "webcomponent": "^0.1.2"
   },
   "pre-commit": [
