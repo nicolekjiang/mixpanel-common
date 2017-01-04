@@ -10,7 +10,7 @@ mixin list-item(bookmark)
       .mp-bm-menu-name(attributes={title: bookmark.name})
         +highlight(bookmark.name, filterText, 'mp-bm-menu-highlight')
       .mp-bm-menu-creator= bookmark.user
-    if hasWritePermissions
+    if $component.isAttributeEnabled('has-write-permissions')
       .mp-bm-menu-delete-button(onclick=e => $helpers.openConfirmDeleteDialog(e, bookmark))
         svg-icon(attributes={icon: 'trashcan'})
 
@@ -44,7 +44,7 @@ mixin highlight(target, search, highlightClass)
                 else if bookmark.user_id !== userId && filteredBookmarks[idx - 1].user_id === userId
                   .mp-bm-menu-section-header Other bookmarks
               +list-item(bookmark)
-        if hasWritePermissions
+        if $component.isAttributeEnabled('has-write-permissions')
           .mp-bm-menu-add
             if !$component.isAttributeEnabled('create-disabled') && (createMode || saving)
               mp-input-group(
