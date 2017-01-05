@@ -1,0 +1,129 @@
+.navbar
+  .nav-strip
+  .nav
+    .nav-section(
+      onclick=$helpers.navSectionChange
+      attributes={'data-section-name': 'colors'}
+      class=sectionOpen === 'colors' ? 'selected' : null
+    )
+      .nav-number 01
+      .nav-label Colors
+    if sectionOpen === 'colors'
+      .sub-nav
+        .sub-nav-section
+          .sub-nav-label Mixpanel UI
+          .sub-nav-number 1.1
+        .sub-nav-section
+          .sub-nav-label Data Visualization
+          .sub-nav-number 1.2
+        .sub-nav-section
+          .sub-nav-label Gradients
+          .sub-nav-number 1.3
+        .sub-nav-section
+          .sub-nav-label Color Use
+          .sub-nav-number 1.4
+        .sub-nav-section
+          .sub-nav-label Hue Library
+          .sub-nav-number 1.5
+    .nav-section(
+      onclick=$helpers.navSectionChange
+      attributes={'data-section-name': 'typography'}
+      class=sectionOpen === 'typography' ? 'selected' : null
+    )
+      .nav-number 02
+      .nav-label Typography
+    if sectionOpen === 'typography'
+      .sub-nav
+        .sub-nav-section
+          .sub-nav-label Sizes
+          .sub-nav-number 2.1
+        .sub-nav-section
+          .sub-nav-label Weights
+          .sub-nav-number 2.2
+        .sub-nav-section
+          .sub-nav-label Colors
+          .sub-nav-number 2.3
+        .sub-nav-section
+          .sub-nav-label Pairings
+          .sub-nav-number 2.4
+    .nav-section(
+      onclick=$helpers.navSectionChange
+      attributes={'data-section-name': 'iconography'}
+      class=sectionOpen === 'iconography' ? 'selected' : null
+    )
+      .nav-number 03
+      .nav-label Iconography
+    if sectionOpen === 'iconography'
+      .sub-nav
+        .sub-nav-section
+          .sub-nav-label UI Icons
+          .sub-nav-number 3.1
+        .sub-nav-section
+          .sub-nav-label Legacy
+          .sub-nav-number 3.2
+        .sub-nav-section
+          .sub-nav-label Marketing
+          .sub-nav-number 3.3
+    .nav-section(
+      onclick=$helpers.navSectionChange
+      attributes={'data-section-name': 'buttons'}
+      class=sectionOpen === 'buttons' ? 'selected' : null
+    )
+      .nav-number 04
+      .nav-label Buttons
+    if sectionOpen === 'buttons'
+      .sub-nav
+        .sub-nav-section
+          .sub-nav-label Types
+          .sub-nav-number 4.1
+        .sub-nav-section
+          .sub-nav-label Measure
+          .sub-nav-number 4.2
+        .sub-nav-section
+          .sub-nav-label Color Use
+          .sub-nav-number 4.3
+        .sub-nav-section
+          .sub-nav-label Interactions
+          .sub-nav-number 4.4
+    .nav-section(
+      onclick=$helpers.navSectionChange
+      attributes={'data-section-name': 'contextual'}
+      class=sectionOpen === 'contextual' ? 'selected' : null
+    )
+      .nav-number 05
+      .nav-label Contextual
+    if sectionOpen === 'contextual'
+      .sub-nav
+        .sub-nav-section
+          .sub-nav-label Modals & Pop-ups
+          .sub-nav-number 5.1
+        .sub-nav-section
+          .sub-nav-label Alerts
+          .sub-nav-number 5.2
+        .sub-nav-section
+          .sub-nav-label Hover Interactions
+          .sub-nav-number 5.3
+        .sub-nav-section
+          .sub-nav-label Links
+          .sub-nav-number 5.4
+    .nav-section(
+      onclick=$helpers.navSectionChange
+      attributes={'data-section-name': 'resources'}
+      class=sectionOpen === 'resources' ? 'selected' : null
+    )
+      .nav-number 06
+      .nav-label Resources
+    if sectionOpen === 'resources'
+      .sub-nav
+        .sub-nav-section
+          .sub-nav-label Sticker Sheets
+          .sub-nav-number 6.1
+        .sub-nav-section
+          .sub-nav-label Style Sheets
+          .sub-nav-number 6.2
+        .sub-nav-section
+          .sub-nav-label UI Templates
+          .sub-nav-number 6.3
+        .sub-nav-section
+          .sub-nav-label Typefaces
+          .sub-nav-number 6.4
