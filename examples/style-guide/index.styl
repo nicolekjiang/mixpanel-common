@@ -2,9 +2,8 @@
 @import '../../build/stylesheets/mixins/common.styl'
 
 .section
-  margin-bottom 10px
-  padding-bottom 10px
   border-bottom 1px solid grey-100
+  padding 10px 20px
 
   .item-palette
     display flex
@@ -63,6 +62,17 @@
 
     .toggle-val
       margin-left 10px
+
+  &.tooltips
+    .tooltips-container
+      display flex
+      flex-direction column
+      align-items center
+
+      .tooltip-container
+        margin 5px 0
+        mp-tooltip.multiline span
+          max-width 200px
 
   &.menus
     .drop-menu-container
