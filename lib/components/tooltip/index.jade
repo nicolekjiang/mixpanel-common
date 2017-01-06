@@ -4,10 +4,10 @@
   onmousedown=$helpers.stopPropagation
 )
   .mp-tooltip-main(
-    class=placementClass
+    class={[`mp-tooltip-placement-${placement}`]: true}
     style={
-      'left': '#{leftOffset}px',
-      'top': '#{topOffset}px',
+      'left': `${leftOffset}px`,
+      'top': `${topOffset}px`,
     }
   )
     content
