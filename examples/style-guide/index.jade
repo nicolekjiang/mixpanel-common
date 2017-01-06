@@ -212,13 +212,19 @@
     h1 Spinners
     mp-spinner
 
-  .section
+  .section.tooltips
     h1 Tooltips
-    p.mp-font-paragraph
-      a
-        | Hover me
+
+    .tooltips-container
+      a.tooltip-container Default tooltip
         mp-tooltip This is my tooltip
 
+      a.tooltip-container Placement 'bottom' tooltip
+        mp-tooltip(attributes={'placement': 'bottom'}) This is my tooltip
+
+      a.tooltip-container Multi-line tooltip
+        mp-tooltip.multiline
+          span This is a long tooltip that spans multiple lines
 
   .section.widgets
     h1 Widgets

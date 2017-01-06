@@ -22,19 +22,25 @@
       font-size-default()
       font-weight bold
       justify-content center
-      line-height 9px
-      padding 13px 18px
+      padding 10px 18px
       pointer-events auto
       position absolute
+      text-align center
       text-transform initial
 
       &::after
         border 5px solid transparent
-        border-top-color grey-900
         content ''
         height 0
         left 50%
         margin-left -5px
         position absolute
-        top 100%
         width 0
+
+      &.placement-top::after
+        border-top-color grey-900
+        top 100%
+
+      &.placement-bottom::after
+        border-bottom-color grey-900
+        bottom 100%
