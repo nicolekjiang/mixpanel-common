@@ -216,15 +216,21 @@
     h1 Tooltips
 
     .tooltips-container
-      a.tooltip-container Default tooltip
-        mp-tooltip This is my tooltip
+      a.tooltip-container Default (placement 'top') tooltip
+        mp-tooltip Tooltip above the element
 
       a.tooltip-container Placement 'bottom' tooltip
-        mp-tooltip(attributes={'placement': 'bottom'}) This is my tooltip
+        mp-tooltip(attributes={'placement': 'bottom'}) Tooltip below the element
+
+      a.tooltip-container Placement 'left' tooltip
+        mp-tooltip(attributes={'placement': 'left'}) Tooltip on the left side of element
+
+      a.tooltip-container Placement 'right' tooltip
+        mp-tooltip(attributes={'placement': 'right'}) Tooltip on the right side of element
 
       a.tooltip-container Multi-line tooltip
         mp-tooltip.multiline
-          span This is a long tooltip that spans multiple lines
+          span This is a long tooltip with text that spans multiple lines
 
   .section.widgets
     h1 Widgets
