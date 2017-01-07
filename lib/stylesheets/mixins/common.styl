@@ -12,3 +12,21 @@ z-dropdown = 7000
 
 mp-box-shadow(size=10)
   box-shadow 0 (size)px (size * 4)px rgba(0, 0, 0, 0.15)
+  
+bg-img(image-path, width=null, height=null)
+  background-image url(image-path)
+  background-repeat no-repeat
+  if width != null && height != null
+    background-size width height
+    width width
+    height height
+
+bg-img-with-2x(original-image, two-times-image, width, height)
+  bg-img(original-image, width, height)
+  @media only screen and (min-device-pixel-ratio: 2),
+    only screen and (device-pixel-ratio: 2),
+    only screen and (device-pixel-ratio 2/1),
+    only screen and (min-device-pixel-ratio 2),
+    only screen and (min-resolution 192dpi),
+    only screen and (min-resolution 2dppx)
+      bg-img(two-times-image)
