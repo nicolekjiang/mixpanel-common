@@ -7407,9 +7407,8 @@
 	  runtime = global.regeneratorRuntime = inModule ? module.exports : {};
 
 	  function wrap(innerFn, outerFn, self, tryLocsList) {
-	    // If outerFn provided and outerFn.prototype is a Generator, then outerFn.prototype instanceof Generator.
-	    var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator;
-	    var generator = Object.create(protoGenerator.prototype);
+	    // If outerFn provided, then outerFn.prototype instanceof Generator.
+	    var generator = Object.create((outerFn || Generator).prototype);
 	    var context = new Context(tryLocsList || []);
 
 	    // The ._invoke method unifies the implementations of the .next,
@@ -20134,6 +20133,10 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	var VISIBILITY_HIDDEN = 'hidden';
+	var VISIBILITY_TRANSITIONING = 'transitioning';
+	var VISIBILITY_VISIBLE = 'visible';
+
 	(0, _registerElement.registerMPElement)('mp-tooltip', function (_Component) {
 	  _inherits(_class, _Component);
 
@@ -20152,45 +20155,57 @@
 
 	      var placement = this.getAttribute('placement') || 'top';
 	      this.update({
-	        isVisible: true,
-	        // Use a large negative offset so that the tooltip is off-screen until it's properly positioned.
-	        leftOffset: -9999,
-	        placement: placement,
-	        topOffset: -9999
+	        visibility: VISIBILITY_TRANSITIONING,
+	        placement: placement
 	      });
 
 	      window.requestAnimationFrame(function () {
 	        // Since computation of top/left offsets depend on tooltip's height/width, these offsets must be computed
 	        // after tooltip is visible, hence in requestAnimationFrame.
 
+	        var parentOffsetLeft = void 0;
+	        var parentOffsetTop = void 0;
+	        var parentPosition = window.getComputedStyle(_this2.parentNode).getPropertyValue('position');
+	        // The tooltip has position absolute, which means it will be positioned relative to the nearest ancestor with
+	        // non-static position. Different handling is needed depending on whether the direct parent of the tooltip
+	        // has non-static positioning.
+	        if (parentPosition === 'static') {
+	          parentOffsetLeft = _this2.parentNode.offsetLeft;
+	          parentOffsetTop = _this2.parentNode.offsetTop;
+	        } else {
+	          parentOffsetLeft = 0;
+	          parentOffsetTop = 0;
+	        }
+
 	        var leftOffset = void 0;
 	        var topOffset = void 0;
 	        if (placement === 'top' || placement === 'bottom') {
-	          leftOffset = _this2.parentNode.offsetLeft + (_this2.parentNode.offsetWidth - tooltip.offsetWidth) / 2;
+	          leftOffset = parentOffsetLeft + (_this2.parentNode.offsetWidth - tooltip.offsetWidth) / 2;
 	          if (placement === 'top') {
-	            topOffset = _this2.parentNode.offsetTop - tooltip.offsetHeight - 8;
+	            topOffset = parentOffsetTop - tooltip.offsetHeight - 8;
 	          } else {
-	            topOffset = _this2.parentNode.offsetTop + _this2.parentNode.offsetHeight + 8;
+	            topOffset = parentOffsetTop + _this2.parentNode.offsetHeight + 8;
 	          }
 	        } else if (placement === 'left' || placement === 'right') {
-	          topOffset = _this2.parentNode.offsetTop + (_this2.parentNode.offsetHeight - tooltip.offsetHeight) / 2;
+	          topOffset = parentOffsetTop + (_this2.parentNode.offsetHeight - tooltip.offsetHeight) / 2;
 	          if (placement === 'left') {
-	            leftOffset = _this2.parentNode.offsetLeft - tooltip.offsetWidth - 8;
+	            leftOffset = parentOffsetLeft - tooltip.offsetWidth - 8;
 	          } else {
-	            leftOffset = _this2.parentNode.offsetLeft + _this2.parentNode.offsetWidth + 8;
+	            leftOffset = parentOffsetLeft + _this2.parentNode.offsetWidth + 8;
 	          }
 	        }
 
 	        _this2.update({
 	          leftOffset: leftOffset,
-	          topOffset: topOffset
+	          topOffset: topOffset,
+	          visibility: VISIBILITY_VISIBLE
 	        });
 	      });
 	    }
 	  }, {
 	    key: 'hide',
 	    value: function hide() {
-	      this.update({ isVisible: false });
+	      this.update({ visibility: VISIBILITY_HIDDEN });
 	    }
 	  }, {
 	    key: 'attachedCallback',
@@ -20200,14 +20215,14 @@
 	      this.show = this.show.bind(this);
 	      this.hide = this.hide.bind(this);
 
-	      this.parentNode.addEventListener('mouseover', this.show);
+	      this.parentNode.addEventListener('mouseenter', this.show);
 	      this.parentNode.addEventListener('mouseleave', this.hide);
 	    }
 	  }, {
 	    key: 'detachedCallback',
 	    value: function detachedCallback() {
 	      _get(_class.prototype.__proto__ || Object.getPrototypeOf(_class.prototype), 'detachedCallback', this).apply(this, arguments);
-	      this.parentNode.removeEventListener('mouseover', this.show);
+	      this.parentNode.removeEventListener('mouseenter', this.show);
 	      this.parentNode.removeEventListener('mouseleave', this.hide);
 	    }
 	  }, {
@@ -20218,7 +20233,7 @@
 	        template: _index2.default,
 	        useShadowDom: true,
 	        defaultState: {
-	          isVisible: false,
+	          visibility: VISIBILITY_HIDDEN,
 	          leftOffset: 0,
 	          placement: '',
 	          topOffset: 0
@@ -20245,7 +20260,7 @@
 
 	function _jade_template_fn(locals) {
 	  locals = locals || {};;;
-	  var result_of_with = function ($helpers, Object, isVisible, leftOffset, placement, topOffset) {
+	  var result_of_with = function ($helpers, Object, leftOffset, placement, topOffset, visibility) {
 	    var h = __webpack_require__(349);
 	    var __objToAttrs = function __objToAttrs(o) {
 	      return Object.keys(o).map(function (k) {
@@ -20257,7 +20272,8 @@
 	        "onclick": $helpers.stopPropagation,
 	        "onmousedown": $helpers.stopPropagation,
 	        "className": [].concat('mp-tooltip-wrapper').concat(__objToAttrs({
-	          'mp-tooltip-hidden': !isVisible
+	          'mp-tooltip-hidden': visibility === 'hidden',
+	          'mp-tooltip-transitioning': visibility === 'transitioning'
 	        })).filter(Boolean).join(' ')
 	      }, [h("div", {
 	        "style": {
@@ -20267,7 +20283,7 @@
 	        "className": [].concat('mp-tooltip-main').concat(__objToAttrs(_defineProperty({}, "mp-tooltip-placement-" + placement, true))).filter(Boolean).join(' ')
 	      }, [h("content")].filter(Boolean))].filter(Boolean))
 	    };
-	  }.call(this, "$helpers" in locals ? locals.$helpers : typeof $helpers !== "undefined" ? $helpers : undefined, "Object" in locals ? locals.Object : typeof Object !== "undefined" ? Object : undefined, "isVisible" in locals ? locals.isVisible : typeof isVisible !== "undefined" ? isVisible : undefined, "leftOffset" in locals ? locals.leftOffset : typeof leftOffset !== "undefined" ? leftOffset : undefined, "placement" in locals ? locals.placement : typeof placement !== "undefined" ? placement : undefined, "topOffset" in locals ? locals.topOffset : typeof topOffset !== "undefined" ? topOffset : undefined);
+	  }.call(this, "$helpers" in locals ? locals.$helpers : typeof $helpers !== "undefined" ? $helpers : undefined, "Object" in locals ? locals.Object : typeof Object !== "undefined" ? Object : undefined, "leftOffset" in locals ? locals.leftOffset : typeof leftOffset !== "undefined" ? leftOffset : undefined, "placement" in locals ? locals.placement : typeof placement !== "undefined" ? placement : undefined, "topOffset" in locals ? locals.topOffset : typeof topOffset !== "undefined" ? topOffset : undefined, "visibility" in locals ? locals.visibility : typeof visibility !== "undefined" ? visibility : undefined);
 	  if (result_of_with) return result_of_with.value;
 	}
 	module.exports = _jade_template_fn;
@@ -20276,7 +20292,7 @@
 /* 379 */
 /***/ function(module, exports) {
 
-	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6e859d;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 12px;   font-stretch: normal;   font-weight: 400; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 12px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-size: 12px;   font-weight: 400;   padding: 8px;   -webkit-transition: border-color 150ms ease-out;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus {   border-color: #3391e9;   -webkit-transition: border-color 200ms ease-in;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } .mp-tooltip-wrapper, .mp-tooltip-wrapper * {   box-sizing: border-box; } .mp-tooltip-wrapper.mp-tooltip-hidden {   pointer-events: none; } .mp-tooltip-wrapper.mp-tooltip-hidden .mp-tooltip-main {   display: none; } .mp-tooltip-wrapper .mp-tooltip-main {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   background-color: #4c6072;   border-radius: 3px;   box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16);   color: #fff;   cursor: default;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 12px;   font-weight: bold;   -webkit-box-pack: center;       -ms-flex-pack: center;           justify-content: center;   padding: 10px 18px;   pointer-events: auto;   position: absolute;   text-transform: initial; } .mp-tooltip-wrapper .mp-tooltip-main::after {   border: 5px solid transparent;   content: '';   height: 0;   position: absolute;   width: 0; } .mp-tooltip-wrapper .mp-tooltip-main.mp-tooltip-placement-top::after {   border-top-color: #4c6072;   left: 50%;   margin-left: -5px;   top: 100%; } .mp-tooltip-wrapper .mp-tooltip-main.mp-tooltip-placement-bottom::after {   border-bottom-color: #4c6072;   left: 50%;   margin-left: -5px;   bottom: 100%; } .mp-tooltip-wrapper .mp-tooltip-main.mp-tooltip-placement-left::after {   border-left-color: #4c6072;   left: 100%;   margin-top: -5px;   top: 50%; } .mp-tooltip-wrapper .mp-tooltip-main.mp-tooltip-placement-right::after {   border-right-color: #4c6072;   margin-top: -5px;   right: 100%;   top: 50%; } ";
+	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6e859d;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 12px;   font-stretch: normal;   font-weight: 400; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 12px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-size: 12px;   font-weight: 400;   padding: 8px;   -webkit-transition: border-color 150ms ease-out;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus {   border-color: #3391e9;   -webkit-transition: border-color 200ms ease-in;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } .mp-tooltip-wrapper, .mp-tooltip-wrapper * {   box-sizing: border-box; } .mp-tooltip-wrapper.mp-tooltip-hidden {   pointer-events: none; } .mp-tooltip-wrapper.mp-tooltip-hidden .mp-tooltip-main {   display: none; } .mp-tooltip-wrapper.mp-tooltip-transitioning {   pointer-events: none; } .mp-tooltip-wrapper.mp-tooltip-transitioning .mp-tooltip-main {   visibility: hidden; } .mp-tooltip-wrapper .mp-tooltip-main {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   background-color: #4c6072;   border-radius: 3px;   box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16);   color: #fff;   cursor: default;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 12px;   font-weight: bold;   -webkit-box-pack: center;       -ms-flex-pack: center;           justify-content: center;   padding: 10px 18px;   pointer-events: auto;   position: absolute;   text-transform: initial; } .mp-tooltip-wrapper .mp-tooltip-main::after {   border: 5px solid transparent;   content: '';   height: 0;   position: absolute;   width: 0; } .mp-tooltip-wrapper .mp-tooltip-main.mp-tooltip-placement-top::after {   border-top-color: #4c6072;   left: 50%;   margin-left: -5px;   top: 100%; } .mp-tooltip-wrapper .mp-tooltip-main.mp-tooltip-placement-bottom::after {   border-bottom-color: #4c6072;   left: 50%;   margin-left: -5px;   bottom: 100%; } .mp-tooltip-wrapper .mp-tooltip-main.mp-tooltip-placement-left::after {   border-left-color: #4c6072;   left: 100%;   margin-top: -5px;   top: 50%; } .mp-tooltip-wrapper .mp-tooltip-main.mp-tooltip-placement-right::after {   border-right-color: #4c6072;   margin-top: -5px;   right: 100%;   top: 50%; } ";
 
 
 /***/ },
@@ -26412,9 +26428,9 @@
 	        var namespaceVars = [this.persistenceKey];
 	        if (this.parentData) {
 	          /* eslint-disable camelcase */
-	          var _parentData = this.parentData,
-	              project_id = _parentData.project_id,
-	              user_id = _parentData.user_id;
+	          var _parentData = this.parentData;
+	          var project_id = _parentData.project_id;
+	          var user_id = _parentData.user_id;
 
 	          namespaceVars = namespaceVars.concat([project_id, user_id]);
 	          /* eslint-enable camelcase */
@@ -27079,18 +27095,6 @@
 	            this._resetActiveBookmark();
 	            break;
 	          }
-	        case 'selected-bookmark-id':
-	          {
-	            this._resetActiveBookmark();
-	            break;
-	          }
-	        case 'user-id':
-	          {
-	            this.state.userId = parseInt(this.getAttribute('user-id'));
-	            this._filterBookmarks();
-	            this._resetActiveBookmark();
-	            break;
-	          }
 	        case 'open':
 	          {
 	            var open = this.isAttributeEnabled('open');
@@ -27101,6 +27105,18 @@
 	        case 'saving':
 	          {
 	            this.update({ saving: this.isAttributeEnabled('saving') });
+	            break;
+	          }
+	        case 'selected-bookmark-id':
+	          {
+	            this._resetActiveBookmark();
+	            break;
+	          }
+	        case 'user-id':
+	          {
+	            this.state.userId = parseInt(this.getAttribute('user-id'));
+	            this._filterBookmarks();
+	            this._resetActiveBookmark();
 	            break;
 	          }
 	      }
@@ -27164,9 +27180,9 @@
 	      // bootstrap the widget's state from attributes
 	      this.update({
 	        bookmarks: this.getJSONAttribute('bookmarks'),
-	        userId: parseInt(this.getAttribute('user-id')),
 	        open: this.isAttributeEnabled('open'),
-	        saving: this.isAttributeEnabled('saving')
+	        saving: this.isAttributeEnabled('saving'),
+	        userId: parseInt(this.getAttribute('user-id'))
 	      });
 	      this._filterBookmarks();
 	      if (this.state.open) {
@@ -27310,25 +27326,30 @@
 	        "className": [].concat('mp-bm-menu-list-item').concat(__objToAttrs({
 	          'mp-bm-menu-list-item-active': activeBookmark && bookmark.id === activeBookmark.id
 	        })).filter(Boolean).join(' ')
-	      }, [h("div", {
-	        "className": [].concat('mp-bm-menu-list-item-content').filter(Boolean).join(' ')
-	      }, [h("div", {
-	        "attributes": {
-	          title: bookmark.name
-	        },
-	        "className": [].concat('mp-bm-menu-name').filter(Boolean).join(' ')
-	      }, [jade_mixins['highlight'].call(this, bookmark.name, filterText, 'mp-bm-menu-highlight')].filter(Boolean)), h("div", {
-	        "className": [].concat('mp-bm-menu-creator').filter(Boolean).join(' ')
-	      }, [bookmark.user])].filter(Boolean)), h("div", {
-	        "onclick": function onclick(e) {
-	          return $helpers.openConfirmDeleteDialog(e, bookmark);
-	        },
-	        "className": [].concat('mp-bm-menu-delete-button').filter(Boolean).join(' ')
-	      }, [h("svg-icon", {
-	        "attributes": {
-	          icon: 'trashcan'
-	        }
-	      })].filter(Boolean))].filter(Boolean));
+	      }, function () {
+	        var __jade_nodes = [];
+	        __jade_nodes = __jade_nodes.concat(h("div", {
+	          "className": [].concat('mp-bm-menu-list-item-content').filter(Boolean).join(' ')
+	        }, [h("div", {
+	          "attributes": {
+	            title: bookmark.name
+	          },
+	          "className": [].concat('mp-bm-menu-name').filter(Boolean).join(' ')
+	        }, [jade_mixins['highlight'].call(this, bookmark.name, filterText, 'mp-bm-menu-highlight')].filter(Boolean)), h("div", {
+	          "className": [].concat('mp-bm-menu-creator').filter(Boolean).join(' ')
+	        }, [bookmark.user])].filter(Boolean)));
+	        __jade_nodes = __jade_nodes.concat($component.isAttributeEnabled('has-write-permissions') ? h("div", {
+	          "onclick": function onclick(e) {
+	            return $helpers.openConfirmDeleteDialog(e, bookmark);
+	          },
+	          "className": [].concat('mp-bm-menu-delete-button').filter(Boolean).join(' ')
+	        }, [h("svg-icon", {
+	          "attributes": {
+	            icon: 'trashcan'
+	          }
+	        })].filter(Boolean)) : undefined);;
+	        return __jade_nodes;
+	      }.call(this).filter(Boolean));
 	    };
 
 	    jade_mixins['highlight'] = function (target, search, highlightClass) {
@@ -27384,70 +27405,76 @@
 	            'slot-body': true
 	          },
 	          "className": [].concat('mp-bm-menu-container').filter(Boolean).join(' ')
-	        }, [h("div", {
-	          "className": [].concat('mp-bm-menu-search').filter(Boolean).join(' ')
-	        }, [h("div", {
-	          "className": [].concat('mp-bm-menu-mp-icon').concat('mp-icon').filter(Boolean).join(' ')
-	        }, [h("svg-icon", {
-	          "attributes": {
-	            icon: "search"
-	          }
-	        })].filter(Boolean)), h("input", {
-	          "type": "text",
-	          "placeholder": 'Filter bookmarks',
-	          "oninput": $helpers.setFilterText,
-	          "onchange": $helpers.stopPropagation
-	        })].filter(Boolean)), h("div", {
-	          "className": [].concat('mp-bm-menu-list').filter(Boolean).join(' ')
 	        }, function () {
 	          var __jade_nodes = [];
-	          __jade_nodes = __jade_nodes.concat(filteredBookmarks.length === 0 ? h("div", {
-	            "className": [].concat('mp-bm-menu-empty').filter(Boolean).join(' ')
-	          }, ["No bookmarks found."].filter(Boolean)) : function () {
+	          __jade_nodes = __jade_nodes.concat(h("div", {
+	            "className": [].concat('mp-bm-menu-search').filter(Boolean).join(' ')
+	          }, [h("div", {
+	            "className": [].concat('mp-bm-menu-mp-icon').concat('mp-icon').filter(Boolean).join(' ')
+	          }, [h("svg-icon", {
+	            "attributes": {
+	              icon: "search"
+	            }
+	          })].filter(Boolean)), h("input", {
+	            "type": "text",
+	            "placeholder": 'Filter bookmarks',
+	            "oninput": $helpers.setFilterText,
+	            "onchange": $helpers.stopPropagation
+	          })].filter(Boolean)));
+	          __jade_nodes = __jade_nodes.concat(h("div", {
+	            "className": [].concat('mp-bm-menu-list').filter(Boolean).join(' ')
+	          }, function () {
 	            var __jade_nodes = [];
-	            var showSectionHeader = filteredBookmarks[0].user_id === userId && filteredBookmarks[filteredBookmarks.length - 1].userId !== userId;
-	            __jade_nodes = __jade_nodes.concat(filteredBookmarks.map(function (bookmark, idx) {
-	              return function () {
-	                var __jade_nodes = [];
-	                __jade_nodes = __jade_nodes.concat(showSectionHeader ? function () {
+	            __jade_nodes = __jade_nodes.concat(filteredBookmarks.length === 0 ? h("div", {
+	              "className": [].concat('mp-bm-menu-empty').filter(Boolean).join(' ')
+	            }, ["No bookmarks found."].filter(Boolean)) : function () {
+	              var __jade_nodes = [];
+	              var showSectionHeader = filteredBookmarks[0].user_id === userId && filteredBookmarks[filteredBookmarks.length - 1].userId !== userId;
+	              __jade_nodes = __jade_nodes.concat(filteredBookmarks.map(function (bookmark, idx) {
+	                return function () {
 	                  var __jade_nodes = [];
-	                  __jade_nodes = __jade_nodes.concat(idx === 0 ? h("div", {
-	                    "className": [].concat('mp-bm-menu-section-header').filter(Boolean).join(' ')
-	                  }, ["Your Bookmarks"].filter(Boolean)) : bookmark.user_id !== userId && filteredBookmarks[idx - 1].user_id === userId ? h("div", {
-	                    "className": [].concat('mp-bm-menu-section-header').filter(Boolean).join(' ')
-	                  }, ["Other bookmarks"].filter(Boolean)) : undefined);;
+	                  __jade_nodes = __jade_nodes.concat(showSectionHeader ? function () {
+	                    var __jade_nodes = [];
+	                    __jade_nodes = __jade_nodes.concat(idx === 0 ? h("div", {
+	                      "className": [].concat('mp-bm-menu-section-header').filter(Boolean).join(' ')
+	                    }, ["Your Bookmarks"].filter(Boolean)) : bookmark.user_id !== userId && filteredBookmarks[idx - 1].user_id === userId ? h("div", {
+	                      "className": [].concat('mp-bm-menu-section-header').filter(Boolean).join(' ')
+	                    }, ["Other bookmarks"].filter(Boolean)) : undefined);;
+	                    return __jade_nodes;
+	                  }.call(this) : undefined);
+	                  __jade_nodes = __jade_nodes.concat(jade_mixins['list-item'].call(this, bookmark));;
 	                  return __jade_nodes;
-	                }.call(this) : undefined);
-	                __jade_nodes = __jade_nodes.concat(jade_mixins['list-item'].call(this, bookmark));;
-	                return __jade_nodes;
-	              }.call(this);
-	            }));;
+	                }.call(this);
+	              }));;
+	              return __jade_nodes;
+	            }.call(this));;
 	            return __jade_nodes;
-	          }.call(this));;
+	          }.call(this).filter(Boolean)));
+	          __jade_nodes = __jade_nodes.concat($component.isAttributeEnabled('has-write-permissions') ? h("div", {
+	            "className": [].concat('mp-bm-menu-add').filter(Boolean).join(' ')
+	          }, function () {
+	            var __jade_nodes = [];
+	            __jade_nodes = __jade_nodes.concat(!$component.isAttributeEnabled('create-disabled') && (createMode || saving) ? h("mp-input-group", {
+	              "attributes": {
+	                autofocus: true,
+	                placeholder: 'Name your bookmark',
+	                busy: saving
+	              },
+	              "onkeydown": $helpers.stopPropagation,
+	              "onchange": $helpers.stopPropagation,
+	              "oninput": $helpers.setName,
+	              "onsubmit": $helpers.createBookmark
+	            }) : h("mp-button-bar", {
+	              "attributes": {
+	                disabled: $component.isAttributeEnabled('create-disabled')
+	              },
+	              "onclick": $helpers.goToCreateMode,
+	              "className": [].concat('mp-button-bar-secondary').filter(Boolean).join(' ')
+	            }, ["Create new bookmark"].filter(Boolean)));;
+	            return __jade_nodes;
+	          }.call(this).filter(Boolean)) : undefined);;
 	          return __jade_nodes;
-	        }.call(this).filter(Boolean)), h("div", {
-	          "className": [].concat('mp-bm-menu-add').filter(Boolean).join(' ')
-	        }, function () {
-	          var __jade_nodes = [];
-	          __jade_nodes = __jade_nodes.concat(!$component.isAttributeEnabled('create-disabled') && (createMode || saving) ? h("mp-input-group", {
-	            "attributes": {
-	              autofocus: true,
-	              placeholder: 'Name your bookmark',
-	              busy: saving
-	            },
-	            "onkeydown": $helpers.stopPropagation,
-	            "onchange": $helpers.stopPropagation,
-	            "oninput": $helpers.setName,
-	            "onsubmit": $helpers.createBookmark
-	          }) : h("mp-button-bar", {
-	            "attributes": {
-	              disabled: $component.isAttributeEnabled('create-disabled')
-	            },
-	            "onclick": $helpers.goToCreateMode,
-	            "className": [].concat('mp-button-bar-secondary').filter(Boolean).join(' ')
-	          }, ["Create new bookmark"].filter(Boolean)));;
-	          return __jade_nodes;
-	        }.call(this).filter(Boolean))].filter(Boolean))].filter(Boolean))].filter(Boolean)));
+	        }.call(this).filter(Boolean))].filter(Boolean))].filter(Boolean)));
 	        __jade_nodes = __jade_nodes.concat(confirmDeleteBookmark ? h("mp-confirm-delete", {
 	          "attributes": {
 	            closeable: true,
