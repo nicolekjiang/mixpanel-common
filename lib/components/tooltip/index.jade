@@ -1,5 +1,8 @@
 .mp-tooltip-wrapper(
-  class={'mp-tooltip-hidden': !isVisible}
+  class={
+    'mp-tooltip-hidden': visibility === 'hidden',
+    'mp-tooltip-transitioning': visibility === 'transitioning',
+  }
   onclick=$helpers.stopPropagation
   onmousedown=$helpers.stopPropagation
 )

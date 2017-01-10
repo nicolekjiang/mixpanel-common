@@ -10,6 +10,15 @@
       .main
         display none
 
+    &.transitioning
+      pointer-events none
+      .main
+        // An alternative that was tried was positioning the tooltip off the page with left:-9999, top: -9999.
+        // However, this in some cases the width of the tooltip is different when it's off the page vs. when it's
+        // finally positioned on the page. This screws up the tooltip position computation which depends on the
+        // final width of the tooltip. Using visibility:hidden doesn't suffer from this problem.
+        visibility hidden
+
     .main
       align-items center
       background-color grey-900
