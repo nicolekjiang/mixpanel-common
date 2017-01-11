@@ -38,7 +38,12 @@
           height 16px
           margin 2px 10px 9px 10px
           margin-left 8px
-          svg-icon-style(size: 16px)
+
+          &.tag-icon
+            svg-icon-style(grey-200, size: 16px)
+
+          &.search-icon
+            svg-icon-style(grey-200, size: 20px, pos-top: -2px)
 
           .loaded
             svg, path

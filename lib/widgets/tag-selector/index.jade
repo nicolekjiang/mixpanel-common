@@ -5,12 +5,15 @@
   else
     .mp-tag-selector-top-input-wrapper
       .mp-tag-selector-input-wrapper(onclick=$helpers.focusInput)
-        .mp-tag-selector-icon-wrapper
+        - const icon = $component.isAttributeEnabled('read-only') ? 'search' : 'tag';
+        .mp-tag-selector-icon-wrapper(class={
+          'mp-tag-selector-tag-icon': icon === 'tag',
+          'mp-tag-selector-search-icon': icon === 'search',
+        })
           if loadState == 'loading_tag'
             mp-spinner
           else
-            svg-icon(attributes={icon: 'tag'} class={
-              'tag-icon': true,
+            svg-icon(attributes={icon} class={
               'mp-tag-selector-loaded': loadState === 'loaded_tag',
               'mp-tag-selector-loaded-error': loadState === 'error',
             })

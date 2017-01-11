@@ -16,9 +16,9 @@ mixin list-item(bookmark)
                b= token
         .mp-bm-menu-creator= bookmark.user
 
-    if $component.isAttributeEnabled('has-write-permissions')
-      .mp-bm-menu-delete-button(onclick=e => $helpers.openConfirmDeleteDialog(e, bookmark))
-        svg-icon(attributes={icon: 'trashcan'})
+      if $component.isAttributeEnabled('has-write-permissions')
+        .mp-bm-menu-delete-button(onclick=e => $helpers.openConfirmDeleteDialog(e, bookmark))
+          svg-icon(attributes={icon: 'trashcan'})
 
 .mp-bm-container(onscroll=$helpers.stopPropagation)
   .mp-bm-btn(onclick=$helpers.toggleBookmarksMenu)
