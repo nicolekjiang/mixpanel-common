@@ -45,15 +45,11 @@
           &.search-icon
             svg-icon-style(grey-200, size: 20px, pos-top: -2px)
 
-          .loaded
-            svg, path
-              color green-300
-              fill green-300
+          &.loaded
+            svg-icon-style(green-300, size: 16px)
 
-          .loaded-error
-            svg, path
-              color mp-red
-              fill mp-red
+          &.loaded-error
+            svg-icon-style(mp-red, size: 16px)
 
           mp-spinner
             height 16px
