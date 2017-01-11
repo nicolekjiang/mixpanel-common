@@ -12,7 +12,7 @@ z-dropdown = 7000
 
 mp-box-shadow(size=10)
   box-shadow 0 (size)px (size * 4)px rgba(0, 0, 0, 0.15)
-  
+
 bg-img(image-path, width=null, height=null)
   background-image url(image-path)
   background-repeat no-repeat
@@ -30,3 +30,9 @@ bg-img-with-2x(original-image, two-times-image, width, height)
     only screen and (min-resolution 192dpi),
     only screen and (min-resolution 2dppx)
       bg-img(two-times-image)
+
+/* LIST STYLES */
+$mp-list-gutter-height = 8px
+$mp-list-gutter-width = 20px
+$mp-list-item-margin = 0px $mp-list-gutter-width
+$mp-list-item-padding = 10px

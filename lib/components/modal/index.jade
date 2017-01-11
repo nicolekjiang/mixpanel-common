@@ -1,7 +1,10 @@
-.mp-modal-stage(class={
+.mp-modal-stage(
+  class={
   'mp-modal-absolute': $component.isAttributeEnabled('not-fullscreen'),
   'mp-modal-closed': visibility === 'closed',
-})
+  }
+  onclick=e => e.stopPropagation()
+)
   if $helpers.getType() === 'modal'
     .mp-modal-backdrop(onclick=$helpers.backdropClicked class='mp-modal-#{visibility}')
   .mp-modal-wrapper

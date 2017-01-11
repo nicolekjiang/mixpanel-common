@@ -1,24 +1,24 @@
 mixin list-item(bookmark)
-  .mp-bm-menu-list-item(
+  mp-list-item(
     onclick=() => $helpers.selectBookmark(bookmark)
     onmouseover=() => $helpers.activateBookmark(bookmark)
-    class={
-      'mp-bm-menu-list-item-active': activeBookmark && bookmark.id === activeBookmark.id
+    attributes={
+      active: activeBookmark && activeBookmark.id === bookmark.id
     }
   )
-    .mp-bm-menu-list-item-content
-      .mp-bm-menu-name(attributes={title: bookmark.name})
-        +highlight(bookmark.name, filterText, 'mp-bm-menu-highlight')
-      .mp-bm-menu-creator= bookmark.user
+    .mp-bm-menu-bookmark-row
+      .mp-bm-menu-bookmark-details
+        .mp-bm-menu-name(attributes={title: bookmark.name})
+          for token, pos in $helpers.stringFilterMatches(bookmark.name, filterText)
+             if pos % 2 === 1
+               span= token
+             else
+               b= token
+        .mp-bm-menu-creator= bookmark.user
+
     if $component.isAttributeEnabled('has-write-permissions')
       .mp-bm-menu-delete-button(onclick=e => $helpers.openConfirmDeleteDialog(e, bookmark))
         svg-icon(attributes={icon: 'trashcan'})
-
-mixin highlight(target, search, highlightClass)
-  - const searchRegex = new RegExp(`(${search})`, 'gi');
-  - const tokens = target.replace(searchRegex, '<>$1<>').split('<>');
-  for token in tokens.filter(Boolean)
-    span(class={[highlightClass]: token.toLowerCase() === search.toLowerCase()})= token
 
 .mp-bm-container(onscroll=$helpers.stopPropagation)
   .mp-bm-btn(onclick=$helpers.toggleBookmarksMenu)
@@ -34,15 +34,18 @@ mixin highlight(target, search, highlightClass)
           input(type="text" placeholder='Filter bookmarks' oninput=$helpers.setFilterText onchange=$helpers.stopPropagation)
         .mp-bm-menu-list
           if filteredBookmarks.length === 0
-            .mp-bm-menu-empty No bookmarks found.
+            mp-list-item(attributes={static: true})
+              .mp-bm-menu-empty No bookmarks found.
           else
             - const showSectionHeader = filteredBookmarks[0].user_id === userId && filteredBookmarks[filteredBookmarks.length - 1].userId !== userId
             for bookmark, idx in filteredBookmarks
               if showSectionHeader
                 if idx === 0
-                  .mp-bm-menu-section-header Your Bookmarks
+                  mp-list-item(attributes={static: true})
+                    .mp-bm-menu-section-header Your Bookmarks
                 else if bookmark.user_id !== userId && filteredBookmarks[idx - 1].user_id === userId
-                  .mp-bm-menu-section-header Other bookmarks
+                  mp-list-item(attributes={static: true})
+                    .mp-bm-menu-section-header Other bookmarks
               +list-item(bookmark)
         if $component.isAttributeEnabled('has-write-permissions')
           .mp-bm-menu-add

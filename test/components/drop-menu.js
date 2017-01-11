@@ -2,7 +2,7 @@
 import expect from 'expect.js';
 
 import '../../lib/components/drop-menu';
-import { onAnimationEnd, offAnimationEnd } from '../../lib/components/utils';
+import { onAnimationEnd, offAnimationEnd } from '../../lib/util/dom';
 
 const VISIBILITY_OPEN = 'open';
 const VISIBILITY_OPENING = 'opening';

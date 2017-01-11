@@ -5,6 +5,7 @@ import '../../lib/widgets/tag-selector';
 const allTags = ['tag foo', 'tag bar', 'tag baz'];
 const selectedTags = ['tag foo'];
 
+const requestAnimationFrame = () => new Promise(resolve => window.requestAnimationFrame(resolve));
 describe('Test tag-selector widget', () => {
   beforeEach(function(done) {
     document.body.innerHTML = '';
@@ -15,12 +16,15 @@ describe('Test tag-selector widget', () => {
     this.widget.setAttribute('load-state', 'idle');
 
     document.body.appendChild(this.widget);
-    window.requestAnimationFrame(() => done());
+
+    // do to the interaction with some browsers and the webcomponent.js polyfill
+    // as it relates to attributeChanged/attachedCallback we need to wait for two animation frames
+    requestAnimationFrame().then(() => requestAnimationFrame()).then(() => done());
   });
 
   it('displays all tags that are not selected', function() {
     let displayedTags = [];
-    const optionList = this.widget.el.querySelectorAll('.option');
+    const optionList = this.widget.el.querySelectorAll('mp-list-item');
     for (var i = 0; i < optionList.length; i++) {
         displayedTags.push(optionList[i].innerText);
     }
@@ -33,11 +37,11 @@ describe('Test tag-selector widget', () => {
       expect(e.detail.tagName).to.equal('new tag');
       done();
     });
-    const searchInput = this.widget.el.querySelector('.search-input');
+    const searchInput = this.widget.el.querySelector('.mp-tag-selector-search-input');
     searchInput.value = 'new tag';
     searchInput.dispatchEvent(new Event('input'));
     window.requestAnimationFrame(() => {
-      const footer = this.widget.el.querySelector('.footer');
+      const footer = this.widget.el.querySelector('.mp-tag-selector-footer');
       expect(footer).to.not.be(null);
       footer.dispatchEvent(new MouseEvent('click'));
     });
@@ -48,6 +52,6 @@ describe('Test tag-selector widget', () => {
       expect(e.detail.action).to.equal('removeTag');
       done();
     });
-    this.widget.el.querySelector('.close-icon').dispatchEvent(new MouseEvent('click'));
+    this.widget.el.querySelector('.mp-tag-selector-close-icon svg-icon').dispatchEvent(new MouseEvent('click'));
   });
 });

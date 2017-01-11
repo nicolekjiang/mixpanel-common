@@ -97,28 +97,37 @@ document.registerElement('style-guide', class extends Component {
           this.state.open.bookmarksWidget = e.detail.open;
           this.update();
         },
-        handleTagSelectorChange: (e) => {
+        toggleTagSelector: () => {
+          this.state.open.tagSelector = !this.state.open.tagSelector;
+          this.update();
+        },
+        handleTagSelectorDropMenuChange: e => {
+          this.state.open.tagSelector = e.detail.state !== 'closed';
+          this.update();
+        },
+        handleTagSelectorChange: e => {
+          e.stopImmediatePropagation(); // i hate that we have to do this
+          // handle whatever business logic we need to deal with when
+          // adding or removing a tag
           const tagName = e.detail.tagName;
-          let allTags = this.state.tagSelectorData.allTags;
           if (e.detail.action === 'addTag') {
-            this.update({tagSelectorLoadState: 'loading_tag'});
-            setTimeout(() => {
-              allTags = allTags.add(tagName);
-              this.state.tagSelectorLoadState = 'loaded_tag';
-              this.state.tagSelectorData.selectedTags.add(tagName);
-              this.update();
-            }, 700);
+            this.state.tagSelectorData.selectedTags.add(tagName);
+            this.state.tagSelectorData.allTags.add(tagName);
           } else if (e.detail.action === 'removeTag') {
-            this.update({tagSelectorLoadState: 'loading_tag'});
-            setTimeout(() => {
-              const selectedTags = this.state.tagSelectorData.selectedTags;
-              selectedTags.delete(tagName);
-              this.state.tagSelectorLoadState = 'loaded_tag';
-              this.state.tagSelectorData.selectedTags.delete(tagName);
-              this.update();
-            }, 700);
+            this.state.tagSelectorData.selectedTags.delete(tagName);
           }
-        }
+          // normally we'd persist to server and this timeout represents that
+          // async call
+          clearTimeout(this.loadingTagTimeout);
+          this.update({tagSelectorLoadState: 'loading_tag'});
+          this.loadingTagTimeout = setTimeout(() => {
+            this.update({tagSelectorLoadState: 'loaded_tag'});
+          }, 700);
+        },
+        handleTagSelectorSubmit: e => {
+          this.state.open.tagSelector = false;
+          this.update();
+        },
       },
       template,
     };

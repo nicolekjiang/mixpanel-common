@@ -109,13 +109,13 @@
       button(onclick=$helpers.toggleMenu) Open Menu
       .drop-menu-container
         mp-drop-menu(
-          attributes={open: open.menu} 
+          attributes={open: open.menu}
           onchange=e => $helpers.handleModalChange('menu', e.detail.state)
         )
           .text-container
-            .text there is text here
-            .text there is text here
-            .text there is text here
+            mp-list-item there is text here
+            mp-list-item there is text here
+            mp-list-item there is text here
 
   .section.modals
     h1 Modals
@@ -255,6 +255,13 @@
 
     h2 tag-selector widget
     .tag-selector-container
+      mp-button.mp-button-secondary(onclick=$helpers.toggleTagSelector) Edit tags
+      mp-drop-menu(attributes={open: open.tagSelector} onchange=$helpers.handleTagSelectorDropMenuChange)
+        .title
+          .header
+            svg-icon(attributes={icon: "check-success"})
+            .header-text Added to company dashboard
+          .subtext Viewed report by type
         mp-tag-selector(
           attributes={
               "selected-tags": JSON.stringify(tagSelectorData.selectedTags),
@@ -262,9 +269,6 @@
               "load-state": tagSelectorLoadState,
           }
           onchange=$helpers.handleTagSelectorChange
+          onsubmit=$helpers.handleTagSelectorSubmit
         )
-          .title
-            .header
-              svg-icon(attributes={icon: "check-success"})
-              .header-text Report added to company dashboard
-            .subtext Viewed report by type
+

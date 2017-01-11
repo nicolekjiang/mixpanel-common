@@ -84,80 +84,58 @@
     .list
       border-bottom-left-radius 5px
       border-bottom-right-radius 5px
-      margin 0 10px
       max-height 360px
       overflow-y auto
-      position relative
 
-      & > :first-child:not(.section-header):not(.empty)
-        margin-top 10px
+      mp-list-item
+        .empty
+          font-style italic
 
-      .empty
-        color grey-500
-        font-style italic
-        padding 20px
+        .section-header
+          color grey-700
+          font-size-xs()
+          font-weight weight-bold
 
-      .section-header
-        color grey-500
-        font-size-xs()
-        font-weight weight-bold
-        padding 20px 10px 8px
-
-      .list-item
-        align-items center
-        border-radius 5px
-        cursor pointer
-        display flex
-        height 54px
-        padding 10px
-
-        &:only-child
-          margin 10px 0
-
-        &:last-child
-          margin-bottom 10px
-
-        &.list-item-active
-          background-color grey-100
-
-          .list-item-content
-            .name, .creator
-              color blue-500
-
-        .list-item-content
+        .bookmark-row
+          align-items center
           display flex
-          flex 1
-          flex-direction column
 
-          .name, .creator
-            font-size-default()
-            max-width 260px
-            overflow hidden
-            text-overflow ellipsis
-            white-space nowrap
+          .bookmark-details
+            display flex
+            flex 1
+            flex-direction column
 
-          .name
-            color grey-700
-            font-weight weight-medium
-            margin-bottom 4px
+            .name, .creator
+              font-size-default()
+              max-width 260px
+              overflow hidden
+              text-overflow ellipsis
+              white-space nowrap
 
-            .highlight
-              font-weight weight-bold
+            .name
+              color grey-700
+              font-weight weight-medium
+              line-height 14px
+              margin-bottom 4px
 
-          .creator
-            color grey-300
-            font-weight weight-regular
+            .creator
+              color grey-300
+              font-weight weight-regular
 
         .delete-button
           display none
-          flex 0
+          flex none
           height 22px
           margin-right 6px
-
           svg-icon-style(grey-200, mp-red, speed: 0.1s)
 
         &:hover .delete-button
           display block
+
+        &[active="true"] .bookmark-row .bookmark-details
+          .name, .creator
+            color mp-blue
+
 
   .add
     align-items center
