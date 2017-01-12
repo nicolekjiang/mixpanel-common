@@ -1,25 +1,26 @@
 mixin list-item(bookmark)
-  .mp-bm-menu-list-item(
-    class={
-      'mp-bm-menu-list-item-active': activeBookmark && bookmark.id === activeBookmark.id,
+  mp-list-item(
+    attrs={
+      active: activeBookmark && activeBookmark.id === bookmark.id
     }
     on={
       click: () => $helpers.selectBookmark(bookmark),
       mouseover: () => $helpers.activateBookmark(bookmark),
     }
   )
-    .mp-bm-menu-list-item-content
-      .mp-bm-menu-name(attrs={title: bookmark.name})
-        +highlight(bookmark.name, filterText, 'mp-bm-menu-highlight')
-      .mp-bm-menu-creator= bookmark.user
-    .mp-bm-menu-delete-button(on={click: e => $helpers.openConfirmDeleteDialog(e, bookmark)})
-      svg-icon(attrs={icon: 'trashcan'})
+    .mp-bm-menu-bookmark-row
+      .mp-bm-menu-bookmark-details
+        .mp-bm-menu-name(attrs={title: bookmark.name})
+          for token, pos in $helpers.stringFilterMatches(bookmark.name, filterText)
+             if pos % 2 === 1
+               span= token
+             else
+               b= token
+        .mp-bm-menu-creator= bookmark.user
 
-mixin highlight(target, search, highlightClass)
-  - const searchRegex = new RegExp(`(${search})`, 'gi');
-  - const tokens = target.replace(searchRegex, '<>$1<>').split('<>');
-  for token in tokens.filter(Boolean)
-    span(class={[highlightClass]: token.toLowerCase() === search.toLowerCase()})= token
+      if $component.isAttributeEnabled('has-write-permissions')
+        .mp-bm-menu-delete-button(on={click: e => $helpers.openConfirmDeleteDialog(e, bookmark)})
+          svg-icon(attrs={icon: 'trashcan'})
 
 .mp-bm-container(on={scroll: $helpers.stopPropagation})
   .mp-bm-btn(on={click: $helpers.toggleBookmarksMenu})
@@ -44,32 +45,36 @@ mixin highlight(target, search, highlightClass)
           )
         .mp-bm-menu-list
           if filteredBookmarks.length === 0
-            .mp-bm-menu-empty No bookmarks found.
+            mp-list-item(attrs={static: true})
+              .mp-bm-menu-empty No bookmarks found.
           else
             - const showSectionHeader = filteredBookmarks[0].user_id === userId && filteredBookmarks[filteredBookmarks.length - 1].userId !== userId
             for bookmark, idx in filteredBookmarks
               if showSectionHeader
                 if idx === 0
-                  .mp-bm-menu-section-header Your Bookmarks
+                  mp-list-item(attrs={static: true})
+                    .mp-bm-menu-section-header Your Bookmarks
                 else if bookmark.user_id !== userId && filteredBookmarks[idx - 1].user_id === userId
-                  .mp-bm-menu-section-header Other bookmarks
+                  mp-list-item(attrs={static: true})
+                    .mp-bm-menu-section-header Other bookmarks
               +list-item(bookmark)
-        .mp-bm-menu-add
-          if !$component.isAttributeEnabled('create-disabled') && (createMode || saving)
-            mp-input-group(
-              attrs={autofocus: true, placeholder: 'Name your bookmark', busy: saving}
-              on={
-                keydown: $helpers.stopPropagation,
-                change: $helpers.stopPropagation,
-                input: $helpers.setName,
-                submit: $helpers.createBookmark,
-              }
-            )
-          else
-            mp-button-bar.mp-button-bar-secondary(
-              attrs={disabled: $component.isAttributeEnabled('create-disabled')}
-              on={click: $helpers.goToCreateMode}
-            ) Create new bookmark
+        if $component.isAttributeEnabled('has-write-permissions')
+          .mp-bm-menu-add
+            if !$component.isAttributeEnabled('create-disabled') && (createMode || saving)
+              mp-input-group(
+                attrs={autofocus: true, placeholder: 'Name your bookmark', busy: saving}
+                on={
+                  keydown: $helpers.stopPropagation,
+                  change: $helpers.stopPropagation,
+                  input: $helpers.setName,
+                  submit: $helpers.createBookmark,
+                }
+              )
+            else
+              mp-button-bar.mp-button-bar-secondary(
+                attrs={disabled: $component.isAttributeEnabled('create-disabled')}
+                on={click: $helpers.goToCreateMode}
+              ) Create new bookmark
 
   if confirmDeleteBookmark
     mp-confirm-delete(

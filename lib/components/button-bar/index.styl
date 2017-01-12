@@ -10,6 +10,7 @@ content-color(color)
         transition 0s
 
 +host-styles(mp-button-bar)
+  display block
   height 45px
   margin-bottom -2px
   margin-left -1px
@@ -34,6 +35,7 @@ content-color(color)
     justify-content center
     letter-spacing 0
     user-select none
+    width 100%
 
     .content
       align-items center
@@ -47,7 +49,7 @@ content-color(color)
 
     {disabled}
       cursor default
-      .content
+      .content, .arrow-next
         opacity 0.6
 
     .arrow-next

@@ -1,3 +1,16 @@
-.mp-tooltip-wrapper.mp-tooltip-hidden
-  .mp-tooltip-main
+.mp-tooltip-wrapper(
+  class={
+    'mp-tooltip-hidden': visibility === 'hidden',
+    'mp-tooltip-transitioning': visibility === 'transitioning',
+  }
+  onclick=$helpers.stopPropagation
+  onmousedown=$helpers.stopPropagation
+)
+  .mp-tooltip-main(
+    class={[`mp-tooltip-placement-${placement}`]: true}
+    style={
+      'left': `${leftOffset}px`,
+      'top': `${topOffset}px`,
+    }
+  )
     content

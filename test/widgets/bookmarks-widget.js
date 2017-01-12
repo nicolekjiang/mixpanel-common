@@ -1,11 +1,11 @@
 /* global beforeEach, describe, it */
 import expect from 'expect.js';
 
-import { onAnimationEnd, offAnimationEnd } from '../../lib/components/utils';
+import { onAnimationEnd, offAnimationEnd } from '../../lib/util/dom';
 import '../../lib/widgets/bookmarks-widget';
 import bookmarks from './bookmark-data.json';
 
-describe('Test boomarks-widget', function() {
+describe('Test bookmarks-widget', function() {
   beforeEach(function(done) {
     document.body.innerHTML = '';
     this.widget = document.createElement('mp-bookmarks-widget');
@@ -30,7 +30,7 @@ describe('Test boomarks-widget', function() {
   it('activates the selected-bookmark-id when opened', function(done) {
     this.widget.setAttribute('selected-bookmark-id', 4);
     onAnimationEnd(this.dropMenu, () => {
-      expect(this.widget.el.querySelector('.mp-bm-menu-list-item-active .mp-bm-menu-name').innerText).to.equal('Signups');
+      expect(this.widget.el.querySelector('mp-list-item[active=true] .mp-bm-menu-name').innerText).to.equal('Signups');
       done();
     });
     this.widget.setAttribute('open', 'true');

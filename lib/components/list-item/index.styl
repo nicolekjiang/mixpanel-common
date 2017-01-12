@@ -1,0 +1,44 @@
+@import '../../stylesheets/defaults'
+
+$mp-list-gutter-height = 9px
+$mp-list-gutter-width = 20px
+$mp-list-item-margin = 0px $mp-list-gutter-width
+$mp-list-item-padding = 10px
+
++host-styles(mp-list-item)
+  display block
+
++host-styles(mp-list-item, ':first-child')
+  margin-top $mp-list-gutter-height
+
++host-styles(mp-list-item, ':last-child')
+  margin-bottom $mp-list-gutter-height
+
++prefix-classes('mp-list-item-')
+  .container
+    &, *
+      box-sizing border-box
+
+    align-items center
+    background-color white
+    border-radius 3px
+    color grey-500
+    display block
+    font-family family-helvetica
+    font-size-default()
+    font-weight weight-medium
+    line-height 12px
+    margin $mp-list-item-margin
+    padding $mp-list-item-padding
+    text-align left
+    user-select none
+
+    &.static
+      cursor default
+
+    &:not(.static)
+      cursor pointer
+
+    &:hover:not(.static), &.active
+      background-color grey-100
+      color mp-blue

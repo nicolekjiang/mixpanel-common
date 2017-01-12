@@ -5,6 +5,7 @@ import {
   sorted,
   sum,
   truncateMiddle,
+  unique,
 
   immutableSplice,
   removeByIndex,
@@ -213,5 +214,75 @@ describe('insertAtIndex()', function() {
   it('appends item if given index === array.length', function() {
     const array = ['a', 'b', 'c', 'd', 'e'];
     expect(insertAtIndex(array, array.length, '$')).to.eql(['a', 'b', 'c', 'd', 'e', '$']);
+  });
+});
+
+describe('unique()', function() {
+  it('removes duplicate items from an array', function() {
+    expect(unique([1, 2, 2, 3, 4, 4, 4, 5])).to.eql([1, 2, 3, 4, 5]);
+  });
+
+  it('does not modify the original array', function() {
+    let array = [1, 2, 2, 3, 4, 4, 4, 5];
+    unique(array);
+    expect(array).to.eql([1, 2, 2, 3, 4, 4, 4, 5]);
+  });
+
+  it('works with an empty array', function() {
+    expect(unique([])).to.eql([]);
+  });
+
+  it('removes duplicates of non-array/object types', function() {
+    expect(unique([
+      0, 0, -1, -1, 'abc', 'abc', null, null, undefined, undefined,
+    ])).to.eql([0, -1, 'abc', null, undefined]);
+  });
+
+  it('throws an exception for non-array inputs', function() {
+    [1, 'abc', {}, null, undefined].forEach(input =>
+      expect(() => unique(input)).to.throwException()
+    );
+  });
+
+  context('when no hash function is provided', function() {
+    it('does not remove duplicate arrays or objects', function() {
+      expect(unique([
+        [], [], {}, {}, [1, 2, 3], [1, 2, 3], {a: 1}, {a: 1},
+      ])).to.eql([
+        [], [], {}, {}, [1, 2, 3], [1, 2, 3], {a: 1}, {a: 1},
+      ]);
+    });
+  });
+
+  context('when a hash function is provided', function() {
+    const getHashFunc = keys =>
+      obj => keys.map(key => obj[key]).join(':');
+
+    it('removes duplicate objects from an array', function() {
+      const hash = getHashFunc(['a', 'b']);
+      expect(unique([
+        {a: 1, b: 2}, {a: 1, b: 4}, {a: 1, b: 2},
+      ], {hash})).to.eql([
+        {a: 1, b: 2}, {a: 1, b: 4},
+      ]);
+    });
+
+    it('removes duplicate arrays from an array', function() {
+      const hash = getHashFunc([1, 3]);
+      expect(unique([
+        [1, 2, 3, 4, 5], [1, 3, 4, 2, 5], [2, 2, 4, 4 ,5],
+      ], {hash})).to.eql([
+        [1, 2, 3, 4, 5], [1, 3, 4, 2, 5],
+      ]);
+    });
+
+    it('removes duplicates of objects containing all types', function() {
+      const hash = getHashFunc(['a', 'b']);
+      expect(unique([
+        {a: 1, b: 'abc'}, {a: 1, b: 'abc'}, {a: null, b: undefined}, {a: null, b: undefined}, {a: [], b: {}}, {a: [], b: {}},
+      ], {hash})).to.eql([
+        {a: 1, b: 'abc'}, {a: null, b: undefined}, {a: [], b: {}},
+      ]);
+    });
   });
 });

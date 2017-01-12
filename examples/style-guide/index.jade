@@ -115,9 +115,9 @@
           on={change: e => $helpers.handleModalChange('menu', e.detail.state)}
         )
           .text-container
-            .text there is text here
-            .text there is text here
-            .text there is text here
+            mp-list-item there is text here
+            mp-list-item there is text here
+            mp-list-item there is text here
 
   .section.modals
     h1 Modals
@@ -217,13 +217,29 @@
     h1 Spinners
     mp-spinner
 
-  .section
+  .section.tooltips
     h1 Tooltips
-    p.mp-font-paragraph
-      a
-        | Hover me
-        mp-tooltip This is my tooltip
 
+    .tooltips-container
+      a.tooltip-container Default (placement 'top') tooltip
+        mp-tooltip Tooltip above the element
+
+      a.tooltip-container Placement 'bottom' tooltip
+        mp-tooltip(attributes={'placement': 'bottom'}) Tooltip below the element
+
+      a.tooltip-container Placement 'left' tooltip
+        mp-tooltip(attributes={'placement': 'left'}) Tooltip on the left side of element
+
+      a.tooltip-container Placement 'right' tooltip
+        mp-tooltip(attributes={'placement': 'right'}) Tooltip on the right side of element
+
+      a.tooltip-container Multi-line tooltip
+        mp-tooltip.multiline
+          span This is a long tooltip with text that spans multiple lines
+
+      a.tooltip-container.position-relative Tooltip with non-statically positioned parent element
+        mp-tooltip
+          span A tooltip
 
   .section.widgets
     h1 Widgets
@@ -237,6 +253,7 @@
             'saving': savingBookmark,
             'selected-bookmark-id': selectedBookmarkId,
             'user-id': 1,
+            'has-write-permissions': true,
           }
           on={
             change: $helpers.handleBookmarksMenuChange,
@@ -246,16 +263,21 @@
 
     h2 tag-selector widget
     .tag-selector-container
+      mp-button.mp-button-secondary(onclick=$helpers.toggleTagSelector) Edit tags
+      mp-drop-menu(attributes={open: open.tagSelector} onchange=$helpers.handleTagSelectorDropMenuChange)
+        .title
+          .header
+            svg-icon(attributes={icon: "check-success"})
+            .header-text Added to company dashboard
+          .subtext Viewed report by type
         mp-tag-selector(
           attrs={
             'selected-tags': JSON.stringify(tagSelectorData.selectedTags),
             'all-tags': JSON.stringify(tagSelectorData.allTags),
             'load-state': tagSelectorLoadState,
           }
-          on={change: $helpers.handleTagSelectorChange}
+          on={
+            change: $helpers.handleTagSelectorChange,
+            submit: $helpers.handleTagSelectorSubmit,
+          }
         )
-          .title
-            .header
-              svg-icon(attrs={icon: 'check-success'})
-              .header-text Report added to company dashboard
-            .subtext Viewed report by type

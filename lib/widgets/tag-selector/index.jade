@@ -1,55 +1,64 @@
-mixin highlight(target, search, highlightClass)
-  - const searchRegex = new RegExp(`(${search})`, 'gi');
-  - const tokens = target.replace(searchRegex, '<>$1<>').split('<>');
-  for token in tokens.filter(Boolean)
-    span(class={[highlightClass]: token.toLowerCase() === search.toLowerCase()})= token
-
 .mp-tag-selector-container
   if loadState == 'loading_widget'
-    .spinner
+    .mp-tag-selector-spinner
       mp-spinner
   else
-    content
-    .top-input-wrapper
-      .input-wrapper
-        if loadState == 'loading_tag'
-          mp-spinner
-        else if loadState == 'loaded_tag'
-          svg-icon.tag-icon.loaded(attrs={icon: 'tag'})
-        else if loadState == 'error'
-          svg-icon.tag-icon.loaded-error(attrs={icon: 'tag'})
-        else
-          svg-icon.tag-icon(attrs={icon: 'tag'})
-
+    .mp-tag-selector-top-input-wrapper
+      .mp-tag-selector-input-wrapper(on={click: $helpers.focusInput})
+        - const icon = $component.isAttributeEnabled('read-only') ? 'search' : 'tag';
+        .mp-tag-selector-icon-wrapper(class={
+          'mp-tag-selector-tag-icon': icon === 'tag',
+          'mp-tag-selector-search-icon': icon === 'search',
+          'mp-tag-selector-loaded': loadState === 'loaded_tag',
+          'mp-tag-selector-loaded-error': loadState === 'error',
+        })
+          if loadState == 'loading_tag'
+            mp-spinner
+          else
+            svg-icon(attrs={icon})
         if !$component.isAttributeEnabled('read-only')
-          for tag in selectedTags
-            .tag
+          - const tags = [...selectedTags];
+          for tag in tags
+            .mp-tag-selector-tag
               span= tag
-              svg-icon.close-icon(
-                attrs={icon: 'x'}
-                on={click: () => $helpers.removeTag(tag)}
-              )
-        input.search-input(
+              .mp-tag-selector-close-icon
+                svg-icon(
+                  attrs={icon: 'x'}
+                  on={click: () => $helpers.removeTag(tag)}
+                )
+        input.mp-tag-selector-search-input(
           attrs={type: 'text'}
           on={
             input: $helpers.setInputText,
-            keydown: $helpers.handleKeyActions,
+            keydown: $helpers.handleKeyDown,
+            keypress: $helpers.handleKeyPress,
           }
-        )
-        .border(class={'loaded-error': loadState === 'error'})
-        .arrow-return-icon
-          svg-icon(attrs={icon: 'arrow-return'})
-    .list-options-wrapper
-      for option, i in $helpers.getSearchMatches()
-        .option(
-          class={
-            active: i === 0 && inputText !== '',
-            bold: inputText === '',
-          }
-          on={click: () => $helpers.addTag(option)}
-        )
-          +highlight(option, inputText, 'bold')
-    if $helpers.shouldShowFooter()
-      .footer(on={click: () => $helpers.addTag(inputText)})
-        .copy Create new label for
-        .label-name= inputText
+          style={width: inputWidth}
+        )= inputText
+        .mp-tag-selector-border(class={'mp-tag-selector-loaded-error': loadState === 'error'})
+
+    - const hasMatches = matchingTags.length;
+    - const showCreateButton = $helpers.showCreateButton();
+
+    if hasMatches || showCreateButton
+      .mp-tag-selector-hr
+
+    if hasMatches
+      .mp-tag-selector-tag-list
+        for tag, tagIdx in matchingTags
+          mp-list-item(
+            attrs={'active': tagIdx === activeTagIndex}
+            on={click: () => $helpers.addTag(tag)}
+          )
+            for token, pos in $helpers.stringFilterMatches(tag, inputText)
+              if pos % 2 === 1
+                span= token
+              else
+                b= token
+
+    else if showCreateButton
+      .mp-tag-selector-footer(on={click: () => $helpers.addTag(inputText)})
+        .mp-tag-selector-copy
+          | Create new label for
+          = ' '
+        .mp-tag-selector-label-name= inputText
