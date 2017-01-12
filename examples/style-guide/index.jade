@@ -225,13 +225,13 @@
         mp-tooltip Tooltip above the element
 
       a.tooltip-container Placement 'bottom' tooltip
-        mp-tooltip(attributes={'placement': 'bottom'}) Tooltip below the element
+        mp-tooltip(attrs={'placement': 'bottom'}) Tooltip below the element
 
       a.tooltip-container Placement 'left' tooltip
-        mp-tooltip(attributes={'placement': 'left'}) Tooltip on the left side of element
+        mp-tooltip(attrs={'placement': 'left'}) Tooltip on the left side of element
 
       a.tooltip-container Placement 'right' tooltip
-        mp-tooltip(attributes={'placement': 'right'}) Tooltip on the right side of element
+        mp-tooltip(attrs={'placement': 'right'}) Tooltip on the right side of element
 
       a.tooltip-container Multi-line tooltip
         mp-tooltip.multiline
@@ -263,11 +263,11 @@
 
     h2 tag-selector widget
     .tag-selector-container
-      mp-button.mp-button-secondary(onclick=$helpers.toggleTagSelector) Edit tags
-      mp-drop-menu(attributes={open: open.tagSelector} onchange=$helpers.handleTagSelectorDropMenuChange)
+      mp-button.mp-button-secondary(on={click: $helpers.toggleTagSelector}) Edit tags
+      mp-drop-menu(attrs={open: open.tagSelector} on={change: $helpers.handleTagSelectorDropMenuChange})
         .title
           .header
-            svg-icon(attributes={icon: "check-success"})
+            svg-icon(attrs={icon: "check-success"})
             .header-text Added to company dashboard
           .subtext Viewed report by type
         mp-tag-selector(
