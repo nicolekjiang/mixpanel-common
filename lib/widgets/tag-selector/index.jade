@@ -27,14 +27,14 @@
                   on={click: () => $helpers.removeTag(tag)}
                 )
         input.mp-tag-selector-search-input(
-          attrs={type: 'text'}
+          props={type: 'text', value: inputText}
           on={
             input: $helpers.setInputText,
             keydown: $helpers.handleKeyDown,
             keypress: $helpers.handleKeyPress,
           }
           style={width: inputWidth}
-        )= inputText
+        )
         .mp-tag-selector-border(class={'mp-tag-selector-loaded-error': loadState === 'error'})
 
     - const hasMatches = matchingTags.length;
