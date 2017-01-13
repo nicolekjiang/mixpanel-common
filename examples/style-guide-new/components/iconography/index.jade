@@ -1,28 +1,14 @@
+include ../mixins.jade
+
 .section
   .section-title
     .title-text Iconography
     .title-section 3.1
   .section-nav
-    .nav-item(
-      onclick=$helpers.sectionChange
-      class=sectionFilter === 'show all' ? 'selected' : null
-      attributes={'data-filter-name': 'show all'}
-    ) Show All
-    .nav-item(
-      onclick=$helpers.sectionChange
-      class=sectionFilter === 'ui' ? 'selected' : null
-      attributes={'data-filter-name': 'ui'}
-    ) UI
-    .nav-item(
-      onclick=$helpers.sectionChange
-      class=sectionFilter === 'marketing' ? 'selected' : null
-      attributes={'data-filter-name': 'marketing'}
-    ) Marketing
-    .nav-item(
-      onclick=$helpers.sectionChange
-      class=sectionFilter === 'legacy' ? 'selected' : null
-      attributes={'data-filter-name': 'legacy'}
-    ) Legacy
+    +section-nav-item('Show All')
+    +section-nav-item('UI')
+    +section-nav-item('Marketing')
+    +section-nav-item('Legacy')
   .section-content
     section.icon-section
       .subsection-title Mixpanel Icons
@@ -31,4 +17,4 @@
         for icon in Object.keys(SVG_ICONS)
           .icon
             svg-icon(attributes={icon})
-            .icon-name #{icon}
+            .icon-name= icon
