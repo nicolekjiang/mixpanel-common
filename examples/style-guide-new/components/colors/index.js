@@ -20,6 +20,9 @@ const COLOR_LIBRARIES = {
 document.registerElement('color-section', class extends Component {
   get config() {
     return {
+      defaultState: {
+        sectionFilter: 'show all',
+      },
       helpers: {
         sectionChange: e => {
           this.update({sectionFilter: e.currentTarget.dataset.filterName});
@@ -33,6 +36,5 @@ document.registerElement('color-section', class extends Component {
 
   attachedCallback() {
     super.attachedCallback(...arguments);
-    this.update({sectionFilter: 'show all'});
   }
 });
