@@ -6,6 +6,7 @@ describe('Test tag component', () => {
   beforeEach(function(done) {
     document.body.innerHTML = '';
     this.widget = document.createElement('mp-tag');
+    this.widget.setAttribute('removable', true);
     document.body.appendChild(this.widget);
 
     window.requestAnimationFrame(() => done());

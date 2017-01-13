@@ -20,7 +20,7 @@
           - const tags = [...selectedTags]
           for tag in tags
             mp-tag(
-              attributes={'tag-name': tag, 'icon': 'lock-locked'}
+              attributes={'tag-name': tag, 'removable': true}
               onchange=e => { e.stopPropagation(); $helpers.removeTag(tag) }
             )
         input.mp-tag-selector-search-input(
