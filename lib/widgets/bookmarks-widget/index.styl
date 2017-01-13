@@ -104,6 +104,7 @@
             display flex
             flex 1
             flex-direction column
+            min-width 0 // http://stackoverflow.com/questions/12022288/how-to-keep-a-flex-item-from-overflowing-due-to-its-text
 
             .name, .creator
               font-size-default()
@@ -123,14 +124,14 @@
               font-weight weight-regular
 
         .delete-button
-          display none
           flex none
           height 22px
           margin-right 6px
           svg-icon-style(grey-200, mp-red, speed: 0.1s)
+          visibility hidden
 
         &:hover .delete-button
-          display block
+          visibility visible
 
         &[active="true"] .bookmark-row .bookmark-details
           .name, .creator

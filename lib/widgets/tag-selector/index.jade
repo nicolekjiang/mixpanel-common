@@ -1,7 +1,6 @@
 .mp-tag-selector-container
   if loadState == 'loading_widget'
-    .mp-tag-selector-spinner
-      mp-spinner
+    mp-spinner.mp-tag-selector-loading-widget
   else
     .mp-tag-selector-top-input-wrapper
       .mp-tag-selector-input-wrapper(onclick=$helpers.focusInput)
