@@ -13,7 +13,8 @@
     "prepublish": "npm run build",
     "test": "npm run lint && npm run build-test && wct --plugin local",
     "test-sauce": "npm run lint && npm run build-test && wct --plugin sauce",
-    "unit-test": "npm run lint && mocha --require babel-core/register test/util/"
+    "unit-test": "npm run lint && mocha --require babel-core/register test/util/",
+    "wct-persistent": "wct --plugin local --persistent"
   },
   "repository": {
     "type": "git",
