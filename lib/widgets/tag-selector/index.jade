@@ -19,13 +19,10 @@
         if !$component.isAttributeEnabled('read-only')
           - const tags = [...selectedTags];
           for tag in tags
-            .mp-tag-selector-tag
-              span= tag
-              .mp-tag-selector-close-icon
-                svg-icon(
-                  attrs={icon: 'x'}
-                  on={click: () => $helpers.removeTag(tag)}
-                )
+            mp-tag(
+              attrs={'tag-name': tag, 'icon': 'lock-locked'}
+              on={change: e => { e.stopPropagation(); $helpers.removeTag(tag) }}
+            )
         input.mp-tag-selector-search-input(
           props={type: 'text', value: inputText}
           on={
