@@ -193,6 +193,14 @@
         div
           .text AHHH DANGER DANGER There is currently an error
 
+    p
+      button(onclick=() => $helpers.openModal('upsell')) Open upsell
+
+      mp-upsell-popup(
+        attributes={id: 'upsell', feature: 'custom-events', open: open['upsell']}
+        onchange=e => $helpers.handleModalChange('upsell', e.detail.state)
+      )
+
   .section.toggles
     h1 Toggles
     p One element out of a set of two or more is always selected.

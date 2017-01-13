@@ -22,6 +22,7 @@ document.registerElement('style-guide', class extends Component {
         SVG_ICONS,
         inputGroupSaving: false,
         open: {
+          alert: false,
           bookmarksWidget: false,
           confirm: false,
           confirmDelete: false,
@@ -29,6 +30,7 @@ document.registerElement('style-guide', class extends Component {
           modal: false,
           popup: false,
           tagSelector: false,
+          upsell: false,
         },
         savingBookmark: false,
         selectedBookmarkId: null,

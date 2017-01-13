@@ -1,0 +1,36 @@
+@import '../../stylesheets/defaults'
+
++host-styles(mp-alert)
+  width 300px
+
++prefix-classes('mp-upsell-popup-')
+  .content
+    display flex
+    padding 20px
+
+    .icon
+      margin-right 10px
+
+      svg
+        width 53px
+        height 42px
+
+    .text
+      color grey-700
+      font-family family-helvetica
+      font-size-medium()
+      font-style normal
+      font-weight weight-regular
+      line-height 18px
+      margin 3px 10px 0 0
+      max-width 180px
+      text-shadow 0 1px 0 alpha(white, 0.5)
+
+      .upgrade-link
+        color blue-900
+        cursor pointer
+        font-weight weight-bold
+        text-decoration none
+
+        &:hover
+          color mp-blue

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="53px" height="44px" viewBox="0 0 53 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>F26B9051-DB7A-47A6-A35F-71A0EC04B121</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="45.109514" height="37" rx="2.35372636"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="45.109514" height="37" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <ellipse id="path-3" cx="7" cy="7" rx="7" ry="7"></ellipse>
+        <mask id="mask-4" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="-1.68881119" y="-1.68881119" width="17.3776224" height="17.3776224">
+            <rect x="-1.68881119" y="-1.68881119" width="17.3776224" height="17.3776224" fill="white"></rect>
+            <use xlink:href="#path-3" fill="black"></use>
+        </mask>
+    </defs>
+    <g id="Pricing-Upgrade-Purple" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Custom-Event-Upgrade-Dialog" transform="translate(-359.000000, -168.000000)">
+            <g id="segmentation-upgrade" transform="translate(341.000000, 150.000000)">
+                <g id="illustration.custom.event" transform="translate(20.000000, 20.000000)">
+                    <use id="fill" stroke="#FFFFFF" mask="url(#mask-2)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="#EDF3F8" xlink:href="#path-1"></use>
+                    <rect id="outline" stroke="#4BA8FF" stroke-width="2.359" stroke-linecap="round" stroke-linejoin="round" x="0" y="0" width="45.109514" height="37" rx="2.35372636"></rect>
+                    <g id="plus" transform="translate(11.000000, 7.000000)">
+                        <circle id="Oval" fill="#C4D6E5" cx="12" cy="12" r="12"></circle>
+                        <path d="M13.3846154,10.6153846 L13.3846154,6 L10.6153846,6 L10.6153846,10.6153846 L6,10.6153846 L6,13.3846154 L10.6153846,13.3846154 L10.6153846,18 L13.3846154,18 L13.3846154,13.3846154 L18,13.3846154 L18,10.6153846 L13.3846154,10.6153846 Z" id="Combined-Shape" fill="#EDF3F8"></path>
+                    </g>
+                    <g id="lighting-bolt" transform="translate(35.000000, 26.000000)">
+                        <g id="circle">
+                            <use fill="#9270E2" fill-rule="evenodd" xlink:href="#path-3"></use>
+                            <use stroke="#FFFFFF" mask="url(#mask-4)" stroke-width="3.37762238" xlink:href="#path-3"></use>
+                        </g>
+                        <path d="M6.50875804,7.43563046 C6.52410688,7.38766237 6.51796734,7.33739641 6.49136269,7.29976876 C6.46494409,7.2621411 6.42038595,7.24059854 6.36931618,7.24059854 L5.03350223,7.24059854 C5.01210688,7.24059854 5.00187432,7.23466237 5.00047897,7.23198152 C4.99908362,7.22920493 5.00010688,7.21704535 5.0121999,7.19885386 L8.41011014,3.08638284 C8.51673783,2.95733196 8.56350739,2.97236977 8.50962051,3.13490852 L7.41089758,6.44898152 C7.39285106,6.49647088 7.39647897,6.5466411 7.42159525,6.58446024 C7.44661851,6.62218365 7.49061851,6.64391769 7.54206037,6.64391769 L8.80466502,6.64391769 C8.82661851,6.64391769 8.83806037,6.65042833 8.84113013,6.65598152 C8.84429292,6.66153471 8.84401385,6.67503471 8.83303711,6.69456663 L5.63308817,11.0810031 C5.53267259,11.2186511 5.4864542,11.2006563 5.52732162,11.0501464 L6.50875804,7.43563046 Z" id="bolt" fill="#FFFFFF"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
