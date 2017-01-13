@@ -52,6 +52,6 @@ describe('Test tag-selector widget', () => {
       expect(e.detail.action).to.equal('removeTag');
       done();
     });
-    this.widget.el.querySelector('.mp-tag-selector-close-icon svg-icon').dispatchEvent(new MouseEvent('click'));
+    this.widget.el.querySelector('mp-tag').dispatchEvent(new CustomEvent('change', {detail: {action: 'remove'}}));
   });
 });
