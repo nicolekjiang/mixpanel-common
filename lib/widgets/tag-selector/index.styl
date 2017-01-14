@@ -39,13 +39,13 @@
           margin 2px 10px 9px 10px
           margin-left 8px
 
-          &.tag-icon
-            svg-icon-style(grey-200, size: 16px)
-
           &.search-icon
             svg-icon-style(grey-200, size: 20px, pos-top: -2px)
 
-          &.loaded
+          &.idle
+            svg-icon-style(grey-200, size: 16px)
+
+          &.loaded-tag
             svg-icon-style(green-300, size: 16px)
 
           &.loaded-error
@@ -54,6 +54,9 @@
           mp-spinner
             height 16px
             width 16px
+
+        mp-tag
+          margin 0 2px 6px
 
         .border
           border 1px solid grey-200

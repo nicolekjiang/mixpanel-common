@@ -6,9 +6,9 @@
       .mp-tag-selector-input-wrapper(onclick=$helpers.focusInput)
         - const icon = $component.isAttributeEnabled('read-only') ? 'search' : 'tag';
         .mp-tag-selector-icon-wrapper(class={
-          'mp-tag-selector-tag-icon': icon === 'tag',
           'mp-tag-selector-search-icon': icon === 'search',
-          'mp-tag-selector-loaded': loadState === 'loaded_tag',
+          'mp-tag-selector-idle': loadState === 'idle',
+          'mp-tag-selector-loaded-tag': loadState === 'loaded_tag',
           'mp-tag-selector-loaded-error': loadState === 'error',
         })
           if loadState == 'loading_tag'
