@@ -3,7 +3,7 @@
   'mp-modal-absolute': $component.isAttributeEnabled('not-fullscreen'),
   'mp-modal-closed': visibility === 'closed',
   }
-  onclick=e => e.stopPropagation()
+  on={click: e => e.stopPropagation()}
 )
   if $helpers.getType() === 'modal'
     .mp-modal-backdrop(

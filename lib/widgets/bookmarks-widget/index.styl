@@ -66,7 +66,7 @@
     .search
       align-items center
       background-color white
-      border 1px solid grey-150
+      border-bottom 1px solid grey-150
       border-top-left-radius 5px
       border-top-right-radius 5px
       display flex
@@ -86,6 +86,12 @@
       border-bottom-right-radius 5px
       max-height 360px
       overflow-y auto
+      position relative
+
+      .list-item-divider
+        height 1px
+        background-color grey-100
+        margin 10px
 
       mp-list-item
         .empty
@@ -104,6 +110,7 @@
             display flex
             flex 1
             flex-direction column
+            min-width 0 // http://stackoverflow.com/questions/12022288/how-to-keep-a-flex-item-from-overflowing-due-to-its-text
 
             .name, .creator
               font-size-default()
@@ -123,14 +130,14 @@
               font-weight weight-regular
 
         .delete-button
-          display none
           flex none
           height 22px
           margin-right 6px
           svg-icon-style(grey-200, mp-red, speed: 0.1s)
+          opacity 0
 
         &:hover .delete-button
-          display block
+          opacity 1
 
         &[active="true"] .bookmark-row .bookmark-details
           .name, .creator
@@ -140,7 +147,7 @@
   .add
     align-items center
     display flex
-    height 48px
+    height 50px
     justify-content center
     width 100%
 

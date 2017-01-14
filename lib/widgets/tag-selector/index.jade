@@ -1,15 +1,14 @@
 .mp-tag-selector-container
   if loadState == 'loading_widget'
-    .mp-tag-selector-spinner
-      mp-spinner
+    mp-spinner.mp-tag-selector-loading-widget
   else
     .mp-tag-selector-top-input-wrapper
       .mp-tag-selector-input-wrapper(on={click: $helpers.focusInput})
         - const icon = $component.isAttributeEnabled('read-only') ? 'search' : 'tag';
         .mp-tag-selector-icon-wrapper(class={
-          'mp-tag-selector-tag-icon': icon === 'tag',
           'mp-tag-selector-search-icon': icon === 'search',
-          'mp-tag-selector-loaded': loadState === 'loaded_tag',
+          'mp-tag-selector-idle': loadState === 'idle',
+          'mp-tag-selector-loaded-tag': loadState === 'loaded_tag',
           'mp-tag-selector-loaded-error': loadState === 'error',
         })
           if loadState == 'loading_tag'
@@ -19,8 +18,11 @@
         if !$component.isAttributeEnabled('read-only')
           - const tags = [...selectedTags];
           for tag in tags
+            - const attrs = {'tag-name': tag}
+            if tag.toLowerCase() === 'my reports'
+              - attrs.icon = 'lock-locked'
             mp-tag(
-              attrs={'tag-name': tag, 'icon': 'lock-locked'}
+              attrs=attrs
               on={change: e => { e.stopPropagation(); $helpers.removeTag(tag) }}
             )
         input.mp-tag-selector-search-input(
