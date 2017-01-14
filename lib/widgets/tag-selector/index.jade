@@ -4,7 +4,7 @@
       mp-spinner
   else
     .mp-tag-selector-top-input-wrapper
-      .mp-tag-selector-input-wrapper(onclick=$helpers.focusInput)
+      .mp-tag-selector-input-wrapper(on={click: $helpers.focusInput})
         - const icon = $component.isAttributeEnabled('read-only') ? 'search' : 'tag';
         .mp-tag-selector-icon-wrapper(class={
           'mp-tag-selector-tag-icon': icon === 'tag',
@@ -15,21 +15,23 @@
           if loadState == 'loading_tag'
             mp-spinner
           else
-            svg-icon(attributes={icon})
+            svg-icon(attrs={icon})
         if !$component.isAttributeEnabled('read-only')
-          - const tags = [...selectedTags]
+          - const tags = [...selectedTags];
           for tag in tags
             mp-tag(
-              attributes={'tag-name': tag, 'removable': true}
-              onchange=e => { e.stopPropagation(); $helpers.removeTag(tag) }
+              attrs={'tag-name': tag, 'removable': true}
+              on={change: e => { e.stopPropagation(); $helpers.removeTag(tag) }}
             )
         input.mp-tag-selector-search-input(
-          style=`width: ${inputWidth}`
-          oninput=$helpers.setInputText
-          onkeydown=$helpers.handleKeyDown
-          onkeypress=$helpers.handleKeyPress
-          type='text'
-        )= inputText
+          props={type: 'text', value: inputText}
+          on={
+            input: $helpers.setInputText,
+            keydown: $helpers.handleKeyDown,
+            keypress: $helpers.handleKeyPress,
+          }
+          style={width: inputWidth}
+        )
         .mp-tag-selector-border(class={'mp-tag-selector-loaded-error': loadState === 'error'})
 
     - const hasMatches = matchingTags.length;
@@ -42,8 +44,8 @@
       .mp-tag-selector-tag-list
         for tag, tagIdx in matchingTags
           mp-list-item(
-            onclick=() => $helpers.addTag(tag)
-            attributes={'active': tagIdx === activeTagIndex}
+            attrs={'active': tagIdx === activeTagIndex}
+            on={click: () => $helpers.addTag(tag)}
           )
             for token, pos in $helpers.stringFilterMatches(tag, inputText)
               if pos % 2 === 1
@@ -52,7 +54,8 @@
                 b= token
 
     else if showCreateButton
-      .mp-tag-selector-footer(onclick=() => $helpers.addTag(inputText))
-        .mp-tag-selector-copy Create new label for
-          =' '
-        .mp-tag-selector-label-name #{inputText}
+      .mp-tag-selector-footer(on={click: () => $helpers.addTag(inputText)})
+        .mp-tag-selector-copy
+          | Create new label for
+          = ' '
+        .mp-tag-selector-label-name= inputText

@@ -1,13 +1,17 @@
+mixin nav-section-header(number, label)
+  - const name = label.toLowerCase();
+  .nav-section(
+    on={click: $helpers.navSectionChange}
+    attrs={'data-section-name': name}
+    class={selected: sectionOpen === name}
+  )
+    .nav-number= number
+    .nav-label= label
+
 .navbar
   .nav-strip
   .nav
-    .nav-section(
-      onclick=$helpers.navSectionChange
-      attributes={'data-section-name': 'colors'}
-      class=sectionOpen === 'colors' ? 'selected' : null
-    )
-      .nav-number 01
-      .nav-label Colors
+    +nav-section-header('01', 'Colors')
     if sectionOpen === 'colors'
       .sub-nav
         .sub-nav-section
@@ -25,13 +29,7 @@
         .sub-nav-section
           .sub-nav-label Hue Library
           .sub-nav-number 1.5
-    .nav-section(
-      onclick=$helpers.navSectionChange
-      attributes={'data-section-name': 'typography'}
-      class=sectionOpen === 'typography' ? 'selected' : null
-    )
-      .nav-number 02
-      .nav-label Typography
+    +nav-section-header('02', 'Typography')
     if sectionOpen === 'typography'
       .sub-nav
         .sub-nav-section
@@ -46,13 +44,7 @@
         .sub-nav-section
           .sub-nav-label Pairings
           .sub-nav-number 2.4
-    .nav-section(
-      onclick=$helpers.navSectionChange
-      attributes={'data-section-name': 'iconography'}
-      class=sectionOpen === 'iconography' ? 'selected' : null
-    )
-      .nav-number 03
-      .nav-label Iconography
+    +nav-section-header('03', 'Iconography')
     if sectionOpen === 'iconography'
       .sub-nav
         .sub-nav-section
@@ -64,13 +56,7 @@
         .sub-nav-section
           .sub-nav-label Marketing
           .sub-nav-number 3.3
-    .nav-section(
-      onclick=$helpers.navSectionChange
-      attributes={'data-section-name': 'buttons'}
-      class=sectionOpen === 'buttons' ? 'selected' : null
-    )
-      .nav-number 04
-      .nav-label Buttons
+    +nav-section-header('04', 'Buttons')
     if sectionOpen === 'buttons'
       .sub-nav
         .sub-nav-section
@@ -85,13 +71,7 @@
         .sub-nav-section
           .sub-nav-label Interactions
           .sub-nav-number 4.4
-    .nav-section(
-      onclick=$helpers.navSectionChange
-      attributes={'data-section-name': 'contextual'}
-      class=sectionOpen === 'contextual' ? 'selected' : null
-    )
-      .nav-number 05
-      .nav-label Contextual
+    +nav-section-header('05', 'Contextual')
     if sectionOpen === 'contextual'
       .sub-nav
         .sub-nav-section
@@ -106,13 +86,7 @@
         .sub-nav-section
           .sub-nav-label Links
           .sub-nav-number 5.4
-    .nav-section(
-      onclick=$helpers.navSectionChange
-      attributes={'data-section-name': 'resources'}
-      class=sectionOpen === 'resources' ? 'selected' : null
-    )
-      .nav-number 06
-      .nav-label Resources
+    +nav-section-header('06', 'Resources')
     if sectionOpen === 'resources'
       .sub-nav
         .sub-nav-section

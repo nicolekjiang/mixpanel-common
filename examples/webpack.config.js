@@ -42,6 +42,10 @@ var webpackConfig = {
       },
     ],
   },
+  virtualJadeLoader: {
+    vdom: 'snabbdom',
+    runtime: 'var h = require("panel").h;',
+  },
 };
 
 module.exports = webpackConfig;

@@ -3,8 +3,10 @@
     'mp-tooltip-hidden': visibility === 'hidden',
     'mp-tooltip-transitioning': visibility === 'transitioning',
   }
-  onclick=$helpers.stopPropagation
-  onmousedown=$helpers.stopPropagation
+  on={
+    click: $helpers.stopPropagation,
+    mousedown: $helpers.stopPropagation,
+  }
 )
   .mp-tooltip-main(
     class={[`mp-tooltip-placement-${placement}`]: true}

@@ -1,16 +1,19 @@
 {
   "name": "mixpanel-common",
   "main": "build/index.js",
-  "version": "0.33.0",
+  "version": "0.34.0",
   "description": "Mixpanel shared JS",
   "scripts": {
     "build": "node build.js",
     "build-examples": "npm run build && webpack --context examples --config examples/webpack.config.js",
+    "build-test": "webpack --context test --config test/webpack.config.js",
     "watch": "npm run build && concurrently 'node build.js -w' 'webpack --context examples --config examples/webpack.config.js -w'",
     "start": "npm run build && concurrently 'node build.js -w' 'webpack-dev-server --context examples --config examples/webpack.config.js --colors --inline'",
     "lint": "eslint lib && stylint lib",
     "prepublish": "npm run build",
-    "test": "npm run lint && webpack --context test --config test/webpack.config.js; DISPLAY=:30 wct --plugin local",
+    "test": "npm run lint && npm run build-test && wct --plugin local",
+    "test-p": "npm run build-test && wct --plugin local --persistent",
+    "test-sauce": "npm run lint && npm run build-test && wct --plugin sauce",
     "unit-test": "npm run lint && mocha --require babel-core/register test/util/"
   },
   "repository": {
@@ -59,7 +62,7 @@
     "stylus": "0.54.5",
     "stylus-loader": "2.1.0",
     "url-loader": "^0.5.7",
-    "virtual-jade": "0.5.0",
+    "virtual-jade": "0.8.1",
     "virtual-jade-loader": "0.5.0",
     "watch": "^1.0.1",
     "web-component-tester": "5.0.0",
@@ -69,9 +72,8 @@
   },
   "dependencies": {
     "mixpanel-browser": "2.9.16",
-    "panel": "0.8.4",
+    "panel": "0.10.0-rc2",
     "rollbar-browser": "1.9.1",
-    "virtual-dom": "2.1.1",
     "webcomponent": "^0.1.2"
   },
   "pre-commit": [

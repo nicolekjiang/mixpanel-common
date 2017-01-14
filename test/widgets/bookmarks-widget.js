@@ -18,10 +18,10 @@ describe('Test bookmarks-widget', function() {
   });
 
   it('opens when open is true', function(done) {
-    expect(this.dropMenu.getAttribute('open')).to.equal('false');
+    expect(this.dropMenu.isAttributeEnabled('open')).not.to.be.ok();
 
     onAnimationEnd(this.dropMenu, () => {
-      expect(this.dropMenu.getAttribute('open')).to.equal('true');
+      expect(this.dropMenu.isAttributeEnabled('open')).to.be.ok();
       done();
     });
     this.widget.setAttribute('open', 'true');

@@ -28,6 +28,8 @@ const CONFIGS = [
           filename: filename,
           name: '_jade_template_fn',
           pretty: true,
+          vdom: 'snabbdom',
+          runtime: `var h = require('panel').h;`,
         };
         const compiled = vjade(source, vjadeOptions) + '\nmodule.exports = _jade_template_fn;';
         const transpiled = babel.transform(compiled, babelrc).code;

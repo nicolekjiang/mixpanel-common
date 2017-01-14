@@ -1,9 +1,9 @@
 .mp-tag
   if $component.getAttribute('icon')
     .extra-icon
-      svg-icon(attributes={icon: $component.getAttribute('icon')})
+      svg-icon(attrs={icon: $component.getAttribute('icon')})
   .tag-name= $component.getAttribute('tag-name')
   if $component.isAttributeEnabled('removable')
-    .remove-tag(onclick=$helpers.remove)
+    .remove-tag(on={click: $helpers.remove})
       .remove-icon
-        svg-icon(attributes={icon: 'x'})
+        svg-icon(attrs={icon: 'x'})

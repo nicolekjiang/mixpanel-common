@@ -1,38 +1,16 @@
+include ../mixins.jade
+
 .section
   .section-title
     .title-text Typography
     .title-section 2.1
   .section-nav
-    .nav-item(
-      onclick=$helpers.sectionChange
-      class=sectionFilter === 'show all' ? 'selected' : null
-      attributes={'data-filter-name': 'show all'}
-    ) Show All
-    .nav-item(
-      onclick=$helpers.sectionChange
-      class=sectionFilter === 'buttons' ? 'selected' : null
-      attributes={'data-filter-name': 'buttons'}
-    ) Buttons
-    .nav-item(
-      onclick=$helpers.sectionChange
-      class=sectionFilter === 'headers' ? 'selected' : null
-      attributes={'data-filter-name': 'headers'}
-    ) Headers
-    .nav-item(
-      onclick=$helpers.sectionChange
-      class=sectionFilter === 'copy' ? 'selected' : null
-      attributes={'data-filter-name': 'copy'}
-    ) Copy
-    .nav-item(
-      onclick=$helpers.sectionChange
-      class=sectionFilter === 'fields' ? 'selected' : null
-      attributes={'data-filter-name': 'fields'}
-    ) Fields
-    .nav-item(
-      onclick=$helpers.sectionChange
-      class=sectionFilter === 'labels' ? 'selected' : null
-      attributes={'data-filter-name': 'labels'}
-    ) Labels
+    +section-nav-item('Show All')
+    +section-nav-item('Buttons')
+    +section-nav-item('Headers')
+    +section-nav-item('Copy')
+    +section-nav-item('Fields')
+    +section-nav-item('Labels')
   .section-content
     section.font-weight
       .subsection-title Type Family & Weight

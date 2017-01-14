@@ -1,14 +1,16 @@
 mixin list-item(bookmark)
   mp-list-item(
-    onclick=() => $helpers.selectBookmark(bookmark)
-    onmouseover=() => $helpers.activateBookmark(bookmark)
-    attributes={
+    attrs={
       active: activeBookmark && activeBookmark.id === bookmark.id
+    }
+    on={
+      click: () => $helpers.selectBookmark(bookmark),
+      mouseover: () => $helpers.activateBookmark(bookmark),
     }
   )
     .mp-bm-menu-bookmark-row
       .mp-bm-menu-bookmark-details
-        .mp-bm-menu-name(attributes={title: bookmark.name})
+        .mp-bm-menu-name(attrs={title: bookmark.name})
           for token, pos in $helpers.stringFilterMatches(bookmark.name, filterText)
              if pos % 2 === 1
                span= token
@@ -17,61 +19,72 @@ mixin list-item(bookmark)
         .mp-bm-menu-creator= bookmark.user
 
       if $component.isAttributeEnabled('has-write-permissions')
-        .mp-bm-menu-delete-button(onclick=e => $helpers.openConfirmDeleteDialog(e, bookmark))
-          svg-icon(attributes={icon: 'trashcan'})
+        .mp-bm-menu-delete-button(on={click: e => $helpers.openConfirmDeleteDialog(e, bookmark)})
+          svg-icon(attrs={icon: 'trashcan'})
 
-.mp-bm-container(onscroll=$helpers.stopPropagation)
-  .mp-bm-btn(onclick=$helpers.toggleBookmarksMenu)
+.mp-bm-container(on={scroll: $helpers.stopPropagation})
+  .mp-bm-btn(on={click: $helpers.toggleBookmarksMenu})
     .mp-bm-btn-icon
-      svg-icon(attributes={icon: 'bookmarks'})
+      svg-icon(attrs={icon: 'bookmarks'})
     span Bookmarks
-  .mp-bm-menu(attributes={tabindex: 0})
-    mp-drop-menu(attributes={open} onchange=$helpers.handleDropMenuChange)
-      .mp-bm-menu-container(attributes={'slot-body': true})
+  .mp-bm-menu(attrs={tabindex: 0})
+    mp-drop-menu(attrs={open} on={change: $helpers.handleDropMenuChange})
+      .mp-bm-menu-container(attrs={'slot-body': true})
         .mp-bm-menu-search
           .mp-bm-menu-mp-icon.mp-icon
-            svg-icon(attributes={icon: "search"})
-          input(type="text" placeholder='Filter bookmarks' oninput=$helpers.setFilterText onchange=$helpers.stopPropagation)
+            svg-icon(attrs={icon: 'search'})
+          input(
+            attrs={
+              type: 'text',
+              placeholder: 'Filter bookmarks',
+            }
+            on={
+             change: $helpers.stopPropagation,
+             input: $helpers.setFilterText,
+            }
+          )
         .mp-bm-menu-list
           if filteredBookmarks.length === 0
-            mp-list-item(attributes={static: true})
+            mp-list-item(attrs={static: true})
               .mp-bm-menu-empty No bookmarks found.
           else
             - const showSectionHeader = filteredBookmarks[0].user_id === userId && filteredBookmarks[filteredBookmarks.length - 1].userId !== userId
             for bookmark, idx in filteredBookmarks
               if showSectionHeader
                 if idx === 0
-                  mp-list-item(attributes={static: true})
+                  mp-list-item(attrs={static: true})
                     .mp-bm-menu-section-header Your Bookmarks
                 else if bookmark.user_id !== userId && filteredBookmarks[idx - 1].user_id === userId
-                  mp-list-item(attributes={static: true})
+                  mp-list-item(attrs={static: true})
                     .mp-bm-menu-section-header Other bookmarks
               +list-item(bookmark)
         if $component.isAttributeEnabled('has-write-permissions')
           .mp-bm-menu-add
             if !$component.isAttributeEnabled('create-disabled') && (createMode || saving)
               mp-input-group(
-                attributes={autofocus: true, placeholder: 'Name your bookmark', busy: saving}
-                onkeydown=$helpers.stopPropagation
-                onchange=$helpers.stopPropagation
-                oninput=$helpers.setName
-                onsubmit=$helpers.createBookmark
+                attrs={autofocus: true, placeholder: 'Name your bookmark', busy: saving}
+                on={
+                  keydown: $helpers.stopPropagation,
+                  change: $helpers.stopPropagation,
+                  input: $helpers.setName,
+                  submit: $helpers.createBookmark,
+                }
               )
             else
               mp-button-bar.mp-button-bar-secondary(
-                attributes={
-                  disabled: $component.isAttributeEnabled('create-disabled')
-                }
-                onclick=$helpers.goToCreateMode
+                attrs={disabled: $component.isAttributeEnabled('create-disabled')}
+                on={click: $helpers.goToCreateMode}
               ) Create new bookmark
 
   if confirmDeleteBookmark
     mp-confirm-delete(
-      attributes={closeable: true, open: true}
-      onchange=$helpers.handleConfirmModalChange
-      onsubmit=$helpers.handleConfirmSubmit
+      attrs={closeable: true, open: true}
+      on={
+        change: $helpers.handleConfirmModalChange,
+        submit: $helpers.handleConfirmSubmit,
+      }
     )
-      .mp-bm-menu-confirm-delete-container(attributes={'slot-body': true})
+      .mp-bm-menu-confirm-delete-container(attrs={'slot-body': true})
         .mp-confirm-delete-title Delete Bookmark
         if confirmDeleteBookmark.include_in_dashboard
           .mp-confirm-delete-description Are you sure you want to delete the bookmark named “#{confirmDeleteBookmark.name}”? Deleting it will also remove it from all dashboards.

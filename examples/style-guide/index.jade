@@ -15,10 +15,10 @@
     p.item-palette.icon-palette
       each icon in Object.keys(SVG_ICONS)
         .list-block
-          svg-icon(attributes={icon})
+          svg-icon(attrs={icon})
           .label= icon
       .list-block
-        svg-icon(attributes={empty: true})
+        svg-icon(attrs={empty: true})
         .label <empty>
 
   .section
@@ -45,72 +45,74 @@
     h1 Buttons
     p
       mp-button.mp-button-primary .mp-button-primary
-      mp-button.mp-button-primary(disabled) disabled
+      mp-button.mp-button-primary(attrs={disabled: true}) disabled
     p
       mp-button.mp-button-secondary .mp-button-secondary
-      mp-button.mp-button-secondary(disabled) disabled
+      mp-button.mp-button-secondary(attrs={disabled: true}) disabled
     p
       mp-button.mp-button-red .mp-button-red
-      mp-button.mp-button-red(disabled) disabled
+      mp-button.mp-button-red(attrs={disabled: true}) disabled
     p.button-field
       mp-button.mp-button-primary.mp-button-on-blue primary on-blue
-      mp-button.mp-button-primary.mp-button-on-blue(disabled) disabled
+      mp-button.mp-button-primary.mp-button-on-blue(attrs={disabled: true}) disabled
     p.button-field
       mp-button.mp-button-secondary.mp-button-on-blue secondary on-blue
-      mp-button.mp-button-secondary.mp-button-on-blue(disabled) disabled
+      mp-button.mp-button-secondary.mp-button-on-blue(attrs={disabled: true}) disabled
 
     h1 Buttons w/ icons
     p
-      mp-button.mp-button-secondary(attributes={icon: 'x'}) Close
-      mp-button.mp-button-secondary(attributes={icon: 'logout'}) Exit
-      mp-button.mp-button-primary(attributes={icon: 'plus'}) Create
-      mp-button.mp-button-red(attributes={icon: 'trashcan'}) Delete
+      mp-button.mp-button-secondary(attrs={icon: 'x'}) Close
+      mp-button.mp-button-secondary(attrs={icon: 'logout'}) Exit
+      mp-button.mp-button-primary(attrs={icon: 'plus'}) Create
+      mp-button.mp-button-red(attrs={icon: 'trashcan'}) Delete
     p.button-field
-      mp-button.mp-button-primary.mp-button-on-blue(attributes={icon: 'plus'}) Create
-      mp-button.mp-button-primary.mp-button-on-blue(attributes={icon: 'plus'} disabled) Create
+      mp-button.mp-button-primary.mp-button-on-blue(attrs={icon: 'plus'}) Create
+      mp-button.mp-button-primary.mp-button-on-blue(attrs={icon: 'plus', disabled: true}) Create
     p.button-field
-      mp-button.mp-button-secondary.mp-button-on-blue(attributes={icon: 'x'}) Cancel
-      mp-button.mp-button-secondary.mp-button-on-blue(attributes={icon: 'x'} disabled) Cancel
+      mp-button.mp-button-secondary.mp-button-on-blue(attrs={icon: 'x'}) Cancel
+      mp-button.mp-button-secondary.mp-button-on-blue(attrs={icon: 'x', disabled: true}) Cancel
 
   .section.button-bars
     h1 Button bar
     p.button-bar-container
       mp-button-bar.mp-button-bar-secondary I'm a button bar
     p.button-bar-container
-      mp-button-bar.mp-button-bar-secondary(attributes={disabled: true}) I'm a disabled button bar
+      mp-button-bar.mp-button-bar-secondary(attrs={disabled: true}) I'm a disabled button bar
     p.button-bar-container
-      mp-button-bar.mp-button-bar-primary(attributes={'arrow-next': true}) Next step
+      mp-button-bar.mp-button-bar-primary(attrs={'arrow-next': true}) Next step
     p.button-bar-container
-      mp-button-bar.mp-button-bar-primary(attributes={'arrow-next': true, disabled: true}) Next step
+      mp-button-bar.mp-button-bar-primary(attrs={'arrow-next': true, disabled: true}) Next step
 
   .section.forms
     h1 Forms
     h2 Input
     p
-      input(type="text" placeholder="I'm a placeholder")
+      input(attrs={type: 'text', placeholder: "I'm a placeholder"})
     h2 Input with icon
     p
       .mp-icon-input
         .mp-icon
-          svg-icon(attributes={icon: "search"})
-        input(type="text" placeholder="Some placeholder text")
+          svg-icon(attrs={icon: "search"})
+        input(attrs={type: 'text', placeholder: 'Some placeholder text'})
 
     h2 Input group
     p
       mp-input-group(
-        attributes={placeholder: "Type a name...", busy: inputGroupSaving}
-        onchange=$helpers.handleNamerChange
-        onsubmit=$helpers.handleNamerSubmit
+        attrs={placeholder: "Type a name...", busy: inputGroupSaving}
+        on={
+          change: $helpers.handleNamerChange,
+          submit: $helpers.handleNamerSubmit,
+        }
       )
 
   .section.menus
     h1 Menus
     p
-      button(onclick=$helpers.toggleMenu) Open Menu
+      button(on={click: $helpers.toggleMenu}) Open Menu
       .drop-menu-container
         mp-drop-menu(
-          attributes={open: open.menu}
-          onchange=e => $helpers.handleModalChange('menu', e.detail.state)
+          attrs={open: open.menu}
+          on={change: e => $helpers.handleModalChange('menu', e.detail.state)}
         )
           .text-container
             mp-list-item there is text here
@@ -120,45 +122,46 @@
   .section.modals
     h1 Modals
     p
-      button(onclick=() => $helpers.openModal('modal')) Open modal
+      button(on={click: () => $helpers.openModal('modal')}) Open modal
 
       mp-modal.modal(
-        attributes={closeable: true, open: open.modal}
-        onchange=e => $helpers.handleModalChange('modal', e.detail.state)
+        attrs={closeable: true, open: open.modal}
+        on={change: e => $helpers.handleModalChange('modal', e.detail.state)}
       )
         div
           .mp-modal-content
             .mp-modal-title Easily track events
             .mp-modal-subtitle Click on any element on your page (e.g. the buy button) to create an event and access all historical data for that event.
           mp-button-bar.mp-button-bar-primary(
-            onclick=() => $helpers.closeModal('modal')
-            attributes={'arrow-next': true}
+            on={click: () => $helpers.closeModal('modal')}
+            attrs={'arrow-next': true}
           ) Create your first event
 
-
     p
-      button(onclick=() => $helpers.openModal('popup')) Open popup
+      button(on={click: () => $helpers.openModal('popup')}) Open popup
 
       mp-modal.popup(
-        attributes={'modal-type': 'popup', closeable: true, open: open.popup}
-        onchange=e => $helpers.handleModalChange('popup', e.detail.state)
+        attrs={'modal-type': 'popup', closeable: true, open: open.popup}
+        on={change: e => $helpers.handleModalChange('popup', e.detail.state)}
       )
         div
           .mp-modal-content
             .mp-modal-title Easily track events
             .mp-modal-subtitle Click on any element on your page (e.g. the buy button) to create an event and access all historical data for that event.
           mp-button-bar.mp-button-bar-primary(
-            onclick=() => $helpers.closeModal('popup')
+            on={click: () => $helpers.closeModal('popup')}
           ) Create your first event
 
 
     p
-      button(onclick=() => $helpers.openModal('confirm')) Open confirm
+      button(on={click: () => $helpers.openModal('confirm')}) Open confirm
 
       mp-confirm(
-        attributes={open: open.confirm}
-        onsubmit=e => console.log(e.detail)
-        onchange=e => $helpers.handleModalChange('confirm', e.detail.state)
+        attrs={open: open.confirm}
+        on={
+          change: e => $helpers.handleModalChange('confirm', e.detail.state),
+          submit: e => console.log(e.detail),
+        }
       )
         div
           .mp-confirm-title Unsaved changes
@@ -166,12 +169,14 @@
 
 
     p
-      button(onclick=() => $helpers.openModal('confirmDelete')) Open confirm-delete
+      button(on={click: () => $helpers.openModal('confirmDelete')}) Open confirm-delete
 
       mp-confirm-delete(
-        attributes={id: 'confirmDelete', 'delete-button-label': 'Delete it', closeable: true, open: open.confirmDelete}
-        onsubmit=e => console.log(e.detail)
-        onchange=e => $helpers.handleModalChange('confirmDelete', e.detail.state)
+        attrs={id: 'confirmDelete', 'delete-button-label': 'Delete it', closeable: true, open: open.confirmDelete}
+        on={
+          change: e => $helpers.handleModalChange('confirmDelete', e.detail.state),
+          submit: e => console.log(e.detail),
+        }
       )
         div
           .mp-confirm-delete-title Delete Bookmark
@@ -179,11 +184,11 @@
 
 
     p
-      button(onclick=() => $helpers.openModal('alert')) Open alert
+      button(on={click: () => $helpers.openModal('alert')}) Open alert
 
       mp-alert(
-        attributes={id: 'alert', closeable: true, open: open['alert']}
-        onchange=e => $helpers.handleModalChange('alert', e.detail.state)
+        attrs={id: 'alert', closeable: true, open: open['alert']}
+        on={change: e => $helpers.handleModalChange('alert', e.detail.state)}
       )
         div
           .text AHHH DANGER DANGER There is currently an error
@@ -192,21 +197,21 @@
     h1 Toggles
     p One element out of a set of two or more is always selected.
     mp-toggle.mp-toggle-blue.inline-toggle(
-      attributes={selected: blueToggleValue}
-      onchange=$helpers.blueToggleChanged
+      attrs={selected: blueToggleValue}
+      on={change: $helpers.blueToggleChanged}
     )
-      mp-toggle-option(attributes={value: 'option1'}) Longer Option 1
-      mp-toggle-option(attributes={value: 'option2'}) Opt2
+      mp-toggle-option(attrs={value: 'option1'}) Longer Option 1
+      mp-toggle-option(attrs={value: 'option2'}) Opt2
     span.toggle-val Selected: #{blueToggleValue}
 
-    mp-toggle.full-width-toggle(attributes={selected: 'option1'})
-      mp-toggle-option(attributes={value: 'option1'}) Super long option text
-      mp-toggle-option(attributes={value: 'option2'}) Short
-      mp-toggle-option(attributes={value: 'option3'}) Medium text here
+    mp-toggle.full-width-toggle(attrs={selected: 'option1'})
+      mp-toggle-option(attrs={value: 'option1'}) Super long option text
+      mp-toggle-option(attrs={value: 'option2'}) Short
+      mp-toggle-option(attrs={value: 'option3'}) Medium text here
 
-    mp-toggle.full-width-toggle.large-toggle(attributes={selected: 'option2'})
-      mp-toggle-option(attributes={value: 'option1'}) Longer Option 1
-      mp-toggle-option(attributes={value: 'option2'}) Longer Option 2
+    mp-toggle.full-width-toggle.large-toggle(attrs={selected: 'option2'})
+      mp-toggle-option(attrs={value: 'option1'}) Longer Option 1
+      mp-toggle-option(attrs={value: 'option2'}) Longer Option 2
 
   .section
     h1 Spinners
@@ -220,13 +225,13 @@
         mp-tooltip Tooltip above the element
 
       a.tooltip-container Placement 'bottom' tooltip
-        mp-tooltip(attributes={'placement': 'bottom'}) Tooltip below the element
+        mp-tooltip(attrs={'placement': 'bottom'}) Tooltip below the element
 
       a.tooltip-container Placement 'left' tooltip
-        mp-tooltip(attributes={'placement': 'left'}) Tooltip on the left side of element
+        mp-tooltip(attrs={'placement': 'left'}) Tooltip on the left side of element
 
       a.tooltip-container Placement 'right' tooltip
-        mp-tooltip(attributes={'placement': 'right'}) Tooltip on the right side of element
+        mp-tooltip(attrs={'placement': 'right'}) Tooltip on the right side of element
 
       a.tooltip-container Multi-line tooltip
         mp-tooltip.multiline
@@ -241,35 +246,38 @@
     p
       .bookmarks-widget
         mp-bookmarks-widget(
-          attributes={
-            bookmarks: JSON.stringify(bookmarks),
+          attrs={
+            'bookmarks': JSON.stringify(bookmarks),
             'create-disabled': false,
-            open: open.bookmarksWidget,
-            saving: savingBookmark,
+            'open': open.bookmarksWidget,
+            'saving': savingBookmark,
             'selected-bookmark-id': selectedBookmarkId,
             'user-id': 1,
             'has-write-permissions': true,
           }
-          onsubmit=$helpers.handleBookmarksMenuSubmit
-          onchange=$helpers.handleBookmarksMenuChange
+          on={
+            change: $helpers.handleBookmarksMenuChange,
+            submit: $helpers.handleBookmarksMenuSubmit,
+          }
         )
 
     h2 tag-selector widget
     .tag-selector-container
-      mp-button.mp-button-secondary(onclick=$helpers.toggleTagSelector) Edit tags
-      mp-drop-menu(attributes={open: open.tagSelector} onchange=$helpers.handleTagSelectorDropMenuChange)
+      mp-button.mp-button-secondary(on={click: $helpers.toggleTagSelector}) Edit tags
+      mp-drop-menu(attrs={open: open.tagSelector} on={change: $helpers.handleTagSelectorDropMenuChange})
         .title
           .header
-            svg-icon(attributes={icon: "check-success"})
+            svg-icon(attrs={icon: "check-success"})
             .header-text Added to company dashboard
           .subtext Viewed report by type
         mp-tag-selector(
-          attributes={
-              "selected-tags": JSON.stringify(tagSelectorData.selectedTags),
-              "all-tags": JSON.stringify(tagSelectorData.allTags),
-              "load-state": tagSelectorLoadState,
+          attrs={
+            'selected-tags': JSON.stringify(tagSelectorData.selectedTags),
+            'all-tags': JSON.stringify(tagSelectorData.allTags),
+            'load-state': tagSelectorLoadState,
           }
-          onchange=$helpers.handleTagSelectorChange
-          onsubmit=$helpers.handleTagSelectorSubmit
+          on={
+            change: $helpers.handleTagSelectorChange,
+            submit: $helpers.handleTagSelectorSubmit,
+          }
         )
-

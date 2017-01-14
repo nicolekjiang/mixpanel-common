@@ -1,38 +1,16 @@
+include ../mixins.jade
+
 .section
   .section-title
     .title-text Colors
     .title-section 1.1
   .section-nav
-    .nav-item(
-      onclick=$helpers.sectionChange
-      class=sectionFilter === 'show all' ? 'selected' : null
-      attributes={'data-filter-name': 'show all'}
-    ) Show All
-    .nav-item(
-      onclick=$helpers.sectionChange
-      class=sectionFilter === 'background' ? 'selected' : null
-      attributes={'data-filter-name': 'background'}
-    ) Background
-    .nav-item(
-      onclick=$helpers.sectionChange
-      class=sectionFilter === 'header' ? 'selected' : null
-      attributes={'data-filter-name': 'header'}
-    ) Header
-    .nav-item(
-      onclick=$helpers.sectionChange
-      class=sectionFilter === 'border' ? 'selected' : null
-      attributes={'data-filter-name': 'border'}
-    ) Border
-    .nav-item(
-      onclick=$helpers.sectionChange
-      class=sectionFilter === 'type' ? 'selected' : null
-      attributes={'data-filter-name': 'type'}
-    ) Type
-    .nav-item(
-      onclick=$helpers.sectionChange
-      class=sectionFilter === 'buttons' ? 'selected' : null
-      attributes={'data-filter-name': 'buttons'}
-    ) Buttons
+    +section-nav-item('Show All')
+    +section-nav-item('Background')
+    +section-nav-item('Header')
+    +section-nav-item('Border')
+    +section-nav-item('Type')
+    +section-nav-item('Buttons')
   .section-content
     - const colorGroups = $helpers.getColorGroups()
     section.ui-colors
@@ -41,10 +19,10 @@
       .color-chips
         for color in colorGroups['Mixpanel UI Colors']
           .swatch
-            .swatch-color(style={'background-color': '#{COLORS[color]}'})
+            .swatch-color(style={'background-color': COLORS[color]})
             .swatch-label
-              .color-name #{color}
-              .color-hex #{COLORS[color]}
+              .color-name= color
+              .color-hex= COLORS[color]
       .code-snippet
         .call-out
           strong.icon +
@@ -79,10 +57,10 @@
       .color-chips
         for color in colorGroups['Data Visualization']
           .swatch
-            .swatch-color(style={'background-color': '#{COLORS[color]}'})
+            .swatch-color(style={'background-color': COLORS[color]})
             .swatch-label
-              .color-name #{color}
-              .color-hex #{COLORS[color]}
+              .color-name= color
+              .color-hex= COLORS[color]
       .code-snippet
         .call-out
           strong.icon +
@@ -118,9 +96,9 @@
       .color-library
         for colorGroup in Object.keys(colorLibrary)
           .color-group-container
-            strong.color-group-title #{colorGroup}
+            strong.color-group-title= colorGroup
             .color-group
               for color in colorLibrary[colorGroup]
-                .color-segment(style={'background-color': '#{COLORS[color]}'})
-                  .color-segment-hex #{COLORS[color]}
-                  .color-segment-name #{color}
+                .color-segment(style={'background-color': COLORS[color]})
+                  .color-segment-hex= COLORS[color]
+                  .color-segment-name= color
