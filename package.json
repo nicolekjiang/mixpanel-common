@@ -12,7 +12,7 @@
     "lint": "eslint lib && stylint lib",
     "prepublish": "npm run build",
     "test": "npm run lint && npm run build-test && wct --plugin local",
-    "test-p": "wct --plugin local --persistent",
+    "test-p": "npm run build-test && wct --plugin local --persistent",
     "test-sauce": "npm run lint && npm run build-test && wct --plugin sauce",
     "unit-test": "npm run lint && mocha --require babel-core/register test/util/"
   },
