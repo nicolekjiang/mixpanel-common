@@ -194,11 +194,11 @@
           .text AHHH DANGER DANGER There is currently an error
 
     p.upsell-element
-      button(onclick=() => $helpers.openModal('upsell')) Open upsell
+      button(on={click: () => $helpers.openModal('upsell')}) Open upsell
 
       mp-upsell-popup(
-        attributes={id: 'upsell', feature: 'custom-events', open: open['upsell'], 'left-position': '50px', 'top-position': '50px'}
-        onchange=e => $helpers.handleModalChange('upsell', e.detail.state)
+        attrs={id: 'upsell', feature: 'custom-events', open: open['upsell'], 'left-position': '50px', 'top-position': '50px'}
+        on={change: e => $helpers.handleModalChange('upsell', e.detail.state)}
       )
 
   .section.toggles

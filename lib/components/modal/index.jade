@@ -1,6 +1,6 @@
 - const notFullScreen = $component.isAttributeEnabled('not-fullscreen');
-- const topPos = $component.getAttribute('top-position');
-- const leftPos = $component.getAttribute('left-position');
+- const topPos = notFullScreen ? $component.getAttribute('top-position') : '';
+- const leftPos = notFullScreen ? $component.getAttribute('left-position') : '';
 .mp-modal-stage(
   class={
   'mp-modal-absolute': notFullScreen,
@@ -16,7 +16,7 @@
   .mp-modal-wrapper
     .mp-modal-main(
         class={[`mp-modal-${visibility}`]: true}
-        style=(notFullScreen ? 'top: #{topPos}; left: #{leftPos};' : false)
+        style={top: `${topPos}`, left: `${leftPos}`}
       )
       if $component.isAttributeEnabled('closeable')
         .mp-modal-close-btn(on={click: $helpers.closeClicked})
