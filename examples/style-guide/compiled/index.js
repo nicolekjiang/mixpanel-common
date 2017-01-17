@@ -54,23 +54,23 @@
 
 	var _panel = __webpack_require__(299);
 
-	__webpack_require__(316);
+	__webpack_require__(343);
 
-	var _colors = __webpack_require__(381);
+	var _colors = __webpack_require__(409);
 
 	var _colors2 = _interopRequireDefault(_colors);
 
-	var _svgIcon = __webpack_require__(346);
+	var _svgIcon = __webpack_require__(374);
 
-	var _bookmarkData = __webpack_require__(416);
+	var _bookmarkData = __webpack_require__(444);
 
 	var _bookmarkData2 = _interopRequireDefault(_bookmarkData);
 
-	var _index = __webpack_require__(417);
+	var _index = __webpack_require__(445);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	__webpack_require__(418);
+	__webpack_require__(446);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -15577,24 +15577,14 @@
 
 	var _component2 = _interopRequireDefault(_component);
 
-	var _h = __webpack_require__(301);
+	var _virtualHyperscript = __webpack_require__(331);
 
-	var _h2 = _interopRequireDefault(_h);
+	var _virtualHyperscript2 = _interopRequireDefault(_virtualHyperscript);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	/**
-	 * Entry point for Panel apps and components
-	 * @module panel
-	 * @example
-	 * import { Component } from 'panel';
-	 * document.registerElement('my-widget', class extends Component {
-	 *   // app definition
-	 * });
-	 */
-
 	exports.Component = _component2.default;
-	exports.h = _h2.default;
+	exports.h = _virtualHyperscript2.default;
 
 /***/ },
 /* 300 */
@@ -15608,19 +15598,31 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _h = __webpack_require__(301);
+	var _mainLoop = __webpack_require__(301);
 
-	var _h2 = _interopRequireDefault(_h);
+	var _mainLoop2 = _interopRequireDefault(_mainLoop);
 
-	var _webcomponent = __webpack_require__(304);
+	var _createElement = __webpack_require__(308);
+
+	var _createElement2 = _interopRequireDefault(_createElement);
+
+	var _diff = __webpack_require__(321);
+
+	var _diff2 = _interopRequireDefault(_diff);
+
+	var _patch = __webpack_require__(326);
+
+	var _patch2 = _interopRequireDefault(_patch);
+
+	var _virtualHyperscript = __webpack_require__(331);
+
+	var _virtualHyperscript2 = _interopRequireDefault(_virtualHyperscript);
+
+	var _webcomponent = __webpack_require__(341);
 
 	var _webcomponent2 = _interopRequireDefault(_webcomponent);
 
-	var _domPatcher = __webpack_require__(305);
-
-	var _domPatcher2 = _interopRequireDefault(_domPatcher);
-
-	var _router = __webpack_require__(315);
+	var _router = __webpack_require__(342);
 
 	var _router2 = _interopRequireDefault(_router);
 
@@ -15634,36 +15636,7 @@
 
 	var panelID = 1;
 	var DOCUMENT_FRAGMENT_NODE = 11;
-	var EMPTY_DIV = (0, _h2.default)('div');
-
-	/**
-	 * Definition of a Panel component/app, implemented as an HTML custom element.
-	 * App logic and configuration is defined by extending this class. Instantiating
-	 * a component is typically not done by calling the constructor directly, but
-	 * either by including the tag in HTML markup, or by using the DOM API method
-	 * [document.createElement]{@link https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement}.
-	 *
-	 * @example <caption>Defining a Panel component</caption>
-	 * class MyWidget extends Component {
-	 *   get config() {
-	 *     return {
-	 *       // options go here
-	 *     };
-	 *   }
-	 *
-	 *   myMethod() {
-	 *     // etc
-	 *   }
-	 * }
-	 *
-	 * @example <caption>Registering the custom element definition for the DOM</caption>
-	 * document.registerElement('my-widget', MyWidget);
-	 *
-	 * @example <caption>Adding an instance of the element to the DOM</caption>
-	 * <my-widget some-attr></my-widget>
-	 *
-	 * @extends WebComponent
-	 */
+	var EMPTY_DIV = (0, _virtualHyperscript2.default)('div');
 
 	var Component = function (_WebComponent) {
 	  _inherits(Component, _WebComponent);
@@ -15671,151 +15644,10 @@
 	  function Component() {
 	    _classCallCheck(this, Component);
 
-	    return _possibleConstructorReturn(this, (Component.__proto__ || Object.getPrototypeOf(Component)).apply(this, arguments));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Component).apply(this, arguments));
 	  }
 
 	  _createClass(Component, [{
-	    key: 'child',
-
-
-	    /**
-	     * For use inside view templates, to create a child Panel component nested under this
-	     * component, which will share its state object and update cycle.
-	     * @param {string} tagName - the HTML element tag name of the custom element
-	     * to be created
-	     * @param {object} [config={}] - snabbdom node config (second argument of h())
-	     * @returns {object} virtual-dom node
-	     * @example
-	     * {template: state => h('.header', this.child('my-child-widget'))}
-	     */
-	    value: function child(tagName) {
-	      var config = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
-
-	      config.attrs = Object.assign({}, config.attrs, { 'panel-parent': this.panelID });
-	      return (0, _h2.default)(tagName, config);
-	    }
-
-	    /**
-	     * Searches the component's Panel ancestors for the first component of the
-	     * given type (HTML tag name).
-	     * @param {string} tagName - tag name of the parent to search for
-	     * @returns {object} Panel component
-	     * @throws Throws an error if no parent component with the given tag name is found.
-	     * @example
-	     * myWidget.findPanelParentByTagName('my-app');
-	     */
-
-	  }, {
-	    key: 'findPanelParentByTagName',
-	    value: function findPanelParentByTagName(tagName) {
-	      tagName = tagName.toLowerCase();
-	      for (var node = this.$panelParent; !!node; node = node.$panelParent) {
-	        if (node.tagName.toLowerCase() === tagName) {
-	          return node;
-	        }
-	      }
-	      throw Error(tagName + ' not found');
-	    }
-
-	    /**
-	     * Fetches a value from the component's configuration map (a combination of
-	     * values supplied in the config() getter and defaults applied automatically).
-	     * @param {string} key - key of config item to fetch
-	     * @returns value associated with key
-	     * @example
-	     * myWidget.getConfig('css');
-	     */
-
-	  }, {
-	    key: 'getConfig',
-	    value: function getConfig(key) {
-	      return this._config[key];
-	    }
-
-	    /**
-	     * Executes the route handler matching the given URL fragment, and updates
-	     * the URL, as though the user had navigated explicitly to that address.
-	     * @param {string} fragment - URL fragment to navigate to
-	     * @param {object} [stateUpdate={}] - update to apply to state object when
-	     * routing
-	     * @example
-	     * myApp.navigate('wombat/54', {color: 'blue'});
-	     */
-
-	  }, {
-	    key: 'navigate',
-	    value: function navigate() {
-	      var _$panelRoot$router;
-
-	      (_$panelRoot$router = this.$panelRoot.router).navigate.apply(_$panelRoot$router, arguments);
-	    }
-
-	    /**
-	     * Sets a value in the component's configuration map after element
-	     * initialization.
-	     * @param {string} key - key of config item to set
-	     * @param val - value to associate with key
-	     * @example
-	     * myWidget.setConfig('template', () => h('.new-template', 'Hi'));
-	     */
-
-	  }, {
-	    key: 'setConfig',
-	    value: function setConfig(key, val) {
-	      this._config[key] = val;
-	    }
-
-	    /**
-	     * To be overridden by subclasses, defining conditional logic for whether
-	     * a component should rerender its template given the state to be applied.
-	     * In most cases this method can be left untouched, but can provide improved
-	     * performance when dealing with very many DOM elements.
-	     * @param {object} state - state object to be used when rendering
-	     * @returns {boolean} whether or not to render/update this component
-	     * @example
-	     * shouldUpdate(state) {
-	     *   // don't need to rerender if result set ID hasn't changed
-	     *   return state.largeResultSetID !== this._cachedResultID;
-	     * }
-	     */
-
-	  }, {
-	    key: 'shouldUpdate',
-	    value: function shouldUpdate(state) {
-	      return true;
-	    }
-
-	    /**
-	     * Applies a state update, triggering a re-render check of the component as
-	     * well as any other components sharing the same state. This is the primary
-	     * means of updating the DOM in a Panel application.
-	     * @param {object} [stateUpdate={}] - keys and values of entries to update in
-	     * the component's state object
-	     * @example
-	     * myWidget.update({name: 'Bob'});
-	     */
-
-	  }, {
-	    key: 'update',
-	    value: function update() {
-	      var stateUpdate = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-
-	      if (!this.initialized) {
-	        Object.assign(this.state, stateUpdate);
-	      } else if (this.isPanelRoot) {
-	        var updateHash = '$fragment' in stateUpdate && stateUpdate.$fragment !== this.state.$fragment;
-
-	        Object.assign(this.state, stateUpdate);
-	        this.updateSelfAndChildren(this.state);
-
-	        if (updateHash) {
-	          this.router.replaceHash(this.state.$fragment);
-	        }
-	      } else {
-	        this.$panelRoot.update(stateUpdate);
-	      }
-	    }
-	  }, {
 	    key: 'createdCallback',
 	    value: function createdCallback() {
 	      this.panelID = panelID++;
@@ -15860,28 +15692,27 @@
 	          }
 	        }
 	        if (!this.$panelParent) {
-	          throw Error('panel-parent ' + parentID + ' not found');
+	          throw 'panel-parent ' + parentID + ' not found';
 	        }
 	        this.$panelParent.$panelChildren.add(this);
 	        this.state = this.$panelRoot.state;
 	      } else {
 	        this.isPanelRoot = true;
 	        this.$panelRoot = this;
-	        this.$panelParent = null;
 	      }
 	      this.app = this.$panelRoot;
 
 	      var newState = Object.assign({}, this.getConfig('defaultState'), this.state, this.getJSONAttribute('data-state'), this._stateFromAttributes());
 	      Object.assign(this.state, newState);
 
+	      this.loop = (0, _mainLoop2.default)(this.state, this._render.bind(this), { create: _createElement2.default, diff: _diff2.default, patch: _patch2.default });
+	      this.el.appendChild(this.loop.target);
+	      this.initialized = true;
+
 	      if (Object.keys(this.getConfig('routes')).length) {
 	        this.router = new _router2.default(this, { historyMethod: this.historyMethod });
 	        this.navigate(window.location.hash);
 	      }
-
-	      this.domPatcher = new _domPatcher2.default(this.state, this._render.bind(this));
-	      this.el.appendChild(this.domPatcher.el);
-	      this.initialized = true;
 	    }
 	  }, {
 	    key: 'detachedCallback',
@@ -15906,11 +15737,47 @@
 	      }
 	    }
 	  }, {
+	    key: 'child',
+	    value: function child(tagName) {
+	      var attrs = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+
+	      attrs = Object.assign({}, attrs);
+	      attrs.attributes = Object.assign({}, attrs.attributes, { 'panel-parent': this.panelID });
+	      return (0, _virtualHyperscript2.default)(tagName, attrs);
+	    }
+	  }, {
+	    key: 'getConfig',
+	    value: function getConfig(item) {
+	      return this._config[item];
+	    }
+	  }, {
 	    key: 'logError',
 	    value: function logError() {
 	      var _console;
 
 	      (_console = console).error.apply(_console, arguments);
+	    }
+	  }, {
+	    key: 'navigate',
+	    value: function navigate() {
+	      var _$panelRoot$router;
+
+	      (_$panelRoot$router = this.$panelRoot.router).navigate.apply(_$panelRoot$router, arguments);
+	    }
+	  }, {
+	    key: 'setConfig',
+	    value: function setConfig(item, val) {
+	      this._config[item] = val;
+	    }
+
+	    // override to provide conditional logic
+	    // for whether a component's loop should receive
+	    // state updates
+
+	  }, {
+	    key: 'shouldUpdate',
+	    value: function shouldUpdate(state) {
+	      return true;
 	    }
 	  }, {
 	    key: 'toString',
@@ -15922,10 +15789,30 @@
 	      }
 	    }
 	  }, {
+	    key: 'update',
+	    value: function update() {
+	      var stateUpdate = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+
+	      if (!this.initialized) {
+	        Object.assign(this.state, stateUpdate);
+	      } else if (this.isPanelRoot) {
+	        var updateHash = '$fragment' in stateUpdate && stateUpdate.$fragment !== this.state.$fragment;
+
+	        Object.assign(this.state, stateUpdate);
+	        this.updateSelfAndChildren(this.state);
+
+	        if (updateHash) {
+	          this.router.replaceHash(this.state.$fragment);
+	        }
+	      } else {
+	        this.$panelRoot.update(stateUpdate);
+	      }
+	    }
+	  }, {
 	    key: 'updateSelfAndChildren',
 	    value: function updateSelfAndChildren(state) {
 	      if (this.initialized && this.shouldUpdate(state)) {
-	        this.domPatcher.update(state);
+	        this.loop.update(state);
 	        var _iteratorNormalCompletion = true;
 	        var _didIteratorError = false;
 	        var _iteratorError = undefined;
@@ -15962,7 +15849,7 @@
 	            $helpers: this.getConfig('helpers')
 	          }));
 	        } catch (e) {
-	          this.logError('Error while rendering ' + this.toString(), this, e.stack);
+	          this.logError('Error while rendering ' + this.toString(), this, e);
 	        }
 	      }
 	      return this._rendered || EMPTY_DIV;
@@ -15984,33 +15871,6 @@
 
 	      return state;
 	    }
-	  }, {
-	    key: 'config',
-
-
-	    /**
-	     * Defines standard component configuration.
-	     * @type {object}
-	     * @property {function} template - function transforming state object to virtual-dom tree
-	     * @property {object} [helpers={}] - properties and functions injected automatically into template state object
-	     * @property {object} [routes={}] - object mapping string route expressions to handler functions
-	     * @property {boolean} [useShadowDom=false] - whether to use Shadow DOM
-	     * @property {string} [css=''] - component-specific Shadow DOM stylesheet
-	     * @example
-	     * get config() {
-	     *   return {
-	     *     template: state => h('.name', `My name is ${name}`),
-	     *     routes: {
-	     *       'wombat/:wombatId': (stateUpdate={}, wombatId) => {
-	     *         // route handler implementation
-	     *       },
-	     *     },
-	     *   };
-	     * }
-	     */
-	    get: function get() {
-	      return {};
-	    }
 	  }]);
 
 	  return Component;
@@ -16022,95 +15882,2174 @@
 /* 301 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
-	var vnode_1 = __webpack_require__(302);
-	var is = __webpack_require__(303);
-	function addNS(data, children, sel) {
-	    data.ns = 'http://www.w3.org/2000/svg';
-	    if (sel !== 'foreignObject' && children !== undefined) {
-	        for (var i = 0; i < children.length; ++i) {
-	            var childData = children[i].data;
-	            if (childData !== undefined) {
-	                addNS(childData, children[i].children, children[i].sel);
+	var raf = __webpack_require__(302)
+	var TypedError = __webpack_require__(304)
+
+	var InvalidUpdateInRender = TypedError({
+	    type: "main-loop.invalid.update.in-render",
+	    message: "main-loop: Unexpected update occurred in loop.\n" +
+	        "We are currently rendering a view, " +
+	            "you can't change state right now.\n" +
+	        "The diff is: {stringDiff}.\n" +
+	        "SUGGESTED FIX: find the state mutation in your view " +
+	            "or rendering function and remove it.\n" +
+	        "The view should not have any side effects.\n",
+	    diff: null,
+	    stringDiff: null
+	})
+
+	module.exports = main
+
+	function main(initialState, view, opts) {
+	    opts = opts || {}
+
+	    var currentState = initialState
+	    var create = opts.create
+	    var diff = opts.diff
+	    var patch = opts.patch
+	    var redrawScheduled = false
+
+	    var tree = opts.initialTree || view(currentState)
+	    var target = opts.target || create(tree, opts)
+	    var inRenderingTransaction = false
+
+	    currentState = null
+
+	    var loop = {
+	        state: initialState,
+	        target: target,
+	        update: update
+	    }
+	    return loop
+
+	    function update(state) {
+	        if (inRenderingTransaction) {
+	            throw InvalidUpdateInRender({
+	                diff: state._diff,
+	                stringDiff: JSON.stringify(state._diff)
+	            })
+	        }
+
+	        if (currentState === null && !redrawScheduled) {
+	            redrawScheduled = true
+	            raf(redraw)
+	        }
+
+	        currentState = state
+	        loop.state = state
+	    }
+
+	    function redraw() {
+	        redrawScheduled = false
+	        if (currentState === null) {
+	            return
+	        }
+
+	        inRenderingTransaction = true
+	        var newTree = view(currentState)
+
+	        if (opts.createOnly) {
+	            inRenderingTransaction = false
+	            create(newTree, opts)
+	        } else {
+	            var patches = diff(tree, newTree, opts)
+	            inRenderingTransaction = false
+	            target = patch(target, patches, opts)
+	        }
+
+	        tree = newTree
+	        currentState = null
+	    }
+	}
+
+
+/***/ },
+/* 302 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var now = __webpack_require__(303)
+	  , global = typeof window === 'undefined' ? {} : window
+	  , vendors = ['moz', 'webkit']
+	  , suffix = 'AnimationFrame'
+	  , raf = global['request' + suffix]
+	  , caf = global['cancel' + suffix] || global['cancelRequest' + suffix]
+	  , isNative = true
+
+	for(var i = 0; i < vendors.length && !raf; i++) {
+	  raf = global[vendors[i] + 'Request' + suffix]
+	  caf = global[vendors[i] + 'Cancel' + suffix]
+	      || global[vendors[i] + 'CancelRequest' + suffix]
+	}
+
+	// Some versions of FF have rAF but not cAF
+	if(!raf || !caf) {
+	  isNative = false
+
+	  var last = 0
+	    , id = 0
+	    , queue = []
+	    , frameDuration = 1000 / 60
+
+	  raf = function(callback) {
+	    if(queue.length === 0) {
+	      var _now = now()
+	        , next = Math.max(0, frameDuration - (_now - last))
+	      last = next + _now
+	      setTimeout(function() {
+	        var cp = queue.slice(0)
+	        // Clear queue here to prevent
+	        // callbacks from appending listeners
+	        // to the current frame's queue
+	        queue.length = 0
+	        for(var i = 0; i < cp.length; i++) {
+	          if(!cp[i].cancelled) {
+	            try{
+	              cp[i].callback(last)
+	            } catch(e) {
+	              setTimeout(function() { throw e }, 0)
+	            }
+	          }
+	        }
+	      }, Math.round(next))
+	    }
+	    queue.push({
+	      handle: ++id,
+	      callback: callback,
+	      cancelled: false
+	    })
+	    return id
+	  }
+
+	  caf = function(handle) {
+	    for(var i = 0; i < queue.length; i++) {
+	      if(queue[i].handle === handle) {
+	        queue[i].cancelled = true
+	      }
+	    }
+	  }
+	}
+
+	module.exports = function(fn) {
+	  // Wrap in a new function to prevent
+	  // `cancel` potentially being assigned
+	  // to the native rAF function
+	  if(!isNative) {
+	    return raf.call(global, fn)
+	  }
+	  return raf.call(global, function() {
+	    try{
+	      fn.apply(this, arguments)
+	    } catch(e) {
+	      setTimeout(function() { throw e }, 0)
+	    }
+	  })
+	}
+	module.exports.cancel = function() {
+	  caf.apply(global, arguments)
+	}
+
+
+/***/ },
+/* 303 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {// Generated by CoffeeScript 1.6.3
+	(function() {
+	  var getNanoSeconds, hrtime, loadTime;
+
+	  if ((typeof performance !== "undefined" && performance !== null) && performance.now) {
+	    module.exports = function() {
+	      return performance.now();
+	    };
+	  } else if ((typeof process !== "undefined" && process !== null) && process.hrtime) {
+	    module.exports = function() {
+	      return (getNanoSeconds() - loadTime) / 1e6;
+	    };
+	    hrtime = process.hrtime;
+	    getNanoSeconds = function() {
+	      var hr;
+	      hr = hrtime();
+	      return hr[0] * 1e9 + hr[1];
+	    };
+	    loadTime = getNanoSeconds();
+	  } else if (Date.now) {
+	    module.exports = function() {
+	      return Date.now() - loadTime;
+	    };
+	    loadTime = Date.now();
+	  } else {
+	    module.exports = function() {
+	      return new Date().getTime() - loadTime;
+	    };
+	    loadTime = new Date().getTime();
+	  }
+
+	}).call(this);
+
+	/*
+	//@ sourceMappingURL=performance-now.map
+	*/
+
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(294)))
+
+/***/ },
+/* 304 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var camelize = __webpack_require__(305)
+	var template = __webpack_require__(306)
+	var extend = __webpack_require__(307)
+
+	module.exports = TypedError
+
+	function TypedError(args) {
+	    if (!args) {
+	        throw new Error("args is required");
+	    }
+	    if (!args.type) {
+	        throw new Error("args.type is required");
+	    }
+	    if (!args.message) {
+	        throw new Error("args.message is required");
+	    }
+
+	    var message = args.message
+
+	    if (args.type && !args.name) {
+	        var errorName = camelize(args.type) + "Error"
+	        args.name = errorName[0].toUpperCase() + errorName.substr(1)
+	    }
+
+	    extend(createError, args);
+	    createError._name = args.name;
+
+	    return createError;
+
+	    function createError(opts) {
+	        var result = new Error()
+
+	        Object.defineProperty(result, "type", {
+	            value: result.type,
+	            enumerable: true,
+	            writable: true,
+	            configurable: true
+	        })
+
+	        var options = extend({}, args, opts)
+
+	        extend(result, options)
+	        result.message = template(message, options)
+
+	        return result
+	    }
+	}
+
+
+
+/***/ },
+/* 305 */
+/***/ function(module, exports) {
+
+	module.exports = function(obj) {
+	    if (typeof obj === 'string') return camelCase(obj);
+	    return walk(obj);
+	};
+
+	function walk (obj) {
+	    if (!obj || typeof obj !== 'object') return obj;
+	    if (isDate(obj) || isRegex(obj)) return obj;
+	    if (isArray(obj)) return map(obj, walk);
+	    return reduce(objectKeys(obj), function (acc, key) {
+	        var camel = camelCase(key);
+	        acc[camel] = walk(obj[key]);
+	        return acc;
+	    }, {});
+	}
+
+	function camelCase(str) {
+	    return str.replace(/[_.-](\w|$)/g, function (_,x) {
+	        return x.toUpperCase();
+	    });
+	}
+
+	var isArray = Array.isArray || function (obj) {
+	    return Object.prototype.toString.call(obj) === '[object Array]';
+	};
+
+	var isDate = function (obj) {
+	    return Object.prototype.toString.call(obj) === '[object Date]';
+	};
+
+	var isRegex = function (obj) {
+	    return Object.prototype.toString.call(obj) === '[object RegExp]';
+	};
+
+	var has = Object.prototype.hasOwnProperty;
+	var objectKeys = Object.keys || function (obj) {
+	    var keys = [];
+	    for (var key in obj) {
+	        if (has.call(obj, key)) keys.push(key);
+	    }
+	    return keys;
+	};
+
+	function map (xs, f) {
+	    if (xs.map) return xs.map(f);
+	    var res = [];
+	    for (var i = 0; i < xs.length; i++) {
+	        res.push(f(xs[i], i));
+	    }
+	    return res;
+	}
+
+	function reduce (xs, f, acc) {
+	    if (xs.reduce) return xs.reduce(f, acc);
+	    for (var i = 0; i < xs.length; i++) {
+	        acc = f(acc, xs[i], i);
+	    }
+	    return acc;
+	}
+
+
+/***/ },
+/* 306 */
+/***/ function(module, exports) {
+
+	var nargs = /\{([0-9a-zA-Z]+)\}/g
+	var slice = Array.prototype.slice
+
+	module.exports = template
+
+	function template(string) {
+	    var args
+
+	    if (arguments.length === 2 && typeof arguments[1] === "object") {
+	        args = arguments[1]
+	    } else {
+	        args = slice.call(arguments, 1)
+	    }
+
+	    if (!args || !args.hasOwnProperty) {
+	        args = {}
+	    }
+
+	    return string.replace(nargs, function replaceArg(match, i, index) {
+	        var result
+
+	        if (string[index - 1] === "{" &&
+	            string[index + match.length] === "}") {
+	            return i
+	        } else {
+	            result = args.hasOwnProperty(i) ? args[i] : null
+	            if (result === null || result === undefined) {
+	                return ""
+	            }
+
+	            return result
+	        }
+	    })
+	}
+
+
+/***/ },
+/* 307 */
+/***/ function(module, exports) {
+
+	module.exports = extend
+
+	var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+	function extend(target) {
+	    for (var i = 1; i < arguments.length; i++) {
+	        var source = arguments[i]
+
+	        for (var key in source) {
+	            if (hasOwnProperty.call(source, key)) {
+	                target[key] = source[key]
+	            }
+	        }
+	    }
+
+	    return target
+	}
+
+
+/***/ },
+/* 308 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var createElement = __webpack_require__(309)
+
+	module.exports = createElement
+
+
+/***/ },
+/* 309 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var document = __webpack_require__(310)
+
+	var applyProperties = __webpack_require__(312)
+
+	var isVNode = __webpack_require__(315)
+	var isVText = __webpack_require__(317)
+	var isWidget = __webpack_require__(318)
+	var handleThunk = __webpack_require__(319)
+
+	module.exports = createElement
+
+	function createElement(vnode, opts) {
+	    var doc = opts ? opts.document || document : document
+	    var warn = opts ? opts.warn : null
+
+	    vnode = handleThunk(vnode).a
+
+	    if (isWidget(vnode)) {
+	        return vnode.init()
+	    } else if (isVText(vnode)) {
+	        return doc.createTextNode(vnode.text)
+	    } else if (!isVNode(vnode)) {
+	        if (warn) {
+	            warn("Item is not a valid virtual dom node", vnode)
+	        }
+	        return null
+	    }
+
+	    var node = (vnode.namespace === null) ?
+	        doc.createElement(vnode.tagName) :
+	        doc.createElementNS(vnode.namespace, vnode.tagName)
+
+	    var props = vnode.properties
+	    applyProperties(node, props)
+
+	    var children = vnode.children
+
+	    for (var i = 0; i < children.length; i++) {
+	        var childNode = createElement(children[i], opts)
+	        if (childNode) {
+	            node.appendChild(childNode)
+	        }
+	    }
+
+	    return node
+	}
+
+
+/***/ },
+/* 310 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(global) {var topLevel = typeof global !== 'undefined' ? global :
+	    typeof window !== 'undefined' ? window : {}
+	var minDoc = __webpack_require__(311);
+
+	if (typeof document !== 'undefined') {
+	    module.exports = document;
+	} else {
+	    var doccy = topLevel['__GLOBAL_DOCUMENT_CACHE@4'];
+
+	    if (!doccy) {
+	        doccy = topLevel['__GLOBAL_DOCUMENT_CACHE@4'] = minDoc;
+	    }
+
+	    module.exports = doccy;
+	}
+
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ },
+/* 311 */
+/***/ function(module, exports) {
+
+	/* (ignored) */
+
+/***/ },
+/* 312 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var isObject = __webpack_require__(313)
+	var isHook = __webpack_require__(314)
+
+	module.exports = applyProperties
+
+	function applyProperties(node, props, previous) {
+	    for (var propName in props) {
+	        var propValue = props[propName]
+
+	        if (propValue === undefined) {
+	            removeProperty(node, propName, propValue, previous);
+	        } else if (isHook(propValue)) {
+	            removeProperty(node, propName, propValue, previous)
+	            if (propValue.hook) {
+	                propValue.hook(node,
+	                    propName,
+	                    previous ? previous[propName] : undefined)
+	            }
+	        } else {
+	            if (isObject(propValue)) {
+	                patchObject(node, props, previous, propName, propValue);
+	            } else {
+	                node[propName] = propValue
 	            }
 	        }
 	    }
 	}
-	function h(sel, b, c) {
-	    var data = {}, children, text, i;
-	    if (c !== undefined) {
-	        data = b;
-	        if (is.array(c)) {
-	            children = c;
-	        }
-	        else if (is.primitive(c)) {
-	            text = c;
-	        }
-	        else if (c && c.sel) {
-	            children = [c];
+
+	function removeProperty(node, propName, propValue, previous) {
+	    if (previous) {
+	        var previousValue = previous[propName]
+
+	        if (!isHook(previousValue)) {
+	            if (propName === "attributes") {
+	                for (var attrName in previousValue) {
+	                    node.removeAttribute(attrName)
+	                }
+	            } else if (propName === "style") {
+	                for (var i in previousValue) {
+	                    node.style[i] = ""
+	                }
+	            } else if (typeof previousValue === "string") {
+	                node[propName] = ""
+	            } else {
+	                node[propName] = null
+	            }
+	        } else if (previousValue.unhook) {
+	            previousValue.unhook(node, propName, propValue)
 	        }
 	    }
-	    else if (b !== undefined) {
-	        if (is.array(b)) {
-	            children = b;
+	}
+
+	function patchObject(node, props, previous, propName, propValue) {
+	    var previousValue = previous ? previous[propName] : undefined
+
+	    // Set attributes
+	    if (propName === "attributes") {
+	        for (var attrName in propValue) {
+	            var attrValue = propValue[attrName]
+
+	            if (attrValue === undefined) {
+	                node.removeAttribute(attrName)
+	            } else {
+	                node.setAttribute(attrName, attrValue)
+	            }
 	        }
-	        else if (is.primitive(b)) {
-	            text = b;
+
+	        return
+	    }
+
+	    if(previousValue && isObject(previousValue) &&
+	        getPrototype(previousValue) !== getPrototype(propValue)) {
+	        node[propName] = propValue
+	        return
+	    }
+
+	    if (!isObject(node[propName])) {
+	        node[propName] = {}
+	    }
+
+	    var replacer = propName === "style" ? "" : undefined
+
+	    for (var k in propValue) {
+	        var value = propValue[k]
+	        node[propName][k] = (value === undefined) ? replacer : value
+	    }
+	}
+
+	function getPrototype(value) {
+	    if (Object.getPrototypeOf) {
+	        return Object.getPrototypeOf(value)
+	    } else if (value.__proto__) {
+	        return value.__proto__
+	    } else if (value.constructor) {
+	        return value.constructor.prototype
+	    }
+	}
+
+
+/***/ },
+/* 313 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	module.exports = function isObject(x) {
+		return typeof x === "object" && x !== null;
+	};
+
+
+/***/ },
+/* 314 */
+/***/ function(module, exports) {
+
+	module.exports = isHook
+
+	function isHook(hook) {
+	    return hook &&
+	      (typeof hook.hook === "function" && !hook.hasOwnProperty("hook") ||
+	       typeof hook.unhook === "function" && !hook.hasOwnProperty("unhook"))
+	}
+
+
+/***/ },
+/* 315 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var version = __webpack_require__(316)
+
+	module.exports = isVirtualNode
+
+	function isVirtualNode(x) {
+	    return x && x.type === "VirtualNode" && x.version === version
+	}
+
+
+/***/ },
+/* 316 */
+/***/ function(module, exports) {
+
+	module.exports = "2"
+
+
+/***/ },
+/* 317 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var version = __webpack_require__(316)
+
+	module.exports = isVirtualText
+
+	function isVirtualText(x) {
+	    return x && x.type === "VirtualText" && x.version === version
+	}
+
+
+/***/ },
+/* 318 */
+/***/ function(module, exports) {
+
+	module.exports = isWidget
+
+	function isWidget(w) {
+	    return w && w.type === "Widget"
+	}
+
+
+/***/ },
+/* 319 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var isVNode = __webpack_require__(315)
+	var isVText = __webpack_require__(317)
+	var isWidget = __webpack_require__(318)
+	var isThunk = __webpack_require__(320)
+
+	module.exports = handleThunk
+
+	function handleThunk(a, b) {
+	    var renderedA = a
+	    var renderedB = b
+
+	    if (isThunk(b)) {
+	        renderedB = renderThunk(b, a)
+	    }
+
+	    if (isThunk(a)) {
+	        renderedA = renderThunk(a, null)
+	    }
+
+	    return {
+	        a: renderedA,
+	        b: renderedB
+	    }
+	}
+
+	function renderThunk(thunk, previous) {
+	    var renderedThunk = thunk.vnode
+
+	    if (!renderedThunk) {
+	        renderedThunk = thunk.vnode = thunk.render(previous)
+	    }
+
+	    if (!(isVNode(renderedThunk) ||
+	            isVText(renderedThunk) ||
+	            isWidget(renderedThunk))) {
+	        throw new Error("thunk did not return a valid node");
+	    }
+
+	    return renderedThunk
+	}
+
+
+/***/ },
+/* 320 */
+/***/ function(module, exports) {
+
+	module.exports = isThunk
+
+	function isThunk(t) {
+	    return t && t.type === "Thunk"
+	}
+
+
+/***/ },
+/* 321 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var diff = __webpack_require__(322)
+
+	module.exports = diff
+
+
+/***/ },
+/* 322 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var isArray = __webpack_require__(323)
+
+	var VPatch = __webpack_require__(324)
+	var isVNode = __webpack_require__(315)
+	var isVText = __webpack_require__(317)
+	var isWidget = __webpack_require__(318)
+	var isThunk = __webpack_require__(320)
+	var handleThunk = __webpack_require__(319)
+
+	var diffProps = __webpack_require__(325)
+
+	module.exports = diff
+
+	function diff(a, b) {
+	    var patch = { a: a }
+	    walk(a, b, patch, 0)
+	    return patch
+	}
+
+	function walk(a, b, patch, index) {
+	    if (a === b) {
+	        return
+	    }
+
+	    var apply = patch[index]
+	    var applyClear = false
+
+	    if (isThunk(a) || isThunk(b)) {
+	        thunks(a, b, patch, index)
+	    } else if (b == null) {
+
+	        // If a is a widget we will add a remove patch for it
+	        // Otherwise any child widgets/hooks must be destroyed.
+	        // This prevents adding two remove patches for a widget.
+	        if (!isWidget(a)) {
+	            clearState(a, patch, index)
+	            apply = patch[index]
 	        }
-	        else if (b && b.sel) {
-	            children = [b];
+
+	        apply = appendPatch(apply, new VPatch(VPatch.REMOVE, a, b))
+	    } else if (isVNode(b)) {
+	        if (isVNode(a)) {
+	            if (a.tagName === b.tagName &&
+	                a.namespace === b.namespace &&
+	                a.key === b.key) {
+	                var propsPatch = diffProps(a.properties, b.properties)
+	                if (propsPatch) {
+	                    apply = appendPatch(apply,
+	                        new VPatch(VPatch.PROPS, a, propsPatch))
+	                }
+	                apply = diffChildren(a, b, patch, apply, index)
+	            } else {
+	                apply = appendPatch(apply, new VPatch(VPatch.VNODE, a, b))
+	                applyClear = true
+	            }
+	        } else {
+	            apply = appendPatch(apply, new VPatch(VPatch.VNODE, a, b))
+	            applyClear = true
+	        }
+	    } else if (isVText(b)) {
+	        if (!isVText(a)) {
+	            apply = appendPatch(apply, new VPatch(VPatch.VTEXT, a, b))
+	            applyClear = true
+	        } else if (a.text !== b.text) {
+	            apply = appendPatch(apply, new VPatch(VPatch.VTEXT, a, b))
+	        }
+	    } else if (isWidget(b)) {
+	        if (!isWidget(a)) {
+	            applyClear = true
+	        }
+
+	        apply = appendPatch(apply, new VPatch(VPatch.WIDGET, a, b))
+	    }
+
+	    if (apply) {
+	        patch[index] = apply
+	    }
+
+	    if (applyClear) {
+	        clearState(a, patch, index)
+	    }
+	}
+
+	function diffChildren(a, b, patch, apply, index) {
+	    var aChildren = a.children
+	    var orderedSet = reorder(aChildren, b.children)
+	    var bChildren = orderedSet.children
+
+	    var aLen = aChildren.length
+	    var bLen = bChildren.length
+	    var len = aLen > bLen ? aLen : bLen
+
+	    for (var i = 0; i < len; i++) {
+	        var leftNode = aChildren[i]
+	        var rightNode = bChildren[i]
+	        index += 1
+
+	        if (!leftNode) {
+	            if (rightNode) {
+	                // Excess nodes in b need to be added
+	                apply = appendPatch(apply,
+	                    new VPatch(VPatch.INSERT, null, rightNode))
+	            }
+	        } else {
+	            walk(leftNode, rightNode, patch, index)
+	        }
+
+	        if (isVNode(leftNode) && leftNode.count) {
+	            index += leftNode.count
+	        }
+	    }
+
+	    if (orderedSet.moves) {
+	        // Reorder nodes last
+	        apply = appendPatch(apply, new VPatch(
+	            VPatch.ORDER,
+	            a,
+	            orderedSet.moves
+	        ))
+	    }
+
+	    return apply
+	}
+
+	function clearState(vNode, patch, index) {
+	    // TODO: Make this a single walk, not two
+	    unhook(vNode, patch, index)
+	    destroyWidgets(vNode, patch, index)
+	}
+
+	// Patch records for all destroyed widgets must be added because we need
+	// a DOM node reference for the destroy function
+	function destroyWidgets(vNode, patch, index) {
+	    if (isWidget(vNode)) {
+	        if (typeof vNode.destroy === "function") {
+	            patch[index] = appendPatch(
+	                patch[index],
+	                new VPatch(VPatch.REMOVE, vNode, null)
+	            )
+	        }
+	    } else if (isVNode(vNode) && (vNode.hasWidgets || vNode.hasThunks)) {
+	        var children = vNode.children
+	        var len = children.length
+	        for (var i = 0; i < len; i++) {
+	            var child = children[i]
+	            index += 1
+
+	            destroyWidgets(child, patch, index)
+
+	            if (isVNode(child) && child.count) {
+	                index += child.count
+	            }
+	        }
+	    } else if (isThunk(vNode)) {
+	        thunks(vNode, null, patch, index)
+	    }
+	}
+
+	// Create a sub-patch for thunks
+	function thunks(a, b, patch, index) {
+	    var nodes = handleThunk(a, b)
+	    var thunkPatch = diff(nodes.a, nodes.b)
+	    if (hasPatches(thunkPatch)) {
+	        patch[index] = new VPatch(VPatch.THUNK, null, thunkPatch)
+	    }
+	}
+
+	function hasPatches(patch) {
+	    for (var index in patch) {
+	        if (index !== "a") {
+	            return true
+	        }
+	    }
+
+	    return false
+	}
+
+	// Execute hooks when two nodes are identical
+	function unhook(vNode, patch, index) {
+	    if (isVNode(vNode)) {
+	        if (vNode.hooks) {
+	            patch[index] = appendPatch(
+	                patch[index],
+	                new VPatch(
+	                    VPatch.PROPS,
+	                    vNode,
+	                    undefinedKeys(vNode.hooks)
+	                )
+	            )
+	        }
+
+	        if (vNode.descendantHooks || vNode.hasThunks) {
+	            var children = vNode.children
+	            var len = children.length
+	            for (var i = 0; i < len; i++) {
+	                var child = children[i]
+	                index += 1
+
+	                unhook(child, patch, index)
+
+	                if (isVNode(child) && child.count) {
+	                    index += child.count
+	                }
+	            }
+	        }
+	    } else if (isThunk(vNode)) {
+	        thunks(vNode, null, patch, index)
+	    }
+	}
+
+	function undefinedKeys(obj) {
+	    var result = {}
+
+	    for (var key in obj) {
+	        result[key] = undefined
+	    }
+
+	    return result
+	}
+
+	// List diff, naive left to right reordering
+	function reorder(aChildren, bChildren) {
+	    // O(M) time, O(M) memory
+	    var bChildIndex = keyIndex(bChildren)
+	    var bKeys = bChildIndex.keys
+	    var bFree = bChildIndex.free
+
+	    if (bFree.length === bChildren.length) {
+	        return {
+	            children: bChildren,
+	            moves: null
+	        }
+	    }
+
+	    // O(N) time, O(N) memory
+	    var aChildIndex = keyIndex(aChildren)
+	    var aKeys = aChildIndex.keys
+	    var aFree = aChildIndex.free
+
+	    if (aFree.length === aChildren.length) {
+	        return {
+	            children: bChildren,
+	            moves: null
+	        }
+	    }
+
+	    // O(MAX(N, M)) memory
+	    var newChildren = []
+
+	    var freeIndex = 0
+	    var freeCount = bFree.length
+	    var deletedItems = 0
+
+	    // Iterate through a and match a node in b
+	    // O(N) time,
+	    for (var i = 0 ; i < aChildren.length; i++) {
+	        var aItem = aChildren[i]
+	        var itemIndex
+
+	        if (aItem.key) {
+	            if (bKeys.hasOwnProperty(aItem.key)) {
+	                // Match up the old keys
+	                itemIndex = bKeys[aItem.key]
+	                newChildren.push(bChildren[itemIndex])
+
+	            } else {
+	                // Remove old keyed items
+	                itemIndex = i - deletedItems++
+	                newChildren.push(null)
+	            }
+	        } else {
+	            // Match the item in a with the next free item in b
+	            if (freeIndex < freeCount) {
+	                itemIndex = bFree[freeIndex++]
+	                newChildren.push(bChildren[itemIndex])
+	            } else {
+	                // There are no free items in b to match with
+	                // the free items in a, so the extra free nodes
+	                // are deleted.
+	                itemIndex = i - deletedItems++
+	                newChildren.push(null)
+	            }
+	        }
+	    }
+
+	    var lastFreeIndex = freeIndex >= bFree.length ?
+	        bChildren.length :
+	        bFree[freeIndex]
+
+	    // Iterate through b and append any new keys
+	    // O(M) time
+	    for (var j = 0; j < bChildren.length; j++) {
+	        var newItem = bChildren[j]
+
+	        if (newItem.key) {
+	            if (!aKeys.hasOwnProperty(newItem.key)) {
+	                // Add any new keyed items
+	                // We are adding new items to the end and then sorting them
+	                // in place. In future we should insert new items in place.
+	                newChildren.push(newItem)
+	            }
+	        } else if (j >= lastFreeIndex) {
+	            // Add any leftover non-keyed items
+	            newChildren.push(newItem)
+	        }
+	    }
+
+	    var simulate = newChildren.slice()
+	    var simulateIndex = 0
+	    var removes = []
+	    var inserts = []
+	    var simulateItem
+
+	    for (var k = 0; k < bChildren.length;) {
+	        var wantedItem = bChildren[k]
+	        simulateItem = simulate[simulateIndex]
+
+	        // remove items
+	        while (simulateItem === null && simulate.length) {
+	            removes.push(remove(simulate, simulateIndex, null))
+	            simulateItem = simulate[simulateIndex]
+	        }
+
+	        if (!simulateItem || simulateItem.key !== wantedItem.key) {
+	            // if we need a key in this position...
+	            if (wantedItem.key) {
+	                if (simulateItem && simulateItem.key) {
+	                    // if an insert doesn't put this key in place, it needs to move
+	                    if (bKeys[simulateItem.key] !== k + 1) {
+	                        removes.push(remove(simulate, simulateIndex, simulateItem.key))
+	                        simulateItem = simulate[simulateIndex]
+	                        // if the remove didn't put the wanted item in place, we need to insert it
+	                        if (!simulateItem || simulateItem.key !== wantedItem.key) {
+	                            inserts.push({key: wantedItem.key, to: k})
+	                        }
+	                        // items are matching, so skip ahead
+	                        else {
+	                            simulateIndex++
+	                        }
+	                    }
+	                    else {
+	                        inserts.push({key: wantedItem.key, to: k})
+	                    }
+	                }
+	                else {
+	                    inserts.push({key: wantedItem.key, to: k})
+	                }
+	                k++
+	            }
+	            // a key in simulate has no matching wanted key, remove it
+	            else if (simulateItem && simulateItem.key) {
+	                removes.push(remove(simulate, simulateIndex, simulateItem.key))
+	            }
 	        }
 	        else {
-	            data = b;
+	            simulateIndex++
+	            k++
 	        }
 	    }
-	    if (is.array(children)) {
-	        for (i = 0; i < children.length; ++i) {
-	            if (is.primitive(children[i]))
-	                children[i] = vnode_1.vnode(undefined, undefined, undefined, children[i]);
+
+	    // remove all the remaining nodes from simulate
+	    while(simulateIndex < simulate.length) {
+	        simulateItem = simulate[simulateIndex]
+	        removes.push(remove(simulate, simulateIndex, simulateItem && simulateItem.key))
+	    }
+
+	    // If the only moves we have are deletes then we can just
+	    // let the delete patch remove these items.
+	    if (removes.length === deletedItems && !inserts.length) {
+	        return {
+	            children: newChildren,
+	            moves: null
 	        }
 	    }
-	    if (sel[0] === 's' && sel[1] === 'v' && sel[2] === 'g' &&
-	        (sel.length === 3 || sel[3] === '.' || sel[3] === '#')) {
-	        addNS(data, children, sel);
+
+	    return {
+	        children: newChildren,
+	        moves: {
+	            removes: removes,
+	            inserts: inserts
+	        }
 	    }
-	    return vnode_1.vnode(sel, data, children, text, undefined);
 	}
-	exports.h = h;
-	;
-	Object.defineProperty(exports, "__esModule", { value: true });
-	exports.default = h;
-	//# sourceMappingURL=h.js.map
+
+	function remove(arr, index, key) {
+	    arr.splice(index, 1)
+
+	    return {
+	        from: index,
+	        key: key
+	    }
+	}
+
+	function keyIndex(children) {
+	    var keys = {}
+	    var free = []
+	    var length = children.length
+
+	    for (var i = 0; i < length; i++) {
+	        var child = children[i]
+
+	        if (child.key) {
+	            keys[child.key] = i
+	        } else {
+	            free.push(i)
+	        }
+	    }
+
+	    return {
+	        keys: keys,     // A hash of key name to index
+	        free: free      // An array of unkeyed item indices
+	    }
+	}
+
+	function appendPatch(apply, patch) {
+	    if (apply) {
+	        if (isArray(apply)) {
+	            apply.push(patch)
+	        } else {
+	            apply = [apply, patch]
+	        }
+
+	        return apply
+	    } else {
+	        return patch
+	    }
+	}
+
 
 /***/ },
-/* 302 */
+/* 323 */
 /***/ function(module, exports) {
 
-	"use strict";
-	function vnode(sel, data, children, text, elm) {
-	    var key = data === undefined ? undefined : data.key;
-	    return { sel: sel, data: data, children: children,
-	        text: text, elm: elm, key: key };
+	var nativeIsArray = Array.isArray
+	var toString = Object.prototype.toString
+
+	module.exports = nativeIsArray || isArray
+
+	function isArray(obj) {
+	    return toString.call(obj) === "[object Array]"
 	}
-	exports.vnode = vnode;
-	Object.defineProperty(exports, "__esModule", { value: true });
-	exports.default = vnode;
-	//# sourceMappingURL=vnode.js.map
+
 
 /***/ },
-/* 303 */
+/* 324 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var version = __webpack_require__(316)
+
+	VirtualPatch.NONE = 0
+	VirtualPatch.VTEXT = 1
+	VirtualPatch.VNODE = 2
+	VirtualPatch.WIDGET = 3
+	VirtualPatch.PROPS = 4
+	VirtualPatch.ORDER = 5
+	VirtualPatch.INSERT = 6
+	VirtualPatch.REMOVE = 7
+	VirtualPatch.THUNK = 8
+
+	module.exports = VirtualPatch
+
+	function VirtualPatch(type, vNode, patch) {
+	    this.type = Number(type)
+	    this.vNode = vNode
+	    this.patch = patch
+	}
+
+	VirtualPatch.prototype.version = version
+	VirtualPatch.prototype.type = "VirtualPatch"
+
+
+/***/ },
+/* 325 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var isObject = __webpack_require__(313)
+	var isHook = __webpack_require__(314)
+
+	module.exports = diffProps
+
+	function diffProps(a, b) {
+	    var diff
+
+	    for (var aKey in a) {
+	        if (!(aKey in b)) {
+	            diff = diff || {}
+	            diff[aKey] = undefined
+	        }
+
+	        var aValue = a[aKey]
+	        var bValue = b[aKey]
+
+	        if (aValue === bValue) {
+	            continue
+	        } else if (isObject(aValue) && isObject(bValue)) {
+	            if (getPrototype(bValue) !== getPrototype(aValue)) {
+	                diff = diff || {}
+	                diff[aKey] = bValue
+	            } else if (isHook(bValue)) {
+	                 diff = diff || {}
+	                 diff[aKey] = bValue
+	            } else {
+	                var objectDiff = diffProps(aValue, bValue)
+	                if (objectDiff) {
+	                    diff = diff || {}
+	                    diff[aKey] = objectDiff
+	                }
+	            }
+	        } else {
+	            diff = diff || {}
+	            diff[aKey] = bValue
+	        }
+	    }
+
+	    for (var bKey in b) {
+	        if (!(bKey in a)) {
+	            diff = diff || {}
+	            diff[bKey] = b[bKey]
+	        }
+	    }
+
+	    return diff
+	}
+
+	function getPrototype(value) {
+	  if (Object.getPrototypeOf) {
+	    return Object.getPrototypeOf(value)
+	  } else if (value.__proto__) {
+	    return value.__proto__
+	  } else if (value.constructor) {
+	    return value.constructor.prototype
+	  }
+	}
+
+
+/***/ },
+/* 326 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var patch = __webpack_require__(327)
+
+	module.exports = patch
+
+
+/***/ },
+/* 327 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var document = __webpack_require__(310)
+	var isArray = __webpack_require__(323)
+
+	var render = __webpack_require__(309)
+	var domIndex = __webpack_require__(328)
+	var patchOp = __webpack_require__(329)
+	module.exports = patch
+
+	function patch(rootNode, patches, renderOptions) {
+	    renderOptions = renderOptions || {}
+	    renderOptions.patch = renderOptions.patch && renderOptions.patch !== patch
+	        ? renderOptions.patch
+	        : patchRecursive
+	    renderOptions.render = renderOptions.render || render
+
+	    return renderOptions.patch(rootNode, patches, renderOptions)
+	}
+
+	function patchRecursive(rootNode, patches, renderOptions) {
+	    var indices = patchIndices(patches)
+
+	    if (indices.length === 0) {
+	        return rootNode
+	    }
+
+	    var index = domIndex(rootNode, patches.a, indices)
+	    var ownerDocument = rootNode.ownerDocument
+
+	    if (!renderOptions.document && ownerDocument !== document) {
+	        renderOptions.document = ownerDocument
+	    }
+
+	    for (var i = 0; i < indices.length; i++) {
+	        var nodeIndex = indices[i]
+	        rootNode = applyPatch(rootNode,
+	            index[nodeIndex],
+	            patches[nodeIndex],
+	            renderOptions)
+	    }
+
+	    return rootNode
+	}
+
+	function applyPatch(rootNode, domNode, patchList, renderOptions) {
+	    if (!domNode) {
+	        return rootNode
+	    }
+
+	    var newNode
+
+	    if (isArray(patchList)) {
+	        for (var i = 0; i < patchList.length; i++) {
+	            newNode = patchOp(patchList[i], domNode, renderOptions)
+
+	            if (domNode === rootNode) {
+	                rootNode = newNode
+	            }
+	        }
+	    } else {
+	        newNode = patchOp(patchList, domNode, renderOptions)
+
+	        if (domNode === rootNode) {
+	            rootNode = newNode
+	        }
+	    }
+
+	    return rootNode
+	}
+
+	function patchIndices(patches) {
+	    var indices = []
+
+	    for (var key in patches) {
+	        if (key !== "a") {
+	            indices.push(Number(key))
+	        }
+	    }
+
+	    return indices
+	}
+
+
+/***/ },
+/* 328 */
 /***/ function(module, exports) {
 
-	"use strict";
-	exports.array = Array.isArray;
-	function primitive(s) {
-	    return typeof s === 'string' || typeof s === 'number';
+	// Maps a virtual DOM tree onto a real DOM tree in an efficient manner.
+	// We don't want to read all of the DOM nodes in the tree so we use
+	// the in-order tree indexing to eliminate recursion down certain branches.
+	// We only recurse into a DOM node if we know that it contains a child of
+	// interest.
+
+	var noChild = {}
+
+	module.exports = domIndex
+
+	function domIndex(rootNode, tree, indices, nodes) {
+	    if (!indices || indices.length === 0) {
+	        return {}
+	    } else {
+	        indices.sort(ascending)
+	        return recurse(rootNode, tree, indices, nodes, 0)
+	    }
 	}
-	exports.primitive = primitive;
-	//# sourceMappingURL=is.js.map
+
+	function recurse(rootNode, tree, indices, nodes, rootIndex) {
+	    nodes = nodes || {}
+
+
+	    if (rootNode) {
+	        if (indexInRange(indices, rootIndex, rootIndex)) {
+	            nodes[rootIndex] = rootNode
+	        }
+
+	        var vChildren = tree.children
+
+	        if (vChildren) {
+
+	            var childNodes = rootNode.childNodes
+
+	            for (var i = 0; i < tree.children.length; i++) {
+	                rootIndex += 1
+
+	                var vChild = vChildren[i] || noChild
+	                var nextIndex = rootIndex + (vChild.count || 0)
+
+	                // skip recursion down the tree if there are no nodes down here
+	                if (indexInRange(indices, rootIndex, nextIndex)) {
+	                    recurse(childNodes[i], vChild, indices, nodes, rootIndex)
+	                }
+
+	                rootIndex = nextIndex
+	            }
+	        }
+	    }
+
+	    return nodes
+	}
+
+	// Binary search for an index in the interval [left, right]
+	function indexInRange(indices, left, right) {
+	    if (indices.length === 0) {
+	        return false
+	    }
+
+	    var minIndex = 0
+	    var maxIndex = indices.length - 1
+	    var currentIndex
+	    var currentItem
+
+	    while (minIndex <= maxIndex) {
+	        currentIndex = ((maxIndex + minIndex) / 2) >> 0
+	        currentItem = indices[currentIndex]
+
+	        if (minIndex === maxIndex) {
+	            return currentItem >= left && currentItem <= right
+	        } else if (currentItem < left) {
+	            minIndex = currentIndex + 1
+	        } else  if (currentItem > right) {
+	            maxIndex = currentIndex - 1
+	        } else {
+	            return true
+	        }
+	    }
+
+	    return false;
+	}
+
+	function ascending(a, b) {
+	    return a > b ? 1 : -1
+	}
+
 
 /***/ },
-/* 304 */
+/* 329 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var applyProperties = __webpack_require__(312)
+
+	var isWidget = __webpack_require__(318)
+	var VPatch = __webpack_require__(324)
+
+	var updateWidget = __webpack_require__(330)
+
+	module.exports = applyPatch
+
+	function applyPatch(vpatch, domNode, renderOptions) {
+	    var type = vpatch.type
+	    var vNode = vpatch.vNode
+	    var patch = vpatch.patch
+
+	    switch (type) {
+	        case VPatch.REMOVE:
+	            return removeNode(domNode, vNode)
+	        case VPatch.INSERT:
+	            return insertNode(domNode, patch, renderOptions)
+	        case VPatch.VTEXT:
+	            return stringPatch(domNode, vNode, patch, renderOptions)
+	        case VPatch.WIDGET:
+	            return widgetPatch(domNode, vNode, patch, renderOptions)
+	        case VPatch.VNODE:
+	            return vNodePatch(domNode, vNode, patch, renderOptions)
+	        case VPatch.ORDER:
+	            reorderChildren(domNode, patch)
+	            return domNode
+	        case VPatch.PROPS:
+	            applyProperties(domNode, patch, vNode.properties)
+	            return domNode
+	        case VPatch.THUNK:
+	            return replaceRoot(domNode,
+	                renderOptions.patch(domNode, patch, renderOptions))
+	        default:
+	            return domNode
+	    }
+	}
+
+	function removeNode(domNode, vNode) {
+	    var parentNode = domNode.parentNode
+
+	    if (parentNode) {
+	        parentNode.removeChild(domNode)
+	    }
+
+	    destroyWidget(domNode, vNode);
+
+	    return null
+	}
+
+	function insertNode(parentNode, vNode, renderOptions) {
+	    var newNode = renderOptions.render(vNode, renderOptions)
+
+	    if (parentNode) {
+	        parentNode.appendChild(newNode)
+	    }
+
+	    return parentNode
+	}
+
+	function stringPatch(domNode, leftVNode, vText, renderOptions) {
+	    var newNode
+
+	    if (domNode.nodeType === 3) {
+	        domNode.replaceData(0, domNode.length, vText.text)
+	        newNode = domNode
+	    } else {
+	        var parentNode = domNode.parentNode
+	        newNode = renderOptions.render(vText, renderOptions)
+
+	        if (parentNode && newNode !== domNode) {
+	            parentNode.replaceChild(newNode, domNode)
+	        }
+	    }
+
+	    return newNode
+	}
+
+	function widgetPatch(domNode, leftVNode, widget, renderOptions) {
+	    var updating = updateWidget(leftVNode, widget)
+	    var newNode
+
+	    if (updating) {
+	        newNode = widget.update(leftVNode, domNode) || domNode
+	    } else {
+	        newNode = renderOptions.render(widget, renderOptions)
+	    }
+
+	    var parentNode = domNode.parentNode
+
+	    if (parentNode && newNode !== domNode) {
+	        parentNode.replaceChild(newNode, domNode)
+	    }
+
+	    if (!updating) {
+	        destroyWidget(domNode, leftVNode)
+	    }
+
+	    return newNode
+	}
+
+	function vNodePatch(domNode, leftVNode, vNode, renderOptions) {
+	    var parentNode = domNode.parentNode
+	    var newNode = renderOptions.render(vNode, renderOptions)
+
+	    if (parentNode && newNode !== domNode) {
+	        parentNode.replaceChild(newNode, domNode)
+	    }
+
+	    return newNode
+	}
+
+	function destroyWidget(domNode, w) {
+	    if (typeof w.destroy === "function" && isWidget(w)) {
+	        w.destroy(domNode)
+	    }
+	}
+
+	function reorderChildren(domNode, moves) {
+	    var childNodes = domNode.childNodes
+	    var keyMap = {}
+	    var node
+	    var remove
+	    var insert
+
+	    for (var i = 0; i < moves.removes.length; i++) {
+	        remove = moves.removes[i]
+	        node = childNodes[remove.from]
+	        if (remove.key) {
+	            keyMap[remove.key] = node
+	        }
+	        domNode.removeChild(node)
+	    }
+
+	    var length = childNodes.length
+	    for (var j = 0; j < moves.inserts.length; j++) {
+	        insert = moves.inserts[j]
+	        node = keyMap[insert.key]
+	        // this is the weirdest bug i've ever seen in webkit
+	        domNode.insertBefore(node, insert.to >= length++ ? null : childNodes[insert.to])
+	    }
+	}
+
+	function replaceRoot(oldRoot, newRoot) {
+	    if (oldRoot && newRoot && oldRoot !== newRoot && oldRoot.parentNode) {
+	        oldRoot.parentNode.replaceChild(newRoot, oldRoot)
+	    }
+
+	    return newRoot;
+	}
+
+
+/***/ },
+/* 330 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var isWidget = __webpack_require__(318)
+
+	module.exports = updateWidget
+
+	function updateWidget(a, b) {
+	    if (isWidget(a) && isWidget(b)) {
+	        if ("name" in a && "name" in b) {
+	            return a.id === b.id
+	        } else {
+	            return a.init === b.init
+	        }
+	    }
+
+	    return false
+	}
+
+
+/***/ },
+/* 331 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var isArray = __webpack_require__(323);
+
+	var VNode = __webpack_require__(332);
+	var VText = __webpack_require__(333);
+	var isVNode = __webpack_require__(315);
+	var isVText = __webpack_require__(317);
+	var isWidget = __webpack_require__(318);
+	var isHook = __webpack_require__(314);
+	var isVThunk = __webpack_require__(320);
+
+	var parseTag = __webpack_require__(334);
+	var softSetHook = __webpack_require__(336);
+	var evHook = __webpack_require__(337);
+
+	module.exports = h;
+
+	function h(tagName, properties, children) {
+	    var childNodes = [];
+	    var tag, props, key, namespace;
+
+	    if (!children && isChildren(properties)) {
+	        children = properties;
+	        props = {};
+	    }
+
+	    props = props || properties || {};
+	    tag = parseTag(tagName, props);
+
+	    // support keys
+	    if (props.hasOwnProperty('key')) {
+	        key = props.key;
+	        props.key = undefined;
+	    }
+
+	    // support namespace
+	    if (props.hasOwnProperty('namespace')) {
+	        namespace = props.namespace;
+	        props.namespace = undefined;
+	    }
+
+	    // fix cursor bug
+	    if (tag === 'INPUT' &&
+	        !namespace &&
+	        props.hasOwnProperty('value') &&
+	        props.value !== undefined &&
+	        !isHook(props.value)
+	    ) {
+	        props.value = softSetHook(props.value);
+	    }
+
+	    transformProperties(props);
+
+	    if (children !== undefined && children !== null) {
+	        addChild(children, childNodes, tag, props);
+	    }
+
+
+	    return new VNode(tag, props, childNodes, key, namespace);
+	}
+
+	function addChild(c, childNodes, tag, props) {
+	    if (typeof c === 'string') {
+	        childNodes.push(new VText(c));
+	    } else if (typeof c === 'number') {
+	        childNodes.push(new VText(String(c)));
+	    } else if (isChild(c)) {
+	        childNodes.push(c);
+	    } else if (isArray(c)) {
+	        for (var i = 0; i < c.length; i++) {
+	            addChild(c[i], childNodes, tag, props);
+	        }
+	    } else if (c === null || c === undefined) {
+	        return;
+	    } else {
+	        throw UnexpectedVirtualElement({
+	            foreignObject: c,
+	            parentVnode: {
+	                tagName: tag,
+	                properties: props
+	            }
+	        });
+	    }
+	}
+
+	function transformProperties(props) {
+	    for (var propName in props) {
+	        if (props.hasOwnProperty(propName)) {
+	            var value = props[propName];
+
+	            if (isHook(value)) {
+	                continue;
+	            }
+
+	            if (propName.substr(0, 3) === 'ev-') {
+	                // add ev-foo support
+	                props[propName] = evHook(value);
+	            }
+	        }
+	    }
+	}
+
+	function isChild(x) {
+	    return isVNode(x) || isVText(x) || isWidget(x) || isVThunk(x);
+	}
+
+	function isChildren(x) {
+	    return typeof x === 'string' || isArray(x) || isChild(x);
+	}
+
+	function UnexpectedVirtualElement(data) {
+	    var err = new Error();
+
+	    err.type = 'virtual-hyperscript.unexpected.virtual-element';
+	    err.message = 'Unexpected virtual child passed to h().\n' +
+	        'Expected a VNode / Vthunk / VWidget / string but:\n' +
+	        'got:\n' +
+	        errorString(data.foreignObject) +
+	        '.\n' +
+	        'The parent vnode is:\n' +
+	        errorString(data.parentVnode)
+	        '\n' +
+	        'Suggested fix: change your `h(..., [ ... ])` callsite.';
+	    err.foreignObject = data.foreignObject;
+	    err.parentVnode = data.parentVnode;
+
+	    return err;
+	}
+
+	function errorString(obj) {
+	    try {
+	        return JSON.stringify(obj, null, '    ');
+	    } catch (e) {
+	        return String(obj);
+	    }
+	}
+
+
+/***/ },
+/* 332 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var version = __webpack_require__(316)
+	var isVNode = __webpack_require__(315)
+	var isWidget = __webpack_require__(318)
+	var isThunk = __webpack_require__(320)
+	var isVHook = __webpack_require__(314)
+
+	module.exports = VirtualNode
+
+	var noProperties = {}
+	var noChildren = []
+
+	function VirtualNode(tagName, properties, children, key, namespace) {
+	    this.tagName = tagName
+	    this.properties = properties || noProperties
+	    this.children = children || noChildren
+	    this.key = key != null ? String(key) : undefined
+	    this.namespace = (typeof namespace === "string") ? namespace : null
+
+	    var count = (children && children.length) || 0
+	    var descendants = 0
+	    var hasWidgets = false
+	    var hasThunks = false
+	    var descendantHooks = false
+	    var hooks
+
+	    for (var propName in properties) {
+	        if (properties.hasOwnProperty(propName)) {
+	            var property = properties[propName]
+	            if (isVHook(property) && property.unhook) {
+	                if (!hooks) {
+	                    hooks = {}
+	                }
+
+	                hooks[propName] = property
+	            }
+	        }
+	    }
+
+	    for (var i = 0; i < count; i++) {
+	        var child = children[i]
+	        if (isVNode(child)) {
+	            descendants += child.count || 0
+
+	            if (!hasWidgets && child.hasWidgets) {
+	                hasWidgets = true
+	            }
+
+	            if (!hasThunks && child.hasThunks) {
+	                hasThunks = true
+	            }
+
+	            if (!descendantHooks && (child.hooks || child.descendantHooks)) {
+	                descendantHooks = true
+	            }
+	        } else if (!hasWidgets && isWidget(child)) {
+	            if (typeof child.destroy === "function") {
+	                hasWidgets = true
+	            }
+	        } else if (!hasThunks && isThunk(child)) {
+	            hasThunks = true;
+	        }
+	    }
+
+	    this.count = count + descendants
+	    this.hasWidgets = hasWidgets
+	    this.hasThunks = hasThunks
+	    this.hooks = hooks
+	    this.descendantHooks = descendantHooks
+	}
+
+	VirtualNode.prototype.version = version
+	VirtualNode.prototype.type = "VirtualNode"
+
+
+/***/ },
+/* 333 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var version = __webpack_require__(316)
+
+	module.exports = VirtualText
+
+	function VirtualText(text) {
+	    this.text = String(text)
+	}
+
+	VirtualText.prototype.version = version
+	VirtualText.prototype.type = "VirtualText"
+
+
+/***/ },
+/* 334 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var split = __webpack_require__(335);
+
+	var classIdSplit = /([\.#]?[a-zA-Z0-9\u007F-\uFFFF_:-]+)/;
+	var notClassId = /^\.|#/;
+
+	module.exports = parseTag;
+
+	function parseTag(tag, props) {
+	    if (!tag) {
+	        return 'DIV';
+	    }
+
+	    var noId = !(props.hasOwnProperty('id'));
+
+	    var tagParts = split(tag, classIdSplit);
+	    var tagName = null;
+
+	    if (notClassId.test(tagParts[1])) {
+	        tagName = 'DIV';
+	    }
+
+	    var classes, part, type, i;
+
+	    for (i = 0; i < tagParts.length; i++) {
+	        part = tagParts[i];
+
+	        if (!part) {
+	            continue;
+	        }
+
+	        type = part.charAt(0);
+
+	        if (!tagName) {
+	            tagName = part;
+	        } else if (type === '.') {
+	            classes = classes || [];
+	            classes.push(part.substring(1, part.length));
+	        } else if (type === '#' && noId) {
+	            props.id = part.substring(1, part.length);
+	        }
+	    }
+
+	    if (classes) {
+	        if (props.className) {
+	            classes.push(props.className);
+	        }
+
+	        props.className = classes.join(' ');
+	    }
+
+	    return props.namespace ? tagName : tagName.toUpperCase();
+	}
+
+
+/***/ },
+/* 335 */
+/***/ function(module, exports) {
+
+	/*!
+	 * Cross-Browser Split 1.1.1
+	 * Copyright 2007-2012 Steven Levithan <stevenlevithan.com>
+	 * Available under the MIT License
+	 * ECMAScript compliant, uniform cross-browser split method
+	 */
+
+	/**
+	 * Splits a string into an array of strings using a regex or string separator. Matches of the
+	 * separator are not included in the result array. However, if `separator` is a regex that contains
+	 * capturing groups, backreferences are spliced into the result each time `separator` is matched.
+	 * Fixes browser bugs compared to the native `String.prototype.split` and can be used reliably
+	 * cross-browser.
+	 * @param {String} str String to split.
+	 * @param {RegExp|String} separator Regex or string to use for separating the string.
+	 * @param {Number} [limit] Maximum number of items to include in the result array.
+	 * @returns {Array} Array of substrings.
+	 * @example
+	 *
+	 * // Basic use
+	 * split('a b c d', ' ');
+	 * // -> ['a', 'b', 'c', 'd']
+	 *
+	 * // With limit
+	 * split('a b c d', ' ', 2);
+	 * // -> ['a', 'b']
+	 *
+	 * // Backreferences in result array
+	 * split('..word1 word2..', /([a-z]+)(\d+)/i);
+	 * // -> ['..', 'word', '1', ' ', 'word', '2', '..']
+	 */
+	module.exports = (function split(undef) {
+
+	  var nativeSplit = String.prototype.split,
+	    compliantExecNpcg = /()??/.exec("")[1] === undef,
+	    // NPCG: nonparticipating capturing group
+	    self;
+
+	  self = function(str, separator, limit) {
+	    // If `separator` is not a regex, use `nativeSplit`
+	    if (Object.prototype.toString.call(separator) !== "[object RegExp]") {
+	      return nativeSplit.call(str, separator, limit);
+	    }
+	    var output = [],
+	      flags = (separator.ignoreCase ? "i" : "") + (separator.multiline ? "m" : "") + (separator.extended ? "x" : "") + // Proposed for ES6
+	      (separator.sticky ? "y" : ""),
+	      // Firefox 3+
+	      lastLastIndex = 0,
+	      // Make `global` and avoid `lastIndex` issues by working with a copy
+	      separator = new RegExp(separator.source, flags + "g"),
+	      separator2, match, lastIndex, lastLength;
+	    str += ""; // Type-convert
+	    if (!compliantExecNpcg) {
+	      // Doesn't need flags gy, but they don't hurt
+	      separator2 = new RegExp("^" + separator.source + "$(?!\\s)", flags);
+	    }
+	    /* Values for `limit`, per the spec:
+	     * If undefined: 4294967295 // Math.pow(2, 32) - 1
+	     * If 0, Infinity, or NaN: 0
+	     * If positive number: limit = Math.floor(limit); if (limit > 4294967295) limit -= 4294967296;
+	     * If negative number: 4294967296 - Math.floor(Math.abs(limit))
+	     * If other: Type-convert, then use the above rules
+	     */
+	    limit = limit === undef ? -1 >>> 0 : // Math.pow(2, 32) - 1
+	    limit >>> 0; // ToUint32(limit)
+	    while (match = separator.exec(str)) {
+	      // `separator.lastIndex` is not reliable cross-browser
+	      lastIndex = match.index + match[0].length;
+	      if (lastIndex > lastLastIndex) {
+	        output.push(str.slice(lastLastIndex, match.index));
+	        // Fix browsers whose `exec` methods don't consistently return `undefined` for
+	        // nonparticipating capturing groups
+	        if (!compliantExecNpcg && match.length > 1) {
+	          match[0].replace(separator2, function() {
+	            for (var i = 1; i < arguments.length - 2; i++) {
+	              if (arguments[i] === undef) {
+	                match[i] = undef;
+	              }
+	            }
+	          });
+	        }
+	        if (match.length > 1 && match.index < str.length) {
+	          Array.prototype.push.apply(output, match.slice(1));
+	        }
+	        lastLength = match[0].length;
+	        lastLastIndex = lastIndex;
+	        if (output.length >= limit) {
+	          break;
+	        }
+	      }
+	      if (separator.lastIndex === match.index) {
+	        separator.lastIndex++; // Avoid an infinite loop
+	      }
+	    }
+	    if (lastLastIndex === str.length) {
+	      if (lastLength || !separator.test("")) {
+	        output.push("");
+	      }
+	    } else {
+	      output.push(str.slice(lastLastIndex));
+	    }
+	    return output.length > limit ? output.slice(0, limit) : output;
+	  };
+
+	  return self;
+	})();
+
+
+/***/ },
+/* 336 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	module.exports = SoftSetHook;
+
+	function SoftSetHook(value) {
+	    if (!(this instanceof SoftSetHook)) {
+	        return new SoftSetHook(value);
+	    }
+
+	    this.value = value;
+	}
+
+	SoftSetHook.prototype.hook = function (node, propertyName) {
+	    if (node[propertyName] !== this.value) {
+	        node[propertyName] = this.value;
+	    }
+	};
+
+
+/***/ },
+/* 337 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var EvStore = __webpack_require__(338);
+
+	module.exports = EvHook;
+
+	function EvHook(value) {
+	    if (!(this instanceof EvHook)) {
+	        return new EvHook(value);
+	    }
+
+	    this.value = value;
+	}
+
+	EvHook.prototype.hook = function (node, propertyName) {
+	    var es = EvStore(node);
+	    var propName = propertyName.substr(3);
+
+	    es[propName] = this.value;
+	};
+
+	EvHook.prototype.unhook = function(node, propertyName) {
+	    var es = EvStore(node);
+	    var propName = propertyName.substr(3);
+
+	    es[propName] = undefined;
+	};
+
+
+/***/ },
+/* 338 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var OneVersionConstraint = __webpack_require__(339);
+
+	var MY_VERSION = '7';
+	OneVersionConstraint('ev-store', MY_VERSION);
+
+	var hashKey = '__EV_STORE_KEY@' + MY_VERSION;
+
+	module.exports = EvStore;
+
+	function EvStore(elem) {
+	    var hash = elem[hashKey];
+
+	    if (!hash) {
+	        hash = elem[hashKey] = {};
+	    }
+
+	    return hash;
+	}
+
+
+/***/ },
+/* 339 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var Individual = __webpack_require__(340);
+
+	module.exports = OneVersion;
+
+	function OneVersion(moduleName, version, defaultValue) {
+	    var key = '__INDIVIDUAL_ONE_VERSION_' + moduleName;
+	    var enforceKey = key + '_ENFORCE_SINGLETON';
+
+	    var versionValue = Individual(enforceKey, version);
+
+	    if (versionValue !== version) {
+	        throw new Error('Can only have one copy of ' +
+	            moduleName + '.\n' +
+	            'You already have version ' + versionValue +
+	            ' installed.\n' +
+	            'This means you cannot install version ' + version);
+	    }
+
+	    return Individual(key, defaultValue);
+	}
+
+
+/***/ },
+/* 340 */
+/***/ function(module, exports) {
+
+	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
+
+	/*global window, global*/
+
+	var root = typeof window !== 'undefined' ?
+	    window : typeof global !== 'undefined' ?
+	    global : {};
+
+	module.exports = Individual;
+
+	function Individual(key, value) {
+	    if (key in root) {
+	        return root[key];
+	    }
+
+	    root[key] = value;
+
+	    return value;
+	}
+
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ },
+/* 341 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -16188,928 +18127,7 @@
 	exports.default = WebComponent;
 
 /***/ },
-/* 305 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _snabbdom = __webpack_require__(306);
-
-	var _snabbdom2 = _interopRequireDefault(_snabbdom);
-
-	var _h = __webpack_require__(301);
-
-	var _h2 = _interopRequireDefault(_h);
-
-	var _attributes = __webpack_require__(309);
-
-	var _attributes2 = _interopRequireDefault(_attributes);
-
-	var _dataset = __webpack_require__(310);
-
-	var _dataset2 = _interopRequireDefault(_dataset);
-
-	var _snabbdomDelayedClass = __webpack_require__(311);
-
-	var _snabbdomDelayedClass2 = _interopRequireDefault(_snabbdomDelayedClass);
-
-	var _eventlisteners = __webpack_require__(312);
-
-	var _eventlisteners2 = _interopRequireDefault(_eventlisteners);
-
-	var _props = __webpack_require__(313);
-
-	var _props2 = _interopRequireDefault(_props);
-
-	var _style = __webpack_require__(314);
-
-	var _style2 = _interopRequireDefault(_style);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var patch = _snabbdom2.default.init([_attributes2.default, _dataset2.default, _snabbdomDelayedClass2.default, _eventlisteners2.default, _props2.default, _style2.default]);
-
-	var DOMPatcher = function () {
-	  function DOMPatcher(initialState, renderFunc) {
-	    var options = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
-
-	    _classCallCheck(this, DOMPatcher);
-
-	    this.updateMode = options.updateMode || 'async';
-
-	    this.state = Object.assign({}, initialState);
-	    this.renderFunc = renderFunc;
-	    this.vnode = this.renderFunc(this.state);
-
-	    // prepare root element
-	    var tagName = this.vnode.sel.split(/[#\.]/)[0];
-	    var classMatches = this.vnode.sel.match(/\.[^\.#]+/g);
-	    var idMatch = this.vnode.sel.match(/#[^\.#]+/);
-	    this.el = document.createElement(tagName);
-	    if (classMatches) {
-	      this.el.className = classMatches.map(function (c) {
-	        return c.slice(1);
-	      }).join(' ');
-	    }
-	    if (idMatch) {
-	      this.el.id = idMatch.slice(1);
-	    }
-
-	    patch(this.el, this.vnode);
-	  }
-
-	  _createClass(DOMPatcher, [{
-	    key: 'update',
-	    value: function update(newState) {
-	      var _this = this;
-
-	      if (this.rendering) {
-	        console.error('Applying new DOM update while render is already in progress!');
-	      }
-
-	      this.pendingState = newState;
-	      switch (this.updateMode) {
-	        case 'async':
-	          if (!this.pending) {
-	            this.pending = true;
-	            requestAnimationFrame(function () {
-	              return _this.render();
-	            });
-	          }
-	          break;
-	        case 'sync':
-	          this.render();
-	          break;
-	      }
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      this.rendering = true;
-
-	      this.pending = false;
-	      this.state = this.pendingState;
-	      var newVnode = this.renderFunc(this.state);
-	      patch(this.vnode, newVnode);
-	      this.vnode = newVnode;
-
-	      this.rendering = false;
-	    }
-	  }]);
-
-	  return DOMPatcher;
-	}();
-
-	exports.default = DOMPatcher;
-
-/***/ },
-/* 306 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var vnode_1 = __webpack_require__(302);
-	var is = __webpack_require__(303);
-	var htmldomapi_1 = __webpack_require__(307);
-	function isUndef(s) { return s === undefined; }
-	function isDef(s) { return s !== undefined; }
-	var emptyNode = vnode_1.default('', {}, [], undefined, undefined);
-	function sameVnode(vnode1, vnode2) {
-	    return vnode1.key === vnode2.key && vnode1.sel === vnode2.sel;
-	}
-	function isVnode(vnode) {
-	    return vnode.sel !== undefined;
-	}
-	function createKeyToOldIdx(children, beginIdx, endIdx) {
-	    var i, map = {}, key;
-	    for (i = beginIdx; i <= endIdx; ++i) {
-	        key = children[i].key;
-	        if (key !== undefined)
-	            map[key] = i;
-	    }
-	    return map;
-	}
-	var hooks = ['create', 'update', 'remove', 'destroy', 'pre', 'post'];
-	var h_1 = __webpack_require__(301);
-	exports.h = h_1.h;
-	var thunk_1 = __webpack_require__(308);
-	exports.thunk = thunk_1.thunk;
-	function init(modules, domApi) {
-	    var i, j, cbs = {};
-	    var api = domApi !== undefined ? domApi : htmldomapi_1.default;
-	    for (i = 0; i < hooks.length; ++i) {
-	        cbs[hooks[i]] = [];
-	        for (j = 0; j < modules.length; ++j) {
-	            if (modules[j][hooks[i]] !== undefined)
-	                cbs[hooks[i]].push(modules[j][hooks[i]]);
-	        }
-	    }
-	    function emptyNodeAt(elm) {
-	        var id = elm.id ? '#' + elm.id : '';
-	        var c = elm.className ? '.' + elm.className.split(' ').join('.') : '';
-	        return vnode_1.default(api.tagName(elm).toLowerCase() + id + c, {}, [], undefined, elm);
-	    }
-	    function createRmCb(childElm, listeners) {
-	        return function rmCb() {
-	            if (--listeners === 0) {
-	                var parent_1 = api.parentNode(childElm);
-	                api.removeChild(parent_1, childElm);
-	            }
-	        };
-	    }
-	    function createElm(vnode, insertedVnodeQueue) {
-	        var i, data = vnode.data;
-	        if (data !== undefined) {
-	            if (isDef(i = data.hook) && isDef(i = i.init)) {
-	                i(vnode);
-	                data = vnode.data;
-	            }
-	        }
-	        var children = vnode.children, sel = vnode.sel;
-	        if (sel !== undefined) {
-	            // Parse selector
-	            var hashIdx = sel.indexOf('#');
-	            var dotIdx = sel.indexOf('.', hashIdx);
-	            var hash = hashIdx > 0 ? hashIdx : sel.length;
-	            var dot = dotIdx > 0 ? dotIdx : sel.length;
-	            var tag = hashIdx !== -1 || dotIdx !== -1 ? sel.slice(0, Math.min(hash, dot)) : sel;
-	            var elm = vnode.elm = isDef(data) && isDef(i = data.ns) ? api.createElementNS(i, tag)
-	                : api.createElement(tag);
-	            if (hash < dot)
-	                elm.id = sel.slice(hash + 1, dot);
-	            if (dotIdx > 0)
-	                elm.className = sel.slice(dot + 1).replace(/\./g, ' ');
-	            if (is.array(children)) {
-	                for (i = 0; i < children.length; ++i) {
-	                    api.appendChild(elm, createElm(children[i], insertedVnodeQueue));
-	                }
-	            }
-	            else if (is.primitive(vnode.text)) {
-	                api.appendChild(elm, api.createTextNode(vnode.text));
-	            }
-	            for (i = 0; i < cbs.create.length; ++i)
-	                cbs.create[i](emptyNode, vnode);
-	            i = vnode.data.hook; // Reuse variable
-	            if (isDef(i)) {
-	                if (i.create)
-	                    i.create(emptyNode, vnode);
-	                if (i.insert)
-	                    insertedVnodeQueue.push(vnode);
-	            }
-	        }
-	        else {
-	            vnode.elm = api.createTextNode(vnode.text);
-	        }
-	        return vnode.elm;
-	    }
-	    function addVnodes(parentElm, before, vnodes, startIdx, endIdx, insertedVnodeQueue) {
-	        for (; startIdx <= endIdx; ++startIdx) {
-	            api.insertBefore(parentElm, createElm(vnodes[startIdx], insertedVnodeQueue), before);
-	        }
-	    }
-	    function invokeDestroyHook(vnode) {
-	        var i, j, data = vnode.data;
-	        if (data !== undefined) {
-	            if (isDef(i = data.hook) && isDef(i = i.destroy))
-	                i(vnode);
-	            for (i = 0; i < cbs.destroy.length; ++i)
-	                cbs.destroy[i](vnode);
-	            if (vnode.children !== undefined) {
-	                for (j = 0; j < vnode.children.length; ++j) {
-	                    i = vnode.children[j];
-	                    if (typeof i !== "string") {
-	                        invokeDestroyHook(i);
-	                    }
-	                }
-	            }
-	        }
-	    }
-	    function removeVnodes(parentElm, vnodes, startIdx, endIdx) {
-	        for (; startIdx <= endIdx; ++startIdx) {
-	            var i_1 = void 0, listeners = void 0, rm = void 0, ch = vnodes[startIdx];
-	            if (isDef(ch)) {
-	                if (isDef(ch.sel)) {
-	                    invokeDestroyHook(ch);
-	                    listeners = cbs.remove.length + 1;
-	                    rm = createRmCb(ch.elm, listeners);
-	                    for (i_1 = 0; i_1 < cbs.remove.length; ++i_1)
-	                        cbs.remove[i_1](ch, rm);
-	                    if (isDef(i_1 = ch.data) && isDef(i_1 = i_1.hook) && isDef(i_1 = i_1.remove)) {
-	                        i_1(ch, rm);
-	                    }
-	                    else {
-	                        rm();
-	                    }
-	                }
-	                else {
-	                    api.removeChild(parentElm, ch.elm);
-	                }
-	            }
-	        }
-	    }
-	    function updateChildren(parentElm, oldCh, newCh, insertedVnodeQueue) {
-	        var oldStartIdx = 0, newStartIdx = 0;
-	        var oldEndIdx = oldCh.length - 1;
-	        var oldStartVnode = oldCh[0];
-	        var oldEndVnode = oldCh[oldEndIdx];
-	        var newEndIdx = newCh.length - 1;
-	        var newStartVnode = newCh[0];
-	        var newEndVnode = newCh[newEndIdx];
-	        var oldKeyToIdx;
-	        var idxInOld;
-	        var elmToMove;
-	        var before;
-	        while (oldStartIdx <= oldEndIdx && newStartIdx <= newEndIdx) {
-	            if (isUndef(oldStartVnode)) {
-	                oldStartVnode = oldCh[++oldStartIdx]; // Vnode has been moved left
-	            }
-	            else if (isUndef(oldEndVnode)) {
-	                oldEndVnode = oldCh[--oldEndIdx];
-	            }
-	            else if (sameVnode(oldStartVnode, newStartVnode)) {
-	                patchVnode(oldStartVnode, newStartVnode, insertedVnodeQueue);
-	                oldStartVnode = oldCh[++oldStartIdx];
-	                newStartVnode = newCh[++newStartIdx];
-	            }
-	            else if (sameVnode(oldEndVnode, newEndVnode)) {
-	                patchVnode(oldEndVnode, newEndVnode, insertedVnodeQueue);
-	                oldEndVnode = oldCh[--oldEndIdx];
-	                newEndVnode = newCh[--newEndIdx];
-	            }
-	            else if (sameVnode(oldStartVnode, newEndVnode)) {
-	                patchVnode(oldStartVnode, newEndVnode, insertedVnodeQueue);
-	                api.insertBefore(parentElm, oldStartVnode.elm, api.nextSibling(oldEndVnode.elm));
-	                oldStartVnode = oldCh[++oldStartIdx];
-	                newEndVnode = newCh[--newEndIdx];
-	            }
-	            else if (sameVnode(oldEndVnode, newStartVnode)) {
-	                patchVnode(oldEndVnode, newStartVnode, insertedVnodeQueue);
-	                api.insertBefore(parentElm, oldEndVnode.elm, oldStartVnode.elm);
-	                oldEndVnode = oldCh[--oldEndIdx];
-	                newStartVnode = newCh[++newStartIdx];
-	            }
-	            else {
-	                if (oldKeyToIdx === undefined) {
-	                    oldKeyToIdx = createKeyToOldIdx(oldCh, oldStartIdx, oldEndIdx);
-	                }
-	                idxInOld = oldKeyToIdx[newStartVnode.key];
-	                if (isUndef(idxInOld)) {
-	                    api.insertBefore(parentElm, createElm(newStartVnode, insertedVnodeQueue), oldStartVnode.elm);
-	                    newStartVnode = newCh[++newStartIdx];
-	                }
-	                else {
-	                    elmToMove = oldCh[idxInOld];
-	                    if (elmToMove.sel !== newStartVnode.sel) {
-	                        api.insertBefore(parentElm, createElm(newStartVnode, insertedVnodeQueue), oldStartVnode.elm);
-	                    }
-	                    else {
-	                        patchVnode(elmToMove, newStartVnode, insertedVnodeQueue);
-	                        oldCh[idxInOld] = undefined;
-	                        api.insertBefore(parentElm, elmToMove.elm, oldStartVnode.elm);
-	                    }
-	                    newStartVnode = newCh[++newStartIdx];
-	                }
-	            }
-	        }
-	        if (oldStartIdx > oldEndIdx) {
-	            before = isUndef(newCh[newEndIdx + 1]) ? null : newCh[newEndIdx + 1].elm;
-	            addVnodes(parentElm, before, newCh, newStartIdx, newEndIdx, insertedVnodeQueue);
-	        }
-	        else if (newStartIdx > newEndIdx) {
-	            removeVnodes(parentElm, oldCh, oldStartIdx, oldEndIdx);
-	        }
-	    }
-	    function patchVnode(oldVnode, vnode, insertedVnodeQueue) {
-	        var i, hook;
-	        if (isDef(i = vnode.data) && isDef(hook = i.hook) && isDef(i = hook.prepatch)) {
-	            i(oldVnode, vnode);
-	        }
-	        var elm = vnode.elm = oldVnode.elm, oldCh = oldVnode.children, ch = vnode.children;
-	        if (oldVnode === vnode)
-	            return;
-	        if (isDef(vnode.data)) {
-	            for (i = 0; i < cbs.update.length; ++i)
-	                cbs.update[i](oldVnode, vnode);
-	            i = vnode.data.hook;
-	            if (isDef(i) && isDef(i = i.update))
-	                i(oldVnode, vnode);
-	        }
-	        if (isUndef(vnode.text)) {
-	            if (isDef(oldCh) && isDef(ch)) {
-	                if (oldCh !== ch)
-	                    updateChildren(elm, oldCh, ch, insertedVnodeQueue);
-	            }
-	            else if (isDef(ch)) {
-	                if (isDef(oldVnode.text))
-	                    api.setTextContent(elm, '');
-	                addVnodes(elm, null, ch, 0, ch.length - 1, insertedVnodeQueue);
-	            }
-	            else if (isDef(oldCh)) {
-	                removeVnodes(elm, oldCh, 0, oldCh.length - 1);
-	            }
-	            else if (isDef(oldVnode.text)) {
-	                api.setTextContent(elm, '');
-	            }
-	        }
-	        else if (oldVnode.text !== vnode.text) {
-	            api.setTextContent(elm, vnode.text);
-	        }
-	        if (isDef(hook) && isDef(i = hook.postpatch)) {
-	            i(oldVnode, vnode);
-	        }
-	    }
-	    return function patch(oldVnode, vnode) {
-	        var i, elm, parent;
-	        var insertedVnodeQueue = [];
-	        for (i = 0; i < cbs.pre.length; ++i)
-	            cbs.pre[i]();
-	        if (!isVnode(oldVnode)) {
-	            oldVnode = emptyNodeAt(oldVnode);
-	        }
-	        if (sameVnode(oldVnode, vnode)) {
-	            patchVnode(oldVnode, vnode, insertedVnodeQueue);
-	        }
-	        else {
-	            elm = oldVnode.elm;
-	            parent = api.parentNode(elm);
-	            createElm(vnode, insertedVnodeQueue);
-	            if (parent !== null) {
-	                api.insertBefore(parent, vnode.elm, api.nextSibling(elm));
-	                removeVnodes(parent, [oldVnode], 0, 0);
-	            }
-	        }
-	        for (i = 0; i < insertedVnodeQueue.length; ++i) {
-	            insertedVnodeQueue[i].data.hook.insert(insertedVnodeQueue[i]);
-	        }
-	        for (i = 0; i < cbs.post.length; ++i)
-	            cbs.post[i]();
-	        return vnode;
-	    };
-	}
-	exports.init = init;
-	//# sourceMappingURL=snabbdom.js.map
-
-/***/ },
-/* 307 */
-/***/ function(module, exports) {
-
-	"use strict";
-	function createElement(tagName) {
-	    return document.createElement(tagName);
-	}
-	function createElementNS(namespaceURI, qualifiedName) {
-	    return document.createElementNS(namespaceURI, qualifiedName);
-	}
-	function createTextNode(text) {
-	    return document.createTextNode(text);
-	}
-	function insertBefore(parentNode, newNode, referenceNode) {
-	    parentNode.insertBefore(newNode, referenceNode);
-	}
-	function removeChild(node, child) {
-	    node.removeChild(child);
-	}
-	function appendChild(node, child) {
-	    node.appendChild(child);
-	}
-	function parentNode(node) {
-	    return node.parentNode;
-	}
-	function nextSibling(node) {
-	    return node.nextSibling;
-	}
-	function tagName(elm) {
-	    return elm.tagName;
-	}
-	function setTextContent(node, text) {
-	    node.textContent = text;
-	}
-	exports.htmlDomApi = {
-	    createElement: createElement,
-	    createElementNS: createElementNS,
-	    createTextNode: createTextNode,
-	    insertBefore: insertBefore,
-	    removeChild: removeChild,
-	    appendChild: appendChild,
-	    parentNode: parentNode,
-	    nextSibling: nextSibling,
-	    tagName: tagName,
-	    setTextContent: setTextContent,
-	};
-	Object.defineProperty(exports, "__esModule", { value: true });
-	exports.default = exports.htmlDomApi;
-	//# sourceMappingURL=htmldomapi.js.map
-
-/***/ },
-/* 308 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var h_1 = __webpack_require__(301);
-	function copyToThunk(vnode, thunk) {
-	    thunk.elm = vnode.elm;
-	    vnode.data.fn = thunk.data.fn;
-	    vnode.data.args = thunk.data.args;
-	    thunk.data = vnode.data;
-	    thunk.children = vnode.children;
-	    thunk.text = vnode.text;
-	    thunk.elm = vnode.elm;
-	}
-	function init(thunk) {
-	    var cur = thunk.data;
-	    var vnode = cur.fn.apply(undefined, cur.args);
-	    copyToThunk(vnode, thunk);
-	}
-	function prepatch(oldVnode, thunk) {
-	    var i, old = oldVnode.data, cur = thunk.data;
-	    var oldArgs = old.args, args = cur.args;
-	    if (old.fn !== cur.fn || oldArgs.length !== args.length) {
-	        copyToThunk(cur.fn.apply(undefined, args), thunk);
-	    }
-	    for (i = 0; i < args.length; ++i) {
-	        if (oldArgs[i] !== args[i]) {
-	            copyToThunk(cur.fn.apply(undefined, args), thunk);
-	            return;
-	        }
-	    }
-	    copyToThunk(oldVnode, thunk);
-	}
-	exports.thunk = function thunk(sel, key, fn, args) {
-	    if (args === undefined) {
-	        args = fn;
-	        fn = key;
-	        key = undefined;
-	    }
-	    return h_1.h(sel, {
-	        key: key,
-	        hook: { init: init, prepatch: prepatch },
-	        fn: fn,
-	        args: args
-	    });
-	};
-	Object.defineProperty(exports, "__esModule", { value: true });
-	exports.default = exports.thunk;
-	//# sourceMappingURL=thunk.js.map
-
-/***/ },
-/* 309 */
-/***/ function(module, exports) {
-
-	"use strict";
-	var NamespaceURIs = {
-	    "xlink": "http://www.w3.org/1999/xlink"
-	};
-	var booleanAttrs = ["allowfullscreen", "async", "autofocus", "autoplay", "checked", "compact", "controls", "declare",
-	    "default", "defaultchecked", "defaultmuted", "defaultselected", "defer", "disabled", "draggable",
-	    "enabled", "formnovalidate", "hidden", "indeterminate", "inert", "ismap", "itemscope", "loop", "multiple",
-	    "muted", "nohref", "noresize", "noshade", "novalidate", "nowrap", "open", "pauseonexit", "readonly",
-	    "required", "reversed", "scoped", "seamless", "selected", "sortable", "spellcheck", "translate",
-	    "truespeed", "typemustmatch", "visible"];
-	var booleanAttrsDict = Object.create(null);
-	for (var i = 0, len = booleanAttrs.length; i < len; i++) {
-	    booleanAttrsDict[booleanAttrs[i]] = true;
-	}
-	function updateAttrs(oldVnode, vnode) {
-	    var key, cur, old, elm = vnode.elm, oldAttrs = oldVnode.data.attrs, attrs = vnode.data.attrs, namespaceSplit;
-	    if (!oldAttrs && !attrs)
-	        return;
-	    oldAttrs = oldAttrs || {};
-	    attrs = attrs || {};
-	    // update modified attributes, add new attributes
-	    for (key in attrs) {
-	        cur = attrs[key];
-	        old = oldAttrs[key];
-	        if (old !== cur) {
-	            if (!cur && booleanAttrsDict[key])
-	                elm.removeAttribute(key);
-	            else {
-	                namespaceSplit = key.split(":");
-	                if (namespaceSplit.length > 1 && NamespaceURIs.hasOwnProperty(namespaceSplit[0]))
-	                    elm.setAttributeNS(NamespaceURIs[namespaceSplit[0]], key, cur);
-	                else
-	                    elm.setAttribute(key, cur);
-	            }
-	        }
-	    }
-	    //remove removed attributes
-	    // use `in` operator since the previous `for` iteration uses it (.i.e. add even attributes with undefined value)
-	    // the other option is to remove all attributes with value == undefined
-	    for (key in oldAttrs) {
-	        if (!(key in attrs)) {
-	            elm.removeAttribute(key);
-	        }
-	    }
-	}
-	exports.attributesModule = { create: updateAttrs, update: updateAttrs };
-	Object.defineProperty(exports, "__esModule", { value: true });
-	exports.default = exports.attributesModule;
-	//# sourceMappingURL=attributes.js.map
-
-/***/ },
-/* 310 */
-/***/ function(module, exports) {
-
-	"use strict";
-	function updateDataset(oldVnode, vnode) {
-	    var elm = vnode.elm, oldDataset = oldVnode.data.dataset, dataset = vnode.data.dataset, key;
-	    if (!oldDataset && !dataset)
-	        return;
-	    oldDataset = oldDataset || {};
-	    dataset = dataset || {};
-	    for (key in oldDataset) {
-	        if (!dataset[key]) {
-	            delete elm.dataset[key];
-	        }
-	    }
-	    for (key in dataset) {
-	        if (oldDataset[key] !== dataset[key]) {
-	            elm.dataset[key] = dataset[key];
-	        }
-	    }
-	}
-	exports.datasetModule = { create: updateDataset, update: updateDataset };
-	Object.defineProperty(exports, "__esModule", { value: true });
-	exports.default = exports.datasetModule;
-	//# sourceMappingURL=dataset.js.map
-
-/***/ },
-/* 311 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	var raf = (typeof requestAnimationFrame !== 'undefined' && requestAnimationFrame) || setTimeout;
-
-	function addOrRemoveClass(el, className, add) {
-	  el.classList[add ? 'add' : 'remove'](className);
-	}
-
-	function nextFrame(fn) {
-	  raf(function() {
-	    raf(fn);
-	  });
-	}
-
-	function changeClassNextFrame(el, className, add) {
-	  nextFrame(function() {
-	    addOrRemoveClass(el, className, add);
-	  });
-	}
-
-	function updateClass(oldVnode, newVnode) {
-	  var el = newVnode.elm;
-	  var oldClass = oldVnode.data.class;
-	  var newClass = newVnode.data.class;
-
-	  if (!oldClass && !newClass) {
-	    return;
-	  }
-	  oldClass = oldClass || {};
-	  newClass = newClass || {};
-
-	  // remove classes which are no longer in vnode class obj
-	  for (var name in oldClass) {
-	    if (!(name in newClass)) {
-	      el.classList.remove(name);
-	    }
-	  }
-
-	  // handle new classes, taking into account special delayed classes
-	  var oldHasDelay = 'delayed' in oldClass;
-	  for (var name in newClass) {
-	    var val = newClass[name];
-
-	    if (typeof val === 'object') {
-
-	      // special 'delayed'/'remove' class objects
-	      if (name === 'delayed') {
-	        for (var delayedName in val) {
-	          var delayedVal = val[delayedName];
-	          if (!oldHasDelay || delayedVal !== oldClass.delayed[delayedName]) {
-	            changeClassNextFrame(el, delayedName, delayedVal);
-	          }
-	        }
-	      }
-
-	    } else if (val !== oldClass[name]) {
-
-	      // normal class string, handle immediately
-	      addOrRemoveClass(el, name, val);
-
-	    }
-	  }
-	}
-
-	function applyDestroyClass(vnode) {
-	  var classObj = vnode.data.class;
-	  var onDestroy = classObj && classObj.destroy;
-	  if (typeof onDestroy !== 'object') {
-	    return;
-	  }
-
-	  var el = vnode.elm;
-	  for (var name in onDestroy) {
-	    addOrRemoveClass(el, name, onDestroy[name]);
-	  }
-	}
-
-	function applyRemoveClass(vnode, rmFunc) {
-	  var classObj = vnode.data.class;
-	  var onRemove = classObj && classObj.remove;
-	  if (typeof onRemove !== 'object') {
-	    rmFunc();
-	    return;
-	  }
-
-	  var el = vnode.elm;
-	  var delayRemove = 0;
-	  for (var name in onRemove) {
-	    var val = onRemove[name];
-	    if (name === 'delayRemove') {
-	      delayRemove = val;
-	    } else {
-	      addOrRemoveClass(el, name, val);
-	    }
-	  }
-
-	  setTimeout(rmFunc, delayRemove);
-	}
-
-	module.exports = {
-	  create:  updateClass,
-	  update:  updateClass,
-	  destroy: applyDestroyClass,
-	  remove:  applyRemoveClass,
-	};
-
-
-/***/ },
-/* 312 */
-/***/ function(module, exports) {
-
-	"use strict";
-	function invokeHandler(handler, vnode, event) {
-	    if (typeof handler === "function") {
-	        // call function handler
-	        handler.call(vnode, event, vnode);
-	    }
-	    else if (typeof handler === "object") {
-	        // call handler with arguments
-	        if (typeof handler[0] === "function") {
-	            // special case for single argument for performance
-	            if (handler.length === 2) {
-	                handler[0].call(vnode, handler[1], event, vnode);
-	            }
-	            else {
-	                var args = handler.slice(1);
-	                args.push(event);
-	                args.push(vnode);
-	                handler[0].apply(vnode, args);
-	            }
-	        }
-	        else {
-	            // call multiple handlers
-	            for (var i = 0; i < handler.length; i++) {
-	                invokeHandler(handler[i]);
-	            }
-	        }
-	    }
-	}
-	function handleEvent(event, vnode) {
-	    var name = event.type, on = vnode.data.on;
-	    // call event handler(s) if exists
-	    if (on && on[name]) {
-	        invokeHandler(on[name], vnode, event);
-	    }
-	}
-	function createListener() {
-	    return function handler(event) {
-	        handleEvent(event, handler.vnode);
-	    };
-	}
-	function updateEventListeners(oldVnode, vnode) {
-	    var oldOn = oldVnode.data.on, oldListener = oldVnode.listener, oldElm = oldVnode.elm, on = vnode && vnode.data.on, elm = (vnode && vnode.elm), name;
-	    // optimization for reused immutable handlers
-	    if (oldOn === on) {
-	        return;
-	    }
-	    // remove existing listeners which no longer used
-	    if (oldOn && oldListener) {
-	        // if element changed or deleted we remove all existing listeners unconditionally
-	        if (!on) {
-	            for (name in oldOn) {
-	                // remove listener if element was changed or existing listeners removed
-	                oldElm.removeEventListener(name, oldListener, false);
-	            }
-	        }
-	        else {
-	            for (name in oldOn) {
-	                // remove listener if existing listener removed
-	                if (!on[name]) {
-	                    oldElm.removeEventListener(name, oldListener, false);
-	                }
-	            }
-	        }
-	    }
-	    // add new listeners which has not already attached
-	    if (on) {
-	        // reuse existing listener or create new
-	        var listener = vnode.listener = oldVnode.listener || createListener();
-	        // update vnode for listener
-	        listener.vnode = vnode;
-	        // if element changed or added we add all needed listeners unconditionally
-	        if (!oldOn) {
-	            for (name in on) {
-	                // add listener if element was changed or new listeners added
-	                elm.addEventListener(name, listener, false);
-	            }
-	        }
-	        else {
-	            for (name in on) {
-	                // add listener if new listener added
-	                if (!oldOn[name]) {
-	                    elm.addEventListener(name, listener, false);
-	                }
-	            }
-	        }
-	    }
-	}
-	exports.eventListenersModule = {
-	    create: updateEventListeners,
-	    update: updateEventListeners,
-	    destroy: updateEventListeners
-	};
-	Object.defineProperty(exports, "__esModule", { value: true });
-	exports.default = exports.eventListenersModule;
-	//# sourceMappingURL=eventlisteners.js.map
-
-/***/ },
-/* 313 */
-/***/ function(module, exports) {
-
-	"use strict";
-	function updateProps(oldVnode, vnode) {
-	    var key, cur, old, elm = vnode.elm, oldProps = oldVnode.data.props, props = vnode.data.props;
-	    if (!oldProps && !props)
-	        return;
-	    oldProps = oldProps || {};
-	    props = props || {};
-	    for (key in oldProps) {
-	        if (!props[key]) {
-	            delete elm[key];
-	        }
-	    }
-	    for (key in props) {
-	        cur = props[key];
-	        old = oldProps[key];
-	        if (old !== cur && (key !== 'value' || elm[key] !== cur)) {
-	            elm[key] = cur;
-	        }
-	    }
-	}
-	exports.propsModule = { create: updateProps, update: updateProps };
-	Object.defineProperty(exports, "__esModule", { value: true });
-	exports.default = exports.propsModule;
-	//# sourceMappingURL=props.js.map
-
-/***/ },
-/* 314 */
-/***/ function(module, exports) {
-
-	"use strict";
-	var raf = (typeof window !== 'undefined' && window.requestAnimationFrame) || setTimeout;
-	var nextFrame = function (fn) { raf(function () { raf(fn); }); };
-	function setNextFrame(obj, prop, val) {
-	    nextFrame(function () { obj[prop] = val; });
-	}
-	function updateStyle(oldVnode, vnode) {
-	    var cur, name, elm = vnode.elm, oldStyle = oldVnode.data.style, style = vnode.data.style;
-	    if (!oldStyle && !style)
-	        return;
-	    oldStyle = oldStyle || {};
-	    style = style || {};
-	    var oldHasDel = 'delayed' in oldStyle;
-	    for (name in oldStyle) {
-	        if (!style[name]) {
-	            if (name.startsWith('--')) {
-	                elm.style.removeProperty(name);
-	            }
-	            else {
-	                elm.style[name] = '';
-	            }
-	        }
-	    }
-	    for (name in style) {
-	        cur = style[name];
-	        if (name === 'delayed') {
-	            for (name in style.delayed) {
-	                cur = style.delayed[name];
-	                if (!oldHasDel || cur !== oldStyle.delayed[name]) {
-	                    setNextFrame(elm.style, name, cur);
-	                }
-	            }
-	        }
-	        else if (name !== 'remove' && cur !== oldStyle[name]) {
-	            if (name.startsWith('--')) {
-	                elm.style.setProperty(name, cur);
-	            }
-	            else {
-	                elm.style[name] = cur;
-	            }
-	        }
-	    }
-	}
-	function applyDestroyStyle(vnode) {
-	    var style, name, elm = vnode.elm, s = vnode.data.style;
-	    if (!s || !(style = s.destroy))
-	        return;
-	    for (name in style) {
-	        elm.style[name] = style[name];
-	    }
-	}
-	function applyRemoveStyle(vnode, rm) {
-	    var s = vnode.data.style;
-	    if (!s || !s.remove) {
-	        rm();
-	        return;
-	    }
-	    var name, elm = vnode.elm, i = 0, compStyle, style = s.remove, amount = 0, applied = [];
-	    for (name in style) {
-	        applied.push(name);
-	        elm.style[name] = style[name];
-	    }
-	    compStyle = getComputedStyle(elm);
-	    var props = compStyle['transition-property'].split(', ');
-	    for (; i < props.length; ++i) {
-	        if (applied.indexOf(props[i]) !== -1)
-	            amount++;
-	    }
-	    elm.addEventListener('transitionend', function (ev) {
-	        if (ev.target === elm)
-	            --amount;
-	        if (amount === 0)
-	            rm();
-	    });
-	}
-	exports.styleModule = {
-	    create: updateStyle,
-	    update: updateStyle,
-	    destroy: applyDestroyStyle,
-	    remove: applyRemoveStyle
-	};
-	Object.defineProperty(exports, "__esModule", { value: true });
-	exports.default = exports.styleModule;
-	//# sourceMappingURL=style.js.map
-
-/***/ },
-/* 315 */
+/* 342 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -17127,6 +18145,7 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	// just the necessary bits of Backbone router+history
+
 	var Router = function () {
 	  function Router(app) {
 	    var _this = this;
@@ -17272,55 +18291,55 @@
 	}
 
 /***/ },
-/* 316 */
+/* 343 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	__webpack_require__(317);
+	__webpack_require__(344);
 
-	__webpack_require__(364);
+	__webpack_require__(392);
 
-	__webpack_require__(347);
+	__webpack_require__(375);
 
-	__webpack_require__(373);
+	__webpack_require__(401);
 
 /***/ },
-/* 317 */
+/* 344 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	__webpack_require__(318);
+	__webpack_require__(345);
 
-	__webpack_require__(324);
+	__webpack_require__(351);
 
-	__webpack_require__(327);
-
-	__webpack_require__(331);
-
-	__webpack_require__(334);
-
-	__webpack_require__(337);
-
-	__webpack_require__(340);
-
-	__webpack_require__(343);
-
-	__webpack_require__(346);
-
-	__webpack_require__(349);
-
-	__webpack_require__(352);
-
-	__webpack_require__(355);
+	__webpack_require__(354);
 
 	__webpack_require__(358);
 
 	__webpack_require__(361);
 
+	__webpack_require__(365);
+
+	__webpack_require__(368);
+
+	__webpack_require__(371);
+
+	__webpack_require__(374);
+
+	__webpack_require__(377);
+
+	__webpack_require__(380);
+
+	__webpack_require__(383);
+
+	__webpack_require__(386);
+
+	__webpack_require__(389);
+
 /***/ },
-/* 318 */
+/* 345 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17329,17 +18348,17 @@
 
 	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
-	var _button = __webpack_require__(319);
+	var _button = __webpack_require__(346);
 
 	var _button2 = _interopRequireDefault(_button);
 
-	var _registerElement = __webpack_require__(321);
+	var _registerElement = __webpack_require__(348);
 
-	var _index = __webpack_require__(322);
+	var _index = __webpack_require__(349);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	var _index3 = __webpack_require__(323);
+	var _index3 = __webpack_require__(350);
 
 	var _index4 = _interopRequireDefault(_index3);
 
@@ -17374,7 +18393,7 @@
 	}(_button2.default));
 
 /***/ },
-/* 319 */
+/* 346 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17389,7 +18408,7 @@
 
 	var _panel = __webpack_require__(299);
 
-	var _dom = __webpack_require__(320);
+	var _dom = __webpack_require__(347);
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -17463,7 +18482,7 @@
 	exports.default = _class;
 
 /***/ },
-/* 320 */
+/* 347 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -17528,7 +18547,7 @@
 	};
 
 /***/ },
-/* 321 */
+/* 348 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -17554,60 +18573,48 @@
 	}
 
 /***/ },
-/* 322 */
+/* 349 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	function _jade_template_fn(locals) {
 	  locals = locals || {};;;
-	  var result_of_with = function ($component, $helpers, Object) {
+	  var result_of_with = function ($component, $helpers) {
 	    var h = __webpack_require__(299).h;
 	    return {
 	      value: h("div", {
 	        "attrs": $helpers.getButtonAttrs(),
-	        "class": Object.assign({}, $helpers.extendComponentClasses({
+	        "className": [].concat('mp-button-container').concat($helpers.extendComponentClasses({
 	          'mp-button-with-icon': !!$component.getAttribute('icon')
-	        }), {
-	          'mp-button-container': true
-	        })
+	        })).filter(Boolean).join(' ')
+	      }, [h("div", {
+	        "className": [].concat('mp-button-content').filter(Boolean).join(' ')
 	      }, function () {
 	        var __jade_nodes = [];
-	        __jade_nodes = __jade_nodes.concat(h("div", {
-	          "class": {
-	            'mp-button-content': true
+	        __jade_nodes = __jade_nodes.concat($component.getAttribute('icon') ? h("svg-icon", {
+	          "attrs": {
+	            icon: $component.getAttribute('icon')
 	          }
-	        }, function () {
-	          var __jade_nodes = [];
-	          __jade_nodes = __jade_nodes.concat($component.getAttribute('icon') ? function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(h("svg-icon", {
-	              "attrs": {
-	                icon: $component.getAttribute('icon')
-	              }
-	            }));;
-	            return __jade_nodes;
-	          }.call(this) : undefined);
-	          __jade_nodes = __jade_nodes.concat(h("content"));;
-	          return __jade_nodes;
-	        }.call(this).filter(Boolean)));;
+	        }) : undefined);
+	        __jade_nodes = __jade_nodes.concat(h("content"));;
 	        return __jade_nodes;
-	      }.call(this).filter(Boolean))
+	      }.call(this).filter(Boolean))].filter(Boolean))
 	    };
-	  }.call(this, "$component" in locals ? locals.$component : typeof $component !== "undefined" ? $component : undefined, "$helpers" in locals ? locals.$helpers : typeof $helpers !== "undefined" ? $helpers : undefined, "Object" in locals ? locals.Object : typeof Object !== "undefined" ? Object : undefined);
+	  }.call(this, "$component" in locals ? locals.$component : typeof $component !== "undefined" ? $component : undefined, "$helpers" in locals ? locals.$helpers : typeof $helpers !== "undefined" ? $helpers : undefined);
 	  if (result_of_with) return result_of_with.value;
 	}
 	module.exports = _jade_template_fn;
 
 /***/ },
-/* 323 */
+/* 350 */
 /***/ function(module, exports) {
 
 	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6e859d;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 12px;   font-stretch: normal;   font-weight: 400; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 12px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-size: 12px;   font-weight: 400;   padding: 8px;   -webkit-transition: border-color 150ms ease-out;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus {   border-color: #3391e9;   -webkit-transition: border-color 200ms ease-in;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } mp-button {   border-radius: 5px;   display: inline-block;   height: 44px; } :host {   border-radius: 5px;   display: inline-block;   height: 44px; } .mp-button-container, .mp-button-container * {   box-sizing: border-box; } .mp-button-container {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   border: 1px solid;   border-radius: inherit;   box-shadow: 0 1px 1px 0 rgba(0,0,0,0.2);   cursor: pointer;   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 14px;   font-weight: 600;   height: 100%;   -webkit-box-pack: center;       -ms-flex-pack: center;           justify-content: center;   letter-spacing: 0;   padding: 0 25px;   text-align: center;   -webkit-user-select: none;      -moz-user-select: none;       -ms-user-select: none;           user-select: none;   width: 100%; /* BEGIN COLOR THEMES */ /* ICON STYLES */ /* END ICON STYLES */ } .mp-button-container .mp-button-content {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   line-height: 18px;   -webkit-box-pack: center;       -ms-flex-pack: center;           justify-content: center; } .mp-button-container svg-icon {   margin-right: 6px; } .mp-button-container content::content svg-icon {   margin-right: 6px; } .mp-button-container:disabled, .mp-button-container[disabled] {   box-shadow: none;   cursor: default; } .mp-button-container:disabled .mp-button-content, .mp-button-container[disabled] .mp-button-content {   opacity: 0.6; } .mp-button-container.mp-button-primary, .mp-button-container.mp-button-blue {   background-image: -webkit-linear-gradient(bottom, #4ba8ff 0, #6cb8ff 100%);   background-image: linear-gradient(0deg, #4ba8ff 0, #6cb8ff 100%);   border-color: #3b99f0; } .mp-button-container.mp-button-primary, .mp-button-container.mp-button-blue {   color: #fff; } .mp-button-container.mp-button-primary svg-icon svg, .mp-button-container.mp-button-blue svg-icon svg, .mp-button-container.mp-button-primary svg-icon path, .mp-button-container.mp-button-blue svg-icon path {   color: #fff;   fill: #fff;   -webkit-transition: 0s;   transition: 0s; } .mp-button-container.mp-button-primary content::content, .mp-button-container.mp-button-blue content::content {   color: #fff; } .mp-button-container.mp-button-primary content::content svg-icon svg, .mp-button-container.mp-button-blue content::content svg-icon svg, .mp-button-container.mp-button-primary content::content svg-icon path, .mp-button-container.mp-button-blue content::content svg-icon path {   color: #fff;   fill: #fff;   -webkit-transition: 0s;   transition: 0s; } .mp-button-container.mp-button-primary:hover:not([disabled]):not(:disabled), .mp-button-container.mp-button-blue:hover:not([disabled]):not(:disabled) {   background-image: -webkit-linear-gradient(bottom, #6cb8ff 0, #6cb8ff 100%);   background-image: linear-gradient(0deg, #6cb8ff 0, #6cb8ff 100%);   box-shadow: 0 1.5px 2.5px 0 rgba(0,0,0,0.3); } .mp-button-container.mp-button-primary:active:not([disabled]):not(:disabled), .mp-button-container.mp-button-blue:active:not([disabled]):not(:disabled), .mp-button-container.mp-button-primary.mp-button-active:not([disabled]):not(:disabled), .mp-button-container.mp-button-blue.mp-button-active:not([disabled]):not(:disabled) {   background-image: -webkit-linear-gradient(bottom, #4ba8ff 0, #6cb8ff 100%);   background-image: linear-gradient(0deg, #4ba8ff 0, #6cb8ff 100%);   border-color: #4ba8ff;   box-shadow: 0 1px 1px 0 alph(#000, 0), inset 0 2px 2px 0 rgba(0,0,0,0.2); } .mp-button-container.mp-button-primary:active:not([disabled]):not(:disabled), .mp-button-container.mp-button-blue:active:not([disabled]):not(:disabled), .mp-button-container.mp-button-primary.mp-button-active:not([disabled]):not(:disabled), .mp-button-container.mp-button-blue.mp-button-active:not([disabled]):not(:disabled) {   color: rgba(255,255,255,0.6); } .mp-button-container.mp-button-primary:active:not([disabled]):not(:disabled) svg-icon svg, .mp-button-container.mp-button-blue:active:not([disabled]):not(:disabled) svg-icon svg, .mp-button-container.mp-button-primary.mp-button-active:not([disabled]):not(:disabled) svg-icon svg, .mp-button-container.mp-button-blue.mp-button-active:not([disabled]):not(:disabled) svg-icon svg, .mp-button-container.mp-button-primary:active:not([disabled]):not(:disabled) svg-icon path, .mp-button-container.mp-button-blue:active:not([disabled]):not(:disabled) svg-icon path, .mp-button-container.mp-button-primary.mp-button-active:not([disabled]):not(:disabled) svg-icon path, .mp-button-container.mp-button-blue.mp-button-active:not([disabled]):not(:disabled) svg-icon path {   color: rgba(255,255,255,0.6);   fill: rgba(255,255,255,0.6);   -webkit-transition: 0s;   transition: 0s; } .mp-button-container.mp-button-primary:active:not([disabled]):not(:disabled) content::content, .mp-button-container.mp-button-blue:active:not([disabled]):not(:disabled) content::content, .mp-button-container.mp-button-primary.mp-button-active:not([disabled]):not(:disabled) content::content, .mp-button-container.mp-button-blue.mp-button-active:not([disabled]):not(:disabled) content::content {   color: rgba(255,255,255,0.6); } .mp-button-container.mp-button-primary:active:not([disabled]):not(:disabled) content::content svg-icon svg, .mp-button-container.mp-button-blue:active:not([disabled]):not(:disabled) content::content svg-icon svg, .mp-button-container.mp-button-primary.mp-button-active:not([disabled]):not(:disabled) content::content svg-icon svg, .mp-button-container.mp-button-blue.mp-button-active:not([disabled]):not(:disabled) content::content svg-icon svg, .mp-button-container.mp-button-primary:active:not([disabled]):not(:disabled) content::content svg-icon path, .mp-button-container.mp-button-blue:active:not([disabled]):not(:disabled) content::content svg-icon path, .mp-button-container.mp-button-primary.mp-button-active:not([disabled]):not(:disabled) content::content svg-icon path, .mp-button-container.mp-button-blue.mp-button-active:not([disabled]):not(:disabled) content::content svg-icon path {   color: rgba(255,255,255,0.6);   fill: rgba(255,255,255,0.6);   -webkit-transition: 0s;   transition: 0s; } .mp-button-container.mp-button-primary.mp-button-on-blue, .mp-button-container.mp-button-blue.mp-button-on-blue {   border-color: #2687e3;   box-shadow: none; } .mp-button-container.mp-button-primary.mp-button-on-blue:hover:not([disabled]):not(:disabled), .mp-button-container.mp-button-blue.mp-button-on-blue:hover:not([disabled]):not(:disabled) {   background-image: -webkit-linear-gradient(bottom, #4ba8ff 0, #6cb8ff 100%);   background-image: linear-gradient(0deg, #4ba8ff 0, #6cb8ff 100%);   box-shadow: 0 1px 1px 0 rgba(0,0,0,0.2); } .mp-button-container.mp-button-primary.mp-button-on-blue:active:not([disabled]):not(:disabled), .mp-button-container.mp-button-blue.mp-button-on-blue:active:not([disabled]):not(:disabled), .mp-button-container.mp-button-primary.mp-button-on-blue.mp-button-active:not([disabled]):not(:disabled), .mp-button-container.mp-button-blue.mp-button-on-blue.mp-button-active:not([disabled]):not(:disabled) {   border-color: #3391e9;   box-shadow: 0 1px 1px 0 rgba(0,0,0,0), inset 0 2px 2px 0 rgba(0,0,0,0.2); } .mp-button-container.mp-button-secondary, .mp-button-container.mp-button-grey {   background-image: -webkit-linear-gradient(bottom, #f9fafc 0, #fff 100%);   background-image: linear-gradient(0deg, #f9fafc 0, #fff 100%);   border-color: #c1ccd5; } .mp-button-container.mp-button-secondary, .mp-button-container.mp-button-grey {   color: #6e859d; } .mp-button-container.mp-button-secondary svg-icon svg, .mp-button-container.mp-button-grey svg-icon svg, .mp-button-container.mp-button-secondary svg-icon path, .mp-button-container.mp-button-grey svg-icon path {   color: #6e859d;   fill: #6e859d;   -webkit-transition: 0s;   transition: 0s; } .mp-button-container.mp-button-secondary content::content, .mp-button-container.mp-button-grey content::content {   color: #6e859d; } .mp-button-container.mp-button-secondary content::content svg-icon svg, .mp-button-container.mp-button-grey content::content svg-icon svg, .mp-button-container.mp-button-secondary content::content svg-icon path, .mp-button-container.mp-button-grey content::content svg-icon path {   color: #6e859d;   fill: #6e859d;   -webkit-transition: 0s;   transition: 0s; } .mp-button-container.mp-button-secondary:hover:not([disabled]):not(:disabled), .mp-button-container.mp-button-grey:hover:not([disabled]):not(:disabled) {   background-image: -webkit-linear-gradient(bottom, #fff 0, #fff 100%);   background-image: linear-gradient(0deg, #fff 0, #fff 100%);   box-shadow: 0 1px 2px 0 rgba(0,0,0,0.23); } .mp-button-container.mp-button-secondary:hover:not([disabled]):not(:disabled), .mp-button-container.mp-button-grey:hover:not([disabled]):not(:disabled) {   color: #4ba8ff; } .mp-button-container.mp-button-secondary:hover:not([disabled]):not(:disabled) svg-icon svg, .mp-button-container.mp-button-grey:hover:not([disabled]):not(:disabled) svg-icon svg, .mp-button-container.mp-button-secondary:hover:not([disabled]):not(:disabled) svg-icon path, .mp-button-container.mp-button-grey:hover:not([disabled]):not(:disabled) svg-icon path {   color: #4ba8ff;   fill: #4ba8ff;   -webkit-transition: 0s;   transition: 0s; } .mp-button-container.mp-button-secondary:hover:not([disabled]):not(:disabled) content::content, .mp-button-container.mp-button-grey:hover:not([disabled]):not(:disabled) content::content {   color: #4ba8ff; } .mp-button-container.mp-button-secondary:hover:not([disabled]):not(:disabled) content::content svg-icon svg, .mp-button-container.mp-button-grey:hover:not([disabled]):not(:disabled) content::content svg-icon svg, .mp-button-container.mp-button-secondary:hover:not([disabled]):not(:disabled) content::content svg-icon path, .mp-button-container.mp-button-grey:hover:not([disabled]):not(:disabled) content::content svg-icon path {   color: #4ba8ff;   fill: #4ba8ff;   -webkit-transition: 0s;   transition: 0s; } .mp-button-container.mp-button-secondary:active:not([disabled]):not(:disabled), .mp-button-container.mp-button-grey:active:not([disabled]):not(:disabled), .mp-button-container.mp-button-secondary.mp-button-active:not([disabled]):not(:disabled), .mp-button-container.mp-button-grey.mp-button-active:not([disabled]):not(:disabled) {   border-color: #d8e0e6;   box-shadow: 0 1px 0 0 #e5eaef, inset 0 2px 3px 0 #d8e0e6; } .mp-button-container.mp-button-secondary:active:not([disabled]):not(:disabled), .mp-button-container.mp-button-grey:active:not([disabled]):not(:disabled), .mp-button-container.mp-button-secondary.mp-button-active:not([disabled]):not(:disabled), .mp-button-container.mp-button-grey.mp-button-active:not([disabled]):not(:disabled) {   color: rgba(110,133,157,0.8); } .mp-button-container.mp-button-secondary:active:not([disabled]):not(:disabled) svg-icon svg, .mp-button-container.mp-button-grey:active:not([disabled]):not(:disabled) svg-icon svg, .mp-button-container.mp-button-secondary.mp-button-active:not([disabled]):not(:disabled) svg-icon svg, .mp-button-container.mp-button-grey.mp-button-active:not([disabled]):not(:disabled) svg-icon svg, .mp-button-container.mp-button-secondary:active:not([disabled]):not(:disabled) svg-icon path, .mp-button-container.mp-button-grey:active:not([disabled]):not(:disabled) svg-icon path, .mp-button-container.mp-button-secondary.mp-button-active:not([disabled]):not(:disabled) svg-icon path, .mp-button-container.mp-button-grey.mp-button-active:not([disabled]):not(:disabled) svg-icon path {   color: rgba(110,133,157,0.8);   fill: rgba(110,133,157,0.8);   -webkit-transition: 0s;   transition: 0s; } .mp-button-container.mp-button-secondary:active:not([disabled]):not(:disabled) content::content, .mp-button-container.mp-button-grey:active:not([disabled]):not(:disabled) content::content, .mp-button-container.mp-button-secondary.mp-button-active:not([disabled]):not(:disabled) content::content, .mp-button-container.mp-button-grey.mp-button-active:not([disabled]):not(:disabled) content::content {   color: rgba(110,133,157,0.8); } .mp-button-container.mp-button-secondary:active:not([disabled]):not(:disabled) content::content svg-icon svg, .mp-button-container.mp-button-grey:active:not([disabled]):not(:disabled) content::content svg-icon svg, .mp-button-container.mp-button-secondary.mp-button-active:not([disabled]):not(:disabled) content::content svg-icon svg, .mp-button-container.mp-button-grey.mp-button-active:not([disabled]):not(:disabled) content::content svg-icon svg, .mp-button-container.mp-button-secondary:active:not([disabled]):not(:disabled) content::content svg-icon path, .mp-button-container.mp-button-grey:active:not([disabled]):not(:disabled) content::content svg-icon path, .mp-button-container.mp-button-secondary.mp-button-active:not([disabled]):not(:disabled) content::content svg-icon path, .mp-button-container.mp-button-grey.mp-button-active:not([disabled]):not(:disabled) content::content svg-icon path {   color: rgba(110,133,157,0.8);   fill: rgba(110,133,157,0.8);   -webkit-transition: 0s;   transition: 0s; } .mp-button-container.mp-button-secondary.mp-button-on-blue, .mp-button-container.mp-button-grey.mp-button-on-blue {   background-color: transparent;   background-image: none;   border-color: transparent;   box-shadow: none; } .mp-button-container.mp-button-secondary.mp-button-on-blue, .mp-button-container.mp-button-grey.mp-button-on-blue {   color: rgba(255,255,255,0.6); } .mp-button-container.mp-button-secondary.mp-button-on-blue svg-icon svg, .mp-button-container.mp-button-grey.mp-button-on-blue svg-icon svg, .mp-button-container.mp-button-secondary.mp-button-on-blue svg-icon path, .mp-button-container.mp-button-grey.mp-button-on-blue svg-icon path {   color: rgba(255,255,255,0.6);   fill: rgba(255,255,255,0.6);   -webkit-transition: 0s;   transition: 0s; } .mp-button-container.mp-button-secondary.mp-button-on-blue content::content, .mp-button-container.mp-button-grey.mp-button-on-blue content::content {   color: rgba(255,255,255,0.6); } .mp-button-container.mp-button-secondary.mp-button-on-blue content::content svg-icon svg, .mp-button-container.mp-button-grey.mp-button-on-blue content::content svg-icon svg, .mp-button-container.mp-button-secondary.mp-button-on-blue content::content svg-icon path, .mp-button-container.mp-button-grey.mp-button-on-blue content::content svg-icon path {   color: rgba(255,255,255,0.6);   fill: rgba(255,255,255,0.6);   -webkit-transition: 0s;   transition: 0s; } .mp-button-container.mp-button-secondary.mp-button-on-blue:hover:not([disabled]):not(:disabled), .mp-button-container.mp-button-grey.mp-button-on-blue:hover:not([disabled]):not(:disabled) {   background-image: none;   border-color: transparent;   box-shadow: none; } .mp-button-container.mp-button-secondary.mp-button-on-blue:hover:not([disabled]):not(:disabled), .mp-button-container.mp-button-grey.mp-button-on-blue:hover:not([disabled]):not(:disabled) {   color: #fff; } .mp-button-container.mp-button-secondary.mp-button-on-blue:hover:not([disabled]):not(:disabled) svg-icon svg, .mp-button-container.mp-button-grey.mp-button-on-blue:hover:not([disabled]):not(:disabled) svg-icon svg, .mp-button-container.mp-button-secondary.mp-button-on-blue:hover:not([disabled]):not(:disabled) svg-icon path, .mp-button-container.mp-button-grey.mp-button-on-blue:hover:not([disabled]):not(:disabled) svg-icon path {   color: #fff;   fill: #fff;   -webkit-transition: 0s;   transition: 0s; } .mp-button-container.mp-button-secondary.mp-button-on-blue:hover:not([disabled]):not(:disabled) content::content, .mp-button-container.mp-button-grey.mp-button-on-blue:hover:not([disabled]):not(:disabled) content::content {   color: #fff; } .mp-button-container.mp-button-secondary.mp-button-on-blue:hover:not([disabled]):not(:disabled) content::content svg-icon svg, .mp-button-container.mp-button-grey.mp-button-on-blue:hover:not([disabled]):not(:disabled) content::content svg-icon svg, .mp-button-container.mp-button-secondary.mp-button-on-blue:hover:not([disabled]):not(:disabled) content::content svg-icon path, .mp-button-container.mp-button-grey.mp-button-on-blue:hover:not([disabled]):not(:disabled) content::content svg-icon path {   color: #fff;   fill: #fff;   -webkit-transition: 0s;   transition: 0s; } .mp-button-container.mp-button-secondary.mp-button-on-blue:active:not([disabled]):not(:disabled), .mp-button-container.mp-button-grey.mp-button-on-blue:active:not([disabled]):not(:disabled), .mp-button-container.mp-button-secondary.mp-button-on-blue.mp-button-active:not([disabled]):not(:disabled), .mp-button-container.mp-button-grey.mp-button-on-blue.mp-button-active:not([disabled]):not(:disabled) {   background-color: #4ba8ff;   border-color: transparent;   box-shadow: none; } .mp-button-container.mp-button-secondary.mp-button-on-blue:active:not([disabled]):not(:disabled), .mp-button-container.mp-button-grey.mp-button-on-blue:active:not([disabled]):not(:disabled), .mp-button-container.mp-button-secondary.mp-button-on-blue.mp-button-active:not([disabled]):not(:disabled), .mp-button-container.mp-button-grey.mp-button-on-blue.mp-button-active:not([disabled]):not(:disabled) {   color: rgba(255,255,255,0.6); } .mp-button-container.mp-button-secondary.mp-button-on-blue:active:not([disabled]):not(:disabled) svg-icon svg, .mp-button-container.mp-button-grey.mp-button-on-blue:active:not([disabled]):not(:disabled) svg-icon svg, .mp-button-container.mp-button-secondary.mp-button-on-blue.mp-button-active:not([disabled]):not(:disabled) svg-icon svg, .mp-button-container.mp-button-grey.mp-button-on-blue.mp-button-active:not([disabled]):not(:disabled) svg-icon svg, .mp-button-container.mp-button-secondary.mp-button-on-blue:active:not([disabled]):not(:disabled) svg-icon path, .mp-button-container.mp-button-grey.mp-button-on-blue:active:not([disabled]):not(:disabled) svg-icon path, .mp-button-container.mp-button-secondary.mp-button-on-blue.mp-button-active:not([disabled]):not(:disabled) svg-icon path, .mp-button-container.mp-button-grey.mp-button-on-blue.mp-button-active:not([disabled]):not(:disabled) svg-icon path {   color: rgba(255,255,255,0.6);   fill: rgba(255,255,255,0.6);   -webkit-transition: 0s;   transition: 0s; } .mp-button-container.mp-button-secondary.mp-button-on-blue:active:not([disabled]):not(:disabled) content::content, .mp-button-container.mp-button-grey.mp-button-on-blue:active:not([disabled]):not(:disabled) content::content, .mp-button-container.mp-button-secondary.mp-button-on-blue.mp-button-active:not([disabled]):not(:disabled) content::content, .mp-button-container.mp-button-grey.mp-button-on-blue.mp-button-active:not([disabled]):not(:disabled) content::content {   color: rgba(255,255,255,0.6); } .mp-button-container.mp-button-secondary.mp-button-on-blue:active:not([disabled]):not(:disabled) content::content svg-icon svg, .mp-button-container.mp-button-grey.mp-button-on-blue:active:not([disabled]):not(:disabled) content::content svg-icon svg, .mp-button-container.mp-button-secondary.mp-button-on-blue.mp-button-active:not([disabled]):not(:disabled) content::content svg-icon svg, .mp-button-container.mp-button-grey.mp-button-on-blue.mp-button-active:not([disabled]):not(:disabled) content::content svg-icon svg, .mp-button-container.mp-button-secondary.mp-button-on-blue:active:not([disabled]):not(:disabled) content::content svg-icon path, .mp-button-container.mp-button-grey.mp-button-on-blue:active:not([disabled]):not(:disabled) content::content svg-icon path, .mp-button-container.mp-button-secondary.mp-button-on-blue.mp-button-active:not([disabled]):not(:disabled) content::content svg-icon path, .mp-button-container.mp-button-grey.mp-button-on-blue.mp-button-active:not([disabled]):not(:disabled) content::content svg-icon path {   color: rgba(255,255,255,0.6);   fill: rgba(255,255,255,0.6);   -webkit-transition: 0s;   transition: 0s; } .mp-button-container.mp-button-red {   background-image: -webkit-linear-gradient(bottom, #e4567b 0, #ec7191 100%);   background-image: linear-gradient(0deg, #e4567b 0, #ec7191 100%);   border-color: #d64174; } .mp-button-container.mp-button-red {   color: #fff; } .mp-button-container.mp-button-red svg-icon svg, .mp-button-container.mp-button-red svg-icon path {   color: #fff;   fill: #fff;   -webkit-transition: 0s;   transition: 0s; } .mp-button-container.mp-button-red content::content {   color: #fff; } .mp-button-container.mp-button-red content::content svg-icon svg, .mp-button-container.mp-button-red content::content svg-icon path {   color: #fff;   fill: #fff;   -webkit-transition: 0s;   transition: 0s; } .mp-button-container.mp-button-red:hover:not([disabled]):not(:disabled) {   background-image: -webkit-linear-gradient(bottom, #ec7191 0, #ec7191 100%);   background-image: linear-gradient(0deg, #ec7191 0, #ec7191 100%); } .mp-button-container.mp-button-red:active:not([disabled]):not(:disabled), .mp-button-container.mp-button-red.mp-button-active:not([disabled]):not(:disabled) {   background-image: -webkit-linear-gradient(bottom, #e4567b 0, #ec7191 100%);   background-image: linear-gradient(0deg, #e4567b 0, #ec7191 100%);   box-shadow: 0 1px 1px 0 rgba(0,0,0,0), inset 0 2px 2px 0 rgba(0,0,0,0.2); } .mp-button-container.mp-button-red:active:not([disabled]):not(:disabled), .mp-button-container.mp-button-red.mp-button-active:not([disabled]):not(:disabled) {   color: rgba(255,255,255,0.6); } .mp-button-container.mp-button-red:active:not([disabled]):not(:disabled) svg-icon svg, .mp-button-container.mp-button-red.mp-button-active:not([disabled]):not(:disabled) svg-icon svg, .mp-button-container.mp-button-red:active:not([disabled]):not(:disabled) svg-icon path, .mp-button-container.mp-button-red.mp-button-active:not([disabled]):not(:disabled) svg-icon path {   color: rgba(255,255,255,0.6);   fill: rgba(255,255,255,0.6);   -webkit-transition: 0s;   transition: 0s; } .mp-button-container.mp-button-red:active:not([disabled]):not(:disabled) content::content, .mp-button-container.mp-button-red.mp-button-active:not([disabled]):not(:disabled) content::content {   color: rgba(255,255,255,0.6); } .mp-button-container.mp-button-red:active:not([disabled]):not(:disabled) content::content svg-icon svg, .mp-button-container.mp-button-red.mp-button-active:not([disabled]):not(:disabled) content::content svg-icon svg, .mp-button-container.mp-button-red:active:not([disabled]):not(:disabled) content::content svg-icon path, .mp-button-container.mp-button-red.mp-button-active:not([disabled]):not(:disabled) content::content svg-icon path {   color: rgba(255,255,255,0.6);   fill: rgba(255,255,255,0.6);   -webkit-transition: 0s;   transition: 0s; } .mp-button-container.mp-button-with-icon {   padding: 0 25px 0 16px; } .mp-button-container svg-icon[icon='x'] {   margin-right: 2px; } .mp-button-container svg-icon[icon='plus'] svg {   height: 30px;   min-height: 30px;   min-width: 30px;   width: 30px;   left: 0;   top: -4px; } .mp-button-container svg-icon[icon='caret-up'], .mp-button-container svg-icon[icon='caret-down'] {   margin-right: 2px; } .mp-button-container content::content svg-icon[icon='x'] {   margin-right: 2px; } .mp-button-container content::content svg-icon[icon='plus'] svg {   height: 30px;   min-height: 30px;   min-width: 30px;   width: 30px;   left: 0;   top: -4px; } .mp-button-container content::content svg-icon[icon='caret-up'], .mp-button-container content::content svg-icon[icon='caret-down'] {   margin-right: 2px; } ";
 
 
 /***/ },
-/* 324 */
+/* 351 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17616,17 +18623,17 @@
 
 	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
-	var _button = __webpack_require__(319);
+	var _button = __webpack_require__(346);
 
 	var _button2 = _interopRequireDefault(_button);
 
-	var _registerElement = __webpack_require__(321);
+	var _registerElement = __webpack_require__(348);
 
-	var _index = __webpack_require__(325);
+	var _index = __webpack_require__(352);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	var _index3 = __webpack_require__(326);
+	var _index3 = __webpack_require__(353);
 
 	var _index4 = _interopRequireDefault(_index3);
 
@@ -17661,68 +18668,50 @@
 	}(_button2.default));
 
 /***/ },
-/* 325 */
+/* 352 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	function _jade_template_fn(locals) {
 	  locals = locals || {};;;
-	  var result_of_with = function ($component, $helpers, Object) {
+	  var result_of_with = function ($component, $helpers) {
 	    var h = __webpack_require__(299).h;
 	    return {
 	      value: h("div", {
 	        "attrs": $helpers.getButtonAttrs(),
-	        "class": Object.assign({}, $helpers.extendComponentClasses({
+	        "className": [].concat('mp-button-bar-container').concat($helpers.extendComponentClasses({
 	          'mp-button-bar-with-icon': !!$component.getAttribute('icon')
-	        }), {
-	          'mp-button-bar-container': true
-	        })
+	        })).filter(Boolean).join(' ')
 	      }, function () {
 	        var __jade_nodes = [];
 	        __jade_nodes = __jade_nodes.concat(h("div", {
-	          "class": {
-	            'mp-button-bar-content': true
+	          "className": [].concat('mp-button-bar-content').filter(Boolean).join(' ')
+	        }, [h("content")].filter(Boolean)));
+	        __jade_nodes = __jade_nodes.concat($component.isAttributeEnabled('arrow-next') ? h("div", {
+	          "className": [].concat('mp-button-bar-arrow-next').filter(Boolean).join(' ')
+	        }, [h("svg-icon", {
+	          "attrs": {
+	            icon: 'arrow-right'
 	          }
-	        }, function () {
-	          var __jade_nodes = [];
-	          __jade_nodes = __jade_nodes.concat(h("content"));;
-	          return __jade_nodes;
-	        }.call(this).filter(Boolean)));
-	        __jade_nodes = __jade_nodes.concat($component.isAttributeEnabled('arrow-next') ? function () {
-	          var __jade_nodes = [];
-	          __jade_nodes = __jade_nodes.concat(h("div", {
-	            "class": {
-	              'mp-button-bar-arrow-next': true
-	            }
-	          }, function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(h("svg-icon", {
-	              "attrs": {
-	                icon: 'arrow-right'
-	              }
-	            }));;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));;
-	          return __jade_nodes;
-	        }.call(this) : undefined);;
+	        })].filter(Boolean)) : undefined);;
 	        return __jade_nodes;
 	      }.call(this).filter(Boolean))
 	    };
-	  }.call(this, "$component" in locals ? locals.$component : typeof $component !== "undefined" ? $component : undefined, "$helpers" in locals ? locals.$helpers : typeof $helpers !== "undefined" ? $helpers : undefined, "Object" in locals ? locals.Object : typeof Object !== "undefined" ? Object : undefined);
+	  }.call(this, "$component" in locals ? locals.$component : typeof $component !== "undefined" ? $component : undefined, "$helpers" in locals ? locals.$helpers : typeof $helpers !== "undefined" ? $helpers : undefined);
 	  if (result_of_with) return result_of_with.value;
 	}
 	module.exports = _jade_template_fn;
 
 /***/ },
-/* 326 */
+/* 353 */
 /***/ function(module, exports) {
 
 	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6e859d;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 12px;   font-stretch: normal;   font-weight: 400; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 12px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-size: 12px;   font-weight: 400;   padding: 8px;   -webkit-transition: border-color 150ms ease-out;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus {   border-color: #3391e9;   -webkit-transition: border-color 200ms ease-in;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } mp-button-bar {   display: block;   height: 45px;   margin-bottom: -2px;   margin-left: -1px;   width: calc(100% + 2px); } :host {   display: block;   height: 45px;   margin-bottom: -2px;   margin-left: -1px;   width: calc(100% + 2px); } .mp-button-bar-container, .mp-button-bar-container * {   box-sizing: border-box; } .mp-button-bar-container {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   border-bottom-left-radius: 5px;   border-bottom-right-radius: 5px;   border-top: 1px solid;   cursor: pointer;   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   -webkit-box-flex: 1;       -ms-flex: 1;           flex: 1;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 14px;   font-weight: 600;   height: 100%;   -webkit-box-pack: center;       -ms-flex-pack: center;           justify-content: center;   letter-spacing: 0;   -webkit-user-select: none;      -moz-user-select: none;       -ms-user-select: none;           user-select: none;   width: 100%; } .mp-button-bar-container .mp-button-bar-content {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   -webkit-box-pack: center;       -ms-flex-pack: center;           justify-content: center;   margin-top: -2px; } .mp-button-bar-container svg-icon {   margin-right: 6px; } .mp-button-bar-container content::content svg-icon {   margin-right: 6px; } .mp-button-bar-container:disabled, .mp-button-bar-container[disabled] {   cursor: default; } .mp-button-bar-container:disabled .mp-button-bar-content, .mp-button-bar-container[disabled] .mp-button-bar-content, .mp-button-bar-container:disabled .mp-button-bar-arrow-next, .mp-button-bar-container[disabled] .mp-button-bar-arrow-next {   opacity: 0.6; } .mp-button-bar-container .mp-button-bar-arrow-next {   height: 22px;   margin-left: 6px;   margin-top: 1px;   width: 18px; } .mp-button-bar-container.mp-button-bar-blue, .mp-button-bar-container.mp-button-bar-primary {   background-color: #4ba8ff;   border-color: #3391e9; } .mp-button-bar-container.mp-button-bar-blue, .mp-button-bar-container.mp-button-bar-primary {   color: #fff; } .mp-button-bar-container.mp-button-bar-blue svg-icon svg, .mp-button-bar-container.mp-button-bar-primary svg-icon svg, .mp-button-bar-container.mp-button-bar-blue svg-icon path, .mp-button-bar-container.mp-button-bar-primary svg-icon path {   color: #fff;   fill: #fff;   -webkit-transition: 0s;   transition: 0s; } .mp-button-bar-container.mp-button-bar-blue content::content, .mp-button-bar-container.mp-button-bar-primary content::content {   color: #fff; } .mp-button-bar-container.mp-button-bar-blue content::content svg-icon svg, .mp-button-bar-container.mp-button-bar-primary content::content svg-icon svg, .mp-button-bar-container.mp-button-bar-blue content::content svg-icon path, .mp-button-bar-container.mp-button-bar-primary content::content svg-icon path {   color: #fff;   fill: #fff;   -webkit-transition: 0s;   transition: 0s; } .mp-button-bar-container.mp-button-bar-blue:hover:not([disabled]):not(:disabled), .mp-button-bar-container.mp-button-bar-primary:hover:not([disabled]):not(:disabled) {   background-color: #6cb8ff; } .mp-button-bar-container.mp-button-bar-blue:active:not([disabled]):not(:disabled), .mp-button-bar-container.mp-button-bar-primary:active:not([disabled]):not(:disabled), .mp-button-bar-container.mp-button-bar-blue.mp-button-bar-active:not([disabled]):not(:disabled), .mp-button-bar-container.mp-button-bar-primary.mp-button-bar-active:not([disabled]):not(:disabled) {   background-color: #4ba8ff;   box-shadow: 0 1px 1px 0 rgba(0,0,0,0), inset 0 2px 2px 0 rgba(0,0,0,0.2); } .mp-button-bar-container.mp-button-bar-blue:active:not([disabled]):not(:disabled), .mp-button-bar-container.mp-button-bar-primary:active:not([disabled]):not(:disabled), .mp-button-bar-container.mp-button-bar-blue.mp-button-bar-active:not([disabled]):not(:disabled), .mp-button-bar-container.mp-button-bar-primary.mp-button-bar-active:not([disabled]):not(:disabled) {   color: rgba(255,255,255,0.6); } .mp-button-bar-container.mp-button-bar-blue:active:not([disabled]):not(:disabled) svg-icon svg, .mp-button-bar-container.mp-button-bar-primary:active:not([disabled]):not(:disabled) svg-icon svg, .mp-button-bar-container.mp-button-bar-blue.mp-button-bar-active:not([disabled]):not(:disabled) svg-icon svg, .mp-button-bar-container.mp-button-bar-primary.mp-button-bar-active:not([disabled]):not(:disabled) svg-icon svg, .mp-button-bar-container.mp-button-bar-blue:active:not([disabled]):not(:disabled) svg-icon path, .mp-button-bar-container.mp-button-bar-primary:active:not([disabled]):not(:disabled) svg-icon path, .mp-button-bar-container.mp-button-bar-blue.mp-button-bar-active:not([disabled]):not(:disabled) svg-icon path, .mp-button-bar-container.mp-button-bar-primary.mp-button-bar-active:not([disabled]):not(:disabled) svg-icon path {   color: rgba(255,255,255,0.6);   fill: rgba(255,255,255,0.6);   -webkit-transition: 0s;   transition: 0s; } .mp-button-bar-container.mp-button-bar-blue:active:not([disabled]):not(:disabled) content::content, .mp-button-bar-container.mp-button-bar-primary:active:not([disabled]):not(:disabled) content::content, .mp-button-bar-container.mp-button-bar-blue.mp-button-bar-active:not([disabled]):not(:disabled) content::content, .mp-button-bar-container.mp-button-bar-primary.mp-button-bar-active:not([disabled]):not(:disabled) content::content {   color: rgba(255,255,255,0.6); } .mp-button-bar-container.mp-button-bar-blue:active:not([disabled]):not(:disabled) content::content svg-icon svg, .mp-button-bar-container.mp-button-bar-primary:active:not([disabled]):not(:disabled) content::content svg-icon svg, .mp-button-bar-container.mp-button-bar-blue.mp-button-bar-active:not([disabled]):not(:disabled) content::content svg-icon svg, .mp-button-bar-container.mp-button-bar-primary.mp-button-bar-active:not([disabled]):not(:disabled) content::content svg-icon svg, .mp-button-bar-container.mp-button-bar-blue:active:not([disabled]):not(:disabled) content::content svg-icon path, .mp-button-bar-container.mp-button-bar-primary:active:not([disabled]):not(:disabled) content::content svg-icon path, .mp-button-bar-container.mp-button-bar-blue.mp-button-bar-active:not([disabled]):not(:disabled) content::content svg-icon path, .mp-button-bar-container.mp-button-bar-primary.mp-button-bar-active:not([disabled]):not(:disabled) content::content svg-icon path {   color: rgba(255,255,255,0.6);   fill: rgba(255,255,255,0.6);   -webkit-transition: 0s;   transition: 0s; } .mp-button-bar-container.mp-button-bar-grey, .mp-button-bar-container.mp-button-bar-secondary {   border-color: #e5eaef; } .mp-button-bar-container.mp-button-bar-grey, .mp-button-bar-container.mp-button-bar-secondary {   color: #6e859d; } .mp-button-bar-container.mp-button-bar-grey svg-icon svg, .mp-button-bar-container.mp-button-bar-secondary svg-icon svg, .mp-button-bar-container.mp-button-bar-grey svg-icon path, .mp-button-bar-container.mp-button-bar-secondary svg-icon path {   color: #6e859d;   fill: #6e859d;   -webkit-transition: 0s;   transition: 0s; } .mp-button-bar-container.mp-button-bar-grey content::content, .mp-button-bar-container.mp-button-bar-secondary content::content {   color: #6e859d; } .mp-button-bar-container.mp-button-bar-grey content::content svg-icon svg, .mp-button-bar-container.mp-button-bar-secondary content::content svg-icon svg, .mp-button-bar-container.mp-button-bar-grey content::content svg-icon path, .mp-button-bar-container.mp-button-bar-secondary content::content svg-icon path {   color: #6e859d;   fill: #6e859d;   -webkit-transition: 0s;   transition: 0s; } .mp-button-bar-container.mp-button-bar-grey:hover:not([disabled]):not(:disabled), .mp-button-bar-container.mp-button-bar-secondary:hover:not([disabled]):not(:disabled) {   color: #4ba8ff; } .mp-button-bar-container.mp-button-bar-grey:hover:not([disabled]):not(:disabled) svg-icon svg, .mp-button-bar-container.mp-button-bar-secondary:hover:not([disabled]):not(:disabled) svg-icon svg, .mp-button-bar-container.mp-button-bar-grey:hover:not([disabled]):not(:disabled) svg-icon path, .mp-button-bar-container.mp-button-bar-secondary:hover:not([disabled]):not(:disabled) svg-icon path {   color: #4ba8ff;   fill: #4ba8ff;   -webkit-transition: 0s;   transition: 0s; } .mp-button-bar-container.mp-button-bar-grey:hover:not([disabled]):not(:disabled) content::content, .mp-button-bar-container.mp-button-bar-secondary:hover:not([disabled]):not(:disabled) content::content {   color: #4ba8ff; } .mp-button-bar-container.mp-button-bar-grey:hover:not([disabled]):not(:disabled) content::content svg-icon svg, .mp-button-bar-container.mp-button-bar-secondary:hover:not([disabled]):not(:disabled) content::content svg-icon svg, .mp-button-bar-container.mp-button-bar-grey:hover:not([disabled]):not(:disabled) content::content svg-icon path, .mp-button-bar-container.mp-button-bar-secondary:hover:not([disabled]):not(:disabled) content::content svg-icon path {   color: #4ba8ff;   fill: #4ba8ff;   -webkit-transition: 0s;   transition: 0s; } .mp-button-bar-container.mp-button-bar-grey:active:not([disabled]):not(:disabled), .mp-button-bar-container.mp-button-bar-secondary:active:not([disabled]):not(:disabled), .mp-button-bar-container.mp-button-bar-grey.mp-button-bar-active:not([disabled]):not(:disabled), .mp-button-bar-container.mp-button-bar-secondary.mp-button-bar-active:not([disabled]):not(:disabled) {   border-color: #e5eaef;   box-shadow: 0 1px 0 0 #e5eaef, inset 0 2px 3px 0 #d8e0e6; } .mp-button-bar-container.mp-button-bar-grey:active:not([disabled]):not(:disabled), .mp-button-bar-container.mp-button-bar-secondary:active:not([disabled]):not(:disabled), .mp-button-bar-container.mp-button-bar-grey.mp-button-bar-active:not([disabled]):not(:disabled), .mp-button-bar-container.mp-button-bar-secondary.mp-button-bar-active:not([disabled]):not(:disabled) {   color: rgba(110,133,157,0.8); } .mp-button-bar-container.mp-button-bar-grey:active:not([disabled]):not(:disabled) svg-icon svg, .mp-button-bar-container.mp-button-bar-secondary:active:not([disabled]):not(:disabled) svg-icon svg, .mp-button-bar-container.mp-button-bar-grey.mp-button-bar-active:not([disabled]):not(:disabled) svg-icon svg, .mp-button-bar-container.mp-button-bar-secondary.mp-button-bar-active:not([disabled]):not(:disabled) svg-icon svg, .mp-button-bar-container.mp-button-bar-grey:active:not([disabled]):not(:disabled) svg-icon path, .mp-button-bar-container.mp-button-bar-secondary:active:not([disabled]):not(:disabled) svg-icon path, .mp-button-bar-container.mp-button-bar-grey.mp-button-bar-active:not([disabled]):not(:disabled) svg-icon path, .mp-button-bar-container.mp-button-bar-secondary.mp-button-bar-active:not([disabled]):not(:disabled) svg-icon path {   color: rgba(110,133,157,0.8);   fill: rgba(110,133,157,0.8);   -webkit-transition: 0s;   transition: 0s; } .mp-button-bar-container.mp-button-bar-grey:active:not([disabled]):not(:disabled) content::content, .mp-button-bar-container.mp-button-bar-secondary:active:not([disabled]):not(:disabled) content::content, .mp-button-bar-container.mp-button-bar-grey.mp-button-bar-active:not([disabled]):not(:disabled) content::content, .mp-button-bar-container.mp-button-bar-secondary.mp-button-bar-active:not([disabled]):not(:disabled) content::content {   color: rgba(110,133,157,0.8); } .mp-button-bar-container.mp-button-bar-grey:active:not([disabled]):not(:disabled) content::content svg-icon svg, .mp-button-bar-container.mp-button-bar-secondary:active:not([disabled]):not(:disabled) content::content svg-icon svg, .mp-button-bar-container.mp-button-bar-grey.mp-button-bar-active:not([disabled]):not(:disabled) content::content svg-icon svg, .mp-button-bar-container.mp-button-bar-secondary.mp-button-bar-active:not([disabled]):not(:disabled) content::content svg-icon svg, .mp-button-bar-container.mp-button-bar-grey:active:not([disabled]):not(:disabled) content::content svg-icon path, .mp-button-bar-container.mp-button-bar-secondary:active:not([disabled]):not(:disabled) content::content svg-icon path, .mp-button-bar-container.mp-button-bar-grey.mp-button-bar-active:not([disabled]):not(:disabled) content::content svg-icon path, .mp-button-bar-container.mp-button-bar-secondary.mp-button-bar-active:not([disabled]):not(:disabled) content::content svg-icon path {   color: rgba(110,133,157,0.8);   fill: rgba(110,133,157,0.8);   -webkit-transition: 0s;   transition: 0s; } ";
 
 
 /***/ },
-/* 327 */
+/* 354 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17731,17 +18720,17 @@
 
 	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
-	var _confirm = __webpack_require__(328);
+	var _confirm = __webpack_require__(355);
 
 	var _confirm2 = _interopRequireDefault(_confirm);
 
-	var _registerElement = __webpack_require__(321);
+	var _registerElement = __webpack_require__(348);
 
-	var _index = __webpack_require__(329);
+	var _index = __webpack_require__(356);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	var _index3 = __webpack_require__(330);
+	var _index3 = __webpack_require__(357);
 
 	var _index4 = _interopRequireDefault(_index3);
 
@@ -17776,7 +18765,7 @@
 	}(_confirm2.default));
 
 /***/ },
-/* 328 */
+/* 355 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17837,7 +18826,7 @@
 	exports.default = _class;
 
 /***/ },
-/* 329 */
+/* 356 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17853,59 +18842,31 @@
 	    return {
 	      value: h("mp-modal", {
 	        "attrs": proxyAttrs
+	      }, [h("div", {
+	        "className": [].concat('mp-confirm-container').filter(Boolean).join(' ')
+	      }, [h("div", {
+	        "className": [].concat('mp-confirm-body').filter(Boolean).join(' ')
+	      }, [h("content")].filter(Boolean)), h("div", {
+	        "className": [].concat('mp-confirm-buttons').filter(Boolean).join(' ')
+	      }, [h("mp-button", {
+	        "on": {
+	          click: $helpers.cancel
+	        },
+	        "className": [].concat('mp-button-secondary').filter(Boolean).join(' ')
 	      }, function () {
 	        var __jade_nodes = [];
-	        __jade_nodes = __jade_nodes.concat(h("div", {
-	          "class": {
-	            'mp-confirm-container': true
-	          }
-	        }, function () {
-	          var __jade_nodes = [];
-	          __jade_nodes = __jade_nodes.concat(h("div", {
-	            "class": {
-	              'mp-confirm-body': true
-	            }
-	          }, function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(h("content"));;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("div", {
-	            "class": {
-	              'mp-confirm-buttons': true
-	            }
-	          }, function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(h("mp-button", {
-	              "on": {
-	                click: $helpers.cancel
-	              },
-	              "class": {
-	                'mp-button-secondary': true
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat($component.getAttribute('cancel-button-label') || 'Cancel');;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));
-	            __jade_nodes = __jade_nodes.concat(h("mp-button", {
-	              "on": {
-	                click: $helpers.confirm
-	              },
-	              "class": {
-	                'mp-button-primary': true
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat($component.getAttribute('confirm-button-label') || 'Ok');;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));;
-	          return __jade_nodes;
-	        }.call(this).filter(Boolean)));;
+	        __jade_nodes = __jade_nodes.concat($component.getAttribute('cancel-button-label') || 'Cancel');;
 	        return __jade_nodes;
-	      }.call(this).filter(Boolean))
+	      }.call(this).filter(Boolean)), h("mp-button", {
+	        "on": {
+	          click: $helpers.confirm
+	        },
+	        "className": [].concat('mp-button-primary').filter(Boolean).join(' ')
+	      }, function () {
+	        var __jade_nodes = [];
+	        __jade_nodes = __jade_nodes.concat($component.getAttribute('confirm-button-label') || 'Ok');;
+	        return __jade_nodes;
+	      }.call(this).filter(Boolean))].filter(Boolean))].filter(Boolean))].filter(Boolean))
 	    };
 	  }.call(this, "$component" in locals ? locals.$component : typeof $component !== "undefined" ? $component : undefined, "$helpers" in locals ? locals.$helpers : typeof $helpers !== "undefined" ? $helpers : undefined);
 	  if (result_of_with) return result_of_with.value;
@@ -17913,14 +18874,14 @@
 	module.exports = _jade_template_fn;
 
 /***/ },
-/* 330 */
+/* 357 */
 /***/ function(module, exports) {
 
 	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6e859d;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 12px;   font-stretch: normal;   font-weight: 400; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 12px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-size: 12px;   font-weight: 400;   padding: 8px;   -webkit-transition: border-color 150ms ease-out;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus {   border-color: #3391e9;   -webkit-transition: border-color 200ms ease-in;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } mp-confirm {   width: 400px; } :host {   width: 400px; } mp-modal {   width: inherit; } .mp-confirm-container, .mp-confirm-container * {   box-sizing: border-box; } .mp-confirm-container {   display: -webkit-box;   display: -ms-flexbox;   display: flex;   -webkit-box-orient: vertical;   -webkit-box-direction: normal;       -ms-flex-direction: column;           flex-direction: column; } .mp-confirm-container .mp-confirm-body {   display: -webkit-box;   display: -ms-flexbox;   display: flex;   -webkit-box-orient: horizontal;   -webkit-box-direction: normal;       -ms-flex-direction: row;           flex-direction: row;   min-height: 92px;   padding: 15px 30px 0 20px;   text-align: left; } .mp-confirm-container .mp-confirm-buttons {   border-top: 1px solid #d8e0e6;   margin-top: 15px;   padding: 15px 20px 15px 0;   text-align: right; } .mp-confirm-container .mp-confirm-buttons mp-button {   margin-left: 15px;   min-width: 90px; } .mp-confirm-container .mp-confirm-title {   color: #4c6072;   font-size: 16px;   font-weight: 600;   line-height: 1.4;   margin-bottom: 10px; } .mp-confirm-container .mp-confirm-description {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } .mp-confirm-container content::content .mp-confirm-title {   color: #4c6072;   font-size: 16px;   font-weight: 600;   line-height: 1.4;   margin-bottom: 10px; } .mp-confirm-container content::content .mp-confirm-description {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } ";
 
 
 /***/ },
-/* 331 */
+/* 358 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17929,17 +18890,17 @@
 
 	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
-	var _confirm = __webpack_require__(328);
+	var _confirm = __webpack_require__(355);
 
 	var _confirm2 = _interopRequireDefault(_confirm);
 
-	var _registerElement = __webpack_require__(321);
+	var _registerElement = __webpack_require__(348);
 
-	var _index = __webpack_require__(332);
+	var _index = __webpack_require__(359);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	var _index3 = __webpack_require__(333);
+	var _index3 = __webpack_require__(360);
 
 	var _index4 = _interopRequireDefault(_index3);
 
@@ -17974,7 +18935,7 @@
 	}(_confirm2.default));
 
 /***/ },
-/* 332 */
+/* 359 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17990,80 +18951,39 @@
 	    return {
 	      value: h("mp-modal", {
 	        "attrs": proxyAttrs
+	      }, [h("div", {
+	        "className": [].concat('mp-confirm-delete-container').filter(Boolean).join(' ')
+	      }, [h("div", {
+	        "className": [].concat('mp-confirm-delete-body').filter(Boolean).join(' ')
+	      }, [h("div", {
+	        "className": [].concat('mp-confirm-delete-icon').filter(Boolean).join(' ')
+	      }, [h("svg-icon", {
+	        "attrs": {
+	          icon: 'alert'
+	        }
+	      })].filter(Boolean)), h("div", {
+	        "className": [].concat('mp-confirm-delete-copy').filter(Boolean).join(' ')
+	      }, [h("content")].filter(Boolean))].filter(Boolean)), h("div", {
+	        "className": [].concat('mp-confirm-delete-buttons').filter(Boolean).join(' ')
+	      }, [h("mp-button", {
+	        "on": {
+	          click: $helpers.cancel
+	        },
+	        "className": [].concat('mp-button-secondary').filter(Boolean).join(' ')
 	      }, function () {
 	        var __jade_nodes = [];
-	        __jade_nodes = __jade_nodes.concat(h("div", {
-	          "class": {
-	            'mp-confirm-delete-container': true
-	          }
-	        }, function () {
-	          var __jade_nodes = [];
-	          __jade_nodes = __jade_nodes.concat(h("div", {
-	            "class": {
-	              'mp-confirm-delete-body': true
-	            }
-	          }, function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(h("div", {
-	              "class": {
-	                'mp-confirm-delete-icon': true
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat(h("svg-icon", {
-	                "attrs": {
-	                  icon: 'alert'
-	                }
-	              }));;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));
-	            __jade_nodes = __jade_nodes.concat(h("div", {
-	              "class": {
-	                'mp-confirm-delete-copy': true
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat(h("content"));;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("div", {
-	            "class": {
-	              'mp-confirm-delete-buttons': true
-	            }
-	          }, function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(h("mp-button", {
-	              "on": {
-	                click: $helpers.cancel
-	              },
-	              "class": {
-	                'mp-button-secondary': true
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat($component.getAttribute('cancel-button-label') || 'Cancel');;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));
-	            __jade_nodes = __jade_nodes.concat(h("mp-button", {
-	              "on": {
-	                click: $helpers.confirm
-	              },
-	              "class": {
-	                'mp-button-red': true
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat($component.getAttribute('delete-button-label') || 'Delete');;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));;
-	          return __jade_nodes;
-	        }.call(this).filter(Boolean)));;
+	        __jade_nodes = __jade_nodes.concat($component.getAttribute('cancel-button-label') || 'Cancel');;
 	        return __jade_nodes;
-	      }.call(this).filter(Boolean))
+	      }.call(this).filter(Boolean)), h("mp-button", {
+	        "on": {
+	          click: $helpers.confirm
+	        },
+	        "className": [].concat('mp-button-red').filter(Boolean).join(' ')
+	      }, function () {
+	        var __jade_nodes = [];
+	        __jade_nodes = __jade_nodes.concat($component.getAttribute('delete-button-label') || 'Delete');;
+	        return __jade_nodes;
+	      }.call(this).filter(Boolean))].filter(Boolean))].filter(Boolean))].filter(Boolean))
 	    };
 	  }.call(this, "$component" in locals ? locals.$component : typeof $component !== "undefined" ? $component : undefined, "$helpers" in locals ? locals.$helpers : typeof $helpers !== "undefined" ? $helpers : undefined);
 	  if (result_of_with) return result_of_with.value;
@@ -18071,14 +18991,14 @@
 	module.exports = _jade_template_fn;
 
 /***/ },
-/* 333 */
+/* 360 */
 /***/ function(module, exports) {
 
 	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6e859d;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 12px;   font-stretch: normal;   font-weight: 400; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 12px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-size: 12px;   font-weight: 400;   padding: 8px;   -webkit-transition: border-color 150ms ease-out;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus {   border-color: #3391e9;   -webkit-transition: border-color 200ms ease-in;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } mp-confirm-delete {   width: 400px; } :host {   width: 400px; } mp-modal {   width: inherit; } .mp-confirm-delete-container, .mp-confirm-delete-container * {   box-sizing: border-box; } .mp-confirm-delete-container {   display: -webkit-box;   display: -ms-flexbox;   display: flex;   -webkit-box-orient: vertical;   -webkit-box-direction: normal;       -ms-flex-direction: column;           flex-direction: column; } .mp-confirm-delete-container .mp-confirm-delete-body {   display: -webkit-box;   display: -ms-flexbox;   display: flex;   -webkit-box-orient: horizontal;   -webkit-box-direction: normal;       -ms-flex-direction: row;           flex-direction: row;   min-height: 92px;   padding: 15px 30px 0 20px;   text-align: left; } .mp-confirm-delete-container .mp-confirm-delete-body .mp-confirm-delete-icon {   width: 22px; } .mp-confirm-delete-container .mp-confirm-delete-body .mp-confirm-delete-icon svg-icon {   height: 22px;   min-height: 22px;   min-width: 22px;   width: 22px; } .mp-confirm-delete-container .mp-confirm-delete-body .mp-confirm-delete-icon svg-icon svg {   height: 22px;   min-height: 22px;   min-width: 22px;   width: 22px;   left: 0;   top: 0; } .mp-confirm-delete-container .mp-confirm-delete-body .mp-confirm-delete-icon svg-icon svg, .mp-confirm-delete-container .mp-confirm-delete-body .mp-confirm-delete-icon svg-icon path {   color: #e4567b;   fill: #e4567b;   -webkit-transition: 0.2s;   transition: 0.2s; } .mp-confirm-delete-container .mp-confirm-delete-body .mp-confirm-delete-copy {   margin-left: 6px; } .mp-confirm-delete-container .mp-confirm-delete-buttons {   border-top: 1px solid #d8e0e6;   margin-top: 15px;   padding: 15px 20px 15px 0;   text-align: right; } .mp-confirm-delete-container .mp-confirm-delete-buttons mp-button {   margin-left: 15px; } .mp-confirm-delete-container .mp-confirm-delete-title {   color: #4c6072;   font-size: 16px;   font-weight: 600;   line-height: 1.4;   margin-bottom: 10px; } .mp-confirm-delete-container .mp-confirm-delete-description {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } .mp-confirm-delete-container content::content .mp-confirm-delete-title {   color: #4c6072;   font-size: 16px;   font-weight: 600;   line-height: 1.4;   margin-bottom: 10px; } .mp-confirm-delete-container content::content .mp-confirm-delete-description {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } ";
 
 
 /***/ },
-/* 334 */
+/* 361 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -18089,13 +19009,13 @@
 
 	var _panel = __webpack_require__(299);
 
-	var _registerElement = __webpack_require__(321);
+	var _registerElement = __webpack_require__(348);
 
-	var _index = __webpack_require__(335);
+	var _index = __webpack_require__(362);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	var _index3 = __webpack_require__(336);
+	var _index3 = __webpack_require__(364);
 
 	var _index4 = _interopRequireDefault(_index3);
 
@@ -18191,20 +19111,49 @@
 	}(_panel.Component));
 
 /***/ },
-/* 335 */
+/* 362 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	function _jade_template_fn(locals) {
 	  locals = locals || {};;;
-	  var result_of_with = function ($component, $helpers, value) {
+	  var result_of_with = function ($component, $helpers, document, value) {
 	    var h = __webpack_require__(299).h;
+
+	    function generateLiteralWidget(id, contents) {
+	      function LiteralWidget(id, contents) {
+	        this.name = 'LiteralWidget';
+	        this.id = id;
+	        this.contents = contents;
+	      }
+	      LiteralWidget.prototype.type = 'Widget';
+	      LiteralWidget.prototype.init = function () {
+	        var wrapper = document.createElement('div');
+	        wrapper.innerHTML = this.contents;
+	        var root;
+	        if (wrapper.childNodes.length === 1) {
+	          root = wrapper.firstChild;
+	        } else {
+	          root = wrapper;
+	        }
+	        return root;
+	      };
+	      LiteralWidget.prototype.update = function (previous, domNode) {
+	        return domNode;
+	      };
+	      // 'render' is called by the vdom-to-html module which is used in the unit tests
+	      LiteralWidget.prototype.render = function () {
+	        var h = __webpack_require__(363);
+	        var host = document.createElement('div');
+	        host.appendChild(this.init());
+	        return h('text', host.innerHTML);
+	      };
+	      return new LiteralWidget(id, contents);
+	    };
 	    return {
 	      value: h("div", {
-	        "class": {
-	          'mp-input-group-container': true
-	        }
+	        "className": [].concat('mp-input-group-container').filter(Boolean).join(' ')
 	      }, function () {
 	        var __jade_nodes = [];
 	        var disabled = $component.isAttributeEnabled('disabled');
@@ -18225,9 +19174,7 @@
 	            input: $helpers.setValue,
 	            keyup: $helpers.submitIfEnter
 	          },
-	          "class": {
-	            'mp-input-group-input': true
-	          }
+	          "className": [].concat('mp-input-group-input').filter(Boolean).join(' ')
 	        }));
 	        __jade_nodes = __jade_nodes.concat(h("mp-button", {
 	          "attrs": {
@@ -18236,29 +19183,12 @@
 	          "on": {
 	            click: $helpers.submit
 	          },
-	          "class": {
-	            'mp-button-primary': true,
-	            'mp-input-group-btn': true
-	          }
+	          "className": [].concat('mp-button-primary').concat('mp-input-group-btn').filter(Boolean).join(' ')
 	        }, function () {
 	          var __jade_nodes = [];
-	          __jade_nodes = __jade_nodes.concat($component.isAttributeEnabled('busy') ? function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(h("div", {
-	              "class": {
-	                'mp-input-group-spinner': true
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat(h('div', {
-	                props: {
-	                  innerHTML: '<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="uil-ring"><rect x="0" y="0" width="100" height="100" fill="none" class="bk"></rect><circle cx="50" cy="50" r="45" stroke-dasharray="169.64600329384882 113.09733552923257" stroke="#ffffff" fill="none" stroke-width="10"><animateTransform attributeName="transform" type="rotate" values="0 50 50;180 50 50;360 50 50;" keyTimes="0;0.5;1" dur="0.75s" repeatCount="indefinite" begin="0s"></animateTransform></circle></svg>'
-	                }
-	              }));;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));;
-	            return __jade_nodes;
-	          }.call(this) : function () {
+	          __jade_nodes = __jade_nodes.concat($component.isAttributeEnabled('busy') ? h("div", {
+	            "className": [].concat('mp-input-group-spinner').filter(Boolean).join(' ')
+	          }, [generateLiteralWidget(0, '<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="uil-ring"><rect x="0" y="0" width="100" height="100" fill="none" class="bk"></rect><circle cx="50" cy="50" r="45" stroke-dasharray="169.64600329384882 113.09733552923257" stroke="#ffffff" fill="none" stroke-width="10"><animateTransform attributeName="transform" type="rotate" values="0 50 50;180 50 50;360 50 50;" keyTimes="0;0.5;1" dur="0.75s" repeatCount="indefinite" begin="0s"></animateTransform></circle></svg>')].filter(Boolean)) : function () {
 	            var __jade_nodes = [];
 	            __jade_nodes = __jade_nodes.concat($component.getAttribute('label') || 'Save');;
 	            return __jade_nodes;
@@ -18268,20 +19198,29 @@
 	        return __jade_nodes;
 	      }.call(this).filter(Boolean))
 	    };
-	  }.call(this, "$component" in locals ? locals.$component : typeof $component !== "undefined" ? $component : undefined, "$helpers" in locals ? locals.$helpers : typeof $helpers !== "undefined" ? $helpers : undefined, "value" in locals ? locals.value : typeof value !== "undefined" ? value : undefined);
+	  }.call(this, "$component" in locals ? locals.$component : typeof $component !== "undefined" ? $component : undefined, "$helpers" in locals ? locals.$helpers : typeof $helpers !== "undefined" ? $helpers : undefined, "document" in locals ? locals.document : typeof document !== "undefined" ? document : undefined, "value" in locals ? locals.value : typeof value !== "undefined" ? value : undefined);
 	  if (result_of_with) return result_of_with.value;
 	}
 	module.exports = _jade_template_fn;
 
 /***/ },
-/* 336 */
+/* 363 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var h = __webpack_require__(331)
+
+	module.exports = h
+
+
+/***/ },
+/* 364 */
 /***/ function(module, exports) {
 
 	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6e859d;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 12px;   font-stretch: normal;   font-weight: 400; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 12px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-size: 12px;   font-weight: 400;   padding: 8px;   -webkit-transition: border-color 150ms ease-out;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus {   border-color: #3391e9;   -webkit-transition: border-color 200ms ease-in;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } mp-input-group {   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   height: 40px;   width: 300px; } :host {   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   height: 40px;   width: 300px; } .mp-input-group-container, .mp-input-group-container * {   box-sizing: border-box; } .mp-input-group-container {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   height: 100%;   width: 100%; } .mp-input-group-container .mp-input-group-input, .mp-input-group-container .mp-input-group-btn {   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex; } .mp-input-group-container .mp-input-group-input {   border-bottom-left-radius: 5px;   border-bottom-right-radius: 0;   border-top-left-radius: 5px;   border-top-right-radius: 0;   height: 100%;   margin: 0 -2px 0 0;   margin-right: -2px;   padding-left: 10px;   width: 80%; } .mp-input-group-container .mp-input-group-btn {   border-bottom-left-radius: 0;   border-top-left-radius: 0;   height: 100%;   max-width: 180px;   min-width: 90px;   width: 20%; } .mp-input-group-container .mp-input-group-spinner {   width: 12px; } ";
 
 
 /***/ },
-/* 337 */
+/* 365 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -18290,13 +19229,13 @@
 
 	var _panel = __webpack_require__(299);
 
-	var _registerElement = __webpack_require__(321);
+	var _registerElement = __webpack_require__(348);
 
-	var _index = __webpack_require__(338);
+	var _index = __webpack_require__(366);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	var _index3 = __webpack_require__(339);
+	var _index3 = __webpack_require__(367);
 
 	var _index4 = _interopRequireDefault(_index3);
 
@@ -18332,42 +19271,43 @@
 	}(_panel.Component));
 
 /***/ },
-/* 338 */
+/* 366 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	function _jade_template_fn(locals) {
 	  locals = locals || {};;;
-	  var result_of_with = function ($component) {
+	  var result_of_with = function ($component, Object) {
 	    var h = __webpack_require__(299).h;
+	    var __objToAttrs = function __objToAttrs(o) {
+	      return Object.keys(o).map(function (k) {
+	        return o[k] ? k : false;
+	      });
+	    };
 	    return {
 	      value: h("div", {
-	        "class": {
+	        "className": [].concat(__objToAttrs({
 	          'mp-list-item-container': true,
 	          'mp-list-item-active': $component.isAttributeEnabled('active'),
 	          'mp-list-item-static': $component.isAttributeEnabled('static')
-	        }
-	      }, function () {
-	        var __jade_nodes = [];
-	        __jade_nodes = __jade_nodes.concat(h("content"));;
-	        return __jade_nodes;
-	      }.call(this).filter(Boolean))
+	        })).filter(Boolean).join(' ')
+	      }, [h("content")].filter(Boolean))
 	    };
-	  }.call(this, "$component" in locals ? locals.$component : typeof $component !== "undefined" ? $component : undefined);
+	  }.call(this, "$component" in locals ? locals.$component : typeof $component !== "undefined" ? $component : undefined, "Object" in locals ? locals.Object : typeof Object !== "undefined" ? Object : undefined);
 	  if (result_of_with) return result_of_with.value;
 	}
 	module.exports = _jade_template_fn;
 
 /***/ },
-/* 339 */
+/* 367 */
 /***/ function(module, exports) {
 
 	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6e859d;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 12px;   font-stretch: normal;   font-weight: 400; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 12px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-size: 12px;   font-weight: 400;   padding: 8px;   -webkit-transition: border-color 150ms ease-out;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus {   border-color: #3391e9;   -webkit-transition: border-color 200ms ease-in;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } mp-list-item {   display: block; } :host {   display: block; } mp-list-item:first-child {   margin-top: 8px; } :host(:first-child) {   margin-top: 8px; } mp-list-item:last-child {   margin-bottom: 8px; } :host(:last-child) {   margin-bottom: 8px; } .mp-list-item-container {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   background-color: #fff;   border-radius: 3px;   color: #9cacbb;   display: block;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 12px;   font-weight: 500;   line-height: 12px;   margin: 0px 8px;   padding: 10px;   text-align: left;   -webkit-user-select: none;      -moz-user-select: none;       -ms-user-select: none;           user-select: none; } .mp-list-item-container, .mp-list-item-container * {   box-sizing: border-box; } .mp-list-item-container.mp-list-item-static {   cursor: default; } .mp-list-item-container:not(.mp-list-item-static) {   cursor: pointer; } .mp-list-item-container:hover:not(.mp-list-item-static), .mp-list-item-container.mp-list-item-active {   background-color: #eff3f5;   color: #4ba8ff; } ";
 
 
 /***/ },
-/* 340 */
+/* 368 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -18378,17 +19318,17 @@
 
 	var _panel = __webpack_require__(299);
 
-	var _registerElement = __webpack_require__(321);
+	var _registerElement = __webpack_require__(348);
 
-	var _index = __webpack_require__(341);
+	var _index = __webpack_require__(369);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	var _index3 = __webpack_require__(342);
+	var _index3 = __webpack_require__(370);
 
 	var _index4 = _interopRequireDefault(_index3);
 
-	var _dom = __webpack_require__(320);
+	var _dom = __webpack_require__(347);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -18545,17 +19485,54 @@
 	}(_panel.Component));
 
 /***/ },
-/* 341 */
+/* 369 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 	function _jade_template_fn(locals) {
 	  locals = locals || {};;;
-	  var result_of_with = function ($component, $helpers, Object, visibility) {
+	  var result_of_with = function ($component, $helpers, Object, document, visibility) {
 	    var h = __webpack_require__(299).h;
+
+	    function generateLiteralWidget(id, contents) {
+	      function LiteralWidget(id, contents) {
+	        this.name = 'LiteralWidget';
+	        this.id = id;
+	        this.contents = contents;
+	      }
+	      LiteralWidget.prototype.type = 'Widget';
+	      LiteralWidget.prototype.init = function () {
+	        var wrapper = document.createElement('div');
+	        wrapper.innerHTML = this.contents;
+	        var root;
+	        if (wrapper.childNodes.length === 1) {
+	          root = wrapper.firstChild;
+	        } else {
+	          root = wrapper;
+	        }
+	        return root;
+	      };
+	      LiteralWidget.prototype.update = function (previous, domNode) {
+	        return domNode;
+	      };
+	      // 'render' is called by the vdom-to-html module which is used in the unit tests
+	      LiteralWidget.prototype.render = function () {
+	        var h = __webpack_require__(363);
+	        var host = document.createElement('div');
+	        host.appendChild(this.init());
+	        return h('text', host.innerHTML);
+	      };
+	      return new LiteralWidget(id, contents);
+	    };
+
+	    var __objToAttrs = function __objToAttrs(o) {
+	      return Object.keys(o).map(function (k) {
+	        return o[k] ? k : false;
+	      });
+	    };
 	    return {
 	      value: h("div", {
 	        "on": {
@@ -18563,88 +19540,52 @@
 	            return e.stopPropagation();
 	          }
 	        },
-	        "class": Object.assign({}, {
+	        "className": [].concat('mp-modal-stage').concat(__objToAttrs({
 	          'mp-modal-absolute': $component.isAttributeEnabled('not-fullscreen'),
 	          'mp-modal-closed': visibility === 'closed'
-	        }, {
-	          'mp-modal-stage': true
-	        })
+	        })).filter(Boolean).join(' ')
 	      }, function () {
 	        var __jade_nodes = [];
-	        __jade_nodes = __jade_nodes.concat($helpers.getType() === 'modal' ? function () {
-	          var __jade_nodes = [];
-	          __jade_nodes = __jade_nodes.concat(h("div", {
-	            "on": {
-	              click: $helpers.backdropClicked
-	            },
-	            "class": Object.assign({}, _defineProperty({}, "mp-modal-" + visibility, true), {
-	              'mp-modal-backdrop': true
-	            })
-	          }));;
-	          return __jade_nodes;
-	        }.call(this) : undefined);
+	        __jade_nodes = __jade_nodes.concat($helpers.getType() === 'modal' ? h("div", {
+	          "on": {
+	            click: $helpers.backdropClicked
+	          },
+	          "className": [].concat('mp-modal-backdrop').concat(__objToAttrs(_defineProperty({}, 'mp-modal-' + visibility, true))).filter(Boolean).join(' ')
+	        }) : undefined);
 	        __jade_nodes = __jade_nodes.concat(h("div", {
-	          "class": {
-	            'mp-modal-wrapper': true
-	          }
+	          "className": [].concat('mp-modal-wrapper').filter(Boolean).join(' ')
+	        }, [h("div", {
+	          "className": [].concat('mp-modal-main').concat(__objToAttrs(_defineProperty({}, 'mp-modal-' + visibility, true))).filter(Boolean).join(' ')
 	        }, function () {
 	          var __jade_nodes = [];
-	          __jade_nodes = __jade_nodes.concat(h("div", {
-	            "class": Object.assign({}, _defineProperty({}, "mp-modal-" + visibility, true), {
-	              'mp-modal-main': true
-	            })
-	          }, function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat($component.isAttributeEnabled('closeable') ? function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat(h("div", {
-	                "on": {
-	                  click: $helpers.closeClicked
-	                },
-	                "class": {
-	                  'mp-modal-close-btn': true
-	                }
-	              }, function () {
-	                var __jade_nodes = [];
-	                __jade_nodes = __jade_nodes.concat(h("div", {
-	                  "class": {
-	                    'mp-modal-close-icon': true
-	                  }
-	                }, function () {
-	                  var __jade_nodes = [];
-	                  __jade_nodes = __jade_nodes.concat(h('div', {
-	                    props: {
-	                      innerHTML: '<?xml version="1.0" encoding="utf-8"?><!-- Generator: Adobe Illustrator 19.2.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  --><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"	 viewBox="0 0 10.6 10.5" style="enable-background:new 0 0 10.6 10.5;" xml:space="preserve"><style type="text/css">	.x{fill-rule:evenodd;clip-rule:evenodd;fill:#D8E0E7;}</style><path class="x" d="M8.6,0L5.3,3.3L2,0L0,2l3.3,3.3L0,8.5l2,2l3.2-3.2l3.2,3.2l2-2L7.3,5.3L10.6,2L8.6,0z"/></svg>'
-	                    }
-	                  }));;
-	                  return __jade_nodes;
-	                }.call(this).filter(Boolean)));;
-	                return __jade_nodes;
-	              }.call(this).filter(Boolean)));;
-	              return __jade_nodes;
-	            }.call(this) : undefined);
-	            __jade_nodes = __jade_nodes.concat(h("content"));;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));;
+	          __jade_nodes = __jade_nodes.concat($component.isAttributeEnabled('closeable') ? h("div", {
+	            "on": {
+	              click: $helpers.closeClicked
+	            },
+	            "className": [].concat('mp-modal-close-btn').filter(Boolean).join(' ')
+	          }, [h("div", {
+	            "className": [].concat('mp-modal-close-icon').filter(Boolean).join(' ')
+	          }, [generateLiteralWidget(1, '<?xml version="1.0" encoding="utf-8"?><!-- Generator: Adobe Illustrator 19.2.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  --><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"	 viewBox="0 0 10.6 10.5" style="enable-background:new 0 0 10.6 10.5;" xml:space="preserve"><style type="text/css">	.x{fill-rule:evenodd;clip-rule:evenodd;fill:#D8E0E7;}</style><path class="x" d="M8.6,0L5.3,3.3L2,0L0,2l3.3,3.3L0,8.5l2,2l3.2-3.2l3.2,3.2l2-2L7.3,5.3L10.6,2L8.6,0z"/></svg>')].filter(Boolean))].filter(Boolean)) : undefined);
+	          __jade_nodes = __jade_nodes.concat(h("content"));;
 	          return __jade_nodes;
-	        }.call(this).filter(Boolean)));;
+	        }.call(this).filter(Boolean))].filter(Boolean)));;
 	        return __jade_nodes;
 	      }.call(this).filter(Boolean))
 	    };
-	  }.call(this, "$component" in locals ? locals.$component : typeof $component !== "undefined" ? $component : undefined, "$helpers" in locals ? locals.$helpers : typeof $helpers !== "undefined" ? $helpers : undefined, "Object" in locals ? locals.Object : typeof Object !== "undefined" ? Object : undefined, "visibility" in locals ? locals.visibility : typeof visibility !== "undefined" ? visibility : undefined);
+	  }.call(this, "$component" in locals ? locals.$component : typeof $component !== "undefined" ? $component : undefined, "$helpers" in locals ? locals.$helpers : typeof $helpers !== "undefined" ? $helpers : undefined, "Object" in locals ? locals.Object : typeof Object !== "undefined" ? Object : undefined, "document" in locals ? locals.document : typeof document !== "undefined" ? document : undefined, "visibility" in locals ? locals.visibility : typeof visibility !== "undefined" ? visibility : undefined);
 	  if (result_of_with) return result_of_with.value;
 	}
 	module.exports = _jade_template_fn;
 
 /***/ },
-/* 342 */
+/* 370 */
 /***/ function(module, exports) {
 
 	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6e859d;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 12px;   font-stretch: normal;   font-weight: 400; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 12px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-size: 12px;   font-weight: 400;   padding: 8px;   -webkit-transition: border-color 150ms ease-out;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus {   border-color: #3391e9;   -webkit-transition: border-color 200ms ease-in;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } mp-modal {   width: 400px; } :host {   width: 400px; } .mp-modal-stage, .mp-modal-stage * {   box-sizing: border-box; } .mp-modal-stage {   bottom: 0;   left: 0;   min-width: 100%;   pointer-events: none;   position: fixed;   right: 0;   top: 0;   width: inherit;   z-index: 100; } .mp-modal-stage.mp-modal-closed {   display: none; } .mp-modal-stage.mp-modal-absolute, .mp-modal-stage.mp-modal-absolute .mp-modal-backdrop, .mp-modal-stage.mp-modal-absolute .mp-modal-wrapper {   position: absolute; } .mp-modal-stage .mp-modal-backdrop {   background: #4c6072;   height: 100%;   pointer-events: auto;   position: fixed;   width: 100%;   z-index: 200; } .mp-modal-stage .mp-modal-backdrop.mp-modal-opening {   -webkit-animation: fadeOverlayIn 300ms forwards;           animation: fadeOverlayIn 300ms forwards;   opacity: 0; } .mp-modal-stage .mp-modal-backdrop.mp-modal-open {   opacity: 0.8; } .mp-modal-stage .mp-modal-backdrop.mp-modal-closing {   -webkit-animation: fadeOverlayOut 300ms forwards;           animation: fadeOverlayOut 300ms forwards; } .mp-modal-stage .mp-modal-backdrop.mp-modal-closed {   opacity: 0; } .mp-modal-stage .mp-modal-backdrop + .mp-modal-wrapper .mp-modal-main {   box-shadow: 0 17px 50px 0 rgba(0,0,0,0.19); } .mp-modal-stage .mp-modal-wrapper {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   height: 100%;   -webkit-box-pack: center;       -ms-flex-pack: center;           justify-content: center;   min-width: 100%;   pointer-events: none;   position: fixed;   width: inherit;   z-index: 300; } .mp-modal-stage .mp-modal-wrapper .mp-modal-main {   background: #fff;   border: 1px solid #eff3f5;   border-radius: 5px;   box-shadow: 0 1px 2px 0 rgba(0,0,0,0.14);   pointer-events: auto;   position: relative;   width: inherit; } .mp-modal-stage .mp-modal-wrapper .mp-modal-main.mp-modal-opening {   -webkit-animation: fadeModalIn 300ms forwards 100ms;           animation: fadeModalIn 300ms forwards 100ms;   opacity: 0; } .mp-modal-stage .mp-modal-wrapper .mp-modal-main.mp-modal-open {   opacity: 1; } .mp-modal-stage .mp-modal-wrapper .mp-modal-main.mp-modal-closing {   -webkit-animation: fadeModalOut 200ms forwards;           animation: fadeModalOut 200ms forwards; } .mp-modal-stage .mp-modal-wrapper .mp-modal-main.mp-modal-closed {   opacity: 0; } .mp-modal-stage .mp-modal-wrapper .mp-modal-main .mp-modal-close-btn {   cursor: pointer;   float: right;   height: 10px;   position: absolute;   right: 15px;   top: 15px; } .mp-modal-stage .mp-modal-wrapper .mp-modal-main .mp-modal-close-btn .mp-modal-close-icon svg {   width: 10px; } .mp-modal-stage .mp-modal-wrapper .mp-modal-main .mp-modal-close-btn .mp-modal-close-icon svg path {   fill: #d8e0e6; } .mp-modal-stage .mp-modal-wrapper .mp-modal-main .mp-modal-close-btn:hover .mp-modal-close-icon svg path {   fill: #c1ccd5; } .mp-modal-content {   padding: 15px 30px; } .mp-modal-title {   color: #4c6072;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 18px;   font-weight: 600;   line-height: 1.4; } .mp-modal-subtitle {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px;   margin: 12px 0; } content::content .mp-modal-content {   padding: 15px 30px; } content::content .mp-modal-title {   color: #4c6072;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 18px;   font-weight: 600;   line-height: 1.4; } content::content .mp-modal-subtitle {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px;   margin: 12px 0; } @-webkit-keyframes fadeOverlayIn {   from {     opacity: 0;   }   to {     opacity: 0.8;   } } @keyframes fadeOverlayIn {   from {     opacity: 0;   }   to {     opacity: 0.8;   } } @-webkit-keyframes fadeOverlayOut {   from {     opacity: 0.8;   }   to {     opacity: 0;   } } @keyframes fadeOverlayOut {   from {     opacity: 0.8;   }   to {     opacity: 0;   } } @-webkit-keyframes fadeModalIn {   from {     opacity: 0;     -webkit-transform: scale(1.1, 1.1);             transform: scale(1.1, 1.1);   }   to {     opacity: 1;     -webkit-transform: scale(1, 1);             transform: scale(1, 1);   } } @keyframes fadeModalIn {   from {     opacity: 0;     -webkit-transform: scale(1.1, 1.1);             transform: scale(1.1, 1.1);   }   to {     opacity: 1;     -webkit-transform: scale(1, 1);             transform: scale(1, 1);   } } @-webkit-keyframes fadeModalOut {   from {     opacity: 1;     -webkit-transform: scale(1, 1);             transform: scale(1, 1);   }   to {     opacity: 0;     -webkit-transform: scale(1.1, 1.1);             transform: scale(1.1, 1.1);   } } @keyframes fadeModalOut {   from {     opacity: 1;     -webkit-transform: scale(1, 1);             transform: scale(1, 1);   }   to {     opacity: 0;     -webkit-transform: scale(1.1, 1.1);             transform: scale(1.1, 1.1);   } } ";
 
 
 /***/ },
-/* 343 */
+/* 371 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -18653,13 +19594,13 @@
 
 	var _panel = __webpack_require__(299);
 
-	var _registerElement = __webpack_require__(321);
+	var _registerElement = __webpack_require__(348);
 
-	var _index = __webpack_require__(344);
+	var _index = __webpack_require__(372);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	var _index3 = __webpack_require__(345);
+	var _index3 = __webpack_require__(373);
 
 	var _index4 = _interopRequireDefault(_index3);
 
@@ -18695,7 +19636,7 @@
 	}(_panel.Component));
 
 /***/ },
-/* 344 */
+/* 372 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -18704,30 +19645,24 @@
 	  locals = locals || {};
 	  var h = __webpack_require__(299).h;
 	  return h("div", {
-	    "class": {
-	      'mp-spinner': true
+	    "className": [].concat('mp-spinner').filter(Boolean).join(' ')
+	  }, [h("svg-icon", {
+	    "attrs": {
+	      icon: 'spinner'
 	    }
-	  }, function () {
-	    var __jade_nodes = [];
-	    __jade_nodes = __jade_nodes.concat(h("svg-icon", {
-	      "attrs": {
-	        icon: 'spinner'
-	      }
-	    }));;
-	    return __jade_nodes;
-	  }.call(this).filter(Boolean));
+	  })].filter(Boolean));
 	}
 	module.exports = _jade_template_fn;
 
 /***/ },
-/* 345 */
+/* 373 */
 /***/ function(module, exports) {
 
 	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6e859d;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 12px;   font-stretch: normal;   font-weight: 400; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 12px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-size: 12px;   font-weight: 400;   padding: 8px;   -webkit-transition: border-color 150ms ease-out;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus {   border-color: #3391e9;   -webkit-transition: border-color 200ms ease-in;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } mp-spinner {   display: inline-block;   height: 22px;   width: 22px; } :host {   display: inline-block;   height: 22px;   width: 22px; } .mp-spinner {   -webkit-animation: spin 0.7s infinite linear;           animation: spin 0.7s infinite linear;   height: 100%;   -webkit-transform: translateZ(0);           transform: translateZ(0);   width: 100%; } .mp-spinner svg-icon {   height: 100%;   min-height: 100%;   min-width: 100%;   width: 100%; } .mp-spinner svg-icon svg {   height: 100%;   min-height: 100%;   min-width: 100%;   width: 100%;   left: 0;   top: 0; } .mp-spinner svg-icon svg, .mp-spinner svg-icon path {   color: #4ba8ff;   fill: #4ba8ff;   -webkit-transition: 0.2s;   transition: 0.2s; } @-webkit-keyframes spin {   0% {     -webkit-transform: rotate(0deg);             transform: rotate(0deg);   }   100% {     -webkit-transform: rotate(360deg);             transform: rotate(360deg);   } } @keyframes spin {   0% {     -webkit-transform: rotate(0deg);             transform: rotate(0deg);   }   100% {     -webkit-transform: rotate(360deg);             transform: rotate(360deg);   } } ";
 
 
 /***/ },
-/* 346 */
+/* 374 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -18739,13 +19674,13 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _webcomponent = __webpack_require__(304);
+	var _webcomponent = __webpack_require__(341);
 
 	var _webcomponent2 = _interopRequireDefault(_webcomponent);
 
-	var _registerElement = __webpack_require__(321);
+	var _registerElement = __webpack_require__(348);
 
-	var _util = __webpack_require__(347);
+	var _util = __webpack_require__(375);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -18972,7 +19907,7 @@
 	exports.SVG_ICONS = SVG_ICONS;
 
 /***/ },
-/* 347 */
+/* 375 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -18983,7 +19918,7 @@
 
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-	var _array = __webpack_require__(348);
+	var _array = __webpack_require__(376);
 
 	Object.keys(_array).forEach(function (key) {
 	  if (key === "default" || key === "__esModule") return;
@@ -19199,7 +20134,7 @@
 	}
 
 /***/ },
-/* 348 */
+/* 376 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -19304,7 +20239,7 @@
 	}
 
 /***/ },
-/* 349 */
+/* 377 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -19313,13 +20248,13 @@
 
 	var _panel = __webpack_require__(299);
 
-	var _registerElement = __webpack_require__(321);
+	var _registerElement = __webpack_require__(348);
 
-	var _index = __webpack_require__(350);
+	var _index = __webpack_require__(378);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	var _index3 = __webpack_require__(351);
+	var _index3 = __webpack_require__(379);
 
 	var _index4 = _interopRequireDefault(_index3);
 
@@ -19362,7 +20297,7 @@
 	}(_panel.Component));
 
 /***/ },
-/* 350 */
+/* 378 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -19373,57 +20308,31 @@
 	    var h = __webpack_require__(299).h;
 	    return {
 	      value: h("div", {
-	        "class": {
-	          'mp-tag': true
-	        }
+	        "className": [].concat('mp-tag').filter(Boolean).join(' ')
 	      }, function () {
 	        var __jade_nodes = [];
-	        __jade_nodes = __jade_nodes.concat($component.getAttribute('icon') ? function () {
-	          var __jade_nodes = [];
-	          __jade_nodes = __jade_nodes.concat(h("div", {
-	            "class": {
-	              'extra-icon': true
-	            }
-	          }, function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(h("svg-icon", {
-	              "attrs": {
-	                icon: $component.getAttribute('icon')
-	              }
-	            }));;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));;
-	          return __jade_nodes;
-	        }.call(this) : undefined);
-	        __jade_nodes = __jade_nodes.concat(h("div", {
-	          "class": {
-	            'tag-name': true
+	        __jade_nodes = __jade_nodes.concat($component.getAttribute('icon') ? h("div", {
+	          "className": [].concat('extra-icon').filter(Boolean).join(' ')
+	        }, [h("svg-icon", {
+	          "attrs": {
+	            icon: $component.getAttribute('icon')
 	          }
-	        }, [$component.getAttribute('tag-name') || '']));
+	        })].filter(Boolean)) : undefined);
 	        __jade_nodes = __jade_nodes.concat(h("div", {
+	          "className": [].concat('tag-name').filter(Boolean).join(' ')
+	        }, [$component.getAttribute('tag-name')]));
+	        __jade_nodes = __jade_nodes.concat($component.isAttributeEnabled('removable') ? h("div", {
 	          "on": {
 	            click: $helpers.remove
 	          },
-	          "class": {
-	            'remove-tag': true
+	          "className": [].concat('remove-tag').filter(Boolean).join(' ')
+	        }, [h("div", {
+	          "className": [].concat('remove-icon').filter(Boolean).join(' ')
+	        }, [h("svg-icon", {
+	          "attrs": {
+	            icon: 'x'
 	          }
-	        }, function () {
-	          var __jade_nodes = [];
-	          __jade_nodes = __jade_nodes.concat(h("div", {
-	            "class": {
-	              'remove-icon': true
-	            }
-	          }, function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(h("svg-icon", {
-	              "attrs": {
-	                icon: 'x'
-	              }
-	            }));;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));;
-	          return __jade_nodes;
-	        }.call(this).filter(Boolean)));;
+	        })].filter(Boolean))].filter(Boolean)) : undefined);;
 	        return __jade_nodes;
 	      }.call(this).filter(Boolean))
 	    };
@@ -19433,14 +20342,14 @@
 	module.exports = _jade_template_fn;
 
 /***/ },
-/* 351 */
+/* 379 */
 /***/ function(module, exports) {
 
 	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6e859d;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 12px;   font-stretch: normal;   font-weight: 400; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 12px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-size: 12px;   font-weight: 400;   padding: 8px;   -webkit-transition: border-color 150ms ease-out;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus {   border-color: #3391e9;   -webkit-transition: border-color 200ms ease-in;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } .mp-tag {   background-color: #6e859d;   border-radius: 13px;   color: #fff;   cursor: pointer;   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 12px;   font-weight: 600;   height: 10px;   line-height: 0.8;   padding: 8px 10px 8px 15px; } .mp-tag .extra-icon {   left: -4px;   position: relative;   top: -3px; } .mp-tag .extra-icon svg-icon {   height: 14px;   min-height: 14px;   min-width: 14px;   width: 14px; } .mp-tag .extra-icon svg-icon svg {   height: 14px;   min-height: 14px;   min-width: 14px;   width: 14px;   left: 0;   top: 0; } .mp-tag .extra-icon svg-icon svg, .mp-tag .extra-icon svg-icon path {   color: #fff;   fill: #fff;   -webkit-transition: 0.2s;   transition: 0.2s; } .mp-tag .remove-tag {   border-radius: 20px;   height: 16px;   left: 3px;   position: relative;   top: -4px;   width: 16px; } .mp-tag .remove-tag .remove-icon {   position: relative;   top: 1px; } .mp-tag .remove-tag .remove-icon svg-icon {   height: 16px;   min-height: 16px;   min-width: 16px;   width: 16px; } .mp-tag .remove-tag .remove-icon svg-icon svg {   height: 16px;   min-height: 16px;   min-width: 16px;   width: 16px;   left: 0;   top: 0; } .mp-tag .remove-tag .remove-icon svg-icon svg, .mp-tag .remove-tag .remove-icon svg-icon path {   color: #c1ccd5;   fill: #c1ccd5;   -webkit-transition: 0.2s;   transition: 0.2s; } .mp-tag .remove-tag .remove-icon:hover svg-icon svg, .mp-tag .remove-tag .remove-icon:hover svg-icon path {   color: #fff;   fill: #fff; } ";
 
 
 /***/ },
-/* 352 */
+/* 380 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -19451,15 +20360,15 @@
 
 	var _panel = __webpack_require__(299);
 
-	var _dom = __webpack_require__(320);
+	var _dom = __webpack_require__(347);
 
-	var _registerElement = __webpack_require__(321);
+	var _registerElement = __webpack_require__(348);
 
-	var _index = __webpack_require__(353);
+	var _index = __webpack_require__(381);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	var _index3 = __webpack_require__(354);
+	var _index3 = __webpack_require__(382);
 
 	var _index4 = _interopRequireDefault(_index3);
 
@@ -19530,14 +20439,14 @@
 	}(_panel.Component));
 
 /***/ },
-/* 353 */
+/* 381 */
 /***/ function(module, exports) {
 
 	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6e859d;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 12px;   font-stretch: normal;   font-weight: 400; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 12px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-size: 12px;   font-weight: 400;   padding: 8px;   -webkit-transition: border-color 150ms ease-out;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus {   border-color: #3391e9;   -webkit-transition: border-color 200ms ease-in;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } mp-toggle {   display: inline-block; } :host {   display: inline-block; } .mp-toggle {   background-color: #eff3f5;   border-radius: 50px;   box-shadow: inset 0 1px 0 0 #d8e0e6;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   height: 32px;   padding: 3px; } .mp-toggle .mp-toggle-option {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   background-color: #eff3f5;   border-radius: 50px;   color: #6e859d;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   -ms-flex-preferred-size: 0;       flex-basis: 0;   -webkit-box-flex: 1;       -ms-flex-positive: 1;           flex-grow: 1;   font-size: 11px;   font-weight: bold;   height: 100%;   -webkit-box-pack: center;       -ms-flex-pack: center;           justify-content: center;   text-align: center;   text-transform: uppercase;   -webkit-transition: background-color 0.2s;   transition: background-color 0.2s; } .mp-toggle .mp-toggle-option.mp-toggle-selected {   background-color: #fff;   box-shadow: 0 1px 0 0 rgba(0,0,0,0.05); } .mp-toggle .mp-toggle-option:not(.mp-toggle-selected) {   cursor: pointer; } .mp-toggle .mp-toggle-option:not(.mp-toggle-selected):hover {   color: #4ba8ff; } .mp-toggle.mp-toggle-blue {   background-color: #3391e9;   box-shadow: inset 0 1px 0 0 #2687e3; } .mp-toggle.mp-toggle-blue .mp-toggle-option {   background-color: #3391e9;   color: #b6dcff; } .mp-toggle.mp-toggle-blue .mp-toggle-option.mp-toggle-selected {   background-color: #6cb8ff;   color: #fff; } .mp-toggle.mp-toggle-blue .mp-toggle-option:not(.mp-toggle-selected):hover {   color: #fff; } .large-toggle {   height: 40px; } ";
 
 
 /***/ },
-/* 354 */
+/* 382 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -19546,33 +20455,26 @@
 	  locals = locals || {};;;
 	  var result_of_with = function ($component, $helpers, Object) {
 	    var h = __webpack_require__(299).h;
+	    var __objToAttrs = function __objToAttrs(o) {
+	      return Object.keys(o).map(function (k) {
+	        return o[k] ? k : false;
+	      });
+	    };
 	    return {
 	      value: h("div", {
-	        "class": Object.assign({}, $helpers.extendComponentClasses(), {
-	          'mp-toggle': true
-	        })
-	      }, function () {
-	        var __jade_nodes = [];
-	        __jade_nodes = __jade_nodes.concat($helpers.toggleOptions().reduce(function (__each_nodes, toggleOption, $index) {
-	          return __each_nodes.concat(function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(h("div", {
-	              "on": {
-	                click: function click() {
-	                  return $helpers.selectOption(toggleOption.value);
-	                }
-	              },
-	              "class": Object.assign({}, {
-	                'mp-toggle-selected': toggleOption.value === $component.value
-	              }, {
-	                'mp-toggle-option': true
-	              })
-	            }, [toggleOption.text || '']));;
-	            return __jade_nodes;
-	          }.call(this));
-	        }, []));;
-	        return __jade_nodes;
-	      }.call(this).filter(Boolean))
+	        "className": [].concat('mp-toggle').concat($helpers.extendComponentClasses()).filter(Boolean).join(' ')
+	      }, [$helpers.toggleOptions().map(function (toggleOption, $index) {
+	        return h("div", {
+	          "on": {
+	            click: function click() {
+	              return $helpers.selectOption(toggleOption.value);
+	            }
+	          },
+	          "className": [].concat('mp-toggle-option').concat(__objToAttrs({
+	            'mp-toggle-selected': toggleOption.value === $component.value
+	          })).filter(Boolean).join(' ')
+	        }, [toggleOption.text]);
+	      })].filter(Boolean))
 	    };
 	  }.call(this, "$component" in locals ? locals.$component : typeof $component !== "undefined" ? $component : undefined, "$helpers" in locals ? locals.$helpers : typeof $helpers !== "undefined" ? $helpers : undefined, "Object" in locals ? locals.Object : typeof Object !== "undefined" ? Object : undefined);
 	  if (result_of_with) return result_of_with.value;
@@ -19580,7 +20482,7 @@
 	module.exports = _jade_template_fn;
 
 /***/ },
-/* 355 */
+/* 383 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -19591,13 +20493,13 @@
 
 	var _panel = __webpack_require__(299);
 
-	var _registerElement = __webpack_require__(321);
+	var _registerElement = __webpack_require__(348);
 
-	var _index = __webpack_require__(356);
+	var _index = __webpack_require__(384);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	var _index3 = __webpack_require__(357);
+	var _index3 = __webpack_require__(385);
 
 	var _index4 = _interopRequireDefault(_index3);
 
@@ -19729,7 +20631,7 @@
 	}(_panel.Component));
 
 /***/ },
-/* 356 */
+/* 384 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -19740,35 +20642,28 @@
 	  locals = locals || {};;;
 	  var result_of_with = function ($helpers, Object, leftOffset, placement, topOffset, visibility) {
 	    var h = __webpack_require__(299).h;
+	    var __objToAttrs = function __objToAttrs(o) {
+	      return Object.keys(o).map(function (k) {
+	        return o[k] ? k : false;
+	      });
+	    };
 	    return {
 	      value: h("div", {
 	        "on": {
 	          click: $helpers.stopPropagation,
 	          mousedown: $helpers.stopPropagation
 	        },
-	        "class": Object.assign({}, {
+	        "className": [].concat('mp-tooltip-wrapper').concat(__objToAttrs({
 	          'mp-tooltip-hidden': visibility === 'hidden',
 	          'mp-tooltip-transitioning': visibility === 'transitioning'
-	        }, {
-	          'mp-tooltip-wrapper': true
-	        })
-	      }, function () {
-	        var __jade_nodes = [];
-	        __jade_nodes = __jade_nodes.concat(h("div", {
-	          "style": {
-	            'left': leftOffset + "px",
-	            'top': topOffset + "px"
-	          },
-	          "class": Object.assign({}, _defineProperty({}, "mp-tooltip-placement-" + placement, true), {
-	            'mp-tooltip-main': true
-	          })
-	        }, function () {
-	          var __jade_nodes = [];
-	          __jade_nodes = __jade_nodes.concat(h("content"));;
-	          return __jade_nodes;
-	        }.call(this).filter(Boolean)));;
-	        return __jade_nodes;
-	      }.call(this).filter(Boolean))
+	        })).filter(Boolean).join(' ')
+	      }, [h("div", {
+	        "style": {
+	          'left': leftOffset + "px",
+	          'top': topOffset + "px"
+	        },
+	        "className": [].concat('mp-tooltip-main').concat(__objToAttrs(_defineProperty({}, "mp-tooltip-placement-" + placement, true))).filter(Boolean).join(' ')
+	      }, [h("content")].filter(Boolean))].filter(Boolean))
 	    };
 	  }.call(this, "$helpers" in locals ? locals.$helpers : typeof $helpers !== "undefined" ? $helpers : undefined, "Object" in locals ? locals.Object : typeof Object !== "undefined" ? Object : undefined, "leftOffset" in locals ? locals.leftOffset : typeof leftOffset !== "undefined" ? leftOffset : undefined, "placement" in locals ? locals.placement : typeof placement !== "undefined" ? placement : undefined, "topOffset" in locals ? locals.topOffset : typeof topOffset !== "undefined" ? topOffset : undefined, "visibility" in locals ? locals.visibility : typeof visibility !== "undefined" ? visibility : undefined);
 	  if (result_of_with) return result_of_with.value;
@@ -19776,14 +20671,14 @@
 	module.exports = _jade_template_fn;
 
 /***/ },
-/* 357 */
+/* 385 */
 /***/ function(module, exports) {
 
 	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6e859d;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 12px;   font-stretch: normal;   font-weight: 400; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 12px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-size: 12px;   font-weight: 400;   padding: 8px;   -webkit-transition: border-color 150ms ease-out;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus {   border-color: #3391e9;   -webkit-transition: border-color 200ms ease-in;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } .mp-tooltip-wrapper, .mp-tooltip-wrapper * {   box-sizing: border-box; } .mp-tooltip-wrapper.mp-tooltip-hidden {   pointer-events: none; } .mp-tooltip-wrapper.mp-tooltip-hidden .mp-tooltip-main {   display: none; } .mp-tooltip-wrapper.mp-tooltip-transitioning {   pointer-events: none; } .mp-tooltip-wrapper.mp-tooltip-transitioning .mp-tooltip-main {   visibility: hidden; } .mp-tooltip-wrapper .mp-tooltip-main {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   background-color: #4c6072;   border-radius: 3px;   box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16);   color: #fff;   cursor: default;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 12px;   font-weight: bold;   -webkit-box-pack: center;       -ms-flex-pack: center;           justify-content: center;   padding: 10px 18px;   pointer-events: auto;   position: absolute;   text-transform: initial; } .mp-tooltip-wrapper .mp-tooltip-main::after {   border: 5px solid transparent;   content: '';   height: 0;   position: absolute;   width: 0; } .mp-tooltip-wrapper .mp-tooltip-main.mp-tooltip-placement-top::after {   border-top-color: #4c6072;   left: 50%;   margin-left: -5px;   top: 100%; } .mp-tooltip-wrapper .mp-tooltip-main.mp-tooltip-placement-bottom::after {   border-bottom-color: #4c6072;   left: 50%;   margin-left: -5px;   bottom: 100%; } .mp-tooltip-wrapper .mp-tooltip-main.mp-tooltip-placement-left::after {   border-left-color: #4c6072;   left: 100%;   margin-top: -5px;   top: 50%; } .mp-tooltip-wrapper .mp-tooltip-main.mp-tooltip-placement-right::after {   border-right-color: #4c6072;   margin-top: -5px;   right: 100%;   top: 50%; } ";
 
 
 /***/ },
-/* 358 */
+/* 386 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -19794,17 +20689,17 @@
 
 	var _panel = __webpack_require__(299);
 
-	var _registerElement = __webpack_require__(321);
+	var _registerElement = __webpack_require__(348);
 
-	var _dom = __webpack_require__(320);
+	var _dom = __webpack_require__(347);
 
-	var _dom2 = __webpack_require__(320);
+	var _dom2 = __webpack_require__(347);
 
-	var _index = __webpack_require__(359);
+	var _index = __webpack_require__(387);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	var _index3 = __webpack_require__(360);
+	var _index3 = __webpack_require__(388);
 
 	var _index4 = _interopRequireDefault(_index3);
 
@@ -19938,7 +20833,7 @@
 	}(_panel.Component));
 
 /***/ },
-/* 359 */
+/* 387 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -19949,16 +20844,15 @@
 	  locals = locals || {};;;
 	  var result_of_with = function (Object, visibility) {
 	    var h = __webpack_require__(299).h;
+	    var __objToAttrs = function __objToAttrs(o) {
+	      return Object.keys(o).map(function (k) {
+	        return o[k] ? k : false;
+	      });
+	    };
 	    return {
 	      value: h("div", {
-	        "class": Object.assign({}, _defineProperty({}, "mp-drop-menu-" + visibility, true), {
-	          'mp-drop-menu-body': true
-	        })
-	      }, function () {
-	        var __jade_nodes = [];
-	        __jade_nodes = __jade_nodes.concat(h("content"));;
-	        return __jade_nodes;
-	      }.call(this).filter(Boolean))
+	        "className": [].concat('mp-drop-menu-body').concat(__objToAttrs(_defineProperty({}, "mp-drop-menu-" + visibility, true))).filter(Boolean).join(' ')
+	      }, [h("content")].filter(Boolean))
 	    };
 	  }.call(this, "Object" in locals ? locals.Object : typeof Object !== "undefined" ? Object : undefined, "visibility" in locals ? locals.visibility : typeof visibility !== "undefined" ? visibility : undefined);
 	  if (result_of_with) return result_of_with.value;
@@ -19966,14 +20860,14 @@
 	module.exports = _jade_template_fn;
 
 /***/ },
-/* 360 */
+/* 388 */
 /***/ function(module, exports) {
 
 	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6e859d;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 12px;   font-stretch: normal;   font-weight: 400; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 12px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-size: 12px;   font-weight: 400;   padding: 8px;   -webkit-transition: border-color 150ms ease-out;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus {   border-color: #3391e9;   -webkit-transition: border-color 200ms ease-in;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } mp-drop-menu {   display: -webkit-box;   display: -ms-flexbox;   display: flex;   left: 0;   margin-bottom: 30px;   position: absolute;   top: 0;   z-index: 100; } :host {   display: -webkit-box;   display: -ms-flexbox;   display: flex;   left: 0;   margin-bottom: 30px;   position: absolute;   top: 0;   z-index: 100; } .mp-drop-menu-body, .mp-drop-menu-body * {   box-sizing: border-box; } .mp-drop-menu-body {   background-color: #fff;   border-radius: 5px;   box-shadow: 0 10px 40px rgba(0,0,0,0.15); } .mp-drop-menu-closed {   display: none; } .mp-drop-menu-opening {   -webkit-animation: fadeOverlayIn 200ms forwards;           animation: fadeOverlayIn 200ms forwards;   opacity: 0; } .mp-drop-menu-open {   opacity: 1; } .mp-drop-menu-closing {   -webkit-animation: fadeOverlayOut 200ms forwards;           animation: fadeOverlayOut 200ms forwards; } @-webkit-keyframes fadeOverlayIn {   from {     opacity: 0;     -webkit-transform: translateY(-10px);             transform: translateY(-10px);   }   to {     opacity: 0.9;   } } @keyframes fadeOverlayIn {   from {     opacity: 0;     -webkit-transform: translateY(-10px);             transform: translateY(-10px);   }   to {     opacity: 0.9;   } } @-webkit-keyframes fadeOverlayOut {   from {     opacity: 0.9;   }   to {     opacity: 0;     -webkit-transform: translateY(-10px);             transform: translateY(-10px);   } } @keyframes fadeOverlayOut {   from {     opacity: 0.9;   }   to {     opacity: 0;     -webkit-transform: translateY(-10px);             transform: translateY(-10px);   } } ";
 
 
 /***/ },
-/* 361 */
+/* 389 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -19982,13 +20876,13 @@
 
 	var _panel = __webpack_require__(299);
 
-	var _registerElement = __webpack_require__(321);
+	var _registerElement = __webpack_require__(348);
 
-	var _index = __webpack_require__(362);
+	var _index = __webpack_require__(390);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	var _index3 = __webpack_require__(363);
+	var _index3 = __webpack_require__(391);
 
 	var _index4 = _interopRequireDefault(_index3);
 
@@ -20024,7 +20918,7 @@
 	}(_panel.Component));
 
 /***/ },
-/* 362 */
+/* 390 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20042,48 +20936,19 @@
 	    return {
 	      value: h("mp-modal", {
 	        "attrs": proxyAttrs
-	      }, function () {
-	        var __jade_nodes = [];
-	        __jade_nodes = __jade_nodes.concat(h("div", {
-	          "class": {
-	            'mp-alert-container': true
-	          }
-	        }, function () {
-	          var __jade_nodes = [];
-	          __jade_nodes = __jade_nodes.concat(h("div", {
-	            "class": {
-	              'mp-alert-body': true
-	            }
-	          }, function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(h("div", {
-	              "class": {
-	                'mp-alert-icon': true
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat(h("svg-icon", {
-	                "attrs": {
-	                  icon: 'alert'
-	                }
-	              }));;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));
-	            __jade_nodes = __jade_nodes.concat(h("div", {
-	              "class": {
-	                'mp-alert-copy': true
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat(h("content"));;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));;
-	          return __jade_nodes;
-	        }.call(this).filter(Boolean)));;
-	        return __jade_nodes;
-	      }.call(this).filter(Boolean))
+	      }, [h("div", {
+	        "className": [].concat('mp-alert-container').filter(Boolean).join(' ')
+	      }, [h("div", {
+	        "className": [].concat('mp-alert-body').filter(Boolean).join(' ')
+	      }, [h("div", {
+	        "className": [].concat('mp-alert-icon').filter(Boolean).join(' ')
+	      }, [h("svg-icon", {
+	        "attrs": {
+	          icon: 'alert'
+	        }
+	      })].filter(Boolean)), h("div", {
+	        "className": [].concat('mp-alert-copy').filter(Boolean).join(' ')
+	      }, [h("content")].filter(Boolean))].filter(Boolean))].filter(Boolean))].filter(Boolean))
 	    };
 	  }.call(this, "$component" in locals ? locals.$component : typeof $component !== "undefined" ? $component : undefined);
 	  if (result_of_with) return result_of_with.value;
@@ -20091,14 +20956,14 @@
 	module.exports = _jade_template_fn;
 
 /***/ },
-/* 363 */
+/* 391 */
 /***/ function(module, exports) {
 
 	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6e859d;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 12px;   font-stretch: normal;   font-weight: 400; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 12px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-size: 12px;   font-weight: 400;   padding: 8px;   -webkit-transition: border-color 150ms ease-out;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus {   border-color: #3391e9;   -webkit-transition: border-color 200ms ease-in;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } mp-alert {   width: 300px; } :host {   width: 300px; } mp-modal {   width: inherit; } .mp-alert-container {   display: -webkit-box;   display: -ms-flexbox;   display: flex;   -webkit-box-orient: vertical;   -webkit-box-direction: normal;       -ms-flex-direction: column;           flex-direction: column;   margin-right: 40px; } .mp-alert-container .mp-alert-body {   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   margin: 12px 10px 10px; } .mp-alert-container .mp-alert-icon {   display: inline-block;   vertical-align: middle; } .mp-alert-container .mp-alert-icon svg-icon svg {   left: 0;   top: 0; } .mp-alert-container .mp-alert-icon svg-icon svg, .mp-alert-container .mp-alert-icon svg-icon path {   color: #ec7191;   fill: #ec7191;   -webkit-transition: 0.2s;   transition: 0.2s; } .mp-alert-container .mp-alert-copy {   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   -ms-flex-wrap: wrap;       flex-wrap: wrap;   margin-left: 10px; } ";
 
 
 /***/ },
-/* 364 */
+/* 392 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20108,7 +20973,7 @@
 	});
 	exports.Persistence = exports.MPApp = undefined;
 
-	var _parentFrame = __webpack_require__(365);
+	var _parentFrame = __webpack_require__(393);
 
 	Object.keys(_parentFrame).forEach(function (key) {
 	  if (key === "default" || key === "__esModule") return;
@@ -20120,7 +20985,7 @@
 	  });
 	});
 
-	var _trackingSetup = __webpack_require__(366);
+	var _trackingSetup = __webpack_require__(394);
 
 	Object.keys(_trackingSetup).forEach(function (key) {
 	  if (key === "default" || key === "__esModule") return;
@@ -20132,11 +20997,11 @@
 	  });
 	});
 
-	var _mpApp = __webpack_require__(369);
+	var _mpApp = __webpack_require__(397);
 
 	var _mpApp2 = _interopRequireDefault(_mpApp);
 
-	var _persistence = __webpack_require__(370);
+	var _persistence = __webpack_require__(398);
 
 	var _persistence2 = _interopRequireDefault(_persistence);
 
@@ -20146,7 +21011,7 @@
 	exports.Persistence = _persistence2.default;
 
 /***/ },
-/* 365 */
+/* 393 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -20176,7 +21041,7 @@
 	}
 
 /***/ },
-/* 366 */
+/* 394 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20187,11 +21052,11 @@
 	exports.initMixpanel = initMixpanel;
 	exports.initRollbar = initRollbar;
 
-	var _mixpanelBrowser = __webpack_require__(367);
+	var _mixpanelBrowser = __webpack_require__(395);
 
 	var _mixpanelBrowser2 = _interopRequireDefault(_mixpanelBrowser);
 
-	var _rollbarBrowser = __webpack_require__(368);
+	var _rollbarBrowser = __webpack_require__(396);
 
 	var _rollbarBrowser2 = _interopRequireDefault(_rollbarBrowser);
 
@@ -20238,7 +21103,7 @@
 	}
 
 /***/ },
-/* 367 */
+/* 395 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -25797,13 +26662,13 @@
 	module.exports = mixpanel;
 
 /***/ },
-/* 368 */
+/* 396 */
 /***/ function(module, exports, __webpack_require__) {
 
 	!function(e,r){if(true)module.exports=r();else if("function"==typeof define&&define.amd)define([],r);else{var t=r();for(var n in t)("object"==typeof exports?exports:e)[n]=t[n]}}(this,function(){return function(e){function r(n){if(t[n])return t[n].exports;var o=t[n]={exports:{},id:n,loaded:!1};return e[n].call(o.exports,o,o.exports,r),o.loaded=!0,o.exports}var t={};return r.m=e,r.c=t,r.p="",r(0)}([function(e,r,t){e.exports=t(1)},function(e,r,t){"use strict";function n(){var e="undefined"==typeof JSON?{}:JSON;o.setupJSON(e)}var o=t(2),i=t(3);n();var a=window._rollbarConfig,s=a&&a.globalAlias||"Rollbar",u=window[s]&&"undefined"!=typeof window[s].shimId;!u&&a?o.wrapper.init(a):(window.Rollbar=o.wrapper,window.RollbarNotifier=i.Notifier),e.exports=o.wrapper},function(e,r,t){"use strict";function n(e,r,t){!t[4]&&window._rollbarWrappedError&&(t[4]=window._rollbarWrappedError,window._rollbarWrappedError=null),e.uncaughtError.apply(e,t),r&&r.apply(window,t)}function o(e,r){if(r.hasOwnProperty&&r.hasOwnProperty("addEventListener")){var t=r.addEventListener;r.addEventListener=function(r,n,o){t.call(this,r,e.wrap(n),o)};var n=r.removeEventListener;r.removeEventListener=function(e,r,t){n.call(this,e,r&&r._wrapped||r,t)}}}var i=t(3),a=t(8),s=i.Notifier;window._rollbarWrappedError=null;var u={};u.init=function(e,r){var t=new s(r);if(t.configure(e),e.captureUncaught){var i;r&&a.isType(r._rollbarOldOnError,"function")?i=r._rollbarOldOnError:window.onerror&&!window.onerror.belongsToShim&&(i=window.onerror),window.onerror=function(){var e=Array.prototype.slice.call(arguments,0);n(t,i,e)};var u,c,l=["EventTarget","Window","Node","ApplicationCache","AudioTrackList","ChannelMergerNode","CryptoOperation","EventSource","FileReader","HTMLUnknownElement","IDBDatabase","IDBRequest","IDBTransaction","KeyOperation","MediaController","MessagePort","ModalWindow","Notification","SVGElementInstance","Screen","TextTrack","TextTrackCue","TextTrackList","WebSocket","WebSocketWorker","Worker","XMLHttpRequest","XMLHttpRequestEventTarget","XMLHttpRequestUpload"];for(u=0;u<l.length;++u)c=l[u],window[c]&&window[c].prototype&&o(t,window[c].prototype)}return e.captureUnhandledRejections&&(r&&a.isType(r._unhandledRejectionHandler,"function")&&window.removeEventListener("unhandledrejection",r._unhandledRejectionHandler),t._unhandledRejectionHandler=function(e){var r=e.reason,n=e.promise,o=e.detail;!r&&o&&(r=o.reason,n=o.promise),t.unhandledRejection(r,n)},window.addEventListener("unhandledrejection",t._unhandledRejectionHandler)),window.Rollbar=t,s.processPayloads(),t},e.exports={wrapper:u,setupJSON:i.setupJSON}},function(e,r,t){"use strict";function n(e){E=e,w.setupJSON(e)}function o(e,r){return function(){var t=r||this;try{return e.apply(t,arguments)}catch(n){console.error("[Rollbar]:",n)}}}function i(){h||(h=setTimeout(f,1e3))}function a(){return _}function s(e){_=_||this;var r="https://"+s.DEFAULT_ENDPOINT;this.options={enabled:!0,endpoint:r,environment:"production",scrubFields:g([],s.DEFAULT_SCRUB_FIELDS),checkIgnore:null,logLevel:s.DEFAULT_LOG_LEVEL,reportLevel:s.DEFAULT_REPORT_LEVEL,uncaughtErrorLevel:s.DEFAULT_UNCAUGHT_ERROR_LEVEL,payload:{}},this.lastError=null,this.plugins={},this.parentNotifier=e,e&&(e.hasOwnProperty("shimId")?e.notifier=this:this.configure(e.options))}function u(e){window._rollbarPayloadQueue.push(e),i()}function c(e){return o(function(){var r=this._getLogArgs(arguments);return this._log(e||r.level||this.options.logLevel||s.DEFAULT_LOG_LEVEL,r.message,r.err,r.custom,r.callback)})}function l(e,r){e||(e=r?E.stringify(r):"");var t={body:e};return r&&(t.extra=g(!0,{},r)),{message:t}}function p(e,r,t){var n=m.guessErrorClass(r.message),o=r.name||n[0],i=n[1],a={exception:{"class":o,message:i}};if(e&&(a.exception.description=e||"uncaught exception"),r.stack){var s,u,c,p,f,d,h,w;for(a.frames=[],h=0;h<r.stack.length;++h)s=r.stack[h],u={filename:s.url?v.sanitizeUrl(s.url):"(unknown)",lineno:s.line||null,method:s.func&&"?"!==s.func?s.func:"[anonymous]",colno:s.column},c=p=f=null,d=s.context?s.context.length:0,d&&(w=Math.floor(d/2),p=s.context.slice(0,w),c=s.context[w],f=s.context.slice(w)),c&&(u.code=c),(p||f)&&(u.context={},p&&p.length&&(u.context.pre=p),f&&f.length&&(u.context.post=f)),s.args&&(u.args=s.args),a.frames.push(u);return a.frames.reverse(),t&&(a.extra=g(!0,{},t)),{trace:a}}return l(o+": "+i,t)}function f(){var e;try{for(;e=window._rollbarPayloadQueue.shift();)d(e)}finally{h=void 0}}function d(e){var r=e.endpointUrl,t=e.accessToken,n=e.payload,o=e.callback||function(){},i=(new Date).getTime();i-L>=6e4&&(L=i,R=0);var a=window._globalRollbarOptions.maxItems,c=window._globalRollbarOptions.itemsPerMinute,l=function(){return!n.ignoreRateLimit&&a>=1&&T>=a},p=function(){return!n.ignoreRateLimit&&c>=1&&R>=c};return l()?void o(new Error(a+" max items reached")):p()?void o(new Error(c+" items per minute reached")):(T++,R++,l()&&_._log(_.options.uncaughtErrorLevel,"maxItems has been hit. Ignoring errors for the remainder of the current page load.",null,{maxItems:a},null,!1,!0),n.ignoreRateLimit&&delete n.ignoreRateLimit,void y.post(r,t,n,function(r,t){return r?(r instanceof b&&(e.callback=function(){},setTimeout(function(){u(e)},s.RETRY_DELAY)),o(r)):o(null,t)}))}var h,g=t(4),m=t(5),v=t(8),w=t(10),y=w.XHR,b=w.ConnectionError,E=null;s.NOTIFIER_VERSION="1.9.1",s.DEFAULT_ENDPOINT="api.rollbar.com/api/1/",s.DEFAULT_SCRUB_FIELDS=["pw","pass","passwd","password","secret","confirm_password","confirmPassword","password_confirmation","passwordConfirmation","access_token","accessToken","secret_key","secretKey","secretToken"],s.DEFAULT_LOG_LEVEL="debug",s.DEFAULT_REPORT_LEVEL="debug",s.DEFAULT_UNCAUGHT_ERROR_LEVEL="error",s.DEFAULT_ITEMS_PER_MIN=60,s.DEFAULT_MAX_ITEMS=0,s.LEVELS={debug:0,info:1,warning:2,error:3,critical:4},s.RETRY_DELAY=1e4,window._rollbarPayloadQueue=window._rollbarPayloadQueue||[],window._globalRollbarOptions={startTime:(new Date).getTime(),maxItems:s.DEFAULT_MAX_ITEMS,itemsPerMinute:s.DEFAULT_ITEMS_PER_MIN};var _,x=s.prototype;x._getLogArgs=function(e){for(var r,t,n,i,a,u,c=this.options.logLevel||s.DEFAULT_LOG_LEVEL,l=[],p=0;p<e.length;++p)u=e[p],a=v.typeName(u),"string"===a?r?l.push(u):r=u:"function"===a?i=o(u,this):"date"===a?l.push(u):"error"===a||u instanceof Error||"undefined"!=typeof DOMException&&u instanceof DOMException?t?l.push(u):t=u:"object"!==a&&"array"!==a||(n?l.push(u):n=u);return l.length&&(n=n||{},n.extraArgs=l),{level:c,message:r,err:t,custom:n,callback:i}},x._route=function(e){var r=this.options.endpoint,t=/\/$/.test(r),n=/^\//.test(e);return t&&n?e=e.substring(1):t||n||(e="/"+e),r+e},x._processShimQueue=function(e){for(var r,t,n,o,i,a,u,c={};t=e.shift();)r=t.shim,n=t.method,o=t.args,i=r.parentShim,u=c[r.shimId],u||(i?(a=c[i.shimId],u=new s(a)):u=this,c[r.shimId]=u),u[n]&&v.isType(u[n],"function")&&u[n].apply(u,o)},x._buildPayload=function(e,r,t,n,o){var i=this.options.accessToken,a=this.options.environment,u=g(!0,{},this.options.payload),c=v.uuid4();if(void 0===s.LEVELS[r])throw new Error("Invalid level");if(!t&&!n&&!o)throw new Error("No message, stack info or custom data");var l={environment:a,endpoint:this.options.endpoint,uuid:c,level:r,platform:"browser",framework:"browser-js",language:"javascript",body:this._buildBody(t,n,o),request:{url:window.location.href,query_string:window.location.search,user_ip:"$remote_ip"},client:{runtime_ms:e.getTime()-window._globalRollbarOptions.startTime,timestamp:Math.round(e.getTime()/1e3),javascript:{browser:window.navigator.userAgent,language:window.navigator.language,cookie_enabled:window.navigator.cookieEnabled,screen:{width:window.screen.width,height:window.screen.height},plugins:this._getBrowserPlugins()}},server:{},notifier:{name:"rollbar-browser-js",version:s.NOTIFIER_VERSION}};u.body&&delete u.body;var p={access_token:i,data:g(!0,l,u)};return this._scrub(p.data),p},x._buildBody=function(e,r,t){var n;return n=r?p(e,r,t):l(e,t)},x._getBrowserPlugins=function(){if(!this._browserPlugins){var e,r,t=window.navigator.plugins||[],n=t.length,o=[];for(r=0;n>r;++r)e=t[r],o.push({name:e.name,description:e.description});this._browserPlugins=o}return this._browserPlugins},x._scrub=function(e){function r(e,r,t,n,o,i){return r+v.redact(i)}function t(e){var t;if(v.isType(e,"string"))for(t=0;t<s.length;++t)e=e.replace(s[t],r);return e}function n(e,r){var t;for(t=0;t<a.length;++t)if(a[t].test(e)){r=v.redact(r);break}return r}function o(e,r){var o=n(e,r);return o===r?t(o):o}var i=this.options.scrubFields,a=this._getScrubFieldRegexs(i),s=this._getScrubQueryParamRegexs(i);return v.traverse(e,o),e},x._getScrubFieldRegexs=function(e){for(var r,t=[],n=0;n<e.length;++n)r="\\[?(%5[bB])?"+e[n]+"\\[?(%5[bB])?\\]?(%5[dD])?",t.push(new RegExp(r,"i"));return t},x._getScrubQueryParamRegexs=function(e){for(var r,t=[],n=0;n<e.length;++n)r="\\[?(%5[bB])?"+e[n]+"\\[?(%5[bB])?\\]?(%5[dD])?",t.push(new RegExp("("+r+"=)([^&\\n]+)","igm"));return t},x._urlIsWhitelisted=function(e){var r,t,n,o,i,a,s,u,c,l;try{if(r=this.options.hostWhiteList,t=e&&e.data&&e.data.body&&e.data.body.trace,!r||0===r.length)return!0;if(!t)return!0;for(s=r.length,i=t.frames.length,c=0;i>c;c++){if(n=t.frames[c],o=n.filename,!v.isType(o,"string"))return!0;for(l=0;s>l;l++)if(a=r[l],u=new RegExp(a),u.test(o))return!0}}catch(p){return this.configure({hostWhiteList:null}),console.error("[Rollbar]: Error while reading your configuration's hostWhiteList option. Removing custom hostWhiteList.",p),!0}return!1},x._messageIsIgnored=function(e){var r,t,n,o,i,a,s,u,c;try{if(i=!1,n=this.options.ignoredMessages,!n||0===n.length)return!1;if(s=e&&e.data&&e.data.body,u=s&&s.trace&&s.trace.exception&&s.trace.exception.message,c=s&&s.message&&s.message.body,r=u||c,!r)return!1;for(o=n.length,t=0;o>t&&(a=new RegExp(n[t],"gi"),!(i=a.test(r)));t++);}catch(l){this.configure({ignoredMessages:null}),console.error("[Rollbar]: Error while reading your configuration's ignoredMessages option. Removing custom ignoredMessages.")}return i},x._enqueuePayload=function(e,r,t,n){var o={callback:n,accessToken:this.options.accessToken,endpointUrl:this._route("item/"),payload:e},i=function(){if(n){var e="This item was not sent to Rollbar because it was ignored. This can happen if a custom checkIgnore() function was used or if the item's level was less than the notifier' reportLevel. See https://rollbar.com/docs/notifier/rollbar.js/configuration for more details.";n(null,{err:0,result:{id:null,uuid:null,message:e}})}};if(this._internalCheckIgnore(r,t,e))return void i();try{if(v.isType(this.options.checkIgnore,"function")&&this.options.checkIgnore(r,t,e))return void i()}catch(a){this.configure({checkIgnore:null}),console.error("[Rollbar]: Error while calling custom checkIgnore() function. Removing custom checkIgnore().",a)}if(this._urlIsWhitelisted(e)&&!this._messageIsIgnored(e)){if(this.options.verbose){if(e.data&&e.data.body&&e.data.body.trace){var s=e.data.body.trace,c=s.exception.message;console.error("[Rollbar]: ",c)}console.info("[Rollbar]: ",o)}v.isType(this.options.logFunction,"function")&&this.options.logFunction(o);try{v.isType(this.options.transform,"function")&&this.options.transform(e)}catch(a){this.configure({transform:null}),console.error("[Rollbar]: Error while calling custom transform() function. Removing custom transform().",a)}this.options.enabled&&u(o)}},x._internalCheckIgnore=function(e,r,t){var n=r[0],o=s.LEVELS[n]||0,i=s.LEVELS[this.options.reportLevel]||0;if(i>o)return!0;var a=this.options?this.options.plugins:{};if(a&&a.jquery&&a.jquery.ignoreAjaxErrors)try{return!!t.data.body.message.extra.isAjax}catch(u){return!1}return!1},x._log=function(e,r,t,n,o,i,a){var s=null;if(t)try{if(s=t._savedStackTrace?t._savedStackTrace:m.parse(t),t===this.lastError)return;this.lastError=t}catch(u){console.error("[Rollbar]: Error while parsing the error object.",u),r=t.message||t.description||r||String(t),t=null}var c=this._buildPayload(new Date,e,r,s,n);a&&(c.ignoreRateLimit=!0),this._enqueuePayload(c,!!i,[e,r,t,n],o)},x.log=c(),x.debug=c("debug"),x.info=c("info"),x.warn=c("warning"),x.warning=c("warning"),x.error=c("error"),x.critical=c("critical"),x.uncaughtError=o(function(e,r,t,n,o,i){if(i=i||null,o&&v.isType(o,"error"))return void this._log(this.options.uncaughtErrorLevel,e,o,i,null,!0);if(r&&v.isType(r,"error"))return void this._log(this.options.uncaughtErrorLevel,e,r,i,null,!0);var a={url:r||"",line:t};a.func=m.guessFunctionName(a.url,a.line),a.context=m.gatherContext(a.url,a.line);var s={mode:"onerror",message:o?String(o):e||"uncaught exception",url:document.location.href,stack:[a],useragent:navigator.userAgent},u=this._buildPayload(new Date,this.options.uncaughtErrorLevel,e,s,i);this._enqueuePayload(u,!0,[this.options.uncaughtErrorLevel,e,r,t,n,o])}),x.unhandledRejection=o(function(e,r){if(null==e)return void _._log(_.options.uncaughtErrorLevel,"unhandled rejection was null or undefined!",null,{},null,!1,!1);var t=e.message||(e?String(e):"unhandled rejection"),n=e._rollbarContext||r._rollbarContext||null;if(e&&v.isType(e,"error"))return void this._log(this.options.uncaughtErrorLevel,t,e,n,null,!0);var o={url:"",line:0};o.func=m.guessFunctionName(o.url,o.line),o.context=m.gatherContext(o.url,o.line);var i={mode:"unhandledrejection",message:t,url:document.location.href,stack:[o],useragent:navigator.userAgent},a=this._buildPayload(new Date,this.options.uncaughtErrorLevel,t,i,n);this._enqueuePayload(a,!0,[this.options.uncaughtErrorLevel,t,o.url,o.line,0,e,r])}),x.global=o(function(e){e=e||{};var r={startTime:e.startTime,maxItems:e.maxItems,itemsPerMinute:e.itemsPerMinute};g(!0,window._globalRollbarOptions,r),void 0!==e.maxItems&&(T=0),void 0!==e.itemsPerMinute&&(R=0)}),x.configure=o(function(e,r){var t=g(!0,{},e);g(!r,this.options,t),this.global(t)}),x.scope=o(function(e){var r=new s(this);return g(!0,r.options.payload,e),r}),x.wrap=function(e,r){try{var t;if(t=v.isType(r,"function")?r:function(){return r||{}},!v.isType(e,"function"))return e;if(e._isWrap)return e;if(!e._wrapped){e._wrapped=function(){try{return e.apply(this,arguments)}catch(r){throw r.stack||(r._savedStackTrace=m.parse(r)),r._rollbarContext=t()||{},r._rollbarContext._wrappedSource=e.toString(),window._rollbarWrappedError=r,r}},e._wrapped._isWrap=!0;for(var n in e)e.hasOwnProperty(n)&&(e._wrapped[n]=e[n])}return e._wrapped}catch(o){return e}},x.loadFull=function(){console.error("[Rollbar]: Unexpected Rollbar.loadFull() called on a Notifier instance")},s.processPayloads=function(e){return e?void f():void i()};var L=(new Date).getTime(),T=0,R=0;e.exports={Notifier:s,setupJSON:n,topLevelNotifier:a}},function(e,r){"use strict";var t=Object.prototype.hasOwnProperty,n=Object.prototype.toString,o=function(e){return"function"==typeof Array.isArray?Array.isArray(e):"[object Array]"===n.call(e)},i=function(e){if(!e||"[object Object]"!==n.call(e))return!1;var r=t.call(e,"constructor"),o=e.constructor&&e.constructor.prototype&&t.call(e.constructor.prototype,"isPrototypeOf");if(e.constructor&&!r&&!o)return!1;var i;for(i in e);return"undefined"==typeof i||t.call(e,i)};e.exports=function a(){var e,r,t,n,s,u,c=arguments[0],l=1,p=arguments.length,f=!1;for("boolean"==typeof c?(f=c,c=arguments[1]||{},l=2):("object"!=typeof c&&"function"!=typeof c||null==c)&&(c={});p>l;++l)if(e=arguments[l],null!=e)for(r in e)t=c[r],n=e[r],c!==n&&(f&&n&&(i(n)||(s=o(n)))?(s?(s=!1,u=t&&o(t)?t:[]):u=t&&i(t)?t:{},c[r]=a(f,u,n)):"undefined"!=typeof n&&(c[r]=n));return c}},function(e,r,t){"use strict";function n(){return l}function o(){return null}function i(e){var r={};return r._stackFrame=e,r.url=e.fileName,r.line=e.lineNumber,r.func=e.functionName,r.column=e.columnNumber,r.args=e.args,r.context=o(r.url,r.line),r}function a(e){function r(){var r=[];try{r=c.parse(e)}catch(t){r=[]}for(var n=[],o=0;o<r.length;o++)n.push(new i(r[o]));return n}return{stack:r(),message:e.message,name:e.name}}function s(e){return new a(e)}function u(e){if(!e)return["Unknown error. There was no error message to display.",""];var r=e.match(p),t="(unknown)";return r&&(t=r[r.length-1],e=e.replace((r[r.length-2]||"")+t+":",""),e=e.replace(/(^[\s]+|[\s]+$)/g,"")),[t,e]}var c=t(6),l="?",p=new RegExp("^(([a-zA-Z0-9-_$ ]*): *)?(Uncaught )?([a-zA-Z0-9-_$ ]*): ");e.exports={guessFunctionName:n,guessErrorClass:u,gatherContext:o,parse:s,Stack:a,Frame:i}},function(e,r,t){var n,o,i;!function(a,s){"use strict";o=[t(7)],n=s,i="function"==typeof n?n.apply(r,o):n,!(void 0!==i&&(e.exports=i))}(this,function(e){"use strict";function r(e,r,t){if("function"==typeof Array.prototype.map)return e.map(r,t);for(var n=new Array(e.length),o=0;o<e.length;o++)n[o]=r.call(t,e[o]);return n}function t(e,r,t){if("function"==typeof Array.prototype.filter)return e.filter(r,t);for(var n=[],o=0;o<e.length;o++)r.call(t,e[o])&&n.push(e[o]);return n}var n=/(^|@)\S+\:\d+/,o=/^\s*at .*(\S+\:\d+|\(native\))/m,i=/^(eval@)?(\[native code\])?$/;return{parse:function(e){if("undefined"!=typeof e.stacktrace||"undefined"!=typeof e["opera#sourceloc"])return this.parseOpera(e);if(e.stack&&e.stack.match(o))return this.parseV8OrIE(e);if(e.stack)return this.parseFFOrSafari(e);throw new Error("Cannot parse given Error object")},extractLocation:function(e){if(-1===e.indexOf(":"))return[e];var r=e.replace(/[\(\)\s]/g,"").split(":"),t=r.pop(),n=r[r.length-1];if(!isNaN(parseFloat(n))&&isFinite(n)){var o=r.pop();return[r.join(":"),o,t]}return[r.join(":"),t,void 0]},parseV8OrIE:function(n){var i=t(n.stack.split("\n"),function(e){return!!e.match(o)},this);return r(i,function(r){r.indexOf("(eval ")>-1&&(r=r.replace(/eval code/g,"eval").replace(/(\(eval at [^\()]*)|(\)\,.*$)/g,""));var t=r.replace(/^\s+/,"").replace(/\(eval code/g,"(").split(/\s+/).slice(1),n=this.extractLocation(t.pop()),o=t.join(" ")||void 0,i="eval"===n[0]?void 0:n[0];return new e(o,void 0,i,n[1],n[2],r)},this)},parseFFOrSafari:function(n){var o=t(n.stack.split("\n"),function(e){return!e.match(i)},this);return r(o,function(r){if(r.indexOf(" > eval")>-1&&(r=r.replace(/ line (\d+)(?: > eval line \d+)* > eval\:\d+\:\d+/g,":$1")),-1===r.indexOf("@")&&-1===r.indexOf(":"))return new e(r);var t=r.split("@"),n=this.extractLocation(t.pop()),o=t.shift()||void 0;return new e(o,void 0,n[0],n[1],n[2],r)},this)},parseOpera:function(e){return!e.stacktrace||e.message.indexOf("\n")>-1&&e.message.split("\n").length>e.stacktrace.split("\n").length?this.parseOpera9(e):e.stack?this.parseOpera11(e):this.parseOpera10(e)},parseOpera9:function(r){for(var t=/Line (\d+).*script (?:in )?(\S+)/i,n=r.message.split("\n"),o=[],i=2,a=n.length;a>i;i+=2){var s=t.exec(n[i]);s&&o.push(new e(void 0,void 0,s[2],s[1],void 0,n[i]))}return o},parseOpera10:function(r){for(var t=/Line (\d+).*script (?:in )?(\S+)(?:: In function (\S+))?$/i,n=r.stacktrace.split("\n"),o=[],i=0,a=n.length;a>i;i+=2){var s=t.exec(n[i]);s&&o.push(new e(s[3]||void 0,void 0,s[2],s[1],void 0,n[i]))}return o},parseOpera11:function(o){var i=t(o.stack.split("\n"),function(e){return!!e.match(n)&&!e.match(/^Error created at/)},this);return r(i,function(r){var t,n=r.split("@"),o=this.extractLocation(n.pop()),i=n.shift()||"",a=i.replace(/<anonymous function(: (\w+))?>/,"$2").replace(/\([^\)]*\)/g,"")||void 0;i.match(/\(([^\)]*)\)/)&&(t=i.replace(/^[^\(]+\(([^\)]*)\)$/,"$1"));var s=void 0===t||"[arguments not available]"===t?void 0:t.split(",");return new e(a,s,o[0],o[1],o[2],r)},this)}}})},function(e,r,t){var n,o,i;!function(t,a){"use strict";o=[],n=a,i="function"==typeof n?n.apply(r,o):n,!(void 0!==i&&(e.exports=i))}(this,function(){"use strict";function e(e){return!isNaN(parseFloat(e))&&isFinite(e)}function r(e,r,t,n,o,i){void 0!==e&&this.setFunctionName(e),void 0!==r&&this.setArgs(r),void 0!==t&&this.setFileName(t),void 0!==n&&this.setLineNumber(n),void 0!==o&&this.setColumnNumber(o),void 0!==i&&this.setSource(i)}return r.prototype={getFunctionName:function(){return this.functionName},setFunctionName:function(e){this.functionName=String(e)},getArgs:function(){return this.args},setArgs:function(e){if("[object Array]"!==Object.prototype.toString.call(e))throw new TypeError("Args must be an Array");this.args=e},getFileName:function(){return this.fileName},setFileName:function(e){this.fileName=String(e)},getLineNumber:function(){return this.lineNumber},setLineNumber:function(r){if(!e(r))throw new TypeError("Line Number must be a Number");this.lineNumber=Number(r)},getColumnNumber:function(){return this.columnNumber},setColumnNumber:function(r){if(!e(r))throw new TypeError("Column Number must be a Number");this.columnNumber=Number(r)},getSource:function(){return this.source},setSource:function(e){this.source=String(e)},toString:function(){var r=this.getFunctionName()||"{anonymous}",t="("+(this.getArgs()||[]).join(",")+")",n=this.getFileName()?"@"+this.getFileName():"",o=e(this.getLineNumber())?":"+this.getLineNumber():"",i=e(this.getColumnNumber())?":"+this.getColumnNumber():"";return r+t+n+o+i}},r})},function(e,r,t){"use strict";function n(e){return{}.toString.call(e).match(/\s([a-zA-Z]+)/)[1].toLowerCase()}function o(e,r){return n(e)===r}function i(e){if(!o(e,"string"))throw new Error("received invalid input");for(var r=l,t=r.parser[r.strictMode?"strict":"loose"].exec(e),n={},i=14;i--;)n[r.key[i]]=t[i]||"";return n[r.q.name]={},n[r.key[12]].replace(r.q.parser,function(e,t,o){t&&(n[r.q.name][t]=o)}),n}function a(e){var r=i(e);return""===r.anchor&&(r.source=r.source.replace("#","")),e=r.source.replace("?"+r.query,"")}function s(e,r){var t,n,i,a=o(e,"object"),u=o(e,"array"),c=[];if(a)for(t in e)e.hasOwnProperty(t)&&c.push(t);else if(u)for(i=0;i<e.length;++i)c.push(i);for(i=0;i<c.length;++i)t=c[i],n=e[t],a=o(n,"object"),u=o(n,"array"),a||u?e[t]=s(n,r):e[t]=r(t,n);return e}function u(e){return e=String(e),new Array(e.length+1).join("*")}function c(){var e=(new Date).getTime(),r="xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g,function(r){var t=(e+16*Math.random())%16|0;return e=Math.floor(e/16),("x"===r?t:7&t|8).toString(16)});return r}t(9);var l={strictMode:!1,key:["source","protocol","authority","userInfo","user","password","host","port","relative","path","directory","file","query","anchor"],q:{name:"queryKey",parser:/(?:^|&)([^&=]*)=?([^&]*)/g},parser:{strict:/^(?:([^:\/?#]+):)?(?:\/\/((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?))?((((?:[^?#\/]*\/)*)([^?#]*))(?:\?([^#]*))?(?:#(.*))?)/,loose:/^(?:(?![^:@]+:[^:@\/]*@)([^:\/?#.]+):)?(?:\/\/)?((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/}},p={isType:o,parseUri:i,parseUriOptions:l,redact:u,sanitizeUrl:a,traverse:s,typeName:n,uuid4:c};e.exports=p},function(e,r){!function(e){"use strict";e.console=e.console||{};for(var r,t,n=e.console,o={},i=function(){},a="memory".split(","),s="assert,clear,count,debug,dir,dirxml,error,exception,group,groupCollapsed,groupEnd,info,log,markTimeline,profile,profiles,profileEnd,show,table,time,timeEnd,timeline,timelineEnd,timeStamp,trace,warn".split(",");r=a.pop();)n[r]||(n[r]=o);for(;t=s.pop();)n[t]||(n[t]=i)}("undefined"==typeof window?this:window)},function(e,r,t){"use strict";function n(e){a=e}function o(e){this.name="Connection Error",this.message=e,this.stack=(new Error).stack}var i=t(8),a=null;o.prototype=Object.create(Error.prototype),o.prototype.constructor=o;var s={XMLHttpFactories:[function(){return new XMLHttpRequest},function(){return new ActiveXObject("Msxml2.XMLHTTP")},function(){return new ActiveXObject("Msxml3.XMLHTTP")},function(){return new ActiveXObject("Microsoft.XMLHTTP")}],createXMLHTTPObject:function(){var e,r=!1,t=s.XMLHttpFactories,n=t.length;for(e=0;n>e;e++)try{r=t[e]();break}catch(o){}return r},post:function(e,r,t,n){if(!i.isType(t,"object"))throw new Error("Expected an object to POST");t=a.stringify(t),n=n||function(){};var u=s.createXMLHTTPObject();if(u)try{try{var c=function(){try{c&&4===u.readyState&&(c=void 0,200===u.status?n(null,a.parse(u.responseText)):n(i.isType(u.status,"number")&&u.status>=400&&u.status<600?new Error(String(u.status)):new o("XHR response had no status code (likely connection failure)")))}catch(e){var r;r=e&&e.stack?e:new Error(e),n(r)}};u.open("POST",e,!0),u.setRequestHeader&&(u.setRequestHeader("Content-Type","application/json"),u.setRequestHeader("X-Rollbar-Access-Token",r)),u.onreadystatechange=c,u.send(t)}catch(l){if("undefined"!=typeof XDomainRequest){"http:"===window.location.href.substring(0,5)&&"https"===e.substring(0,5)&&(e="http"+e.substring(5));var p=function(){n(new o("Request timed out"))},f=function(){n(new Error("Error during request"))},d=function(){n(null,a.parse(u.responseText))};u=new XDomainRequest,u.onprogress=function(){},u.ontimeout=p,u.onerror=f,u.onload=d,u.open("POST",e,!0),u.send(t)}}}catch(h){n(h)}}};e.exports={XHR:s,setupJSON:n,ConnectionError:o}}])});
 
 /***/ },
-/* 369 */
+/* 397 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25818,13 +26683,13 @@
 
 	var _panel = __webpack_require__(299);
 
-	var _parentFrame = __webpack_require__(365);
+	var _parentFrame = __webpack_require__(393);
 
-	var _persistence = __webpack_require__(370);
+	var _persistence = __webpack_require__(398);
 
 	var _persistence2 = _interopRequireDefault(_persistence);
 
-	var _util = __webpack_require__(371);
+	var _util = __webpack_require__(399);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -25991,7 +26856,7 @@
 	exports.default = MPApp;
 
 /***/ },
-/* 370 */
+/* 398 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -26044,7 +26909,7 @@
 	exports.default = Persistence;
 
 /***/ },
-/* 371 */
+/* 399 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26059,9 +26924,9 @@
 	exports.renamePropertyType = renamePropertyType;
 	exports.renamePropertyValue = renamePropertyValue;
 
-	var _util = __webpack_require__(347);
+	var _util = __webpack_require__(375);
 
-	var _constants = __webpack_require__(372);
+	var _constants = __webpack_require__(400);
 
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; } /* global DEBUG_LOG */
 
@@ -26160,7 +27025,7 @@
 	}
 
 /***/ },
-/* 372 */
+/* 400 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -26502,17 +27367,17 @@
 	/* eslint-enable camelcase */
 
 /***/ },
-/* 373 */
+/* 401 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	__webpack_require__(374);
+	__webpack_require__(402);
 
-	__webpack_require__(378);
+	__webpack_require__(406);
 
 /***/ },
-/* 374 */
+/* 402 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26523,15 +27388,15 @@
 
 	var _panel = __webpack_require__(299);
 
-	var _registerElement = __webpack_require__(321);
+	var _registerElement = __webpack_require__(348);
 
-	var _string = __webpack_require__(375);
+	var _string = __webpack_require__(403);
 
-	var _index = __webpack_require__(376);
+	var _index = __webpack_require__(404);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	var _index3 = __webpack_require__(377);
+	var _index3 = __webpack_require__(405);
 
 	var _index4 = _interopRequireDefault(_index3);
 
@@ -26823,7 +27688,7 @@
 	}(_panel.Component));
 
 /***/ },
-/* 375 */
+/* 403 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -26911,7 +27776,7 @@
 	}
 
 /***/ },
-/* 376 */
+/* 404 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26925,399 +27790,208 @@
 	      var block = this && this.block,
 	          attributes = this && this.attributes || {};
 
-	      return function () {
-	        var __jade_nodes = [];
-	        __jade_nodes = __jade_nodes.concat(h("mp-list-item", {
-	          "attrs": {
-	            active: activeBookmark && activeBookmark.id === bookmark.id
+	      return h("mp-list-item", {
+	        "attrs": {
+	          active: activeBookmark && activeBookmark.id === bookmark.id
+	        },
+	        "on": {
+	          click: function click() {
+	            return $helpers.selectBookmark(bookmark);
 	          },
-	          "on": {
-	            click: function click() {
-	              return $helpers.selectBookmark(bookmark);
-	            },
-	            mouseover: function mouseover() {
-	              return $helpers.activateBookmark(bookmark);
-	            }
+	          mouseover: function mouseover() {
+	            return $helpers.activateBookmark(bookmark);
 	          }
-	        }, function () {
-	          var __jade_nodes = [];
-	          __jade_nodes = __jade_nodes.concat(h("div", {
-	            "class": {
-	              'mp-bm-menu-bookmark-row': true
-	            }
-	          }, function () {
+	        }
+	      }, [h("div", {
+	        "className": [].concat('mp-bm-menu-bookmark-row').filter(Boolean).join(' ')
+	      }, function () {
+	        var __jade_nodes = [];
+	        __jade_nodes = __jade_nodes.concat(h("div", {
+	          "className": [].concat('mp-bm-menu-bookmark-details').filter(Boolean).join(' ')
+	        }, [h("div", {
+	          "attrs": {
+	            title: bookmark.name
+	          },
+	          "className": [].concat('mp-bm-menu-name').filter(Boolean).join(' ')
+	        }, [$helpers.stringFilterMatches(bookmark.name, filterText).map(function (token, pos) {
+	          return function () {
 	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(h("div", {
-	              "class": {
-	                'mp-bm-menu-bookmark-details': true
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat(h("div", {
-	                "attrs": {
-	                  title: bookmark.name
-	                },
-	                "class": {
-	                  'mp-bm-menu-name': true
-	                }
-	              }, function () {
-	                var __jade_nodes = [];
-	                __jade_nodes = __jade_nodes.concat($helpers.stringFilterMatches(bookmark.name, filterText).reduce(function (__each_nodes, token, pos) {
-	                  return __each_nodes.concat(function () {
-	                    var __jade_nodes = [];
-	                    __jade_nodes = __jade_nodes.concat(pos % 2 === 1 ? function () {
-	                      var __jade_nodes = [];
-	                      __jade_nodes = __jade_nodes.concat(h("span", [token || '']));;
-	                      return __jade_nodes;
-	                    }.call(this) : function () {
-	                      var __jade_nodes = [];
-	                      __jade_nodes = __jade_nodes.concat(h("b", [token || '']));;
-	                      return __jade_nodes;
-	                    }.call(this));;
-	                    return __jade_nodes;
-	                  }.call(this));
-	                }, []));;
-	                return __jade_nodes;
-	              }.call(this).filter(Boolean)));
-	              __jade_nodes = __jade_nodes.concat(h("div", {
-	                "class": {
-	                  'mp-bm-menu-creator': true
-	                }
-	              }, [bookmark.user || '']));;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));
-	            __jade_nodes = __jade_nodes.concat($component.isAttributeEnabled('has-write-permissions') ? function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat(h("div", {
-	                "on": {
-	                  click: function click(e) {
-	                    return $helpers.openConfirmDeleteDialog(e, bookmark);
-	                  }
-	                },
-	                "class": {
-	                  'mp-bm-menu-delete-button': true
-	                }
-	              }, function () {
-	                var __jade_nodes = [];
-	                __jade_nodes = __jade_nodes.concat(h("svg-icon", {
-	                  "attrs": {
-	                    icon: 'trashcan'
-	                  }
-	                }));;
-	                return __jade_nodes;
-	              }.call(this).filter(Boolean)));;
-	              return __jade_nodes;
-	            }.call(this) : undefined);;
+	            __jade_nodes = __jade_nodes.concat(pos % 2 === 1 ? h("span", [token]) : h("b", [token]));;
 	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));;
-	          return __jade_nodes;
-	        }.call(this).filter(Boolean)));;
+	          }.call(this);
+	        })].filter(Boolean)), h("div", {
+	          "className": [].concat('mp-bm-menu-creator').filter(Boolean).join(' ')
+	        }, [bookmark.user])].filter(Boolean)));
+	        __jade_nodes = __jade_nodes.concat($component.isAttributeEnabled('has-write-permissions') ? h("div", {
+	          "on": {
+	            click: function click(e) {
+	              return $helpers.openConfirmDeleteDialog(e, bookmark);
+	            }
+	          },
+	          "className": [].concat('mp-bm-menu-delete-button').filter(Boolean).join(' ')
+	        }, [h("svg-icon", {
+	          "attrs": {
+	            icon: 'trashcan'
+	          }
+	        })].filter(Boolean)) : undefined);;
 	        return __jade_nodes;
-	      }.call(this);
+	      }.call(this).filter(Boolean))].filter(Boolean));
 	    };
 	    return {
 	      value: h("div", {
 	        "on": {
 	          scroll: $helpers.stopPropagation
 	        },
-	        "class": {
-	          'mp-bm-container': true
-	        }
+	        "className": [].concat('mp-bm-container').filter(Boolean).join(' ')
 	      }, function () {
 	        var __jade_nodes = [];
 	        __jade_nodes = __jade_nodes.concat(h("div", {
 	          "on": {
 	            click: $helpers.toggleBookmarksMenu
 	          },
-	          "class": {
-	            'mp-bm-btn': true
+	          "className": [].concat('mp-bm-btn').filter(Boolean).join(' ')
+	        }, [h("div", {
+	          "className": [].concat('mp-bm-btn-icon').filter(Boolean).join(' ')
+	        }, [h("svg-icon", {
+	          "attrs": {
+	            icon: 'bookmarks'
 	          }
-	        }, function () {
-	          var __jade_nodes = [];
-	          __jade_nodes = __jade_nodes.concat(h("div", {
-	            "class": {
-	              'mp-bm-btn-icon': true
-	            }
-	          }, function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(h("svg-icon", {
-	              "attrs": {
-	                icon: 'bookmarks'
-	              }
-	            }));;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("span", function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat("Bookmarks");;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));;
-	          return __jade_nodes;
-	        }.call(this).filter(Boolean)));
+	        })].filter(Boolean)), h("span", ["Bookmarks"].filter(Boolean))].filter(Boolean)));
 	        __jade_nodes = __jade_nodes.concat(h("div", {
 	          "attrs": {
 	            tabindex: 0
 	          },
-	          "class": {
-	            'mp-bm-menu': true
+	          "className": [].concat('mp-bm-menu').filter(Boolean).join(' ')
+	        }, [h("mp-drop-menu", {
+	          "attrs": {
+	            open: open
+	          },
+	          "on": {
+	            change: $helpers.handleDropMenuChange
 	          }
+	        }, [h("div", {
+	          "attrs": {
+	            'slot-body': true
+	          },
+	          "className": [].concat('mp-bm-menu-container').filter(Boolean).join(' ')
 	        }, function () {
 	          var __jade_nodes = [];
-	          __jade_nodes = __jade_nodes.concat(h("mp-drop-menu", {
+	          __jade_nodes = __jade_nodes.concat(h("div", {
+	            "className": [].concat('mp-bm-menu-search').filter(Boolean).join(' ')
+	          }, [h("div", {
+	            "className": [].concat('mp-bm-menu-mp-icon').concat('mp-icon').filter(Boolean).join(' ')
+	          }, [h("svg-icon", {
 	            "attrs": {
-	              open: open
+	              icon: 'search'
+	            }
+	          })].filter(Boolean)), h("input", {
+	            "attrs": {
+	              type: 'text',
+	              placeholder: 'Filter bookmarks'
 	            },
 	            "on": {
-	              change: $helpers.handleDropMenuChange
+	              change: $helpers.stopPropagation,
+	              input: $helpers.setFilterText
 	            }
+	          })].filter(Boolean)));
+	          __jade_nodes = __jade_nodes.concat(h("div", {
+	            "className": [].concat('mp-bm-menu-list').filter(Boolean).join(' ')
 	          }, function () {
 	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(h("div", {
+	            __jade_nodes = __jade_nodes.concat(filteredBookmarks.length === 0 ? h("mp-list-item", {
 	              "attrs": {
-	                'slot-body': true
-	              },
-	              "class": {
-	                'mp-bm-menu-container': true
+	                static: true
 	              }
-	            }, function () {
+	            }, [h("div", {
+	              "className": [].concat('mp-bm-menu-empty').filter(Boolean).join(' ')
+	            }, ["No bookmarks found."].filter(Boolean))].filter(Boolean)) : function () {
 	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat(h("div", {
-	                "class": {
-	                  'mp-bm-menu-search': true
-	                }
-	              }, function () {
-	                var __jade_nodes = [];
-	                __jade_nodes = __jade_nodes.concat(h("div", {
-	                  "class": {
-	                    'mp-bm-menu-mp-icon': true,
-	                    'mp-icon': true
-	                  }
-	                }, function () {
+	              var showSectionHeader = filteredBookmarks[0].user_id === userId && filteredBookmarks[filteredBookmarks.length - 1].userId !== userId;
+	              __jade_nodes = __jade_nodes.concat(filteredBookmarks.map(function (bookmark, idx) {
+	                return function () {
 	                  var __jade_nodes = [];
-	                  __jade_nodes = __jade_nodes.concat(h("svg-icon", {
-	                    "attrs": {
-	                      icon: 'search'
-	                    }
-	                  }));;
-	                  return __jade_nodes;
-	                }.call(this).filter(Boolean)));
-	                __jade_nodes = __jade_nodes.concat(h("input", {
-	                  "attrs": {
-	                    type: 'text',
-	                    placeholder: 'Filter bookmarks'
-	                  },
-	                  "on": {
-	                    change: $helpers.stopPropagation,
-	                    input: $helpers.setFilterText
-	                  }
-	                }));;
-	                return __jade_nodes;
-	              }.call(this).filter(Boolean)));
-	              __jade_nodes = __jade_nodes.concat(h("div", {
-	                "class": {
-	                  'mp-bm-menu-list': true
-	                }
-	              }, function () {
-	                var __jade_nodes = [];
-	                __jade_nodes = __jade_nodes.concat(filteredBookmarks.length === 0 ? function () {
-	                  var __jade_nodes = [];
-	                  __jade_nodes = __jade_nodes.concat(h("mp-list-item", {
-	                    "attrs": {
-	                      static: true
-	                    }
-	                  }, function () {
+	                  __jade_nodes = __jade_nodes.concat(showSectionHeader ? function () {
 	                    var __jade_nodes = [];
-	                    __jade_nodes = __jade_nodes.concat(h("div", {
-	                      "class": {
-	                        'mp-bm-menu-empty': true
-	                      }
-	                    }, function () {
-	                      var __jade_nodes = [];
-	                      __jade_nodes = __jade_nodes.concat("No bookmarks found.");;
-	                      return __jade_nodes;
-	                    }.call(this).filter(Boolean)));;
-	                    return __jade_nodes;
-	                  }.call(this).filter(Boolean)));;
-	                  return __jade_nodes;
-	                }.call(this) : function () {
-	                  var __jade_nodes = [];
-	                  var showSectionHeader = filteredBookmarks[0].user_id === userId && filteredBookmarks[filteredBookmarks.length - 1].userId !== userId;
-	                  __jade_nodes = __jade_nodes.concat(filteredBookmarks.reduce(function (__each_nodes, bookmark, idx) {
-	                    return __each_nodes.concat(function () {
-	                      var __jade_nodes = [];
-	                      __jade_nodes = __jade_nodes.concat(showSectionHeader ? function () {
-	                        var __jade_nodes = [];
-	                        __jade_nodes = __jade_nodes.concat(idx === 0 ? function () {
-	                          var __jade_nodes = [];
-	                          __jade_nodes = __jade_nodes.concat(h("mp-list-item", {
-	                            "attrs": {
-	                              static: true
-	                            }
-	                          }, function () {
-	                            var __jade_nodes = [];
-	                            __jade_nodes = __jade_nodes.concat(h("div", {
-	                              "class": {
-	                                'mp-bm-menu-section-header': true
-	                              }
-	                            }, function () {
-	                              var __jade_nodes = [];
-	                              __jade_nodes = __jade_nodes.concat("Your Bookmarks");;
-	                              return __jade_nodes;
-	                            }.call(this).filter(Boolean)));;
-	                            return __jade_nodes;
-	                          }.call(this).filter(Boolean)));;
-	                          return __jade_nodes;
-	                        }.call(this) : bookmark.user_id !== userId && filteredBookmarks[idx - 1].user_id === userId ? function () {
-	                          var __jade_nodes = [];
-	                          __jade_nodes = __jade_nodes.concat(h("div", {
-	                            "class": {
-	                              'mp-bm-menu-list-item-divider': true
-	                            }
-	                          }));
-	                          __jade_nodes = __jade_nodes.concat(h("mp-list-item", {
-	                            "attrs": {
-	                              static: true
-	                            }
-	                          }, function () {
-	                            var __jade_nodes = [];
-	                            __jade_nodes = __jade_nodes.concat(h("div", {
-	                              "class": {
-	                                'mp-bm-menu-section-header': true
-	                              }
-	                            }, function () {
-	                              var __jade_nodes = [];
-	                              __jade_nodes = __jade_nodes.concat("Other bookmarks");;
-	                              return __jade_nodes;
-	                            }.call(this).filter(Boolean)));;
-	                            return __jade_nodes;
-	                          }.call(this).filter(Boolean)));;
-	                          return __jade_nodes;
-	                        }.call(this) : undefined);;
-	                        return __jade_nodes;
-	                      }.call(this) : undefined);
-	                      __jade_nodes = __jade_nodes.concat(jade_mixins['list-item'].call(this, bookmark));;
-	                      return __jade_nodes;
-	                    }.call(this));
-	                  }, []));;
-	                  return __jade_nodes;
-	                }.call(this));;
-	                return __jade_nodes;
-	              }.call(this).filter(Boolean)));
-	              __jade_nodes = __jade_nodes.concat($component.isAttributeEnabled('has-write-permissions') ? function () {
-	                var __jade_nodes = [];
-	                __jade_nodes = __jade_nodes.concat(h("div", {
-	                  "class": {
-	                    'mp-bm-menu-add': true
-	                  }
-	                }, function () {
-	                  var __jade_nodes = [];
-	                  __jade_nodes = __jade_nodes.concat(!$component.isAttributeEnabled('create-disabled') && (createMode || saving) ? function () {
-	                    var __jade_nodes = [];
-	                    __jade_nodes = __jade_nodes.concat(h("mp-input-group", {
+	                    __jade_nodes = __jade_nodes.concat(idx === 0 ? h("mp-list-item", {
 	                      "attrs": {
-	                        autofocus: true,
-	                        placeholder: 'Name your bookmark',
-	                        busy: saving
-	                      },
-	                      "on": {
-	                        keydown: $helpers.stopPropagation,
-	                        change: $helpers.stopPropagation,
-	                        input: $helpers.setName,
-	                        submit: $helpers.createBookmark
+	                        static: true
 	                      }
-	                    }));;
-	                    return __jade_nodes;
-	                  }.call(this) : function () {
-	                    var __jade_nodes = [];
-	                    __jade_nodes = __jade_nodes.concat(h("mp-button-bar", {
+	                    }, [h("div", {
+	                      "className": [].concat('mp-bm-menu-section-header').filter(Boolean).join(' ')
+	                    }, ["Your Bookmarks"].filter(Boolean))].filter(Boolean)) : bookmark.user_id !== userId && filteredBookmarks[idx - 1].user_id === userId ? [h("div", {
+	                      "className": [].concat('mp-bm-menu-list-item-divider').filter(Boolean).join(' ')
+	                    }), h("mp-list-item", {
 	                      "attrs": {
-	                        disabled: $component.isAttributeEnabled('create-disabled')
-	                      },
-	                      "on": {
-	                        click: $helpers.goToCreateMode
-	                      },
-	                      "class": {
-	                        'mp-button-bar-secondary': true
+	                        static: true
 	                      }
-	                    }, function () {
-	                      var __jade_nodes = [];
-	                      __jade_nodes = __jade_nodes.concat("Create new bookmark");;
-	                      return __jade_nodes;
-	                    }.call(this).filter(Boolean)));;
+	                    }, [h("div", {
+	                      "className": [].concat('mp-bm-menu-section-header').filter(Boolean).join(' ')
+	                    }, ["Other bookmarks"].filter(Boolean))].filter(Boolean))] : undefined);;
 	                    return __jade_nodes;
-	                  }.call(this));;
+	                  }.call(this) : undefined);
+	                  __jade_nodes = __jade_nodes.concat(jade_mixins['list-item'].call(this, bookmark));;
 	                  return __jade_nodes;
-	                }.call(this).filter(Boolean)));;
-	                return __jade_nodes;
-	              }.call(this) : undefined);;
+	                }.call(this);
+	              }));;
 	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));;
+	            }.call(this));;
 	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));;
+	          }.call(this).filter(Boolean)));
+	          __jade_nodes = __jade_nodes.concat($component.isAttributeEnabled('has-write-permissions') ? h("div", {
+	            "className": [].concat('mp-bm-menu-add').filter(Boolean).join(' ')
+	          }, function () {
+	            var __jade_nodes = [];
+	            __jade_nodes = __jade_nodes.concat(!$component.isAttributeEnabled('create-disabled') && (createMode || saving) ? h("mp-input-group", {
+	              "attrs": {
+	                autofocus: true,
+	                placeholder: 'Name your bookmark',
+	                busy: saving
+	              },
+	              "on": {
+	                keydown: $helpers.stopPropagation,
+	                change: $helpers.stopPropagation,
+	                input: $helpers.setName,
+	                submit: $helpers.createBookmark
+	              }
+	            }) : h("mp-button-bar", {
+	              "attrs": {
+	                disabled: $component.isAttributeEnabled('create-disabled')
+	              },
+	              "on": {
+	                click: $helpers.goToCreateMode
+	              },
+	              "className": [].concat('mp-button-bar-secondary').filter(Boolean).join(' ')
+	            }, ["Create new bookmark"].filter(Boolean)));;
+	            return __jade_nodes;
+	          }.call(this).filter(Boolean)) : undefined);;
 	          return __jade_nodes;
-	        }.call(this).filter(Boolean)));
-	        __jade_nodes = __jade_nodes.concat(confirmDeleteBookmark ? function () {
+	        }.call(this).filter(Boolean))].filter(Boolean))].filter(Boolean)));
+	        __jade_nodes = __jade_nodes.concat(confirmDeleteBookmark ? h("mp-confirm-delete", {
+	          "attrs": {
+	            closeable: true,
+	            open: true
+	          },
+	          "on": {
+	            change: $helpers.handleConfirmModalChange,
+	            submit: $helpers.handleConfirmSubmit
+	          }
+	        }, [h("div", {
+	          "attrs": {
+	            'slot-body': true
+	          },
+	          "className": [].concat('mp-bm-menu-confirm-delete-container').filter(Boolean).join(' ')
+	        }, function () {
 	          var __jade_nodes = [];
-	          __jade_nodes = __jade_nodes.concat(h("mp-confirm-delete", {
-	            "attrs": {
-	              closeable: true,
-	              open: true
-	            },
-	            "on": {
-	              change: $helpers.handleConfirmModalChange,
-	              submit: $helpers.handleConfirmSubmit
-	            }
-	          }, function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(h("div", {
-	              "attrs": {
-	                'slot-body': true
-	              },
-	              "class": {
-	                'mp-bm-menu-confirm-delete-container': true
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat(h("div", {
-	                "class": {
-	                  'mp-confirm-delete-title': true
-	                }
-	              }, function () {
-	                var __jade_nodes = [];
-	                __jade_nodes = __jade_nodes.concat("Delete Bookmark");;
-	                return __jade_nodes;
-	              }.call(this).filter(Boolean)));
-	              __jade_nodes = __jade_nodes.concat(confirmDeleteBookmark.include_in_dashboard ? function () {
-	                var __jade_nodes = [];
-	                __jade_nodes = __jade_nodes.concat(h("div", {
-	                  "class": {
-	                    'mp-confirm-delete-description': true
-	                  }
-	                }, function () {
-	                  var __jade_nodes = [];
-	                  __jade_nodes = __jade_nodes.concat("Are you sure you want to delete the bookmark named \"" + confirmDeleteBookmark.name + "\"? Deleting it will also remove it from all dashboards.");;
-	                  return __jade_nodes;
-	                }.call(this).filter(Boolean)));;
-	                return __jade_nodes;
-	              }.call(this) : function () {
-	                var __jade_nodes = [];
-	                __jade_nodes = __jade_nodes.concat(h("div", {
-	                  "class": {
-	                    'mp-confirm-delete-description': true
-	                  }
-	                }, function () {
-	                  var __jade_nodes = [];
-	                  __jade_nodes = __jade_nodes.concat("Are you sure you want to delete the bookmark named \"" + confirmDeleteBookmark.name + "\"?");;
-	                  return __jade_nodes;
-	                }.call(this).filter(Boolean)));;
-	                return __jade_nodes;
-	              }.call(this));;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));;
+	          __jade_nodes = __jade_nodes.concat(h("div", {
+	            "className": [].concat('mp-confirm-delete-title').filter(Boolean).join(' ')
+	          }, ["Delete Bookmark"].filter(Boolean)));
+	          __jade_nodes = __jade_nodes.concat(confirmDeleteBookmark.include_in_dashboard ? h("div", {
+	            "className": [].concat('mp-confirm-delete-description').filter(Boolean).join(' ')
+	          }, ["Are you sure you want to delete the bookmark named \"" + confirmDeleteBookmark.name + "\"? Deleting it will also remove it from all dashboards."].filter(Boolean)) : h("div", {
+	            "className": [].concat('mp-confirm-delete-description').filter(Boolean).join(' ')
+	          }, ["Are you sure you want to delete the bookmark named \"" + confirmDeleteBookmark.name + "\"?"].filter(Boolean)));;
 	          return __jade_nodes;
-	        }.call(this) : undefined);;
+	        }.call(this).filter(Boolean))].filter(Boolean)) : undefined);;
 	        return __jade_nodes;
 	      }.call(this).filter(Boolean))
 	    };
@@ -27327,14 +28001,14 @@
 	module.exports = _jade_template_fn;
 
 /***/ },
-/* 377 */
+/* 405 */
 /***/ function(module, exports) {
 
 	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6e859d;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 12px;   font-stretch: normal;   font-weight: 400; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 12px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-size: 12px;   font-weight: 400;   padding: 8px;   -webkit-transition: border-color 150ms ease-out;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus {   border-color: #3391e9;   -webkit-transition: border-color 200ms ease-in;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } mp-bookmarks-widget {   background-color: #eff3f5;   background-image: -webkit-linear-gradient(#f9fafc 0, #eff3f5 100%);   background-image: linear-gradient(#f9fafc 0, #eff3f5 100%);   box-shadow: 0 1px rgba(0,0,0,0.05);   box-sizing: border-box;   height: 54px;   width: 145px; } :host {   background-color: #eff3f5;   background-image: -webkit-linear-gradient(#f9fafc 0, #eff3f5 100%);   background-image: linear-gradient(#f9fafc 0, #eff3f5 100%);   box-shadow: 0 1px rgba(0,0,0,0.05);   box-sizing: border-box;   height: 54px;   width: 145px; } .mp-bm-container, .mp-bm-container * {   box-sizing: border-box; } .mp-bm-container {   color: #6e859d;   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   -webkit-box-orient: vertical;   -webkit-box-direction: normal;       -ms-flex-direction: column;           flex-direction: column;   height: 100%;   width: 100%; } .mp-bm-container .mp-bm-btn {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   cursor: pointer;   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 12px;   font-weight: 600;   height: 100%;   -webkit-box-pack: center;       -ms-flex-pack: center;           justify-content: center;   -webkit-user-select: none;      -moz-user-select: none;       -ms-user-select: none;           user-select: none;   width: 100%; } .mp-bm-container .mp-bm-btn svg-icon svg {   left: 0;   top: 0; } .mp-bm-container .mp-bm-btn svg-icon svg, .mp-bm-container .mp-bm-btn svg-icon path {   color: #6e859d;   fill: #6e859d;   -webkit-transition: 0;   transition: 0; } .mp-bm-container .mp-bm-btn:hover svg-icon svg, .mp-bm-container .mp-bm-btn:hover svg-icon path {   color: #4c6072;   fill: #4c6072; } .mp-bm-container .mp-bm-btn .mp-bm-btn-icon {   height: 22px;   margin-right: 4px; } .mp-bm-container .mp-bm-btn:hover {   background-color: rgba(255,255,255,0.35);   color: #4c6072; } .mp-bm-container .mp-bm-menu {   height: 0;   position: relative;   width: 100%; } .mp-bm-container .mp-bm-menu mp-drop-menu {   left: initial;   right: -8px;   top: -10px; } .mp-bm-menu-container, .mp-bm-menu-container * {   box-sizing: border-box; } .mp-bm-menu-container {   background-color: #fff;   border-radius: 5px;   width: 320px; } .mp-bm-menu-container.mp-bm-menu-open {   display: block; } .mp-bm-menu-container .mp-bm-menu-search {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   background-color: #fff;   border-bottom: 1px solid #e5eaef;   border-top-left-radius: 5px;   border-top-right-radius: 5px;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   height: 60px;   -webkit-box-pack: center;       -ms-flex-pack: center;           justify-content: center;   padding: 12px 15px;   width: 100%;   align-items: center;   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   position: relative; } .mp-bm-menu-container .mp-bm-menu-search input {   padding: 6px;   padding-left: 36px;   padding-right: 18px;   width: 100%; } .mp-bm-menu-container .mp-bm-menu-search input:focus + .mp-bm-menu-mp-icon svg-icon svg {   left: 0;   top: 0; } .mp-bm-menu-container .mp-bm-menu-search input:focus + .mp-bm-menu-mp-icon svg-icon svg, .mp-bm-menu-container .mp-bm-menu-search input:focus + .mp-bm-menu-mp-icon svg-icon path {   color: #6e859d;   fill: #6e859d;   -webkit-transition: 0.2s;   transition: 0.2s; } .mp-bm-menu-container .mp-bm-menu-search .mp-bm-menu-mp-icon {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   bottom: 0;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   left: 8px;   position: absolute;   top: 0; } .mp-bm-menu-container .mp-bm-menu-search .mp-bm-menu-mp-icon svg-icon svg {   left: 0;   top: 0; } .mp-bm-menu-container .mp-bm-menu-search .mp-bm-menu-mp-icon svg-icon svg, .mp-bm-menu-container .mp-bm-menu-search .mp-bm-menu-mp-icon svg-icon path {   color: #9cacbb;   fill: #9cacbb;   -webkit-transition: 0.2s;   transition: 0.2s; } .mp-bm-menu-container .mp-bm-menu-search .mp-bm-menu-mp-icon {   left: 24px;   top: -1px; } .mp-bm-menu-container .mp-bm-menu-list {   border-bottom-left-radius: 5px;   border-bottom-right-radius: 5px;   max-height: 360px;   overflow-y: auto;   position: relative; } .mp-bm-menu-container .mp-bm-menu-list .mp-bm-menu-list-item-divider {   height: 1px;   background-color: #eff3f5;   margin: 10px; } .mp-bm-menu-container .mp-bm-menu-list mp-list-item .mp-bm-menu-empty {   font-style: italic; } .mp-bm-menu-container .mp-bm-menu-list mp-list-item .mp-bm-menu-section-header {   color: #6e859d;   font-size: 11px;   text-transform: uppercase;   font-weight: 600; } .mp-bm-menu-container .mp-bm-menu-list mp-list-item .mp-bm-menu-bookmark-row {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   display: -webkit-box;   display: -ms-flexbox;   display: flex; } .mp-bm-menu-container .mp-bm-menu-list mp-list-item .mp-bm-menu-bookmark-row .mp-bm-menu-bookmark-details {   display: -webkit-box;   display: -ms-flexbox;   display: flex;   -webkit-box-flex: 1;       -ms-flex: 1;           flex: 1;   -webkit-box-orient: vertical;   -webkit-box-direction: normal;       -ms-flex-direction: column;           flex-direction: column;   min-width: 0; } .mp-bm-menu-container .mp-bm-menu-list mp-list-item .mp-bm-menu-bookmark-row .mp-bm-menu-bookmark-details .mp-bm-menu-name, .mp-bm-menu-container .mp-bm-menu-list mp-list-item .mp-bm-menu-bookmark-row .mp-bm-menu-bookmark-details .mp-bm-menu-creator {   font-size: 12px;   max-width: 260px;   overflow: hidden;   text-overflow: ellipsis;   white-space: nowrap; } .mp-bm-menu-container .mp-bm-menu-list mp-list-item .mp-bm-menu-bookmark-row .mp-bm-menu-bookmark-details .mp-bm-menu-name {   color: #6e859d;   font-weight: 500;   line-height: 14px;   margin-bottom: 4px; } .mp-bm-menu-container .mp-bm-menu-list mp-list-item .mp-bm-menu-bookmark-row .mp-bm-menu-bookmark-details .mp-bm-menu-creator {   color: #c1ccd5;   font-weight: 400; } .mp-bm-menu-container .mp-bm-menu-list mp-list-item .mp-bm-menu-delete-button {   -webkit-box-flex: 0;       -ms-flex: none;           flex: none;   height: 22px;   margin-right: 6px;   opacity: 0; } .mp-bm-menu-container .mp-bm-menu-list mp-list-item .mp-bm-menu-delete-button svg-icon svg {   left: 0;   top: 0; } .mp-bm-menu-container .mp-bm-menu-list mp-list-item .mp-bm-menu-delete-button svg-icon svg, .mp-bm-menu-container .mp-bm-menu-list mp-list-item .mp-bm-menu-delete-button svg-icon path {   color: #d8e0e6;   fill: #d8e0e6;   -webkit-transition: 0.1s;   transition: 0.1s; } .mp-bm-menu-container .mp-bm-menu-list mp-list-item .mp-bm-menu-delete-button:hover svg-icon svg, .mp-bm-menu-container .mp-bm-menu-list mp-list-item .mp-bm-menu-delete-button:hover svg-icon path {   color: #e4567b;   fill: #e4567b; } .mp-bm-menu-container .mp-bm-menu-list mp-list-item:hover .mp-bm-menu-delete-button {   opacity: 1; } .mp-bm-menu-container .mp-bm-menu-list mp-list-item[active=\"true\"] .mp-bm-menu-bookmark-row .mp-bm-menu-bookmark-details .mp-bm-menu-name, .mp-bm-menu-container .mp-bm-menu-list mp-list-item[active=\"true\"] .mp-bm-menu-bookmark-row .mp-bm-menu-bookmark-details .mp-bm-menu-creator {   color: #4ba8ff; } .mp-bm-menu-add {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   height: 50px;   -webkit-box-pack: center;       -ms-flex-pack: center;           justify-content: center;   width: 100%; } .mp-bm-menu-add mp-button-bar {   height: 100%; } .mp-bm-menu-add mp-input-group {   border-top: 1px solid #d8e0e6;   height: 100%;   padding: 6px;   width: 100%; } ";
 
 
 /***/ },
-/* 378 */
+/* 406 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27345,15 +28019,15 @@
 
 	var _panel = __webpack_require__(299);
 
-	var _registerElement = __webpack_require__(321);
+	var _registerElement = __webpack_require__(348);
 
-	var _string = __webpack_require__(375);
+	var _string = __webpack_require__(403);
 
-	var _index = __webpack_require__(379);
+	var _index = __webpack_require__(407);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	var _index3 = __webpack_require__(380);
+	var _index3 = __webpack_require__(408);
 
 	var _index4 = _interopRequireDefault(_index3);
 
@@ -27566,14 +28240,14 @@
 	}(_panel.Component));
 
 /***/ },
-/* 379 */
+/* 407 */
 /***/ function(module, exports) {
 
 	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6e859d;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 12px;   font-stretch: normal;   font-weight: 400; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 12px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-size: 12px;   font-weight: 400;   padding: 8px;   -webkit-transition: border-color 150ms ease-out;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus {   border-color: #3391e9;   -webkit-transition: border-color 200ms ease-in;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } mp-drop-menu {   border-radius: 5px;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   width: 340px; } :host {   border-radius: 5px;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   width: 340px; } .mp-tag-selector-container {   border-radius: inherit;   width: 100%; } .mp-tag-selector-container, .mp-tag-selector-container * {   box-sizing: border-box; } .mp-tag-selector-container mp-spinner.mp-tag-selector-loading-widget {   display: block;   margin: 50px auto; } .mp-tag-selector-container .mp-tag-selector-top-input-wrapper {   margin: 0 auto;   margin-bottom: 20px;   padding: 0 20px; } .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   cursor: text;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   -webkit-box-orient: horizontal;   -webkit-box-direction: normal;       -ms-flex-direction: row;           flex-direction: row;   -ms-flex-wrap: wrap;       flex-wrap: wrap;   -webkit-box-pack: start;       -ms-flex-pack: start;           justify-content: flex-start;   min-height: 36px;   padding: 6px 6px 0px;   position: relative;   width: 300px; } .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper .mp-tag-selector-icon-wrapper {   height: 16px;   margin: 2px 10px 9px 10px;   margin-left: 8px; } .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper .mp-tag-selector-icon-wrapper.mp-tag-selector-search-icon svg-icon {   height: 20px;   min-height: 20px;   min-width: 20px;   width: 20px; } .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper .mp-tag-selector-icon-wrapper.mp-tag-selector-search-icon svg-icon svg {   height: 20px;   min-height: 20px;   min-width: 20px;   width: 20px;   left: 0;   top: -2px; } .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper .mp-tag-selector-icon-wrapper.mp-tag-selector-search-icon svg-icon svg, .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper .mp-tag-selector-icon-wrapper.mp-tag-selector-search-icon svg-icon path {   color: #d8e0e6;   fill: #d8e0e6;   -webkit-transition: 0.2s;   transition: 0.2s; } .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper .mp-tag-selector-icon-wrapper.mp-tag-selector-idle svg-icon {   height: 16px;   min-height: 16px;   min-width: 16px;   width: 16px; } .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper .mp-tag-selector-icon-wrapper.mp-tag-selector-idle svg-icon svg {   height: 16px;   min-height: 16px;   min-width: 16px;   width: 16px;   left: 0;   top: 0; } .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper .mp-tag-selector-icon-wrapper.mp-tag-selector-idle svg-icon svg, .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper .mp-tag-selector-icon-wrapper.mp-tag-selector-idle svg-icon path {   color: #d8e0e6;   fill: #d8e0e6;   -webkit-transition: 0.2s;   transition: 0.2s; } .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper .mp-tag-selector-icon-wrapper.mp-tag-selector-loaded-tag svg-icon {   height: 16px;   min-height: 16px;   min-width: 16px;   width: 16px; } .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper .mp-tag-selector-icon-wrapper.mp-tag-selector-loaded-tag svg-icon svg {   height: 16px;   min-height: 16px;   min-width: 16px;   width: 16px;   left: 0;   top: 0; } .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper .mp-tag-selector-icon-wrapper.mp-tag-selector-loaded-tag svg-icon svg, .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper .mp-tag-selector-icon-wrapper.mp-tag-selector-loaded-tag svg-icon path {   color: #39d183;   fill: #39d183;   -webkit-transition: 0.2s;   transition: 0.2s; } .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper .mp-tag-selector-icon-wrapper.mp-tag-selector-loaded-error svg-icon {   height: 16px;   min-height: 16px;   min-width: 16px;   width: 16px; } .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper .mp-tag-selector-icon-wrapper.mp-tag-selector-loaded-error svg-icon svg {   height: 16px;   min-height: 16px;   min-width: 16px;   width: 16px;   left: 0;   top: 0; } .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper .mp-tag-selector-icon-wrapper.mp-tag-selector-loaded-error svg-icon svg, .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper .mp-tag-selector-icon-wrapper.mp-tag-selector-loaded-error svg-icon path {   color: #e4567b;   fill: #e4567b;   -webkit-transition: 0.2s;   transition: 0.2s; } .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper .mp-tag-selector-icon-wrapper mp-spinner {   height: 16px;   width: 16px; } .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper mp-tag {   margin: 0 2px 6px; } .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper .mp-tag-selector-border {   border: 1px solid #d8e0e6;   border-radius: 3px;   height: 100%;   left: 0;   pointer-events: none;   position: absolute;   top: 0;   width: 100%; } .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper .mp-tag-selector-border.mp-tag-selector-loaded-error {   border-color: #e4567b; } .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper .mp-tag-selector-search-input {   background-color: transparent;   border: 0;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 12px;   font-weight: 400;   height: auto;   line-height: 1.5;   margin-left: 6px;   margin-bottom: 6px;   min-width: 0;   max-width: 100%;   padding: 0; } .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper .mp-tag-selector-search-input:focus + .mp-tag-selector-border:not(.mp-tag-selector-loaded-error) {   border-color: #4ba8ff; } .mp-tag-selector-container .mp-tag-selector-hr {   background-color: #d8e0e6;   height: 1px;   width: 100%; } .mp-tag-selector-container .mp-tag-selector-tag-list {   max-height: 280px;   overflow-y: auto; } .mp-tag-selector-container .mp-tag-selector-footer {   box-sizing: border-box;   cursor: pointer;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   -webkit-box-orient: horizontal;   -webkit-box-direction: normal;       -ms-flex-direction: row;           flex-direction: row;   -ms-flex-wrap: wrap;       flex-wrap: wrap;   font-size: 14px;   font-weight: 600;   -webkit-box-pack: center;       -ms-flex-pack: center;           justify-content: center;   max-width: 100%;   padding: 14px 20px;   width: 100%;   word-wrap: break-word; } .mp-tag-selector-container .mp-tag-selector-footer:hover {   background-color: #eff3f5; } .mp-tag-selector-container .mp-tag-selector-footer .mp-tag-selector-copy {   -ms-flex-item-align: center;       -ms-grid-row-align: center;       align-self: center;   color: #3391e9;   white-space: pre; } .mp-tag-selector-container .mp-tag-selector-footer .mp-tag-selector-label-name {   -ms-flex-item-align: center;       -ms-grid-row-align: center;       align-self: center;   color: #4c6072;   max-width: 100%;   word-wrap: break-word; } .mp-tag-selector-search-input-dummy {   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 12px;   font-weight: 400;   padding: 0;   position: absolute;   white-space: nowrap;   visibility: hidden; } ";
 
 
 /***/ },
-/* 380 */
+/* 408 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27584,209 +28258,138 @@
 	  locals = locals || {};;;
 	  var result_of_with = function ($component, $helpers, Object, activeTagIndex, inputText, inputWidth, loadState, matchingTags, selectedTags) {
 	    var h = __webpack_require__(299).h;
+	    var __objToAttrs = function __objToAttrs(o) {
+	      return Object.keys(o).map(function (k) {
+	        return o[k] ? k : false;
+	      });
+	    };
 	    return {
 	      value: h("div", {
-	        "class": {
-	          'mp-tag-selector-container': true
-	        }
+	        "className": [].concat('mp-tag-selector-container').filter(Boolean).join(' ')
 	      }, function () {
 	        var __jade_nodes = [];
-	        __jade_nodes = __jade_nodes.concat(loadState == 'loading_widget' ? function () {
-	          var __jade_nodes = [];
-	          __jade_nodes = __jade_nodes.concat(h("mp-spinner", {
-	            "class": {
-	              'mp-tag-selector-loading-widget': true
-	            }
-	          }));;
-	          return __jade_nodes;
-	        }.call(this) : function () {
+	        __jade_nodes = __jade_nodes.concat(loadState == 'loading_widget' ? h("mp-spinner", {
+	          "className": [].concat('mp-tag-selector-loading-widget').filter(Boolean).join(' ')
+	        }) : function () {
 	          var __jade_nodes = [];
 	          __jade_nodes = __jade_nodes.concat(h("div", {
-	            "class": {
-	              'mp-tag-selector-top-input-wrapper': true
-	            }
+	            "className": [].concat('mp-tag-selector-top-input-wrapper').filter(Boolean).join(' ')
+	          }, [h("div", {
+	            "on": {
+	              click: $helpers.focusInput
+	            },
+	            "className": [].concat('mp-tag-selector-input-wrapper').filter(Boolean).join(' ')
 	          }, function () {
 	            var __jade_nodes = [];
+	            var icon = $component.isAttributeEnabled('read-only') ? 'search' : 'tag';;
 	            __jade_nodes = __jade_nodes.concat(h("div", {
-	              "on": {
-	                click: $helpers.focusInput
-	              },
-	              "class": {
-	                'mp-tag-selector-input-wrapper': true
-	              }
+	              "className": [].concat('mp-tag-selector-icon-wrapper').concat(__objToAttrs({
+	                'mp-tag-selector-search-icon': icon === 'search',
+	                'mp-tag-selector-idle': loadState === 'idle',
+	                'mp-tag-selector-loaded-tag': loadState === 'loaded_tag',
+	                'mp-tag-selector-loaded-error': loadState === 'error'
+	              })).filter(Boolean).join(' ')
 	            }, function () {
 	              var __jade_nodes = [];
-	              var icon = $component.isAttributeEnabled('read-only') ? 'search' : 'tag';;
-	              __jade_nodes = __jade_nodes.concat(h("div", {
-	                "class": Object.assign({}, {
-	                  'mp-tag-selector-search-icon': icon === 'search',
-	                  'mp-tag-selector-idle': loadState === 'idle',
-	                  'mp-tag-selector-loaded-tag': loadState === 'loaded_tag',
-	                  'mp-tag-selector-loaded-error': loadState === 'error'
-	                }, {
-	                  'mp-tag-selector-icon-wrapper': true
-	                })
-	              }, function () {
-	                var __jade_nodes = [];
-	                __jade_nodes = __jade_nodes.concat(loadState == 'loading_tag' ? function () {
+	              __jade_nodes = __jade_nodes.concat(loadState == 'loading_tag' ? h("mp-spinner") : h("svg-icon", {
+	                "attrs": {
+	                  icon: icon
+	                }
+	              }));;
+	              return __jade_nodes;
+	            }.call(this).filter(Boolean)));
+	            __jade_nodes = __jade_nodes.concat(!$component.isAttributeEnabled('read-only') ? function () {
+	              var __jade_nodes = [];
+	              var tags = [].concat(_toConsumableArray(selectedTags));;
+	              __jade_nodes = __jade_nodes.concat(tags.map(function (tag, $index) {
+	                return function () {
 	                  var __jade_nodes = [];
-	                  __jade_nodes = __jade_nodes.concat(h("mp-spinner"));;
-	                  return __jade_nodes;
-	                }.call(this) : function () {
-	                  var __jade_nodes = [];
-	                  __jade_nodes = __jade_nodes.concat(h("svg-icon", {
-	                    "attrs": {
-	                      icon: icon
+	                  var attrs = {
+	                    'tag-name': tag,
+	                    'removable': true
+	                  };
+	                  __jade_nodes = __jade_nodes.concat(tag.toLowerCase() === 'my reports' ? function () {
+	                    var __jade_nodes = [];
+	                    attrs.icon = 'lock-locked';;
+	                    return __jade_nodes;
+	                  }.call(this) : undefined);
+	                  __jade_nodes = __jade_nodes.concat(h("mp-tag", {
+	                    "attrs": attrs,
+	                    "on": {
+	                      change: function change(e) {
+	                        e.stopPropagation();
+	                        $helpers.removeTag(tag);
+	                      }
 	                    }
 	                  }));;
 	                  return __jade_nodes;
-	                }.call(this));;
-	                return __jade_nodes;
-	              }.call(this).filter(Boolean)));
-	              __jade_nodes = __jade_nodes.concat(!$component.isAttributeEnabled('read-only') ? function () {
-	                var __jade_nodes = [];
-	                var tags = [].concat(_toConsumableArray(selectedTags));;
-	                __jade_nodes = __jade_nodes.concat(tags.reduce(function (__each_nodes, tag, $index) {
-	                  return __each_nodes.concat(function () {
-	                    var __jade_nodes = [];
-	                    var attrs = {
-	                      'tag-name': tag
-	                    };
-	                    __jade_nodes = __jade_nodes.concat(tag.toLowerCase() === 'my reports' ? function () {
-	                      var __jade_nodes = [];
-	                      attrs.icon = 'lock-locked';;
-	                      return __jade_nodes;
-	                    }.call(this) : undefined);
-	                    __jade_nodes = __jade_nodes.concat(h("mp-tag", {
-	                      "attrs": attrs,
-	                      "on": {
-	                        change: function change(e) {
-	                          e.stopPropagation();
-	                          $helpers.removeTag(tag);
-	                        }
-	                      }
-	                    }));;
-	                    return __jade_nodes;
-	                  }.call(this));
-	                }, []));;
-	                return __jade_nodes;
-	              }.call(this) : undefined);
-	              __jade_nodes = __jade_nodes.concat(h("input", {
-	                "props": {
-	                  type: 'text',
-	                  value: inputText
-	                },
-	                "on": {
-	                  input: $helpers.setInputText,
-	                  keydown: $helpers.handleKeyDown,
-	                  keypress: $helpers.handleKeyPress
-	                },
-	                "style": {
-	                  width: inputWidth
-	                },
-	                "class": {
-	                  'mp-tag-selector-search-input': true
-	                }
-	              }));
-	              __jade_nodes = __jade_nodes.concat(h("div", {
-	                "class": Object.assign({}, {
-	                  'mp-tag-selector-loaded-error': loadState === 'error'
-	                }, {
-	                  'mp-tag-selector-border': true
-	                })
+	                }.call(this);
 	              }));;
 	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          var hasMatches = matchingTags.length;;
-	          var showCreateButton = $helpers.showCreateButton();;
-	          __jade_nodes = __jade_nodes.concat(hasMatches || showCreateButton ? function () {
-	            var __jade_nodes = [];
+	            }.call(this) : undefined);
+	            __jade_nodes = __jade_nodes.concat(h("input", {
+	              "props": {
+	                type: 'text',
+	                value: inputText
+	              },
+	              "on": {
+	                input: $helpers.setInputText,
+	                keydown: $helpers.handleKeyDown,
+	                keypress: $helpers.handleKeyPress
+	              },
+	              "style": {
+	                width: inputWidth
+	              },
+	              "className": [].concat('mp-tag-selector-search-input').filter(Boolean).join(' ')
+	            }));
 	            __jade_nodes = __jade_nodes.concat(h("div", {
-	              "class": {
-	                'mp-tag-selector-hr': true
-	              }
+	              "className": [].concat('mp-tag-selector-border').concat(__objToAttrs({
+	                'mp-tag-selector-loaded-error': loadState === 'error'
+	              })).filter(Boolean).join(' ')
 	            }));;
 	            return __jade_nodes;
-	          }.call(this) : undefined);
-	          __jade_nodes = __jade_nodes.concat(hasMatches ? function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(h("div", {
-	              "class": {
-	                'mp-tag-selector-tag-list': true
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat(matchingTags.reduce(function (__each_nodes, tag, tagIdx) {
-	                return __each_nodes.concat(function () {
-	                  var __jade_nodes = [];
-	                  __jade_nodes = __jade_nodes.concat(h("mp-list-item", {
-	                    "attrs": {
-	                      'active': tagIdx === activeTagIndex
-	                    },
-	                    "on": {
-	                      click: function click() {
-	                        return $helpers.addTag(tag);
-	                      }
-	                    }
-	                  }, function () {
-	                    var __jade_nodes = [];
-	                    __jade_nodes = __jade_nodes.concat($helpers.stringFilterMatches(tag, inputText).reduce(function (__each_nodes, token, pos) {
-	                      return __each_nodes.concat(function () {
-	                        var __jade_nodes = [];
-	                        __jade_nodes = __jade_nodes.concat(pos % 2 === 1 ? function () {
-	                          var __jade_nodes = [];
-	                          __jade_nodes = __jade_nodes.concat(h("span", [token || '']));;
-	                          return __jade_nodes;
-	                        }.call(this) : function () {
-	                          var __jade_nodes = [];
-	                          __jade_nodes = __jade_nodes.concat(h("b", [token || '']));;
-	                          return __jade_nodes;
-	                        }.call(this));;
-	                        return __jade_nodes;
-	                      }.call(this));
-	                    }, []));;
-	                    return __jade_nodes;
-	                  }.call(this).filter(Boolean)));;
-	                  return __jade_nodes;
-	                }.call(this));
-	              }, []));;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));;
-	            return __jade_nodes;
-	          }.call(this) : showCreateButton ? function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(h("div", {
+	          }.call(this).filter(Boolean))].filter(Boolean)));
+	          var hasMatches = matchingTags.length;;
+	          var showCreateButton = $helpers.showCreateButton();;
+	          __jade_nodes = __jade_nodes.concat(hasMatches || showCreateButton ? h("div", {
+	            "className": [].concat('mp-tag-selector-hr').filter(Boolean).join(' ')
+	          }) : undefined);
+	          __jade_nodes = __jade_nodes.concat(hasMatches ? h("div", {
+	            "className": [].concat('mp-tag-selector-tag-list').filter(Boolean).join(' ')
+	          }, [matchingTags.map(function (tag, tagIdx) {
+	            return h("mp-list-item", {
+	              "attrs": {
+	                'active': tagIdx === activeTagIndex
+	              },
 	              "on": {
 	                click: function click() {
-	                  return $helpers.addTag(inputText);
+	                  return $helpers.addTag(tag);
 	                }
-	              },
-	              "class": {
-	                'mp-tag-selector-footer': true
 	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat(h("div", {
-	                "class": {
-	                  'mp-tag-selector-copy': true
-	                }
-	              }, function () {
+	            }, [$helpers.stringFilterMatches(tag, inputText).map(function (token, pos) {
+	              return function () {
 	                var __jade_nodes = [];
-	                __jade_nodes = __jade_nodes.concat("Create new label for");
-	                __jade_nodes = __jade_nodes.concat(' ');;
+	                __jade_nodes = __jade_nodes.concat(pos % 2 === 1 ? h("span", [token]) : h("b", [token]));;
 	                return __jade_nodes;
-	              }.call(this).filter(Boolean)));
-	              __jade_nodes = __jade_nodes.concat(h("div", {
-	                "class": {
-	                  'mp-tag-selector-label-name': true
-	                }
-	              }, [inputText || '']));;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));;
+	              }.call(this);
+	            })].filter(Boolean));
+	          })].filter(Boolean)) : showCreateButton ? h("div", {
+	            "on": {
+	              click: function click() {
+	                return $helpers.addTag(inputText);
+	              }
+	            },
+	            "className": [].concat('mp-tag-selector-footer').filter(Boolean).join(' ')
+	          }, [h("div", {
+	            "className": [].concat('mp-tag-selector-copy').filter(Boolean).join(' ')
+	          }, function () {
+	            var __jade_nodes = [];
+	            __jade_nodes = __jade_nodes.concat("Create new label for");
+	            __jade_nodes = __jade_nodes.concat(' ');;
 	            return __jade_nodes;
-	          }.call(this) : undefined);;
+	          }.call(this).filter(Boolean)), h("div", {
+	            "className": [].concat('mp-tag-selector-label-name').filter(Boolean).join(' ')
+	          }, [inputText])].filter(Boolean)) : undefined);;
 	          return __jade_nodes;
 	        }.call(this));;
 	        return __jade_nodes;
@@ -27798,7 +28401,7 @@
 	module.exports = _jade_template_fn;
 
 /***/ },
-/* 381 */
+/* 409 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -27851,11 +28454,11 @@
 	};
 
 /***/ },
-/* 382 */,
-/* 383 */,
-/* 384 */,
-/* 385 */,
-/* 386 */
+/* 410 */,
+/* 411 */,
+/* 412 */,
+/* 413 */,
+/* 414 */
 /***/ function(module, exports) {
 
 	/*
@@ -27911,10 +28514,10 @@
 
 
 /***/ },
-/* 387 */
+/* 415 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(386)();
+	exports = module.exports = __webpack_require__(414)();
 	// imports
 
 
@@ -27925,7 +28528,7 @@
 
 
 /***/ },
-/* 388 */
+/* 416 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -28177,34 +28780,34 @@
 
 
 /***/ },
-/* 389 */,
-/* 390 */,
-/* 391 */,
-/* 392 */,
-/* 393 */,
-/* 394 */,
-/* 395 */,
-/* 396 */,
-/* 397 */,
-/* 398 */,
-/* 399 */,
-/* 400 */,
-/* 401 */,
-/* 402 */,
-/* 403 */,
-/* 404 */,
-/* 405 */,
-/* 406 */,
-/* 407 */,
-/* 408 */,
-/* 409 */,
-/* 410 */,
-/* 411 */,
-/* 412 */,
-/* 413 */,
-/* 414 */,
-/* 415 */,
-/* 416 */
+/* 417 */,
+/* 418 */,
+/* 419 */,
+/* 420 */,
+/* 421 */,
+/* 422 */,
+/* 423 */,
+/* 424 */,
+/* 425 */,
+/* 426 */,
+/* 427 */,
+/* 428 */,
+/* 429 */,
+/* 430 */,
+/* 431 */,
+/* 432 */,
+/* 433 */,
+/* 434 */,
+/* 435 */,
+/* 436 */,
+/* 437 */,
+/* 438 */,
+/* 439 */,
+/* 440 */,
+/* 441 */,
+/* 442 */,
+/* 443 */,
+/* 444 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -28302,7 +28905,7 @@
 	];
 
 /***/ },
-/* 417 */
+/* 445 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -28313,1498 +28916,501 @@
 	    var h = __webpack_require__(299).h;
 	    return {
 	      value: h("div", {
-	        "class": {
-	          'style-guide': true
+	        "className": [].concat('style-guide').filter(Boolean).join(' ')
+	      }, [h("div", {
+	        "className": [].concat('section').filter(Boolean).join(' ')
+	      }, [h("h1", ["Colors"].filter(Boolean)), h("p", {
+	        "className": [].concat('item-palette').concat('color-palette').concat('mp-font-list-item').filter(Boolean).join(' ')
+	      }, [Object.keys(COLORS).map(function (color, $index) {
+	        return h("div", {
+	          "className": [].concat('list-block').filter(Boolean).join(' ')
+	        }, [h("div", {
+	          "style": {
+	            'background-color': COLORS[color]
+	          },
+	          "className": [].concat('square').filter(Boolean).join(' ')
+	        }), h("div", {
+	          "className": [].concat('label').filter(Boolean).join(' ')
+	        }, function () {
+	          var __jade_nodes = [];
+	          __jade_nodes = __jade_nodes.concat(color);
+	          __jade_nodes = __jade_nodes.concat(h("mp-tooltip", [COLORS[color]]));;
+	          return __jade_nodes;
+	        }.call(this).filter(Boolean))].filter(Boolean));
+	      })].filter(Boolean))].filter(Boolean)), h("div", {
+	        "className": [].concat('section').filter(Boolean).join(' ')
+	      }, [h("h1", ["Icons"].filter(Boolean)), h("p", {
+	        "className": [].concat('item-palette').concat('icon-palette').filter(Boolean).join(' ')
+	      }, [Object.keys(SVG_ICONS).map(function (icon, $index) {
+	        return h("div", {
+	          "className": [].concat('list-block').filter(Boolean).join(' ')
+	        }, [h("svg-icon", {
+	          "attrs": {
+	            icon: icon
+	          }
+	        }), h("div", {
+	          "className": [].concat('label').filter(Boolean).join(' ')
+	        }, [icon])].filter(Boolean));
+	      }), h("div", {
+	        "className": [].concat('list-block').filter(Boolean).join(' ')
+	      }, [h("svg-icon", {
+	        "attrs": {
+	          empty: true
 	        }
-	      }, function () {
-	        var __jade_nodes = [];
-	        __jade_nodes = __jade_nodes.concat(h("div", {
-	          "class": {
-	            'section': true
+	      }), h("div", {
+	        "className": [].concat('label').filter(Boolean).join(' ')
+	      }, ["<empty>"].filter(Boolean))].filter(Boolean))].filter(Boolean))].filter(Boolean)), h("div", {
+	        "className": [].concat('section').filter(Boolean).join(' ')
+	      }, [h("h1", ["Typography"].filter(Boolean)), h("h2", ["Sizes"].filter(Boolean)), h("p", {
+	        "className": [].concat('mp-font-size-xl').filter(Boolean).join(' ')
+	      }, [".mp-font-size-xl | Mixpanel helps you learn from your data"].filter(Boolean)), h("p", {
+	        "className": [].concat('mp-font-size-large').filter(Boolean).join(' ')
+	      }, [".mp-font-size-large | Mixpanel helps you learn from your data"].filter(Boolean)), h("p", {
+	        "className": [].concat('mp-font-size-medium').filter(Boolean).join(' ')
+	      }, [".mp-font-size-medium | Mixpanel helps you learn from your data"].filter(Boolean)), h("p", {
+	        "className": [].concat('mp-font-size-default').filter(Boolean).join(' ')
+	      }, [".mp-font-size-default | Mixpanel helps you learn from your data"].filter(Boolean)), h("p", {
+	        "className": [].concat('mp-font-size-xs').filter(Boolean).join(' ')
+	      }, [".mp-font-size-xs | Mixpanel helps you learn from your data"].filter(Boolean)), h("h2", ["Weights"].filter(Boolean)), h("p", {
+	        "className": [].concat('mp-font-weight-regular').filter(Boolean).join(' ')
+	      }, [".mp-font-weight-regular | Mixpanel helps you learn from your data"].filter(Boolean)), h("p", {
+	        "className": [].concat('mp-font-weight-medium').filter(Boolean).join(' ')
+	      }, [".mp-font-weight-medium | Mixpanel helps you learn from your data"].filter(Boolean)), h("p", {
+	        "className": [].concat('mp-font-weight-bold').filter(Boolean).join(' ')
+	      }, [".mp-font-weight-bold | Mixpanel helps you learn from your data"].filter(Boolean)), h("h2", ["Utility classes"].filter(Boolean)), h("p", {
+	        "className": [].concat('mp-font-paragraph').filter(Boolean).join(' ')
+	      }, [".mp-font-paragraph", h("p", ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dignissim sodales rhoncus. Cras rutrum nisl et sapien efficitur tempus. Sed sagittis sed lorem in efficitur. Morbi sollicitudin interdum sapien, vitae semper odio dapibus non. Aenean id massa id nunc cursus varius. Suspendisse congue leo ac ante egestas molestie. Phasellus nec arcu in dolor tincidunt ornare a sed nunc. Proin et dapibus augue, sit amet fermentum risus. Integer ornare convallis nulla, in condimentum lectus efficitur et. Fusce facilisis, ex vitae consequat scelerisque, enim nibh fringilla ligula, a bibendum orci lorem id felis. Mauris eget augue nibh. Ut quis pharetra velit. Donec tempor ante id risus porttitor venenatis. Proin id dictum arcu, pulvinar iaculis augue. Aliquam in nunc vitae urna feugiat condimentum."].filter(Boolean))].filter(Boolean))].filter(Boolean)), h("div", {
+	        "className": [].concat('section').concat('buttons').filter(Boolean).join(' ')
+	      }, [h("h1", ["Buttons"].filter(Boolean)), h("p", [h("mp-button", {
+	        "className": [].concat('mp-button-primary').filter(Boolean).join(' ')
+	      }, [".mp-button-primary"].filter(Boolean)), h("mp-button", {
+	        "attrs": {
+	          disabled: true
+	        },
+	        "className": [].concat('mp-button-primary').filter(Boolean).join(' ')
+	      }, ["disabled"].filter(Boolean))].filter(Boolean)), h("p", [h("mp-button", {
+	        "className": [].concat('mp-button-secondary').filter(Boolean).join(' ')
+	      }, [".mp-button-secondary"].filter(Boolean)), h("mp-button", {
+	        "attrs": {
+	          disabled: true
+	        },
+	        "className": [].concat('mp-button-secondary').filter(Boolean).join(' ')
+	      }, ["disabled"].filter(Boolean))].filter(Boolean)), h("p", [h("mp-button", {
+	        "className": [].concat('mp-button-red').filter(Boolean).join(' ')
+	      }, [".mp-button-red"].filter(Boolean)), h("mp-button", {
+	        "attrs": {
+	          disabled: true
+	        },
+	        "className": [].concat('mp-button-red').filter(Boolean).join(' ')
+	      }, ["disabled"].filter(Boolean))].filter(Boolean)), h("p", {
+	        "className": [].concat('button-field').filter(Boolean).join(' ')
+	      }, [h("mp-button", {
+	        "className": [].concat('mp-button-primary').concat('mp-button-on-blue').filter(Boolean).join(' ')
+	      }, ["primary on-blue"].filter(Boolean)), h("mp-button", {
+	        "attrs": {
+	          disabled: true
+	        },
+	        "className": [].concat('mp-button-primary').concat('mp-button-on-blue').filter(Boolean).join(' ')
+	      }, ["disabled"].filter(Boolean))].filter(Boolean)), h("p", {
+	        "className": [].concat('button-field').filter(Boolean).join(' ')
+	      }, [h("mp-button", {
+	        "className": [].concat('mp-button-secondary').concat('mp-button-on-blue').filter(Boolean).join(' ')
+	      }, ["secondary on-blue"].filter(Boolean)), h("mp-button", {
+	        "attrs": {
+	          disabled: true
+	        },
+	        "className": [].concat('mp-button-secondary').concat('mp-button-on-blue').filter(Boolean).join(' ')
+	      }, ["disabled"].filter(Boolean))].filter(Boolean)), h("h1", ["Buttons w/ icons"].filter(Boolean)), h("p", [h("mp-button", {
+	        "attrs": {
+	          icon: 'x'
+	        },
+	        "className": [].concat('mp-button-secondary').filter(Boolean).join(' ')
+	      }, ["Close"].filter(Boolean)), h("mp-button", {
+	        "attrs": {
+	          icon: 'logout'
+	        },
+	        "className": [].concat('mp-button-secondary').filter(Boolean).join(' ')
+	      }, ["Exit"].filter(Boolean)), h("mp-button", {
+	        "attrs": {
+	          icon: 'plus'
+	        },
+	        "className": [].concat('mp-button-primary').filter(Boolean).join(' ')
+	      }, ["Create"].filter(Boolean)), h("mp-button", {
+	        "attrs": {
+	          icon: 'trashcan'
+	        },
+	        "className": [].concat('mp-button-red').filter(Boolean).join(' ')
+	      }, ["Delete"].filter(Boolean))].filter(Boolean)), h("p", {
+	        "className": [].concat('button-field').filter(Boolean).join(' ')
+	      }, [h("mp-button", {
+	        "attrs": {
+	          icon: 'plus'
+	        },
+	        "className": [].concat('mp-button-primary').concat('mp-button-on-blue').filter(Boolean).join(' ')
+	      }, ["Create"].filter(Boolean)), h("mp-button", {
+	        "attrs": {
+	          icon: 'plus',
+	          disabled: true
+	        },
+	        "className": [].concat('mp-button-primary').concat('mp-button-on-blue').filter(Boolean).join(' ')
+	      }, ["Create"].filter(Boolean))].filter(Boolean)), h("p", {
+	        "className": [].concat('button-field').filter(Boolean).join(' ')
+	      }, [h("mp-button", {
+	        "attrs": {
+	          icon: 'x'
+	        },
+	        "className": [].concat('mp-button-secondary').concat('mp-button-on-blue').filter(Boolean).join(' ')
+	      }, ["Cancel"].filter(Boolean)), h("mp-button", {
+	        "attrs": {
+	          icon: 'x',
+	          disabled: true
+	        },
+	        "className": [].concat('mp-button-secondary').concat('mp-button-on-blue').filter(Boolean).join(' ')
+	      }, ["Cancel"].filter(Boolean))].filter(Boolean))].filter(Boolean)), h("div", {
+	        "className": [].concat('section').concat('button-bars').filter(Boolean).join(' ')
+	      }, [h("h1", ["Button bar"].filter(Boolean)), h("p", {
+	        "className": [].concat('button-bar-container').filter(Boolean).join(' ')
+	      }, [h("mp-button-bar", {
+	        "className": [].concat('mp-button-bar-secondary').filter(Boolean).join(' ')
+	      }, ["I'm a button bar"].filter(Boolean))].filter(Boolean)), h("p", {
+	        "className": [].concat('button-bar-container').filter(Boolean).join(' ')
+	      }, [h("mp-button-bar", {
+	        "attrs": {
+	          disabled: true
+	        },
+	        "className": [].concat('mp-button-bar-secondary').filter(Boolean).join(' ')
+	      }, ["I'm a disabled button bar"].filter(Boolean))].filter(Boolean)), h("p", {
+	        "className": [].concat('button-bar-container').filter(Boolean).join(' ')
+	      }, [h("mp-button-bar", {
+	        "attrs": {
+	          'arrow-next': true
+	        },
+	        "className": [].concat('mp-button-bar-primary').filter(Boolean).join(' ')
+	      }, ["Next step"].filter(Boolean))].filter(Boolean)), h("p", {
+	        "className": [].concat('button-bar-container').filter(Boolean).join(' ')
+	      }, [h("mp-button-bar", {
+	        "attrs": {
+	          'arrow-next': true,
+	          disabled: true
+	        },
+	        "className": [].concat('mp-button-bar-primary').filter(Boolean).join(' ')
+	      }, ["Next step"].filter(Boolean))].filter(Boolean))].filter(Boolean)), h("div", {
+	        "className": [].concat('section').concat('forms').filter(Boolean).join(' ')
+	      }, [h("h1", ["Forms"].filter(Boolean)), h("h2", ["Input"].filter(Boolean)), h("p", [h("input", {
+	        "attrs": {
+	          type: 'text',
+	          placeholder: "I'm a placeholder"
+	        }
+	      })].filter(Boolean)), h("h2", ["Input with icon"].filter(Boolean)), h("p", [h("div", {
+	        "className": [].concat('mp-icon-input').filter(Boolean).join(' ')
+	      }, [h("div", {
+	        "className": [].concat('mp-icon').filter(Boolean).join(' ')
+	      }, [h("svg-icon", {
+	        "attrs": {
+	          icon: "search"
+	        }
+	      })].filter(Boolean)), h("input", {
+	        "attrs": {
+	          type: 'text',
+	          placeholder: 'Some placeholder text'
+	        }
+	      })].filter(Boolean))].filter(Boolean)), h("h2", ["Input group"].filter(Boolean)), h("p", [h("mp-input-group", {
+	        "attrs": {
+	          placeholder: "Type a name...",
+	          busy: inputGroupSaving
+	        },
+	        "on": {
+	          change: $helpers.handleNamerChange,
+	          submit: $helpers.handleNamerSubmit
+	        }
+	      })].filter(Boolean))].filter(Boolean)), h("div", {
+	        "className": [].concat('section').concat('menus').filter(Boolean).join(' ')
+	      }, [h("h1", ["Menus"].filter(Boolean)), h("p", [h("button", {
+	        "on": {
+	          click: $helpers.toggleMenu
+	        }
+	      }, ["Open Menu"].filter(Boolean)), h("div", {
+	        "className": [].concat('drop-menu-container').filter(Boolean).join(' ')
+	      }, [h("mp-drop-menu", {
+	        "attrs": {
+	          open: open.menu
+	        },
+	        "on": {
+	          change: function change(e) {
+	            return $helpers.handleModalChange('menu', e.detail.state);
 	          }
-	        }, function () {
-	          var __jade_nodes = [];
-	          __jade_nodes = __jade_nodes.concat(h("h1", function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat("Colors");;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("p", {
-	            "class": {
-	              'item-palette': true,
-	              'color-palette': true,
-	              'mp-font-list-item': true
-	            }
-	          }, function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(Object.keys(COLORS).reduce(function (__each_nodes, color, $index) {
-	              return __each_nodes.concat(function () {
-	                var __jade_nodes = [];
-	                __jade_nodes = __jade_nodes.concat(h("div", {
-	                  "class": {
-	                    'list-block': true
-	                  }
-	                }, function () {
-	                  var __jade_nodes = [];
-	                  __jade_nodes = __jade_nodes.concat(h("div", {
-	                    "style": {
-	                      'background-color': COLORS[color]
-	                    },
-	                    "class": {
-	                      'square': true
-	                    }
-	                  }));
-	                  __jade_nodes = __jade_nodes.concat(h("div", {
-	                    "class": {
-	                      'label': true
-	                    }
-	                  }, function () {
-	                    var __jade_nodes = [];
-	                    __jade_nodes = __jade_nodes.concat(color);
-	                    __jade_nodes = __jade_nodes.concat(h("mp-tooltip", [COLORS[color] || '']));;
-	                    return __jade_nodes;
-	                  }.call(this).filter(Boolean)));;
-	                  return __jade_nodes;
-	                }.call(this).filter(Boolean)));;
-	                return __jade_nodes;
-	              }.call(this));
-	            }, []));;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));;
-	          return __jade_nodes;
-	        }.call(this).filter(Boolean)));
-	        __jade_nodes = __jade_nodes.concat(h("div", {
-	          "class": {
-	            'section': true
+	        }
+	      }, [h("div", {
+	        "className": [].concat('text-container').filter(Boolean).join(' ')
+	      }, [h("mp-list-item", ["there is text here"].filter(Boolean)), h("mp-list-item", ["there is text here"].filter(Boolean)), h("mp-list-item", ["there is text here"].filter(Boolean))].filter(Boolean))].filter(Boolean))].filter(Boolean))].filter(Boolean))].filter(Boolean)), h("div", {
+	        "className": [].concat('section').concat('modals').filter(Boolean).join(' ')
+	      }, [h("h1", ["Modals"].filter(Boolean)), h("p", [h("button", {
+	        "on": {
+	          click: function click() {
+	            return $helpers.openModal('modal');
 	          }
-	        }, function () {
-	          var __jade_nodes = [];
-	          __jade_nodes = __jade_nodes.concat(h("h1", function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat("Icons");;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("p", {
-	            "class": {
-	              'item-palette': true,
-	              'icon-palette': true
-	            }
-	          }, function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(Object.keys(SVG_ICONS).reduce(function (__each_nodes, icon, $index) {
-	              return __each_nodes.concat(function () {
-	                var __jade_nodes = [];
-	                __jade_nodes = __jade_nodes.concat(h("div", {
-	                  "class": {
-	                    'list-block': true
-	                  }
-	                }, function () {
-	                  var __jade_nodes = [];
-	                  __jade_nodes = __jade_nodes.concat(h("svg-icon", {
-	                    "attrs": {
-	                      icon: icon
-	                    }
-	                  }));
-	                  __jade_nodes = __jade_nodes.concat(h("div", {
-	                    "class": {
-	                      'label': true
-	                    }
-	                  }, [icon || '']));;
-	                  return __jade_nodes;
-	                }.call(this).filter(Boolean)));;
-	                return __jade_nodes;
-	              }.call(this));
-	            }, []));
-	            __jade_nodes = __jade_nodes.concat(h("div", {
-	              "class": {
-	                'list-block': true
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat(h("svg-icon", {
-	                "attrs": {
-	                  empty: true
-	                }
-	              }));
-	              __jade_nodes = __jade_nodes.concat(h("div", {
-	                "class": {
-	                  'label': true
-	                }
-	              }, function () {
-	                var __jade_nodes = [];
-	                __jade_nodes = __jade_nodes.concat("<empty>");;
-	                return __jade_nodes;
-	              }.call(this).filter(Boolean)));;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));;
-	          return __jade_nodes;
-	        }.call(this).filter(Boolean)));
-	        __jade_nodes = __jade_nodes.concat(h("div", {
-	          "class": {
-	            'section': true
+	        }
+	      }, ["Open modal"].filter(Boolean)), h("mp-modal", {
+	        "attrs": {
+	          closeable: true,
+	          open: open.modal
+	        },
+	        "on": {
+	          change: function change(e) {
+	            return $helpers.handleModalChange('modal', e.detail.state);
 	          }
-	        }, function () {
-	          var __jade_nodes = [];
-	          __jade_nodes = __jade_nodes.concat(h("h1", function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat("Typography");;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("h2", function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat("Sizes");;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("p", {
-	            "class": {
-	              'mp-font-size-xl': true
-	            }
-	          }, function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(".mp-font-size-xl | Mixpanel helps you learn from your data");;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("p", {
-	            "class": {
-	              'mp-font-size-large': true
-	            }
-	          }, function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(".mp-font-size-large | Mixpanel helps you learn from your data");;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("p", {
-	            "class": {
-	              'mp-font-size-medium': true
-	            }
-	          }, function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(".mp-font-size-medium | Mixpanel helps you learn from your data");;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("p", {
-	            "class": {
-	              'mp-font-size-default': true
-	            }
-	          }, function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(".mp-font-size-default | Mixpanel helps you learn from your data");;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("p", {
-	            "class": {
-	              'mp-font-size-xs': true
-	            }
-	          }, function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(".mp-font-size-xs | Mixpanel helps you learn from your data");;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("h2", function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat("Weights");;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("p", {
-	            "class": {
-	              'mp-font-weight-regular': true
-	            }
-	          }, function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(".mp-font-weight-regular | Mixpanel helps you learn from your data");;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("p", {
-	            "class": {
-	              'mp-font-weight-medium': true
-	            }
-	          }, function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(".mp-font-weight-medium | Mixpanel helps you learn from your data");;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("p", {
-	            "class": {
-	              'mp-font-weight-bold': true
-	            }
-	          }, function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(".mp-font-weight-bold | Mixpanel helps you learn from your data");;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("h2", function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat("Utility classes");;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("p", {
-	            "class": {
-	              'mp-font-paragraph': true
-	            }
-	          }, function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(".mp-font-paragraph");
-	            __jade_nodes = __jade_nodes.concat(h("p", function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dignissim sodales rhoncus. Cras rutrum nisl et sapien efficitur tempus. Sed sagittis sed lorem in efficitur. Morbi sollicitudin interdum sapien, vitae semper odio dapibus non. Aenean id massa id nunc cursus varius. Suspendisse congue leo ac ante egestas molestie. Phasellus nec arcu in dolor tincidunt ornare a sed nunc. Proin et dapibus augue, sit amet fermentum risus. Integer ornare convallis nulla, in condimentum lectus efficitur et. Fusce facilisis, ex vitae consequat scelerisque, enim nibh fringilla ligula, a bibendum orci lorem id felis. Mauris eget augue nibh. Ut quis pharetra velit. Donec tempor ante id risus porttitor venenatis. Proin id dictum arcu, pulvinar iaculis augue. Aliquam in nunc vitae urna feugiat condimentum.");;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));;
-	          return __jade_nodes;
-	        }.call(this).filter(Boolean)));
-	        __jade_nodes = __jade_nodes.concat(h("div", {
-	          "class": {
-	            'section': true,
-	            'buttons': true
+	        },
+	        "className": [].concat('modal').filter(Boolean).join(' ')
+	      }, [h("div", [h("div", {
+	        "className": [].concat('mp-modal-content').filter(Boolean).join(' ')
+	      }, [h("div", {
+	        "className": [].concat('mp-modal-title').filter(Boolean).join(' ')
+	      }, ["Easily track events"].filter(Boolean)), h("div", {
+	        "className": [].concat('mp-modal-subtitle').filter(Boolean).join(' ')
+	      }, ["Click on any element on your page (e.g. the buy button) to create an event and access all historical data for that event."].filter(Boolean))].filter(Boolean)), h("mp-button-bar", {
+	        "on": {
+	          click: function click() {
+	            return $helpers.closeModal('modal');
 	          }
-	        }, function () {
-	          var __jade_nodes = [];
-	          __jade_nodes = __jade_nodes.concat(h("h1", function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat("Buttons");;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("p", function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(h("mp-button", {
-	              "class": {
-	                'mp-button-primary': true
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat(".mp-button-primary");;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));
-	            __jade_nodes = __jade_nodes.concat(h("mp-button", {
-	              "attrs": {
-	                disabled: true
-	              },
-	              "class": {
-	                'mp-button-primary': true
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat("disabled");;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("p", function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(h("mp-button", {
-	              "class": {
-	                'mp-button-secondary': true
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat(".mp-button-secondary");;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));
-	            __jade_nodes = __jade_nodes.concat(h("mp-button", {
-	              "attrs": {
-	                disabled: true
-	              },
-	              "class": {
-	                'mp-button-secondary': true
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat("disabled");;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("p", function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(h("mp-button", {
-	              "class": {
-	                'mp-button-red': true
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat(".mp-button-red");;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));
-	            __jade_nodes = __jade_nodes.concat(h("mp-button", {
-	              "attrs": {
-	                disabled: true
-	              },
-	              "class": {
-	                'mp-button-red': true
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat("disabled");;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("p", {
-	            "class": {
-	              'button-field': true
-	            }
-	          }, function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(h("mp-button", {
-	              "class": {
-	                'mp-button-primary': true,
-	                'mp-button-on-blue': true
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat("primary on-blue");;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));
-	            __jade_nodes = __jade_nodes.concat(h("mp-button", {
-	              "attrs": {
-	                disabled: true
-	              },
-	              "class": {
-	                'mp-button-primary': true,
-	                'mp-button-on-blue': true
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat("disabled");;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("p", {
-	            "class": {
-	              'button-field': true
-	            }
-	          }, function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(h("mp-button", {
-	              "class": {
-	                'mp-button-secondary': true,
-	                'mp-button-on-blue': true
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat("secondary on-blue");;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));
-	            __jade_nodes = __jade_nodes.concat(h("mp-button", {
-	              "attrs": {
-	                disabled: true
-	              },
-	              "class": {
-	                'mp-button-secondary': true,
-	                'mp-button-on-blue': true
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat("disabled");;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("h1", function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat("Buttons w/ icons");;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("p", function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(h("mp-button", {
-	              "attrs": {
-	                icon: 'x'
-	              },
-	              "class": {
-	                'mp-button-secondary': true
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat("Close");;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));
-	            __jade_nodes = __jade_nodes.concat(h("mp-button", {
-	              "attrs": {
-	                icon: 'logout'
-	              },
-	              "class": {
-	                'mp-button-secondary': true
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat("Exit");;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));
-	            __jade_nodes = __jade_nodes.concat(h("mp-button", {
-	              "attrs": {
-	                icon: 'plus'
-	              },
-	              "class": {
-	                'mp-button-primary': true
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat("Create");;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));
-	            __jade_nodes = __jade_nodes.concat(h("mp-button", {
-	              "attrs": {
-	                icon: 'trashcan'
-	              },
-	              "class": {
-	                'mp-button-red': true
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat("Delete");;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("p", {
-	            "class": {
-	              'button-field': true
-	            }
-	          }, function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(h("mp-button", {
-	              "attrs": {
-	                icon: 'plus'
-	              },
-	              "class": {
-	                'mp-button-primary': true,
-	                'mp-button-on-blue': true
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat("Create");;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));
-	            __jade_nodes = __jade_nodes.concat(h("mp-button", {
-	              "attrs": {
-	                icon: 'plus',
-	                disabled: true
-	              },
-	              "class": {
-	                'mp-button-primary': true,
-	                'mp-button-on-blue': true
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat("Create");;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("p", {
-	            "class": {
-	              'button-field': true
-	            }
-	          }, function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(h("mp-button", {
-	              "attrs": {
-	                icon: 'x'
-	              },
-	              "class": {
-	                'mp-button-secondary': true,
-	                'mp-button-on-blue': true
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat("Cancel");;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));
-	            __jade_nodes = __jade_nodes.concat(h("mp-button", {
-	              "attrs": {
-	                icon: 'x',
-	                disabled: true
-	              },
-	              "class": {
-	                'mp-button-secondary': true,
-	                'mp-button-on-blue': true
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat("Cancel");;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));;
-	          return __jade_nodes;
-	        }.call(this).filter(Boolean)));
-	        __jade_nodes = __jade_nodes.concat(h("div", {
-	          "class": {
-	            'section': true,
-	            'button-bars': true
+	        },
+	        "attrs": {
+	          'arrow-next': true
+	        },
+	        "className": [].concat('mp-button-bar-primary').filter(Boolean).join(' ')
+	      }, ["Create your first event"].filter(Boolean))].filter(Boolean))].filter(Boolean))].filter(Boolean)), h("p", [h("button", {
+	        "on": {
+	          click: function click() {
+	            return $helpers.openModal('popup');
 	          }
-	        }, function () {
-	          var __jade_nodes = [];
-	          __jade_nodes = __jade_nodes.concat(h("h1", function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat("Button bar");;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("p", {
-	            "class": {
-	              'button-bar-container': true
-	            }
-	          }, function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(h("mp-button-bar", {
-	              "class": {
-	                'mp-button-bar-secondary': true
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat("I'm a button bar");;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("p", {
-	            "class": {
-	              'button-bar-container': true
-	            }
-	          }, function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(h("mp-button-bar", {
-	              "attrs": {
-	                disabled: true
-	              },
-	              "class": {
-	                'mp-button-bar-secondary': true
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat("I'm a disabled button bar");;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("p", {
-	            "class": {
-	              'button-bar-container': true
-	            }
-	          }, function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(h("mp-button-bar", {
-	              "attrs": {
-	                'arrow-next': true
-	              },
-	              "class": {
-	                'mp-button-bar-primary': true
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat("Next step");;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("p", {
-	            "class": {
-	              'button-bar-container': true
-	            }
-	          }, function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(h("mp-button-bar", {
-	              "attrs": {
-	                'arrow-next': true,
-	                disabled: true
-	              },
-	              "class": {
-	                'mp-button-bar-primary': true
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat("Next step");;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));;
-	          return __jade_nodes;
-	        }.call(this).filter(Boolean)));
-	        __jade_nodes = __jade_nodes.concat(h("div", {
-	          "class": {
-	            'section': true,
-	            'forms': true
+	        }
+	      }, ["Open popup"].filter(Boolean)), h("mp-modal", {
+	        "attrs": {
+	          'modal-type': 'popup',
+	          closeable: true,
+	          open: open.popup
+	        },
+	        "on": {
+	          change: function change(e) {
+	            return $helpers.handleModalChange('popup', e.detail.state);
 	          }
-	        }, function () {
-	          var __jade_nodes = [];
-	          __jade_nodes = __jade_nodes.concat(h("h1", function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat("Forms");;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("h2", function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat("Input");;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("p", function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(h("input", {
-	              "attrs": {
-	                type: 'text',
-	                placeholder: "I'm a placeholder"
-	              }
-	            }));;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("h2", function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat("Input with icon");;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("p", function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(h("div", {
-	              "class": {
-	                'mp-icon-input': true
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat(h("div", {
-	                "class": {
-	                  'mp-icon': true
-	                }
-	              }, function () {
-	                var __jade_nodes = [];
-	                __jade_nodes = __jade_nodes.concat(h("svg-icon", {
-	                  "attrs": {
-	                    icon: "search"
-	                  }
-	                }));;
-	                return __jade_nodes;
-	              }.call(this).filter(Boolean)));
-	              __jade_nodes = __jade_nodes.concat(h("input", {
-	                "attrs": {
-	                  type: 'text',
-	                  placeholder: 'Some placeholder text'
-	                }
-	              }));;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("h2", function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat("Input group");;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("p", function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(h("mp-input-group", {
-	              "attrs": {
-	                placeholder: "Type a name...",
-	                busy: inputGroupSaving
-	              },
-	              "on": {
-	                change: $helpers.handleNamerChange,
-	                submit: $helpers.handleNamerSubmit
-	              }
-	            }));;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));;
-	          return __jade_nodes;
-	        }.call(this).filter(Boolean)));
-	        __jade_nodes = __jade_nodes.concat(h("div", {
-	          "class": {
-	            'section': true,
-	            'menus': true
+	        },
+	        "className": [].concat('popup').filter(Boolean).join(' ')
+	      }, [h("div", [h("div", {
+	        "className": [].concat('mp-modal-content').filter(Boolean).join(' ')
+	      }, [h("div", {
+	        "className": [].concat('mp-modal-title').filter(Boolean).join(' ')
+	      }, ["Easily track events"].filter(Boolean)), h("div", {
+	        "className": [].concat('mp-modal-subtitle').filter(Boolean).join(' ')
+	      }, ["Click on any element on your page (e.g. the buy button) to create an event and access all historical data for that event."].filter(Boolean))].filter(Boolean)), h("mp-button-bar", {
+	        "on": {
+	          click: function click() {
+	            return $helpers.closeModal('popup');
 	          }
-	        }, function () {
-	          var __jade_nodes = [];
-	          __jade_nodes = __jade_nodes.concat(h("h1", function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat("Menus");;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("p", function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(h("button", {
-	              "on": {
-	                click: $helpers.toggleMenu
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat("Open Menu");;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));
-	            __jade_nodes = __jade_nodes.concat(h("div", {
-	              "class": {
-	                'drop-menu-container': true
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat(h("mp-drop-menu", {
-	                "attrs": {
-	                  open: open.menu
-	                },
-	                "on": {
-	                  change: function change(e) {
-	                    return $helpers.handleModalChange('menu', e.detail.state);
-	                  }
-	                }
-	              }, function () {
-	                var __jade_nodes = [];
-	                __jade_nodes = __jade_nodes.concat(h("div", {
-	                  "class": {
-	                    'text-container': true
-	                  }
-	                }, function () {
-	                  var __jade_nodes = [];
-	                  __jade_nodes = __jade_nodes.concat(h("mp-list-item", function () {
-	                    var __jade_nodes = [];
-	                    __jade_nodes = __jade_nodes.concat("there is text here");;
-	                    return __jade_nodes;
-	                  }.call(this).filter(Boolean)));
-	                  __jade_nodes = __jade_nodes.concat(h("mp-list-item", function () {
-	                    var __jade_nodes = [];
-	                    __jade_nodes = __jade_nodes.concat("there is text here");;
-	                    return __jade_nodes;
-	                  }.call(this).filter(Boolean)));
-	                  __jade_nodes = __jade_nodes.concat(h("mp-list-item", function () {
-	                    var __jade_nodes = [];
-	                    __jade_nodes = __jade_nodes.concat("there is text here");;
-	                    return __jade_nodes;
-	                  }.call(this).filter(Boolean)));;
-	                  return __jade_nodes;
-	                }.call(this).filter(Boolean)));;
-	                return __jade_nodes;
-	              }.call(this).filter(Boolean)));;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));;
-	          return __jade_nodes;
-	        }.call(this).filter(Boolean)));
-	        __jade_nodes = __jade_nodes.concat(h("div", {
-	          "class": {
-	            'section': true,
-	            'modals': true
+	        },
+	        "className": [].concat('mp-button-bar-primary').filter(Boolean).join(' ')
+	      }, ["Create your first event"].filter(Boolean))].filter(Boolean))].filter(Boolean))].filter(Boolean)), h("p", [h("button", {
+	        "on": {
+	          click: function click() {
+	            return $helpers.openModal('confirm');
 	          }
-	        }, function () {
-	          var __jade_nodes = [];
-	          __jade_nodes = __jade_nodes.concat(h("h1", function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat("Modals");;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("p", function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(h("button", {
-	              "on": {
-	                click: function click() {
-	                  return $helpers.openModal('modal');
-	                }
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat("Open modal");;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));
-	            __jade_nodes = __jade_nodes.concat(h("mp-modal", {
-	              "attrs": {
-	                closeable: true,
-	                open: open.modal
-	              },
-	              "on": {
-	                change: function change(e) {
-	                  return $helpers.handleModalChange('modal', e.detail.state);
-	                }
-	              },
-	              "class": {
-	                'modal': true
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat(h("div", function () {
-	                var __jade_nodes = [];
-	                __jade_nodes = __jade_nodes.concat(h("div", {
-	                  "class": {
-	                    'mp-modal-content': true
-	                  }
-	                }, function () {
-	                  var __jade_nodes = [];
-	                  __jade_nodes = __jade_nodes.concat(h("div", {
-	                    "class": {
-	                      'mp-modal-title': true
-	                    }
-	                  }, function () {
-	                    var __jade_nodes = [];
-	                    __jade_nodes = __jade_nodes.concat("Easily track events");;
-	                    return __jade_nodes;
-	                  }.call(this).filter(Boolean)));
-	                  __jade_nodes = __jade_nodes.concat(h("div", {
-	                    "class": {
-	                      'mp-modal-subtitle': true
-	                    }
-	                  }, function () {
-	                    var __jade_nodes = [];
-	                    __jade_nodes = __jade_nodes.concat("Click on any element on your page (e.g. the buy button) to create an event and access all historical data for that event.");;
-	                    return __jade_nodes;
-	                  }.call(this).filter(Boolean)));;
-	                  return __jade_nodes;
-	                }.call(this).filter(Boolean)));
-	                __jade_nodes = __jade_nodes.concat(h("mp-button-bar", {
-	                  "on": {
-	                    click: function click() {
-	                      return $helpers.closeModal('modal');
-	                    }
-	                  },
-	                  "attrs": {
-	                    'arrow-next': true
-	                  },
-	                  "class": {
-	                    'mp-button-bar-primary': true
-	                  }
-	                }, function () {
-	                  var __jade_nodes = [];
-	                  __jade_nodes = __jade_nodes.concat("Create your first event");;
-	                  return __jade_nodes;
-	                }.call(this).filter(Boolean)));;
-	                return __jade_nodes;
-	              }.call(this).filter(Boolean)));;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("p", function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(h("button", {
-	              "on": {
-	                click: function click() {
-	                  return $helpers.openModal('popup');
-	                }
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat("Open popup");;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));
-	            __jade_nodes = __jade_nodes.concat(h("mp-modal", {
-	              "attrs": {
-	                'modal-type': 'popup',
-	                closeable: true,
-	                open: open.popup
-	              },
-	              "on": {
-	                change: function change(e) {
-	                  return $helpers.handleModalChange('popup', e.detail.state);
-	                }
-	              },
-	              "class": {
-	                'popup': true
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat(h("div", function () {
-	                var __jade_nodes = [];
-	                __jade_nodes = __jade_nodes.concat(h("div", {
-	                  "class": {
-	                    'mp-modal-content': true
-	                  }
-	                }, function () {
-	                  var __jade_nodes = [];
-	                  __jade_nodes = __jade_nodes.concat(h("div", {
-	                    "class": {
-	                      'mp-modal-title': true
-	                    }
-	                  }, function () {
-	                    var __jade_nodes = [];
-	                    __jade_nodes = __jade_nodes.concat("Easily track events");;
-	                    return __jade_nodes;
-	                  }.call(this).filter(Boolean)));
-	                  __jade_nodes = __jade_nodes.concat(h("div", {
-	                    "class": {
-	                      'mp-modal-subtitle': true
-	                    }
-	                  }, function () {
-	                    var __jade_nodes = [];
-	                    __jade_nodes = __jade_nodes.concat("Click on any element on your page (e.g. the buy button) to create an event and access all historical data for that event.");;
-	                    return __jade_nodes;
-	                  }.call(this).filter(Boolean)));;
-	                  return __jade_nodes;
-	                }.call(this).filter(Boolean)));
-	                __jade_nodes = __jade_nodes.concat(h("mp-button-bar", {
-	                  "on": {
-	                    click: function click() {
-	                      return $helpers.closeModal('popup');
-	                    }
-	                  },
-	                  "class": {
-	                    'mp-button-bar-primary': true
-	                  }
-	                }, function () {
-	                  var __jade_nodes = [];
-	                  __jade_nodes = __jade_nodes.concat("Create your first event");;
-	                  return __jade_nodes;
-	                }.call(this).filter(Boolean)));;
-	                return __jade_nodes;
-	              }.call(this).filter(Boolean)));;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("p", function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(h("button", {
-	              "on": {
-	                click: function click() {
-	                  return $helpers.openModal('confirm');
-	                }
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat("Open confirm");;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));
-	            __jade_nodes = __jade_nodes.concat(h("mp-confirm", {
-	              "attrs": {
-	                open: open.confirm
-	              },
-	              "on": {
-	                change: function change(e) {
-	                  return $helpers.handleModalChange('confirm', e.detail.state);
-	                },
-	                submit: function submit(e) {
-	                  return console.log(e.detail);
-	                }
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat(h("div", function () {
-	                var __jade_nodes = [];
-	                __jade_nodes = __jade_nodes.concat(h("div", {
-	                  "class": {
-	                    'mp-confirm-title': true
-	                  }
-	                }, function () {
-	                  var __jade_nodes = [];
-	                  __jade_nodes = __jade_nodes.concat("Unsaved changes");;
-	                  return __jade_nodes;
-	                }.call(this).filter(Boolean)));
-	                __jade_nodes = __jade_nodes.concat(h("div", {
-	                  "class": {
-	                    'mp-confirm-description': true
-	                  }
-	                }, function () {
-	                  var __jade_nodes = [];
-	                  __jade_nodes = __jade_nodes.concat("If you navigate away from this page you will lose your changes. Would you like to continue?");;
-	                  return __jade_nodes;
-	                }.call(this).filter(Boolean)));;
-	                return __jade_nodes;
-	              }.call(this).filter(Boolean)));;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("p", function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(h("button", {
-	              "on": {
-	                click: function click() {
-	                  return $helpers.openModal('confirmDelete');
-	                }
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat("Open confirm-delete");;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));
-	            __jade_nodes = __jade_nodes.concat(h("mp-confirm-delete", {
-	              "attrs": {
-	                id: 'confirmDelete',
-	                'delete-button-label': 'Delete it',
-	                closeable: true,
-	                open: open.confirmDelete
-	              },
-	              "on": {
-	                change: function change(e) {
-	                  return $helpers.handleModalChange('confirmDelete', e.detail.state);
-	                },
-	                submit: function submit(e) {
-	                  return console.log(e.detail);
-	                }
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat(h("div", function () {
-	                var __jade_nodes = [];
-	                __jade_nodes = __jade_nodes.concat(h("div", {
-	                  "class": {
-	                    'mp-confirm-delete-title': true
-	                  }
-	                }, function () {
-	                  var __jade_nodes = [];
-	                  __jade_nodes = __jade_nodes.concat("Delete Bookmark");;
-	                  return __jade_nodes;
-	                }.call(this).filter(Boolean)));
-	                __jade_nodes = __jade_nodes.concat(h("div", {
-	                  "class": {
-	                    'mp-confirm-delete-description': true
-	                  }
-	                }, function () {
-	                  var __jade_nodes = [];
-	                  __jade_nodes = __jade_nodes.concat("Are you sure you want to delete this bookmark?");;
-	                  return __jade_nodes;
-	                }.call(this).filter(Boolean)));;
-	                return __jade_nodes;
-	              }.call(this).filter(Boolean)));;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("p", function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(h("button", {
-	              "on": {
-	                click: function click() {
-	                  return $helpers.openModal('alert');
-	                }
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat("Open alert");;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));
-	            __jade_nodes = __jade_nodes.concat(h("mp-alert", {
-	              "attrs": {
-	                id: 'alert',
-	                closeable: true,
-	                open: open['alert']
-	              },
-	              "on": {
-	                change: function change(e) {
-	                  return $helpers.handleModalChange('alert', e.detail.state);
-	                }
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat(h("div", function () {
-	                var __jade_nodes = [];
-	                __jade_nodes = __jade_nodes.concat(h("div", {
-	                  "class": {
-	                    'text': true
-	                  }
-	                }, function () {
-	                  var __jade_nodes = [];
-	                  __jade_nodes = __jade_nodes.concat("AHHH DANGER DANGER There is currently an error");;
-	                  return __jade_nodes;
-	                }.call(this).filter(Boolean)));;
-	                return __jade_nodes;
-	              }.call(this).filter(Boolean)));;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));;
-	          return __jade_nodes;
-	        }.call(this).filter(Boolean)));
-	        __jade_nodes = __jade_nodes.concat(h("div", {
-	          "class": {
-	            'section': true,
-	            'toggles': true
+	        }
+	      }, ["Open confirm"].filter(Boolean)), h("mp-confirm", {
+	        "attrs": {
+	          open: open.confirm
+	        },
+	        "on": {
+	          change: function change(e) {
+	            return $helpers.handleModalChange('confirm', e.detail.state);
+	          },
+	          submit: function submit(e) {
+	            return console.log(e.detail);
 	          }
-	        }, function () {
-	          var __jade_nodes = [];
-	          __jade_nodes = __jade_nodes.concat(h("h1", function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat("Toggles");;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("p", function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat("One element out of a set of two or more is always selected.");;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("mp-toggle", {
-	            "attrs": {
-	              selected: blueToggleValue
-	            },
-	            "on": {
-	              change: $helpers.blueToggleChanged
-	            },
-	            "class": {
-	              'mp-toggle-blue': true,
-	              'inline-toggle': true
-	            }
-	          }, function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(h("mp-toggle-option", {
-	              "attrs": {
-	                value: 'option1'
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat("Longer Option 1");;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));
-	            __jade_nodes = __jade_nodes.concat(h("mp-toggle-option", {
-	              "attrs": {
-	                value: 'option2'
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat("Opt2");;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("span", {
-	            "class": {
-	              'toggle-val': true
-	            }
-	          }, function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat("Selected: " + blueToggleValue + "");;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("mp-toggle", {
-	            "attrs": {
-	              selected: 'option1'
-	            },
-	            "class": {
-	              'full-width-toggle': true
-	            }
-	          }, function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(h("mp-toggle-option", {
-	              "attrs": {
-	                value: 'option1'
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat("Super long option text");;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));
-	            __jade_nodes = __jade_nodes.concat(h("mp-toggle-option", {
-	              "attrs": {
-	                value: 'option2'
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat("Short");;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));
-	            __jade_nodes = __jade_nodes.concat(h("mp-toggle-option", {
-	              "attrs": {
-	                value: 'option3'
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat("Medium text here");;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("mp-toggle", {
-	            "attrs": {
-	              selected: 'option2'
-	            },
-	            "class": {
-	              'full-width-toggle': true,
-	              'large-toggle': true
-	            }
-	          }, function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(h("mp-toggle-option", {
-	              "attrs": {
-	                value: 'option1'
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat("Longer Option 1");;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));
-	            __jade_nodes = __jade_nodes.concat(h("mp-toggle-option", {
-	              "attrs": {
-	                value: 'option2'
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat("Longer Option 2");;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));;
-	          return __jade_nodes;
-	        }.call(this).filter(Boolean)));
-	        __jade_nodes = __jade_nodes.concat(h("div", {
-	          "class": {
-	            'section': true
+	        }
+	      }, [h("div", [h("div", {
+	        "className": [].concat('mp-confirm-title').filter(Boolean).join(' ')
+	      }, ["Unsaved changes"].filter(Boolean)), h("div", {
+	        "className": [].concat('mp-confirm-description').filter(Boolean).join(' ')
+	      }, ["If you navigate away from this page you will lose your changes. Would you like to continue?"].filter(Boolean))].filter(Boolean))].filter(Boolean))].filter(Boolean)), h("p", [h("button", {
+	        "on": {
+	          click: function click() {
+	            return $helpers.openModal('confirmDelete');
 	          }
-	        }, function () {
-	          var __jade_nodes = [];
-	          __jade_nodes = __jade_nodes.concat(h("h1", function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat("Spinners");;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("mp-spinner"));;
-	          return __jade_nodes;
-	        }.call(this).filter(Boolean)));
-	        __jade_nodes = __jade_nodes.concat(h("div", {
-	          "class": {
-	            'section': true,
-	            'tooltips': true
+	        }
+	      }, ["Open confirm-delete"].filter(Boolean)), h("mp-confirm-delete", {
+	        "attrs": {
+	          id: 'confirmDelete',
+	          'delete-button-label': 'Delete it',
+	          closeable: true,
+	          open: open.confirmDelete
+	        },
+	        "on": {
+	          change: function change(e) {
+	            return $helpers.handleModalChange('confirmDelete', e.detail.state);
+	          },
+	          submit: function submit(e) {
+	            return console.log(e.detail);
 	          }
-	        }, function () {
-	          var __jade_nodes = [];
-	          __jade_nodes = __jade_nodes.concat(h("h1", function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat("Tooltips");;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("div", {
-	            "class": {
-	              'tooltips-container': true
-	            }
-	          }, function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(h("a", {
-	              "class": {
-	                'tooltip-container': true
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat("Default (placement 'top') tooltip");
-	              __jade_nodes = __jade_nodes.concat(h("mp-tooltip", function () {
-	                var __jade_nodes = [];
-	                __jade_nodes = __jade_nodes.concat("Tooltip above the element");;
-	                return __jade_nodes;
-	              }.call(this).filter(Boolean)));;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));
-	            __jade_nodes = __jade_nodes.concat(h("a", {
-	              "class": {
-	                'tooltip-container': true
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat("Placement 'bottom' tooltip");
-	              __jade_nodes = __jade_nodes.concat(h("mp-tooltip", {
-	                "attrs": {
-	                  'placement': 'bottom'
-	                }
-	              }, function () {
-	                var __jade_nodes = [];
-	                __jade_nodes = __jade_nodes.concat("Tooltip below the element");;
-	                return __jade_nodes;
-	              }.call(this).filter(Boolean)));;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));
-	            __jade_nodes = __jade_nodes.concat(h("a", {
-	              "class": {
-	                'tooltip-container': true
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat("Placement 'left' tooltip");
-	              __jade_nodes = __jade_nodes.concat(h("mp-tooltip", {
-	                "attrs": {
-	                  'placement': 'left'
-	                }
-	              }, function () {
-	                var __jade_nodes = [];
-	                __jade_nodes = __jade_nodes.concat("Tooltip on the left side of element");;
-	                return __jade_nodes;
-	              }.call(this).filter(Boolean)));;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));
-	            __jade_nodes = __jade_nodes.concat(h("a", {
-	              "class": {
-	                'tooltip-container': true
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat("Placement 'right' tooltip");
-	              __jade_nodes = __jade_nodes.concat(h("mp-tooltip", {
-	                "attrs": {
-	                  'placement': 'right'
-	                }
-	              }, function () {
-	                var __jade_nodes = [];
-	                __jade_nodes = __jade_nodes.concat("Tooltip on the right side of element");;
-	                return __jade_nodes;
-	              }.call(this).filter(Boolean)));;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));
-	            __jade_nodes = __jade_nodes.concat(h("a", {
-	              "class": {
-	                'tooltip-container': true
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat("Multi-line tooltip");
-	              __jade_nodes = __jade_nodes.concat(h("mp-tooltip", {
-	                "class": {
-	                  'multiline': true
-	                }
-	              }, function () {
-	                var __jade_nodes = [];
-	                __jade_nodes = __jade_nodes.concat(h("span", function () {
-	                  var __jade_nodes = [];
-	                  __jade_nodes = __jade_nodes.concat("This is a long tooltip with text that spans multiple lines");;
-	                  return __jade_nodes;
-	                }.call(this).filter(Boolean)));;
-	                return __jade_nodes;
-	              }.call(this).filter(Boolean)));;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));
-	            __jade_nodes = __jade_nodes.concat(h("a", {
-	              "class": {
-	                'tooltip-container': true,
-	                'position-relative': true
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat("Tooltip with non-statically positioned parent element");
-	              __jade_nodes = __jade_nodes.concat(h("mp-tooltip", function () {
-	                var __jade_nodes = [];
-	                __jade_nodes = __jade_nodes.concat(h("span", function () {
-	                  var __jade_nodes = [];
-	                  __jade_nodes = __jade_nodes.concat("A tooltip");;
-	                  return __jade_nodes;
-	                }.call(this).filter(Boolean)));;
-	                return __jade_nodes;
-	              }.call(this).filter(Boolean)));;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));;
-	          return __jade_nodes;
-	        }.call(this).filter(Boolean)));
-	        __jade_nodes = __jade_nodes.concat(h("div", {
-	          "class": {
-	            'section': true,
-	            'widgets': true
+	        }
+	      }, [h("div", [h("div", {
+	        "className": [].concat('mp-confirm-delete-title').filter(Boolean).join(' ')
+	      }, ["Delete Bookmark"].filter(Boolean)), h("div", {
+	        "className": [].concat('mp-confirm-delete-description').filter(Boolean).join(' ')
+	      }, ["Are you sure you want to delete this bookmark?"].filter(Boolean))].filter(Boolean))].filter(Boolean))].filter(Boolean)), h("p", [h("button", {
+	        "on": {
+	          click: function click() {
+	            return $helpers.openModal('alert');
 	          }
-	        }, function () {
-	          var __jade_nodes = [];
-	          __jade_nodes = __jade_nodes.concat(h("h1", function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat("Widgets");;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("p", function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(h("div", {
-	              "class": {
-	                'bookmarks-widget': true
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat(h("mp-bookmarks-widget", {
-	                "attrs": {
-	                  'bookmarks': JSON.stringify(bookmarks),
-	                  'create-disabled': false,
-	                  'open': open.bookmarksWidget,
-	                  'saving': savingBookmark,
-	                  'selected-bookmark-id': selectedBookmarkId,
-	                  'user-id': 1,
-	                  'has-write-permissions': true
-	                },
-	                "on": {
-	                  change: $helpers.handleBookmarksMenuChange,
-	                  submit: $helpers.handleBookmarksMenuSubmit
-	                }
-	              }));;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("h2", function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat("tag-selector widget");;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));
-	          __jade_nodes = __jade_nodes.concat(h("div", {
-	            "class": {
-	              'tag-selector-container': true
-	            }
-	          }, function () {
-	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat(h("mp-button", {
-	              "on": {
-	                click: $helpers.toggleTagSelector
-	              },
-	              "class": {
-	                'mp-button-secondary': true
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat("Edit tags");;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));
-	            __jade_nodes = __jade_nodes.concat(h("mp-drop-menu", {
-	              "attrs": {
-	                open: open.tagSelector
-	              },
-	              "on": {
-	                change: $helpers.handleTagSelectorDropMenuChange
-	              }
-	            }, function () {
-	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat(h("div", {
-	                "class": {
-	                  'title': true
-	                }
-	              }, function () {
-	                var __jade_nodes = [];
-	                __jade_nodes = __jade_nodes.concat(h("div", {
-	                  "class": {
-	                    'header': true
-	                  }
-	                }, function () {
-	                  var __jade_nodes = [];
-	                  __jade_nodes = __jade_nodes.concat(h("svg-icon", {
-	                    "attrs": {
-	                      icon: "check-success"
-	                    }
-	                  }));
-	                  __jade_nodes = __jade_nodes.concat(h("div", {
-	                    "class": {
-	                      'header-text': true
-	                    }
-	                  }, function () {
-	                    var __jade_nodes = [];
-	                    __jade_nodes = __jade_nodes.concat("Added to company dashboard");;
-	                    return __jade_nodes;
-	                  }.call(this).filter(Boolean)));;
-	                  return __jade_nodes;
-	                }.call(this).filter(Boolean)));
-	                __jade_nodes = __jade_nodes.concat(h("div", {
-	                  "class": {
-	                    'subtext': true
-	                  }
-	                }, function () {
-	                  var __jade_nodes = [];
-	                  __jade_nodes = __jade_nodes.concat("Viewed report by type");;
-	                  return __jade_nodes;
-	                }.call(this).filter(Boolean)));;
-	                return __jade_nodes;
-	              }.call(this).filter(Boolean)));
-	              __jade_nodes = __jade_nodes.concat(h("mp-tag-selector", {
-	                "attrs": {
-	                  'selected-tags': JSON.stringify(tagSelectorData.selectedTags),
-	                  'all-tags': JSON.stringify(tagSelectorData.allTags),
-	                  'load-state': tagSelectorLoadState
-	                },
-	                "on": {
-	                  change: $helpers.handleTagSelectorChange,
-	                  submit: $helpers.handleTagSelectorSubmit
-	                }
-	              }));;
-	              return __jade_nodes;
-	            }.call(this).filter(Boolean)));;
-	            return __jade_nodes;
-	          }.call(this).filter(Boolean)));;
-	          return __jade_nodes;
-	        }.call(this).filter(Boolean)));;
-	        return __jade_nodes;
-	      }.call(this).filter(Boolean))
+	        }
+	      }, ["Open alert"].filter(Boolean)), h("mp-alert", {
+	        "attrs": {
+	          id: 'alert',
+	          closeable: true,
+	          open: open['alert']
+	        },
+	        "on": {
+	          change: function change(e) {
+	            return $helpers.handleModalChange('alert', e.detail.state);
+	          }
+	        }
+	      }, [h("div", [h("div", {
+	        "className": [].concat('text').filter(Boolean).join(' ')
+	      }, ["AHHH DANGER DANGER There is currently an error"].filter(Boolean))].filter(Boolean))].filter(Boolean))].filter(Boolean))].filter(Boolean)), h("div", {
+	        "className": [].concat('section').concat('toggles').filter(Boolean).join(' ')
+	      }, [h("h1", ["Toggles"].filter(Boolean)), h("p", ["One element out of a set of two or more is always selected."].filter(Boolean)), h("mp-toggle", {
+	        "attrs": {
+	          selected: blueToggleValue
+	        },
+	        "on": {
+	          change: $helpers.blueToggleChanged
+	        },
+	        "className": [].concat('mp-toggle-blue').concat('inline-toggle').filter(Boolean).join(' ')
+	      }, [h("mp-toggle-option", {
+	        "attrs": {
+	          value: 'option1'
+	        }
+	      }, ["Longer Option 1"].filter(Boolean)), h("mp-toggle-option", {
+	        "attrs": {
+	          value: 'option2'
+	        }
+	      }, ["Opt2"].filter(Boolean))].filter(Boolean)), h("span", {
+	        "className": [].concat('toggle-val').filter(Boolean).join(' ')
+	      }, ["Selected: " + blueToggleValue + ""].filter(Boolean)), h("mp-toggle", {
+	        "attrs": {
+	          selected: 'option1'
+	        },
+	        "className": [].concat('full-width-toggle').filter(Boolean).join(' ')
+	      }, [h("mp-toggle-option", {
+	        "attrs": {
+	          value: 'option1'
+	        }
+	      }, ["Super long option text"].filter(Boolean)), h("mp-toggle-option", {
+	        "attrs": {
+	          value: 'option2'
+	        }
+	      }, ["Short"].filter(Boolean)), h("mp-toggle-option", {
+	        "attrs": {
+	          value: 'option3'
+	        }
+	      }, ["Medium text here"].filter(Boolean))].filter(Boolean)), h("mp-toggle", {
+	        "attrs": {
+	          selected: 'option2'
+	        },
+	        "className": [].concat('full-width-toggle').concat('large-toggle').filter(Boolean).join(' ')
+	      }, [h("mp-toggle-option", {
+	        "attrs": {
+	          value: 'option1'
+	        }
+	      }, ["Longer Option 1"].filter(Boolean)), h("mp-toggle-option", {
+	        "attrs": {
+	          value: 'option2'
+	        }
+	      }, ["Longer Option 2"].filter(Boolean))].filter(Boolean))].filter(Boolean)), h("div", {
+	        "className": [].concat('section').filter(Boolean).join(' ')
+	      }, [h("h1", ["Spinners"].filter(Boolean)), h("mp-spinner")].filter(Boolean)), h("div", {
+	        "className": [].concat('section').concat('tooltips').filter(Boolean).join(' ')
+	      }, [h("h1", ["Tooltips"].filter(Boolean)), h("div", {
+	        "className": [].concat('tooltips-container').filter(Boolean).join(' ')
+	      }, [h("a", {
+	        "className": [].concat('tooltip-container').filter(Boolean).join(' ')
+	      }, ["Default (placement 'top') tooltip", h("mp-tooltip", ["Tooltip above the element"].filter(Boolean))].filter(Boolean)), h("a", {
+	        "className": [].concat('tooltip-container').filter(Boolean).join(' ')
+	      }, ["Placement 'bottom' tooltip", h("mp-tooltip", {
+	        "attrs": {
+	          'placement': 'bottom'
+	        }
+	      }, ["Tooltip below the element"].filter(Boolean))].filter(Boolean)), h("a", {
+	        "className": [].concat('tooltip-container').filter(Boolean).join(' ')
+	      }, ["Placement 'left' tooltip", h("mp-tooltip", {
+	        "attrs": {
+	          'placement': 'left'
+	        }
+	      }, ["Tooltip on the left side of element"].filter(Boolean))].filter(Boolean)), h("a", {
+	        "className": [].concat('tooltip-container').filter(Boolean).join(' ')
+	      }, ["Placement 'right' tooltip", h("mp-tooltip", {
+	        "attrs": {
+	          'placement': 'right'
+	        }
+	      }, ["Tooltip on the right side of element"].filter(Boolean))].filter(Boolean)), h("a", {
+	        "className": [].concat('tooltip-container').filter(Boolean).join(' ')
+	      }, ["Multi-line tooltip", h("mp-tooltip", {
+	        "className": [].concat('multiline').filter(Boolean).join(' ')
+	      }, [h("span", ["This is a long tooltip with text that spans multiple lines"].filter(Boolean))].filter(Boolean))].filter(Boolean)), h("a", {
+	        "className": [].concat('tooltip-container').concat('position-relative').filter(Boolean).join(' ')
+	      }, ["Tooltip with non-statically positioned parent element", h("mp-tooltip", [h("span", ["A tooltip"].filter(Boolean))].filter(Boolean))].filter(Boolean))].filter(Boolean))].filter(Boolean)), h("div", {
+	        "className": [].concat('section').concat('widgets').filter(Boolean).join(' ')
+	      }, [h("h1", ["Widgets"].filter(Boolean)), h("p", [h("div", {
+	        "className": [].concat('bookmarks-widget').filter(Boolean).join(' ')
+	      }, [h("mp-bookmarks-widget", {
+	        "attrs": {
+	          'bookmarks': JSON.stringify(bookmarks),
+	          'create-disabled': false,
+	          'open': open.bookmarksWidget,
+	          'saving': savingBookmark,
+	          'selected-bookmark-id': selectedBookmarkId,
+	          'user-id': 1,
+	          'has-write-permissions': true
+	        },
+	        "on": {
+	          change: $helpers.handleBookmarksMenuChange,
+	          submit: $helpers.handleBookmarksMenuSubmit
+	        }
+	      })].filter(Boolean))].filter(Boolean)), h("h2", ["tag-selector widget"].filter(Boolean)), h("div", {
+	        "className": [].concat('tag-selector-container').filter(Boolean).join(' ')
+	      }, [h("mp-button", {
+	        "on": {
+	          click: $helpers.toggleTagSelector
+	        },
+	        "className": [].concat('mp-button-secondary').filter(Boolean).join(' ')
+	      }, ["Edit tags"].filter(Boolean)), h("mp-drop-menu", {
+	        "attrs": {
+	          open: open.tagSelector
+	        },
+	        "on": {
+	          change: $helpers.handleTagSelectorDropMenuChange
+	        }
+	      }, [h("div", {
+	        "className": [].concat('title').filter(Boolean).join(' ')
+	      }, [h("div", {
+	        "className": [].concat('header').filter(Boolean).join(' ')
+	      }, [h("svg-icon", {
+	        "attrs": {
+	          icon: "check-success"
+	        }
+	      }), h("div", {
+	        "className": [].concat('header-text').filter(Boolean).join(' ')
+	      }, ["Added to company dashboard"].filter(Boolean))].filter(Boolean)), h("div", {
+	        "className": [].concat('subtext').filter(Boolean).join(' ')
+	      }, ["Viewed report by type"].filter(Boolean))].filter(Boolean)), h("mp-tag-selector", {
+	        "attrs": {
+	          'selected-tags': JSON.stringify(tagSelectorData.selectedTags),
+	          'all-tags': JSON.stringify(tagSelectorData.allTags),
+	          'load-state': tagSelectorLoadState
+	        },
+	        "on": {
+	          change: $helpers.handleTagSelectorChange,
+	          submit: $helpers.handleTagSelectorSubmit
+	        }
+	      })].filter(Boolean))].filter(Boolean))].filter(Boolean))].filter(Boolean))
 	    };
 	  }.call(this, "$helpers" in locals ? locals.$helpers : typeof $helpers !== "undefined" ? $helpers : undefined, "COLORS" in locals ? locals.COLORS : typeof COLORS !== "undefined" ? COLORS : undefined, "JSON" in locals ? locals.JSON : typeof JSON !== "undefined" ? JSON : undefined, "Object" in locals ? locals.Object : typeof Object !== "undefined" ? Object : undefined, "SVG_ICONS" in locals ? locals.SVG_ICONS : typeof SVG_ICONS !== "undefined" ? SVG_ICONS : undefined, "blueToggleValue" in locals ? locals.blueToggleValue : typeof blueToggleValue !== "undefined" ? blueToggleValue : undefined, "bookmarks" in locals ? locals.bookmarks : typeof bookmarks !== "undefined" ? bookmarks : undefined, "console" in locals ? locals.console : typeof console !== "undefined" ? console : undefined, "inputGroupSaving" in locals ? locals.inputGroupSaving : typeof inputGroupSaving !== "undefined" ? inputGroupSaving : undefined, "open" in locals ? locals.open : typeof open !== "undefined" ? open : undefined, "savingBookmark" in locals ? locals.savingBookmark : typeof savingBookmark !== "undefined" ? savingBookmark : undefined, "selectedBookmarkId" in locals ? locals.selectedBookmarkId : typeof selectedBookmarkId !== "undefined" ? selectedBookmarkId : undefined, "tagSelectorData" in locals ? locals.tagSelectorData : typeof tagSelectorData !== "undefined" ? tagSelectorData : undefined, "tagSelectorLoadState" in locals ? locals.tagSelectorLoadState : typeof tagSelectorLoadState !== "undefined" ? tagSelectorLoadState : undefined);
 	  if (result_of_with) return result_of_with.value;
@@ -29812,16 +29418,16 @@
 	module.exports = _jade_template_fn;
 
 /***/ },
-/* 418 */
+/* 446 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(419);
+	var content = __webpack_require__(447);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(388)(content, {});
+	var update = __webpack_require__(416)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -29838,12 +29444,12 @@
 	}
 
 /***/ },
-/* 419 */
+/* 447 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(386)();
+	exports = module.exports = __webpack_require__(414)();
 	// imports
-	exports.i(__webpack_require__(387), "");
+	exports.i(__webpack_require__(415), "");
 
 	// module
 	exports.push([module.id, ".section {\n  border-bottom: 1px solid #eff3f5;\n  padding: 10px 20px;\n}\n.section .item-palette {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: column wrap;\n      flex-flow: column wrap;\n}\n.section .item-palette.color-palette {\n  height: 180px;\n}\n.section .item-palette.icon-palette {\n  height: 320px;\n}\n.section .list-block {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  margin: 5px;\n}\n.section .list-block svg-icon svg {\n  left: 0;\n  top: 0;\n}\n.section .list-block svg-icon svg,\n.section .list-block svg-icon path {\n  color: #4c6072;\n  fill: #4c6072;\n  -webkit-transition: 0.2s;\n  transition: 0.2s;\n}\n.section .list-block:hover svg-icon svg,\n.section .list-block:hover svg-icon path {\n  color: #6cb8ff;\n  fill: #6cb8ff;\n}\n.section .list-block .square {\n  display: inline-block;\n  vertical-align: middle;\n  margin-right: 4px;\n  width: 20px;\n  height: 20px;\n}\n.section .list-block .label {\n  display: inline-block;\n  margin-left: 10px;\n  vertical-align: middle;\n}\n.section.buttons mp-button {\n  margin-right: 4px;\n  vertical-align: middle;\n}\n.section.buttons p.button-field {\n  background: #4ba8ff;\n  display: table;\n  padding: 10px;\n}\n.section.button-bars .button-bar-container {\n  max-width: 600px;\n}\n.section.modals .modal {\n  width: 500px;\n}\n.section.modals mp-confirm {\n  width: 480px;\n}\n.section.toggles mp-toggle {\n  margin-bottom: 10px;\n}\n.section.toggles mp-toggle.inline-toggle {\n  width: 300px;\n}\n.section.toggles mp-toggle.full-width-toggle {\n  display: block;\n}\n.section.toggles .toggle-val {\n  margin-left: 10px;\n}\n.section.tooltips .tooltips-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.section.tooltips .tooltips-container .tooltip-container {\n  margin: 5px 0;\n}\n.section.tooltips .tooltips-container .tooltip-container.position-relative {\n  position: relative;\n  left: 100px;\n  top: 10px;\n}\n.section.tooltips .tooltips-container .tooltip-container mp-tooltip.multiline span {\n  max-width: 200px;\n}\n.section.menus .drop-menu-container {\n  position: relative;\n}\n.section.forms .mp-icon-input {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  position: relative;\n}\n.section.forms .mp-icon-input input {\n  padding: 6px;\n  padding-left: 36px;\n  padding-right: 18px;\n  width: 100%;\n}\n.section.forms .mp-icon-input input:focus + .mp-icon svg-icon svg {\n  left: 0;\n  top: 0;\n}\n.section.forms .mp-icon-input input:focus + .mp-icon svg-icon svg,\n.section.forms .mp-icon-input input:focus + .mp-icon svg-icon path {\n  color: #6e859d;\n  fill: #6e859d;\n  -webkit-transition: 0.2s;\n  transition: 0.2s;\n}\n.section.forms .mp-icon-input .mp-icon {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  bottom: 0;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  left: 8px;\n  position: absolute;\n  top: 0;\n}\n.section.forms .mp-icon-input .mp-icon svg-icon svg {\n  left: 0;\n  top: 0;\n}\n.section.forms .mp-icon-input .mp-icon svg-icon svg,\n.section.forms .mp-icon-input .mp-icon svg-icon path {\n  color: #9cacbb;\n  fill: #9cacbb;\n  -webkit-transition: 0.2s;\n  transition: 0.2s;\n}\n.section.widgets {\n  padding-bottom: 500px;\n}\n.section.widgets .bookmarks-widget {\n  background-color: #eff3f5;\n  border: 1px solid #c1ccd5;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 54px;\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n  width: 100%;\n}\n.section.widgets .bookmarks-widget mp-bookmarks-widget {\n  border-left: 1px solid #d8e0e6;\n  border-right: 1px solid #d8e0e6;\n  margin-right: 50px;\n}\n.section.widgets .tag-selector-container {\n  position: relative;\n}\n.section.widgets .tag-selector-container mp-drop-menu {\n  top: 40px;\n}\n.section.widgets .tag-selector-container .title {\n  padding-top: 20px;\n}\n.section.widgets .tag-selector-container .title .header {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  margin-left: 18px;\n}\n.section.widgets .tag-selector-container .title .header svg-icon svg {\n  left: 0;\n  top: 0;\n}\n.section.widgets .tag-selector-container .title .header svg-icon svg,\n.section.widgets .tag-selector-container .title .header svg-icon path {\n  color: #39d183;\n  fill: #39d183;\n  -webkit-transition: 0.2s;\n  transition: 0.2s;\n}\n.section.widgets .tag-selector-container .title .header svg-icon {\n  margin: auto 0;\n}\n.section.widgets .tag-selector-container .title .header .header-text {\n  color: #4c6072;\n  display: inline-block;\n  font-size: 16px;\n  font-weight: 600;\n  line-height: 1.12;\n  margin: auto 0;\n  padding-left: 10px;\n}\n.section.widgets .tag-selector-container .title .subtext {\n  color: #6e859d;\n  font-size: 12px;\n  font-weight: 500;\n  line-height: 1.5;\n  margin: 6px 0 20px 50px;\n}\n", ""]);
