@@ -1,5 +1,7 @@
 - const proxyAttrs = {'modal-type': 'popup', 'closeable': true, 'not-fullscreen': true};
 - proxyAttrs['open'] = $component.getAttribute('open');
+- proxyAttrs['top-position'] = $component.getAttribute('top-position');
+- proxyAttrs['left-position'] = $component.getAttribute('left-position');
 - const feature = $component.getAttribute('feature');
 mp-modal(attributes=proxyAttrs)
     .mp-upsell-popup-content

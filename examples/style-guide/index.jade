@@ -197,7 +197,7 @@
       button(onclick=() => $helpers.openModal('upsell')) Open upsell
 
       mp-upsell-popup(
-        attributes={id: 'upsell', feature: 'custom-events', open: open['upsell']}
+        attributes={id: 'upsell', feature: 'custom-events', open: open['upsell'], 'left-position': '50px', 'top-position': '50px'}
         onchange=e => $helpers.handleModalChange('upsell', e.detail.state)
       )
 

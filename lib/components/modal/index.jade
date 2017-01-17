@@ -1,6 +1,9 @@
+- const notFullScreen = $component.isAttributeEnabled('not-fullscreen');
+- const topPos = $component.getAttribute('top-position');
+- const leftPos = $component.getAttribute('left-position');
 .mp-modal-stage(
   class={
-  'mp-modal-absolute': $component.isAttributeEnabled('not-fullscreen'),
+  'mp-modal-absolute': notFullScreen,
   'mp-modal-closed': visibility === 'closed',
   }
   on={click: e => e.stopPropagation()}
@@ -11,7 +14,10 @@
       on={click: $helpers.backdropClicked}
     )
   .mp-modal-wrapper
-    .mp-modal-main(class={[`mp-modal-${visibility}`]: true})
+    .mp-modal-main(
+        class={[`mp-modal-${visibility}`]: true}
+        style=(notFullScreen ? 'top: #{topPos}; left: #{leftPos};' : false)
+      )
       if $component.isAttributeEnabled('closeable')
         .mp-modal-close-btn(on={click: $helpers.closeClicked})
           .mp-modal-close-icon
