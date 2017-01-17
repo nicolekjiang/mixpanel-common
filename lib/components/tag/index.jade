@@ -3,6 +3,7 @@
     .extra-icon
       svg-icon(attrs={icon: $component.getAttribute('icon')})
   .tag-name= $component.getAttribute('tag-name')
-  .remove-tag(on={click: $helpers.remove})
-    .remove-icon
-      svg-icon(attrs={icon: 'x'})
+  if $component.isAttributeEnabled('removable')
+    .remove-tag(on={click: $helpers.remove})
+      .remove-icon
+        svg-icon(attrs={icon: 'x'})
