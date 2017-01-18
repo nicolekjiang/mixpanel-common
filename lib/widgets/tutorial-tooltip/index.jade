@@ -1,0 +1,10 @@
+.mp-tutorial-tooltip-wrapper(
+  class={[`placement-${placement}`]: placement}
+  style=overrideStyles
+)
+  .mp-tooltip-content
+    content
+  .mp-tooltip-footer
+    ul.steps
+      each step in $helpers.getSteps()
+        li.step(class={active: step === currStep})

@@ -1,0 +1,110 @@
+@import '../../stylesheets/defaults'
+
+tooltip-width = 420px
+tooltip-height = 160px
+tooltip-distance = 12px
+
+.mp-tutorial-tooltip-wrapper
+  background blue-700
+  border-radius 8px
+  box-shadow 0 2px 4px 0 (rgba(0, 0, 0, 0.16))
+  color white
+  cursor default
+  font-family family-helvetica
+  font-size-default()
+  height tooltip-height
+  position absolute
+  width tooltip-width
+  z-index 1
+
+  &.placement-top
+    bottom "calc(100% + %s)" % tooltip-distance
+    left "calc(50% - %s)" % (tooltip-width / 2)
+
+  &.placement-bottom
+    top "calc(100% + %s)" % tooltip-distance
+    left "calc(50% - %s)" % (tooltip-width / 2)
+
+  &.placement-left
+    right "calc(100% + %s)" % tooltip-distance
+    top "calc(50% - %s)" % (tooltip-height / 2)
+
+  &.placement-right
+    left "calc(100% + %s)" % tooltip-distance
+    top "calc(50% - %s)" % (tooltip-height / 2)
+
+  &.placement-center
+    left "calc(50% - %s)" % (tooltip-width / 2)
+    top "calc(50% - %s)" % (tooltip-height / 2)
+
+  &:not(.placement-center)
+    &::after
+      border 5px solid transparent
+      content ''
+      height 0
+      position absolute
+      width 0
+
+    &.placement-top::after
+      border-top-color blue-700
+      left 50%
+      margin-left -5px
+      top 100%
+
+    &.placement-bottom::after
+      border-bottom-color blue-700
+      bottom 100%
+      left 50%
+      margin-left -5px
+
+    &.placement-left::after
+      border-left-color blue-700
+      left 100%
+      margin-top -5px
+      top 50%
+
+    &.placement-right::after
+      border-right-color blue-700
+      margin-top -5px
+      right 100%
+      top 50%
+
+.mp-tooltip-content
+  padding 20px 30px
+
+.mp-tooltip-footer
+  background blue-900
+  border-radius 0 0 8px 8px
+  bottom 0
+  height 42px
+  position absolute
+  width 100%
+
+  ul.steps
+    list-style none
+    margin 0
+    padding 0
+    padding-left 24px
+
+    li.step
+      background blue-100
+      border-radius 50%
+      float left
+      height 6px
+      margin 17px 14px 17px 0
+      position relative
+      width 6px
+
+      &.active
+        background transparent
+
+        &::after
+          border 4px solid mp-yellow
+          border-radius 50%
+          box-shadow 0 2px 3px 0 rgba(19, 102, 179, 0.66)
+          content ''
+          height 4px
+          left -3px
+          position absolute
+          top -3px
+          width 4px
