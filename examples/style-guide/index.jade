@@ -220,18 +220,19 @@
   .section.tooltips
     h1 Tooltips
 
+    h2 Standard tooltips
     .tooltips-container
       a.tooltip-container Default (placement 'top') tooltip
         mp-tooltip Tooltip above the element
 
       a.tooltip-container Placement 'bottom' tooltip
-        mp-tooltip(attrs={'placement': 'bottom'}) Tooltip below the element
+        mp-tooltip(attrs={placement: 'bottom'}) Tooltip below the element
 
       a.tooltip-container Placement 'left' tooltip
-        mp-tooltip(attrs={'placement': 'left'}) Tooltip on the left side of element
+        mp-tooltip(attrs={placement: 'left'}) Tooltip on the left side of element
 
       a.tooltip-container Placement 'right' tooltip
-        mp-tooltip(attrs={'placement': 'right'}) Tooltip on the right side of element
+        mp-tooltip(attrs={placement: 'right'}) Tooltip on the right side of element
 
       a.tooltip-container Multi-line tooltip
         mp-tooltip.multiline
@@ -240,6 +241,23 @@
       a.tooltip-container.position-relative Tooltip with non-statically positioned parent element
         mp-tooltip
           span A tooltip
+
+    h2 Tutorial tooltips
+    .tooltips-container
+      a.tutorial-tooltip-container.top.position-relative Default (placement 'top') tooltip
+        mp-tutorial-tooltip Tooltip above the element
+
+      a.tutorial-tooltip-container.bottom.position-relative Placement 'bottom' tooltip
+        mp-tutorial-tooltip(attrs={placement: 'bottom', numSteps: 4}) Tooltip below the element
+
+      a.tutorial-tooltip-container.left.position-relative Placement 'left' tooltip
+        mp-tutorial-tooltip(attrs={placement: 'left', numSteps: 4, currStep: 1}) Tooltip on the left side of element
+
+      a.tutorial-tooltip-container.right.position-relative Placement 'right' tooltip
+        mp-tutorial-tooltip(attrs={placement: 'right', numSteps: 4, currStep: 2}) Tooltip on the right side of element
+
+      a.tutorial-tooltip-container.center.position-relative Placement 'center' tooltip
+        mp-tutorial-tooltip(attrs={placement: 'center', overrideTop: '20px', numSteps: 4, currStep: 3}) Tooltip centered on the element
 
   .section.widgets
     h1 Widgets
