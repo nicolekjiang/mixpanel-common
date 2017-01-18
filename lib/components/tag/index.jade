@@ -1,4 +1,7 @@
-.mp-tag
+.mp-tag(class={
+  clickable: $component.isAttributeEnabled('clickable'),
+  removable: $component.isAttributeEnabled('removable'),
+})
   if $component.getAttribute('icon')
     .extra-icon
       svg-icon(attrs={icon: $component.getAttribute('icon')})
