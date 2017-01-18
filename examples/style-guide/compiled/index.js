@@ -19350,8 +19350,9 @@
 	        css: _index4.default,
 	        template: _index2.default,
 	        helpers: {
-	          remove: function remove() {
-	            return _this2.dispatchEvent(new CustomEvent('change', { detail: { action: 'remove' } }));
+	          remove: function remove(e) {
+	            e.stopPropagation();
+	            _this2.dispatchEvent(new CustomEvent('change', { detail: { action: 'remove' } }));
 	          }
 	        }
 	      };
@@ -19369,13 +19370,16 @@
 
 	function _jade_template_fn(locals) {
 	  locals = locals || {};;;
-	  var result_of_with = function ($component, $helpers) {
+	  var result_of_with = function ($component, $helpers, Object) {
 	    var h = __webpack_require__(299).h;
 	    return {
 	      value: h("div", {
-	        "class": {
+	        "class": Object.assign({}, {
+	          clickable: $component.isAttributeEnabled('clickable'),
+	          removable: $component.isAttributeEnabled('removable')
+	        }, {
 	          'mp-tag': true
-	        }
+	        })
 	      }, function () {
 	        var __jade_nodes = [];
 	        __jade_nodes = __jade_nodes.concat($component.getAttribute('icon') ? function () {
@@ -19431,7 +19435,7 @@
 	        return __jade_nodes;
 	      }.call(this).filter(Boolean))
 	    };
-	  }.call(this, "$component" in locals ? locals.$component : typeof $component !== "undefined" ? $component : undefined, "$helpers" in locals ? locals.$helpers : typeof $helpers !== "undefined" ? $helpers : undefined);
+	  }.call(this, "$component" in locals ? locals.$component : typeof $component !== "undefined" ? $component : undefined, "$helpers" in locals ? locals.$helpers : typeof $helpers !== "undefined" ? $helpers : undefined, "Object" in locals ? locals.Object : typeof Object !== "undefined" ? Object : undefined);
 	  if (result_of_with) return result_of_with.value;
 	}
 	module.exports = _jade_template_fn;
@@ -19440,7 +19444,7 @@
 /* 351 */
 /***/ function(module, exports) {
 
-	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6e859d;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 12px;   font-stretch: normal;   font-weight: 400; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 12px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-size: 12px;   font-weight: 400;   padding: 8px;   -webkit-transition: border-color 150ms ease-out;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus {   border-color: #3391e9;   -webkit-transition: border-color 200ms ease-in;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } .mp-tag {   background-color: #6e859d;   border-radius: 13px;   color: #fff;   cursor: pointer;   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 12px;   font-weight: 600;   height: 10px;   line-height: 0.8;   padding: 8px 10px 8px 15px; } .mp-tag .extra-icon {   left: -4px;   position: relative;   top: -3px; } .mp-tag .extra-icon svg-icon {   height: 14px;   min-height: 14px;   min-width: 14px;   width: 14px; } .mp-tag .extra-icon svg-icon svg {   height: 14px;   min-height: 14px;   min-width: 14px;   width: 14px;   left: 0;   top: 0; } .mp-tag .extra-icon svg-icon svg, .mp-tag .extra-icon svg-icon path {   color: #fff;   fill: #fff;   -webkit-transition: 0.2s;   transition: 0.2s; } .mp-tag .remove-tag {   border-radius: 20px;   height: 16px;   left: 3px;   position: relative;   top: -4px;   width: 16px; } .mp-tag .remove-tag .remove-icon {   position: relative;   top: 1px; } .mp-tag .remove-tag .remove-icon svg-icon {   height: 16px;   min-height: 16px;   min-width: 16px;   width: 16px; } .mp-tag .remove-tag .remove-icon svg-icon svg {   height: 16px;   min-height: 16px;   min-width: 16px;   width: 16px;   left: 0;   top: 0; } .mp-tag .remove-tag .remove-icon svg-icon svg, .mp-tag .remove-tag .remove-icon svg-icon path {   color: #c1ccd5;   fill: #c1ccd5;   -webkit-transition: 0.2s;   transition: 0.2s; } .mp-tag .remove-tag .remove-icon:hover svg-icon svg, .mp-tag .remove-tag .remove-icon:hover svg-icon path {   color: #fff;   fill: #fff; } ";
+	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6e859d;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 12px;   font-stretch: normal;   font-weight: 400; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 12px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6e859d;   font-size: 14px;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-size: 12px;   font-weight: 400;   padding: 8px;   -webkit-transition: border-color 150ms ease-out;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus {   border-color: #3391e9;   -webkit-transition: border-color 200ms ease-in;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } .mp-tag {   background-color: #6e859d;   border-radius: 13px;   color: #fff;   cursor: pointer;   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   font-family: 'HelveticaNeue', 'Helvetica Neue', 'HelveticaNeueRoman', 'HelveticaNeue-Roman', 'Helvetica Neue Roman', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 12px;   font-weight: 600;   height: 10px;   line-height: 0.8;   padding: 8px 15px 8px 15px; } .mp-tag.clickable:hover {   background-color: #4c6072; } .mp-tag.removable {   padding-right: 10px; } .mp-tag .extra-icon {   left: -4px;   position: relative;   top: -3px; } .mp-tag .extra-icon svg-icon {   height: 14px;   min-height: 14px;   min-width: 14px;   width: 14px; } .mp-tag .extra-icon svg-icon svg {   height: 14px;   min-height: 14px;   min-width: 14px;   width: 14px;   left: 0;   top: 0; } .mp-tag .extra-icon svg-icon svg, .mp-tag .extra-icon svg-icon path {   color: #fff;   fill: #fff;   -webkit-transition: 0.2s;   transition: 0.2s; } .mp-tag .remove-tag {   border-radius: 20px;   height: 16px;   left: 3px;   position: relative;   top: -4px;   width: 16px; } .mp-tag .remove-tag .remove-icon {   position: relative;   top: 1px; } .mp-tag .remove-tag .remove-icon svg-icon {   height: 16px;   min-height: 16px;   min-width: 16px;   width: 16px; } .mp-tag .remove-tag .remove-icon svg-icon svg {   height: 16px;   min-height: 16px;   min-width: 16px;   width: 16px;   left: 0;   top: 0; } .mp-tag .remove-tag .remove-icon svg-icon svg, .mp-tag .remove-tag .remove-icon svg-icon path {   color: #c1ccd5;   fill: #c1ccd5;   -webkit-transition: 0.2s;   transition: 0.2s; } .mp-tag .remove-tag .remove-icon:hover svg-icon svg, .mp-tag .remove-tag .remove-icon:hover svg-icon path {   color: #fff;   fill: #fff; } ";
 
 
 /***/ },
@@ -27487,7 +27491,6 @@
 	        this.state.selectedTags.add(tagName);
 	        this.update({ inputText: '', inputWidth: MIN_INPUT_WIDTH });
 	        this._resetActiveTagIndex();
-	        this.setAttribute('load-state', LOADING_TAG);
 	        this.dispatchEvent(new CustomEvent('change', { detail: { tagName: tagName, action: 'addTag' } }));
 	        requestAnimationFrame(function () {
 	          return _this4.focus();
