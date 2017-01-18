@@ -125,7 +125,7 @@
       button(on={click: () => $helpers.openModal('modal')}) Open modal
 
       mp-modal.modal(
-        attrs={closeable: true, open: open.modal, 'not-fullscreen': true}
+        attrs={closeable: true, open: open.modal}
         on={change: e => $helpers.handleModalChange('modal', e.detail.state)}
       )
         div
@@ -141,7 +141,7 @@
       button(on={click: () => $helpers.openModal('popup')}) Open popup
 
       mp-modal.popup(
-        attrs={'modal-type': 'popup', 'not-fullscreen': true, closeable: true, open: open.popup}
+        attrs={'modal-type': 'popup', closeable: true, open: open.popup}
         on={change: e => $helpers.handleModalChange('popup', e.detail.state)}
       )
         div
