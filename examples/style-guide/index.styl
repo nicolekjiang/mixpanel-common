@@ -80,25 +80,6 @@
         mp-tooltip.multiline span
           max-width 200px
 
-      .tutorial-tooltip-container
-        position relative
-        margin 20px
-
-        &.top
-          margin-top 200px
-
-        &.bottom
-          margin-bottom 200px
-
-        &.left
-          margin 100px
-
-        &.right
-          margin 100px
-
-        &.center
-          margin-bottom 200px
-
   &.menus
     .drop-menu-container
       position relative
@@ -155,3 +136,30 @@
           font-weight weight-medium
           line-height 1.5
           margin 6px 0 20px 50px
+
+    .tutorial-tooltips-container
+      display flex
+      flex-direction column
+      align-items center
+
+      .tutorial-tooltip-container
+        position relative
+        margin 20px
+
+        &.top
+          margin-top 200px
+
+        &.bottom
+          margin-bottom 200px
+
+        &.left
+          margin 100px
+
+        &.right
+          margin 100px
+
+        &.center
+          margin-bottom 200px
+
+          mp-tutorial-tooltip
+            top 40px
