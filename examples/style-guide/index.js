@@ -34,8 +34,8 @@ document.registerElement('style-guide', class extends Component {
         selectedBookmarkId: null,
         tagSelectorLoadState: 'idle',
         tagSelectorData: {
-          selectedTags: new Set(["My tag", "Another tag"]),
-          allTags: new Set(["My tag", "Another tag", "Our tag", "His tag"]),
+          selectedTags: new Set(["my tag", "another tag"]),
+          allTags: new Set(["my tag", "another tag", "Our tag", "His tag"]),
         }
       },
       helpers: {
