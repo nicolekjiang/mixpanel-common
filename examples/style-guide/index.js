@@ -35,7 +35,7 @@ document.registerElement('style-guide', class extends Component {
         tagSelectorLoadState: 'idle',
         tagSelectorData: {
           selectedTags: new Set(["my tag", "another tag"]),
-          allTags: new Set(["my tag", "another tag", "Our tag", "His tag"]),
+          allTags: new Set(["my tag", "another tag", "our tag", "his tag"]),
         }
       },
       helpers: {
