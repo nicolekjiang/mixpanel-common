@@ -18,7 +18,7 @@
         if !$component.isAttributeEnabled('read-only')
           - const tags = [...selectedTags];
           for tag in tags
-            - const attrs = {'tag-name': $helpers.toSentenceCase(tag), 'removable': true}
+            - const attrs = {'tag-name': tag, 'removable': true}
             if tag.toLowerCase() === 'my reports'
               - attrs.icon = 'lock-locked'
             mp-tag(

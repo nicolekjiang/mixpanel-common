@@ -5,7 +5,7 @@
   if $component.getAttribute('icon')
     .extra-icon
       svg-icon(attrs={icon: $component.getAttribute('icon')})
-  .tag-name= $component.getAttribute('tag-name')
+  .tag-name= $helpers.toSentenceCase($component.getAttribute('tag-name'))
   if $component.isAttributeEnabled('removable')
     .remove-tag(on={click: $helpers.remove})
       .remove-icon
