@@ -55,7 +55,7 @@
               else
                 b= token
 
-    else if showCreateButton
+    if showCreateButton
       .mp-tag-selector-footer(on={click: () => $helpers.addTag(inputText)})
         .mp-tag-selector-copy
           | Create new label for
