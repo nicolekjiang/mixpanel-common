@@ -1,7 +1,7 @@
 {
   "name": "mixpanel-common",
   "main": "build/index.js",
-  "version": "0.36.1",
+  "version": "0.37.0",
   "description": "Mixpanel shared JS",
   "scripts": {
     "build": "node build.js",
@@ -72,7 +72,7 @@
   },
   "dependencies": {
     "mixpanel-browser": "2.9.16",
-    "panel": "0.10.0-rc4",
+    "panel": "0.10.0-rc5",
     "rollbar-browser": "1.9.1",
     "webcomponent": "^0.1.2"
   },
