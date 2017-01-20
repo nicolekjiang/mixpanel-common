@@ -56,21 +56,21 @@
 
 	__webpack_require__(316);
 
-	var _colors = __webpack_require__(381);
+	var _colors = __webpack_require__(384);
 
 	var _colors2 = _interopRequireDefault(_colors);
 
 	var _svgIcon = __webpack_require__(346);
 
-	var _bookmarkData = __webpack_require__(416);
+	var _bookmarkData = __webpack_require__(419);
 
 	var _bookmarkData2 = _interopRequireDefault(_bookmarkData);
 
-	var _index = __webpack_require__(417);
+	var _index = __webpack_require__(420);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	__webpack_require__(418);
+	__webpack_require__(421);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -26616,6 +26616,8 @@
 
 	__webpack_require__(378);
 
+	__webpack_require__(381);
+
 /***/ },
 /* 375 */
 /***/ function(module, exports, __webpack_require__) {
@@ -27817,6 +27819,167 @@
 
 /***/ },
 /* 381 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
+	var _panel = __webpack_require__(299);
+
+	var _registerElement = __webpack_require__(321);
+
+	var _index = __webpack_require__(382);
+
+	var _index2 = _interopRequireDefault(_index);
+
+	var _index3 = __webpack_require__(383);
+
+	var _index4 = _interopRequireDefault(_index3);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	(0, _registerElement.registerMPElement)('mp-tutorial-tooltip', function (_Component) {
+	  _inherits(_class, _Component);
+
+	  function _class() {
+	    _classCallCheck(this, _class);
+
+	    return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).apply(this, arguments));
+	  }
+
+	  _createClass(_class, [{
+	    key: 'attributeChangedCallback',
+	    value: function attributeChangedCallback() {
+	      _get(_class.prototype.__proto__ || Object.getPrototypeOf(_class.prototype), 'attributeChangedCallback', this).apply(this, arguments);
+
+	      var update = {};
+	      var placement = this.getAttribute('placement');
+	      var numSteps = parseInt(this.getAttribute('num-steps'));
+	      var currStep = parseInt(this.getAttribute('curr-step'));
+
+	      if (placement) {
+	        update.placement = placement;
+	      }
+	      if (Number.isInteger(numSteps)) {
+	        update.numSteps = numSteps;
+	      }
+	      if (Number.isInteger(currStep)) {
+	        update.currStep = currStep;
+	      }
+
+	      this.update(update);
+	    }
+	  }, {
+	    key: 'config',
+	    get: function get() {
+	      var _this2 = this;
+
+	      return {
+	        css: _index4.default,
+	        template: _index2.default,
+	        useShadowDom: true,
+	        defaultState: {
+	          placement: 'top',
+	          numSteps: 0,
+	          currStep: 0
+	        },
+	        helpers: {
+	          getSteps: function getSteps() {
+	            return [].concat(_toConsumableArray(Array(_this2.state.numSteps).keys()));
+	          }
+	        }
+	      };
+	    }
+	  }]);
+
+	  return _class;
+	}(_panel.Component));
+
+/***/ },
+/* 382 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	function _jade_template_fn(locals) {
+	  locals = locals || {};;;
+	  var result_of_with = function ($helpers, Object, currStep, placement) {
+	    var h = __webpack_require__(299).h;
+	    return {
+	      value: h("div", {
+	        "class": Object.assign({}, _defineProperty({}, "placement-" + placement, placement), {
+	          'mp-tutorial-tooltip-wrapper': true
+	        })
+	      }, function () {
+	        var __jade_nodes = [];
+	        __jade_nodes = __jade_nodes.concat(h("div", {
+	          "class": {
+	            'mp-tooltip-content': true
+	          }
+	        }, function () {
+	          var __jade_nodes = [];
+	          __jade_nodes = __jade_nodes.concat(h("content"));;
+	          return __jade_nodes;
+	        }.call(this).filter(Boolean)));
+	        __jade_nodes = __jade_nodes.concat(h("div", {
+	          "class": {
+	            'mp-tooltip-footer': true
+	          }
+	        }, function () {
+	          var __jade_nodes = [];
+	          __jade_nodes = __jade_nodes.concat(h("ul", {
+	            "class": {
+	              'steps': true
+	            }
+	          }, function () {
+	            var __jade_nodes = [];
+	            __jade_nodes = __jade_nodes.concat($helpers.getSteps().reduce(function (__each_nodes, step, $index) {
+	              return __each_nodes.concat(function () {
+	                var __jade_nodes = [];
+	                __jade_nodes = __jade_nodes.concat(h("li", {
+	                  "class": Object.assign({}, {
+	                    active: step === currStep
+	                  }, {
+	                    'step': true
+	                  })
+	                }));;
+	                return __jade_nodes;
+	              }.call(this));
+	            }, []));;
+	            return __jade_nodes;
+	          }.call(this).filter(Boolean)));;
+	          return __jade_nodes;
+	        }.call(this).filter(Boolean)));;
+	        return __jade_nodes;
+	      }.call(this).filter(Boolean))
+	    };
+	  }.call(this, "$helpers" in locals ? locals.$helpers : typeof $helpers !== "undefined" ? $helpers : undefined, "Object" in locals ? locals.Object : typeof Object !== "undefined" ? Object : undefined, "currStep" in locals ? locals.currStep : typeof currStep !== "undefined" ? currStep : undefined, "placement" in locals ? locals.placement : typeof placement !== "undefined" ? placement : undefined);
+	  if (result_of_with) return result_of_with.value;
+	}
+	module.exports = _jade_template_fn;
+
+/***/ },
+/* 383 */
+/***/ function(module, exports) {
+
+	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } svg-icon[icon=type-boolean] #left-dot {   color: #fff;   fill: #fff; } svg-icon[icon=type-boolean] #right-dot {   color: #4c6072;   fill: #4c6072; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6e859d;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 12px;   font-stretch: normal;   font-weight: 400; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 12px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6e859d;   font-size: 14px;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-size: 12px;   font-weight: 400;   padding: 8px;   -webkit-transition: border-color 150ms ease-out;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus {   border-color: #3391e9;   -webkit-transition: border-color 200ms ease-in;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } mp-tutorial-tooltip {   height: 160px;   position: absolute;   width: 420px;   z-index: 100;   bottom: calc(100% + 12px);   left: calc(50% - 210px); } :host {   height: 160px;   position: absolute;   width: 420px;   z-index: 100;   bottom: calc(100% + 12px);   left: calc(50% - 210px); } mp-tutorial-tooltip[placement=\"bottom\"] {   bottom: initial;   top: calc(100% + 12px);   left: calc(50% - 210px); } :host([placement=\"bottom\"]) {   bottom: initial;   top: calc(100% + 12px);   left: calc(50% - 210px); } mp-tutorial-tooltip[placement=\"left\"] {   bottom: initial;   left: initial;   right: calc(100% + 12px);   top: calc(50% - 80px); } :host([placement=\"left\"]) {   bottom: initial;   left: initial;   right: calc(100% + 12px);   top: calc(50% - 80px); } mp-tutorial-tooltip[placement=\"right\"] {   bottom: initial;   left: calc(100% + 12px);   top: calc(50% - 80px); } :host([placement=\"right\"]) {   bottom: initial;   left: calc(100% + 12px);   top: calc(50% - 80px); } mp-tutorial-tooltip[placement=\"center\"] {   bottom: initial;   left: calc(50% - 210px);   top: calc(50% - 80px); } :host([placement=\"center\"]) {   bottom: initial;   left: calc(50% - 210px);   top: calc(50% - 80px); } .mp-tutorial-tooltip-wrapper {   background: #3391e9;   border-radius: 8px;   box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16);   color: #fff;   cursor: default;   height: inherit; } .mp-tutorial-tooltip-wrapper:not(.placement-center)::after {   border: 5px solid transparent;   content: '';   height: 0;   position: absolute;   width: 0; } .mp-tutorial-tooltip-wrapper:not(.placement-center).placement-top::after {   border-top-color: #3391e9;   left: 50%;   margin-left: -5px;   top: 100%; } .mp-tutorial-tooltip-wrapper:not(.placement-center).placement-bottom::after {   border-bottom-color: #3391e9;   bottom: 100%;   left: 50%;   margin-left: -5px; } .mp-tutorial-tooltip-wrapper:not(.placement-center).placement-left::after {   border-left-color: #3391e9;   left: 100%;   margin-top: -5px;   top: 50%; } .mp-tutorial-tooltip-wrapper:not(.placement-center).placement-right::after {   border-right-color: #3391e9;   margin-top: -5px;   right: 100%;   top: 50%; } .mp-tooltip-content {   padding: 20px 30px; } .mp-tooltip-footer {   background: #2687e3;   border-radius: 0 0 8px 8px;   bottom: 0;   height: 42px;   position: absolute;   width: 100%; } .mp-tooltip-footer ul.steps {   list-style: none;   margin: 0;   padding: 0;   padding-left: 24px; } .mp-tooltip-footer ul.steps li.step {   background: #6cb8ff;   border-radius: 50%;   float: left;   height: 6px;   margin: 17px 14px 17px 0;   position: relative;   width: 6px; } .mp-tooltip-footer ul.steps li.step.active {   background: transparent; } .mp-tooltip-footer ul.steps li.step.active::after {   border: 4px solid #ffd209;   border-radius: 50%;   box-shadow: 0 2px 3px 0 rgba(19,102,179,0.66);   content: '';   height: 4px;   left: -3px;   position: absolute;   top: -3px;   width: 4px; } ";
+
+
+/***/ },
+/* 384 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -27869,11 +28032,11 @@
 	};
 
 /***/ },
-/* 382 */,
-/* 383 */,
-/* 384 */,
 /* 385 */,
-/* 386 */
+/* 386 */,
+/* 387 */,
+/* 388 */,
+/* 389 */
 /***/ function(module, exports) {
 
 	/*
@@ -27929,10 +28092,10 @@
 
 
 /***/ },
-/* 387 */
+/* 390 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(386)();
+	exports = module.exports = __webpack_require__(389)();
 	// imports
 
 
@@ -27943,7 +28106,7 @@
 
 
 /***/ },
-/* 388 */
+/* 391 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -28195,9 +28358,6 @@
 
 
 /***/ },
-/* 389 */,
-/* 390 */,
-/* 391 */,
 /* 392 */,
 /* 393 */,
 /* 394 */,
@@ -28222,7 +28382,10 @@
 /* 413 */,
 /* 414 */,
 /* 415 */,
-/* 416 */
+/* 416 */,
+/* 417 */,
+/* 418 */,
+/* 419 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -28320,7 +28483,7 @@
 	];
 
 /***/ },
-/* 417 */
+/* 420 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -29604,7 +29767,7 @@
 	              __jade_nodes = __jade_nodes.concat("Placement 'bottom' tooltip");
 	              __jade_nodes = __jade_nodes.concat(h("mp-tooltip", {
 	                "attrs": {
-	                  'placement': 'bottom'
+	                  placement: 'bottom'
 	                }
 	              }, function () {
 	                var __jade_nodes = [];
@@ -29622,7 +29785,7 @@
 	              __jade_nodes = __jade_nodes.concat("Placement 'left' tooltip");
 	              __jade_nodes = __jade_nodes.concat(h("mp-tooltip", {
 	                "attrs": {
-	                  'placement': 'left'
+	                  placement: 'left'
 	                }
 	              }, function () {
 	                var __jade_nodes = [];
@@ -29640,7 +29803,7 @@
 	              __jade_nodes = __jade_nodes.concat("Placement 'right' tooltip");
 	              __jade_nodes = __jade_nodes.concat(h("mp-tooltip", {
 	                "attrs": {
-	                  'placement': 'right'
+	                  placement: 'right'
 	                }
 	              }, function () {
 	                var __jade_nodes = [];
@@ -29818,6 +29981,122 @@
 	              return __jade_nodes;
 	            }.call(this).filter(Boolean)));;
 	            return __jade_nodes;
+	          }.call(this).filter(Boolean)));
+	          __jade_nodes = __jade_nodes.concat(h("h2", function () {
+	            var __jade_nodes = [];
+	            __jade_nodes = __jade_nodes.concat("Tutorial tooltip widgets");;
+	            return __jade_nodes;
+	          }.call(this).filter(Boolean)));
+	          __jade_nodes = __jade_nodes.concat(h("div", {
+	            "class": {
+	              'tutorial-tooltips-container': true
+	            }
+	          }, function () {
+	            var __jade_nodes = [];
+	            __jade_nodes = __jade_nodes.concat(h("a", {
+	              "class": {
+	                'tutorial-tooltip-container': true,
+	                'top': true,
+	                'position-relative': true
+	              }
+	            }, function () {
+	              var __jade_nodes = [];
+	              __jade_nodes = __jade_nodes.concat("Default (placement 'top') tooltip");
+	              __jade_nodes = __jade_nodes.concat(h("mp-tutorial-tooltip", function () {
+	                var __jade_nodes = [];
+	                __jade_nodes = __jade_nodes.concat("Tooltip above the element");;
+	                return __jade_nodes;
+	              }.call(this).filter(Boolean)));;
+	              return __jade_nodes;
+	            }.call(this).filter(Boolean)));
+	            __jade_nodes = __jade_nodes.concat(h("a", {
+	              "class": {
+	                'tutorial-tooltip-container': true,
+	                'bottom': true,
+	                'position-relative': true
+	              }
+	            }, function () {
+	              var __jade_nodes = [];
+	              __jade_nodes = __jade_nodes.concat("Placement 'bottom' tooltip");
+	              __jade_nodes = __jade_nodes.concat(h("mp-tutorial-tooltip", {
+	                "attrs": {
+	                  placement: 'bottom',
+	                  'num-steps': 4
+	                }
+	              }, function () {
+	                var __jade_nodes = [];
+	                __jade_nodes = __jade_nodes.concat("Tooltip below the element");;
+	                return __jade_nodes;
+	              }.call(this).filter(Boolean)));;
+	              return __jade_nodes;
+	            }.call(this).filter(Boolean)));
+	            __jade_nodes = __jade_nodes.concat(h("a", {
+	              "class": {
+	                'tutorial-tooltip-container': true,
+	                'left': true,
+	                'position-relative': true
+	              }
+	            }, function () {
+	              var __jade_nodes = [];
+	              __jade_nodes = __jade_nodes.concat("Placement 'left' tooltip");
+	              __jade_nodes = __jade_nodes.concat(h("mp-tutorial-tooltip", {
+	                "attrs": {
+	                  placement: 'left',
+	                  'num-steps': 4,
+	                  'curr-step': 1
+	                }
+	              }, function () {
+	                var __jade_nodes = [];
+	                __jade_nodes = __jade_nodes.concat("Tooltip on the left side of element");;
+	                return __jade_nodes;
+	              }.call(this).filter(Boolean)));;
+	              return __jade_nodes;
+	            }.call(this).filter(Boolean)));
+	            __jade_nodes = __jade_nodes.concat(h("a", {
+	              "class": {
+	                'tutorial-tooltip-container': true,
+	                'right': true,
+	                'position-relative': true
+	              }
+	            }, function () {
+	              var __jade_nodes = [];
+	              __jade_nodes = __jade_nodes.concat("Placement 'right' tooltip");
+	              __jade_nodes = __jade_nodes.concat(h("mp-tutorial-tooltip", {
+	                "attrs": {
+	                  placement: 'right',
+	                  'num-steps': 4,
+	                  'curr-step': 2
+	                }
+	              }, function () {
+	                var __jade_nodes = [];
+	                __jade_nodes = __jade_nodes.concat("Tooltip on the right side of element");;
+	                return __jade_nodes;
+	              }.call(this).filter(Boolean)));;
+	              return __jade_nodes;
+	            }.call(this).filter(Boolean)));
+	            __jade_nodes = __jade_nodes.concat(h("a", {
+	              "class": {
+	                'tutorial-tooltip-container': true,
+	                'center': true,
+	                'position-relative': true
+	              }
+	            }, function () {
+	              var __jade_nodes = [];
+	              __jade_nodes = __jade_nodes.concat("Placement 'center' tooltip");
+	              __jade_nodes = __jade_nodes.concat(h("mp-tutorial-tooltip", {
+	                "attrs": {
+	                  placement: 'center',
+	                  'num-steps': 4,
+	                  'curr-step': 3
+	                }
+	              }, function () {
+	                var __jade_nodes = [];
+	                __jade_nodes = __jade_nodes.concat("Tooltip centered on the element (with overridden top offset)");;
+	                return __jade_nodes;
+	              }.call(this).filter(Boolean)));;
+	              return __jade_nodes;
+	            }.call(this).filter(Boolean)));;
+	            return __jade_nodes;
 	          }.call(this).filter(Boolean)));;
 	          return __jade_nodes;
 	        }.call(this).filter(Boolean)));;
@@ -29830,16 +30109,16 @@
 	module.exports = _jade_template_fn;
 
 /***/ },
-/* 418 */
+/* 421 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(419);
+	var content = __webpack_require__(422);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(388)(content, {});
+	var update = __webpack_require__(391)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -29856,15 +30135,15 @@
 	}
 
 /***/ },
-/* 419 */
+/* 422 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(386)();
+	exports = module.exports = __webpack_require__(389)();
 	// imports
-	exports.i(__webpack_require__(387), "");
+	exports.i(__webpack_require__(390), "");
 
 	// module
-	exports.push([module.id, ".section {\n  border-bottom: 1px solid #eff3f5;\n  padding: 10px 20px;\n}\n.section .item-palette {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: column wrap;\n      flex-flow: column wrap;\n}\n.section .item-palette.color-palette {\n  height: 180px;\n}\n.section .item-palette.icon-palette {\n  height: 320px;\n}\n.section .list-block {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  margin: 5px;\n}\n.section .list-block svg-icon svg {\n  left: 0;\n  top: 0;\n}\n.section .list-block svg-icon svg,\n.section .list-block svg-icon path {\n  color: #6e859d;\n  fill: #6e859d;\n  -webkit-transition: 0.2s;\n  transition: 0.2s;\n}\n.section .list-block:hover svg-icon svg,\n.section .list-block:hover svg-icon path {\n  color: #6cb8ff;\n  fill: #6cb8ff;\n}\n.section .list-block .square {\n  display: inline-block;\n  vertical-align: middle;\n  margin-right: 4px;\n  width: 20px;\n  height: 20px;\n}\n.section .list-block .label {\n  display: inline-block;\n  margin-left: 10px;\n  vertical-align: middle;\n}\n.section.buttons mp-button {\n  margin-right: 4px;\n  vertical-align: middle;\n}\n.section.buttons p.button-field {\n  background: #4ba8ff;\n  display: table;\n  padding: 10px;\n}\n.section.button-bars .button-bar-container {\n  max-width: 600px;\n}\n.section.modals .modal {\n  width: 500px;\n}\n.section.modals mp-confirm {\n  width: 480px;\n}\n.section.toggles mp-toggle {\n  margin-bottom: 10px;\n}\n.section.toggles mp-toggle.inline-toggle {\n  width: 300px;\n}\n.section.toggles mp-toggle.full-width-toggle {\n  display: block;\n}\n.section.toggles .toggle-val {\n  margin-left: 10px;\n}\n.section.tooltips .tooltips-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.section.tooltips .tooltips-container .tooltip-container {\n  margin: 5px 0;\n}\n.section.tooltips .tooltips-container .tooltip-container.position-relative {\n  position: relative;\n  left: 100px;\n  top: 10px;\n}\n.section.tooltips .tooltips-container .tooltip-container mp-tooltip.multiline span {\n  max-width: 200px;\n}\n.section.menus .drop-menu-container {\n  position: relative;\n}\n.section.forms .mp-icon-input {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  position: relative;\n}\n.section.forms .mp-icon-input input {\n  padding: 6px;\n  padding-left: 36px;\n  padding-right: 18px;\n  width: 100%;\n}\n.section.forms .mp-icon-input input:focus + .mp-icon svg-icon svg {\n  left: 0;\n  top: 0;\n}\n.section.forms .mp-icon-input input:focus + .mp-icon svg-icon svg,\n.section.forms .mp-icon-input input:focus + .mp-icon svg-icon path {\n  color: #6e859d;\n  fill: #6e859d;\n  -webkit-transition: 0.2s;\n  transition: 0.2s;\n}\n.section.forms .mp-icon-input .mp-icon {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  bottom: 0;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  left: 8px;\n  position: absolute;\n  top: 0;\n}\n.section.forms .mp-icon-input .mp-icon svg-icon svg {\n  left: 0;\n  top: 0;\n}\n.section.forms .mp-icon-input .mp-icon svg-icon svg,\n.section.forms .mp-icon-input .mp-icon svg-icon path {\n  color: #9cacbb;\n  fill: #9cacbb;\n  -webkit-transition: 0.2s;\n  transition: 0.2s;\n}\n.section.widgets {\n  padding-bottom: 500px;\n}\n.section.widgets .bookmarks-widget {\n  background-color: #eff3f5;\n  border: 1px solid #c1ccd5;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 54px;\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n  width: 100%;\n}\n.section.widgets .bookmarks-widget mp-bookmarks-widget {\n  border-left: 1px solid #d8e0e6;\n  border-right: 1px solid #d8e0e6;\n  margin-right: 50px;\n}\n.section.widgets .tag-selector-container {\n  position: relative;\n}\n.section.widgets .tag-selector-container mp-drop-menu {\n  top: 40px;\n}\n.section.widgets .tag-selector-container .title {\n  padding-top: 20px;\n}\n.section.widgets .tag-selector-container .title .header {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  margin-left: 18px;\n}\n.section.widgets .tag-selector-container .title .header svg-icon svg {\n  left: 0;\n  top: 0;\n}\n.section.widgets .tag-selector-container .title .header svg-icon svg,\n.section.widgets .tag-selector-container .title .header svg-icon path {\n  color: #39d183;\n  fill: #39d183;\n  -webkit-transition: 0.2s;\n  transition: 0.2s;\n}\n.section.widgets .tag-selector-container .title .header svg-icon {\n  margin: auto 0;\n}\n.section.widgets .tag-selector-container .title .header .header-text {\n  color: #4c6072;\n  display: inline-block;\n  font-size: 16px;\n  font-weight: 600;\n  line-height: 1.12;\n  margin: auto 0;\n  padding-left: 10px;\n}\n.section.widgets .tag-selector-container .title .subtext {\n  color: #6e859d;\n  font-size: 12px;\n  font-weight: 500;\n  line-height: 1.5;\n  margin: 6px 0 20px 50px;\n}\n", ""]);
+	exports.push([module.id, ".section {\n  border-bottom: 1px solid #eff3f5;\n  padding: 10px 20px;\n}\n.section .item-palette {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: column wrap;\n      flex-flow: column wrap;\n}\n.section .item-palette.color-palette {\n  height: 180px;\n}\n.section .item-palette.icon-palette {\n  height: 320px;\n}\n.section .list-block {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  margin: 5px;\n}\n.section .list-block svg-icon svg {\n  left: 0;\n  top: 0;\n}\n.section .list-block svg-icon svg,\n.section .list-block svg-icon path {\n  color: #6e859d;\n  fill: #6e859d;\n  -webkit-transition: 0.2s;\n  transition: 0.2s;\n}\n.section .list-block:hover svg-icon svg,\n.section .list-block:hover svg-icon path {\n  color: #6cb8ff;\n  fill: #6cb8ff;\n}\n.section .list-block .square {\n  display: inline-block;\n  vertical-align: middle;\n  margin-right: 4px;\n  width: 20px;\n  height: 20px;\n}\n.section .list-block .label {\n  display: inline-block;\n  margin-left: 10px;\n  vertical-align: middle;\n}\n.section.buttons mp-button {\n  margin-right: 4px;\n  vertical-align: middle;\n}\n.section.buttons p.button-field {\n  background: #4ba8ff;\n  display: table;\n  padding: 10px;\n}\n.section.button-bars .button-bar-container {\n  max-width: 600px;\n}\n.section.modals .modal {\n  width: 500px;\n}\n.section.modals mp-confirm {\n  width: 480px;\n}\n.section.toggles mp-toggle {\n  margin-bottom: 10px;\n}\n.section.toggles mp-toggle.inline-toggle {\n  width: 300px;\n}\n.section.toggles mp-toggle.full-width-toggle {\n  display: block;\n}\n.section.toggles .toggle-val {\n  margin-left: 10px;\n}\n.section.tooltips .tooltips-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.section.tooltips .tooltips-container .tooltip-container {\n  margin: 5px 0;\n}\n.section.tooltips .tooltips-container .tooltip-container.position-relative {\n  position: relative;\n  left: 100px;\n  top: 10px;\n}\n.section.tooltips .tooltips-container .tooltip-container mp-tooltip.multiline span {\n  max-width: 200px;\n}\n.section.menus .drop-menu-container {\n  position: relative;\n}\n.section.forms .mp-icon-input {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  position: relative;\n}\n.section.forms .mp-icon-input input {\n  padding: 6px;\n  padding-left: 36px;\n  padding-right: 18px;\n  width: 100%;\n}\n.section.forms .mp-icon-input input:focus + .mp-icon svg-icon svg {\n  left: 0;\n  top: 0;\n}\n.section.forms .mp-icon-input input:focus + .mp-icon svg-icon svg,\n.section.forms .mp-icon-input input:focus + .mp-icon svg-icon path {\n  color: #6e859d;\n  fill: #6e859d;\n  -webkit-transition: 0.2s;\n  transition: 0.2s;\n}\n.section.forms .mp-icon-input .mp-icon {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  bottom: 0;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  left: 8px;\n  position: absolute;\n  top: 0;\n}\n.section.forms .mp-icon-input .mp-icon svg-icon svg {\n  left: 0;\n  top: 0;\n}\n.section.forms .mp-icon-input .mp-icon svg-icon svg,\n.section.forms .mp-icon-input .mp-icon svg-icon path {\n  color: #9cacbb;\n  fill: #9cacbb;\n  -webkit-transition: 0.2s;\n  transition: 0.2s;\n}\n.section.widgets {\n  padding-bottom: 500px;\n}\n.section.widgets .bookmarks-widget {\n  background-color: #eff3f5;\n  border: 1px solid #c1ccd5;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 54px;\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n  width: 100%;\n}\n.section.widgets .bookmarks-widget mp-bookmarks-widget {\n  border-left: 1px solid #d8e0e6;\n  border-right: 1px solid #d8e0e6;\n  margin-right: 50px;\n}\n.section.widgets .tag-selector-container {\n  position: relative;\n}\n.section.widgets .tag-selector-container mp-drop-menu {\n  top: 40px;\n}\n.section.widgets .tag-selector-container .title {\n  padding-top: 20px;\n}\n.section.widgets .tag-selector-container .title .header {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  margin-left: 18px;\n}\n.section.widgets .tag-selector-container .title .header svg-icon svg {\n  left: 0;\n  top: 0;\n}\n.section.widgets .tag-selector-container .title .header svg-icon svg,\n.section.widgets .tag-selector-container .title .header svg-icon path {\n  color: #39d183;\n  fill: #39d183;\n  -webkit-transition: 0.2s;\n  transition: 0.2s;\n}\n.section.widgets .tag-selector-container .title .header svg-icon {\n  margin: auto 0;\n}\n.section.widgets .tag-selector-container .title .header .header-text {\n  color: #4c6072;\n  display: inline-block;\n  font-size: 16px;\n  font-weight: 600;\n  line-height: 1.12;\n  margin: auto 0;\n  padding-left: 10px;\n}\n.section.widgets .tag-selector-container .title .subtext {\n  color: #6e859d;\n  font-size: 12px;\n  font-weight: 500;\n  line-height: 1.5;\n  margin: 6px 0 20px 50px;\n}\n.section.widgets .tutorial-tooltips-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.section.widgets .tutorial-tooltips-container .tutorial-tooltip-container {\n  position: relative;\n  margin: 20px;\n}\n.section.widgets .tutorial-tooltips-container .tutorial-tooltip-container.top {\n  margin-top: 200px;\n}\n.section.widgets .tutorial-tooltips-container .tutorial-tooltip-container.bottom {\n  margin-bottom: 200px;\n}\n.section.widgets .tutorial-tooltips-container .tutorial-tooltip-container.left {\n  margin: 100px;\n}\n.section.widgets .tutorial-tooltips-container .tutorial-tooltip-container.right {\n  margin: 100px;\n}\n.section.widgets .tutorial-tooltips-container .tutorial-tooltip-container.center {\n  margin-bottom: 200px;\n}\n.section.widgets .tutorial-tooltips-container .tutorial-tooltip-container.center mp-tutorial-tooltip {\n  top: 40px;\n}\n", ""]);
 
 	// exports
 

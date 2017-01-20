@@ -56,31 +56,31 @@
 
 	__webpack_require__(316);
 
-	var _colors = __webpack_require__(381);
+	var _colors = __webpack_require__(384);
 
 	var _colors2 = _interopRequireDefault(_colors);
 
 	var _svgIcon = __webpack_require__(346);
 
-	__webpack_require__(382);
+	__webpack_require__(385);
 
-	__webpack_require__(389);
+	__webpack_require__(392);
 
-	__webpack_require__(393);
+	__webpack_require__(396);
 
-	__webpack_require__(397);
+	__webpack_require__(400);
 
-	__webpack_require__(401);
+	__webpack_require__(404);
 
-	__webpack_require__(405);
+	__webpack_require__(408);
 
-	__webpack_require__(409);
+	__webpack_require__(412);
 
-	var _index = __webpack_require__(413);
+	var _index = __webpack_require__(416);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	__webpack_require__(414);
+	__webpack_require__(417);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -26524,6 +26524,8 @@
 
 	__webpack_require__(378);
 
+	__webpack_require__(381);
+
 /***/ },
 /* 375 */
 /***/ function(module, exports, __webpack_require__) {
@@ -27725,6 +27727,167 @@
 
 /***/ },
 /* 381 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
+	var _panel = __webpack_require__(299);
+
+	var _registerElement = __webpack_require__(321);
+
+	var _index = __webpack_require__(382);
+
+	var _index2 = _interopRequireDefault(_index);
+
+	var _index3 = __webpack_require__(383);
+
+	var _index4 = _interopRequireDefault(_index3);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	(0, _registerElement.registerMPElement)('mp-tutorial-tooltip', function (_Component) {
+	  _inherits(_class, _Component);
+
+	  function _class() {
+	    _classCallCheck(this, _class);
+
+	    return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).apply(this, arguments));
+	  }
+
+	  _createClass(_class, [{
+	    key: 'attributeChangedCallback',
+	    value: function attributeChangedCallback() {
+	      _get(_class.prototype.__proto__ || Object.getPrototypeOf(_class.prototype), 'attributeChangedCallback', this).apply(this, arguments);
+
+	      var update = {};
+	      var placement = this.getAttribute('placement');
+	      var numSteps = parseInt(this.getAttribute('num-steps'));
+	      var currStep = parseInt(this.getAttribute('curr-step'));
+
+	      if (placement) {
+	        update.placement = placement;
+	      }
+	      if (Number.isInteger(numSteps)) {
+	        update.numSteps = numSteps;
+	      }
+	      if (Number.isInteger(currStep)) {
+	        update.currStep = currStep;
+	      }
+
+	      this.update(update);
+	    }
+	  }, {
+	    key: 'config',
+	    get: function get() {
+	      var _this2 = this;
+
+	      return {
+	        css: _index4.default,
+	        template: _index2.default,
+	        useShadowDom: true,
+	        defaultState: {
+	          placement: 'top',
+	          numSteps: 0,
+	          currStep: 0
+	        },
+	        helpers: {
+	          getSteps: function getSteps() {
+	            return [].concat(_toConsumableArray(Array(_this2.state.numSteps).keys()));
+	          }
+	        }
+	      };
+	    }
+	  }]);
+
+	  return _class;
+	}(_panel.Component));
+
+/***/ },
+/* 382 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	function _jade_template_fn(locals) {
+	  locals = locals || {};;;
+	  var result_of_with = function ($helpers, Object, currStep, placement) {
+	    var h = __webpack_require__(299).h;
+	    return {
+	      value: h("div", {
+	        "class": Object.assign({}, _defineProperty({}, "placement-" + placement, placement), {
+	          'mp-tutorial-tooltip-wrapper': true
+	        })
+	      }, function () {
+	        var __jade_nodes = [];
+	        __jade_nodes = __jade_nodes.concat(h("div", {
+	          "class": {
+	            'mp-tooltip-content': true
+	          }
+	        }, function () {
+	          var __jade_nodes = [];
+	          __jade_nodes = __jade_nodes.concat(h("content"));;
+	          return __jade_nodes;
+	        }.call(this).filter(Boolean)));
+	        __jade_nodes = __jade_nodes.concat(h("div", {
+	          "class": {
+	            'mp-tooltip-footer': true
+	          }
+	        }, function () {
+	          var __jade_nodes = [];
+	          __jade_nodes = __jade_nodes.concat(h("ul", {
+	            "class": {
+	              'steps': true
+	            }
+	          }, function () {
+	            var __jade_nodes = [];
+	            __jade_nodes = __jade_nodes.concat($helpers.getSteps().reduce(function (__each_nodes, step, $index) {
+	              return __each_nodes.concat(function () {
+	                var __jade_nodes = [];
+	                __jade_nodes = __jade_nodes.concat(h("li", {
+	                  "class": Object.assign({}, {
+	                    active: step === currStep
+	                  }, {
+	                    'step': true
+	                  })
+	                }));;
+	                return __jade_nodes;
+	              }.call(this));
+	            }, []));;
+	            return __jade_nodes;
+	          }.call(this).filter(Boolean)));;
+	          return __jade_nodes;
+	        }.call(this).filter(Boolean)));;
+	        return __jade_nodes;
+	      }.call(this).filter(Boolean))
+	    };
+	  }.call(this, "$helpers" in locals ? locals.$helpers : typeof $helpers !== "undefined" ? $helpers : undefined, "Object" in locals ? locals.Object : typeof Object !== "undefined" ? Object : undefined, "currStep" in locals ? locals.currStep : typeof currStep !== "undefined" ? currStep : undefined, "placement" in locals ? locals.placement : typeof placement !== "undefined" ? placement : undefined);
+	  if (result_of_with) return result_of_with.value;
+	}
+	module.exports = _jade_template_fn;
+
+/***/ },
+/* 383 */
+/***/ function(module, exports) {
+
+	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } svg-icon[icon=type-boolean] #left-dot {   color: #fff;   fill: #fff; } svg-icon[icon=type-boolean] #right-dot {   color: #4c6072;   fill: #4c6072; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6e859d;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 12px;   font-stretch: normal;   font-weight: 400; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 12px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6e859d;   font-size: 14px;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-size: 12px;   font-weight: 400;   padding: 8px;   -webkit-transition: border-color 150ms ease-out;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus {   border-color: #3391e9;   -webkit-transition: border-color 200ms ease-in;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } mp-tutorial-tooltip {   height: 160px;   position: absolute;   width: 420px;   z-index: 100;   bottom: calc(100% + 12px);   left: calc(50% - 210px); } :host {   height: 160px;   position: absolute;   width: 420px;   z-index: 100;   bottom: calc(100% + 12px);   left: calc(50% - 210px); } mp-tutorial-tooltip[placement=\"bottom\"] {   bottom: initial;   top: calc(100% + 12px);   left: calc(50% - 210px); } :host([placement=\"bottom\"]) {   bottom: initial;   top: calc(100% + 12px);   left: calc(50% - 210px); } mp-tutorial-tooltip[placement=\"left\"] {   bottom: initial;   left: initial;   right: calc(100% + 12px);   top: calc(50% - 80px); } :host([placement=\"left\"]) {   bottom: initial;   left: initial;   right: calc(100% + 12px);   top: calc(50% - 80px); } mp-tutorial-tooltip[placement=\"right\"] {   bottom: initial;   left: calc(100% + 12px);   top: calc(50% - 80px); } :host([placement=\"right\"]) {   bottom: initial;   left: calc(100% + 12px);   top: calc(50% - 80px); } mp-tutorial-tooltip[placement=\"center\"] {   bottom: initial;   left: calc(50% - 210px);   top: calc(50% - 80px); } :host([placement=\"center\"]) {   bottom: initial;   left: calc(50% - 210px);   top: calc(50% - 80px); } .mp-tutorial-tooltip-wrapper {   background: #3391e9;   border-radius: 8px;   box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16);   color: #fff;   cursor: default;   height: inherit; } .mp-tutorial-tooltip-wrapper:not(.placement-center)::after {   border: 5px solid transparent;   content: '';   height: 0;   position: absolute;   width: 0; } .mp-tutorial-tooltip-wrapper:not(.placement-center).placement-top::after {   border-top-color: #3391e9;   left: 50%;   margin-left: -5px;   top: 100%; } .mp-tutorial-tooltip-wrapper:not(.placement-center).placement-bottom::after {   border-bottom-color: #3391e9;   bottom: 100%;   left: 50%;   margin-left: -5px; } .mp-tutorial-tooltip-wrapper:not(.placement-center).placement-left::after {   border-left-color: #3391e9;   left: 100%;   margin-top: -5px;   top: 50%; } .mp-tutorial-tooltip-wrapper:not(.placement-center).placement-right::after {   border-right-color: #3391e9;   margin-top: -5px;   right: 100%;   top: 50%; } .mp-tooltip-content {   padding: 20px 30px; } .mp-tooltip-footer {   background: #2687e3;   border-radius: 0 0 8px 8px;   bottom: 0;   height: 42px;   position: absolute;   width: 100%; } .mp-tooltip-footer ul.steps {   list-style: none;   margin: 0;   padding: 0;   padding-left: 24px; } .mp-tooltip-footer ul.steps li.step {   background: #6cb8ff;   border-radius: 50%;   float: left;   height: 6px;   margin: 17px 14px 17px 0;   position: relative;   width: 6px; } .mp-tooltip-footer ul.steps li.step.active {   background: transparent; } .mp-tooltip-footer ul.steps li.step.active::after {   border: 4px solid #ffd209;   border-radius: 50%;   box-shadow: 0 2px 3px 0 rgba(19,102,179,0.66);   content: '';   height: 4px;   left: -3px;   position: absolute;   top: -3px;   width: 4px; } ";
+
+
+/***/ },
+/* 384 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -27777,7 +27940,7 @@
 	};
 
 /***/ },
-/* 382 */
+/* 385 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27786,11 +27949,11 @@
 
 	var _panel = __webpack_require__(299);
 
-	var _index = __webpack_require__(383);
+	var _index = __webpack_require__(386);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	__webpack_require__(384);
+	__webpack_require__(387);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -27833,7 +27996,7 @@
 	}(_panel.Component));
 
 /***/ },
-/* 383 */
+/* 386 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -28610,16 +28773,16 @@
 	module.exports = _jade_template_fn;
 
 /***/ },
-/* 384 */
+/* 387 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(385);
+	var content = __webpack_require__(388);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(388)(content, {});
+	var update = __webpack_require__(391)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -28636,12 +28799,12 @@
 	}
 
 /***/ },
-/* 385 */
+/* 388 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(386)();
+	exports = module.exports = __webpack_require__(389)();
 	// imports
-	exports.i(__webpack_require__(387), "");
+	exports.i(__webpack_require__(390), "");
 
 	// module
 	exports.push([module.id, ".nav-strip {\n  background-color: #fff;\n  border-right: 1px solid #d8e0e6;\n  position: fixed;\n  width: 15px;\n  z-index: 0;\n}\n.nav {\n  box-sizing: border-box;\n  height: 100%;\n  list-style-type: none;\n  margin: 0;\n  width: 300px;\n  overflow-y: scroll;\n  padding: 180px 0 60px 0;\n  position: fixed;\n  top: 0;\n  z-index: 900;\n}\n.nav .nav-section {\n  border-left: 15px solid #4ba8ff;\n  color: #4c6072;\n  cursor: pointer;\n  padding: 12px 0 0 45px;\n}\n.nav .nav-section:hover {\n  color: #4ba8ff;\n}\n.nav .nav-section.selected {\n  color: #4ba8ff;\n}\n.nav .nav-section .nav-number {\n  color: #c1ccd5;\n  font-size: 14px;\n}\n.nav .nav-section .nav-label {\n  border-bottom: 1px solid #d8e0e6;\n  display: block;\n  font-size: 20px;\n  line-height: 15px;\n  padding: 0 0 19px 23px;\n}\n.nav .sub-nav {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  border-left: 15px solid #89c6ff;\n  color: #6e859d;\n  cursor: pointer;\n  padding: 12px 0 0 45px;\n}\n.nav .sub-nav .sub-nav-section {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  font-size: 16px;\n  padding: 6px 0 6px 23px;\n  font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;\n}\n.nav .sub-nav .sub-nav-section .sub-nav-number {\n  color: #9cacbb;\n  display: none;\n  font-size: 14px;\n  font-weight: 600;\n  left: -30px;\n  position: relative;\n}\n.nav .sub-nav .sub-nav-section:hover .sub-nav-number {\n  display: block;\n}\n", ""]);
@@ -28650,7 +28813,7 @@
 
 
 /***/ },
-/* 386 */
+/* 389 */
 /***/ function(module, exports) {
 
 	/*
@@ -28706,10 +28869,10 @@
 
 
 /***/ },
-/* 387 */
+/* 390 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(386)();
+	exports = module.exports = __webpack_require__(389)();
 	// imports
 
 
@@ -28720,7 +28883,7 @@
 
 
 /***/ },
-/* 388 */
+/* 391 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -28972,7 +29135,7 @@
 
 
 /***/ },
-/* 389 */
+/* 392 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28983,11 +29146,11 @@
 
 	var _panel = __webpack_require__(299);
 
-	var _index = __webpack_require__(390);
+	var _index = __webpack_require__(393);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	__webpack_require__(391);
+	__webpack_require__(394);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29054,7 +29217,7 @@
 	}(_panel.Component));
 
 /***/ },
-/* 390 */
+/* 393 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -29621,16 +29784,16 @@
 	module.exports = _jade_template_fn;
 
 /***/ },
-/* 391 */
+/* 394 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(392);
+	var content = __webpack_require__(395);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(388)(content, {});
+	var update = __webpack_require__(391)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -29647,12 +29810,12 @@
 	}
 
 /***/ },
-/* 392 */
+/* 395 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(386)();
+	exports = module.exports = __webpack_require__(389)();
 	// imports
-	exports.i(__webpack_require__(387), "");
+	exports.i(__webpack_require__(390), "");
 
 	// module
 	exports.push([module.id, ".color-chips {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n}\n.color-chips .swatch {\n  background-color: #fff;\n  border: 1px solid #e5eaef;\n  border-radius: 6px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  height: 250px;\n  margin: 0 30px 45px 0;\n  width: 200px;\n}\n.color-chips .swatch .swatch-color {\n  border-radius: 6px 6px 0px 0px;\n  width: 100%;\n  height: 180px;\n}\n.color-chips .swatch .swatch-label {\n  border-top: 1px solid #e5eaef;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n}\n.color-chips .swatch .swatch-label .color-name {\n  display: block;\n  color: #4c6072;\n  font-size: 18px;\n  margin: 12px 0 0 15px;\n}\n.color-chips .swatch .swatch-label .color-hex {\n  color: #9cacbb;\n  font-size: 16px;\n  margin: 3px 0 0 15px;\n}\n.color-library {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n}\n.color-library .color-group-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  height: 400px;\n  margin-left: 5px;\n  width: 30vw;\n}\n.color-library .color-group-container .color-group-title {\n  color: #9cacbb;\n  padding: 50px 0 10px 0;\n}\n.color-library .color-group-container .color-group {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n}\n.color-library .color-group-container .color-group .color-segment {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  width: 100%;\n}\n.color-library .color-group-container .color-group .color-segment .color-segment-hex {\n  color: #fff;\n  font-size: 18px;\n  opacity: 0.5;\n  padding: 20px;\n}\n.color-library .color-group-container .color-group .color-segment .color-segment-name {\n  color: #fff;\n  padding: 20px;\n}\n", ""]);
@@ -29661,7 +29824,7 @@
 
 
 /***/ },
-/* 393 */
+/* 396 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29672,11 +29835,11 @@
 
 	var _panel = __webpack_require__(299);
 
-	var _index = __webpack_require__(394);
+	var _index = __webpack_require__(397);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	__webpack_require__(395);
+	__webpack_require__(398);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29723,7 +29886,7 @@
 	}(_panel.Component));
 
 /***/ },
-/* 394 */
+/* 397 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -30716,16 +30879,16 @@
 	module.exports = _jade_template_fn;
 
 /***/ },
-/* 395 */
+/* 398 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(396);
+	var content = __webpack_require__(399);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(388)(content, {});
+	var update = __webpack_require__(391)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -30742,12 +30905,12 @@
 	}
 
 /***/ },
-/* 396 */
+/* 399 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(386)();
+	exports = module.exports = __webpack_require__(389)();
 	// imports
-	exports.i(__webpack_require__(387), "");
+	exports.i(__webpack_require__(390), "");
 
 	// module
 	exports.push([module.id, ".example {\n  font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;\n}\n.example-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -ms-flex-pack: distribute;\n      justify-content: space-around;\n  width: 900px;\n}\n.example-container .large-example {\n  font-size: 84px;\n  width: 110px;\n}\n.example-container .text-example {\n  left: -75px;\n  position: relative;\n  top: 55px;\n  width: 400px;\n}\n.example-container .right-example-container {\n  border-left: 1px solid #d8e0e6;\n  position: relative;\n}\n.example-container .right-example-container .right-example {\n  padding: 10px 0px 0px 22px;\n}\n.example-container .right-example-container .right-example .weight {\n  padding-bottom: 3px;\n}\n.code-container {\n  position: relative;\n  left: 50px;\n}\n.code-container .code-snippet {\n  width: 900px;\n  padding-bottom: 65px;\n}\n.size-examples {\n  position: relative;\n  left: 60px;\n}\n.size-examples .size-example {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  border-bottom: 1px dashed #d8e0e6;\n  padding-bottom: 20px;\n  margin-bottom: 30px;\n  width: 835px;\n}\n.size-examples .size-example .text-example {\n  padding-bottom: 10px;\n}\n", ""]);
@@ -30756,7 +30919,7 @@
 
 
 /***/ },
-/* 397 */
+/* 400 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30767,11 +30930,11 @@
 
 	var _panel = __webpack_require__(299);
 
-	var _index = __webpack_require__(398);
+	var _index = __webpack_require__(401);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	__webpack_require__(399);
+	__webpack_require__(402);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30818,7 +30981,7 @@
 	}(_panel.Component));
 
 /***/ },
-/* 398 */
+/* 401 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -30971,16 +31134,16 @@
 	module.exports = _jade_template_fn;
 
 /***/ },
-/* 399 */
+/* 402 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(400);
+	var content = __webpack_require__(403);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(388)(content, {});
+	var update = __webpack_require__(391)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -30997,12 +31160,12 @@
 	}
 
 /***/ },
-/* 400 */
+/* 403 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(386)();
+	exports = module.exports = __webpack_require__(389)();
 	// imports
-	exports.i(__webpack_require__(387), "");
+	exports.i(__webpack_require__(390), "");
 
 	// module
 	exports.push([module.id, ".icons {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n}\n.icons .icon {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  padding-bottom: 10px;\n  width: 220px;\n}\n.icons .icon svg-icon svg {\n  left: 0;\n  top: 0;\n}\n.icons .icon svg-icon svg,\n.icons .icon svg-icon path {\n  color: #4c6072;\n  fill: #4c6072;\n  -webkit-transition: 0.2s;\n  transition: 0.2s;\n}\n.icons .icon:hover svg-icon svg,\n.icons .icon:hover svg-icon path {\n  color: #6cb8ff;\n  fill: #6cb8ff;\n}\n.icons .icon .icon-name {\n  padding-left: 20px;\n}\n", ""]);
@@ -31011,7 +31174,7 @@
 
 
 /***/ },
-/* 401 */
+/* 404 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31022,11 +31185,11 @@
 
 	var _panel = __webpack_require__(299);
 
-	var _index = __webpack_require__(402);
+	var _index = __webpack_require__(405);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	__webpack_require__(403);
+	__webpack_require__(406);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -31073,7 +31236,7 @@
 	}(_panel.Component));
 
 /***/ },
-/* 402 */
+/* 405 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -31254,16 +31417,16 @@
 	module.exports = _jade_template_fn;
 
 /***/ },
-/* 403 */
+/* 406 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(404);
+	var content = __webpack_require__(407);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(388)(content, {});
+	var update = __webpack_require__(391)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -31280,12 +31443,12 @@
 	}
 
 /***/ },
-/* 404 */
+/* 407 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(386)();
+	exports = module.exports = __webpack_require__(389)();
 	// imports
-	exports.i(__webpack_require__(387), "");
+	exports.i(__webpack_require__(390), "");
 
 	// module
 	exports.push([module.id, ".button-types {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n}\n", ""]);
@@ -31294,7 +31457,7 @@
 
 
 /***/ },
-/* 405 */
+/* 408 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31303,11 +31466,11 @@
 
 	var _panel = __webpack_require__(299);
 
-	var _index = __webpack_require__(406);
+	var _index = __webpack_require__(409);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	__webpack_require__(407);
+	__webpack_require__(410);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -31346,7 +31509,7 @@
 	}(_panel.Component));
 
 /***/ },
-/* 406 */
+/* 409 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -31397,16 +31560,16 @@
 	module.exports = _jade_template_fn;
 
 /***/ },
-/* 407 */
+/* 410 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(408);
+	var content = __webpack_require__(411);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(388)(content, {});
+	var update = __webpack_require__(391)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -31423,10 +31586,10 @@
 	}
 
 /***/ },
-/* 408 */
+/* 411 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(386)();
+	exports = module.exports = __webpack_require__(389)();
 	// imports
 
 
@@ -31437,7 +31600,7 @@
 
 
 /***/ },
-/* 409 */
+/* 412 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31446,11 +31609,11 @@
 
 	var _panel = __webpack_require__(299);
 
-	var _index = __webpack_require__(410);
+	var _index = __webpack_require__(413);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	__webpack_require__(411);
+	__webpack_require__(414);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -31489,7 +31652,7 @@
 	}(_panel.Component));
 
 /***/ },
-/* 410 */
+/* 413 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -31540,16 +31703,16 @@
 	module.exports = _jade_template_fn;
 
 /***/ },
-/* 411 */
+/* 414 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(412);
+	var content = __webpack_require__(415);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(388)(content, {});
+	var update = __webpack_require__(391)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -31566,10 +31729,10 @@
 	}
 
 /***/ },
-/* 412 */
+/* 415 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(386)();
+	exports = module.exports = __webpack_require__(389)();
 	// imports
 
 
@@ -31580,7 +31743,7 @@
 
 
 /***/ },
-/* 413 */
+/* 416 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -31656,16 +31819,16 @@
 	module.exports = _jade_template_fn;
 
 /***/ },
-/* 414 */
+/* 417 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(415);
+	var content = __webpack_require__(418);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(388)(content, {});
+	var update = __webpack_require__(391)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -31682,12 +31845,12 @@
 	}
 
 /***/ },
-/* 415 */
+/* 418 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(386)();
+	exports = module.exports = __webpack_require__(389)();
 	// imports
-	exports.i(__webpack_require__(387), "");
+	exports.i(__webpack_require__(390), "");
 
 	// module
 	exports.push([module.id, "sup,\nh1,\nstrong,\nbutton,\n.bold {\n  font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;\n  font-weight: 600;\n}\n.style-guide-title {\n  color: #4c6072;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;\n  font-size: 24px;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  left: 150px;\n  position: relative;\n  position: relative;\n  top: 100px;\n  width: calc(100% - 150px);\n}\n.section-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  left: 345px;\n  position: relative;\n  top: 185px;\n  width: calc(100% - 350px);\n}\n.section-title {\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  font-weight: 600;\n  padding: 0px 0px 15px 0px;\n  width: 100%;\n}\n.section-title .title-text {\n  color: #4c6072;\n  font-size: 64px;\n}\n.section-title .title-section {\n  color: #c1ccd5;\n  font-size: 24px;\n  height: 60px;\n  padding-left: 10px;\n  position: relative;\n  top: 16px;\n}\nsection {\n  margin-bottom: 50px;\n  padding-bottom: 50px;\n  border-bottom: 1px solid #eff3f5;\n}\n.section {\n  position: relative;\n  width: 70vw;\n  -webkit-animation: fadeContentIn 500ms forwards;\n          animation: fadeContentIn 500ms forwards;\n}\n.subsection-title {\n  color: #4c6072;\n  font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;\n  font-size: 24px;\n}\n.subsection-description {\n  padding: 16px 0px 45px 0px;\n  font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;\n  font-size: 16px;\n}\n.section-nav {\n  border-top: 1px solid #d8e0e6;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  list-style-type: none;\n  overflow-x: scroll;\n  padding: 0 0 30px 0;\n  position: relative;\n  white-space: nowrap;\n  width: 100%;\n}\n.section-nav .nav-item {\n  color: #4c6072;\n  cursor: pointer;\n  font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;\n  font-size: 16px;\n  font-weight: 500;\n  margin: 30px 30px 0 0;\n  padding: 10px 30px;\n}\n.section-nav .nav-item:hover {\n  color: #4ba8ff;\n}\n.section-nav .nav-item.selected {\n  background-color: #4ba8ff;\n  border-radius: 30px;\n  color: #fff;\n}\n.code-snippet {\n  left: -60px;\n  padding-left: 15px;\n  position: relative;\n}\n.code-snippet .call-out {\n  color: #4c6072;\n  display: inline-block;\n  text-transform: uppercase;\n}\n.code-snippet .call-out.extra {\n  margin-top: 30px;\n}\n.code-snippet .call-out > strong {\n  margin-left: 15px;\n}\n.code-snippet .call-out label {\n  text-transform: none;\n}\n.code-snippet .call-out p {\n  line-height: 4px;\n  margin-left: 45px;\n  text-transform: none;\n}\n.code-snippet .snippet-container {\n  background-color: #f9fafc;\n  border: 1px solid #d8e0e6;\n  border-radius: 6px;\n  font-size: 14px;\n  margin: 30px 0 0 45px;\n  position: relative;\n}\n.code-snippet .snippet-header {\n  color: #6e859d;\n  border-bottom: 1px solid #d8e0e6;\n  border-radius: 6px 6px 0px 0px;\n  padding: 15px;\n}\n.code-snippet .snippet-header label {\n  text-transform: uppercase;\n  letter-spacing: 1.2px;\n}\n.code-snippet .code-field {\n  background-color: #fff;\n  border-left: 1px solid #d8e0e6;\n  border-radius: 0px 0px 6px 0px;\n  font-family: monospace;\n  margin: 0 0 0 45px;\n  padding: 15px;\n}\n.code-snippet .code-field pre {\n  color: #4c6072;\n  display: inline-block;\n  letter-spacing: 1.5px;\n  line-height: 20px;\n  margin: -2px 0 0 -45px;\n  white-space: pre-wrap;\n}\n.code-snippet .code-field pre:nth-child(2n) {\n  margin-left: 45px;\n}\n.code-snippet pre span {\n  color: #e4567b;\n}\n.code-snippet pre b {\n  color: #4c6072;\n  font-weight: 400;\n}\n@-webkit-keyframes fadeContentIn {\n  from {\n    -webkit-transform: translateY(30px);\n            transform: translateY(30px);\n    opacity: 0;\n  }\n  to {\n    opacity: 1;\n  }\n}\n@keyframes fadeContentIn {\n  from {\n    -webkit-transform: translateY(30px);\n            transform: translateY(30px);\n    opacity: 0;\n  }\n  to {\n    opacity: 1;\n  }\n}\n", ""]);
