@@ -23,6 +23,12 @@ mixin list-item(bookmark)
           svg-icon(attrs={icon: 'trashcan'})
 
 .mp-bm-container(on={scroll: $helpers.stopPropagation})
+  mp-upsell-popup(
+    attrs={open: showUpsellModal, feature: 'bookmark-maximum'}
+    on={
+      change: $helpers.closeUpsellModal,
+    }
+  )
   .mp-bm-btn(on={click: $helpers.toggleBookmarksMenu})
     .mp-bm-btn-icon
       svg-icon(attrs={icon: 'bookmarks'})
@@ -74,7 +80,7 @@ mixin list-item(bookmark)
             else
               mp-button-bar.mp-button-bar-secondary(
                 attrs={disabled: $component.isAttributeEnabled('create-disabled')}
-                on={click: $component.isAttributeEnabled('over-free-limit') ? $helpers.toggleUpsellModal: $helpers.goToCreateMode}
+                on={click: $component.isAttributeEnabled('over-free-limit') ? $helpers.openUpsellModal: $helpers.goToCreateMode}
               )
                 .mp-bm-menu-button-bar-text(
                   class={'mp-bm-menu-over-free-text': $component.isAttributeEnabled('over-free-limit')}
@@ -82,10 +88,6 @@ mixin list-item(bookmark)
               if $component.isAttributeEnabled('over-free-limit')
                 .mp-bm-menu-upsell-icon
                     svg-icon(attrs={icon: 'lighting-bolt'})
-              mp-upsell-popup(
-                attrs={open: showUpsellModal, feature: 'bookmark-maximum'}
-                onchange=$helpers.toggleUpsellModal
-              )
 
   if confirmDeleteBookmark
     mp-confirm-delete(
