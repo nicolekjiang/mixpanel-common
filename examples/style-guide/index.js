@@ -94,7 +94,9 @@ document.registerElement('style-guide', class extends Component {
           }
         },
         handleBookmarksMenuChange: e => {
-          this.state.open.bookmarksWidget = e.detail.open;
+          if (e.detail.open) {
+            this.state.open.bookmarksWidget = e.detail.open;
+          }
           this.update();
         },
         toggleTagSelector: () => {
