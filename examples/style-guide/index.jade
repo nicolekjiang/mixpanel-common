@@ -244,12 +244,12 @@
   .section.widgets
     h1 Widgets
     p
+      h2 Regular Bookmark
       .bookmarks-widget
         mp-bookmarks-widget(
           attrs={
             'bookmarks': JSON.stringify(bookmarks),
             'create-disabled': false,
-            'open': open.bookmarksWidget,
             'saving': savingBookmark,
             'selected-bookmark-id': selectedBookmarkId,
             'user-id': 1,
@@ -260,12 +260,12 @@
             submit: $helpers.handleBookmarksMenuSubmit,
           }
         )
+      h2 Free Plan Restricted Bookmark
       .bookmarks-widget
         mp-bookmarks-widget(
           attrs={
             'bookmarks': JSON.stringify(bookmarks),
             'create-disabled': false,
-            'open': open.bookmarksWidget,
             'saving': savingBookmark,
             'selected-bookmark-id': selectedBookmarkId,
             'user-id': 1,

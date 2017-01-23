@@ -66,10 +66,6 @@ document.registerElement('style-guide', class extends Component {
           this.state.open.menu = !this.state.open.menu;
           this.update();
         },
-        toggleBookmarksMenu: () => {
-          this.state.open.bookmarksWidget = !this.state.open.bookmarksWidget;
-          this.update();
-        },
         handleBookmarksMenuSubmit: e => {
           switch (e.detail.action) {
             case 'select':
