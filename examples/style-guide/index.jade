@@ -260,6 +260,23 @@
             submit: $helpers.handleBookmarksMenuSubmit,
           }
         )
+      .bookmarks-widget
+        mp-bookmarks-widget(
+          attrs={
+            'bookmarks': JSON.stringify(bookmarks),
+            'create-disabled': false,
+            'open': open.bookmarksWidget,
+            'saving': savingBookmark,
+            'selected-bookmark-id': selectedBookmarkId,
+            'user-id': 1,
+            'has-write-permissions': true,
+            'over-free-limit': true,
+          }
+          on={
+            change: $helpers.handleBookmarksMenuChange,
+            submit: $helpers.handleBookmarksMenuSubmit,
+          }
+        )
 
     h2 tag-selector widget
     .tag-selector-container
