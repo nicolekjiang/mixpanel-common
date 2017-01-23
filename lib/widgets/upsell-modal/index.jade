@@ -1,5 +1,4 @@
-- const modalAttrs = {'modal-type': 'popup', 'closeable': true, 'not-fullscreen': true};
-- ['top-position', 'left-position', 'open'].forEach(attr => modalAttrs[attr] = $component.getAttribute(attr));
+- const modalAttrs = {'modal-type': 'popup', 'closeable': true, 'not-fullscreen': true, 'open': $component.getAttribute('open')};
 - const feature = $component.getAttribute('feature');
 mp-modal(attrs=modalAttrs)
     .mp-upsell-popup-content
