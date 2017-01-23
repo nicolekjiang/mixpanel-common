@@ -35,8 +35,9 @@ document.registerElement(`style-guide`, class extends Component {
         tagSelectorLoadState: `idle`,
         tagSelectorData: {
           pinnedTags: new Set([`pinned tag`]),
-          selectedTags: new Set([`my tag`, `another tag`]),
-          allTags: new Set([`my tag`, `another tag`, `pinned tag`, `our tag`, `his tag`]),
+          defaultTags: new Set([`default tag`]),
+          selectedTags: new Set([`my tag`, `another tag`, `default tag`]),
+          allTags: new Set([`my tag`, `another tag`, `pinned tag`, `default tag`, `our tag`, `his tag`]),
         },
       },
       helpers: {
