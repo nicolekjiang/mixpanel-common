@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="53px" height="42px" viewBox="0 0 53 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>70DF7A0A-2DFC-4C75-82E7-675032143BED</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="45.109514" height="37" rx="2.35372636"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="45.109514" height="37" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <path d="M7,14 C10.8659932,14 14,10.8659932 14,7 C14,3.13400675 10.8659932,0 7,0 C3.13400675,0 0,3.13400675 0,7 C0,10.8659932 3.13400675,14 7,14 Z" id="path-3"></path>
+        <mask id="mask-4" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="-1.75331439" y="-1.75331439" width="17.5066288" height="17.5066288">
+            <rect x="-1.75331439" y="-1.75331439" width="17.5066288" height="17.5066288" fill="white"></rect>
+            <use xlink:href="#path-3" fill="black"></use>
+        </mask>
+    </defs>
+    <g id="Pricing-Upgrade-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Retention-Upgrade" transform="translate(-980.000000, -298.000000)">
+            <g id="retention-filters-upgrade" transform="translate(962.000000, 277.000000)">
+                <g id="illustration.filter" transform="translate(20.000000, 23.000000)">
+                    <use id="fill" stroke="#FFFFFF" mask="url(#mask-2)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="#EDF3F8" xlink:href="#path-1"></use>
+                    <rect id="outline" stroke="#4BA8FF" stroke-width="2.359" stroke-linecap="round" stroke-linejoin="round" x="0" y="0" width="45.109514" height="37" rx="2.35372636"></rect>
+                    <g id="lines" transform="translate(9.000000, 12.000000)" stroke="#C4D6E5" stroke-width="2.30771739" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M0.804347826,1.62162162 L28.1956522,1.62162162" id="Line"></path>
+                        <path d="M5.69565217,6.48648649 L23.3043478,6.48648649" id="Line-Copy"></path>
+                        <polyline id="Line-Copy-2" points="10.5869565 11.3513514 13.9699591 11.3513514 18.4130435 11.3513514"></polyline>
+                    </g>
+                    <g id="upgrade" transform="translate(35.000000, 24.000000)">
+                        <g id="Oval-Copy">
+                            <use fill="#9270E2" fill-rule="evenodd" xlink:href="#path-3"></use>
+                            <use stroke="#FFFFFF" mask="url(#mask-4)" stroke-width="3.50662879" xlink:href="#path-3"></use>
+                        </g>
+                        <path d="M6.50875804,7.43563046 C6.52410688,7.38766237 6.51796734,7.33739641 6.49136269,7.29976876 C6.46494409,7.2621411 6.42038595,7.24059854 6.36931618,7.24059854 L5.03350223,7.24059854 C5.01210688,7.24059854 5.00187432,7.23466237 5.00047897,7.23198152 C4.99908362,7.22920493 5.00010688,7.21704535 5.0121999,7.19885386 L8.41011014,3.08638284 C8.51673783,2.95733196 8.56350739,2.97236977 8.50962051,3.13490852 L7.41089758,6.44898152 C7.39285106,6.49647088 7.39647897,6.5466411 7.42159525,6.58446024 C7.44661851,6.62218365 7.49061851,6.64391769 7.54206037,6.64391769 L8.80466502,6.64391769 C8.82661851,6.64391769 8.83806037,6.65042833 8.84113013,6.65598152 C8.84429292,6.66153471 8.84401385,6.67503471 8.83303711,6.69456663 L5.63308817,11.0810031 C5.53267259,11.2186511 5.4864542,11.2006563 5.52732162,11.0501464 L6.50875804,7.43563046 Z" id="Fill-1-Copy" fill="#FFFFFF"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
