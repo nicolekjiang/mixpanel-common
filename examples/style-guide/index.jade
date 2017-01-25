@@ -196,8 +196,8 @@
   .section.toggles
     h1 Toggles
     p One element out of a set of two or more is always selected.
-    mp-toggle.mp-toggle-blue.inline-toggle(
-      attrs={selected: blueToggleValue}
+    mp-toggle.inline-toggle(
+      attrs={blue: true, selected: blueToggleValue}
       on={change: $helpers.blueToggleChanged}
     )
       mp-toggle-option(attrs={value: 'option1'}) Longer Option 1
@@ -209,9 +209,15 @@
       mp-toggle-option(attrs={value: 'option2'}) Short
       mp-toggle-option(attrs={value: 'option3'}) Medium text here
 
-    mp-toggle.full-width-toggle.large-toggle(attrs={selected: 'option2'})
+    mp-toggle.full-width-toggle(attrs={large: true, selected: 'option2'})
       mp-toggle-option(attrs={value: 'option1'}) Longer Option 1
       mp-toggle-option(attrs={value: 'option2'}) Longer Option 2
+
+    h4 Square toggle
+    mp-toggle.inline-toggle(attrs={square: true, selected: 'all'})
+      mp-toggle-option(attrs={value: 'all'}) All
+      mp-toggle-option(attrs={value: 'events'}) Events
+      mp-toggle-option(attrs={value: 'people'}) People
 
   .section
     h1 Spinners

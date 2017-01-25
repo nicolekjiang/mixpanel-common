@@ -1,4 +1,8 @@
-.mp-toggle(class=$helpers.extendComponentClasses())
+.mp-toggle(class={
+  'toggle-blue': $component.isAttributeEnabled(`blue`),
+  'toggle-large': $component.isAttributeEnabled(`large`),
+  'toggle-square': $component.isAttributeEnabled(`square`),
+})
   for toggleOption in $helpers.toggleOptions()
     .mp-toggle-option(
       class={'mp-toggle-selected': toggleOption.value === $component.value}
