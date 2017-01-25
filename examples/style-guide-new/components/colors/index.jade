@@ -16,13 +16,14 @@ include ../mixins.jade
     section.ui-colors
       .subsection-title Mixpanel UI Colors
       .subsection-description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id massa et libero condimentum dignissim at ut odio. Aliquam placerat libero metus, et fringilla nisl dictum vitae. Sed at lacus eu risus fermentum consequat.
-      .color-chips
-        for color in colorGroups['Mixpanel UI Colors']
-          .swatch
-            .swatch-color(style={'background-color': COLORS[color]})
-            .swatch-label
-              .color-name= color
-              .color-hex= COLORS[color]
+      .indent-container
+        .color-chips
+          for color in colorGroups['Mixpanel UI Colors']
+            .swatch
+              .swatch-color(style={'background-color': COLORS[color]})
+              .swatch-label
+                .color-name= color
+                .color-hex= COLORS[color]
       .code-snippet
         .call-out
           strong.icon +
@@ -52,15 +53,18 @@ include ../mixins.jade
               b     blue-700 =
               span  #3391E9
     section.data-viz-colors
+      .divider 
+        label 1.2
       .subsection-title Data Visualization
       .subsection-description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id massa et libero condimentum dignissim at ut odio. Aliquam placerat libero metus, et fringilla nisl dictum vitae. Sed at lacus eu risus fermentum consequat.
-      .color-chips
-        for color in colorGroups['Data Visualization']
-          .swatch
-            .swatch-color(style={'background-color': COLORS[color]})
-            .swatch-label
-              .color-name= color
-              .color-hex= COLORS[color]
+      .indent-container
+        .color-chips
+          for color in colorGroups['Data Visualization']
+            .swatch
+              .swatch-color(style={'background-color': COLORS[color]})
+              .swatch-label
+                .color-name= color
+                .color-hex= COLORS[color]
       .code-snippet
         .call-out
           strong.icon +
@@ -91,6 +95,8 @@ include ../mixins.jade
               span  #3391E9
     section.color-library-container
       - const colorLibrary = $helpers.getColorLibraries()
+      .divider 
+        label 1.3
       .subsection-title Color Library
       .subsection-description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id massa et libero condimentum dignissim at ut odio. Aliquam placerat libero metus, et fringilla nisl dictum vitae. Sed at lacus eu risus fermentum consequat.
       .color-library

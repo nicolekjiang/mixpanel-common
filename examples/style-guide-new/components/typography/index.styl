@@ -1,4 +1,3 @@
-@import '../../../../build/stylesheets/defaults/index.css'
 @import '../../../../build/stylesheets/mixins/common.styl'
 
 .example
@@ -7,8 +6,8 @@
 .example-container
   display flex
   flex-direction row
-  justify-content space-around
-  width 900px
+  justify-content space-between
+  width 830px
 
   .large-example
     font-size 84px
@@ -21,7 +20,7 @@
     width 400px
 
   .right-example-container
-    border-left 1px solid #D8E0E6
+    border-left 1px solid grey-200
     position relative
 
     .right-example
@@ -32,24 +31,55 @@
 
 .code-container
   position relative
-  left 50px
 
   .code-snippet
     width 900px
-    padding-bottom 65px
 
 .size-examples
   position relative
-  left 60px
 
   .size-example
     display flex
     flex-direction row
     justify-content space-between
-    border-bottom 1px dashed #D8E0E6
+    border-bottom 1px dashed grey-200
     padding-bottom 20px
     margin-bottom 30px
     width 835px
     
     .text-example
       padding-bottom 10px
+      
+  .size-class
+    transform scale(1.5)
+    color grey-200
+    text-align  right
+    font-weight weight-bold
+    margin: 6px 40px 0 0
+    
+    &:hover
+      color mp-blue
+      
+.mp-font-size-xl
+  font-size-xl()
+  
+.mp-font-size-large
+  font-size-large()
+
+.mp-font-size-medium
+  font-size-medium()
+
+.mp-font-size-default
+  font-size-default()
+  
+.mp-font-size-xs
+  font-size-xs()
+  
+.mp-font-weight-bold
+  font-weight weight-bold
+
+.mp-font-weight-medium
+  font-weight weight-medium
+
+.mp-font-weight-regular
+  font-weight: weight-regular

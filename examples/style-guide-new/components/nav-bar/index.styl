@@ -1,10 +1,12 @@
-@import '../../../../build/stylesheets/defaults/index.css'
 @import '../../../../build/stylesheets/mixins/common.styl'
 
 .nav-strip
   background-color #FFFFFF
-  border-right 1px solid #D8E0E6
+  border-right 1px solid grey-200
   position fixed
+  top 0
+  bottom 0
+  left 0
   width 15px
   z-index 0
 
@@ -12,60 +14,64 @@
   box-sizing border-box
   height 100%
   list-style-type none
-  margin 0
   width 300px
   overflow-y scroll
   padding 180px 0 60px 0
   position fixed
   top 0
+  left 0
   z-index 900
   
   .nav-section
-    border-left 15px solid #4BA8FF
-    color #4C6072
+    border-left 15px solid mp-blue
+    color grey-900
     cursor pointer
     padding 12px 0 0 45px
 
     &:hover
-      color #4BA8FF
+      color mp-blue
 
     &.selected
-      color #4BA8FF
+      color mp-blue
 
     .nav-number
-      color #C1CCD5
-      font-size 14px
+      color grey-300
+      font-size-medium()
+      font-weight weight-bold
+      margin-bottom 4px
     
     .nav-label
-      border-bottom 1px solid #D8E0E6
+      border-bottom 1px solid grey-200
       display block
       font-size 20px
-      line-height 15px
+      line-height 16px
       padding 0 0 19px 23px
 
   .sub-nav
     display flex
     flex-direction column
-    border-left 15px solid #89C6FF
-    color #6E859D
+    border-left 15px solid #89C6FF // not an mp-color
+    color grey-700
     cursor pointer
     padding 12px 0 0 45px
     
+    :last-child
+      border-bottom 1px solid grey-200
+      
     .sub-nav-section
       display flex
       flex-direction row
-      justify-content space-between
-      font-size 16px
-      padding 6px 0 6px 23px
+      font-size-large()
+      padding 18px 0 6px 23px
       font-family family-helvetica
 
       .sub-nav-number
-        color #9CACBB
+        color grey-500
         display none
-        font-size 14px
+        font-size-medium()
         font-weight weight-bold
-        left -30px
-        position relative
+        position absolute
+        right 30px
 
       &:hover
         .sub-nav-number

@@ -13,8 +13,37 @@ include ../mixins.jade
     section.icon-section
       .subsection-title Mixpanel Icons
       .subsection-description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id massa et libero condimentum dignissim at ut odio. Aliquam placerat libero metus, et fringilla nisl dictum vitae. Sed at lacus eu risus fermentum consequat.
-      .icons
-        for icon in Object.keys(SVG_ICONS)
-          .icon
-            svg-icon(attrs={icon})
-            .icon-name= icon
+      .indent-container
+        .icons
+          for icon in Object.keys(SVG_ICONS)
+            .icon
+              svg-icon(attrs={icon})
+              .icon-name= icon
+      .code-snippet
+        .call-out
+          strong.icon +
+          strong Example Code
+        .snippet-container.min.max
+          .snippet-header
+            label Stylus
+          .code-field
+            pre
+              | 1    /* Color Declarations */
+              br
+              | 2
+              br
+              | 3
+              b     mp-red   =
+              span  #E4567B
+              br
+              | 4
+              b     mp-blue  =
+              span  #4BA8FF
+              br
+              | 5
+              b     blue-900 =
+              span  #2687E3
+              br
+              | 6
+              b     blue-700 =
+              span  #3391E9

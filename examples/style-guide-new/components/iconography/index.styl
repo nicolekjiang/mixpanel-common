@@ -1,4 +1,3 @@
-@import '../../../../build/stylesheets/defaults/index.css'
 @import '../../../../build/stylesheets/mixins/common.styl'
 
 .icons
@@ -11,8 +10,36 @@
     flex-direction row
     padding-bottom 10px
     svg-icon-style(grey-900, blue-100)
-    width 220px
+    width 135px
+    height 135px
+    position relative
+    margin 0 20px 50px 0
+    border 1px dashed grey-300
+    align-items center
+    padding 0
 
-
+    svg-icon
+      margin 0 auto
+      min-height 22px
+      min-width 22px
+      transform scale(1.5)
+      
     .icon-name
-      padding-left 20px
+      position absolute
+      bottom -30px
+      left 5%
+      text-align center
+      white-space nowrap
+      overflow hidden
+      text-overflow ellipsis
+      width 90%
+      font-size-medium()
+  
+  :hover
+    &.icon 
+      background #FFFFFF
+      border 1px solid mp-blue
+      box-shadow 0 2px 4px 0 rgba(0,0,0,0.07)
+      
+    .icon-name
+      color mp-blue
