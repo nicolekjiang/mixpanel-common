@@ -63,6 +63,7 @@ input[type=text], textarea
   box-sizing border-box
   color grey-900
   display inline-block
+  font-family family-helvetica
   font-size-default()
   font-weight weight-regular
   padding 8px
@@ -72,7 +73,7 @@ input[type=text], textarea
     color grey-500 !important // @stylint ignore
     font-weight weight-normal !important // @stylint ignore
 
-  &:focus
+  &:focus, &:active
     border-color blue-700
     transition border-color 200ms ease-in
 
