@@ -219,6 +219,12 @@
       mp-toggle-option(attrs={value: 'events'}) Events
       mp-toggle-option(attrs={value: 'people'}) People
 
+    h4 Small/square toggle
+    mp-toggle.inline-toggle(attrs={square: true, small: true, selected: 'people'})
+      mp-toggle-option(attrs={value: 'all'}) All
+      mp-toggle-option(attrs={value: 'events'}) Events
+      mp-toggle-option(attrs={value: 'people'}) People
+
   .section
     h1 Spinners
     mp-spinner
