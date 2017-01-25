@@ -15619,7 +15619,7 @@
 	  function Component() {
 	    _classCallCheck(this, Component);
 
-	    return _possibleConstructorReturn(this, (Component.__proto__ || Object.getPrototypeOf(Component)).apply(this, arguments));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Component).apply(this, arguments));
 	  }
 
 	  _createClass(Component, [{
@@ -15774,6 +15774,7 @@
 	        template: function template() {
 	          throw Error('No template provided by Component subclass');
 	        },
+	        updateSync: false,
 	        useShadowDom: false
 	      }, this.config);
 	      this.state = {};
@@ -15826,7 +15827,9 @@
 	        this.navigate(window.location.hash);
 	      }
 
-	      this.domPatcher = new _domPatcher2.default(this.state, this._render.bind(this));
+	      this.domPatcher = new _domPatcher2.default(this.state, this._render.bind(this), {
+	        updateMode: this.getConfig('updateSync') ? 'sync' : 'async'
+	      });
 	      this.el.appendChild(this.domPatcher.el);
 	      this.initialized = true;
 	    }
@@ -15941,6 +15944,8 @@
 	     * @property {function} template - function transforming state object to virtual-dom tree
 	     * @property {object} [helpers={}] - properties and functions injected automatically into template state object
 	     * @property {object} [routes={}] - object mapping string route expressions to handler functions
+	     * @property {boolean} [updateSync=false] - whether to apply updates to DOM
+	     * immediately, instead of batching to one update per frame
 	     * @property {boolean} [useShadowDom=false] - whether to use Shadow DOM
 	     * @property {string} [css=''] - component-specific Shadow DOM stylesheet
 	     * @example
@@ -17205,6 +17210,7 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	// just the necessary bits of Backbone router+history
+
 	var Router = function () {
 	  function Router(app) {
 	    var _this = this;
