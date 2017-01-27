@@ -36,7 +36,8 @@ document.registerElement('style-guide', class extends Component {
         tagSelectorData: {
           selectedTags: new Set(["my tag", "another tag"]),
           allTags: new Set(["my tag", "another tag", "our tag", "his tag"]),
-        }
+        },
+        toasts: [],
       },
       helpers: {
         blueToggleChanged: ev => this.update({blueToggleValue: ev.detail.selected}),
@@ -126,6 +127,14 @@ document.registerElement('style-guide', class extends Component {
           this.state.open.tagSelector = false;
           this.update();
         },
+        addToast: () => {
+          this.state.toasts.push({message: `Hi, I'm toast ${new Date().getTime()}`, cta: `undo`, closed: false});
+          this.update();
+        },
+        closeToast: toast => {
+          toast.closed = true;
+          this.update();
+        }
       },
       template,
     };

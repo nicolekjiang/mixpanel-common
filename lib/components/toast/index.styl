@@ -1,0 +1,66 @@
+@import '../../stylesheets/defaults'
+
++host-styles('mp-toast')
+  display flex
+
++prefix-classes('mp-toast-')
+  .stage
+    position relative
+
+    .container
+      height 0
+      opacity 0
+      position relative
+      transition all .25s ease-in-out
+
+      &.in
+        bottom 0
+        height 64px
+        opacity 1
+
+      &.out
+        bottom 80px
+        height 0
+        opacity 0
+
+      .widget
+        align-items center
+        background-color blue-100
+        border-radius 6px
+        box-shadow 0 8px 22px 0 rgba(0, 0, 0, 0.37)
+        color white
+        display flex
+        font-family family-helvetica
+        font-size-medium()
+        font-weight weight-bold
+        min-width 354px
+        padding 15px 24px
+        pointer-events auto
+        position relative
+
+        .message
+          display flex
+          position relative
+          flex-grow 1
+
+        .cta
+          cursor pointer
+          font-size-medium()
+          margin-left 12px
+          margin-right 7px
+          opacity 0.5
+          text-transform uppercase
+
+          &:hover
+            opacity 1
+
+        .close
+          cursor pointer
+          display flex
+          flex-direction row-reverse
+          opacity 0.5
+          svg-icon-style(white, pos-left: 5px)
+
+          &:hover
+            opacity 1
+

@@ -229,6 +229,22 @@
     h1 Spinners
     mp-spinner
 
+  .section
+    button(on={click: $helpers.addToast}) Add some toast
+    .toast-container
+      for toast in toasts
+        mp-toast(
+          attrs={
+            cta: toast.cta,
+            hide: toast.closed,
+          }
+          on={
+            action: () => alert('undo please'),
+            close: () => $helpers.closeToast(toast),
+          }
+        )= toast.message
+
+
   .section.tooltips
     h1 Tooltips
 
