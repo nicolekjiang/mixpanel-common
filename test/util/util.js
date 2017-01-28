@@ -12,6 +12,8 @@ import {
   removeByValue,
   replaceByIndex,
   insertAtIndex,
+
+  nestedObjectRolling,
 } from '../../lib/util';
 
 describe('pluralize()', function() {
@@ -283,6 +285,65 @@ describe('unique()', function() {
       ], {hash})).to.eql([
         {a: 1, b: 'abc'}, {a: null, b: undefined}, {a: [], b: {}},
       ]);
+    });
+  });
+});
+
+const timeseriesResultObj = {
+  US: {
+    '2016-06-01': 8,
+    '2016-06-02': 2,
+    '2016-06-03': 2,
+    '2016-06-04': 8,
+    '2016-06-05': 14,
+  },
+  Canada: {
+    '2016-06-01': 6,
+    '2016-06-02': 3,
+    '2016-06-03': 3,
+    '2016-06-04': 12,
+    '2016-06-05': 6,
+  },
+};
+
+describe('nestedObjectRolling', function() {
+  it('supports rolling average on the leaf nodes without enought data for a window', function() {
+    const arr = nestedObjectRolling(timeseriesResultObj, 7);
+    expect(arr).to.eql({
+      US: {
+        '2016-06-01': 8,
+        '2016-06-02': 5,
+        '2016-06-03': 4,
+        '2016-06-04': 5,
+        '2016-06-05': 6.8,
+      },
+      Canada: {
+        '2016-06-01': 6,
+        '2016-06-02': 4.5,
+        '2016-06-03': 4,
+        '2016-06-04': 6,
+        '2016-06-05': 6,
+      },
+    });
+  });
+
+  it('supports rolling average on the leaf nodes with more data than a window', function() {
+    const arr = nestedObjectRolling(timeseriesResultObj, 3);
+    expect(arr).to.eql({
+      US: {
+        '2016-06-01': 8,
+        '2016-06-02': 5,
+        '2016-06-03': 4,
+        '2016-06-04': 4,
+        '2016-06-05': 8,
+      },
+      Canada: {
+        '2016-06-01': 6,
+        '2016-06-02': 4.5,
+        '2016-06-03': 4,
+        '2016-06-04': 6,
+        '2016-06-05': 7,
+      },
     });
   });
 });
