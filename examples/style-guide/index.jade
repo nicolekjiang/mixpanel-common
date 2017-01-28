@@ -312,9 +312,17 @@
       mp-drop-menu(attrs={open: open.tagSelector} on={change: $helpers.handleTagSelectorDropMenuChange})
         .title
           .header
-            svg-icon(attrs={icon: "check-success"})
-            .header-text Added to company dashboard
-          .subtext Viewed report by type
+            .header-text Viewed report by type
+          .subtext
+            if savingTag
+              mp-spinner
+            else if savedTag
+              .saved-icon
+                svg-icon(attrs={icon: 'check-checkbox'})
+            else
+              .dashboard-icon
+                svg-icon(attrs={icon: 'check-checkbox'})
+            span added to the following dashboards:
         mp-tag-selector(
           attrs={
             'selected-tags': JSON.stringify(tagSelectorData.selectedTags),

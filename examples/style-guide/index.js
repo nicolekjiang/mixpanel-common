@@ -117,10 +117,13 @@ document.registerElement('style-guide', class extends Component {
           }
           // normally we'd persist to server and this timeout represents that
           // async call
-          clearTimeout(this.loadingTagTimeout);
-          this.update({tagSelectorLoadState: 'loading_tag'});
-          this.loadingTagTimeout = setTimeout(() => {
-            this.update({tagSelectorLoadState: 'loaded_tag'});
+          clearTimeout(this.tagIndicatorTimeout);
+          this.update({savingTag: true});
+          this.tagIndicatorTimeout = setTimeout(() => {
+            this.update({savingTag: false, savedTag: true})
+            this.tagIndicatorTimeout = setTimeout(() => {
+              this.update({savedTag: false});
+            }, 1000)
           }, 700);
         },
         handleTagSelectorSubmit: e => {

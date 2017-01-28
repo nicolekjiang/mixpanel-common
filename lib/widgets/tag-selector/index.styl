@@ -13,10 +13,6 @@
     &, *
       box-sizing border-box
 
-    mp-spinner.loading-widget
-      display block
-      margin 50px auto
-
     .top-input-wrapper
       margin 0 auto
       margin-bottom 20px
@@ -34,30 +30,17 @@
         position relative
         width 300px
 
-        .icon-wrapper
-          height 22px
-          margin 2px 2px 9px 10px
-          margin-left 8px
-
-          &.search-icon
-            svg-icon-style(grey-200, size: 22px)
-
-          &.idle
-            svg-icon-style(grey-200, size: 22px)
-
-          &.loaded-tag
-            svg-icon-style(green-300, size: 22px)
-
-          &.loaded-error
-            svg-icon-style(mp-red, size: 22px)
-
-          mp-spinner
-            height 16px
-            width 16px
-            margin 3px
-
         mp-tag
           margin 0 0 6px 4px
+          opacity 0
+          white-space nowrap
+          transition all 0.25s
+
+          &.tag-in
+           opacity 1
+
+          &.tag-out
+            opacity 0
 
         .border
           border 1px solid grey-200
@@ -67,9 +50,10 @@
           pointer-events none
           position absolute
           top 0
+          transition border-color 0.25s
           width 100%
 
-          &.loaded-error
+          &.error
             border-color mp-red
 
         &:active .border
@@ -100,6 +84,10 @@
     .tag-list
       max-height 280px
       overflow-y auto
+
+      mp-list-item
+        margin-left 12px
+        margin-right 12px
 
     .footer
       box-sizing border-box

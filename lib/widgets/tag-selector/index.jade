@@ -1,61 +1,49 @@
 .mp-tag-selector-container
-  if loadState == 'loading_widget'
-    mp-spinner.mp-tag-selector-loading-widget
-  else
-    .mp-tag-selector-top-input-wrapper
-      .mp-tag-selector-input-wrapper(on={click: $helpers.focusInput})
-        - const icon = $component.isAttributeEnabled('read-only') ? 'search' : 'tag';
-        .mp-tag-selector-icon-wrapper(class={
-          'mp-tag-selector-search-icon': icon === 'search',
-          'mp-tag-selector-idle': loadState === 'idle',
-          'mp-tag-selector-loaded-tag': loadState === 'loaded_tag',
-          'mp-tag-selector-loaded-error': loadState === 'error',
-        })
-          if loadState == 'loading_tag'
-            mp-spinner
-          else
-            svg-icon(attrs={icon})
-        if !$component.isAttributeEnabled('read-only')
-          - const tags = [...selectedTags];
-          for tag in tags
-            - const attrs = {'tag-name': tag, 'removable': tags.length > 1}
-            mp-tag(
-              attrs=attrs
-              on={change: e => { e.stopPropagation(); $helpers.removeTag(tag) }}
-            )
-        input.mp-tag-selector-search-input(
-          props={type: 'text', value: inputText}
-          on={
-            input: $helpers.setInputText,
-            keydown: $helpers.handleKeyDown,
-            keypress: $helpers.handleKeyPress,
-          }
-          style={width: inputWidth}
-        )
-        .mp-tag-selector-border(class={'mp-tag-selector-loaded-error': loadState === 'error'})
-
-    - const hasMatches = matchingTags.length;
-    - const showCreateButton = $helpers.showCreateButton();
-
-    if hasMatches || showCreateButton
-      .mp-tag-selector-hr
-
-    if hasMatches
-      .mp-tag-selector-tag-list
-        for tag, tagIdx in matchingTags
-          mp-list-item(
-            attrs={active: tagIdx === activeTagIndex}
-            on={click: () => $helpers.addTag(tag)}
+  .mp-tag-selector-top-input-wrapper
+    .mp-tag-selector-input-wrapper(on={click: $helpers.focusInput})
+      if !$component.isAttributeEnabled('read-only')
+        - const tags = [...selectedTags];
+        for tag in tags
+          - const attrs = {'tag-name': tag, 'removable': tags.length > 1}
+          mp-tag(
+            attrs=attrs
+            key='tag-' + tag,
+            class={delayed: {'mp-tag-selector-tag-in': true}, remove: {'mp-tag-selector-tag-out': true, delayRemove: 250}}
+            on={change: e => { e.stopPropagation(); $helpers.removeTag(tag) }}
           )
-            for token, pos in $helpers.stringFilterMatches($helpers.toSentenceCase(tag), inputText)
-              if pos % 2 === 1
-                span= token
-              else
-                b= token
+      input.mp-tag-selector-search-input(
+        props={type: 'text', value: inputText}
+        on={
+          input: $helpers.setInputText,
+          keydown: $helpers.handleKeyDown,
+          keypress: $helpers.handleKeyPress,
+        }
+        style={width: inputWidth}
+      )
+      .mp-tag-selector-border(class={'mp-tag-selector-error': $component.isAttributeEnabled('error')})
 
-    if showCreateButton
-      .mp-tag-selector-footer(on={click: () => $helpers.addTag(inputText)})
-        .mp-tag-selector-copy
-          | Create new label for
-          = ' '
-        .mp-tag-selector-label-name= inputText
+  - const hasMatches = matchingTags.length;
+  - const showCreateButton = $helpers.showCreateButton();
+
+  if hasMatches || showCreateButton
+    .mp-tag-selector-hr
+
+  if hasMatches
+    .mp-tag-selector-tag-list
+      for tag, tagIdx in matchingTags
+        mp-list-item(
+          attrs={active: tagIdx === activeTagIndex}
+          on={click: () => $helpers.addTag(tag)}
+        )
+          for token, pos in $helpers.stringFilterMatches($helpers.toSentenceCase(tag), inputText)
+            if pos % 2 === 1
+              span= token
+            else
+              b= token
+
+  if showCreateButton
+    .mp-tag-selector-footer(on={click: () => $helpers.addTag(inputText)})
+      .mp-tag-selector-copy
+        | Create new label for
+        = ' '
+      .mp-tag-selector-label-name= inputText

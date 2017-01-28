@@ -6,7 +6,9 @@ $mp-list-item-margin = 0px $mp-list-gutter-width
 $mp-list-item-padding = 10px
 
 +host-styles(mp-list-item)
+  box-sizing border-box
   display block
+  height 30px
 
 +host-styles(mp-list-item, ':first-child')
   margin-top $mp-list-gutter-height
@@ -23,13 +25,14 @@ $mp-list-item-padding = 10px
     background-color white
     border-radius 3px
     color grey-700
-    display block
+    display flex
     font-family family-helvetica
     font-size-default()
     font-weight weight-medium
+    height 100%
     line-height 12px
     margin $mp-list-item-margin
-    padding $mp-list-item-padding
+    padding 0px $mp-list-item-padding
     text-align left
     user-select none
 
