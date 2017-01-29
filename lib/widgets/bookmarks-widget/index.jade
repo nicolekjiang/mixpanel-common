@@ -13,7 +13,7 @@ mixin list-item(bookmark)
         .mp-bm-menu-name(attrs={title: bookmark.name})
           for token, pos in $helpers.stringFilterMatches(bookmark.name, filterText)
              if pos % 2 === 1
-               span= token
+               span= $helpers.truncateMiddle(token, 40)
              else
                b= token
         .mp-bm-menu-creator= bookmark.user
