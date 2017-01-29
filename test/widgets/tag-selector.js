@@ -26,7 +26,7 @@ describe(`Test tag-selector widget`, () => {
     let displayedTags = [];
     const optionList = this.widget.el.querySelectorAll(`mp-list-item`);
     for (var i = 0; i < optionList.length; i++) {
-      displayedTags.push(optionList[i].innerText);
+      displayedTags.push(optionList[i].textContent);
     }
     expect(displayedTags).to.eql([`Tag bar`, `Tag baz`]);
   });

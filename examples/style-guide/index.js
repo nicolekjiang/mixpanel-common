@@ -34,8 +34,8 @@ document.registerElement(`style-guide`, class extends Component {
         selectedBookmarkId: null,
         tagSelectorLoadState: `idle`,
         tagSelectorData: {
-          selectedTags: new Set([`my tag`, `another tag`]),
-          allTags: new Set([`my tag`, `another tag`, `our tag`, `his tag`]),
+          selectedTags: new Set([`my tag`, `another tag`, `my dashboard`]),
+          allTags: new Set([`my tag`, `another tag`, `our tag`, `his tag`, `my dashboard`]),
         },
         toasts: [],
       },

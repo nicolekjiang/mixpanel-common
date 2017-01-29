@@ -88,6 +88,10 @@
       mp-list-item
         margin-left 12px
         margin-right 12px
+        svg-icon-style(grey-700, size: 16px, speed: 0s, pos-left: -3px, pos-top: -1px)
+
+        &[active="true"], &:hover
+          svg-icon-style(blue-300, size: 16px, speed: 0s, pos-left: -3px, pos-top: -1px)
 
         .tag-list-item
           display block

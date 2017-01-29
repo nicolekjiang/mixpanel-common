@@ -5,6 +5,8 @@
         - const tags = [...selectedTags];
         for tag in tags
           - const attrs = {'tag-name': tag, 'removable': tags.length > 1}
+          if tag === 'my dashboard'
+            - attrs['icon'] = 'profile-large';
           mp-tag(
             attrs=attrs
             key='tag-' + tag,
@@ -35,6 +37,8 @@
           attrs={active: tagIdx === activeTagIndex}
           on={click: () => $helpers.addTag(tag)}
         )
+          if tag === 'my dashboard'
+            svg-icon(attrs={icon: 'profile-large'})
           .mp-tag-selector-tag-list-item
             for token, pos in $helpers.stringFilterMatches($helpers.toSentenceCase(tag), inputText)
               if pos % 2 === 1
