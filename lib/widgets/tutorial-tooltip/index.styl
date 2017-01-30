@@ -44,32 +44,32 @@ $tooltip-distance = 12px
   height inherit
 
   &:not(.placement-center)
-    &::after
+    .arrow
       border 5px solid transparent
       content ''
       height 0
       position absolute
       width 0
 
-    &.placement-top::after
+    &.placement-top .arrow
       border-top-color blue-700
       left 50%
       margin-left -5px
       top 100%
 
-    &.placement-bottom::after
+    &.placement-bottom .arrow
       border-bottom-color blue-700
       bottom 100%
       left 50%
       margin-left -5px
 
-    &.placement-left::after
+    &.placement-left .arrow
       border-left-color blue-700
       left 100%
       margin-top -5px
       top 50%
 
-    &.placement-right::after
+    &.placement-right .arrow
       border-right-color blue-700
       margin-top -5px
       right 100%

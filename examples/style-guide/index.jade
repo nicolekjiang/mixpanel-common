@@ -362,7 +362,7 @@
     h2 Tutorial tooltip widgets
     .tutorial-tooltips-container
       a.tutorial-tooltip-container.top.position-relative Default (placement 'top') tooltip
-        mp-tutorial-tooltip Tooltip above the element
+        mp-tutorial-tooltip(attrs={'hide-footer': true, 'arrow-offset': 20}) Tooltip above the element
 
       a.tutorial-tooltip-container.bottom.position-relative Placement 'bottom' tooltip
         mp-tutorial-tooltip(attrs={placement: 'bottom', 'num-steps': 4}) Tooltip below the element
