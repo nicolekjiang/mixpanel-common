@@ -35,82 +35,123 @@ $tooltip-distance = 12px
   left "calc(50% - %s)" % ($tooltip-width / 2)
   top "calc(50% - %s)" % ($tooltip-height / 2)
 
-.mp-tutorial-tooltip-wrapper
-  background blue-700
-  border-radius 8px
-  box-shadow 0 2px 4px 0 (rgba(0, 0, 0, 0.16))
-  color white
-  cursor default
-  height inherit
++prefix-classes('mp-tutorial-tooltip-')
+  .stage
+    height inherit
 
-  &:not(.placement-center)
-    &::after
-      border 5px solid transparent
-      content ''
-      height 0
-      position absolute
-      width 0
+    &.hidden
+      pointer-events none
 
-    &.placement-top::after
-      border-top-color blue-700
-      left 50%
-      margin-left -5px
-      top 100%
+  .wrapper
+    background blue-700
+    border-radius 8px
+    box-shadow 0 16px 41px 0 rgba(18, 82, 143, 0.37);
+    color rgba(255, 255, 255, 0.64);
+    cursor default
+    height inherit
 
-    &.placement-bottom::after
-      border-bottom-color blue-700
-      bottom 100%
-      left 50%
-      margin-left -5px
+    &.in
+      opacity 1
+      transition all .4s cubic-bezier(0.165, 0.840, 0.440, 1.000)  // ease out quart
+      //transition all .25s cubic-bezier(0.215, 0.610, 0.355, 1.000)  // ease out cubic
 
-    &.placement-left::after
-      border-left-color blue-700
-      left 100%
-      margin-top -5px
-      top 50%
+    &.out
+      opacity 0
+      transition all .4s cubic-bezier(0.895, 0.030, 0.685, 0.220)  // ease in quart
+      //transition all .25s cubic-bezier(0.550, 0.055, 0.675, 0.190)  // ease in cubic
 
-    &.placement-right::after
-      border-right-color blue-700
-      margin-top -5px
-      right 100%
-      top 50%
+    &:not(.placement-center)
+      &::after
+        border 8px solid transparent
+        content ''
+        height 0
+        position absolute
+        width 0
 
-.mp-tooltip-content
-  padding 20px 30px
+      &.placement-bottom,
+      &.placement-top,
+      &.placement-left,
+      &.placement-right
+        &.in
+          transform translate(0)
 
-.mp-tooltip-footer
-  background blue-900
-  border-radius 0 0 8px 8px
-  bottom 0
-  height 42px
-  position absolute
-  width 100%
-
-  ul.steps
-    list-style none
-    margin 0
-    padding 0
-    padding-left 24px
-
-    li.step
-      background blue-100
-      border-radius 50%
-      float left
-      height 6px
-      margin 17px 14px 17px 0
-      position relative
-      width 6px
-
-      &.active
-        background transparent
+      &.placement-top
+        &, &.out
+          transform translateY(-20px)
 
         &::after
-          border 4px solid mp-yellow
-          border-radius 50%
-          box-shadow 0 2px 3px 0 rgba(19, 102, 179, 0.66)
-          content ''
-          height 4px
-          left -3px
-          position absolute
-          top -3px
-          width 4px
+          border-top-color blue-900
+          left 50%
+          margin-left -8px
+          top 100%
+
+      &.placement-bottom
+        &, &.out
+          transform translateY(20px)
+
+        &::after
+          border-bottom-color blue-700
+          bottom 100%
+          left 50%
+          margin-left -8px
+
+      &.placement-left
+        &, &.out
+          transform translateX(-20px)
+
+        &::after
+          border-left-color blue-700
+          left 100%
+          margin-top -8px
+          top 50%
+
+      &.placement-right
+        &, &.out
+          transform translateX(20px)
+
+        &::after
+          border-right-color blue-700
+          margin-top -8px
+          right 100%
+          top 50%
+
+  .content
+    padding 20px 30px
+
+  .footer
+    background blue-900
+    border-radius 0 0 8px 8px
+    border-top 1px solid #2282DD
+    bottom 0
+    height 42px
+    position absolute
+    width 100%
+
+    ul.steps
+      list-style none
+      margin 0
+      padding 0
+      padding-left 24px
+
+      li.step
+        background blue-100
+        border-radius 50%
+        float left
+        height 6px
+        margin 17px 14px 17px 0
+        position relative
+        width 6px
+
+        &.active
+          background transparent
+
+          &::after
+            border 4px solid mp-yellow
+            border-radius 50%
+            box-shadow 0 2px 3px 0 rgba(19, 102, 179, 0.66)
+            content ''
+            height 4px
+            left -3px
+            position absolute
+            top -3px
+            width 4px

@@ -1,7 +1,16 @@
-.mp-tutorial-tooltip-wrapper(class={[`placement-${placement}`]: placement})
-  .mp-tooltip-content
-    content
-  .mp-tooltip-footer
-    ul.steps
-      each step in $helpers.getSteps()
-        li.step(class={active: step === currStep})
+- const hide = $component.isAttributeEnabled('hide')
+.mp-tutorial-tooltip-stage(class={'mp-tutorial-tooltip-hidden': hide})
+  if !hide
+    .mp-tutorial-tooltip-wrapper(class={
+      [`mp-tutorial-tooltip-placement-${placement}`]: placement,
+      delayed: {'mp-tutorial-tooltip-in': true},
+      remove: {'mp-tutorial-tooltip-out': true, delayRemove: 400},
+    })
+      .mp-tutorial-tooltip-content
+        content
+      .mp-tutorial-tooltip-footer
+        ul.mp-tutorial-tooltip-steps
+          each step in $helpers.getSteps()
+            li.mp-tutorial-tooltip-step(class={
+              'mp-tutorial-tooltip-active': step === currStep,
+            })

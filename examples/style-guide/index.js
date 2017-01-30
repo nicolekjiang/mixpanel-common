@@ -7,6 +7,7 @@ import { Component } from 'panel';
 import '../../build/index';
 import COLORS from '../../build/stylesheets/mixins/colors.json';
 import { SVG_ICONS } from '../../build/components/svg-icon';
+import { extend } from '../../build/util';
 import bookmarks from './bookmark-data.json';
 
 import template from './index.jade';
@@ -29,6 +30,7 @@ document.registerElement(`style-guide`, class extends Component {
           modal: false,
           popup: false,
           tagSelector: false,
+          tutorialTooltip: {},
         },
         savingBookmark: false,
         selectedBookmarkId: null,
@@ -137,6 +139,16 @@ document.registerElement(`style-guide`, class extends Component {
         closeToast: toast => {
           toast.closed = true;
           this.update();
+        },
+        showTutorialTooltip: position => {
+          this.update({
+            open: extend(open, {tutorialTooltip: {[position]: true}}),
+          });
+        },
+        hideTutorialTooltip: position => {
+//          this.update({
+//            open: extend(open, {tutorialTooltip: {}}),
+//          });
         },
       },
       template,
