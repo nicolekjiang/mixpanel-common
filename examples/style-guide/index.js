@@ -140,15 +140,14 @@ document.registerElement(`style-guide`, class extends Component {
           toast.closed = true;
           this.update();
         },
-        showTutorialTooltip: position => {
+        toggleTutorialTooltip: position => {
           this.update({
-            open: extend(open, {tutorialTooltip: {[position]: true}}),
+            open: extend(open, {
+              tutorialTooltip: extend(this.state.open.tutorialTooltip, {
+                [position]: !this.state.open.tutorialTooltip[position],
+              }),
+            }),
           });
-        },
-        hideTutorialTooltip: position => {
-//          this.update({
-//            open: extend(open, {tutorialTooltip: {}}),
-//          });
         },
       },
       template,

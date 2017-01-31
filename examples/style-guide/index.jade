@@ -361,15 +361,13 @@
 
     h2 Tutorial tooltip widgets
     .tutorial-tooltips-container
-      a.tutorial-tooltip-container.top.position-relative(on={
-        mouseover: () => $helpers.showTutorialTooltip('top'),
-        mouseout: () => $helpers.hideTutorialTooltip('top'),
+      mp-button.tutorial-tooltip-container.top.position-relative(on={
+        click: () => $helpers.toggleTutorialTooltip('top'),
       }) Default (placement 'top') tooltip
         mp-tutorial-tooltip(attrs={hide: !open.tutorialTooltip.top}) Tooltip above the element
 
-      a.tutorial-tooltip-container.bottom.position-relative(on={
-        mouseover: () => $helpers.showTutorialTooltip('bottom'),
-        mouseout: () => $helpers.hideTutorialTooltip('bottom'),
+      mp-button.tutorial-tooltip-container.bottom.position-relative(on={
+        click: () => $helpers.toggleTutorialTooltip('bottom'),
       }) Placement 'bottom' tooltip
         mp-tutorial-tooltip(attrs={
           hide: !open.tutorialTooltip.bottom,
@@ -377,9 +375,8 @@
           'num-steps': 4,
         }) Tooltip below the element
 
-      a.tutorial-tooltip-container.left.position-relative(on={
-        mouseover: () => $helpers.showTutorialTooltip('left'),
-        mouseout: () => $helpers.hideTutorialTooltip('left'),
+      mp-button.tutorial-tooltip-container.left.position-relative(on={
+        click: () => $helpers.toggleTutorialTooltip('left'),
       }) Placement 'left' tooltip
         mp-tutorial-tooltip(attrs={
           hide: !open.tutorialTooltip.left,
@@ -388,9 +385,8 @@
           'curr-step': 1,
         }) Tooltip on the left side of element
 
-      a.tutorial-tooltip-container.right.position-relative(on={
-        mouseover: () => $helpers.showTutorialTooltip('right'),
-        mouseout: () => $helpers.hideTutorialTooltip('right'),
+      mp-button.tutorial-tooltip-container.right.position-relative(on={
+        click: () => $helpers.toggleTutorialTooltip('right'),
       }) Placement 'right' tooltip
         mp-tutorial-tooltip(attrs={
           hide: !open.tutorialTooltip.right,
@@ -399,9 +395,8 @@
           'curr-step': 2,
         }) Tooltip on the right side of element
 
-      a.tutorial-tooltip-container.center.position-relative(on={
-        mouseover: () => $helpers.showTutorialTooltip('center'),
-        mouseout: () => $helpers.hideTutorialTooltip('center'),
+      mp-button.tutorial-tooltip-container.center.position-relative(on={
+        click: () => $helpers.toggleTutorialTooltip('center'),
       }) Placement 'center' tooltip
         mp-tutorial-tooltip(attrs={
           hide: !open.tutorialTooltip.center,
