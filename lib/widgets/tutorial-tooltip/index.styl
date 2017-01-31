@@ -14,6 +14,9 @@ $tooltip-distance = 12px
   bottom "calc(100% + %s)" % $tooltip-distance
   left "calc(50% - %s)" % ($tooltip-width / 2)
 
++host-styles(mp-tutorial-tooltip, '[hide="true"]')
+  pointer-events none
+
 +host-styles(mp-tutorial-tooltip, '[placement="bottom"]')
   bottom initial
   top "calc(100% + %s)" % $tooltip-distance
@@ -49,6 +52,7 @@ $tooltip-distance = 12px
     color rgba(255, 255, 255, 0.64);
     cursor default
     height inherit
+    opacity 0
 
     &.in
       opacity 1
