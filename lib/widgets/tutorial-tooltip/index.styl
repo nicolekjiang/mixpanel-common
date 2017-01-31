@@ -60,60 +60,65 @@ $tooltip-distance = 12px
       transition all .4s cubic-bezier(0.895, 0.030, 0.685, 0.220)  // ease in quart
       //transition all .25s cubic-bezier(0.550, 0.055, 0.675, 0.190)  // ease in cubic
 
-    &:not(.placement-center)
+    &::after
+      border 8px solid transparent
+      content ''
+      height 0
+      position absolute
+      width 0
+
+    &.placement-bottom,
+    &.placement-top,
+    &.placement-left,
+    &.placement-right
+      &.in
+        transform translate(0)
+
+    &.placement-top
+      &, &.out
+        transform translateY(-20px)
+
       &::after
-        border 8px solid transparent
-        content ''
-        height 0
-        position absolute
-        width 0
+        border-top-color blue-900
+        left 50%
+        margin-left -8px
+        top 100%
 
-      &.placement-bottom,
-      &.placement-top,
-      &.placement-left,
-      &.placement-right
-        &.in
-          transform translate(0)
+    &.placement-bottom
+      &, &.out
+        transform translateY(20px)
 
-      &.placement-top
-        &, &.out
-          transform translateY(-20px)
+      &::after
+        border-bottom-color blue-700
+        bottom 100%
+        left 50%
+        margin-left -8px
 
-        &::after
-          border-top-color blue-900
-          left 50%
-          margin-left -8px
-          top 100%
+    &.placement-left
+      &, &.out
+        transform translateX(-20px)
 
-      &.placement-bottom
-        &, &.out
-          transform translateY(20px)
+      &::after
+        border-left-color blue-700
+        left 100%
+        margin-top -8px
+        top 50%
 
-        &::after
-          border-bottom-color blue-700
-          bottom 100%
-          left 50%
-          margin-left -8px
+    &.placement-right
+      &, &.out
+        transform translateX(20px)
 
-      &.placement-left
-        &, &.out
-          transform translateX(-20px)
+      &::after
+        border-right-color blue-700
+        margin-top -8px
+        right 100%
+        top 50%
 
-        &::after
-          border-left-color blue-700
-          left 100%
-          margin-top -8px
-          top 50%
-
-      &.placement-right
-        &, &.out
-          transform translateX(20px)
-
-        &::after
-          border-right-color blue-700
-          margin-top -8px
-          right 100%
-          top 50%
+    &.placement-center
+      &.in
+        transform scale(1)
+      &, &.out
+        transform scale(.95)
 
   .content
     padding 20px 30px
