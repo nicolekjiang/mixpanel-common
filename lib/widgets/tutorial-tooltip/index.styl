@@ -52,13 +52,11 @@ $tooltip-distance = 12px
 
     &.in
       opacity 1
-      transition all .4s cubic-bezier(0.165, 0.840, 0.440, 1.000)  // ease out quart
-      //transition all .25s cubic-bezier(0.215, 0.610, 0.355, 1.000)  // ease out cubic
+      transition all .4s ease-out-quart
 
     &.out
       opacity 0
-      transition all .4s cubic-bezier(0.895, 0.030, 0.685, 0.220)  // ease in quart
-      //transition all .25s cubic-bezier(0.550, 0.055, 0.675, 0.190)  // ease in cubic
+      transition all .4s ease-in-quart
 
     &::after
       border 8px solid transparent
