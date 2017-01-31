@@ -6,4 +6,4 @@
       ul.steps
         each step in $helpers.getSteps()
           li.step(class={active: step === currStep})
-  .arrow
+  .arrow(class={ [`arrow-align-${arrowAlign}`]: arrowAlign})

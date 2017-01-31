@@ -43,6 +43,7 @@ $tooltip-distance = 12px
   cursor default
   height inherit
 
+    
   &:not(.placement-center)
     .arrow
       border 5px solid transparent
@@ -50,6 +51,9 @@ $tooltip-distance = 12px
       height 0
       position absolute
       width 0
+
+      &.arrow-align-top.arrow-align-top
+        top 23px
 
     &.placement-top .arrow
       border-top-color blue-700
