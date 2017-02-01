@@ -143,9 +143,9 @@ document.registerElement(`style-guide`, class extends Component {
         toggleTutorialTooltip: position => {
           this.update({
             open: extend(open, {
-              tutorialTooltip: extend(this.state.open.tutorialTooltip, {
+              tutorialTooltip: {
                 [position]: !this.state.open.tutorialTooltip[position],
-              }),
+              },
             }),
           });
         },

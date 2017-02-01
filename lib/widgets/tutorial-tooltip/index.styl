@@ -52,6 +52,9 @@ $tooltip-distance = 12px
     color rgba(255, 255, 255, 0.64);
     cursor default
     height inherit
+
+    // fade-in animation styles
+
     opacity 0
 
     &.in
@@ -69,6 +72,8 @@ $tooltip-distance = 12px
       position absolute
       width 0
 
+    // slide-in animation styles
+
     &.placement-bottom,
     &.placement-top,
     &.placement-left,
@@ -80,47 +85,75 @@ $tooltip-distance = 12px
       &, &.out
         transform translateY(-20px)
 
-      &::after
-        border-top-color blue-900
-        left 50%
-        margin-left -8px
-        top 100%
-
     &.placement-bottom
       &, &.out
         transform translateY(20px)
-
-      &::after
-        border-bottom-color blue-700
-        bottom 100%
-        left 50%
-        margin-left -8px
 
     &.placement-left
       &, &.out
         transform translateX(-20px)
 
-      &::after
-        border-left-color blue-700
-        left 100%
-        margin-top -8px
-        top 50%
-
     &.placement-right
       &, &.out
         transform translateX(20px)
-
-      &::after
-        border-right-color blue-700
-        margin-top -8px
-        right 100%
-        top 50%
 
     &.placement-center
       &.in
         transform scale(1)
       &, &.out
         transform scale(.95)
+
+    // tooltip arrow styles
+
+    &.placement-top::after
+      border-top-color blue-900
+      left 50%
+      margin-left -8px
+      top 100%
+
+    &.placement-bottom::after
+      border-bottom-color blue-700
+      bottom 100%
+      left 50%
+      margin-left -8px
+
+    &.placement-left::after
+      border-left-color blue-700
+      left 100%
+      margin-top -8px
+      top 50%
+
+    &.placement-right::after
+      border-right-color blue-700
+      margin-top -8px
+      right 100%
+      top 50%
+
+    // tooltip arrow special alignment styles
+
+    &.arrow-align-top
+      &.placement-left, &.placement-right
+        &::after
+          bottom initial
+          top 23px
+
+    &.arrow-align-bottom
+      &.placement-left, &.placement-right
+        &::after
+          bottom 23px
+          top initial
+
+    &.arrow-align-right
+      &.placement-top, &.placement-bottom
+        &::after
+          left initial
+          right 23px
+
+    &.arrow-align-left
+      &.placement-top, &.placement-bottom
+        &::after
+          left 23px
+          right initial
 
   .content
     padding 20px 30px

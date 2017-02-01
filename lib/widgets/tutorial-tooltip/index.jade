@@ -3,14 +3,16 @@
   if !hide
     .mp-tutorial-tooltip-wrapper(class={
       [`mp-tutorial-tooltip-placement-${placement}`]: placement,
+      [`mp-tutorial-tooltip-arrow-align-${arrowAlign}`]: arrowAlign,
       delayed: {'mp-tutorial-tooltip-in': true},
       remove: {'mp-tutorial-tooltip-out': true, delayRemove: 400},
     })
       .mp-tutorial-tooltip-content
         content
-      .mp-tutorial-tooltip-footer
-        ul.mp-tutorial-tooltip-steps
-          each step in $helpers.getSteps()
-            li.mp-tutorial-tooltip-step(class={
-              'mp-tutorial-tooltip-active': step === currStep,
-            })
+      if !$component.isAttributeEnabled('hide-footer')
+        .mp-tutorial-tooltip-footer
+          ul.mp-tutorial-tooltip-steps
+            each step in $helpers.getSteps()
+              li.mp-tutorial-tooltip-step(class={
+                'mp-tutorial-tooltip-active': step === currStep,
+              })

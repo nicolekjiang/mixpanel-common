@@ -27773,7 +27773,10 @@
 	  }, {
 	    key: 'focus',
 	    value: function focus() {
-	      this.el.querySelector('.mp-tag-selector-search-input').focus();
+	      var searchInput = this.el.querySelector('.mp-tag-selector-search-input');
+	      if (searchInput) {
+	        searchInput.focus();
+	      }
 	    }
 	  }, {
 	    key: '_filterTags',
@@ -27806,6 +27809,13 @@
 	        activeTagIndex = 0;
 	      }
 	      this.update({ matchingTags: matchingTags, activeTagIndex: activeTagIndex });
+	      this.dispatchEvent(new CustomEvent('change', {
+	        detail: {
+	          action: 'updateInput',
+	          inputText: this.state.inputText,
+	          matchingTags: matchingTags
+	        }
+	      }));
 	    }
 	  }, {
 	    key: '_resizeInput',
@@ -28110,7 +28120,8 @@
 	                var __jade_nodes = [];
 	                __jade_nodes = __jade_nodes.concat(h("mp-list-item", {
 	                  "attrs": {
-	                    active: tagIdx === activeTagIndex
+	                    active: tagIdx === activeTagIndex,
+	                    'tag-name': tag
 	                  },
 	                  "on": {
 	                    click: function click() {
@@ -28247,6 +28258,12 @@
 	  }
 
 	  _createClass(_class, [{
+	    key: 'attachedCallback',
+	    value: function attachedCallback() {
+	      _get(_class.prototype.__proto__ || Object.getPrototypeOf(_class.prototype), 'attachedCallback', this).apply(this, arguments);
+	      this.style.display = this.isAttributeEnabled('hide') ? 'none' : '';
+	    }
+	  }, {
 	    key: 'attributeChangedCallback',
 	    value: function attributeChangedCallback() {
 	      _get(_class.prototype.__proto__ || Object.getPrototypeOf(_class.prototype), 'attributeChangedCallback', this).apply(this, arguments);
@@ -28255,6 +28272,7 @@
 	      var placement = this.getAttribute('placement');
 	      var numSteps = parseInt(this.getAttribute('num-steps'));
 	      var currStep = parseInt(this.getAttribute('curr-step'));
+	      var arrowAlign = this.getAttribute('arrow-align');
 
 	      if (placement) {
 	        update.placement = placement;
@@ -28264,6 +28282,9 @@
 	      }
 	      if (Number.isInteger(currStep)) {
 	        update.currStep = currStep;
+	      }
+	      if (arrowAlign) {
+	        update.arrowAlign = arrowAlign;
 	      }
 
 	      this.update(update);
@@ -28304,7 +28325,7 @@
 
 	function _jade_template_fn(locals) {
 	  locals = locals || {};;;
-	  var result_of_with = function ($helpers, Object, currStep, placement) {
+	  var result_of_with = function ($component, $helpers, Object, arrowAlign, currStep, placement) {
 	    var h = __webpack_require__(299).h;
 	    return {
 	      value: h("div", {
@@ -28322,39 +28343,48 @@
 	          __jade_nodes = __jade_nodes.concat(h("content"));;
 	          return __jade_nodes;
 	        }.call(this).filter(Boolean)));
-	        __jade_nodes = __jade_nodes.concat(h("div", {
-	          "class": {
-	            'mp-tooltip-footer': true
-	          }
-	        }, function () {
+	        __jade_nodes = __jade_nodes.concat(!$component.isAttributeEnabled('hide-footer') ? function () {
 	          var __jade_nodes = [];
-	          __jade_nodes = __jade_nodes.concat(h("ul", {
+	          __jade_nodes = __jade_nodes.concat(h("div", {
 	            "class": {
-	              'steps': true
+	              'mp-tooltip-footer': true
 	            }
 	          }, function () {
 	            var __jade_nodes = [];
-	            __jade_nodes = __jade_nodes.concat($helpers.getSteps().reduce(function (__each_nodes, step, $index) {
-	              return __each_nodes.concat(function () {
-	                var __jade_nodes = [];
-	                __jade_nodes = __jade_nodes.concat(h("li", {
-	                  "class": Object.assign({}, {
-	                    active: step === currStep
-	                  }, {
-	                    'step': true
-	                  })
-	                }));;
-	                return __jade_nodes;
-	              }.call(this));
-	            }, []));;
+	            __jade_nodes = __jade_nodes.concat(h("ul", {
+	              "class": {
+	                'steps': true
+	              }
+	            }, function () {
+	              var __jade_nodes = [];
+	              __jade_nodes = __jade_nodes.concat($helpers.getSteps().reduce(function (__each_nodes, step, $index) {
+	                return __each_nodes.concat(function () {
+	                  var __jade_nodes = [];
+	                  __jade_nodes = __jade_nodes.concat(h("li", {
+	                    "class": Object.assign({}, {
+	                      active: step === currStep
+	                    }, {
+	                      'step': true
+	                    })
+	                  }));;
+	                  return __jade_nodes;
+	                }.call(this));
+	              }, []));;
+	              return __jade_nodes;
+	            }.call(this).filter(Boolean)));;
 	            return __jade_nodes;
 	          }.call(this).filter(Boolean)));;
 	          return __jade_nodes;
-	        }.call(this).filter(Boolean)));;
+	        }.call(this) : undefined);
+	        __jade_nodes = __jade_nodes.concat(h("div", {
+	          "class": Object.assign({}, _defineProperty({}, "arrow-align-" + arrowAlign, arrowAlign), {
+	            'arrow': true
+	          })
+	        }));;
 	        return __jade_nodes;
 	      }.call(this).filter(Boolean))
 	    };
-	  }.call(this, "$helpers" in locals ? locals.$helpers : typeof $helpers !== "undefined" ? $helpers : undefined, "Object" in locals ? locals.Object : typeof Object !== "undefined" ? Object : undefined, "currStep" in locals ? locals.currStep : typeof currStep !== "undefined" ? currStep : undefined, "placement" in locals ? locals.placement : typeof placement !== "undefined" ? placement : undefined);
+	  }.call(this, "$component" in locals ? locals.$component : typeof $component !== "undefined" ? $component : undefined, "$helpers" in locals ? locals.$helpers : typeof $helpers !== "undefined" ? $helpers : undefined, "Object" in locals ? locals.Object : typeof Object !== "undefined" ? Object : undefined, "arrowAlign" in locals ? locals.arrowAlign : typeof arrowAlign !== "undefined" ? arrowAlign : undefined, "currStep" in locals ? locals.currStep : typeof currStep !== "undefined" ? currStep : undefined, "placement" in locals ? locals.placement : typeof placement !== "undefined" ? placement : undefined);
 	  if (result_of_with) return result_of_with.value;
 	}
 	module.exports = _jade_template_fn;
@@ -28363,7 +28393,7 @@
 /* 388 */
 /***/ function(module, exports) {
 
-	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } svg-icon[icon=type-boolean] #left-dot {   color: #fff;   fill: #fff; } svg-icon[icon=type-boolean] #right-dot {   color: #4c6072;   fill: #4c6072; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6e859d;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 12px;   font-stretch: normal;   font-weight: 400; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 12px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6e859d;   font-size: 14px;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 12px;   font-weight: 400;   padding: 8px;   -webkit-transition: border-color 150ms ease-out;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus, input[type=text]:active, textarea:active {   border-color: #3391e9;   -webkit-transition: border-color 200ms ease-in;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } mp-tutorial-tooltip {   height: 160px;   position: absolute;   width: 420px;   z-index: 100;   bottom: calc(100% + 12px);   left: calc(50% - 210px); } :host {   height: 160px;   position: absolute;   width: 420px;   z-index: 100;   bottom: calc(100% + 12px);   left: calc(50% - 210px); } mp-tutorial-tooltip[placement=\"bottom\"] {   bottom: initial;   top: calc(100% + 12px);   left: calc(50% - 210px); } :host([placement=\"bottom\"]) {   bottom: initial;   top: calc(100% + 12px);   left: calc(50% - 210px); } mp-tutorial-tooltip[placement=\"left\"] {   bottom: initial;   left: initial;   right: calc(100% + 12px);   top: calc(50% - 80px); } :host([placement=\"left\"]) {   bottom: initial;   left: initial;   right: calc(100% + 12px);   top: calc(50% - 80px); } mp-tutorial-tooltip[placement=\"right\"] {   bottom: initial;   left: calc(100% + 12px);   top: calc(50% - 80px); } :host([placement=\"right\"]) {   bottom: initial;   left: calc(100% + 12px);   top: calc(50% - 80px); } mp-tutorial-tooltip[placement=\"center\"] {   bottom: initial;   left: calc(50% - 210px);   top: calc(50% - 80px); } :host([placement=\"center\"]) {   bottom: initial;   left: calc(50% - 210px);   top: calc(50% - 80px); } .mp-tutorial-tooltip-wrapper {   background: #3391e9;   border-radius: 8px;   box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16);   color: #fff;   cursor: default;   height: inherit; } .mp-tutorial-tooltip-wrapper:not(.placement-center)::after {   border: 5px solid transparent;   content: '';   height: 0;   position: absolute;   width: 0; } .mp-tutorial-tooltip-wrapper:not(.placement-center).placement-top::after {   border-top-color: #3391e9;   left: 50%;   margin-left: -5px;   top: 100%; } .mp-tutorial-tooltip-wrapper:not(.placement-center).placement-bottom::after {   border-bottom-color: #3391e9;   bottom: 100%;   left: 50%;   margin-left: -5px; } .mp-tutorial-tooltip-wrapper:not(.placement-center).placement-left::after {   border-left-color: #3391e9;   left: 100%;   margin-top: -5px;   top: 50%; } .mp-tutorial-tooltip-wrapper:not(.placement-center).placement-right::after {   border-right-color: #3391e9;   margin-top: -5px;   right: 100%;   top: 50%; } .mp-tooltip-content {   padding: 20px 30px; } .mp-tooltip-footer {   background: #2687e3;   border-radius: 0 0 8px 8px;   bottom: 0;   height: 42px;   position: absolute;   width: 100%; } .mp-tooltip-footer ul.steps {   list-style: none;   margin: 0;   padding: 0;   padding-left: 24px; } .mp-tooltip-footer ul.steps li.step {   background: #6cb8ff;   border-radius: 50%;   float: left;   height: 6px;   margin: 17px 14px 17px 0;   position: relative;   width: 6px; } .mp-tooltip-footer ul.steps li.step.active {   background: transparent; } .mp-tooltip-footer ul.steps li.step.active::after {   border: 4px solid #ffd209;   border-radius: 50%;   box-shadow: 0 2px 3px 0 rgba(19,102,179,0.66);   content: '';   height: 4px;   left: -3px;   position: absolute;   top: -3px;   width: 4px; } ";
+	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } svg-icon[icon=type-boolean] #left-dot {   color: #fff;   fill: #fff; } svg-icon[icon=type-boolean] #right-dot {   color: #4c6072;   fill: #4c6072; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6e859d;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 12px;   font-stretch: normal;   font-weight: 400; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 12px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6e859d;   font-size: 14px;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 12px;   font-weight: 400;   padding: 8px;   -webkit-transition: border-color 150ms ease-out;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9cacbb !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus, input[type=text]:active, textarea:active {   border-color: #3391e9;   -webkit-transition: border-color 200ms ease-in;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } mp-tutorial-tooltip {   height: 160px;   position: absolute;   width: 420px;   z-index: 100;   bottom: calc(100% + 12px);   left: calc(50% - 210px); } :host {   height: 160px;   position: absolute;   width: 420px;   z-index: 100;   bottom: calc(100% + 12px);   left: calc(50% - 210px); } mp-tutorial-tooltip[placement=\"bottom\"] {   bottom: initial;   top: calc(100% + 12px);   left: calc(50% - 210px); } :host([placement=\"bottom\"]) {   bottom: initial;   top: calc(100% + 12px);   left: calc(50% - 210px); } mp-tutorial-tooltip[placement=\"left\"] {   bottom: initial;   left: initial;   right: calc(100% + 12px);   top: calc(50% - 80px); } :host([placement=\"left\"]) {   bottom: initial;   left: initial;   right: calc(100% + 12px);   top: calc(50% - 80px); } mp-tutorial-tooltip[placement=\"right\"] {   bottom: initial;   left: calc(100% + 12px);   top: calc(50% - 80px); } :host([placement=\"right\"]) {   bottom: initial;   left: calc(100% + 12px);   top: calc(50% - 80px); } mp-tutorial-tooltip[placement=\"center\"] {   bottom: initial;   left: calc(50% - 210px);   top: calc(50% - 80px); } :host([placement=\"center\"]) {   bottom: initial;   left: calc(50% - 210px);   top: calc(50% - 80px); } .mp-tutorial-tooltip-wrapper {   background: #3391e9;   border-radius: 8px;   box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16);   color: #fff;   cursor: default;   height: inherit; } .mp-tutorial-tooltip-wrapper:not(.placement-center) .arrow {   border: 5px solid transparent;   content: '';   height: 0;   position: absolute;   width: 0; } .mp-tutorial-tooltip-wrapper:not(.placement-center) .arrow.arrow-align-top.arrow-align-top {   top: 23px; } .mp-tutorial-tooltip-wrapper:not(.placement-center).placement-top .arrow {   border-top-color: #3391e9;   left: 50%;   margin-left: -5px;   top: 100%; } .mp-tutorial-tooltip-wrapper:not(.placement-center).placement-bottom .arrow {   border-bottom-color: #3391e9;   bottom: 100%;   left: 50%;   margin-left: -5px; } .mp-tutorial-tooltip-wrapper:not(.placement-center).placement-left .arrow {   border-left-color: #3391e9;   left: 100%;   margin-top: -5px;   top: 50%; } .mp-tutorial-tooltip-wrapper:not(.placement-center).placement-right .arrow {   border-right-color: #3391e9;   margin-top: -5px;   right: 100%;   top: 50%; } .mp-tooltip-content {   padding: 20px 30px; } .mp-tooltip-footer {   background: #2687e3;   border-radius: 0 0 8px 8px;   bottom: 0;   height: 42px;   position: absolute;   width: 100%; } .mp-tooltip-footer ul.steps {   list-style: none;   margin: 0;   padding: 0;   padding-left: 24px; } .mp-tooltip-footer ul.steps li.step {   background: #6cb8ff;   border-radius: 50%;   float: left;   height: 6px;   margin: 17px 14px 17px 0;   position: relative;   width: 6px; } .mp-tooltip-footer ul.steps li.step.active {   background: transparent; } .mp-tooltip-footer ul.steps li.step.active::after {   border: 4px solid #ffd209;   border-radius: 50%;   box-shadow: 0 2px 3px 0 rgba(19,102,179,0.66);   content: '';   height: 4px;   left: -3px;   position: absolute;   top: -3px;   width: 4px; } ";
 
 
 /***/ },

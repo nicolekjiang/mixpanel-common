@@ -34,7 +34,7 @@
     .mp-tag-selector-tag-list
       for tag, tagIdx in matchingTags
         mp-list-item(
-          attrs={active: tagIdx === activeTagIndex}
+          attrs={active: tagIdx === activeTagIndex, 'tag-name': tag}
           on={click: () => $helpers.addTag(tag)}
         )
           if tag === 'my dashboard'

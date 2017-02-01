@@ -33,9 +33,9 @@ describe(`Test tag-selector widget`, () => {
 
   it(`fires change event to add tags`, function(done) {
     this.widget.addEventListener(`change`, e => {
-      expect(e.detail.action).to.equal(`addTag`);
-      expect(e.detail.tagName).to.equal(`new tag`);
-      done();
+      if(e.detail.action === `addTag` && e.detail.tagName === `new tag`) {
+        done();
+      }
     });
     const searchInput = this.widget.el.querySelector(`.mp-tag-selector-search-input`);
     searchInput.value = `new tag`;
@@ -49,8 +49,9 @@ describe(`Test tag-selector widget`, () => {
 
   it(`fires change event to remove tags`, function(done) {
     this.widget.addEventListener(`change`, e => {
-      expect(e.detail.action).to.equal(`removeTag`);
-      done();
+      if(e.detail.action === `removeTag`) {
+        done();
+      }
     });
     this.widget.el.querySelector(`mp-tag`).dispatchEvent(new CustomEvent(`change`, {detail: {action: `remove`}}));
   });

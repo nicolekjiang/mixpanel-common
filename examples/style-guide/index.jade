@@ -363,45 +363,69 @@
     .tutorial-tooltips-container
       mp-button.tutorial-tooltip-container.top.position-relative(on={
         click: () => $helpers.toggleTutorialTooltip('top'),
-      }) Default (placement 'top') tooltip
-        mp-tutorial-tooltip(attrs={hide: !open.tutorialTooltip.top}) Tooltip above the element
+      }) Default (placement="top") tooltip
+        mp-tutorial-tooltip(attrs={hide: !open.tutorialTooltip.top}) Default (placement="top") tooltip
 
       mp-button.tutorial-tooltip-container.bottom.position-relative(on={
         click: () => $helpers.toggleTutorialTooltip('bottom'),
-      }) Placement 'bottom' tooltip
+      }) Tooltip with placement="bottom"
         mp-tutorial-tooltip(attrs={
           hide: !open.tutorialTooltip.bottom,
           placement: 'bottom',
           'num-steps': 4,
-        }) Tooltip below the element
+        }) Tooltip with placement="bottom"
 
       mp-button.tutorial-tooltip-container.left.position-relative(on={
         click: () => $helpers.toggleTutorialTooltip('left'),
-      }) Placement 'left' tooltip
+      }) Tooltip with placement="left"
         mp-tutorial-tooltip(attrs={
           hide: !open.tutorialTooltip.left,
           placement: 'left',
           'num-steps': 4,
           'curr-step': 1,
-        }) Tooltip on the left side of element
+        }) Tooltip with placement="left"
 
       mp-button.tutorial-tooltip-container.right.position-relative(on={
         click: () => $helpers.toggleTutorialTooltip('right'),
-      }) Placement 'right' tooltip
+      }) Tooltip with placement="right"
         mp-tutorial-tooltip(attrs={
           hide: !open.tutorialTooltip.right,
           placement: 'right',
           'num-steps': 4,
           'curr-step': 2,
-        }) Tooltip on the right side of element
+        }) Tooltip with placement="right"
 
       mp-button.tutorial-tooltip-container.center.position-relative(on={
         click: () => $helpers.toggleTutorialTooltip('center'),
-      }) Placement 'center' tooltip
+      }) Tooltip with placement="center" (with overridden "top" positioning)
         mp-tutorial-tooltip(attrs={
           hide: !open.tutorialTooltip.center,
           placement: 'center',
           'num-steps': 4,
           'curr-step': 3,
-        }) Tooltip centered on the element (with overridden top offset)
+        }) Tooltip with placement="center" (with overridden "top" positioning)
 
+      mp-button.tutorial-tooltip-container.top.position-relative(on={
+        click: () => $helpers.toggleTutorialTooltip('top'),
+      }) Tooltip with hide-footer="true"
+        mp-tutorial-tooltip(attrs={'hide-footer': true, placement: 'top', hide: !open.tutorialTooltip.top}) Tooltip with hide-footer="true"
+
+      mp-button.tutorial-tooltip-container.top.position-relative(on={
+        click: () => $helpers.toggleTutorialTooltip('left'),
+      }) Tooltip with arrow-align="top"
+        mp-tutorial-tooltip(attrs={'arrow-align': 'top', placement: 'left', hide: !open.tutorialTooltip.left}) Tooltip arrow-align="top"
+
+      mp-button.tutorial-tooltip-container.top.position-relative(on={
+        click: () => $helpers.toggleTutorialTooltip('right'),
+      }) Tooltip with arrow-align="bottom"
+        mp-tutorial-tooltip(attrs={'arrow-align': 'bottom', placement: 'right', hide: !open.tutorialTooltip.right}) Tooltip arrow-align="bottom"
+
+      mp-button.tutorial-tooltip-container.top.position-relative(on={
+        click: () => $helpers.toggleTutorialTooltip('top'),
+      }) Tooltip with arrow-align="left"
+        mp-tutorial-tooltip(attrs={'arrow-align': 'left', placement: 'top', hide: !open.tutorialTooltip.top}) Tooltip with arrow-align="left"
+
+      mp-button.tutorial-tooltip-container.top.position-relative(on={
+        click: () => $helpers.toggleTutorialTooltip('bottom'),
+      }) Tooltip with arrow-align="right"
+        mp-tutorial-tooltip(attrs={'arrow-align': 'right', placement: 'bottom', hide: !open.tutorialTooltip.bottom}) Tooltip with arrow-align="right"
