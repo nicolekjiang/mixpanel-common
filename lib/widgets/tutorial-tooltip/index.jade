@@ -1,4 +1,7 @@
 - const hide = $component.isAttributeEnabled('hide')
+- const placement = $component.getAttribute('placement')
+- const arrowAlign = $component.getAttribute('arrow-align')
+
 .mp-tutorial-tooltip-stage(class={'mp-tutorial-tooltip-hidden': hide})
   if !hide
     .mp-tutorial-tooltip-wrapper(class={
