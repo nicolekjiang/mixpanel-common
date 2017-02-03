@@ -1,10 +1,12 @@
 - const hide = $component.isAttributeEnabled('hide')
+- const hideFooter = $component.isAttributeEnabled('hide-footer')
 - const placement = $component.getAttribute('placement')
 - const arrowAlign = $component.getAttribute('arrow-align')
 
 .mp-tutorial-tooltip-stage
   if !hide
     .mp-tutorial-tooltip-wrapper(class={
+      'mp-tutorial-tooltip-hide-footer': hideFooter,
       [`mp-tutorial-tooltip-placement-${placement}`]: placement,
       [`mp-tutorial-tooltip-arrow-align-${arrowAlign}`]: arrowAlign,
       delayed: {'mp-tutorial-tooltip-in': true},

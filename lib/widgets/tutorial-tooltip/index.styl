@@ -5,6 +5,9 @@ $tooltip-height = 160px
 $tooltip-distance = 12px
 
 +host-styles(mp-tutorial-tooltip)
+  color rgba(255, 255, 255, 0.64);
+  cursor default
+  font-weight 600
   height $tooltip-height
   position absolute
   width $tooltip-width
@@ -38,6 +41,22 @@ $tooltip-distance = 12px
   left "calc(50% - %s)" % ($tooltip-width / 2)
   top "calc(50% - %s)" % ($tooltip-height / 2)
 
++host-styles(mp-tutorial-tooltip, '[arrow-align="top"]')
+  bottom initial
+  top calc(50% - 31px)
+
++host-styles(mp-tutorial-tooltip, '[arrow-align="bottom"]')
+  top initial
+  bottom calc(50% - 24px)
+
++host-styles(mp-tutorial-tooltip, '[arrow-align="left"]')
+  right initial
+  left calc(50% - 32px)
+
++host-styles(mp-tutorial-tooltip, '[arrow-align="right"]')
+  left initial
+  right calc(50% - 36px)
+
 +prefix-classes('mp-tutorial-tooltip-')
   .stage
     height inherit
@@ -46,8 +65,6 @@ $tooltip-distance = 12px
     background blue-700
     border-radius 8px
     box-shadow 0 16px 41px 0 rgba(18, 82, 143, 0.37);
-    color rgba(255, 255, 255, 0.64);
-    cursor default
     height inherit
 
     // fade-in animation styles
@@ -61,13 +78,6 @@ $tooltip-distance = 12px
     &.out
       opacity 0
       transition all (mp-slow)ms ease-in-quart
-
-    &::after
-      border 8px solid transparent
-      content ''
-      height 0
-      position absolute
-      width 0
 
     // slide-in animation styles
 
@@ -102,27 +112,37 @@ $tooltip-distance = 12px
 
     // tooltip arrow styles
 
+    &::after
+      border 11px solid transparent
+      content ''
+      height 0
+      position absolute
+      width 0
+
     &.placement-top::after
       border-top-color blue-900
       left 50%
-      margin-left -8px
+      margin-left -11px
       top 100%
+
+    &.placement-top.hide-footer::after
+      border-top-color blue-700
 
     &.placement-bottom::after
       border-bottom-color blue-700
       bottom 100%
       left 50%
-      margin-left -8px
+      margin-left -11px
 
     &.placement-left::after
       border-left-color blue-700
       left 100%
-      margin-top -8px
+      margin-top -11px
       top 50%
 
     &.placement-right::after
       border-right-color blue-700
-      margin-top -8px
+      margin-top -11px
       right 100%
       top 50%
 
@@ -132,13 +152,16 @@ $tooltip-distance = 12px
       &.placement-left, &.placement-right
         &::after
           bottom initial
-          top 23px
+          top 32px
 
     &.arrow-align-bottom
       &.placement-left, &.placement-right
         &::after
-          bottom 23px
+          bottom 13px
           top initial
+
+        &:not(.hide-footer)::after
+          border-right-color blue-900
 
     &.arrow-align-right
       &.placement-top, &.placement-bottom
@@ -149,7 +172,7 @@ $tooltip-distance = 12px
     &.arrow-align-left
       &.placement-top, &.placement-bottom
         &::after
-          left 23px
+          left 32px
           right initial
 
   .content
@@ -168,7 +191,7 @@ $tooltip-distance = 12px
       list-style none
       margin 0
       padding 0
-      padding-left 24px
+      padding-left 30px
 
       li.step
         background blue-100
