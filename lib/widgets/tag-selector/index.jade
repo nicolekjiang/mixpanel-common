@@ -50,6 +50,11 @@
                 span= token
               else
                 b= token
+  else
+    .mp-tag-selector-hr
+    .mp-tag-selector-empty-list
+      mp-list-item(attrs={static: true})
+        .mp-tag-selector-empty No dashboards found.
 
   if showCreateButton
     .mp-tag-selector-hr
