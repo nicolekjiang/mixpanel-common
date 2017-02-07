@@ -13,14 +13,19 @@
             class={delayed: {'mp-tag-selector-tag-in': true}, remove: {'mp-tag-selector-tag-out': true, delayRemove: 250}}
             on={change: e => { e.stopPropagation(); $helpers.removeTag(tag) }}
           )
+      - const isEmpty = !selectedTags.size
+      if isEmpty
+        .mp-tag-selector-mp-icon.mp-icon
+            svg-icon(attrs={icon: 'search'})
       input.mp-tag-selector-search-input(
-        props={type: 'text', value: inputText}
+        class={'mp-tag-selector-empty': isEmpty}
+        props={type: 'text', value: inputText, placeholder: isEmpty ? 'Add dashboards...' : ''}
         on={
           input: $helpers.setInputText,
           keydown: $helpers.handleKeyDown,
           keypress: $helpers.handleKeyPress,
         }
-        style={width: inputWidth}
+        style={width: isEmpty ? '100%' : inputWidth}
       )
       .mp-tag-selector-border(class={'mp-tag-selector-error': $component.isAttributeEnabled('error')})
 
