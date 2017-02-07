@@ -4,7 +4,7 @@
       if !$component.isAttributeEnabled('read-only')
         - const tags = [...selectedTags];
         for tag in tags
-          - const attrs = {'tag-name': tag, 'removable': tags.length > 1}
+          - const attrs = {'tag-name': tag, 'removable': tags.length > 1, 'size': 'small'}
           if tag === 'my dashboard'
             - attrs['icon'] = 'profile-large';
           mp-tag(
