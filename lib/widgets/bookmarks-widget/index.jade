@@ -6,6 +6,7 @@ mixin list-item(bookmark)
     on={
       click: () => $helpers.selectBookmark(bookmark),
       mouseover: () => $helpers.activateBookmark(bookmark),
+      mouseleave: () => $helpers.activateBookmark(null),
     }
   )
     .mp-bm-menu-bookmark-row
