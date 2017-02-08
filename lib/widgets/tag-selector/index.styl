@@ -26,7 +26,7 @@
         flex-wrap wrap
         justify-content flex-start
         min-height 36px
-        padding 6px 6px 0px
+        padding 6px 6px 0
         position relative
         width 300px
 
@@ -38,11 +38,11 @@
         mp-tag
           margin 0 0 6px 4px
           opacity 0
-          white-space nowrap
           transition all 0.25s
+          white-space nowrap
 
           &.tag-in
-           opacity 1
+            opacity 1
 
           &.tag-out
             opacity 0
@@ -72,10 +72,10 @@
           font-weight weight-regular
           height auto
           line-height 1.5
-          margin-left 6px
           margin-bottom 7px
-          min-width 0
+          margin-left 6px
           max-width 100%
+          min-width 0
           padding 0
 
           &.empty
@@ -102,15 +102,15 @@
         margin-right 12px
         svg-icon-style(grey-700, size: 16px, speed: 0s, pos-left: -3px, pos-top: -1px)
 
-        &[active="true"], &:hover
+        &[active='true'], &:hover
           svg-icon-style(blue-300, size: 16px, speed: 0s, pos-left: -3px, pos-top: -1px)
 
         .tag-list-item
           display block
 
     .footer
-      border-bottom-right-radius inherit
       border-bottom-left-radius inherit
+      border-bottom-right-radius inherit
       box-sizing border-box
       cursor pointer
       display flex
@@ -144,6 +144,6 @@
     font-weight weight-regular
     padding 0
     position absolute
-    white-space nowrap
     visibility hidden
+    white-space nowrap
 

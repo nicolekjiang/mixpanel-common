@@ -20,8 +20,8 @@ bg-img(image-path, width=null, height=null)
   background-repeat no-repeat
   if width != null && height != null
     background-size width height
-    width width
     height height
+    width width
 
 bg-img-with-2x(original-image, two-times-image, width, height)
   bg-img(original-image, width, height)
@@ -32,9 +32,3 @@ bg-img-with-2x(original-image, two-times-image, width, height)
     only screen and (min-resolution 192dpi),
     only screen and (min-resolution 2dppx)
       bg-img(two-times-image)
-
-/* LIST STYLES */
-$mp-list-gutter-height = 8px
-$mp-list-gutter-width = 20px
-$mp-list-item-margin = 0px $mp-list-gutter-width
-$mp-list-item-padding = 10px
