@@ -1,8 +1,12 @@
 .mp-tag-selector-container
   .mp-tag-selector-top-input-wrapper
     .mp-tag-selector-input-wrapper(on={click: $helpers.focusInput})
-      if !$component.isAttributeEnabled('read-only')
-        - const tags = [...selectedTags];
+      - const isEmpty = !selectedTags.size
+      if isEmpty || $component.isAttributeEnabled('read-only')
+        .mp-tag-selector-mp-icon.mp-icon
+            svg-icon(attrs={icon: 'search'})      
+      else
+        - const tags = [...selectedTags]
         for tag in tags
           - const attrs = {'tag-name': tag, 'removable': tags.length > 1, 'size': 'small'}
           if tag === 'my dashboard'
@@ -13,10 +17,6 @@
             class={delayed: {'mp-tag-selector-tag-in': true}, remove: {'mp-tag-selector-tag-out': true, delayRemove: 250}}
             on={change: e => { e.stopPropagation(); $helpers.removeTag(tag) }}
           )
-      - const isEmpty = !selectedTags.size
-      if isEmpty
-        .mp-tag-selector-mp-icon.mp-icon
-            svg-icon(attrs={icon: 'search'})
       input.mp-tag-selector-search-input(
         class={'mp-tag-selector-empty': isEmpty}
         props={type: 'text', value: inputText, placeholder: isEmpty ? 'Add dashboards...' : ''}
