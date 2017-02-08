@@ -34,14 +34,17 @@ describe(`lexicalCompose`, function() {
   it(`implements a lexical ordering`, function() {
     let myOrd = lexicalCompose(
       mapArguments(defaultOrdering, x => x[0]),
-      mapArguments(defaultOrdering, x => x[1])
+      mapArguments(defaultOrdering, x => x[1]),
+      mapArguments(defaultOrdering, x => x[2])
     );
     
     expect([
-      [1,1],
-      [1,2],
-      [2,1],
-      [0,10]
-    ].sort(myOrd)).to.eql([[0,10],[1,1],[1,2],[2,1]]);
+      [1,1,1],
+      [1,2,1],
+      [2,1,1],
+      [2,1,2],
+      [2,1,0],
+      [0,10,0]
+    ].sort(myOrd)).to.eql([[0,10,0],[1,1,1],[1,2,1],[2,1,0],[2,1,1],[2,1,2]]);
   });
 });
