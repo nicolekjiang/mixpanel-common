@@ -91,6 +91,7 @@
       border-bottom-left-radius 5px
       border-bottom-right-radius 5px
       max-height 360px
+      overflow-x hidden
       overflow-y auto
       position relative
 
@@ -137,7 +138,7 @@
               margin-bottom 4px
 
             .creator
-              color grey-500
+              color grey-300
               font-weight weight-regular
 
         .delete-button
@@ -151,8 +152,11 @@
           opacity 1
 
         &[active='true'] .bookmark-row .bookmark-details
-          .name, .creator
+          .name
             color mp-blue
+
+          .creator
+            color grey-500
 
   .add
     align-items center
