@@ -53,7 +53,7 @@ mixin list-item(bookmark)
         .mp-bm-menu-list
           if filteredBookmarks.length === 0
             mp-list-item(attrs={static: true})
-              .mp-bm-menu-empty No bookmarks found.
+              .mp-bm-menu-empty No bookmarks found, try creating a bookmark.
           else
             - const showSectionHeader = filteredBookmarks[0].user_id === userId && filteredBookmarks[filteredBookmarks.length - 1].userId !== userId
             for bookmark, idx in filteredBookmarks

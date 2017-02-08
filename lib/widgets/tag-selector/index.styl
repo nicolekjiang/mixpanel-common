@@ -30,6 +30,11 @@
         position relative
         width 300px
 
+        icon-input(icon-color: grey-500, icon-size: 22px)
+
+        .mp-icon
+          top -1px
+
         mp-tag
           margin 0 0 6px 4px
           opacity 0
@@ -44,7 +49,7 @@
 
         .border
           border 1px solid grey-200
-          border-radius 3px
+          border-radius 5px
           height 100%
           left 0
           pointer-events none
@@ -57,7 +62,7 @@
             border-color mp-red
 
         &:active .border
-          border-color mp-blue
+          border-color blue-500
 
         .search-input
           background-color transparent
@@ -73,8 +78,15 @@
           max-width 100%
           padding 0
 
+          &.empty
+            padding-top 1px
+            padding-left 24px
+
           &:focus + .border:not(.loaded-error)
-            border-color mp-blue
+            border-color blue-500
+    
+    .empty
+      font-style italic
 
     .hr
       background-color grey-200

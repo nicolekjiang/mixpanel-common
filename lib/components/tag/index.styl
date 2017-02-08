@@ -8,9 +8,27 @@
   font-family family-helvetica
   font-size-default()
   font-weight weight-bold
-  height 10px
-  line-height 0.8
   padding 8px 15px 8px 15px
+
+  &.default-tag
+    height 10px
+    line-height 0.8
+    
+    .remove-tag
+      top -4px
+
+    .extra-icon
+      top -2px
+
+  &.small-tag
+    height 8px
+    line-height 0.7
+    
+    .remove-tag
+      top -5px
+
+    .extra-icon
+      top -3px      
 
   &.clickable:hover
     background-color grey-500
@@ -22,7 +40,6 @@
   .extra-icon
     left -4px
     position relative
-    top -2px
 
     svg-icon-style(white, size: 14px)
 
@@ -32,7 +49,6 @@
     height 16px
     left 3px
     position relative
-    top -4px
     width 16px
 
     .remove-icon
