@@ -5,7 +5,7 @@ $tooltip-height = 160px
 $tooltip-distance = 12px
 
 +host-styles(mp-tutorial-tooltip)
-  color rgba(255, 255, 255, 0.64);
+  color rgba(255, 255, 255, 0.64)
   cursor default
   font-weight 600
   height $tooltip-height
@@ -14,44 +14,44 @@ $tooltip-distance = 12px
   z-index 100
 
   // default (placement=top) tooltip positioning
-  bottom "calc(100% + %s)" % $tooltip-distance
-  left "calc(50% - %s)" % ($tooltip-width / 2)
+  bottom 'calc(100% + %s)' % $tooltip-distance
+  left 'calc(50% - %s)' % ($tooltip-width / 2)
 
 +host-styles(mp-tutorial-tooltip, '[hide="true"]')
   pointer-events none
 
 +host-styles(mp-tutorial-tooltip, '[placement="bottom"]')
   bottom initial
-  top "calc(100% + %s)" % $tooltip-distance
-  left "calc(50% - %s)" % ($tooltip-width / 2)
+  left 'calc(50% - %s)' % ($tooltip-width / 2)
+  top 'calc(100% + %s)' % $tooltip-distance
 
 +host-styles(mp-tutorial-tooltip, '[placement="left"]')
   bottom initial
   left initial
-  right "calc(100% + %s)" % $tooltip-distance
-  top "calc(50% - %s)" % ($tooltip-height / 2)
+  right 'calc(100% + %s)' % $tooltip-distance
+  top 'calc(50% - %s)' % ($tooltip-height / 2)
 
 +host-styles(mp-tutorial-tooltip, '[placement="right"]')
   bottom initial
-  left "calc(100% + %s)" % $tooltip-distance
-  top "calc(50% - %s)" % ($tooltip-height / 2)
+  left 'calc(100% + %s)' % $tooltip-distance
+  top 'calc(50% - %s)' % ($tooltip-height / 2)
 
 +host-styles(mp-tutorial-tooltip, '[placement="center"]')
   bottom initial
-  left "calc(50% - %s)" % ($tooltip-width / 2)
-  top "calc(50% - %s)" % ($tooltip-height / 2)
+  left 'calc(50% - %s)' % ($tooltip-width / 2)
+  top 'calc(50% - %s)' % ($tooltip-height / 2)
 
 +host-styles(mp-tutorial-tooltip, '[arrow-align="top"]')
   bottom initial
   top calc(50% - 31px)
 
 +host-styles(mp-tutorial-tooltip, '[arrow-align="bottom"]')
-  top initial
   bottom calc(50% - 24px)
+  top initial
 
 +host-styles(mp-tutorial-tooltip, '[arrow-align="left"]')
-  right initial
   left calc(50% - 32px)
+  right initial
 
 +host-styles(mp-tutorial-tooltip, '[arrow-align="right"]')
   left initial
@@ -64,7 +64,7 @@ $tooltip-distance = 12px
   .wrapper
     background blue-700
     border-radius 8px
-    box-shadow 0 16px 41px 0 rgba(18, 82, 143, 0.37);
+    box-shadow 0 16px 41px 0 rgba(18, 82, 143, 0.37)
     height inherit
 
     // fade-in animation styles
@@ -108,7 +108,7 @@ $tooltip-distance = 12px
       &.in
         transform scale(1)
       &, &.out
-        transform scale(.95)
+        transform scale(0.95)
 
     // tooltip arrow styles
 
@@ -181,7 +181,7 @@ $tooltip-distance = 12px
   .footer
     background blue-900
     border-radius 0 0 8px 8px
-    border-top 1px solid #2282DD
+    border-top 1px solid blue-900
     bottom 0
     height 42px
     position absolute
