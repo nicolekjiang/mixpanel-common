@@ -1,10 +1,10 @@
 .mp-tag-selector-container
   .mp-tag-selector-top-input-wrapper
     .mp-tag-selector-input-wrapper(on={click: $helpers.focusInput})
-      - const isEmpty = !selectedTags.size
-      if isEmpty || $component.isAttributeEnabled('read-only')
-        .mp-tag-selector-mp-icon.mp-icon
-            svg-icon(attrs={icon: 'search'})      
+      - const showSearchIcon = !selectedTags.size || $component.isAttributeEnabled('read-only')
+      if showSearchIcon
+        .mp-tag-selector-mp-icon
+            svg-icon(attrs={icon: 'search'})
       else
         - const tags = [...selectedTags]
         for tag in tags
@@ -18,14 +18,14 @@
             on={change: e => { e.stopPropagation(); $helpers.removeTag(tag) }}
           )
       input.mp-tag-selector-search-input(
-        class={'mp-tag-selector-empty': isEmpty}
-        props={type: 'text', value: inputText, placeholder: isEmpty ? 'Add dashboards...' : ''}
+        class={'mp-tag-selector-empty': showSearchIcon}
+        props={type: 'text', value: inputText, placeholder: showSearchIcon ? 'Add dashboards...' : ''}
         on={
           input: $helpers.setInputText,
           keydown: $helpers.handleKeyDown,
           keypress: $helpers.handleKeyPress,
         }
-        style={width: isEmpty ? '100%' : inputWidth}
+        style={width: showSearchIcon ? '100%' : inputWidth}
       )
       .mp-tag-selector-border(class={'mp-tag-selector-error': $component.isAttributeEnabled('error')})
 
