@@ -4,7 +4,7 @@
       - const showSearchIcon = !selectedTags.size || $component.isAttributeEnabled('read-only')
       if showSearchIcon
         .mp-tag-selector-mp-icon
-            svg-icon(attrs={icon: 'search'})
+          svg-icon(attrs={icon: 'search'})
       else
         - const tags = [...selectedTags]
         for tag in tags
@@ -29,13 +29,9 @@
       )
       .mp-tag-selector-border(class={'mp-tag-selector-error': $component.isAttributeEnabled('error')})
 
-  - const hasMatches = matchingTags.length;
-  - const showCreateButton = $helpers.showCreateButton();
+  .mp-tag-selector-hr
 
-  if hasMatches
-    .mp-tag-selector-hr
-
-  if hasMatches
+  if matchingTags.length
     .mp-tag-selector-tag-list
       for tag, tagIdx in matchingTags
         mp-list-item(
@@ -51,15 +47,19 @@
               else
                 b= token
   else
-    .mp-tag-selector-hr
     .mp-tag-selector-empty-list
       mp-list-item(attrs={static: true})
         .mp-tag-selector-empty No dashboards found.
 
-  if showCreateButton
-    .mp-tag-selector-hr
-    .mp-tag-selector-footer(on={click: () => $helpers.addTag(inputText)})
-      .mp-tag-selector-copy
-        | Create new dashboard for
-        = ' '
-      .mp-tag-selector-label-name= inputText
+  if !$component.isAttributeEnabled('read-only')
+    if $helpers.showCreateButton()
+      mp-button-bar(attrs={color: 'grey'} on={click: () => $helpers.addTag(inputText)})
+        .mp-tag-selector-create-tag-btn
+          .mp-tag-selector-copy Create new dashboard for
+          .mp-tag-selector-label-name= inputText
+    else
+      mp-button-bar.save-btn(attrs={color: 'blue'} on={click: $helpers.saveTags})
+        if $component.isAttributeEnabled('saving')
+          mp-spinner(attrs={color: 'white'})
+        else
+          | Save
