@@ -46,7 +46,6 @@
           margin 0 0 6px 4px
           opacity 0
           transition all 0.25s
-          white-space nowrap
 
           &.tag-in
             opacity 1
@@ -91,12 +90,12 @@
 
           &:focus + .border:not(.loaded-error)
             border-color blue-500
-    
+
     .empty
       font-style italic
 
     .hr
-      background-color grey-200
+      background-color grey-150
       height 1px
       width 100%
 
@@ -115,35 +114,26 @@
         .tag-list-item
           display block
 
-    .footer
-      border-bottom-left-radius inherit
-      border-bottom-right-radius inherit
-      box-sizing border-box
-      cursor pointer
-      display flex
-      flex-direction row
-      flex-wrap wrap
-      font-size-medium()
-      font-weight weight-bold
-      justify-content center
-      max-width 100%
-      padding 14px 20px
-      width 100%
-      word-wrap break-word
+  .save-btn
+    mp-spinner
 
-      &:hover
-        background-color grey-100
 
-      .copy
-        align-self center
-        color grey-900
-        white-space pre
+  .create-tag-btn
+    display flex
+    max-width 100%
+    overflow hidden
+    white-space nowrap
 
-      .label-name
-        align-self center
-        color blue-700
-        max-width 100%
-        word-wrap break-word
+    .copy
+      color grey-900
+      flex none
+      margin-right 4px
+
+    .label-name
+      color blue-700
+      flex 1
+      overflow hidden
+      text-overflow ellipsis
 
   .search-input-dummy
     font-family family-helvetica

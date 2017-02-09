@@ -106,27 +106,15 @@ document.registerElement(`style-guide`, class extends Component {
           this.state.open.tagSelector = e.detail.state !== `closed`;
           this.update();
         },
-        handleTagSelectorChange: e => {
-          e.stopImmediatePropagation(); // i hate that we have to do this
-          // handle whatever business logic we need to deal with when
-          // adding or removing a tag
-          const tagName = e.detail.tagName;
-          if (e.detail.action === `addTag`) {
-            this.state.tagSelectorData.selectedTags.add(tagName);
-            this.state.tagSelectorData.allTags.add(tagName);
-          } else if (e.detail.action === `removeTag`) {
-            this.state.tagSelectorData.selectedTags.delete(tagName);
-          }
-          // normally we'd persist to server and this timeout represents that
-          // async call
-          clearTimeout(this.tagIndicatorTimeout);
-          this.update({savingTag: true});
-          this.tagIndicatorTimeout = setTimeout(() => {
-            this.update({savingTag: false, savedTag: true})
-            this.tagIndicatorTimeout = setTimeout(() => {
-              this.update({savedTag: false});
-            }, 1000)
-          }, 700);
+        handleTagSelectorSave: e => {
+          this.state.tagSelectorData.saving = true;
+          this.update();
+          setTimeout(() => { // mock network request latency
+            this.state.tagSelectorData.selectedTags = [...e.detail.tags];
+            this.state.tagSelectorData.saving = false;
+            this.state.open.tagSelector = false;
+            this.update();
+          }, 3000)
         },
         handleTagSelectorSubmit: e => {
           this.state.open.tagSelector = false;

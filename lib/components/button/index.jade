@@ -1,6 +1,10 @@
 .mp-button-container(
   attrs=$helpers.getButtonAttrs()
-  class=$helpers.extendComponentClasses({'mp-button-with-icon': !!$component.getAttribute('icon')})
+  class=$helpers.extendComponentClasses({
+    'mp-button-with-icon': !!$component.getAttribute('icon'),
+    'mp-button-blue': $component.getAttribute('color') === 'blue',
+    'mp-button-grey': $component.getAttribute('color') === 'grey',
+  })
 )
   .mp-button-content
     if $component.getAttribute('icon')
