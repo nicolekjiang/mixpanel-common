@@ -19,7 +19,7 @@
           )
       input.mp-tag-selector-search-input(
         class={'mp-tag-selector-empty': showSearchIcon}
-        props={type: 'text', value: inputText, placeholder: showSearchIcon ? 'Add dashboards...' : ''}
+        props={type: 'text', value: inputText, placeholder: showSearchIcon ? 'Search dashboards...' : ''}
         on={
           input: $helpers.setInputText,
           keydown: $helpers.handleKeyDown,
@@ -58,7 +58,7 @@
           .mp-tag-selector-copy Create new dashboard for
           .mp-tag-selector-label-name= inputText
     else
-      mp-button-bar.save-btn(attrs={color: 'blue'} on={click: $helpers.saveTags})
+      mp-button-bar.save-btn(attrs={color: 'blue', disabled: $component.isAttributeEnabled('saving')} on={click: $helpers.saveTags})
         if $component.isAttributeEnabled('saving')
           mp-spinner(attrs={color: 'white'})
         else
