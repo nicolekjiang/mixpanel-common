@@ -102,6 +102,10 @@ mixin list-item(bookmark)
       .mp-bm-menu-confirm-delete-container(attrs={'slot-body': true})
         .mp-confirm-delete-title Delete bookmark
         if confirmDeleteBookmark.include_in_dashboard
-          .mp-confirm-delete-description Are you sure you want to delete the bookmark named "#{confirmDeleteBookmark.name}"? Deleting it will also remove it from all dashboards.
+          .mp-confirm-delete-description 
+            | Are you sure you want to delete the bookmark named "#{confirmDeleteBookmark.name}"?
+            br
+            br
+            | Deleting it will also remove it from all dashboards.
         else
           .mp-confirm-delete-description Are you sure you want to delete the bookmark named "#{confirmDeleteBookmark.name}"?
