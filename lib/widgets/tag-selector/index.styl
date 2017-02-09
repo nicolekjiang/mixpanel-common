@@ -99,6 +99,7 @@
       width 100%
 
     .tag-list
+      margin-bottom 8px
       max-height 280px
       overflow-y auto
 
@@ -106,6 +107,9 @@
         margin-left 12px
         margin-right 12px
         svg-icon-style(grey-700, size: 16px, speed: 0s, pos-left: -3px, pos-top: -1px)
+
+        &:last-child
+          margin-bottom 0
 
         &[active='true'], &:hover
           svg-icon-style(blue-300, size: 16px, speed: 0s, pos-left: -3px, pos-top: -1px)
