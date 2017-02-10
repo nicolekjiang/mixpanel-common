@@ -41,9 +41,9 @@ describe(`Test tag-selector widget`, () => {
     searchInput.value = `new tag`;
     searchInput.dispatchEvent(new Event(`input`));
     window.requestAnimationFrame(() => {
-      const footer = this.widget.el.querySelector(`.mp-tag-selector-footer`);
-      expect(footer).to.not.be(null);
-      footer.dispatchEvent(new MouseEvent(`click`));
+      const saveButton = this.widget.el.querySelector(`mp-button-bar`);
+      expect(saveButton).to.not.be(null);
+      saveButton.dispatchEvent(new MouseEvent(`click`));
     });
   }),
 
