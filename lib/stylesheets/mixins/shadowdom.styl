@@ -18,3 +18,12 @@ host-styles(tagName, additionalSelector='')
   :host{additionalSelector} // @stylint ignore
     {block} // @stylint ignore
 
+host-context(hostTag, contextSelector)
+  // apply host context styles for FF, Safari, IE
+  {contextSelector} {hostTag} // @stylint ignore
+    {block} // @stylint ignore
+
+  // apply host-context
+  :host-context({contextSelector}) // @stylint ignore
+    {block} // @stylint ignore
+
