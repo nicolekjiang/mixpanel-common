@@ -53,14 +53,29 @@
         color white
 
   &.toggle-large
-    height 40px
+    height 39px
 
   &.toggle-small
-    height 27px
-    &.toggle-square .mp-toggle-option
-      border-radius 2px
+    height 29px
+
 
   &.toggle-square
+    background-color white
     border-radius 4px
+    box-shadow none
+    box-sizing border-box
+    padding 0
     .mp-toggle-option
-      border-radius 3px
+      background-color white
+      border 1px solid grey-200
+      border-radius 0
+      &:first-child
+        border-radius 3px 0 0 3px
+        border-right none
+      &:last-child
+        border-left none
+        border-radius 0 3px 3px 0
+      &.mp-toggle-selected
+        background-color blue-300
+        border-color blue-500
+        color white
