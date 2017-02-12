@@ -14,6 +14,9 @@
     })
       .mp-tutorial-tooltip-content
         content
+      if $component.isAttributeEnabled('closeable')
+        .mp-tutorial-tooltip-close-btn(on={click: $helpers.close})
+          svg-icon(attrs={icon: 'x'})
       if !$component.isAttributeEnabled('hide-footer')
         .mp-tutorial-tooltip-footer
           ul.mp-tutorial-tooltip-steps

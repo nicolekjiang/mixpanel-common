@@ -357,6 +357,14 @@
       }) Default (placement="top") tooltip
         mp-tutorial-tooltip(attrs={hide: !open.tutorialTooltip.top}) Default (placement="top") tooltip
 
+      mp-button.tutorial-tooltip-container.top.position-relative(on={
+        click: () => $helpers.toggleTutorialTooltip('closeable'),
+      }) Tooltip w/ close button
+        mp-tutorial-tooltip(
+          attrs={closeable: true, hide: !open.tutorialTooltip.closeable}
+          on={close: () => alert('close clicked')}
+        ) I have a close button
+
       mp-button.tutorial-tooltip-container.bottom.position-relative(on={
         click: () => $helpers.toggleTutorialTooltip('bottom'),
       }) Tooltip with placement="bottom"

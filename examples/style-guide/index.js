@@ -128,11 +128,11 @@ document.registerElement(`style-guide`, class extends Component {
           toast.closed = true;
           this.update();
         },
-        toggleTutorialTooltip: position => {
+        toggleTutorialTooltip: name => {
           this.update({
             open: extend(open, {
               tutorialTooltip: {
-                [position]: !this.state.open.tutorialTooltip[position],
+                [name]: !this.state.open.tutorialTooltip[name],
               },
             }),
           });
