@@ -27801,7 +27801,6 @@
 	                  }
 	                }, function () {
 	                  var __jade_nodes = [];
-	                  __jade_nodes = __jade_nodes.concat(" ");
 	                  __jade_nodes = __jade_nodes.concat("Are you sure you want to delete the bookmark named \"" + confirmDeleteBookmark.name + "\"?");
 	                  __jade_nodes = __jade_nodes.concat(h("br"));
 	                  __jade_nodes = __jade_nodes.concat(h("br"));
@@ -28796,8 +28795,10 @@
 	                __jade_nodes = __jade_nodes.concat(function () {
 	                  var __jade_nodes = [];
 	                  __jade_nodes = __jade_nodes.concat(h("a", {
-	                    "href": '/pricing/',
-	                    "target": '_blank',
+	                    "attrs": {
+	                      href: '/pricing/',
+	                      target: '_blank'
+	                    },
 	                    "class": {
 	                      'upgrade-link': true
 	                    }
@@ -28820,8 +28821,10 @@
 	                __jade_nodes = __jade_nodes.concat(function () {
 	                  var __jade_nodes = [];
 	                  __jade_nodes = __jade_nodes.concat(h("a", {
-	                    "href": '/pricing/',
-	                    "target": '_blank',
+	                    "attrs": {
+	                      href: '/pricing/',
+	                      target: '_blank'
+	                    },
 	                    "class": {
 	                      'upgrade-link': true
 	                    }
@@ -28844,8 +28847,10 @@
 	                __jade_nodes = __jade_nodes.concat(function () {
 	                  var __jade_nodes = [];
 	                  __jade_nodes = __jade_nodes.concat(h("a", {
-	                    "href": '/pricing/',
-	                    "target": '_blank',
+	                    "attrs": {
+	                      href: '/pricing/',
+	                      target: '_blank'
+	                    },
 	                    "class": {
 	                      'upgrade-link': true
 	                    }
@@ -28868,8 +28873,10 @@
 	                __jade_nodes = __jade_nodes.concat(function () {
 	                  var __jade_nodes = [];
 	                  __jade_nodes = __jade_nodes.concat(h("a", {
-	                    "href": '/pricing/',
-	                    "target": '_blank',
+	                    "attrs": {
+	                      href: '/pricing/',
+	                      target: '_blank'
+	                    },
 	                    "class": {
 	                      'upgrade-link': true
 	                    }
@@ -28892,8 +28899,10 @@
 	                __jade_nodes = __jade_nodes.concat(function () {
 	                  var __jade_nodes = [];
 	                  __jade_nodes = __jade_nodes.concat(h("a", {
-	                    "href": '/pricing/',
-	                    "target": '_blank',
+	                    "attrs": {
+	                      href: '/pricing/',
+	                      target: '_blank'
+	                    },
 	                    "class": {
 	                      'upgrade-link': true
 	                    }
@@ -28916,8 +28925,10 @@
 	                __jade_nodes = __jade_nodes.concat(function () {
 	                  var __jade_nodes = [];
 	                  __jade_nodes = __jade_nodes.concat(h("a", {
-	                    "href": '/pricing/',
-	                    "target": '_blank',
+	                    "attrs": {
+	                      href: '/pricing/',
+	                      target: '_blank'
+	                    },
 	                    "class": {
 	                      'upgrade-link': true
 	                    }
@@ -31477,6 +31488,32 @@
 	              }.call(this).filter(Boolean)));;
 	              return __jade_nodes;
 	            }.call(this).filter(Boolean)));;
+	            return __jade_nodes;
+	          }.call(this).filter(Boolean)));
+	          __jade_nodes = __jade_nodes.concat(h("h2", {
+	            "style": {
+	              position: 'relative'
+	            }
+	          }, function () {
+	            var __jade_nodes = [];
+	            __jade_nodes = __jade_nodes.concat("Upsell popups");
+	            __jade_nodes = __jade_nodes.concat(['custom-events', 'date-range', 'export-csv', 'filter-levels', 'bookmark-maximum', 'default'].reduce(function (__each_nodes, feature, idx) {
+	              return __each_nodes.concat(function () {
+	                var __jade_nodes = [];
+	                __jade_nodes = __jade_nodes.concat(h("mp-upsell-popup", {
+	                  "attrs": {
+	                    feature: feature,
+	                    open: true
+	                  },
+	                  "style": {
+	                    position: 'absolute',
+	                    top: 100 * (idx + 1) + 'px',
+	                    left: '0px'
+	                  }
+	                }));;
+	                return __jade_nodes;
+	              }.call(this));
+	            }, []));;
 	            return __jade_nodes;
 	          }.call(this).filter(Boolean)));;
 	          return __jade_nodes;

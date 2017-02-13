@@ -27696,7 +27696,6 @@
 	                  }
 	                }, function () {
 	                  var __jade_nodes = [];
-	                  __jade_nodes = __jade_nodes.concat(" ");
 	                  __jade_nodes = __jade_nodes.concat("Are you sure you want to delete the bookmark named \"" + confirmDeleteBookmark.name + "\"?");
 	                  __jade_nodes = __jade_nodes.concat(h("br"));
 	                  __jade_nodes = __jade_nodes.concat(h("br"));
@@ -28691,8 +28690,10 @@
 	                __jade_nodes = __jade_nodes.concat(function () {
 	                  var __jade_nodes = [];
 	                  __jade_nodes = __jade_nodes.concat(h("a", {
-	                    "href": '/pricing/',
-	                    "target": '_blank',
+	                    "attrs": {
+	                      href: '/pricing/',
+	                      target: '_blank'
+	                    },
 	                    "class": {
 	                      'upgrade-link': true
 	                    }
@@ -28715,8 +28716,10 @@
 	                __jade_nodes = __jade_nodes.concat(function () {
 	                  var __jade_nodes = [];
 	                  __jade_nodes = __jade_nodes.concat(h("a", {
-	                    "href": '/pricing/',
-	                    "target": '_blank',
+	                    "attrs": {
+	                      href: '/pricing/',
+	                      target: '_blank'
+	                    },
 	                    "class": {
 	                      'upgrade-link': true
 	                    }
@@ -28739,8 +28742,10 @@
 	                __jade_nodes = __jade_nodes.concat(function () {
 	                  var __jade_nodes = [];
 	                  __jade_nodes = __jade_nodes.concat(h("a", {
-	                    "href": '/pricing/',
-	                    "target": '_blank',
+	                    "attrs": {
+	                      href: '/pricing/',
+	                      target: '_blank'
+	                    },
 	                    "class": {
 	                      'upgrade-link': true
 	                    }
@@ -28763,8 +28768,10 @@
 	                __jade_nodes = __jade_nodes.concat(function () {
 	                  var __jade_nodes = [];
 	                  __jade_nodes = __jade_nodes.concat(h("a", {
-	                    "href": '/pricing/',
-	                    "target": '_blank',
+	                    "attrs": {
+	                      href: '/pricing/',
+	                      target: '_blank'
+	                    },
 	                    "class": {
 	                      'upgrade-link': true
 	                    }
@@ -28787,8 +28794,10 @@
 	                __jade_nodes = __jade_nodes.concat(function () {
 	                  var __jade_nodes = [];
 	                  __jade_nodes = __jade_nodes.concat(h("a", {
-	                    "href": '/pricing/',
-	                    "target": '_blank',
+	                    "attrs": {
+	                      href: '/pricing/',
+	                      target: '_blank'
+	                    },
 	                    "class": {
 	                      'upgrade-link': true
 	                    }
@@ -28811,8 +28820,10 @@
 	                __jade_nodes = __jade_nodes.concat(function () {
 	                  var __jade_nodes = [];
 	                  __jade_nodes = __jade_nodes.concat(h("a", {
-	                    "href": '/pricing/',
-	                    "target": '_blank',
+	                    "attrs": {
+	                      href: '/pricing/',
+	                      target: '_blank'
+	                    },
 	                    "class": {
 	                      'upgrade-link': true
 	                    }
