@@ -428,3 +428,7 @@
         click: () => $helpers.toggleTutorialTooltip('bottom'),
       }) Tooltip with arrow-align="right"
         mp-tutorial-tooltip(attrs={'arrow-align': 'right', placement: 'bottom', hide: !open.tutorialTooltip.bottom}) Tooltip with arrow-align="right"
+
+    h2(style={position: 'relative'}) Upsell popups
+      for feature, idx in ['custom-events', 'date-range', 'export-csv', 'filter-levels', 'bookmark-maximum', 'default']
+        mp-upsell-popup(attrs={feature, open: true} style={position: 'absolute', top: 100 * (idx + 1) + 'px', left: '0px'})
