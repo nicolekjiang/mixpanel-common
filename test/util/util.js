@@ -14,6 +14,10 @@ import {
   insertAtIndex,
 
   nestedObjectRolling,
+
+  truncateToElement,
+  binarySearch,
+  truncateToWidth
 } from '../../lib/util';
 
 describe('pluralize()', function() {
@@ -345,5 +349,33 @@ describe('nestedObjectRolling', function() {
         '2016-06-05': 7,
       },
     });
+  });
+});
+
+describe('binarySearch', function() {
+  it('finds the first positive value in a range', function() {
+    expect(binarySearch(0, 50, n => n - 10)).to.eql(10);
+  });
+});
+
+describe('truncateToWidth', function() {
+  it('finds the largest truncation which fits in the given space and font', function() {
+    expect(truncateToWidth('abcdefghijklmnopqrstuvwxyz', '12px Arial', 35)).to.eql('ab...z')
+    expect(truncateToWidth('abcdefghijklmnopqrstuvwxyz', '12px Arial', 25)).to.eql('a...z')
+    expect(truncateToWidth('abcdefghijklmnopqrstuvwxyz', '22px Arial', 35)).to.eql('ab')
+  });
+});
+
+describe('truncateToElement', function() {
+  it('finds the largest truncation which fits in the given element, taking account of font / padding', function() {
+    var elem = document.createElement('div');
+    document.body.appendChild(elem);
+    elem.style.width = '35px';
+    elem.style.font = '12px Arial';
+    elem.style.padding = '0px';
+    expect(truncateToElement('abcdefghijklmnopqrstuvwxyz', elem)).to.eql('ab...z')
+    elem.style.padding = '10px';
+    expect(truncateToElement('abcdefghijklmnopqrstuvwxyz', elem)).to.eql('ab...z')
+    document.body.removeChild(elem);
   });
 });
