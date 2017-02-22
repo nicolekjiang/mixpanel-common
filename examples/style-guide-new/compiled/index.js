@@ -17527,7 +17527,7 @@
 	function clickWasOutside(clickEvent, subjectEl) {
 	  // events from shadow DOM will be retargeted to appear as if they come from component
 	  // use path to distinguish between events within nested components
-	  var path = window.ShadowDOMPolyfill ? clickEvent.path : clickEvent.composedPath();
+	  var path = window.ShadowDOMPolyfill || typeof clickEvent.composedPath !== "function" ? clickEvent.path : clickEvent.composedPath();
 	  return !path.includes(subjectEl);
 	}
 
