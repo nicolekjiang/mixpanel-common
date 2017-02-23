@@ -191,21 +191,17 @@ describe(`formatDate`, function() {
   it(`formats Date objects and timestamp integers to the expected string format`, function() {
     expect(formatDate(new Date(2015, 11, 1))).to.eql(`Dec 1, 2015`);
     expect(formatDate(1448956800000)).to.eql(`Dec 1, 2015`);
-    expect(formatDate('1448956800000')).to.eql(`Dec 1, 2015`);
 
     expect(formatDate(new Date(2000, 1, 27))).to.eql(`Feb 27, 2000`);
     expect(formatDate(951638400000)).to.eql(`Feb 27, 2000`);
-    expect(formatDate('951638400000')).to.eql(`Feb 27, 2000`);
   });
 
   it(`formats Date objects and timestamp integers to the expected string format if the 'iso' option is set`, function() {
     expect(formatDate(new Date(2015, 11, 1), {iso: true})).to.eql(`2015-12-01`);
     expect(formatDate(1448956800000, {iso: true})).to.eql(`2015-12-01`);
-    expect(formatDate('1448956800000', {iso: true})).to.eql(`2015-12-01`);
 
     expect(formatDate(new Date(2000, 1, 27), {iso: true})).to.eql(`2000-02-27`);
     expect(formatDate(951638400000, {iso: true})).to.eql(`2000-02-27`);
-    expect(formatDate('951638400000', {iso: true})).to.eql(`2000-02-27`);
   });
 
   it(`formats Date objects and timestamp integers to the expected string format if the 'unit' option is set`, function() {
@@ -276,8 +272,11 @@ describe(`formatDate`, function() {
 
   it(`returns null if invalid input is passed`, function() {
     ;[
+      ``,
       `Ce n'est pas une date`,
+      null,
       undefined,
+      [],
       {},
     ].forEach(input => expect(formatDate(input)).to.eql(null));
   });
