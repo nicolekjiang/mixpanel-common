@@ -19189,6 +19189,7 @@
 	exports.sum = sum;
 	exports.truncateMiddle = truncateMiddle;
 	exports.binarySearch = binarySearch;
+	exports.measureTextWidth = measureTextWidth;
 	exports.truncateToWidth = truncateToWidth;
 	exports.truncateToElement = truncateToElement;
 	exports.getRollingCount = getRollingCount;
@@ -19415,6 +19416,11 @@
 	  return measureContext;
 	}
 
+	function measureTextWidth(string, font) {
+	  getMeasureContext().font = font;
+	  return getMeasureContext().measureText(string).width;
+	}
+
 	function truncateToWidth(string, font, width) {
 	  getMeasureContext().font = font;
 	  // spaceLeft will give the amount of space left after truncating N chars off string
@@ -19431,8 +19437,11 @@
 	  var styles = window.getComputedStyle(elem);
 	  availableWidth -= parseInt(styles.getPropertyValue('padding-left'));
 	  availableWidth -= parseInt(styles.getPropertyValue('padding-right'));
-	  // Note: getPropertyValue('font') does not work in FF, so we construct a font property from font-size and font-family.
-	  return truncateToWidth(string, styles.getPropertyValue('font-size') + ' ' + styles.getPropertyValue('font-family'), availableWidth);
+	  // Note: getPropertyValue('font') does not work in FF, so we construct a font property from its components
+	  var fontString = 'font-style font-variant font-weight font-size font-family'.split(' ').map(function (prop) {
+	    return styles.getPropertyValue(prop);
+	  }).join(' ');
+	  return truncateToWidth(string, fontString, availableWidth);
 	}
 
 	//get the rollingcount based on unit for calculating rolling average
