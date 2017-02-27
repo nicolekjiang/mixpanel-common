@@ -15,3 +15,12 @@
 - Install dependencies: `npm install`
 - Start a server and build continuously: `npm start`
 - Open [http://localhost:8080/examples/style-guide/index.html](http://localhost:8080/examples/style-guide/index.html)
+
+
+### Release Log
+
+#### 0.50.1
+ - renamePropertyValue param signature change to (value, header) - header is a new optional field. 
+    If header is $event / $country_code / $mp_country_code, then value will be expanded. 
+    Otherwise it will be passed through.  
+ 
