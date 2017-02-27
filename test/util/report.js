@@ -8,17 +8,17 @@ import {
 } from '../../lib/report/util.js';
 
 describe(`renamePropertyValue`, () => {
-  it(`returns same value when no header given`, () => {
+  it(`returns same value when no propertyName given`, () => {
     expect(renamePropertyValue(`NO`)).to.equal(`NO`);
     expect(renamePropertyValue(`mr`)).to.equal(`mr`);
   });
 
-  it(`expands country code when $country_code is the header`, () => {
+  it(`expands country code when $country_code is the propertyName`, () => {
     expect(renamePropertyValue(`GB`, `$mp_country_code`)).to.equal(`United Kingdom`);
-    expect(renamePropertyValue(`US`, `$country_code`)).to.equal(`United States`);
+    expect(renamePropertyValue(`us`, `$country_code`)).to.equal(`United States`);
   });  
 
-  it(`expands event when $event is the header`, () => {
+  it(`expands event when $event is the propertyName`, () => {
     expect(renamePropertyValue(`$top_events`, `$event`)).to.equal(`Your Top Events`);
     expect(renamePropertyValue(`$signup`, `$event`)).to.equal(`Signup`);
   });    
