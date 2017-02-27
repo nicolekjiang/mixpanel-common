@@ -1,3 +1,5 @@
+/* global describe, it */
+
 import expect from 'expect.js';
 import {
     renameProperty,
