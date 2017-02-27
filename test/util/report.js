@@ -22,6 +22,10 @@ describe(`renamePropertyValue`, () => {
     expect(renamePropertyValue(`$top_events`, `$event`)).to.equal(`Your Top Events`);
     expect(renamePropertyValue(`$signup`, `$event`)).to.equal(`Signup`);
   });    
+
+  it(`expands $all_people when $people is the propertyName`, () => {
+    expect(renamePropertyValue(`$all_people`, `$people`)).to.equal(`All People`);
+  });      
 });
 
 describe(`renameProperty`, () => {
