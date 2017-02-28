@@ -1,7 +1,7 @@
 {
   "name": "mixpanel-common",
   "main": "build/index.js",
-  "version": "0.50.1",
+  "version": "0.50.2",
   "description": "Mixpanel shared JS",
   "scripts": {
     "build": "node build.js",
@@ -53,7 +53,7 @@
     "glob": "^7.1.1",
     "js-beautify": "1.6.3",
     "json-loader": "^0.5.4",
-    "lolex": "^1.5.2",    
+    "lolex": "^1.5.2",
     "minimist": "^1.2.0",
     "mocha": "^3.1.2",
     "precommit-hook-eslint": "3.0.0",
