@@ -1,0 +1,81 @@
+.mp-add-to-dash-container(
+  attrs={'not-implemented': $component.isAttributeEnabled('not-implemented')}
+  class={[`mp-add-to-dash-type-${$component.getAttribute('report-type')}`]: true}
+  onmouseenter=$helpers.maybeTrackHover
+)
+  mp-upsell-popup(
+    attrs={
+      open: showUpsellModal,
+      feature: 'bookmark-maximum',
+    }
+    on={change: $helpers.closeUpsellPopup}
+  )
+
+  - const existingReport = $component.getAttribute('bookmark') && $component.getJSONAttribute('bookmark').include_in_dashboard
+
+  mp-tutorial-tooltip(
+    attrs={
+      hide: !$component.isAttributeEnabled('show-tutorial-tooltip'),
+      'hide-footer': true,
+      closeable: true,
+      placement: 'left',
+    }
+    on={close: $helpers.closeTooltip}
+  )
+    .mp-add-to-dash-tutorial-title Easily add reports to your dashboard
+    .mp-add-to-dash-tutorial-content Dashboards allow your entire team to understand your business all in one place.
+
+  .mp-add-to-dash-inner-container(attrs={disabled: $component.isAttributeEnabled('disabled')})
+    - reportName = $component.getAttribute('report-name')
+    .mp-add-to-dash-btn(
+      class={'mp-add-to-dash-added': reportCreated}
+      on={click: () => open ? $helpers.closeMenu() : $helpers.openMenu()}
+    )
+      if $component.isAttributeEnabled('over-free-limit') && !(reportCreated || existingReport)
+        .mp-add-to-dash-upsell-icon
+          svg-icon(attrs={icon: `lightning-bolt`})
+      .mp-add-to-dash-icon
+        svg-icon(
+          attrs={icon: (reportCreated || existingReport) ? `dashboard-confirm` : `dashboard-add-to`},
+        )
+    .mp-add-to-dash-menu
+      mp-drop-menu(attrs={open} on={change: $helpers.tagSelectorMenuChanged})
+        .mp-add-to-dash-menu-contents
+          if initialLoading
+            .mp-add-to-dash-loading
+              .mp-add-to-dash-spinner
+                mp-spinner
+          else if editTags
+            .mp-add-to-dash-title
+              .mp-add-to-dash-header
+                .mp-add-to-dash-header-text Edit dashboards
+              .mp-add-to-dash-subtext.mp-add-to-dash-no-icon(attrs={title: reportName})= $helpers.truncateMiddle(reportName, 40)
+
+            mp-tag-selector(
+              attrs={
+                'all-tags': $helpers.allTags(),
+                'selected-tags': $helpers.selectedTags(),
+                'saving': savingTags,
+              }
+              on={
+                change: $helpers.tagSelectorChanged,
+                save: $helpers.saveTags,
+              }
+            )
+          else
+            .mp-add-to-dash-title
+              .mp-add-to-dash-header
+                svg-icon.mp-add-to-dash-added(attrs={icon: `check-success`})
+                .mp-add-to-dash-header-text Report added to dashboards
+              .mp-add-to-dash-subtext(attrs={title: reportName})= $helpers.truncateMiddle(reportName, 40)
+            mp-button-bar(attrs={color: 'grey'} on={click: $helpers.editTags}) Edit selected dashboards
+    if !open && !$component.isAttributeEnabled('show-tutorial-tooltip')
+      mp-tooltip(attrs={'placement': 'bottom'})= existingReport ? 'Edit dashboards' : 'Add to dashboard'
+
+  if $component.isAttributeEnabled('not-implemented')
+    .mp-add-to-dash-disabled-tooltip
+      .mp-add-to-dash-disabled-tooltip-icon
+      if $component.isAttributeEnabled('seg-retention')
+        .mp-add-to-dash-disabled-tooltip-text Segmented retention reports are not currently supported in dashboards. Please remove the segment and try again.
+      else
+        .mp-add-to-dash-disabled-tooltip-text This report is not currently supported in dashboards, but we are continuing to add support for new reports.
