@@ -9,12 +9,19 @@ import {
   dateRangeToUnit,
 } from '../../lib/util/date';
 
+const NON_DATE_INPUTS = [
+  ``,
+  `Ceci n'est pas une date`,
+  null,
+  undefined,
+  [],
+  {},
+];
+
 describe(`parseDate`, function() {
   it(`handles date strings of the desired formats`, function() {
-    const dec1st2015 = new Date(2015, 11, 1);
-    const feb27th2000 = new Date(2000, 1, 27);
-
-    ;[
+    const startOfDec1st2015 = new Date(2015, 11, 1).setHours(0, 0, 0, 0);
+    const dec1st2015Formats = [
       `12/01/2015`,
       `12/01/15`,
       `12-01-2015`,
@@ -65,11 +72,14 @@ describe(`parseDate`, function() {
       `December 1st 2015`,
       `December 1st 15`,
       `December 1st '15`,
-    ].forEach(dateString => expect(
-      parseDate(dateString).setHours(0, 0, 0, 0)
-    ).to.eql(dec1st2015.setHours(0, 0, 0, 0)));
+    ];
 
-    ;[
+    dec1st2015Formats.forEach(dateString => expect(
+      parseDate(dateString).setHours(0, 0, 0, 0)
+    ).to.eql(startOfDec1st2015));
+
+    const startOfFeb27th2000 = new Date(2000, 1, 27).setHours(0, 0, 0, 0);
+    const feb27th2000Formats = [
       `02/27/2000`,
       `02/27/00`,
       `02-27-2000`,
@@ -120,9 +130,11 @@ describe(`parseDate`, function() {
       `February 27th 2000`,
       `February 27th 00`,
       `February 27th '00`,
-    ].forEach(dateString => expect(
+    ];
+
+    feb27th2000Formats.forEach(dateString => expect(
       parseDate(dateString).setHours(0, 0, 0, 0)
-    ).to.eql(feb27th2000.setHours(0, 0, 0, 0)));
+    ).to.eql(startOfFeb27th2000));
   });
 
   it(`handles date strings that don't include year`, function() {
@@ -168,17 +180,11 @@ describe(`parseDate`, function() {
     });
   });
 
-  it(`returns 'null' if invalid input is passed`, function() {
-    ;[
-      ``,
-      `Ce n'est pas une date`,
+  it(`returns null if invalid input is passed`, function() {
+    NON_DATE_INPUTS.concat([
       123,
-      null,
-      undefined,
-      [],
-      {},
       new Date(),
-    ].forEach(input => expect(parseDate(input)).to.eql(null));
+    ]).forEach(input => expect(parseDate(input)).to.eql(null));
   });
 
   it(`sets date to end of day if 'endOfDay' option is set`, function() {
@@ -271,80 +277,67 @@ describe(`formatDate`, function() {
   });
 
   it(`returns null if invalid input is passed`, function() {
-    ;[
-      ``,
-      `Ce n'est pas une date`,
-      null,
-      undefined,
-      [],
-      {},
-    ].forEach(input => expect(formatDate(input)).to.eql(null));
+    NON_DATE_INPUTS.forEach(input => expect(formatDate(input)).to.eql(null));
   });
 });
 
 describe(`relativeToAbsoluteDate`, function() {
   it(`converts a relative date integer and a unit to the expected Date object`, function() {
     let date = new Date();
-    expect(relativeToAbsoluteDate(5, 'day')).to.eql(date.setDate(date.getDate() - 5));
+    expect(relativeToAbsoluteDate(5, `day`)).to.eql(date.setDate(date.getDate() - 5));
 
     date = new Date();
-    expect(relativeToAbsoluteDate(5, 'month')).to.eql(date.setMonth(date.getMonth() - 5));
+    expect(relativeToAbsoluteDate(5, `month`)).to.eql(date.setMonth(date.getMonth() - 5));
 
     date = new Date();
-    expect(relativeToAbsoluteDate(5, 'year')).to.eql(date.setFullYear(date.getFullYear() - 5));
+    expect(relativeToAbsoluteDate(5, `year`)).to.eql(date.setFullYear(date.getFullYear() - 5));
 
     date = new Date();
-    expect(relativeToAbsoluteDate(-100, 'day')).to.eql(date.setDate(date.getDate() + 100));
+    expect(relativeToAbsoluteDate(-100, `day`)).to.eql(date.setDate(date.getDate() + 100));
 
     date = new Date();
-    expect(relativeToAbsoluteDate(-100, 'month')).to.eql(date.setMonth(date.getMonth() + 100));
+    expect(relativeToAbsoluteDate(-100, `month`)).to.eql(date.setMonth(date.getMonth() + 100));
 
     date = new Date();
-    expect(relativeToAbsoluteDate(-100, 'year')).to.eql(date.setFullYear(date.getFullYear() + 100));
+    expect(relativeToAbsoluteDate(-100, `year`)).to.eql(date.setFullYear(date.getFullYear() + 100));
 
     date = new Date();
-    expect(relativeToAbsoluteDate(0, 'day')).to.eql(date);
+    expect(relativeToAbsoluteDate(0, `day`)).to.eql(date);
 
     date = new Date();
-    expect(relativeToAbsoluteDate(0, 'month')).to.eql(date);
+    expect(relativeToAbsoluteDate(0, `month`)).to.eql(date);
 
     date = new Date();
-    expect(relativeToAbsoluteDate(0, 'year')).to.eql(date);
+    expect(relativeToAbsoluteDate(0, `year`)).to.eql(date);
   });
 
   it(`returns null if invalid input is passed`, function() {
-    ;[
-      ``,
-      `Ce n'est pas une date`,
-      123,
-      null,
-      undefined,
-      [],
-      {},
-      new Date(),
-    ].forEach(input => expect(relativeToAbsoluteDate(input, input)).to.eql(null));
+    const inputs = NON_DATE_INPUTS.concat([new Date()]);
+
+    inputs.forEach(input => expect(relativeToAbsoluteDate(input, input)).to.eql(null));
+    inputs.forEach(input => expect(relativeToAbsoluteDate(5, input)).to.eql(null));
+    inputs.forEach(input => expect(relativeToAbsoluteDate(input, `day`)).to.eql(null));
   });
 });
 
 describe(`normalizeDateStrings`, function() {
   it(`accepts a list of date strings and parses, sorts, and ensures they don't exceed the current moment`, function() {
-    const currentDate = new Date().toISOString().slice(0, 10);
-    const inputDates = ['12/01/2015', '2000 2 27', 'January 1st 9999'];
-    const outputDates = ['2000-02-27', '2015-12-01', currentDate];
+    const now = new Date();
+    const currentDate = [
+      now.getFullYear(),
+      (`0` + (now.getMonth() + 1)).slice(-2),
+      (`0` + now.getDate()).slice(-2),
+    ].map(String).join(`-`);
+    const inputDates = [`12/01/2015`, `2000 2 27`, `January 1st 9999`];
+    const outputDates = [`2000-02-27`, `2015-12-01`, currentDate];
     expect(normalizeDateStrings(...inputDates)).to.eql(outputDates);
   });
 
   it(`replaces invalid entries in the arguments list with null`, function() {
-    const inputs = [
-      ``,
-      `Ce n'est pas une date`,
+    const inputs = NON_DATE_INPUTS.concat([
       123,
-      null,
-      undefined,
-      [],
-      {},
       new Date(),
-    ];
+    ]);
     normalizeDateStrings(...inputs).forEach(output => expect(output).to.eql(null));
   });
 });
@@ -369,14 +362,8 @@ describe(`dateRangeToUnit`, function() {
   });
 
   it(`returns null if either input date is invalid`, function() {
-    const inputs = [
-      ``,
-      `Ce n'est pas une date`,
-      null,
-      undefined,
-      [],
-      {},
-    ];
-    inputs.forEach(input => expect(dateRangeToUnit(input, input)).to.eql(null));
+    NON_DATE_INPUTS.forEach(input => expect(dateRangeToUnit(input, input)).to.eql(null));
+    NON_DATE_INPUTS.forEach(input => expect(dateRangeToUnit(new Date(), input)).to.eql(null));
+    NON_DATE_INPUTS.forEach(input => expect(dateRangeToUnit(input, new Date())).to.eql(null));
   });
 });
