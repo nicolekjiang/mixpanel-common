@@ -75,7 +75,7 @@
     "lodash": "^4.17.4",
     "mixpanel-browser": "2.9.16",
     "moment": "^2.17.1",
-    "panel": "0.10.0-rc6",
+    "panel": "0.10.0",
     "rollbar-browser": "1.9.1",
     "webcomponent": "^0.1.2"
   },
