@@ -206,6 +206,19 @@
 	              _this2.update();
 	            }, 3000);
 	          },
+	          handleTagSelectorChange: function handleTagSelectorChange(e) {
+	            if (e.detail && e.detail.action) {
+	              var tag = e.detail.tagName;
+	              if (e.detail.action === 'addTag') {
+	                _this2.state.tagSelectorData.selectedTags.add(tag);
+	                _this2.state.tagSelectorData.allTags.add(tag);
+	                _this2.update();
+	              } else if (e.detail.action === 'removeTag') {
+	                _this2.state.tagSelectorData.selectedTags.delete(tag);
+	                _this2.update();
+	              }
+	            }
+	          },
 	          handleTagSelectorSubmit: function handleTagSelectorSubmit(e) {
 	            _this2.state.open.tagSelector = false;
 	            _this2.update();
@@ -32596,6 +32609,7 @@
 	                  'saving': tagSelectorData.saving
 	                },
 	                "on": {
+	                  change: $helpers.handleTagSelectorChange,
 	                  save: $helpers.handleTagSelectorSave
 	                }
 	              }));;
