@@ -116,6 +116,19 @@ document.registerElement(`style-guide`, class extends Component {
             this.update();
           }, 3000)
         },
+        handleTagSelectorChange: e => {
+          if (e.detail && e.detail.action) {
+            const tag = e.detail.tagName;
+            if (e.detail.action === 'addTag') {
+              this.state.tagSelectorData.selectedTags.add(tag);
+              this.state.tagSelectorData.allTags.add(tag);
+              this.update();
+            } else if (e.detail.action === 'removeTag') {
+              this.state.tagSelectorData.selectedTags.delete(tag);
+              this.update();
+            }
+          }
+        },
         handleTagSelectorSubmit: e => {
           this.state.open.tagSelector = false;
           this.update();

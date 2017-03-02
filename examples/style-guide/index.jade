@@ -329,6 +329,7 @@
             'saving': tagSelectorData.saving,
           }
           on={
+            change: $helpers.handleTagSelectorChange,
             save: $helpers.handleTagSelectorSave,
           }
         )
