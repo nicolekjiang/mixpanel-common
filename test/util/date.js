@@ -9,6 +9,13 @@ import {
   dateRangeToUnit,
 } from '../../lib/util/date';
 
+const NOW = new Date();
+const CURRENT_DATE_ISO = [
+  NOW.getFullYear(),
+  (`0` + (NOW.getMonth() + 1)).slice(-2),
+  (`0` + NOW.getDate()).slice(-2),
+].map(String).join(`-`);
+
 const NON_DATE_INPUTS = [
   ``,
   `Ceci n'est pas une date`,
@@ -137,7 +144,7 @@ describe(`parseDate`, function() {
     ).to.eql(startOfFeb27th2000));
   });
 
-  it(`handles date strings that don't include year`, function() {
+  it(`parses date strings that don't include year to the most recent past instance of that date`, function() {
     const shorthandDates = {
       '12/01': {month: 12, day: 1 },
       '12-01': {month: 12, day: 1 },
@@ -180,16 +187,33 @@ describe(`parseDate`, function() {
     });
   });
 
+  it(`sets date to start of day if 'startOfDay' option is set`, function() {
+    expect(parseDate(`12/1/2015`, {startOfDay: false}).setHours(0, 0, 0, 0)).to.eql(new Date(2015, 12 - 1, 1).setHours(0, 0, 0, 0));
+    expect(parseDate(`12/1/2015`, {startOfDay: true})).to.eql(new Date(2015, 12 - 1, 1).setHours(0, 0, 0, 0));
+  });
+
+  it(`sets date to end of day if 'endOfDay' option is set`, function() {
+    expect(parseDate(`12/1/2015`, {endOfDay: false}).setHours(0, 0, 0, 0)).to.eql(new Date(2015, 12 - 1, 1).setHours(0, 0, 0, 0));
+    expect(parseDate(`12/1/2015`, {endOfDay: true})).to.eql(new Date(2015, 12 - 1, 1).setHours(23, 59, 59, 999));
+  });
+
+  it(`parses date strings that do include a future year to a future date`, function() {
+    expect(parseDate(`12/1/9999`).setHours(0, 0, 0, 0)).to.eql(new Date(9999, 12 - 1, 1).setHours(0, 0, 0, 0));
+    expect(parseDate(`12/1/9999`, {startOfDay: true})).to.eql(new Date(9999, 12 - 1, 1).setHours(0, 0, 0, 0));
+    expect(parseDate(`12/1/9999`, {endOfDay: true})).to.eql(new Date(9999, 12 - 1, 1).setHours(23, 59, 59, 999));
+  });
+
+  it(`doesn't reset today's date to a past year`, function() {
+    expect(parseDate(CURRENT_DATE_ISO).setHours(0, 0, 0, 0)).to.eql(new Date().setHours(0, 0, 0, 0));
+    expect(parseDate(CURRENT_DATE_ISO, {startOfDay: true})).to.eql(new Date().setHours(0, 0, 0, 0));
+    expect(parseDate(CURRENT_DATE_ISO, {endOfDay: true})).to.eql(new Date().setHours(23, 59, 59, 999));
+  });
+
   it(`returns null if invalid input is passed`, function() {
     NON_DATE_INPUTS.concat([
       123,
       new Date(),
     ]).forEach(input => expect(parseDate(input)).to.eql(null));
-  });
-
-  it(`sets date to end of day if 'endOfDay' option is set`, function() {
-    expect(parseDate(`12/1/2015`, {endOfDay: false})).to.eql(new Date().setHours(0, 0, 0, 0));
-    expect(parseDate(`12/1/2015`, {endOfDay: true})).to.eql(new Date().setHours(23, 59, 59, 999));
   });
 });
 
@@ -322,14 +346,8 @@ describe(`relativeToAbsoluteDate`, function() {
 
 describe(`normalizeDateStrings`, function() {
   it(`accepts a list of date strings and parses, sorts, and ensures they don't exceed the current moment`, function() {
-    const now = new Date();
-    const currentDate = [
-      now.getFullYear(),
-      (`0` + (now.getMonth() + 1)).slice(-2),
-      (`0` + now.getDate()).slice(-2),
-    ].map(String).join(`-`);
     const inputDates = [`12/01/2015`, `2000 2 27`, `January 1st 9999`];
-    const outputDates = [`2000-02-27`, `2015-12-01`, currentDate];
+    const outputDates = [`2000-02-27`, `2015-12-01`, CURRENT_DATE_ISO];
     expect(normalizeDateStrings(...inputDates)).to.eql(outputDates);
   });
 
