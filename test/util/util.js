@@ -83,11 +83,18 @@ describe('sorted()', function() {
       .to.eql(['January 8th, 2000', '4-1-15', '12/31/16']);
   });
 
-  it('can properly sort iso date strings', function() {
+  it('can properly sort date strings with a parse config', function() {
     expect(sorted(['2016-12-31', '2000-08-01', '2015-04-01'], {
       orderNumDateAlpha: true,
-      parseDateConfig: {iso: true},
+      parseDateConfig: {iso: true, utc: true},
     })).to.eql(['2000-08-01', '2015-04-01', '2016-12-31']);
+  });
+
+  it('can properly sort date strings that match a specific regex', function() {
+    expect(sorted(['apr 10 2015', '2016-12-31', '2000-08-01', 'feb 4 2012'], {
+      orderNumDateAlpha: true,
+      dateRegex: `\d\d\d\d-\d\d-\d\d`,
+    })).to.eql(['2000-08-01', '2016-12-31', 'apr 10 2015', 'feb 4 2012']);
   });
 });
 
