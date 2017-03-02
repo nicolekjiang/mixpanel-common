@@ -54,7 +54,7 @@
             mp-tag-selector(
               attrs={
                 'all-tags': $helpers.allTags(),
-                'selected-tags': $helpers.selectedTags(),
+                'selected-tags': JSON.stringify(Array.from(selectedTags)),
                 'saving': savingTags,
               }
               on={

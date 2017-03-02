@@ -14,7 +14,6 @@
           mp-tag(
             attrs=attrs
             key='tag-' + tag,
-            class={delayed: {'mp-tag-selector-tag-in': true}, remove: {'mp-tag-selector-tag-out': true, delayRemove: 250}}
             on={change: e => { e.stopPropagation(); $helpers.removeTag(tag) }}
           )
       input.mp-tag-selector-search-input(
