@@ -58,10 +58,36 @@ describe('sorted()', function() {
   });
 
   it('can sort based on a given transformation', function() {
-    expect(sorted(['a', 'zzz', 'MOO'], {
-      order: 'desc',
-      transform: s => s.toLowerCase(),
-    })).to.eql(['zzz', 'MOO', 'a']);
+    expect(JSON.stringify(sorted([{a: 5}, {a: 2}, {a: 3}], {
+      transform: o => o.a,
+    }))).to.eql(JSON.stringify([{a: 2}, {a: 3}, {a: 5}]));
+  });
+
+  it('can convert strings to lowercase before sorting', function() {
+    expect(sorted(['zzz', 'a', 'MOO'], {lowercase: true}))
+      .to.eql(['a', 'MOO', 'zzz']);
+  });
+
+  it('can properly sort numeric strings', function() {
+    expect(sorted(['9.876', '11', '000', '-12,000'], {orderNumDateAlpha: true}))
+      .to.eql(['-12,000', '000', '9.876', '11']);
+  });
+
+  it('can properly sort numbers', function() {
+    expect(sorted([9.876, 11, 0, -12000], {orderNumDateAlpha: true}))
+      .to.eql([-12000, 0, 9.876, 11]);
+  });
+
+  it('can properly sort date strings', function() {
+    expect(sorted(['12/31/16', 'January 8th, 2000', '4-1-15'], {orderNumDateAlpha: true}))
+      .to.eql(['January 8th, 2000', '4-1-15', '12/31/16']);
+  });
+
+  it('can properly sort iso date strings', function() {
+    expect(sorted(['2016-12-31', '2000-08-01', '2015-04-01'], {
+      orderNumDateAlpha: true,
+      parseDateConfig: {iso: true},
+    })).to.eql(['2000-08-01', '2015-04-01', '2016-12-31']);
   });
 });
 
