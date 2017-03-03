@@ -7,7 +7,7 @@ import {
   truncateMiddle,
   unique,
 
-  stringComparator,
+  baseComparator,
   dateStringComparator,
   numericComparator,
   numDateAlphaComparator,
@@ -74,19 +74,27 @@ describe('sorted()', function() {
   });
 });
 
-describe(`stringComparator()`, function() {
+describe(`baseComparator()`, function() {
   it('sorts strings', function() {
-    expect(['a', 'zzz', 'moo'].sort(stringComparator())).to.eql(['a', 'moo', 'zzz']);
-    expect(['a', 'zzz', 'moo'].sort(stringComparator({order: 'desc'}))).to.eql(['zzz', 'moo', 'a']);
+    expect(['a', 'zzz', 'moo'].sort(baseComparator())).to.eql(['a', 'moo', 'zzz']);
+    expect(['a', 'zzz', 'moo'].sort(baseComparator({order: 'desc'}))).to.eql(['zzz', 'moo', 'a']);
+  });
+
+  it(`sorts numbers`, function() {
+    expect([9.876, 11, 0, -12000].sort(baseComparator()))
+      .to.eql([-12000, 0, 9.876, 11]);
+
+    expect([9.876, 11, 0, -12000].sort(baseComparator({order: `desc`})))
+      .to.eql([11, 9.876, 0, -12000]);
   });
 
   it('can sort based on a given transformation', function() {
-    expect(['a', 'zzz', 'MOO'].sort(stringComparator({
+    expect(['a', 'zzz', 'MOO'].sort(baseComparator({
       order: 'desc',
       transform: s => s.toLowerCase(),
     }))).to.eql(['zzz', 'MOO', 'a']);
 
-    expect([{a: 5}, {a: 2}, {a: 3}].sort(stringComparator({
+    expect([{a: 5}, {a: 2}, {a: 3}].sort(baseComparator({
       transform: o => o.a,
     }))).to.eql([{a: 2}, {a: 3}, {a: 5}]);
   });
@@ -166,8 +174,8 @@ describe(`dateStringComparator()`, function() {
 
 describe(`numDateAlphaComparator()`, function() {
   it('sorts strings', function() {
-    expect(['a', 'zzz', 'moo'].sort(stringComparator())).to.eql(['a', 'moo', 'zzz']);
-    expect(['a', 'zzz', 'moo'].sort(stringComparator({order: 'desc'}))).to.eql(['zzz', 'moo', 'a']);
+    expect(['a', 'zzz', 'moo'].sort(numDateAlphaComparator())).to.eql(['a', 'moo', 'zzz']);
+    expect(['a', 'zzz', 'moo'].sort(numDateAlphaComparator({order: 'desc'}))).to.eql(['zzz', 'moo', 'a']);
   });
 
   it(`sorts numeric strings`, function() {
