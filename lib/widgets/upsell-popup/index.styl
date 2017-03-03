@@ -1,7 +1,8 @@
 @import '../../stylesheets/defaults'
 
 mp-modal
-  width 285px
+  width 305px
+
 
 +prefix-classes('mp-upsell-popup-')
   .content
@@ -26,11 +27,12 @@ mp-modal
       max-width 180px
       text-shadow 0 1px 0 alpha(white, 0.5)
 
-      .upgrade-link
-        color blue-900
-        cursor pointer
-        font-weight weight-bold
-        text-decoration none
 
         &:hover
           color mp-blue
+
+.upgrade-link
+  color blue-900
+  cursor pointer
+  font-weight weight-bold
+  text-decoration none
