@@ -7,6 +7,11 @@ import {
   truncateMiddle,
   unique,
 
+  stringComparator,
+  dateStringComparator,
+  numericComparator,
+  numDateAlphaComparator,
+
   immutableSplice,
   removeByIndex,
   removeByValue,
@@ -58,43 +63,168 @@ describe('sorted()', function() {
   });
 
   it('can sort based on a given transformation', function() {
-    expect(JSON.stringify(sorted([{a: 5}, {a: 2}, {a: 3}], {
+    expect(sorted(['a', 'zzz', 'MOO'], {
+      order: 'desc',
+      transform: s => s.toLowerCase(),
+    })).to.eql(['zzz', 'MOO', 'a']);
+
+    expect(sorted([{a: 5}, {a: 2}, {a: 3}], {
       transform: o => o.a,
-    }))).to.eql(JSON.stringify([{a: 2}, {a: 3}, {a: 5}]));
+    })).to.eql([{a: 2}, {a: 3}, {a: 5}]);
+  });
+});
+
+describe(`stringComparator()`, function() {
+  it('sorts strings', function() {
+    expect(['a', 'zzz', 'moo'].sort(stringComparator())).to.eql(['a', 'moo', 'zzz']);
+    expect(['a', 'zzz', 'moo'].sort(stringComparator({order: 'desc'}))).to.eql(['zzz', 'moo', 'a']);
   });
 
-  it('can convert strings to lowercase before sorting', function() {
-    expect(sorted(['zzz', 'a', 'MOO'], {lowercase: true}))
-      .to.eql(['a', 'MOO', 'zzz']);
+  it('can sort based on a given transformation', function() {
+    expect(['a', 'zzz', 'MOO'].sort(stringComparator({
+      order: 'desc',
+      transform: s => s.toLowerCase(),
+    }))).to.eql(['zzz', 'MOO', 'a']);
+
+    expect([{a: 5}, {a: 2}, {a: 3}].sort(stringComparator({
+      transform: o => o.a,
+    }))).to.eql([{a: 2}, {a: 3}, {a: 5}]);
+  });
+});
+
+describe(`numericComparator()`, function() {
+  it(`sorts numeric strings`, function() {
+    expect([`9.876`, `11`, `000`, `-12,000`].sort(numericComparator()))
+      .to.eql([`-12,000`, `000`, `9.876`, `11`]);
+
+    expect([`9.876`, `11`, `000`, `-12,000`].sort(numericComparator({order: `desc`})))
+      .to.eql([`11`, `9.876`, `000`, `-12,000`]);
   });
 
-  it('can properly sort numeric strings', function() {
-    expect(sorted(['9.876', '11', '000', '-12,000'], {orderNumDateAlpha: true}))
-      .to.eql(['-12,000', '000', '9.876', '11']);
-  });
-
-  it('can properly sort numbers', function() {
-    expect(sorted([9.876, 11, 0, -12000], {orderNumDateAlpha: true}))
+  it(`sorts numbers`, function() {
+    expect([9.876, 11, 0, -12000].sort(numericComparator()))
       .to.eql([-12000, 0, 9.876, 11]);
+
+    expect([9.876, 11, 0, -12000].sort(numericComparator({order: `desc`})))
+      .to.eql([11, 9.876, 0, -12000]);
   });
 
-  it('can properly sort date strings', function() {
-    expect(sorted(['12/31/16', 'January 8th, 2000', '4-1-15'], {orderNumDateAlpha: true}))
-      .to.eql(['January 8th, 2000', '4-1-15', '12/31/16']);
+  it('can sort based on a given transformation', function() {
+    expect([3, 4, 5].sort(numericComparator({
+      transform: n => n % 2,
+    }))).to.eql([4, 3, 5]);
+
+    expect([3, 4, 5].sort(numericComparator({
+      order: 'desc',
+      transform: n => n % 2,
+    }))).to.eql([3, 5, 4]);
+  });
+});
+
+describe(`dateStringComparator()`, function() {
+  it(`sorts date strings`, function() {
+    expect([`12/31/16`, `January 8th, 2000`, `4-1-15`].sort(dateStringComparator()))
+      .to.eql([`January 8th, 2000`, `4-1-15`, `12/31/16`]);
+
+    expect([`12/31/16`, `January 8th, 2000`, `4-1-15`].sort(dateStringComparator({order: `desc`})))
+      .to.eql([`12/31/16`, `4-1-15`, `January 8th, 2000`]);
   });
 
-  it('can properly sort date strings with a parse config', function() {
-    expect(sorted(['2016-12-31', '2000-08-01', '2015-04-01'], {
-      orderNumDateAlpha: true,
+  it(`sorts date strings with a parse config`, function() {
+    expect([`2016-12-31`, `2000-08-01`, `2015-04-01`].sort(dateStringComparator({
       parseDateConfig: {iso: true, utc: true},
-    })).to.eql(['2000-08-01', '2015-04-01', '2016-12-31']);
+    }))).to.eql([`2000-08-01`, `2015-04-01`, `2016-12-31`]);
+
+    expect([`2016-12-31`, `2000-08-01`, `2015-04-01`].sort(dateStringComparator({
+      order: `desc`,
+      parseDateConfig: {iso: true, utc: true},
+    }))).to.eql([`2016-12-31`, `2015-04-01`, `2000-08-01`]);
   });
 
-  it('can properly sort date strings that match a specific regex', function() {
-    expect(sorted(['apr 10 2015', '2016-12-31', '2000-08-01', 'feb 4 2012'], {
-      orderNumDateAlpha: true,
-      dateRegex: `\d\d\d\d-\d\d-\d\d`,
-    })).to.eql(['2000-08-01', '2016-12-31', 'apr 10 2015', 'feb 4 2012']);
+  it(`sorts date strings that match a specific regex`, function() {
+    expect([`apr 10 2015`, `2016-12-31`, `2000-08-01`, `feb 4 2012`].sort(dateStringComparator({
+      dateRegex: /\d\d\d\d-\d\d-\d\d/,
+    }))).to.eql([`2000-08-01`, `2016-12-31`, `apr 10 2015`, `feb 4 2012`]);
+
+    expect([`apr 10 2015`, `2016-12-31`, `2000-08-01`, `feb 4 2012`].sort(dateStringComparator({
+      order: `desc`,
+      dateRegex: /\d\d\d\d-\d\d-\d\d/,
+    }))).to.eql([`2016-12-31`, `2000-08-01`, `apr 10 2015`, `feb 4 2012`]);
+  });
+
+  it('can sort based on a given transformation', function() {
+    expect(['12/6/2002', '12/5/2003', '12/7/2001'].sort(dateStringComparator({
+      transform: s => s.slice(0, 4),
+    }))).to.eql(['12/5/2003', '12/6/2002', '12/7/2001']);
+
+    expect(['12/6/2002', '12/5/2003', '12/7/2001'].sort(dateStringComparator({
+      order: `desc`,
+      transform: s => s.slice(0, 4),
+    }))).to.eql(['12/7/2001', '12/6/2002', '12/5/2003']);
+  });
+});
+
+describe(`numDateAlphaComparator()`, function() {
+  it('sorts strings', function() {
+    expect(['a', 'zzz', 'moo'].sort(stringComparator())).to.eql(['a', 'moo', 'zzz']);
+    expect(['a', 'zzz', 'moo'].sort(stringComparator({order: 'desc'}))).to.eql(['zzz', 'moo', 'a']);
+  });
+
+  it(`sorts numeric strings`, function() {
+    expect([`9.876`, `11`, `000`, `-12,000`].sort(numDateAlphaComparator()))
+      .to.eql([`-12,000`, `000`, `9.876`, `11`]);
+
+    expect([`9.876`, `11`, `000`, `-12,000`].sort(numDateAlphaComparator({order: `desc`})))
+      .to.eql([`11`, `9.876`, `000`, `-12,000`]);
+  });
+
+  it(`sorts numbers`, function() {
+    expect([9.876, 11, 0, -12000].sort(numDateAlphaComparator()))
+      .to.eql([-12000, 0, 9.876, 11]);
+
+    expect([9.876, 11, 0, -12000].sort(numDateAlphaComparator({order: `desc`})))
+      .to.eql([11, 9.876, 0, -12000]);
+  });
+
+  it(`sorts date strings`, function() {
+    expect([`12/31/16`, `January 8th, 2000`, `4-1-15`].sort(numDateAlphaComparator()))
+      .to.eql([`January 8th, 2000`, `4-1-15`, `12/31/16`]);
+
+    expect([`12/31/16`, `January 8th, 2000`, `4-1-15`].sort(numDateAlphaComparator({order: `desc`})))
+      .to.eql([`12/31/16`, `4-1-15`, `January 8th, 2000`]);
+  });
+
+  it(`sorts date strings with a parse config`, function() {
+    expect([`2016-12-31`, `2000-08-01`, `2015-04-01`].sort(numDateAlphaComparator({
+      parseDateConfig: {iso: true, utc: true},
+    }))).to.eql([`2000-08-01`, `2015-04-01`, `2016-12-31`]);
+
+    expect([`2016-12-31`, `2000-08-01`, `2015-04-01`].sort(numDateAlphaComparator({
+      order: `desc`,
+      parseDateConfig: {iso: true, utc: true},
+    }))).to.eql([`2016-12-31`, `2015-04-01`, `2000-08-01`]);
+  });
+
+  it(`sorts date strings that match a specific regex`, function() {
+    expect([`apr 10 2015`, `2016-12-31`, `2000-08-01`, `feb 4 2012`].sort(numDateAlphaComparator({
+      dateRegex: /\d\d\d\d-\d\d-\d\d/,
+    }))).to.eql([`2000-08-01`, `2016-12-31`, `apr 10 2015`, `feb 4 2012`]);
+
+    expect([`apr 10 2015`, `2016-12-31`, `2000-08-01`, `feb 4 2012`].sort(numDateAlphaComparator({
+      order: `desc`,
+      dateRegex: /\d\d\d\d-\d\d-\d\d/,
+    }))).to.eql([`2016-12-31`, `2000-08-01`, `feb 4 2012`, `apr 10 2015`]);
+  });
+
+  it('can sort based on a given transformation', function() {
+    expect(['a', 'zzz', 'MOO'].sort(numDateAlphaComparator({
+      order: 'desc',
+      transform: s => s.toLowerCase(),
+    }))).to.eql(['zzz', 'MOO', 'a']);
+
+    expect([{a: 5}, {a: 2}, {a: 3}].sort(numDateAlphaComparator({
+      transform: o => o.a,
+    }))).to.eql([{a: 2}, {a: 3}, {a: 5}]);
   });
 });
 
