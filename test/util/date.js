@@ -306,33 +306,25 @@ describe(`formatDate`, function() {
 });
 
 describe(`relativeToAbsoluteDate`, function() {
-  it(`converts a relative date integer and a unit to the expected Date object`, function() {
-    let date = new Date();
-    expect(relativeToAbsoluteDate(5, `day`)).to.eql(date.setDate(date.getDate() - 5));
+  it.only(`converts a relative date integer and a unit to the expected Date object`, function() {
+    const testCases = [
+      [5, `day`, date => date.setDate(date.getDate() - 5)],
+      [5, `month`, date => date.setMonth(date.getMonth() - 5)],
+      [5, `year`, date => date.setFullYear(date.getFullYear() - 5)],
+      [-100, `day`, date => date.setDate(date.getDate() + 100)],
+      [-100, `month`, date => date.setMonth(date.getMonth() + 100)],
+      [-100, `year`, date => date.setFullYear(date.getFullYear() + 100)],
+      [0, `day`, date => date],
+      [0, `month`, date => date],
+      [0, `year`, date => date],
+    ];
 
-    date = new Date();
-    expect(relativeToAbsoluteDate(5, `month`)).to.eql(date.setMonth(date.getMonth() - 5));
-
-    date = new Date();
-    expect(relativeToAbsoluteDate(5, `year`)).to.eql(date.setFullYear(date.getFullYear() - 5));
-
-    date = new Date();
-    expect(relativeToAbsoluteDate(-100, `day`)).to.eql(date.setDate(date.getDate() + 100));
-
-    date = new Date();
-    expect(relativeToAbsoluteDate(-100, `month`)).to.eql(date.setMonth(date.getMonth() + 100));
-
-    date = new Date();
-    expect(relativeToAbsoluteDate(-100, `year`)).to.eql(date.setFullYear(date.getFullYear() + 100));
-
-    date = new Date();
-    expect(relativeToAbsoluteDate(0, `day`)).to.eql(date);
-
-    date = new Date();
-    expect(relativeToAbsoluteDate(0, `month`)).to.eql(date);
-
-    date = new Date();
-    expect(relativeToAbsoluteDate(0, `year`)).to.eql(date);
+    testCases.forEach(([value, unit, setExpected]) => {
+      const actual = relativeToAbsoluteDate(value, unit);
+      const expected = new Date();
+      setExpected(expected);
+      expect(actual.setHours(0, 0, 0, 0)).to.eql(expected.setHours(0, 0, 0, 0));
+    });
   });
 
   it(`returns null if invalid input is passed`, function() {
