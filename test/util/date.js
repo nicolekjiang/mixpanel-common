@@ -306,7 +306,7 @@ describe(`formatDate`, function() {
 });
 
 describe(`relativeToAbsoluteDate`, function() {
-  it.only(`converts a relative date integer and a unit to the expected Date object`, function() {
+  it(`converts a relative date integer and a unit to the expected Date object`, function() {
     const testCases = [
       [5, `day`, date => date.setDate(date.getDate() - 5)],
       [5, `month`, date => date.setMonth(date.getMonth() - 5)],
