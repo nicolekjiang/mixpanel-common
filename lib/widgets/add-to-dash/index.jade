@@ -12,6 +12,7 @@
   )
 
   - const existingReport = $component.getAttribute('bookmark') && $component.getJSONAttribute('bookmark').include_in_dashboard
+  - const currentReport = existingReport || reportCreated
 
   mp-tutorial-tooltip(
     attrs={
@@ -31,12 +32,12 @@
       class={'mp-add-to-dash-added': reportCreated}
       on={click: () => open ? $helpers.closeMenu() : $helpers.openMenu()}
     )
-      if $component.isAttributeEnabled('over-free-limit') && !(reportCreated || existingReport)
+      if $component.isAttributeEnabled('over-free-limit') && !currentReport
         .mp-add-to-dash-upsell-icon
           svg-icon(attrs={icon: `lightning-bolt`})
       .mp-add-to-dash-icon
         svg-icon(
-          attrs={icon: (reportCreated || existingReport) ? `dashboard-confirm` : `dashboard-add-to`},
+          attrs={icon: currentReport ? `dashboard-confirm` : `dashboard-add-to`},
         )
     .mp-add-to-dash-menu
       mp-drop-menu(attrs={open} on={change: $helpers.tagSelectorMenuChanged})

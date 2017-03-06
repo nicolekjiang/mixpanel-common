@@ -55,7 +55,7 @@
       mp-button-bar(attrs={color: 'grey'} on={click: () => $helpers.addTag(inputText)})
         .mp-tag-selector-create-tag-btn
           .mp-tag-selector-copy Create new dashboard for
-          .mp-tag-selector-label-name= inputText
+          mp-truncated-text.mp-tag-selector-label-name(attrs={title: inputText})
     else
       mp-button-bar.save-btn(attrs={color: 'blue', disabled: $component.isAttributeEnabled('saving')} on={click: $helpers.saveTags})
         if $component.isAttributeEnabled('saving')
