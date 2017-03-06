@@ -19726,7 +19726,7 @@
 
 	  return (0, _function.mapArguments)(SORT_ORDERING[order], function (item) {
 	    item = transform(item);
-	    var number = Number(item.replace ? item.replace(/,/g, '') : item);
+	    var number = Number(item && item.replace ? item.replace(/,/g, '') : item);
 	    return !isNaN(number) ? number : null;
 	  });
 	}
@@ -19845,7 +19845,7 @@
 
 	var UNITS_ARRAY = [UNITS.hour, UNITS.day, UNITS.week, UNITS.month, UNITS.quarter, UNITS.year];
 
-	var PARSE_DATE_FORMATS = ['M D YY', 'M D YYYY', 'YY M D', 'YYYY M D', 'MMM D YY', 'MMM D YYYY', 'MMM Do YY', 'MMM Do YYYY', 'M D'];
+	var PARSE_DATE_FORMATS = ['M D YY', 'M D YYYY', 'YY M D', 'YYYY M D', 'MMM D YY', 'MMM D YYYY', 'MMM Do YY', 'MMM Do YYYY', 'M D', 'M YYYY', 'MMM YYYY'];
 
 	var DISPLAY_DATE_FORMATS = (_DISPLAY_DATE_FORMATS = {}, _defineProperty(_DISPLAY_DATE_FORMATS, UNITS.hour, 'MMM D[,] ha'), _defineProperty(_DISPLAY_DATE_FORMATS, UNITS.day, 'ddd, MMM Do'), _defineProperty(_DISPLAY_DATE_FORMATS, UNITS.week, 'MMM D'), _defineProperty(_DISPLAY_DATE_FORMATS, UNITS.month, 'MMM YYYY'), _defineProperty(_DISPLAY_DATE_FORMATS, UNITS.quarter, '[Q]Q YYYY'), _defineProperty(_DISPLAY_DATE_FORMATS, UNITS.year, 'YYYY'), _DISPLAY_DATE_FORMATS);
 
