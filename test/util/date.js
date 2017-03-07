@@ -170,15 +170,26 @@ describe(`parseDate`, function() {
       'Feb 27th':  {month: 2,  day: 27},
       'February 27':  {month: 2,  day: 27},
       'February 27th':  {month: 2,  day: 27},
+      'December 2015': {month: 12, day: 1, year: 2015},
+      'Dec 2015': {month: 12, day: 1, year: 2015},
+      'December \'15': {month: 12, day: 1, year: 2015},
+      'Dec \'15': {month: 12, day: 1, year: 2015},
+      'February 2000': {month: 2, day: 1, year: 2000},
+      'Feb 2000': {month: 2, day: 1, year: 2000},
+      'February \'00': {month: 2, day: 1, year: 2000},
+      'Feb \'00': {month: 2, day: 1, year: 2000},
     };
 
     Object.keys(shorthandDates).forEach(dateString => {
       let date = new Date();
+      let {year, month, day} = shorthandDates[dateString];
 
-      date.setMonth(shorthandDates[dateString].month - 1);
-      date.setDate(shorthandDates[dateString].day - 1);
+      date.setMonth(month - 1);
+      date.setDate(day - 1);
 
-      if (date > new Date()) {
+      if (year) {
+        date.setFullYear(year);
+      } else if (date > new Date()) {
         date.setFullYear(date.getFullYear() - 1);
       }
 
@@ -236,8 +247,8 @@ describe(`formatDate`, function() {
 
   it(`formats Date objects and timestamp integers to the expected string format if the 'unit' option is set`, function() {
     let unitDateFormats = {
-      'hour': `Dec 1, 12am`,
-      'day': `Tue, Dec 1st`,
+      'hour': `12am, Tue, Dec 1`,
+      'day': `Tue, Dec 1`,
       'week': `Dec 1 - Dec 7`,
       'month': `Dec 2015`,
       'quarter': `Q4 2015`,
@@ -248,8 +259,8 @@ describe(`formatDate`, function() {
     );
 
     unitDateFormats = {
-      'hour': `Feb 27, 12am`,
-      'day': `Sun, Feb 27th`,
+      'hour': `12am, Sun, Feb 27`,
+      'day': `Sun, Feb 27`,
       'week': `Feb 27 - Mar 4`,
       'month': `Feb 2000`,
       'quarter': `Q1 2000`,
