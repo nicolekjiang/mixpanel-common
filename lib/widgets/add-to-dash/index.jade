@@ -70,7 +70,7 @@
               .mp-add-to-dash-subtext(attrs={title: reportName})= $helpers.truncateMiddle(reportName, 40)
             mp-button-bar(attrs={color: 'grey'} on={click: $helpers.editTags}) Edit selected dashboards
     if !open && !$component.isAttributeEnabled('show-tutorial-tooltip') && !$component.isAttributeEnabled('not-implemented')
-      mp-tooltip(attrs={'placement': 'bottom'})= existingReport ? 'Edit dashboards' : 'Add to dashboard'
+      mp-tooltip(attrs={'placement': $component.getAttribute('tooltip-placement') || 'bottom'})= existingReport ? 'Edit dashboards' : 'Add to dashboard'
 
   if $component.isAttributeEnabled('not-implemented')
     .mp-add-to-dash-disabled-tooltip
