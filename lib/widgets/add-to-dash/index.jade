@@ -69,7 +69,7 @@
                 .mp-add-to-dash-header-text Report added to dashboards
               .mp-add-to-dash-subtext(attrs={title: reportName})= $helpers.truncateMiddle(reportName, 40)
             mp-button-bar(attrs={color: 'grey'} on={click: $helpers.editTags}) Edit selected dashboards
-    if !open && !$component.isAttributeEnabled('show-tutorial-tooltip')
+    if !open && !$component.isAttributeEnabled('show-tutorial-tooltip') && !$component.isAttributeEnabled('not-implemented')
       mp-tooltip(attrs={'placement': 'bottom'})= existingReport ? 'Edit dashboards' : 'Add to dashboard'
 
   if $component.isAttributeEnabled('not-implemented')
@@ -77,5 +77,7 @@
       .mp-add-to-dash-disabled-tooltip-icon
       if $component.isAttributeEnabled('seg-retention')
         .mp-add-to-dash-disabled-tooltip-text Segmented retention reports are not currently supported in dashboards. Please remove the segment and try again.
+      else if $component.getAttribute('not-implemented-text')
+        .mp-add-to-dash-disabled-tooltip-text= $component.getAttribute('not-implemented-text')
       else
         .mp-add-to-dash-disabled-tooltip-text This report is not currently supported in dashboards, but we are continuing to add support for new reports.
