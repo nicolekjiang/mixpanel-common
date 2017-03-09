@@ -69,6 +69,27 @@ document.registerElement(`style-guide`, class extends Component {
           this.state.open.menu = !this.state.open.menu;
           this.update();
         },
+
+        getElementStr: el => {
+          const attributesStr = Array.from(el.attributes).map(attribute => {
+            return `${attribute.nodeName}="${attribute.nodeValue}"`
+          }).join(` `);
+          return `<${el.tagName.toLowerCase()} ${attributesStr}>`;
+        },
+
+        getCalendarEventHandlers: () => {
+          return {
+            selectDate: e => console.log(e),
+          };
+        },
+
+        handleInsertCalendar: el => {
+          const textEl = document.createElement(`div`);
+          textEl.textContent = this.helpers.getElementStr(el);
+          const parentEl = el.parentElement;
+          parentEl.insertBefore(textEl, parentEl.childNodes[0]);
+        },
+
         handleBookmarksMenuSubmit: e => {
           switch (e.detail.action) {
             case `select`:

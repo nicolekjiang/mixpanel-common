@@ -348,6 +348,10 @@ describe(`relativeToAbsoluteDate`, function() {
   });
 });
 
+describe(`normalizeDateRange`, function() {
+  // TODO(mack):
+});
+
 describe(`normalizeDateStrings`, function() {
   it(`accepts a list of date strings and parses, sorts, and ensures they don't exceed the current moment`, function() {
     const inputDates = [`12/01/2015`, `2000 2 27`, `January 1st 9999`];
