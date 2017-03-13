@@ -13,20 +13,24 @@
     box-sizing border-box
 
   .container
-    position relative
+    .icon
+      position relative
+
+      .upsell-icon
+        position absolute
+        right -6px
+        top -5px
 
     &.type-segmentation, &.type-retention
       .btn
         padding 14px
         svg-icon-style(grey-700, grey-900)
 
+        .upsell-icon
+          svg-icon-style(mp-purple, size: 16px)
+
         &:hover
           background-color alpha(white, 0.35)
-
-        .upsell-icon.upsell-icon
-          left 27px
-          position absolute
-          top 6px
 
       mp-drop-menu
         cursor default
@@ -37,12 +41,11 @@
         padding 4px
         svg-icon-style(grey-700, grey-900)
 
+        .upsell-icon
+          svg-icon-style(mp-purple, size: 16px)
+
         &:hover
           background-color alpha(white, 0.35)
-
-        .upsell-icon.upsell-icon
-          left 22px
-          top -9px
 
       mp-drop-menu
         cursor default
@@ -54,9 +57,8 @@
         padding 5px
         svg-icon-style(grey-500, mp-blue)
 
-        .upsell-icon.upsell-icon
-          left 22px
-          top -9px
+        .upsell-icon
+          svg-icon-style(mp-purple, size: 16px)
 
       mp-drop-menu
         cursor default

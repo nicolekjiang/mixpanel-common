@@ -31,13 +31,13 @@
       class={'mp-add-to-dash-added': reportCreated}
       on={click: () => open ? $helpers.closeMenu() : $helpers.openMenu()}
     )
-      if $component.isAttributeEnabled('over-free-limit') && !existingReport
-        .mp-add-to-dash-upsell-icon
-          svg-icon(attrs={icon: `lightning-bolt`})
       .mp-add-to-dash-icon
         svg-icon(
           attrs={icon: existingReport ? `dashboard-confirm` : `dashboard-add-to`},
         )
+        if $component.isAttributeEnabled('over-free-limit') && !existingReport
+          .mp-add-to-dash-upsell-icon
+            svg-icon(attrs={icon: `lighting-bolt`})
     .mp-add-to-dash-menu
       mp-drop-menu(attrs={open} on={change: $helpers.tagSelectorMenuChanged})
         .mp-add-to-dash-menu-contents
