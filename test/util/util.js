@@ -18,6 +18,7 @@ import {
   replaceByIndex,
   insertAtIndex,
 
+  nestedObjectDepth,
   nestedObjectRolling,
 
   truncateToElement,
@@ -526,6 +527,30 @@ describe(`unique()`, function() {
         {a: 1, b: `abc`}, {a: null, b: undefined}, {a: [], b: {}},
       ]);
     });
+  });
+});
+
+const timeseriesResultObjNull = {
+  US: {
+    '2016-06-01': null,
+    '2016-06-02': null,
+    '2016-06-03': 2,
+    '2016-06-04': 8,
+    '2016-06-05': 14,
+  },
+  Canada: {
+    '2016-06-01': 6,
+    '2016-06-02': 3,
+    '2016-06-03': 3,
+    '2016-06-04': 12,
+    '2016-06-05': null,
+  },
+};
+
+describe(`nestedObjectDepth`, function() {
+  it(`supports null value leaf nodes`, function() {
+    const depth = nestedObjectDepth(timeseriesResultObjNull);
+    expect(depth).to.eql(2);
   });
 });
 
