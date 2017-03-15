@@ -401,10 +401,12 @@ describe(`dateRangeToUnit`, function() {
 
 describe(`localizedDate`, function() {
   it(`gives the current time when offsetting by the timezone you are in`, function() {
-    expect(localizedDate(-NOW.getTimezoneOffset(), NOW)).to.eql(NOW);
+    expect(localizedDate({utcOffset: -NOW.getTimezoneOffset(), date: NOW})).to.eql(NOW);
   });
 
   it(`always returns a date `, function() {
-    expect(localizedDate(null, null)).to.be.a(Date);
+    NON_DATE_INPUTS.forEach(input => expect(localizedDate({utcOffset: input, date: input})).to.be.a(Date));
+    NON_DATE_INPUTS.forEach(input => expect(localizedDate({utcOffset: input})).to.be.a(Date));
+    NON_DATE_INPUTS.forEach(input => expect(localizedDate({date: input})).to.be.a(Date));
   });
 });
