@@ -4,6 +4,7 @@ import expect from 'expect.js';
 import {
   parseDate,
   formatDate,
+  localizedDate,
   normalizeDateStrings,
   relativeToAbsoluteDate,
   dateRangeToUnit,
@@ -351,7 +352,7 @@ describe(`normalizeDateStrings`, function() {
   it(`accepts a list of date strings and parses, sorts, and ensures they don't exceed the current moment`, function() {
     const inputDates = [`12/01/2015`, `2000 2 27`, `January 1st 9999`];
     const outputDates = [`2000-02-27`, `2015-12-01`, CURRENT_DATE_ISO];
-    expect(normalizeDateStrings(...inputDates)).to.eql(outputDates);
+    expect(normalizeDateStrings(inputDates)).to.eql(outputDates);
   });
 
   it(`replaces invalid entries in the arguments list with null`, function() {
@@ -359,7 +360,16 @@ describe(`normalizeDateStrings`, function() {
       123,
       new Date(),
     ]);
-    normalizeDateStrings(...inputs).forEach(output => expect(output).to.eql(null));
+    normalizeDateStrings(inputs).forEach(output => expect(output).to.eql(null));
+  });
+
+  it('allows utc offset to define the current moment', function() {
+    const oneDayFromNow = new Date();
+    oneDayFromNow.setDate(oneDayFromNow.getDate() + 1);
+    const inputDates = [NOW.toISOString(), oneDayFromNow.toISOString()];
+    const outputDates = [CURRENT_DATE_ISO, oneDayFromNow.toISOString().split('T')[0]];
+    const utcOffset = 24 * 60; // include one day of offset hours
+    expect(normalizeDateStrings(inputDates, {utcOffset})).to.eql(outputDates);
   });
 });
 
@@ -386,5 +396,15 @@ describe(`dateRangeToUnit`, function() {
     NON_DATE_INPUTS.forEach(input => expect(dateRangeToUnit(input, input)).to.eql(null));
     NON_DATE_INPUTS.forEach(input => expect(dateRangeToUnit(new Date(), input)).to.eql(null));
     NON_DATE_INPUTS.forEach(input => expect(dateRangeToUnit(input, new Date())).to.eql(null));
+  });
+});
+
+describe(`localizedDate`, function() {
+  it(`gives the current time when offsetting by the timezone you are in`, function() {
+    expect(localizedDate(-NOW.getTimezoneOffset(), NOW)).to.eql(NOW);
+  });
+
+  it(`always returns a date `, function() {
+    expect(localizedDate(null, null)).to.be.a(Date);
   });
 });
