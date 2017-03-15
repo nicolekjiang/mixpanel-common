@@ -19228,7 +19228,7 @@
 	}
 
 	function nestedObjectDepth(obj) {
-	  return typeof obj === 'object' ? nestedObjectDepth(obj[Object.keys(obj)[0]]) + 1 : 0;
+	  return obj !== null && typeof obj === 'object' ? nestedObjectDepth(obj[Object.keys(obj)[0]]) + 1 : 0;
 	}
 
 	function getKeys(obj, depth, keySet) {
@@ -34911,6 +34911,8 @@
 
 	var _string = __webpack_require__(465);
 
+	var _dom = __webpack_require__(321);
+
 	var _index = __webpack_require__(466);
 
 	var _index2 = _interopRequireDefault(_index);
@@ -34965,9 +34967,14 @@
 	          sizeClass: 'default-tag'
 	        },
 	        helpers: {
-	          remove: function remove(e) {
-	            e.stopPropagation();
-	            _this2.dispatchEvent(new CustomEvent('change', { detail: { action: 'remove' } }));
+	          remove: function remove() {
+	            return _this2.dispatchEvent(new CustomEvent('remove', { detail: { tagName: _this2.getAttribute('tag-name') } }));
+	          },
+	          select: function select(e) {
+	            var removeTag = _this2.el.querySelector('.remove-tag');
+	            if (!removeTag || (0, _dom.clickWasOutside)(e, removeTag)) {
+	              _this2.dispatchEvent(new CustomEvent('select', { detail: { tagName: _this2.getAttribute('tag-name') } }));
+	            }
 	          },
 	          toSentenceCase: _string.toSentenceCase
 	        }
@@ -35086,6 +35093,9 @@
 	    var h = __webpack_require__(299).h;
 	    return {
 	      value: h("div", {
+	        "on": {
+	          click: $helpers.select
+	        },
 	        "class": Object.assign({}, _defineProperty({
 	          clickable: $component.isAttributeEnabled('clickable'),
 	          removable: $component.isAttributeEnabled('removable')
@@ -44954,9 +44964,8 @@
 	                    "attrs": attrs,
 	                    "key": 'tag-' + tag,
 	                    "on": {
-	                      change: function change(e) {
-	                        e.stopPropagation();
-	                        $helpers.removeTag(tag);
+	                      remove: function remove() {
+	                        return $helpers.removeTag(tag);
 	                      }
 	                    }
 	                  }));;

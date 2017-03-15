@@ -172,7 +172,7 @@
 	                  console.log('Created:', e.detail.name);
 	                  var newBookmark = {
 	                    id: new Date().getTime(),
-	                    user_id: 1,
+	                    user_id: 1, // eslint-disable-line camelcase
 	                    name: e.detail.name,
 	                    user: 'John D.'
 	                  };
@@ -200,11 +200,11 @@
 	            _this2.update();
 	            setTimeout(function () {
 	              // mock network request latency
-	              _this2.state.tagSelectorData.selectedTags = [].concat(_toConsumableArray(e.detail.tags));
+	              _this2.state.tagSelectorData.selectedTags = new Set([].concat(_toConsumableArray(e.detail.tags)));
 	              _this2.state.tagSelectorData.saving = false;
 	              _this2.state.open.tagSelector = false;
 	              _this2.update();
-	            }, 3000);
+	            }, 2000);
 	          },
 	          handleTagSelectorChange: function handleTagSelectorChange(e) {
 	            if (e.detail && e.detail.action) {
@@ -219,7 +219,7 @@
 	              }
 	            }
 	          },
-	          handleTagSelectorSubmit: function handleTagSelectorSubmit(e) {
+	          handleTagSelectorSubmit: function handleTagSelectorSubmit() {
 	            _this2.state.open.tagSelector = false;
 	            _this2.update();
 	          },
@@ -19346,7 +19346,7 @@
 	}
 
 	function nestedObjectDepth(obj) {
-	  return typeof obj === 'object' ? nestedObjectDepth(obj[Object.keys(obj)[0]]) + 1 : 0;
+	  return obj !== null && typeof obj === 'object' ? nestedObjectDepth(obj[Object.keys(obj)[0]]) + 1 : 0;
 	}
 
 	function getKeys(obj, depth, keySet) {
@@ -35029,6 +35029,8 @@
 
 	var _string = __webpack_require__(465);
 
+	var _dom = __webpack_require__(321);
+
 	var _index = __webpack_require__(466);
 
 	var _index2 = _interopRequireDefault(_index);
@@ -35083,9 +35085,14 @@
 	          sizeClass: 'default-tag'
 	        },
 	        helpers: {
-	          remove: function remove(e) {
-	            e.stopPropagation();
-	            _this2.dispatchEvent(new CustomEvent('change', { detail: { action: 'remove' } }));
+	          remove: function remove() {
+	            return _this2.dispatchEvent(new CustomEvent('remove', { detail: { tagName: _this2.getAttribute('tag-name') } }));
+	          },
+	          select: function select(e) {
+	            var removeTag = _this2.el.querySelector('.remove-tag');
+	            if (!removeTag || (0, _dom.clickWasOutside)(e, removeTag)) {
+	              _this2.dispatchEvent(new CustomEvent('select', { detail: { tagName: _this2.getAttribute('tag-name') } }));
+	            }
 	          },
 	          toSentenceCase: _string.toSentenceCase
 	        }
@@ -35204,6 +35211,9 @@
 	    var h = __webpack_require__(299).h;
 	    return {
 	      value: h("div", {
+	        "on": {
+	          click: $helpers.select
+	        },
 	        "class": Object.assign({}, _defineProperty({
 	          clickable: $component.isAttributeEnabled('clickable'),
 	          removable: $component.isAttributeEnabled('removable')
@@ -45072,9 +45082,8 @@
 	                    "attrs": attrs,
 	                    "key": 'tag-' + tag,
 	                    "on": {
-	                      change: function change(e) {
-	                        e.stopPropagation();
-	                        $helpers.removeTag(tag);
+	                      remove: function remove() {
+	                        return $helpers.removeTag(tag);
 	                      }
 	                    }
 	                  }));;
