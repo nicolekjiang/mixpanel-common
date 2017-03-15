@@ -13,7 +13,6 @@ describe(`Test tag-selector widget`, () => {
     this.widget.setAttribute(`open`, true);
     this.widget.setAttribute(`all-tags`, JSON.stringify(allTags));
     this.widget.setAttribute(`selected-tags`, JSON.stringify(selectedTags));
-    this.widget.setAttribute(`load-state`, `idle`);
 
     document.body.appendChild(this.widget);
 

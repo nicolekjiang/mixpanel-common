@@ -83,7 +83,7 @@ document.registerElement(`style-guide`, class extends Component {
                 console.log(`Created:`, e.detail.name);
                 const newBookmark = {
                   id: (new Date()).getTime(),
-                  user_id: 1,
+                  user_id: 1, // eslint-disable-line camelcase
                   name: e.detail.name,
                   user: `John D.`,
                 };
@@ -110,26 +110,26 @@ document.registerElement(`style-guide`, class extends Component {
           this.state.tagSelectorData.saving = true;
           this.update();
           setTimeout(() => { // mock network request latency
-            this.state.tagSelectorData.selectedTags = [...e.detail.tags];
+            this.state.tagSelectorData.selectedTags = new Set([...e.detail.tags]);
             this.state.tagSelectorData.saving = false;
             this.state.open.tagSelector = false;
             this.update();
-          }, 3000)
+          }, 2000);
         },
         handleTagSelectorChange: e => {
           if (e.detail && e.detail.action) {
             const tag = e.detail.tagName;
-            if (e.detail.action === 'addTag') {
+            if (e.detail.action === `addTag`) {
               this.state.tagSelectorData.selectedTags.add(tag);
               this.state.tagSelectorData.allTags.add(tag);
               this.update();
-            } else if (e.detail.action === 'removeTag') {
+            } else if (e.detail.action === `removeTag`) {
               this.state.tagSelectorData.selectedTags.delete(tag);
               this.update();
             }
           }
         },
-        handleTagSelectorSubmit: e => {
+        handleTagSelectorSubmit: () => {
           this.state.open.tagSelector = false;
           this.update();
         },

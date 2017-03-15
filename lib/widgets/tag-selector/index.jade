@@ -14,7 +14,7 @@
           mp-tag(
             attrs=attrs
             key='tag-' + tag,
-            on={change: e => { e.stopPropagation(); $helpers.removeTag(tag) }}
+            on={remove: () => $helpers.removeTag(tag)}
           )
       input.mp-tag-selector-search-input(
         class={'mp-tag-selector-empty': showSearchIcon}

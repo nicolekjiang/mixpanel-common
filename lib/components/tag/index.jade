@@ -3,7 +3,8 @@
     clickable: $component.isAttributeEnabled('clickable'),
     removable: $component.isAttributeEnabled('removable'),
     [sizeClass]: true,
-  })
+  }
+  on={click: $helpers.select})
   if $component.getAttribute('icon')
     .extra-icon
       svg-icon(attrs={icon: $component.getAttribute('icon')})
