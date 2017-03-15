@@ -47,11 +47,9 @@ describe(`Test tag-selector widget`, () => {
   }),
 
   it(`fires change event to remove tags`, function(done) {
-    this.widget.addEventListener(`change`, e => {
-      if(e.detail.action === `removeTag`) {
-        done();
-      }
+    this.widget.addEventListener(`remove`, () => {
+      done();
     });
-    this.widget.el.querySelector(`mp-tag`).dispatchEvent(new CustomEvent(`change`, {detail: {action: `remove`}}));
+    this.widget.el.querySelector(`mp-tag`).dispatchEvent(new CustomEvent(`remove`, {detail: {}}));
   });
 });

@@ -2,21 +2,20 @@
 import expect from 'expect.js';
 import '../../lib/components/tag';
 
-describe('Test tag component', () => {
+describe(`Test tag component`, () => {
   beforeEach(function(done) {
-    document.body.innerHTML = '';
-    this.widget = document.createElement('mp-tag');
-    this.widget.setAttribute('removable', true);
+    document.body.innerHTML = ``;
+    this.widget = document.createElement(`mp-tag`);
+    this.widget.setAttribute(`removable`, true);
     document.body.appendChild(this.widget);
 
     window.requestAnimationFrame(() => done());
   });
 
-  it('fires close event', function(done) {
-    this.widget.addEventListener('change', (e) => {
-      expect(e.detail.action).to.equal('remove');
-      done()
+  it(`fires close event`, function(done) {
+    this.widget.addEventListener(`remove`, () => {
+      done();
     });
-    this.widget.el.querySelector('.remove-tag').dispatchEvent(new MouseEvent('click'));
+    this.widget.el.querySelector(`.remove-tag`).dispatchEvent(new MouseEvent(`click`));
   });
 });
