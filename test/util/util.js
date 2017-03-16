@@ -11,6 +11,7 @@ import {
   dateStringComparator,
   numericComparator,
   numDateAlphaComparator,
+  SortCache,
 
   immutableSplice,
   removeByIndex,
@@ -25,6 +26,9 @@ import {
   binarySearch,
   truncateToWidth
 } from '../../lib/util';
+import {
+  parseDate,
+} from '../../lib/util/date';
 
 describe(`pluralize()`, function() {
   it(`defaults to adding s`, function() {
@@ -129,6 +133,15 @@ describe(`numericComparator()`, function() {
       transform: n => n % 3,
     }))).to.eql([5, 7, 3]);
   });
+
+  it.only(`caches values in parseNumberCache`, function() {
+    const numberStrings = [`9.876`, `11`, `000`, `-12,000`];
+    const parseNumberCache = new SortCache();
+
+    numberStrings.sort(numericComparator({parseNumberCache}));
+    numberStrings.forEach(numberString =>
+      expect(parseNumberCache.fetch(numberString)).to.eql(Number(numberString.replace(`,`, ``))));
+  });
 });
 
 describe(`dateStringComparator()`, function() {
@@ -189,6 +202,15 @@ describe(`dateStringComparator()`, function() {
       order: `desc`,
       transform: s => s.slice(0, 4),
     }))).to.eql([`12/7/2001`, `12/6/2002`, `12/5/2003`]);
+  });
+
+  it.only(`caches values in parseDateCache`, function() {
+    const dateStrings = [`12/31/16`, `January 8th, 2000`, `4-1-15`];
+    const parseDateCache = new SortCache();
+
+    dateStrings.sort(dateStringComparator({parseDateCache}));
+    dateStrings.forEach(dateString =>
+      expect(parseDateCache.fetch(dateString)).to.eql(parseDate(dateString).getTime()));
   });
 });
 
@@ -268,6 +290,111 @@ describe(`numDateAlphaComparator()`, function() {
     expect([{a: 5}, {a: 2}, {a: 3}].sort(numDateAlphaComparator({
       transform: o => o.a,
     }))).to.eql([{a: 2}, {a: 3}, {a: 5}]);
+  });
+
+  it(`sorts a mixture of date, numeric, and alpha strings (asc)`, function() {
+    expect([`12/31/16`, `January 8th, 2000`, `4-1-15`, `9.876`, `11`, `000`, `-12,000`, `efg`, `abc`, `xyz`].sort(numDateAlphaComparator()))
+      .to.eql([`-12,000`, `000`, `9.876`, `11`, `January 8th, 2000`, `4-1-15`, `12/31/16`, `abc`, `efg`, `xyz`]);
+  });
+
+  it(`sorts a mixture of date, numeric, and alpha strings (desc)`, function() {
+    expect([`12/31/16`, `January 8th, 2000`, `4-1-15`, `9.876`, `11`, `000`, `-12,000`, `efg`, `abc`, `xyz`].sort(numDateAlphaComparator({order: `desc`})))
+      .to.eql([`11`, `9.876`, `000`, `-12,000`, `12/31/16`, `4-1-15`, `January 8th, 2000`, `xyz`, `efg`, `abc`]);
+  });
+
+  it(`can order date, numeric, and alpha strings independently`, function() {
+    expect([`12/31/16`, `January 8th, 2000`, `4-1-15`, `9.876`, `11`, `000`, `-12,000`, `efg`, `abc`, `xyz`].sort(numDateAlphaComparator({order: {
+      date: `asc`,
+      number: `asc`,
+      base: `asc`,
+    }}))).to.eql([`-12,000`, `000`, `9.876`, `11`, `January 8th, 2000`, `4-1-15`, `12/31/16`, `abc`, `efg`, `xyz`]);
+
+    expect([`12/31/16`, `January 8th, 2000`, `4-1-15`, `9.876`, `11`, `000`, `-12,000`, `efg`, `abc`, `xyz`].sort(numDateAlphaComparator({order: {
+      date: `desc`,
+      number: `asc`,
+      base: `asc`,
+    }}))).to.eql([`-12,000`, `000`, `9.876`, `11`, `12/31/16`, `4-1-15`, `January 8th, 2000`, `abc`, `efg`, `xyz`]);
+
+    expect([`12/31/16`, `January 8th, 2000`, `4-1-15`, `9.876`, `11`, `000`, `-12,000`, `efg`, `abc`, `xyz`].sort(numDateAlphaComparator({order: {
+      date: `asc`,
+      number: `desc`,
+      base: `asc`,
+    }}))).to.eql([`11`, `9.876`, `000`, `-12,000`, `January 8th, 2000`, `4-1-15`, `12/31/16`, `abc`, `efg`, `xyz`]);
+
+    expect([`12/31/16`, `January 8th, 2000`, `4-1-15`, `9.876`, `11`, `000`, `-12,000`, `efg`, `abc`, `xyz`].sort(numDateAlphaComparator({order: {
+      date: `asc`,
+      number: `asc`,
+      base: `desc`,
+    }}))).to.eql([`-12,000`, `000`, `9.876`, `11`, `January 8th, 2000`, `4-1-15`, `12/31/16`, `xyz`, `efg`, `abc`]);
+
+    expect([`12/31/16`, `January 8th, 2000`, `4-1-15`, `9.876`, `11`, `000`, `-12,000`, `efg`, `abc`, `xyz`].sort(numDateAlphaComparator({order: {
+      date: `desc`,
+      number: `desc`,
+      base: `asc`,
+    }}))).to.eql([`11`, `9.876`, `000`, `-12,000`, `12/31/16`, `4-1-15`, `January 8th, 2000`, `abc`, `efg`, `xyz`]);
+
+    expect([`12/31/16`, `January 8th, 2000`, `4-1-15`, `9.876`, `11`, `000`, `-12,000`, `efg`, `abc`, `xyz`].sort(numDateAlphaComparator({order: {
+      date: `desc`,
+      number: `asc`,
+      base: `desc`,
+    }}))).to.eql([`-12,000`, `000`, `9.876`, `11`, `12/31/16`, `4-1-15`, `January 8th, 2000`, `xyz`, `efg`, `abc`]);
+
+    expect([`12/31/16`, `January 8th, 2000`, `4-1-15`, `9.876`, `11`, `000`, `-12,000`, `efg`, `abc`, `xyz`].sort(numDateAlphaComparator({order: {
+      date: `asc`,
+      number: `desc`,
+      base: `desc`,
+    }}))).to.eql([`11`, `9.876`, `000`, `-12,000`, `January 8th, 2000`, `4-1-15`, `12/31/16`, `xyz`, `efg`, `abc`]);
+
+    expect([`12/31/16`, `January 8th, 2000`, `4-1-15`, `9.876`, `11`, `000`, `-12,000`, `efg`, `abc`, `xyz`].sort(numDateAlphaComparator({order: {
+      date: `desc`,
+      number: `desc`,
+      base: `desc`,
+    }}))).to.eql([`11`, `9.876`, `000`, `-12,000`, `12/31/16`, `4-1-15`, `January 8th, 2000`, `xyz`, `efg`, `abc`]);
+  });
+
+  it(`when ordering date, numeric, alpha values independenly, "asc" is default where order is not specified`, function() {
+    expect([`12/31/16`, `January 8th, 2000`, `4-1-15`, `9.876`, `11`, `000`, `-12,000`, `efg`, `abc`, `xyz`].sort(numDateAlphaComparator({order: {
+    }}))).to.eql([`-12,000`, `000`, `9.876`, `11`, `January 8th, 2000`, `4-1-15`, `12/31/16`, `abc`, `efg`, `xyz`]);
+
+    expect([`12/31/16`, `January 8th, 2000`, `4-1-15`, `9.876`, `11`, `000`, `-12,000`, `efg`, `abc`, `xyz`].sort(numDateAlphaComparator({order: {
+      date: `desc`,
+    }}))).to.eql([`-12,000`, `000`, `9.876`, `11`, `12/31/16`, `4-1-15`, `January 8th, 2000`, `abc`, `efg`, `xyz`]);
+
+    expect([`12/31/16`, `January 8th, 2000`, `4-1-15`, `9.876`, `11`, `000`, `-12,000`, `efg`, `abc`, `xyz`].sort(numDateAlphaComparator({order: {
+      number: `desc`,
+    }}))).to.eql([`11`, `9.876`, `000`, `-12,000`, `January 8th, 2000`, `4-1-15`, `12/31/16`, `abc`, `efg`, `xyz`]);
+
+    expect([`12/31/16`, `January 8th, 2000`, `4-1-15`, `9.876`, `11`, `000`, `-12,000`, `efg`, `abc`, `xyz`].sort(numDateAlphaComparator({order: {
+      base: `desc`,
+    }}))).to.eql([`-12,000`, `000`, `9.876`, `11`, `January 8th, 2000`, `4-1-15`, `12/31/16`, `xyz`, `efg`, `abc`]);
+
+    expect([`12/31/16`, `January 8th, 2000`, `4-1-15`, `9.876`, `11`, `000`, `-12,000`, `efg`, `abc`, `xyz`].sort(numDateAlphaComparator({order: {
+      date: `desc`,
+      number: `desc`,
+    }}))).to.eql([`11`, `9.876`, `000`, `-12,000`, `12/31/16`, `4-1-15`, `January 8th, 2000`, `abc`, `efg`, `xyz`]);
+
+    expect([`12/31/16`, `January 8th, 2000`, `4-1-15`, `9.876`, `11`, `000`, `-12,000`, `efg`, `abc`, `xyz`].sort(numDateAlphaComparator({order: {
+      date: `desc`,
+      base: `desc`,
+    }}))).to.eql([`-12,000`, `000`, `9.876`, `11`, `12/31/16`, `4-1-15`, `January 8th, 2000`, `xyz`, `efg`, `abc`]);
+
+    expect([`12/31/16`, `January 8th, 2000`, `4-1-15`, `9.876`, `11`, `000`, `-12,000`, `efg`, `abc`, `xyz`].sort(numDateAlphaComparator({order: {
+      number: `desc`,
+      base: `desc`,
+    }}))).to.eql([`11`, `9.876`, `000`, `-12,000`, `January 8th, 2000`, `4-1-15`, `12/31/16`, `xyz`, `efg`, `abc`]);
+  });
+
+  it.only(`caches values in parseNumberCache and parseDateCache`, function() {
+    const numberStrings = [`9.876`, `11`, `000`, `-12,000`];
+    const dateStrings = [`12/31/16`, `January 8th, 2000`, `4-1-15`];
+    const parseNumberCache = new SortCache();
+    const parseDateCache = new SortCache();
+
+    numberStrings.concat(dateStrings).sort(numDateAlphaComparator({parseNumberCache, parseDateCache}));
+    numberStrings.forEach(numberString =>
+      expect(parseNumberCache.fetch(numberString)).to.eql(Number(numberString.replace(`,`, ``))));
+    dateStrings.forEach(dateString =>
+      expect(parseDateCache.fetch(dateString)).to.eql(parseDate(dateString).getTime()));
   });
 });
 
