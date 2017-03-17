@@ -7,6 +7,32 @@ import {
   toSentenceCase,
 } from '../../lib/util/string';
 
+describe(`nameToInitials`, function() {
+  it(`returns one initial when the name is only one word`, function() {
+    expect(nameToInitials(`Cassie`)).to.eql(`C`);
+  });
+
+  it(`returns both initials for a first name and last name`, function() {
+    expect(nameToInitials(`Cassie Morford`)).to.eql(`CM`);
+  });
+
+  it(`returns uppercase initials for a lowercase name`, function() {
+    expect(nameToInitials(`cassandra raven morford`)).to.eql(`CM`);
+  });
+
+  it(`returns two initials for a very long name`, function() {
+    expect(nameToInitials(`King Eric (The Real One) The Fourth`)).to.eql(`KF`);
+  });
+
+  it(`returns empty string on null`, function() {
+    expect(nameToInitials(null)).to.eql(``);
+  });
+
+  it(`returns empty string on undefined`, function() {
+    expect(nameToInitials(undefined)).to.eql(``);
+  });
+});
+
 describe(`stringFilterMatches`, function() {
   it(`matches at the beginning of a string`, function() {
     expect(stringFilterMatches(`abcdefg`, `abc`)).to.eql([`abc`, `defg`]);
@@ -79,34 +105,5 @@ describe(`toSentenceCase`, function() {
 
   it(`produces the empty string on null input`, function() {
     expect(toSentenceCase(null)).to.eql(``);
-  });  
+  });
 });
-
-describe(`nameToInitials`, function() {
-  it(`returns one initial when the name is only one word`, function() {
-    expect(nameToInitials(`Cassie`)).to.eql(`C`);
-  });
-
-  it(`returns both initials for a first name and last name`, function() {
-    expect(nameToInitials(`Cassie Morford`)).to.eql(`CM`);
-  });
-
-  it(`returns uppercase initials for a lowercase name`, function() {
-    expect(nameToInitials(`cassandra raven morford`)).to.eql(`CM`);
-  });
-
-  it(`returns two initials for a very long name`, function() {
-    expect(nameToInitials(`King Eric (The Real One) The Fourth`)).to.eql(`KF`);
-  });
-
-  it(`returns empty string on null`, function() {
-    expect(nameToInitials(null)).to.eql(``);
-  });
-
-  it(`returns empty string on undefined`, function() {
-    expect(nameToInitials(undefined)).to.eql(``);
-  });
-
-});
-
-
