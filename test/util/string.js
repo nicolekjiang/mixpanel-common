@@ -91,8 +91,8 @@ describe(`nameToInitials`, function() {
     expect(nameToInitials(`Cassie Morford`)).to.eql(`CM`);
   });
 
-  it(`returns two initials for a first, middle and last name`, function() {
-    expect(nameToInitials(`Cassandra Raven Morford`)).to.eql(`CM`);
+  it(`returns uppercase initials for a lowercase name`, function() {
+    expect(nameToInitials(`cassandra raven morford`)).to.eql(`CM`);
   });
 
   it(`returns two initials for a very long name`, function() {
