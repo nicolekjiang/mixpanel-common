@@ -2,6 +2,7 @@
 import expect from 'expect.js';
 
 import {
+  nameToInitials,
   stringFilterMatches,
   toSentenceCase,
 } from '../../lib/util/string';
