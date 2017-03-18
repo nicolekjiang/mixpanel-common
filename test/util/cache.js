@@ -59,55 +59,87 @@ describe(`Cache`, function() {
     }
   });
 
-  it(`can fetch any type of key/value`, function() {
-    const cache = new Cache();
+  describe(`fetch()`, function() {
+    it(`can retrieve any type of key/value`, function() {
+      const cache = new Cache();
 
-    for (const key of INPUTS) {
-      for (const value of INPUTS) {
-        cache.remove(key);
-        expect(cache.fetch(key)).to.eql(undefined);
-        cache.add(key, value);
-        expect(cache.fetch(key)).to.eql(value);
-      }
-    }
-  });
-
-  it(`can fetch any type of key/value with a defaultValue of any non-function type supplied`, function() {
-    const cache = new Cache();
-
-    for (const key of INPUTS) {
-      for (const defaultValue of INPUTS) {
-        if (!defaultValue instanceof Function) {
-          cache.remove(key)
+      for (const key of INPUTS) {
+        for (const value of INPUTS) {
+          cache.remove(key);
           expect(cache.fetch(key)).to.eql(undefined);
-          expect(cache.fetch(key, defaultValue)).to.eql(defaultValue);
-          expect(cache.fetch(key)).to.eql(defaultValue);
+          cache.add(key, value);
+          expect(cache.fetch(key)).to.eql(value);
         }
       }
-    }
-  });
+    });
 
-  it(`can fetch any type of key/value with a defaultValue function supplied`, function() {
-    const cache = new Cache();
-    let defaultValueFunc, defaultValueFuncCallCount;
+    it(`sets a value in the cache to a static defaultValue if a one is supplied`, function() {
+      const cache = new Cache();
 
-    for (const key of INPUTS) {
-      defaultValueFuncCallCount = 0;
-      defaultValueFunc = key => {
+      for (const key of INPUTS) {
+        for (const defaultValue of INPUTS) {
+          if (!defaultValue instanceof Function) {
+            cache.remove(key)
+            expect(cache.fetch(key)).to.eql(undefined);
+            expect(cache.fetch(key, defaultValue)).to.eql(defaultValue);
+            expect(cache.fetch(key)).to.eql(defaultValue);
+          }
+        }
+      }
+    });
+
+    it(`sets a value in the cache to the result of defaultValue(key) if a function defaultValue is supplied`, function() {
+      const cache = new Cache();
+      const defaultValueFunc = key => [key, key];
+
+      for (const key of INPUTS) {
+        cache.remove(key)
+        expect(cache.fetch(key)).to.eql(undefined);
+        expect(cache.fetch(key, defaultValueFunc)).to.eql([key, key]);
+        expect(cache.fetch(key)).to.eql([key, key]);
+      }
+    });
+
+    it(`doesn't re-run defaultValue multiple times for the same key`, function() {
+      const cache = new Cache();
+      const defaultValueFunc = key => {
         defaultValueFuncCallCount++;
         return [key, key];
       };
+      let defaultValueFuncCallCount;
 
-      cache.remove(key)
-      expect(cache.fetch(key)).to.eql(undefined);
-      expect(defaultValueFuncCallCount).to.eql(0);
+      for (const key of INPUTS) {
+        defaultValueFuncCallCount = 0;
 
-      expect(cache.fetch(key, defaultValueFunc)).to.eql([key, key]);
-      expect(defaultValueFuncCallCount).to.eql(1);
+        cache.remove(key)
+        cache.fetch(key);
+        expect(defaultValueFuncCallCount).to.eql(0);
 
-      expect(cache.fetch(key)).to.eql([key, key]);
-      expect(defaultValueFuncCallCount).to.eql(1);
-    }
+        cache.fetch(key, defaultValueFunc);
+        expect(defaultValueFuncCallCount).to.eql(1);
+
+        cache.fetch(key, defaultValueFunc);
+        expect(defaultValueFuncCallCount).to.eql(1);
+
+        cache.fetch(key);
+        expect(defaultValueFuncCallCount).to.eql(1);
+      }
+    });
+
+    it(`doesn't use defaultValue if the key/value pair already exists in the cache`, function() {
+      const cache = new Cache();
+
+      for (const key of INPUTS) {
+        for (const defaultValue of INPUTS) {
+          if (!defaultValue instanceof Function) {
+            cache.remove(key)
+            expect(cache.add(key, value)).to.eql(undefined);
+            expect(cache.fetch(key, defaultValue)).to.eql(value);
+            expect(cache.fetch(key)).to.eql(value);
+          }
+        }
+      }
+    });
   });
 
   it(`can check existence any type of key/value`, function() {
