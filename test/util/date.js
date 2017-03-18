@@ -1,5 +1,6 @@
 /* global describe, it */
 import expect from 'expect.js';
+import moment from 'moment';
 
 import {
   parseDate,
@@ -11,11 +12,10 @@ import {
 } from '../../lib/util/date';
 
 const NOW = new Date();
-const CURRENT_DATE_ISO = [
-  NOW.getFullYear(),
-  (`0` + (NOW.getMonth() + 1)).slice(-2),
-  (`0` + NOW.getDate()).slice(-2),
-].map(String).join(`-`);
+const DATE_FORMAT = `YYYY-MM-DD`;
+const DATE_TIME_FORMAT = `YYYY-MM-DDTHH:mm:ss`;
+const CURRENT_DATE_ISO = moment(NOW).format(DATE_FORMAT);
+const CURRENT_DATE_TIME_ISO = moment(NOW).format(DATE_TIME_FORMAT);
 
 const NON_DATE_INPUTS = [
   ``,
@@ -366,8 +366,8 @@ describe(`normalizeDateStrings`, function() {
   it('allows utc offset to define the current moment', function() {
     const oneDayFromNow = new Date();
     oneDayFromNow.setDate(oneDayFromNow.getDate() + 1);
-    const inputDates = [NOW.toISOString(), oneDayFromNow.toISOString()];
-    const outputDates = [CURRENT_DATE_ISO, oneDayFromNow.toISOString().split('T')[0]];
+    const inputDates = [CURRENT_DATE_TIME_ISO, moment(oneDayFromNow).format(DATE_TIME_FORMAT)];
+    const outputDates = [CURRENT_DATE_ISO, moment(oneDayFromNow).format(DATE_FORMAT)];
     const utcOffset = 24 * 60; // include one day of offset hours
     expect(normalizeDateStrings(inputDates, {utcOffset})).to.eql(outputDates);
   });
