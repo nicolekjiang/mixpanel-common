@@ -125,6 +125,19 @@ icon-size(size=none, pos-left=0, pos-top=0)
           box-shadow none
           content-color(alpha(white, 0.6))
 
+    &.purple
+      background-image linear-gradient(0deg, mp-purple 0, purple-300 100%)
+      border-color purple-700
+      content-color(white)
+
+      &:hover{not-disabled}
+        background-image linear-gradient(0deg, purple-300 0, purple-300 100%)
+
+      &:active{not-disabled}, &.active{not-disabled}
+        background-image linear-gradient(0deg, mp-purple 0, purple-300 100%)
+        box-shadow 0 1px 1px 0 alpha(black, 0.0), inset 0 2px 2px 0 alpha(black, 0.2)
+        content-color(alpha(white, 0.6))
+
     &.red
       background-image linear-gradient(0deg, mp-red 0, red-300 100%)
       border-color red-700
