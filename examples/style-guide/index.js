@@ -92,6 +92,35 @@ document.registerElement(`style-guide`, class extends Component {
               }, 2000);
           }
         },
+
+        // FIXME(mack): Remove duplicate method
+        getElementStr: el => {
+          const attributesStr = Array.from(el.attributes).map(attribute => {
+            return `${attribute.nodeName}="${attribute.nodeValue}"`
+          }).join(` `);
+          return `<${el.tagName.toLowerCase()} ${attributesStr}>`;
+        },
+
+        handleInsertComponent: el => {
+          const textEl = document.createElement(`div`);
+          textEl.classList += `component-markup`;
+          textEl.textContent = this.helpers.getElementStr(el);
+          const parentEl = el.parentElement;
+          parentEl.insertBefore(textEl, parentEl.childNodes[0]);
+        },
+
+        logEvent: e => {
+          console.log(e);
+        },
+
+        getDropMenuListItemEventHandlers: () => {
+          return {
+            click: e => this.helpers.logEvent(e),
+            clickPill: e => this.helpers.logEvent(e),
+            clickDelete: e => this.helpers.logEvent(e),
+          };
+        },
+
         handleBookmarksMenuChange: e => {
           if (e.detail.open) {
             this.state.open.bookmarksWidget = e.detail.open;

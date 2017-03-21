@@ -1,0 +1,138 @@
+@import '../../stylesheets/defaults'
+
+ellipsis()
+  overflow hidden
+  text-overflow ellipsis
+  white-space nowrap
+
++host-styles(mp-drop-menu-list-item)
+  display block
+
+  .drop-menu-list-item
+    align-items center
+    border-radius 3px
+    display flex
+    height 100%
+
+    &:hover
+      background-color grey-100
+
+      &.is-selectable
+        cursor pointer
+
+    /* label */
+    .label
+      display flex
+      flex 1 1
+      flex-direction column
+      overflow hidden
+      padding 8px
+
+      .primary-label
+        color grey-700
+        ellipsis()
+        font-size 12px
+        font-weight weight-medium
+
+        .label-part
+          &.is-match
+            color mp-blue
+        
+      .secondary-label
+        color grey-300
+        ellipsis()
+        font-size 12px
+        font-weight weight-normal
+        margin-top 4px
+
+    &.is-upper-case
+      .label
+        .primary-label
+          font-size 11px
+          font-weight weight-bold
+          text-transform uppercase
+
+    &.is-selected
+      .label
+        .primary-label
+          color grey-900
+          font-weight weight-bold
+
+        .secondary-label
+          font-weight weight-bold
+
+    &:hover
+      &:not(.is-selected), &.is-selectable
+        .label
+          .primary-label
+            color mp-blue
+
+          .secondary-label
+            color grey-500
+
+    /* end label */
+
+    /* icon */
+    .icon
+      padding-left 5px
+      svg-icon-style(grey-700)
+
+    &.is-selected
+      .icon
+        svg-icon-style(grey-900)
+
+    &:hover.is-selectable
+      .icon
+        svg-icon-style(mp-blue)
+    /* end icon */
+
+    /* secondary-action */
+    .secondary-action
+      align-items center
+      cursor pointer
+      display none
+      flex 0
+      margin 0 5px 0 10px
+      opacity 0
+
+      &.caret
+        height 18px
+        position relative
+        svg-icon-style(mp-blue, size: 16px, speed: 0s)
+        top 1px
+
+      &.pill
+        background-color white
+        border-radius 40px
+        color grey-500
+        font-size 11px
+        font-weight weight-bold
+        height 18px
+        line-height 12px
+        padding 0 5px 0 10px
+        transition background-color 0.1s
+
+        &:hover
+          background-color mp-blue
+          color white
+
+        /* pill-caret */
+        .pill-caret
+          right -2px
+          svg-icon-style(grey-500, size: 16px, speed: 0s, pos-top: 1px)
+          top 0
+
+        &:hover
+          .pill-caret
+            svg-icon-style(white, speed: 0s, pos-top: 1px)
+        /* end pill-caret */
+
+      &.delete
+        height 22px
+        svg-icon-style(grey-200, mp-red, speed: 0.1s)
+
+    &:hover
+      .secondary-action
+        display flex
+        opacity 1
+    /* end option-secondary-action */

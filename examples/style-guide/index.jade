@@ -122,6 +122,231 @@
             mp-list-item there is text here
             mp-list-item there is text here
 
+  .section.drop-menu-list-items
+    h1 Menu list item
+
+    h2 Basic
+    .drop-menu-list-item-group
+      .drop-menu-list-item-container
+        mp-drop-menu-list-item(
+          attrs={
+            'label': `Top Events`,
+          }
+          on=$helpers.getDropMenuListItemEventHandlers()
+          hook={insert: vnode => $helpers.handleInsertComponent(vnode.elm)}
+        )
+
+      .drop-menu-list-item-container
+        mp-drop-menu-list-item(
+          attrs={
+            'label': `Top Events`,
+            'label-parts': JSON.stringify([``, `Top `, `Eve`, `nts`]),
+          }
+          on=$helpers.getDropMenuListItemEventHandlers()
+          hook={insert: vnode => $helpers.handleInsertComponent(vnode.elm)}
+        )
+
+      .drop-menu-list-item-container
+        mp-drop-menu-list-item(
+          attrs={
+            'label': `Top Events`,
+            'is-upper-case': true,
+          }
+          on=$helpers.getDropMenuListItemEventHandlers()
+          hook={insert: vnode => $helpers.handleInsertComponent(vnode.elm)}
+        )
+
+      .drop-menu-list-item-container
+        mp-drop-menu-list-item(
+          attrs={
+            'label': `Top Events`,
+            'icon': `star-top-events`,
+          }
+          on=$helpers.getDropMenuListItemEventHandlers()
+          hook={insert: vnode => $helpers.handleInsertComponent(vnode.elm)}
+        )
+
+      .drop-menu-list-item-container
+        mp-drop-menu-list-item(
+          attrs={
+            'label': `Top Events`,
+            'has-caret': true,
+          }
+          on=$helpers.getDropMenuListItemEventHandlers()
+          hook={insert: vnode => $helpers.handleInsertComponent(vnode.elm)}
+        )
+
+      .drop-menu-list-item-container
+        mp-drop-menu-list-item(
+          attrs={
+            'label': `Top Events`,
+            'pill-label': `Properties`,
+          }
+          on=$helpers.getDropMenuListItemEventHandlers()
+          hook={insert: vnode => $helpers.handleInsertComponent(vnode.elm)}
+        )
+
+      .drop-menu-list-item-container
+        mp-drop-menu-list-item(
+          attrs={
+            'label': `Top Events`,
+            'is-deletable': true,
+          }
+          on=$helpers.getDropMenuListItemEventHandlers()
+          hook={insert: vnode => $helpers.handleInsertComponent(vnode.elm)}
+        )
+
+    h2 With selected item
+    .drop-menu-list-item-group
+      .drop-menu-list-item-container
+        mp-drop-menu-list-item(
+          attrs={
+            'label': `Top Events`,
+            'is-selected': true,
+          }
+          on=$helpers.getDropMenuListItemEventHandlers()
+          hook={insert: vnode => $helpers.handleInsertComponent(vnode.elm)}
+        )
+
+      .drop-menu-list-item-container
+        mp-drop-menu-list-item(
+          attrs={
+            'label': `Top Events`,
+            'label-parts': JSON.stringify([``, `Top `, `Eve`, `nts`]),
+            'is-selected': true,
+          }
+          on=$helpers.getDropMenuListItemEventHandlers()
+          hook={insert: vnode => $helpers.handleInsertComponent(vnode.elm)}
+        )
+
+      .drop-menu-list-item-container
+        mp-drop-menu-list-item(
+          attrs={
+            'label': `Top Events`,
+            'is-selected': true,
+            'has-caret': true,
+          }
+          on=$helpers.getDropMenuListItemEventHandlers()
+          hook={insert: vnode => $helpers.handleInsertComponent(vnode.elm)}
+        )
+
+      .drop-menu-list-item-container
+        mp-drop-menu-list-item(
+          attrs={
+            'label': `Top Events`,
+            'is-selected': true,
+            'is-selected-selectable': true,
+          }
+          on=$helpers.getDropMenuListItemEventHandlers()
+          hook={insert: vnode => $helpers.handleInsertComponent(vnode.elm)}
+        )
+
+    h2 With secondary label
+    .drop-menu-list-item-group
+      .drop-menu-list-item-container
+        mp-drop-menu-list-item(
+          attrs={
+            'label': `$signup by Viewport Width`,
+            'secondary-label': `Jeffrey J.`,
+          }
+          on=$helpers.getDropMenuListItemEventHandlers()
+          hook={insert: vnode => $helpers.handleInsertComponent(vnode.elm)}
+        )
+
+      .drop-menu-list-item-container
+        mp-drop-menu-list-item(
+          attrs={
+            'label': `$signup by Viewport Width`,
+            'secondary-label': `Jeffrey J.`,
+            'is-deletable': true,
+          }
+          on=$helpers.getDropMenuListItemEventHandlers()
+          hook={insert: vnode => $helpers.handleInsertComponent(vnode.elm)}
+        )
+
+      .drop-menu-list-item-container
+        mp-drop-menu-list-item(
+          attrs={
+            'label': `$signup by Viewport Width`,
+            'secondary-label': `Jeffrey J.`,
+            'is-selected': true,
+          }
+          on=$helpers.getDropMenuListItemEventHandlers()
+          hook={insert: vnode => $helpers.handleInsertComponent(vnode.elm)}
+        )
+
+      .drop-menu-list-item-container
+        mp-drop-menu-list-item(
+          attrs={
+            'label': `$signup by Viewport Width`,
+            'secondary-label': `Jeffrey J.`,
+            'is-selected': true,
+            'is-selected-selectable': true,
+          }
+          on=$helpers.getDropMenuListItemEventHandlers()
+          hook={insert: vnode => $helpers.handleInsertComponent(vnode.elm)}
+        )
+
+    h2 With overflowing text
+    .drop-menu-list-item-group
+      .drop-menu-list-item-container
+        mp-drop-menu-list-item(
+          attrs={
+            'label': `Super long event name that will overflow for certain, guaranteed`,
+          }
+          on=$helpers.getDropMenuListItemEventHandlers()
+          hook={insert: vnode => $helpers.handleInsertComponent(vnode.elm)}
+        )
+
+      .drop-menu-list-item-container
+        mp-drop-menu-list-item(
+          attrs={
+            'label-parts': JSON.stringify([``, `Super long event name t`, `hat will overflow for`, ` certain, guaranteed`]),
+          }
+          on=$helpers.getDropMenuListItemEventHandlers()
+          hook={insert: vnode => $helpers.handleInsertComponent(vnode.elm)}
+        )
+
+      .drop-menu-list-item-container
+        mp-drop-menu-list-item(
+          attrs={
+            'label': `Super long event name that will overflow for certain, guaranteed`,
+            'is-selected': true,
+          }
+          on=$helpers.getDropMenuListItemEventHandlers()
+          hook={insert: vnode => $helpers.handleInsertComponent(vnode.elm)}
+        )
+
+      .drop-menu-list-item-container
+        mp-drop-menu-list-item(
+          attrs={
+            'label': `Super long event name that will overflow for certain, guaranteed`,
+            'has-caret': true,
+          }
+          on=$helpers.getDropMenuListItemEventHandlers()
+          hook={insert: vnode => $helpers.handleInsertComponent(vnode.elm)}
+        )
+
+      .drop-menu-list-item-container
+        mp-drop-menu-list-item(
+          attrs={
+            'label': `Super long event name that will overflow for certain, guaranteed`,
+            'pill-label': `Properties`,
+          }
+          on=$helpers.getDropMenuListItemEventHandlers()
+          hook={insert: vnode => $helpers.handleInsertComponent(vnode.elm)}
+        )
+
+      .drop-menu-list-item-container
+        mp-drop-menu-list-item(
+          attrs={
+            'label': `Super long event name that will overflow for certain, guaranteed`,
+            'is-deletable': true,
+          }
+          on=$helpers.getDropMenuListItemEventHandlers()
+          hook={insert: vnode => $helpers.handleInsertComponent(vnode.elm)}
+        )
+
   .section.modals
     h1 Modals
     p

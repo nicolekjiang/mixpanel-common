@@ -1,0 +1,32 @@
+- const isSelectable = !isSelected || hasCaret || isSelectedSelectable
+.drop-menu-list-item(
+  class={
+    'is-selected': isSelected,
+    'is-selectable': isSelectable,
+    'is-upper-case': isUpperCase,
+  }
+  on={click: !isSelectable ? e => e.stopPropagation() : null}
+)
+  if icon
+    .icon
+      svg-icon(attrs={icon})
+  .label
+    .primary-label(attrs={title: label ? label : ``})
+      if labelParts
+        each labelPart, idx in labelParts
+          span.label-part(class={'is-match': idx % 2 === 0})= labelPart
+      else
+        = label
+    if secondaryLabel
+      .secondary-label= secondaryLabel
+  if hasCaret
+    .secondary-action.caret
+      svg-icon(attrs={icon: `caret-right`})
+  if pillLabel
+    .secondary-action.pill(on={click: $helpers.handleClickPill})
+      span.secondary-label= pillLabel
+      .pill-caret
+        svg-icon(attrs={icon: `caret-right`})
+  if isDeletable
+    .secondary-action.delete(on={click: $helpers.handleClickDelete})
+      svg-icon(attrs={icon: `trashcan`})

@@ -90,6 +90,24 @@
     .drop-menu-container
       position relative
 
+  &.drop-menu-list-items
+    .drop-menu-list-item-group
+      display flex
+      flex-wrap wrap
+
+      .drop-menu-list-item-container
+        display flex
+        flex-direction column
+        justify-content space-between
+        margin 10px
+        max-width 300px
+        min-width 300px
+
+        mp-drop-menu-list-item
+          border 1px dotted grey-700
+          margin-top 10px
+          padding 10px
+
   &.forms
     .mp-icon-input
       icon-input()
