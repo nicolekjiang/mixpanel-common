@@ -81,11 +81,23 @@
           max-width 200px
 
   &.calendars
-    .calendar-container
-      margin-bottom 20px
+    .calendar-group
+      display flex
+      flex-wrap wrap
 
-      &:last-child
-        margin-bottom 0
+      .calendar-container
+        display flex
+        flex-direction column
+        justify-content space-between
+        margin 10px
+
+      &.single-calendar
+        .calendar-container
+          width 240px
+
+      &.double-calendar
+        .calendar-container
+          width 492px
 
   .toast-container
     height 400px

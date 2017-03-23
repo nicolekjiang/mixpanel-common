@@ -282,66 +282,70 @@
   .section.calendars
     h1 Calendars
 
-    .calendar-container
-      mp-calendar(
-        on=$helpers.getCalendarEventHandlers()
-        hook={insert: vnode => $helpers.handleInsertCalendar(vnode.elm)}
-      )
+    h2 Single date
+    .calendar-group.single-calendar
+      .calendar-container
+        mp-calendar(
+          on=$helpers.getCalendarEventHandlers()
+          hook={insert: vnode => $helpers.handleInsertComponent(vnode.elm)}
+        )
 
-    .calendar-container
-      mp-calendar(
-        attrs={
-          'min-date': `2015-01-10`,
-          'max-date': `2016-01-20`,
-          'selected-date': `2016-01-15`,
-        }
-        on=$helpers.getCalendarEventHandlers()
-        hook={insert: vnode => $helpers.handleInsertCalendar(vnode.elm)}
-      )
+      .calendar-container
+        mp-calendar(
+          attrs={
+            'min-date': `2015-01-10`,
+            'max-date': `2016-01-20`,
+            'selected-date': `2016-01-15`,
+          }
+          on=$helpers.getCalendarEventHandlers()
+          hook={insert: vnode => $helpers.handleInsertComponent(vnode.elm)}
+        )
 
-    .calendar-container
-      mp-calendar(
-        attrs={
-          'is-double-calendar': true,
-          'is-range': true,
-          'min-date': `2015-12-10`,
-          'max-date': `2016-03-20`,
-          'selected-from-date': `2015-12-25`,
-          'selected-to-date': `2016-03-15`,
-        }
-        on=$helpers.getCalendarEventHandlers()
-        hook={insert: vnode => $helpers.handleInsertCalendar(vnode.elm)}
-      )
+    h2 Date range
+    .calendar-group.double-calendar
+      .calendar-container
+        mp-calendar(
+          attrs={
+            'is-double-calendar': true,
+            'is-range': true,
+            'min-date': `2015-12-10`,
+            'max-date': `2016-03-20`,
+            'selected-from-date': `2015-12-25`,
+            'selected-to-date': `2016-03-15`,
+          }
+          on=$helpers.getCalendarEventHandlers()
+          hook={insert: vnode => $helpers.handleInsertComponent(vnode.elm)}
+        )
 
-    .calendar-container
-      mp-calendar(
-        attrs={
-          'is-double-calendar': true,
-          'is-range': true,
-          'min-date': `2015-12-10`,
-          'max-date': `2016-01-20`,
-          'is-from-date-focused': true,
-          'selected-from-date': `2015-12-25`,
-          'selected-to-date': `2016-01-16`,
-        }
-        on=$helpers.getCalendarEventHandlers()
-        hook={insert: vnode => $helpers.handleInsertCalendar(vnode.elm)}
-      )
+      .calendar-container
+        mp-calendar(
+          attrs={
+            'is-double-calendar': true,
+            'is-range': true,
+            'min-date': `2015-12-10`,
+            'max-date': `2016-01-20`,
+            'is-from-date-focused': true,
+            'selected-from-date': `2015-12-25`,
+            'selected-to-date': `2016-01-16`,
+          }
+          on=$helpers.getCalendarEventHandlers()
+          hook={insert: vnode => $helpers.handleInsertComponent(vnode.elm)}
+        )
 
-    .calendar-container
-      mp-calendar(
-        attrs={
-          'is-double-calendar': true,
-          'is-range': true,
-          'min-date': `2015-12-10`,
-          'max-date': `2016-01-20`,
-          'is-to-date-focused': true,
-          'selected-from-date': `2015-12-25`,
-          'selected-to-date': `2016-01-16`,
-        }
-        on=$helpers.getCalendarEventHandlers()
-        hook={insert: vnode => $helpers.handleInsertCalendar(vnode.elm)}
-      )
+      .calendar-container
+        mp-calendar(
+          attrs={
+            'is-double-calendar': true,
+            'is-range': true,
+            'min-date': `2015-12-10`,
+            'max-date': `2016-01-20`,
+            'is-to-date-focused': true,
+            'selected-from-date': `2015-12-25`,
+            'selected-to-date': `2016-01-16`,
+          }
+          on=$helpers.getCalendarEventHandlers()
+          hook={insert: vnode => $helpers.handleInsertComponent(vnode.elm)}
+        )
 
   .section.widgets
     h1 Widgets

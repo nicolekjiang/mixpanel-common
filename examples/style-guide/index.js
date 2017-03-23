@@ -77,17 +77,17 @@ document.registerElement(`style-guide`, class extends Component {
           return `<${el.tagName.toLowerCase()} ${attributesStr}>`;
         },
 
-        getCalendarEventHandlers: () => {
-          return {
-            selectDate: e => console.log(e),
-          };
-        },
-
-        handleInsertCalendar: el => {
+        handleInsertComponent: el => {
           const textEl = document.createElement(`div`);
           textEl.textContent = this.helpers.getElementStr(el);
           const parentEl = el.parentElement;
           parentEl.insertBefore(textEl, parentEl.childNodes[0]);
+        },
+
+        getCalendarEventHandlers: () => {
+          return {
+            selectDate: e => console.log(e),
+          };
         },
 
         handleBookmarksMenuSubmit: e => {

@@ -353,28 +353,28 @@ describe(`normalizeDateRange`, function() {
   describe(`from_date is <= to_date`, function() {
     it(`doesn't adjust dates if focusedDate is 'from'`, function() {
       expect(
-        normalizeDateRange([`2017-01-30`, `2017-03-30`], `from`)
+        normalizeDateRange(`2017-01-30`, `2017-03-30`, `from`)
       ).to.eql([`2017-01-30`, `2017-03-30`]);
     });
     it(`doesn't adjust dates if focusedDate is 'to'`, function() {
       expect(
-        normalizeDateRange([`2017-01-30`, `2017-03-30`], `to`)
+        normalizeDateRange(`2017-01-30`, `2017-03-30`, `to`)
       ).to.eql([`2017-01-30`, `2017-03-30`]);
     });
   });
   describe(`from_date is > to_date`, function() {
     it(`adjusts to_date if focusedDate is 'from'`, function() {
       expect(
-        normalizeDateRange([`2017-03-30`, `2017-01-30`], `from`)
+        normalizeDateRange(`2017-03-30`, `2017-01-30`, `from`)
       ).to.eql([`2017-03-30`, `2017-03-30`]);
     });
     it(`adjusts from_date if focusedDate is 'to'`, function() {
       expect(
-        normalizeDateRange([`2017-03-30`, `2017-01-30`], `to`)
+        normalizeDateRange(`2017-03-30`, `2017-01-30`, `to`)
       ).to.eql([`2017-01-30`, `2017-01-30`]);
     });
     it(`adjusts correctly when date is not padded`, function() {
-      expect(normalizeDateRange([`2017-01-30`, `999-01-30`], `to`)).to.eql(
+      expect(normalizeDateRange(`2017-01-30`, `999-01-30`, `to`)).to.eql(
         [`999-01-30`, `999-01-30`]
       );
     });
