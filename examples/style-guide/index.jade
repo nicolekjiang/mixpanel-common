@@ -122,6 +122,100 @@
             mp-list-item there is text here
             mp-list-item there is text here
 
+  .section.list-items
+    h1 List item
+
+    h2 Basic
+    .list-item-group
+      .list-item-container
+        mp-list-item Top Events
+
+      // How to support uppercase? Using attribute, class, or dependent on caller? Seems more consistent to have
+      // it as an attribute. Otherwise, part of component interface is from attribute, while other part is from
+      // from attributes.
+      .list-item-container
+        mp-list-item(attrs={
+          'is-upper-case': true,
+        }) Top Events
+
+      .list-item-container
+        mp-list-item(attrs={
+          'has-icon': true,
+          'icon': `star-top-events`,
+        }) Top Events
+
+      .list-item-container
+        mp-list-item(attrs={
+          'has-icon': true,
+          'icon': ``,
+        }) Top Events
+
+      .list-item-container
+        mp-list-item(attrs={
+          'is-active': true,
+          'has-icon': true,
+          'icon': `star-top-events`,
+        }) Top Events
+
+      .list-item-container
+        mp-list-item(attrs={
+          'is-selected': true,
+          'has-icon': true,
+          'icon': `star-top-events`,
+        }) Top Events
+
+      // Highlighting will be handled by component using attribute or by caller? If handled by caller, caller
+      // will need to re-implement some of the styling logic to override the styles that highlighting styles overrode.
+      // Implementing it by the caller is not only a lot of code duplication, but it also involves the caller being
+      // being aware of the semantics of how mp-list-item works (e.g. it needs to understand when an item is
+      // non-selectable, since a non-selectable item needs darker grey color for the non-highlight parts vs. a
+      // selectable list-item. Implementing highlighting as component attribute is weird unless the label is also
+      // an attribute? Maybe can support label/label-parts coming from attribute or as content:
+      // if labelParts
+      //   +matches(labelParts)
+      // else
+      //   content
+      .list-item-container
+        mp-list-item(attrs={
+          'label': `Top Events`,
+          'label-parts': JSON.stringify([``, `Top `, `Ev`, `ents`]),
+        })
+
+    h2 With secondary action
+    .list-item-group
+      .list-item-container
+        mp-secondary-action-list-item(attrs={
+          'secondary-action': `delete`,
+          'has-icon': true,
+          'icon': `star-top-events`,
+        }) Top Events
+
+      .list-item-container
+        mp-secondary-action-list-item(attrs={
+          'secondary-action': `nav`,
+          'has-icon': true,
+          'icon': `star-top-events`,
+        }) Top Events
+
+      .list-item-container
+        mp-secondary-action-list-item(attrs={
+          'secondary-action': `optional-nav`,
+          'nav-label': `Properties`,
+          'has-icon': true,
+          'icon': `star-top-events`,
+        }) Top Events
+
+    h2 Multi-line
+    .list-item-group
+      .list-item-container
+        mp-multi-line-list-item(attrs={
+          'secondary-action': `delete`,
+          'is-selected': true,
+          'label': `Top Events`,
+          'label-parts': JSON.stringify([``, `Top `, `Ev`, `ents`]),
+          'secondary-label': `By Jeffrey J.`,
+        })
+
   .section.drop-menu-list-items
     h1 Menu list item
 

@@ -36,12 +36,32 @@ $mp-list-item-padding = 10px
     text-align left
     user-select none
 
-    &.static
-      cursor default
+    &.selected
+      color grey-900
+      font-weight weight-bold
 
-    &:not(.static)
+    &.selectable
       cursor pointer
 
-    &:hover:not(.static), &.active
+    &:not(.selectable)
+      cursor default
+
+    &:hover, &.active
       background-color grey-100
-      color blue-500
+
+    &.selectable:hover, &.active
+      color mp-blue
+
+    /* icon */
+    .icon
+      padding-left 5px
+      svg-icon-style(grey-700)
+
+    &.selected
+      .icon
+        svg-icon-style(grey-900)
+
+    &.selectable:hover, &.active
+      .icon
+        svg-icon-style(mp-blue)
+    /* end icon */

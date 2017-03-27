@@ -1,6 +1,21 @@
-div(class={
-  'mp-list-item-container': true,
-  'mp-list-item-active': $component.isAttributeEnabled('active'),
-  'mp-list-item-static': $component.isAttributeEnabled('static')
-})
-  content
+- const isSelectable = !isSelected || isSelectedSelectable
+//div(class={
+//  'mp-list-item-container': true,
+//  'mp-list-item-active': $component.isAttributeEnabled('active'),
+//  'mp-list-item-selectable': isSelectable,
+//})
+//  content
+.mp-list-item(
+  class={
+    'mp-list-item-container': true,
+    'mp-list-item-active': isActive,
+    'mp-list-item-selected': isSelected,
+    'mp-list-item-selectable': isSelectable,
+  }
+  on={click: !isSelectable ? e => e.stopPropagation() : null}
+)
+  if hasIcon
+    .mp-list-item-icon
+      svg-icon(attrs={icon, empty: !icon})
+  .mp-list-item-content
+    content
