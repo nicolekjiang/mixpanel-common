@@ -286,7 +286,6 @@
     .calendar-group.single-calendar
       .calendar-container
         mp-calendar(
-          on=$helpers.getCalendarEventHandlers()
           hook={insert: vnode => $helpers.handleInsertComponent(vnode.elm)}
         )
 
@@ -297,7 +296,6 @@
             'max-date': `2016-01-20`,
             'selected-date': `2016-01-15`,
           }
-          on=$helpers.getCalendarEventHandlers()
           hook={insert: vnode => $helpers.handleInsertComponent(vnode.elm)}
         )
 
@@ -313,7 +311,6 @@
             'selected-from-date': `2015-12-25`,
             'selected-to-date': `2016-03-15`,
           }
-          on=$helpers.getCalendarEventHandlers()
           hook={insert: vnode => $helpers.handleInsertComponent(vnode.elm)}
         )
 
@@ -328,7 +325,6 @@
             'selected-from-date': `2015-12-25`,
             'selected-to-date': `2016-01-16`,
           }
-          on=$helpers.getCalendarEventHandlers()
           hook={insert: vnode => $helpers.handleInsertComponent(vnode.elm)}
         )
 
@@ -343,7 +339,6 @@
             'selected-from-date': `2015-12-25`,
             'selected-to-date': `2016-01-16`,
           }
-          on=$helpers.getCalendarEventHandlers()
           hook={insert: vnode => $helpers.handleInsertComponent(vnode.elm)}
         )
 

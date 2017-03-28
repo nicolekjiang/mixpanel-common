@@ -84,12 +84,6 @@ document.registerElement(`style-guide`, class extends Component {
           parentEl.insertBefore(textEl, parentEl.childNodes[0]);
         },
 
-        getCalendarEventHandlers: () => {
-          return {
-            selectDate: e => console.log(e),
-          };
-        },
-
         handleBookmarksMenuSubmit: e => {
           switch (e.detail.action) {
             case `select`:
