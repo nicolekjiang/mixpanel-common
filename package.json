@@ -76,6 +76,7 @@
     "mixpanel-browser": "2.9.16",
     "moment": "^2.17.1",
     "panel": "0.10.0",
+    "pikaday": "git://github.com/dbushell/Pikaday.git#a1704adef06e985a448cd8ab313dee5a5787a228",
     "rollbar-browser": "1.9.1",
     "webcomponent": "^0.1.2"
   },

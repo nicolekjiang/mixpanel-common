@@ -21,6 +21,10 @@ var webpackConfig = {
         },
       },
       {
+        test: /\.(png|svg)$/,
+        loader: 'url-loader?limit=50000',
+      },
+      {
         test: /\.styl$/,
         exclude: /node_modules/,
         loader: 'css-loader!autoprefixer-loader!stylus-loader',

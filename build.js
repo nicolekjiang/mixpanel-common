@@ -75,6 +75,7 @@ function compileStylus(filename) {
   return stylus(source)
     .include(path.dirname(filename))
     .include(path.resolve('./node_modules'))
+    .define('url', stylus.url())
     .use(autoprefixer())
     .render();
 }

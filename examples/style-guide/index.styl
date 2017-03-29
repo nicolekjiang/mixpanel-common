@@ -80,6 +80,25 @@
         mp-tooltip.multiline span
           max-width 200px
 
+  &.calendars
+    .calendar-group
+      display flex
+      flex-wrap wrap
+
+      .calendar-container
+        display flex
+        flex-direction column
+        justify-content space-between
+        margin 10px
+
+      &.single-calendar
+        .calendar-container
+          width 240px
+
+      &.double-calendar
+        .calendar-container
+          width 492px
+
   .toast-container
     height 400px
     display flex
