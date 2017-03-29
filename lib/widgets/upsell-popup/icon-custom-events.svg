@@ -24,7 +24,7 @@
                         <circle id="Oval" fill="#C4D6E5" cx="12" cy="12" r="12"></circle>
                         <path d="M13.3846154,10.6153846 L13.3846154,6 L10.6153846,6 L10.6153846,10.6153846 L6,10.6153846 L6,13.3846154 L10.6153846,13.3846154 L10.6153846,18 L13.3846154,18 L13.3846154,13.3846154 L18,13.3846154 L18,10.6153846 L13.3846154,10.6153846 Z" id="Combined-Shape" fill="#EDF3F8"></path>
                     </g>
-                    <g id="lighting-bolt" transform="translate(35.000000, 26.000000)">
+                    <g id="lightning-bolt" transform="translate(35.000000, 26.000000)">
                         <g id="circle">
                             <use fill="#9270E2" fill-rule="evenodd" xlink:href="#path-3"></use>
                             <use stroke="#FFFFFF" mask="url(#mask-4)" stroke-width="3.37762238" xlink:href="#path-3"></use>
