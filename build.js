@@ -77,6 +77,7 @@ function compileStylus(filename) {
     .include(path.resolve('./node_modules'))
     .define('url', stylus.url())
     .use(autoprefixer())
+    .set('include css', true)
     .render();
 }
 
