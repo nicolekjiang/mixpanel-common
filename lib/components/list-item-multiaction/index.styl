@@ -1,0 +1,60 @@
+@import '../../stylesheets/defaults'
+@import '../list-item/mixins'
+
++host-styles(mp-list-item-multiaction)
+  display block
+  height 30px
+
+.container
+  list-item-styles()
+
+  /* secondary-action */
+  .secondary-action
+    align-items center
+    cursor pointer
+    display none
+    flex 0
+    margin 0 5px 0 10px
+    opacity 0
+
+    &.caret
+      height 18px
+      position relative
+      svg-icon-style(mp-blue, size: 16px, speed: 0s)
+      top 1px
+
+    &.pill
+      background-color white
+      border-radius 40px
+      color grey-500
+      font-size 11px
+      font-weight weight-bold
+      height 18px
+      line-height 12px
+      padding 0 5px 0 10px
+      transition background-color 0.1s
+
+      &:hover
+        background-color mp-blue
+        color white
+
+      /* pill-caret */
+      .pill-caret
+        right -2px
+        svg-icon-style(grey-500, size: 16px, speed: 0s, pos-top: 1px)
+        top 0
+
+      &:hover
+        .pill-caret
+          svg-icon-style(white, speed: 0s, pos-top: 1px)
+      /* end pill-caret */
+
+    &.delete
+      height 22px
+      svg-icon-style(grey-200, mp-red, speed: 0.1s)
+
+  &:hover
+    .secondary-action
+      display flex
+      opacity 1
+  /* end option-secondary-action */

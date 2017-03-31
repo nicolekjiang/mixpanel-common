@@ -135,25 +135,22 @@
       // from attributes.
       .list-item-container
         mp-list-item(attrs={
-          'is-upper-case': true,
+          'is-uppercase': true,
         }) Top Events
 
       .list-item-container
         mp-list-item(attrs={
-          'has-icon': true,
           'icon': `star-top-events`,
         }) Top Events
 
       .list-item-container
         mp-list-item(attrs={
-          'has-icon': true,
           'icon': ``,
         }) Top Events
 
       .list-item-container
         mp-list-item(attrs={
           'is-active': true,
-          'has-icon': true,
           'icon': `star-top-events`,
         }) Top Events
 
@@ -181,27 +178,35 @@
           'label-parts': JSON.stringify([``, `Top `, `Ev`, `ents`]),
         })
 
+    h2 In a mp-drop-menu
+    div
+      button(on={click: $helpers.toggleListItemMenu}) Open Menu
+      .drop-menu-container
+        mp-drop-menu(attrs={open: open.listItemMenu})
+          .menu-list-items
+            mp-list-item Top Events
+            mp-list-item(attrs={'is-uppercase': true}) Top Events
+            mp-list-item(attrs={'is-active': true, 'icon': `star-top-events`}) Top Events
+            mp-list-item(attrs={'icon': ``}) Top Events
+
     h2 With secondary action
     .list-item-group
       .list-item-container
-        mp-secondary-action-list-item(attrs={
+        mp-list-item-multiaction(attrs={
           'secondary-action': `delete`,
-          'has-icon': true,
           'icon': `star-top-events`,
         }) Top Events
 
       .list-item-container
-        mp-secondary-action-list-item(attrs={
+        mp-list-item-multiaction(attrs={
           'secondary-action': `nav`,
-          'has-icon': true,
           'icon': `star-top-events`,
         }) Top Events
 
       .list-item-container
-        mp-secondary-action-list-item(attrs={
+        mp-list-item-multiaction(attrs={
           'secondary-action': `optional-nav`,
           'nav-label': `Properties`,
-          'has-icon': true,
           'icon': `star-top-events`,
         }) Top Events
 

@@ -29,3 +29,22 @@ div(
       .label(attrs={title: label})= label
     else
       content
+
+  - const secondaryAction = $component.getAttribute(`secondary-action`);
+  div(
+    class={
+      'secondary-action': true,
+      'caret': secondaryAction === `nav`,
+      'pill': secondaryAction === `optional-nav`,
+      'delete': secondaryAction === `delete`,
+    }
+    on={click: $helpers.handleClickSecondaryAction}
+  )
+    if secondaryAction === `nav`
+      svg-icon(attrs={icon: `caret-right`})
+    else if secondaryAction === `optional-nav`
+      span= $component.getAttribute(`nav-label`)
+      .pill-caret
+        svg-icon(attrs={icon: `caret-right`})
+    else if secondaryAction === `delete`
+      svg-icon(attrs={icon: `trashcan`})

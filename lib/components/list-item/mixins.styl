@@ -1,0 +1,61 @@
+@import '../../stylesheets/defaults'
+
+list-item-styles()
+  align-items center
+  background-color white
+  border-radius 3px
+  color grey-700
+  display flex
+  font-family family-helvetica
+  font-size-default()
+  font-weight weight-medium
+  height 100%
+  line-height 12px
+  text-align left
+  user-select none
+
+  &.uppercase
+    font-size-xs()
+    font-weight weight-bold
+    line-height 11px
+
+  &.selected
+    color grey-900
+    font-weight weight-bold
+
+  &.selectable
+    cursor pointer
+
+  &:not(.selectable)
+    cursor default
+
+  &:hover, &.active
+    background-color grey-100
+
+  &.selectable:hover, &.active
+    color mp-blue
+
+  /* icon */
+  .icon
+    padding-left 5px
+    svg-icon-style(grey-700)
+
+  &.selected
+    .icon
+      svg-icon-style(grey-900)
+
+  &.selectable:hover, &.active
+    .icon
+      svg-icon-style(mp-blue)
+  /* end icon */
+
+  /* label */
+  .content
+    display flex
+    flex 1 1
+    overflow hidden
+    padding 8px
+
+    .label-part.is-match
+      color mp-blue
+  /* end label */

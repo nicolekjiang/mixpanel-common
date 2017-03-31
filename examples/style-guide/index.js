@@ -26,6 +26,7 @@ document.registerElement(`style-guide`, class extends Component {
           bookmarksWidget: false,
           confirm: false,
           confirmDelete: false,
+          listItemMenu: false,
           menu: false,
           modal: false,
           popup: false,
@@ -91,6 +92,11 @@ document.registerElement(`style-guide`, class extends Component {
                 this.update({savingBookmark: false, selectedBookmarkId: newBookmark.id});
               }, 2000);
           }
+        },
+
+        toggleListItemMenu: () => {
+          this.state.open.listItemMenu = !this.state.open.listItemMenu;
+          this.update();
         },
 
         // FIXME(mack): Remove duplicate method
