@@ -1,5 +1,10 @@
 @import '../../stylesheets/defaults'
 
+ellipsis()
+  overflow hidden
+  text-overflow ellipsis
+  white-space nowrap
+
 list-item-styles()
   align-items center
   background-color white
@@ -56,6 +61,9 @@ list-item-styles()
     overflow hidden
     padding 8px
 
-    .label-part.is-match
-      color mp-blue
+    .label
+      ellipsis()
+
+      .label-part.is-match
+        color mp-blue
   /* end label */

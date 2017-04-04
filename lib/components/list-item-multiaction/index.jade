@@ -25,10 +25,8 @@ div(
             'label-part': true,
             'is-match': idx % 2 === 0,
           })= labelPart
-    else if label
-      .label(attrs={title: label})= label
     else
-      content
+      .label(attrs={title: label})= label
 
   - const secondaryAction = $component.getAttribute(`secondary-action`);
   div(

@@ -128,38 +128,37 @@
     h2 Basic
     .list-item-group
       .list-item-container
-        mp-list-item Top Events
+        mp-list-item(attrs={
+          'label': `Top Events`,
+        })
 
       // How to support uppercase? Using attribute, class, or dependent on caller? Seems more consistent to have
       // it as an attribute. Otherwise, part of component interface is from attribute, while other part is from
       // from attributes.
       .list-item-container
         mp-list-item(attrs={
+          'label': `Top Events`,
           'is-uppercase': true,
-        }) Top Events
+        })
 
       .list-item-container
         mp-list-item(attrs={
           'icon': `star-top-events`,
-        }) Top Events
+          'label': `Top Events`,
+        })
 
       .list-item-container
         mp-list-item(attrs={
           'icon': ``,
-        }) Top Events
+          'label': `Top Events`,
+        })
 
       .list-item-container
         mp-list-item(attrs={
           'is-active': true,
           'icon': `star-top-events`,
-        }) Top Events
-
-      .list-item-container
-        mp-list-item(attrs={
-          'is-selected': true,
-          'has-icon': true,
-          'icon': `star-top-events`,
-        }) Top Events
+          'label': `Top Events`,
+        })
 
       // Highlighting will be handled by component using attribute or by caller? If handled by caller, caller
       // will need to re-implement some of the styling logic to override the styles that highlighting styles overrode.
@@ -178,37 +177,51 @@
           'label-parts': JSON.stringify([``, `Top `, `Ev`, `ents`]),
         })
 
+      .list-item-container
+        mp-list-item(attrs={
+          'label': `A really really really really long event name that is super long why would someone make it so long`,
+        })
+
+      .list-item-container
+        mp-list-item(attrs={
+          'label': `A really really really really long event name that is super long why would someone make it so long`,
+          'label-parts': JSON.stringify([``, `A really really`, ` really really`, ` long event name that is super long why would someone make it so long`]),
+        })
+
     h2 In a mp-drop-menu
     div
       button(on={click: $helpers.toggleListItemMenu}) Open Menu
       .drop-menu-container
         mp-drop-menu(attrs={open: open.listItemMenu})
           .menu-list-items
-            mp-list-item Top Events
-            mp-list-item(attrs={'is-uppercase': true}) Top Events
-            mp-list-item(attrs={'is-active': true, 'icon': `star-top-events`}) Top Events
-            mp-list-item(attrs={'icon': ``}) Top Events
+            mp-list-item(attrs={'label': `Top Events`})
+            mp-list-item(attrs={'label': `Top Events`, 'is-uppercase': true})
+            mp-list-item(attrs={'label': `Top Events`, 'is-active': true, 'icon': `star-top-events`})
+            mp-list-item(attrs={'label': `Top Events`, 'icon': ``})
 
     h2 With secondary action
     .list-item-group
       .list-item-container
         mp-list-item-multiaction(attrs={
+          'label': `Top Events`,
           'secondary-action': `delete`,
           'icon': `star-top-events`,
-        }) Top Events
+        })
 
       .list-item-container
         mp-list-item-multiaction(attrs={
+          'label': `Top Events`,
           'secondary-action': `nav`,
           'icon': `star-top-events`,
-        }) Top Events
+        })
 
       .list-item-container
         mp-list-item-multiaction(attrs={
+          'label': `Top Events`,
           'secondary-action': `optional-nav`,
           'nav-label': `Properties`,
           'icon': `star-top-events`,
-        }) Top Events
+        })
 
     h2 Multi-line
     .list-item-group
