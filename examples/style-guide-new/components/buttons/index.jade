@@ -5,22 +5,99 @@ include ../mixins.jade
     .title-text Buttons
     .title-section 4.1
   .section-nav
-    +section-nav-item('Show All')
-    +section-nav-item('Basics')
-    +section-nav-item('Bars')
-    +section-nav-item('Dropdowns')
-    +section-nav-item('Toggles')
-    +section-nav-item('Misc')
+    //- +section-nav-item('Show All')
+    //- +section-nav-item('Basics')
+    //- +section-nav-item('Bars')
+    //- +section-nav-item('Dropdowns')
+    //- +section-nav-item('Toggles')
+    //- +section-nav-item('Misc')
   .section-content
     section.basic-buttons
       .subsection-title Basic MP-Buttons
       .subsection-description These pill shape buttons are used when there is a focused action. The confirmation intent should always be placed on the right of the cancellation button, when present. Respective containers included for visual reference.
-      .button-types
-        .button-type-1
-          .button-title
-            .plus-icon
-            .button-title-text Type 01: Text Only
-        .button-type-2
-        .button-type-caution
-      .button-disabled
-      .button-misuse
+      .example-block
+        .call-out.first-call-out
+          strong.icon +
+          strong TYPE 01: 
+          p Text Only
+        .common-example
+          mp-button.mp-button-secondary Secondary
+          mp-button.mp-button-primary Primary
+      .example-block
+        .call-out
+          strong TYPE 02: 
+          p Icon & Text
+        .common-example
+          mp-button(attrs={icon: 'x'}).mp-button-secondary.mp-button-with-icon Cancel
+          mp-button(attrs={icon: 'plus'}).mp-button-primary.mp-button-with-icon Create
+      .example-block        
+        .call-out
+          strong Caution
+        .common-example
+          mp-button.mp-button-red Delete
+      .example-block
+        .call-out.first-call-out
+          strong.icon +
+          strong Disabled
+        .common-example
+          mp-button.mp-button-secondary(attrs={disabled: true}) Secondary
+          mp-button.mp-button-primary(attrs={disabled: true}) Primary
+          mp-button.mp-button-red(attrs={disabled: true}) Caution
+      .example-block
+        .call-out.first-call-out
+          strong.icon +
+          strong TYPE 03: 
+          p Dark Background
+          .desc For use when background color is causing contrast that is too high or too low.
+        .floating-blue-bar
+          mp-button.mp-button-secondary.mp-button-on-blue Secondary
+          mp-button.mp-button-primary.mp-button-on-blue Primary
+          .blue-vertical-seperator
+          mp-button.mp-button-secondary.mp-button-on-blue(attrs={disabled: true}) Disabled
+          mp-button.mp-button-primary.mp-button-on-blue(attrs={disabled: true}) Disabled
+      .code-snippet
+      .call-out
+        strong.icon +
+        strong Example Code
+      .snippet-container.min.max
+        .snippet-header
+          label Stylus
+        .code-field
+          pre
+            | 1
+            span.grey-500      /* Basic buttons */
+            br
+            | 2
+            b      mp-button
+            span.mp-red .mp-button-primary
+            br
+            | 3
+            b      mp-button
+            span.mp-red .mp-button-secondary
+            br
+            | 4
+            br
+            | 5
+            span.grey-500      /* Buttons with icon */
+            br
+            | 6
+            b      mp-button
+            span.mp-purple (attrs={icon: 'x'})
+            span.mp-red .mp-button-secondary.mp-button-with-icon 
+            b  Cancel
+            br
+            | 7
+            br
+            | 8
+            span.grey-500      /* Disabled buttons */
+            br
+            | 9
+            b      mp-button
+            span.mp-red .mp-button-secondary
+            span.mp-purple (attrs={disabled: true}) 
+            b Secondary disabled
+    .divider 
+      sup 4.3
+    section.basic-buttons
+      .subsection-title Button Bars
+      .subsection-description These pill shape buttons are used when there is a focused action. The confirmation intent should always be placed on the right of the cancellation button, when present. Respective containers included for visual reference.

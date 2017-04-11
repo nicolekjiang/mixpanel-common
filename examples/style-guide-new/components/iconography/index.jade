@@ -5,10 +5,10 @@ include ../mixins.jade
     .title-text Iconography
     .title-section 3.1
   .section-nav
-    +section-nav-item('Show All')
-    +section-nav-item('UI')
-    +section-nav-item('Marketing')
-    +section-nav-item('Legacy')
+    //- +section-nav-item('Show All')
+    //- +section-nav-item('UI')
+    //- +section-nav-item('Marketing')
+    //- +section-nav-item('Legacy')
   .section-content
     section.icon-section
       .subsection-title Mixpanel Icons
@@ -16,7 +16,7 @@ include ../mixins.jade
       .indent-container
         .icons
           for icon in Object.keys(SVG_ICONS)
-            .icon
+            .icon.common-example 
               svg-icon(attrs={icon})
               .icon-name= icon
       .code-snippet
