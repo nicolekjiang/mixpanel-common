@@ -28,6 +28,7 @@ document.registerElement(`style-guide`, class extends Component {
           confirmDelete: false,
           menu: false,
           modal: false,
+          nonCenteredPopup: false,
           popup: false,
           tagSelector: false,
           tutorialTooltip: {},

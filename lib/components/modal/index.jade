@@ -1,7 +1,8 @@
 .mp-modal-stage(
   class={
-  'mp-modal-absolute': $component.isAttributeEnabled('not-fullscreen'),
-  'mp-modal-closed': visibility === 'closed',
+    'mp-modal-absolute': $component.isAttributeEnabled('not-fullscreen'),
+    'mp-modal-centered': $helpers.isCentered(),
+    'mp-modal-closed': visibility === 'closed',
   }
   on={click: e => e.stopPropagation()}
 )

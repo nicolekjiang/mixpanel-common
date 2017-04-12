@@ -158,6 +158,20 @@
             on={click: () => $helpers.closeModal('popup')}
           ) Create your first event
 
+    p
+      button(on={click: () => $helpers.openModal('nonCenteredPopup')}) Open non-centered popup
+
+      mp-modal.non-centered-popup(
+        attrs={'modal-type': 'popup', closeable: true, open: open.nonCenteredPopup, 'not-centered': true}
+        on={change: e => $helpers.handleModalChange('nonCenteredPopup', e.detail.state)}
+      )
+        div
+          .mp-modal-content
+            .mp-modal-title Easily track events
+            .mp-modal-subtitle Click on any element on your page (e.g. the buy button) to create an event and access all historical data for that event.
+          mp-button-bar.mp-button-bar-primary(
+            on={click: () => $helpers.closeModal('nonCenteredPopup')}
+          ) Create your first event
 
     p
       button(on={click: () => $helpers.openModal('confirm')}) Open confirm
