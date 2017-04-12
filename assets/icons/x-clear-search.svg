@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
+    <title>x-clear-search</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="16-x-16" stroke="none" stroke-width="1" fill-rule="evenodd">
+        <g id="x-clear-search">
+            <g transform="translate(5.000000, 5.000000)">
+                <circle id="Oval" cx="6" cy="6" r="6"></circle>
+                <polygon id="x" fill="#FFFFFF" points="7.99165087 3.00003565 5.99998217 4.99170435 4.00795693 3.00003565 3 4.00834913 4.9916687 6.00001783 3 7.99168652 4.00795693 9 5.99998217 7.0083313 7.99165087 9 8.99996435 7.99168652 7.00829565 6.00001783 8.99996435 4.00834913"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>
