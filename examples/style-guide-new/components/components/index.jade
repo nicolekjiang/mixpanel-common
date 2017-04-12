@@ -1,5 +1,24 @@
+include ../mixins.jade
+
 .section
   .section-title
     .title-text Components
     .title-section 5.1
+  //- .section-nav
+  //-   +section-nav-item('Show All')
+  //-   +section-nav-item('Basics')
+  //-   +section-nav-item('Bars')
+  //-   +section-nav-item('Dropdowns')
+  //-   +section-nav-item('Toggles')
+  //-   +section-nav-item('Misc')
+  .divider 
   .section-content
+    section.input-fields
+      .subsection-title Input Fields
+      .subsection-description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id massa et libero condimentum dignissim at ut odio. Aliquam placerat libero metus, et fringilla nisl dictum vitae. Sed at lacus eu risus fermentum consequat. 
+      .indent-container
+        .example-block
+          .call-out.first-call-out
+            strong.icon +
+            strong Square: 
+            p Search Field

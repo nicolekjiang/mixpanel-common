@@ -5,12 +5,13 @@ include ../mixins.jade
     .title-text Colors
     .title-section 1.1
   .section-nav
-    //- +section-nav-item('Show All')
-    //- +section-nav-item('Background')
-    //- +section-nav-item('Header')
-    //- +section-nav-item('Border')
-    //- +section-nav-item('Type')
-    //- +section-nav-item('Buttons')
+    +section-nav-item('Show All')
+    +section-nav-item('Background')
+    +section-nav-item('Header')
+    +section-nav-item('Border')
+    +section-nav-item('Type')
+    +section-nav-item('Buttons')
+  .divider 
   .section-content
     - const colorGroups = $helpers.getColorGroups()
     section.ui-colors
@@ -24,37 +25,46 @@ include ../mixins.jade
               .swatch-label
                 .color-name= color
                 .color-hex= COLORS[color]
-      .code-snippet
-        .call-out
-          strong.icon +
-          strong Example Code
-        .snippet-container.min.max
-          .snippet-header
-            label Stylus
-          .code-field
-            pre
-              | 1    /* Color Declarations */
-              br
-              | 2
-              br
-              | 3
-              b     mp-red   =
-              span  #E4567B
-              br
-              | 4
-              b     mp-blue  =
-              span  #4BA8FF
-              br
-              | 5
-              b     blue-900 =
-              span  #2687E3
-              br
-              | 6
-              b     blue-700 =
-              span  #3391E9
-    section.data-viz-colors
-      .divider 
-        label 1.2
+        .code-snippet
+          .call-out.first-call-out
+            strong.icon +
+            strong Example Code
+          .snippet-container.min.max
+            .snippet-header
+              label Stylus
+            .code-field
+              pre
+                | 1
+                br
+                | 2
+                br
+                | 3
+                br
+                | 4
+                br
+                | 5
+              pre
+                span.grey-500  /* Color declarations */
+                br
+                b   color 
+                span.mp-red  mp-red
+                br
+                b   background-color
+                span.mp-red  grey-100
+                br
+                b   border 1px solid
+                span.mp-red  blue-700
+                br
+                b   background-image 
+                span.mp-purple linear-gradient(0deg, 
+                span.mp-red mp-blue 
+                span.mp-purple 0, 
+                span.mp-red blue-100 
+                span.mp-purple 100%)
+    .divider 
+      label 1.2
+    .section-content
+      section.data-viz-colors
       .subsection-title Data Visualization
       .subsection-description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id massa et libero condimentum dignissim at ut odio. Aliquam placerat libero metus, et fringilla nisl dictum vitae. Sed at lacus eu risus fermentum consequat.
       .indent-container
@@ -65,46 +75,22 @@ include ../mixins.jade
               .swatch-label
                 .color-name= color
                 .color-hex= COLORS[color]
-      .code-snippet
-        .call-out
-          strong.icon +
-          strong Example Code
-        .snippet-container.min.max
-          .snippet-header
-            label Stylus
-          .code-field
-            pre
-              | 1    /* Color Declarations */
-              br
-              | 2
-              br
-              | 3
-              b     mp-red   =
-              span  #E4567B
-              br
-              | 4
-              b     mp-blue  =
-              span  #4BA8FF
-              br
-              | 5
-              b     blue-900 =
-              span  #2687E3
-              br
-              | 6
-              b     blue-700 =
-              span  #3391E9
     section.color-library-container
       - const colorLibrary = $helpers.getColorLibraries()
       .divider 
         label 1.3
+      .section-content
+        section.color-library
       .subsection-title Color Library
       .subsection-description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id massa et libero condimentum dignissim at ut odio. Aliquam placerat libero metus, et fringilla nisl dictum vitae. Sed at lacus eu risus fermentum consequat.
-      .color-library
-        for colorGroup in Object.keys(colorLibrary)
-          .color-group-container
-            strong.color-group-title= colorGroup
-            .color-group
-              for color in colorLibrary[colorGroup]
-                .color-segment(style={'background-color': COLORS[color]})
-                  .color-segment-hex= COLORS[color]
-                  .color-segment-name= color
+      .indent-container
+        .color-library
+          for colorGroup in Object.keys(colorLibrary)
+            .color-group-container
+              strong.color-group-title= colorGroup
+              .color-group
+                for color in colorLibrary[colorGroup]
+                  .color-segment(style={'background-color': COLORS[color]})
+                    .color-segment-hex= COLORS[color]
+                    .color-segment-name= color
+  

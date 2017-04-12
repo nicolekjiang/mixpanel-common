@@ -4,11 +4,12 @@ include ../mixins.jade
   .section-title
     .title-text Iconography
     .title-section 3.1
-  .section-nav
+  //- .section-nav
     //- +section-nav-item('Show All')
     //- +section-nav-item('UI')
     //- +section-nav-item('Marketing')
     //- +section-nav-item('Legacy')
+  .divider 
   .section-content
     section.icon-section
       .subsection-title Mixpanel Icons
@@ -19,31 +20,34 @@ include ../mixins.jade
             .icon.common-example 
               svg-icon(attrs={icon})
               .icon-name= icon
-      .code-snippet
-        .call-out
-          strong.icon +
-          strong Example Code
-        .snippet-container.min.max
-          .snippet-header
-            label Stylus
-          .code-field
-            pre
-              | 1    /* Color Declarations */
-              br
-              | 2
-              br
-              | 3
-              b     mp-red   =
-              span  #E4567B
-              br
-              | 4
-              b     mp-blue  =
-              span  #4BA8FF
-              br
-              | 5
-              b     blue-900 =
-              span  #2687E3
-              br
-              | 6
-              b     blue-700 =
-              span  #3391E9
+        .code-snippet
+          .call-out.first-call-out
+            strong.icon +
+            strong Example Code
+          .snippet-container.min.max
+            .snippet-header
+              label Jade
+            .code-field
+              pre
+                | 1
+                br
+                | 2
+                br
+                | 3
+                br
+                | 4
+                br
+                | 5
+              pre
+                span.grey-500  /* Common Icons */
+                br
+                b  line of code
+                br
+                span.mp-red     more code 
+                b s'more lines
+                br
+                b  continued...
+                br
+                span.mp-red     again with color
+                span.mp-purple (almost over)
+                b The end

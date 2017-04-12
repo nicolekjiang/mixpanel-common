@@ -4,100 +4,285 @@ include ../mixins.jade
   .section-title
     .title-text Buttons
     .title-section 4.1
-  .section-nav
+  //- .section-nav
     //- +section-nav-item('Show All')
     //- +section-nav-item('Basics')
     //- +section-nav-item('Bars')
     //- +section-nav-item('Dropdowns')
     //- +section-nav-item('Toggles')
     //- +section-nav-item('Misc')
+  .divider 
   .section-content
     section.basic-buttons
       .subsection-title Basic MP-Buttons
-      .subsection-description These pill shape buttons are used when there is a focused action. The confirmation intent should always be placed on the right of the cancellation button, when present. Respective containers included for visual reference.
-      .example-block
-        .call-out.first-call-out
-          strong.icon +
-          strong TYPE 01: 
-          p Text Only
-        .common-example
-          mp-button.mp-button-secondary Secondary
-          mp-button.mp-button-primary Primary
-      .example-block
-        .call-out
-          strong TYPE 02: 
-          p Icon & Text
-        .common-example
-          mp-button(attrs={icon: 'x'}).mp-button-secondary.mp-button-with-icon Cancel
-          mp-button(attrs={icon: 'plus'}).mp-button-primary.mp-button-with-icon Create
-      .example-block        
-        .call-out
-          strong Caution
-        .common-example
-          mp-button.mp-button-red Delete
-      .example-block
-        .call-out.first-call-out
-          strong.icon +
-          strong Disabled
-        .common-example
-          mp-button.mp-button-secondary(attrs={disabled: true}) Secondary
-          mp-button.mp-button-primary(attrs={disabled: true}) Primary
-          mp-button.mp-button-red(attrs={disabled: true}) Caution
-      .example-block
-        .call-out.first-call-out
-          strong.icon +
-          strong TYPE 03: 
-          p Dark Background
-          .desc For use when background color is causing contrast that is too high or too low.
-        .floating-blue-bar
-          mp-button.mp-button-secondary.mp-button-on-blue Secondary
-          mp-button.mp-button-primary.mp-button-on-blue Primary
-          .blue-vertical-seperator
-          mp-button.mp-button-secondary.mp-button-on-blue(attrs={disabled: true}) Disabled
-          mp-button.mp-button-primary.mp-button-on-blue(attrs={disabled: true}) Disabled
-      .code-snippet
-      .call-out
-        strong.icon +
-        strong Example Code
-      .snippet-container.min.max
-        .snippet-header
-          label Stylus
-        .code-field
-          pre
-            | 1
-            span.grey-500      /* Basic buttons */
-            br
-            | 2
-            b      mp-button
-            span.mp-red .mp-button-primary
-            br
-            | 3
-            b      mp-button
-            span.mp-red .mp-button-secondary
-            br
-            | 4
-            br
-            | 5
-            span.grey-500      /* Buttons with icon */
-            br
-            | 6
-            b      mp-button
-            span.mp-purple (attrs={icon: 'x'})
-            span.mp-red .mp-button-secondary.mp-button-with-icon 
-            b  Cancel
-            br
-            | 7
-            br
-            | 8
-            span.grey-500      /* Disabled buttons */
-            br
-            | 9
-            b      mp-button
-            span.mp-red .mp-button-secondary
-            span.mp-purple (attrs={disabled: true}) 
-            b Secondary disabled
+      .subsection-description These pill shape buttons are used when there is a focused action. The confirmation intent should always be placed on the right of the cancellation button, when present.  Respective containers included for visual reference. 
+      .indent-container
+        .example-block
+          .call-out.first-call-out
+            strong.icon +
+            strong TYPE 01: 
+            p Text Only
+          .common-example
+            mp-button.mp-button-secondary Secondary
+            mp-button.mp-button-primary Primary
+        .example-block
+          .call-out
+            strong TYPE 02: 
+            p Icon & Text
+          .common-example
+            mp-button(attrs={icon: 'x'}).mp-button-secondary.mp-button-with-icon Cancel
+            mp-button(attrs={icon: 'plus'}).mp-button-primary.mp-button-with-icon Create
+        .example-block        
+          .call-out
+            strong Caution
+          .common-example
+            mp-button.mp-button-red Delete
+        .example-block
+          .call-out.first-call-out
+            strong.icon +
+            strong Disabled
+          .common-example
+            mp-button.mp-button-secondary(attrs={disabled: true}) Secondary
+            mp-button.mp-button-primary(attrs={disabled: true}) Primary
+            mp-button.mp-button-red(attrs={disabled: true}) Caution
+        .example-block
+          .call-out.first-call-out
+            strong.icon +
+            strong TYPE 03: 
+            p Dark Background
+            .desc For use when background color is causing contrast that is too high or too low.
+          .floating-example-bar.align-right.blue-bar
+            mp-button.mp-button-secondary.mp-button-on-blue Secondary
+            mp-button.mp-button-primary.mp-button-on-blue Primary
+            .blue-vertical-seperator
+            mp-button.mp-button-secondary.mp-button-on-blue(attrs={disabled: true}) Disabled
+            mp-button.mp-button-primary.mp-button-on-blue(attrs={disabled: true}) Disabled
+        .code-snippet
+          .call-out.first-call-out
+            strong.icon +
+            strong Example Code
+          .snippet-container.min.max
+            .snippet-header
+              label Jade
+            .code-field
+              pre
+                | 1
+                br
+                | 2
+                br
+                | 3
+                br
+                | 4
+                br
+                | 5
+                br
+                | 6
+                br
+                | 7
+                br
+                | 8
+                br
+                | 9
+              pre
+                span.grey-500  /* Basic buttons */
+                br
+                b   mp-button
+                span.mp-red .mp-button-primary
+                br
+                b   mp-button
+                span.mp-red .mp-button-secondary
+                br
+                br
+                span.grey-500  /* Buttons with icon */
+                br
+                b   mp-button
+                span.mp-purple (attrs={icon: 'x'})
+                span.mp-red .mp-button-secondary.mp-button-with-icon 
+                b  Cancel
+                br
+                br
+                span.grey-500  /* Disabled buttons */
+                br
+                b   mp-button
+                span.mp-red .mp-button-secondary
+                span.mp-purple (attrs={disabled: true}) 
+                b Secondary disabled
     .divider 
-      sup 4.3
-    section.basic-buttons
+      label 4.2
+    .section-content
+      section.button-bars
       .subsection-title Button Bars
-      .subsection-description These pill shape buttons are used when there is a focused action. The confirmation intent should always be placed on the right of the cancellation button, when present. Respective containers included for visual reference.
+      .subsection-description Button bars are used in tandem with ui-cards to lead the user through a linear flow or to complete a form.  TYPE 03 bar corners can be used to modify card content.
+      .indent-container
+        .example-block.half
+          .call-out.first-call-out
+            strong.icon +
+            strong TYPE 01: 
+            p Text & Arrow
+          .example-card.narrow.mp-button-bar-container
+            mp-button-bar.mp-button-bar-primary(attrs={'arrow-next': true}) Button-bar icon
+        .example-block.half
+          .call-out
+            strong TYPE 02: 
+            p Text only
+          .example-card.narrow.truncated.mp-button-bar-container
+            mp-button-bar.mp-button-bar-primary Button-bar primary
+          .example-card.narrow.truncated.mp-button-bar-container
+            mp-button-bar.mp-button-bar-secondary Button-bar secondary
+        .code-snippet
+          .call-out.first-call-out
+            strong.icon +
+            strong Example Code
+          .snippet-container.min.max
+            .snippet-header
+              label Jade
+            .code-field
+              pre
+                | 1
+                br
+                | 2
+                br
+                | 3
+                br
+                | 4
+                br
+                | 5
+              pre
+                span.grey-500  /* Button bars */
+                br
+                b  .mp-button-bar-container
+                br
+                span.mp-red     mp-button-bar.mp-button-bar-secondary 
+                b Button text
+                br
+                b  .mp-button-bar-container
+                br
+                span.mp-red     mp-button-bar.mp-button-bar-primary
+                span.mp-purple (attrs={'arrow-next': true}) 
+                b Button text
+    .divider 
+      label 4.3
+    .section-content
+      section.toggle-buttons
+      .subsection-title Toggle Buttons
+      .subsection-description Toggles can be used to sort lists or to force a single selection from a finite list of viewing options.
+      .indent-container
+        .example-block
+          .call-out.first-call-out
+            strong.icon +
+            strong Toggle Square: 
+            p Large
+          .common-example
+            mp-toggle.inline-toggle(attrs={square: true, large: true, selected: 'option1'})
+              mp-toggle-option(attrs={value: 'option1'}) Apples
+              mp-toggle-option(attrs={value: 'option2'}) Oranges
+              mp-toggle-option(attrs={value: 'option3'}) Bananans
+        .example-block
+          .call-out
+            strong Toggle Square: 
+            p Small
+          .common-example
+            mp-toggle.inline-toggle(attrs={square: true, small: true, selected: 'option1'})
+              mp-toggle-option(attrs={value: 'option1'}) Pears
+              mp-toggle-option(attrs={value: 'option2'}) Peaches
+              mp-toggle-option(attrs={value: 'option3'}) Plums
+        .example-block
+          .call-out.first-call-out
+            strong.icon +
+            strong Toggle Round: 
+            p Light / Small
+          .common-example   
+            mp-toggle.max-width-toggle(attrs={selected: 'option2'})
+              mp-toggle-option(attrs={value: 'option1'}) Label
+              mp-toggle-option(attrs={value: 'option2'}) Label
+              mp-toggle-option(attrs={value: 'option3'}) Label   
+              mp-toggle-option(attrs={value: 'option4'}) Label
+              mp-toggle-option(attrs={value: 'option5'}) Label
+        .example-block
+          .call-out.first-call-out
+            strong.icon +
+            strong Toggle Round: 
+            p Dark / Small
+          .floating-example-bar.blue-bar
+            mp-toggle.full-width-toggle(
+              attrs={blue: true, selected: 'option1'})
+              mp-toggle-option(attrs={value: 'option1'}) Option One
+              mp-toggle-option(attrs={value: 'option2'}) Option Two
+              mp-toggle-option(attrs={value: 'option3'}) Option Three
+        .example-block
+          .call-out.first-call-out
+            strong.icon +
+            strong Toggle Round: 
+            p Large
+          .common-example
+            mp-toggle.max-width-toggle(attrs={large: true, selected: 'option2'})
+              mp-toggle-option(attrs={value: 'option1'}) All
+              mp-toggle-option(attrs={value: 'option2'}) Your Reports
+        .code-snippet
+          .call-out.first-call-out
+            strong.icon +
+            strong Example Code
+          .snippet-container.min.max
+            .snippet-header
+              label Jade
+            .code-field
+              pre
+                | 1
+                br
+                | 2
+                br
+                | 3
+                br
+                | 4
+                br
+                | 5
+                br
+                | 6
+                br
+                | 7
+                br
+                | 8
+                br
+                | 9
+                br
+                | 10
+                br
+                | 11
+              pre
+                span.grey-500  /* Square Large Toggle */
+                br
+                b mp-toggle
+                span.mp-red .custom-class 
+                span.mp-purple (attrs={'square: true, large: true, selected: 'option1'})
+                br
+                b   mp-toggle-option
+                span.mp-purple (attrs={value: 'option1'})
+                b Apples
+                br
+                b   mp-toggle-option
+                span.mp-purple (attrs={value: 'option2'})
+                b Oranges
+                br
+                b   mp-toggle-option
+                span.mp-purple (attrs={value: 'option3'})
+                b Bananas
+                br
+                br
+                span.grey-500  /* Round Blue Small Toggle */
+                br
+                b  mp-toggle
+                span.mp-red .custom-class 
+                span.mp-purple (attrs={blue: true, small: true, selected: 'option1'})
+                br
+                b   mp-toggle-option
+                span.mp-purple (attrs={value: 'option1'})
+                b Apples
+                br
+                b   mp-toggle-option
+                span.mp-purple (attrs={value: 'option2'})
+                b Oranges
+                br
+                b   mp-toggle-option
+                span.mp-purple (attrs={value: 'option3'})
+                b Bananas
+                br

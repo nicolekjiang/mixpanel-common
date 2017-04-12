@@ -4,13 +4,14 @@ include ../mixins.jade
   .section-title
     .title-text Typography
     .title-section 2.1
-  .section-nav
+  //- .section-nav
     //- +section-nav-item('Show All')
     //- +section-nav-item('Buttons')
     //- +section-nav-item('Headers')
     //- +section-nav-item('Copy')
     //- +section-nav-item('Fields')
     //- +section-nav-item('Labels')
+  .divider 
   .section-content
     section.font-weight
       .subsection-title Type Family & Weight
@@ -31,14 +32,13 @@ include ../mixins.jade
               .code-snippet
                 .snippet-container.min.max
                   .snippet-header.mp-font-weight-regular
-                    label CSS // Stylus // Less
+                    label Stylus
                   .code-field
                     pre
                       | 1
-                      b     #[span font-family:]  family-helvetica
-                      br
-                      | 2
-                      b     #[span font-weight:]  weight-bold
+                    pre
+                      span.mp-red  font-weight:
+                      b  weight-bold
         .medium-example.mp-font-weight-medium
           .indent-container
             .example-container
@@ -54,14 +54,13 @@ include ../mixins.jade
               .code-snippet
                 .snippet-container.min.max
                   .snippet-header.mp-font-weight-regular
-                    label CSS:    <h1>,  <h2>,  <button>,  <label>,  <b>
+                    label Stylus
                   .code-field
                     pre
                       | 1
-                      b     #[span font-family:]  family-helvetica
-                      br
-                      | 2
-                      b     #[span font-weight:]  weight-medium
+                    pre
+                      span.mp-red  font-weight:
+                      b  weight-medium
         .regular-example.mp-font-weight-regular
           .indent-container
             .example-container
@@ -77,14 +76,13 @@ include ../mixins.jade
               .code-snippet
                 .snippet-container.min.max
                   .snippet-header.mp-font-weight-regular
-                    label CSS:    <h1>,  <h2>,  <button>,  <label>,  <b>
+                    label Stylus
                   .code-field
                     pre
                       | 1
-                      b     #[span font-family:]  family-helvetica
-                      br
-                      | 2
-                      b     #[span font-weight:]  weight-regular
+                    pre
+                      span.mp-red  font-weight:
+                      b  weight-regular
     section.type-sizes
       .divider 
         label 1.2
@@ -122,31 +120,34 @@ include ../mixins.jade
               .size-type.mp-font-size-medium 11px - Extra small
             .right-example
               .size-class.mp-font-size-xs .MP-FONT-SIZE-XS
-      .code-snippet
-        .call-out
-          strong.icon +
-          strong Example Code
-        .snippet-container.min.max
-          .snippet-header
-            label Stylus
-          .code-field
-            pre
-              | 1    /* Color Declarations */
-              br
-              | 2
-              br
-              | 3
-              b     mp-red   =
-              span  #E4567B
-              br
-              | 4
-              b     mp-blue  =
-              span  #4BA8FF
-              br
-              | 5
-              b     blue-900 =
-              span  #2687E3
-              br
-              | 6
-              b     blue-700 =
-              span  #3391E9
+          .code-snippet
+            .call-out.first-call-out
+              strong.icon +
+              strong Example Code
+            .snippet-container.min.max
+              .snippet-header
+                label Jade
+              .code-field
+                pre
+                  | 1
+                  br
+                  | 2
+                  br
+                  | 3
+                  br
+                  | 4
+                  br
+                  | 5
+                pre
+                  span.grey-500  /* Common Icons */
+                  br
+                  b  line of code
+                  br
+                  span.mp-red     more code 
+                  b s'more lines
+                  br
+                  b  continued...
+                  br
+                  span.mp-red     again with color
+                  span.mp-purple (almost over)
+                  b The e     
