@@ -39788,7 +39788,7 @@
 
 	var Config = {
 	    DEBUG: false,
-	    LIB_VERSION: '2.9.16'
+	    LIB_VERSION: '2.11.1'
 	};
 
 	// since es6 imports are static and we run unit tests from the console, window won't be defined when importing this file
@@ -40171,7 +40171,7 @@
 	    return function(mixed_val) {
 	        var value = mixed_val;
 	        var quote = function(string) {
-	            var escapable = /[\\\"\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g;
+	            var escapable = /[\\\"\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g; // eslint-disable-line no-control-regex
 	            var meta = { // table of character substitutions
 	                '\b': '\\b',
 	                '\t': '\\t',
@@ -41180,6 +41180,8 @@
 	            return 'Chrome';
 	        } else if (_.includes(user_agent, 'CriOS')) {
 	            return 'Chrome iOS';
+	        } else if (_.includes(user_agent, 'UCWEB') || _.includes(user_agent, 'UCBrowser')) {
+	            return 'UC Browser';
 	        } else if (_.includes(user_agent, 'FxiOS')) {
 	            return 'Firefox iOS';
 	        } else if (_.includes(vendor, 'Apple')) {
@@ -41214,6 +41216,7 @@
 	            'Microsoft Edge': /Edge\/(\d+(\.\d+)?)/,
 	            'Chrome': /Chrome\/(\d+(\.\d+)?)/,
 	            'Chrome iOS': /CriOS\/(\d+(\.\d+)?)/,
+	            'UC Browser' : /(UCBrowser|UCWEB)\/(\d+(\.\d+)?)/,
 	            'Safari': /Version\/(\d+(\.\d+)?)/,
 	            'Mobile Safari': /Version\/(\d+(\.\d+)?)/,
 	            'Opera': /(Opera|OPR)\/(\d+(\.\d+)?)/,
@@ -41331,8 +41334,6 @@
 	_['info']['device']     = _.info.device;
 	_['info']['browser']    = _.info.browser;
 	_['info']['properties'] = _.info.properties;
-
-	var DISABLE_COOKIE = '__mpced';
 
 	// specifying these locally here since some websites override the global Node var
 	// ex: https://www.codingame.com/
@@ -41600,16 +41601,6 @@
 	        return props;
 	    },
 
-	    checkForBackoff: function(resp) {
-	        // temporarily stop CE for X seconds if the 'X-MP-CE-Backoff' header says to
-	        var secondsToDisable = parseInt(resp.getResponseHeader('X-MP-CE-Backoff'));
-	        if (!isNaN(secondsToDisable) && secondsToDisable > 0) {
-	            var disableUntil = _.timestamp() + (secondsToDisable * 1000);
-	            console.log('disabling CE for ' + secondsToDisable + ' seconds (from ' + _.timestamp() + ' until ' + disableUntil + ')');
-	            _.cookie.set_seconds(DISABLE_COOKIE, true, secondsToDisable, true);
-	        }
-	    },
-
 	    _getEventTarget: function(e) {
 	        // https://developer.mozilla.org/en-US/docs/Web/API/Event/target#Compatibility_notes
 	        if (typeof e.target === 'undefined') {
@@ -41691,10 +41682,8 @@
 
 	    _addDomEventHandlers: function(instance) {
 	        var handler = _.bind(function(e) {
-	            if (_.cookie.parse(DISABLE_COOKIE) !== true) {
-	                e = e || window.event;
-	                this._trackEvent(e, instance);
-	            }
+	            e = e || window.event;
+	            this._trackEvent(e, instance);
 	        }, this);
 	        _.register_event(document, 'submit', handler, false, true);
 	        _.register_event(document, 'change', handler, false, true);
@@ -41787,37 +41776,39 @@
 	     * 3. From session storage under the key `editorParams` if the editor was initialized on a previous page
 	     */
 	    _maybeLoadEditor: function(instance) {
-	        var parseFromUrl = false;
-	        if (_.getHashParam(window.location.hash, 'state')) {
-	            var state = _.getHashParam(window.location.hash, 'state');
-	            state = JSON.parse(decodeURIComponent(state));
-	            parseFromUrl = state['action'] === 'mpeditor';
-	        }
-	        var parseFromStorage = !!window.sessionStorage.getItem('_mpcehash');
-	        var editorParams;
+	        try {
+	            var parseFromUrl = false;
+	            if (_.getHashParam(window.location.hash, 'state')) {
+	                var state = _.getHashParam(window.location.hash, 'state');
+	                state = JSON.parse(decodeURIComponent(state));
+	                parseFromUrl = state['action'] === 'mpeditor';
+	            }
+	            var parseFromStorage = !!window.sessionStorage.getItem('_mpcehash');
+	            var editorParams;
 
-	        if (parseFromUrl) { // happens if they are initializing the editor using an old snippet
-	            editorParams = this._editorParamsFromHash(instance, window.location.hash);
-	        } else if (parseFromStorage) { // happens if they are initialized the editor and using the new snippet
-	            editorParams = this._editorParamsFromHash(instance, window.sessionStorage.getItem('_mpcehash'));
-	            window.sessionStorage.removeItem('_mpcehash');
-	        } else { // get credentials from sessionStorage from a previous initialzation
-	            editorParams = JSON.parse(window.sessionStorage.getItem('editorParams') || '{}');
-	        }
+	            if (parseFromUrl) { // happens if they are initializing the editor using an old snippet
+	                editorParams = this._editorParamsFromHash(instance, window.location.hash);
+	            } else if (parseFromStorage) { // happens if they are initialized the editor and using the new snippet
+	                editorParams = this._editorParamsFromHash(instance, window.sessionStorage.getItem('_mpcehash'));
+	                window.sessionStorage.removeItem('_mpcehash');
+	            } else { // get credentials from sessionStorage from a previous initialzation
+	                editorParams = JSON.parse(window.sessionStorage.getItem('editorParams') || '{}');
+	            }
 
-	        if (editorParams['projectToken'] && instance.get_config('token') === editorParams['projectToken']) {
-	            this._loadEditor(instance, editorParams);
-	            return true;
-	        } else {
+	            if (editorParams['projectToken'] && instance.get_config('token') === editorParams['projectToken']) {
+	                this._loadEditor(instance, editorParams);
+	                return true;
+	            } else {
+	                return false;
+	            }
+	        } catch (e) {
 	            return false;
 	        }
 	    },
 
-	    // only load the codeless event editor once, even if there are multiple instances of MixpanelLib
-	    _editorLoaded: false,
 	    _loadEditor: function(instance, editorParams) {
-	        if (!this._editorLoaded) {
-	            this._editorLoaded = true;
+	        if (!window['_mpEditorLoaded']) { // only load the codeless event editor once, even if there are multiple instances of MixpanelLib
+	            window['_mpEditorLoaded'] = true;
 	            var editorUrl;
 	            var cacheBuster = '?_ts=' + (new Date()).getTime();
 	            var siteMedia = instance.get_config('app_host') + '/site_media';
@@ -42775,9 +42766,6 @@
 	            req.withCredentials = true;
 	            req.onreadystatechange = function () {
 	                if (req.readyState === 4) { // XMLHttpRequest.DONE == 4, except in safari 4
-	                    if (url.indexOf('api.mixpanel.com/track') !== -1) {
-	                        autotrack.checkForBackoff(req);
-	                    }
 	                    if (req.status === 200) {
 	                        if (callback) {
 	                            if (verbose_mode) {
@@ -43415,7 +43403,7 @@
 
 	    var data = {
 	        'verbose':     true,
-	        'version':     '1',
+	        'version':     '2',
 	        'lib':         'web',
 	        'token':       this.get_config('token'),
 	        'distinct_id': distinct_id
@@ -43892,15 +43880,17 @@
 
 	    this.body            = (_.escapeHTML(notif_data['body']) || '').replace(/\n/g, '<br/>');
 	    this.cta             = _.escapeHTML(notif_data['cta']) || 'Close';
-	    this.dest_url        = _.escapeHTML(notif_data['cta_url']) || null;
-	    this.image_url       = _.escapeHTML(notif_data['image_url']) || null;
 	    this.notif_type      = _.escapeHTML(notif_data['type']) || 'takeover';
 	    this.style           = _.escapeHTML(notif_data['style']) || 'light';
-	    this.thumb_image_url = _.escapeHTML(notif_data['thumb_image_url']) || null;
 	    this.title           = _.escapeHTML(notif_data['title']) || '';
-	    this.video_url       = _.escapeHTML(notif_data['video_url']) || null;
 	    this.video_width     = MPNotif.VIDEO_WIDTH;
 	    this.video_height    = MPNotif.VIDEO_HEIGHT;
+
+	    // These fields are url-sanitized in the backend already.
+	    this.dest_url        = notif_data['cta_url'] || null;
+	    this.image_url       = notif_data['image_url'] || null;
+	    this.thumb_image_url = notif_data['thumb_image_url'] || null;
+	    this.video_url       = notif_data['video_url'] || null;
 
 	    this.clickthrough = true;
 	    if (!this.dest_url) {
