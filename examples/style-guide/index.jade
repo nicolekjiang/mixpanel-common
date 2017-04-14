@@ -49,21 +49,33 @@
     p
       mp-button.mp-button-primary .mp-button-primary
       mp-button.mp-button-primary(attrs={disabled: true}) disabled
+      mp-button.mp-button-primary(attrs={size: 'small'}) .mp-button-primary
+      mp-button.mp-button-primary(attrs={size: 'small', disabled: true}) disabled
     p
       mp-button.mp-button-secondary .mp-button-secondary
       mp-button.mp-button-secondary(attrs={disabled: true}) disabled
+      mp-button.mp-button-secondary(attrs={size: 'small'}) .mp-button-secondary
+      mp-button.mp-button-secondary(attrs={size: 'small', disabled: true}) disabled
     p
       mp-button.mp-button-red .mp-button-red
       mp-button.mp-button-red(attrs={disabled: true}) disabled
+      mp-button.mp-button-red(attrs={size: 'small'}) .mp-button-red
+      mp-button.mp-button-red(attrs={size: 'small', disabled: true}) disabled
     p
       mp-button.mp-button-purple .mp-button-purple
       mp-button.mp-button-purple(attrs={disabled: true}) disabled
+      mp-button.mp-button-purple(attrs={size: 'small'}) .mp-button-purple
+      mp-button.mp-button-purple(attrs={size: 'small', disabled: true}) disabled
     p.button-field
       mp-button.mp-button-primary.mp-button-on-blue primary on-blue
       mp-button.mp-button-primary.mp-button-on-blue(attrs={disabled: true}) disabled
+      mp-button.mp-button-primary.mp-button-on-blue(attrs={size: 'small'}) primary on-blue
+      mp-button.mp-button-primary.mp-button-on-blue(attrs={size: 'small', disabled: true}) disabled
     p.button-field
       mp-button.mp-button-secondary.mp-button-on-blue secondary on-blue
       mp-button.mp-button-secondary.mp-button-on-blue(attrs={disabled: true}) disabled
+      mp-button.mp-button-secondary.mp-button-on-blue(attrs={size: 'small'}) secondary on-blue
+      mp-button.mp-button-secondary.mp-button-on-blue(attrs={size: 'small', disabled: true}) disabled
 
     h1 Buttons w/ icons
     p
@@ -71,12 +83,20 @@
       mp-button.mp-button-secondary(attrs={icon: 'logout'}) Exit
       mp-button.mp-button-primary(attrs={icon: 'plus'}) Create
       mp-button.mp-button-red(attrs={icon: 'trashcan'}) Delete
+      mp-button.mp-button-secondary(attrs={size: 'small', icon: 'x'}) Close
+      mp-button.mp-button-secondary(attrs={size: 'small', icon: 'logout'}) Exit
+      mp-button.mp-button-primary(attrs={size: 'small', icon: 'plus'}) Create
+      mp-button.mp-button-red(attrs={size: 'small', icon: 'trashcan'}) Delete
     p.button-field
       mp-button.mp-button-primary.mp-button-on-blue(attrs={icon: 'plus'}) Create
       mp-button.mp-button-primary.mp-button-on-blue(attrs={icon: 'plus', disabled: true}) Create
+      mp-button.mp-button-primary.mp-button-on-blue(attrs={size: 'small', icon: 'plus'}) Create
+      mp-button.mp-button-primary.mp-button-on-blue(attrs={size: 'small', icon: 'plus', disabled: true}) Create
     p.button-field
       mp-button.mp-button-secondary.mp-button-on-blue(attrs={icon: 'x'}) Cancel
       mp-button.mp-button-secondary.mp-button-on-blue(attrs={icon: 'x', disabled: true}) Cancel
+      mp-button.mp-button-secondary.mp-button-on-blue(attrs={size: 'small', icon: 'x'}) Cancel
+      mp-button.mp-button-secondary.mp-button-on-blue(attrs={size: 'small', icon: 'x', disabled: true}) Cancel
 
   .section.button-bars
     h1 Button bar

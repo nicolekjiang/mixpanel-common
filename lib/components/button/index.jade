@@ -4,6 +4,8 @@
     'mp-button-with-icon': !!$component.getAttribute('icon'),
     'mp-button-blue': $component.getAttribute('color') === 'blue',
     'mp-button-grey': $component.getAttribute('color') === 'grey',
+    'mp-button-small': $component.getAttribute('size') === 'small',
+    'mp-button-large': $component.getAttribute('size') !== 'small',
   })
 )
   .mp-button-content
