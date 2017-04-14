@@ -15,7 +15,7 @@ include ../mixins.jade
   .section-content
     section.font-weight
       .subsection-title Type Family & Weight
-      .subsection-description You can use the appropriate markup (e.g. <label>) to specify which of the three weights to use. Each weight has a specific function in the MP type heirarchy.
+      .subsection-description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id massa et libero condimentum dignissim at ut odio. Aliquam placerat libero metus, et fringilla nisl dictum vitae. Sed at lacus eu risus fermentum consequat.
       .font-weight-examples
         .bold-example.mp-font-weight-bold
           .indent-container
@@ -37,7 +37,7 @@ include ../mixins.jade
                     pre
                       | 1
                     pre
-                      span.mp-red  font-weight:
+                      span.mp-red font-weight
                       b  weight-bold
         .medium-example.mp-font-weight-medium
           .indent-container
@@ -59,7 +59,7 @@ include ../mixins.jade
                     pre
                       | 1
                     pre
-                      span.mp-red  font-weight:
+                      span.mp-red font-weight
                       b  weight-medium
         .regular-example.mp-font-weight-regular
           .indent-container
@@ -81,11 +81,12 @@ include ../mixins.jade
                     pre
                       | 1
                     pre
-                      span.mp-red  font-weight:
+                      span.mp-red font-weight
                       b  weight-regular
+  .divider 
+    label 1.2
+  .section-content
     section.type-sizes
-      .divider 
-        label 1.2
       .subsection-title Type Sizes
       .subsection-description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id massa et libero condimentum dignissim at ut odio. Aliquam placerat libero metus, et fringilla nisl dictum vitae. Sed at lacus eu risus fermentum consequat.
       .indent-container
@@ -111,7 +112,7 @@ include ../mixins.jade
           .size-example
             .left-example
               .text-example.mp-font-size-default Mixpanel bestows major data-viz insights f'n quickly.
-              .size-type.mp-font-size-medium 12px - Default
+              .size-type.mp-font-size-medium 13px - Default
             .right-example
               .size-class.mp-font-size-default .mp-font-size-default
           .size-example
@@ -138,16 +139,23 @@ include ../mixins.jade
                   | 4
                   br
                   | 5
+                  br
+                  | 6
                 pre
-                  span.grey-500  /* Common Icons */
+                  span.grey-500  /* Type size declarations */
                   br
-                  b  line of code
+                  b  .class-name
+                  span.mp-red  font-size-xl()
                   br
-                  span.mp-red     more code 
-                  b s'more lines
+                  b  .class-name
+                  span.mp-red  font-size-large()
                   br
-                  b  continued...
+                  b  .class-name
+                  span.mp-red  font-size-medium()
                   br
-                  span.mp-red     again with color
-                  span.mp-purple (almost over)
-                  b The e     
+                  b  .class-name
+                  span.mp-red  font-size-default()
+                  span.grey-500  //- or leave undefined
+                  br
+                  b  .class-name
+                  span.mp-red  font-size-xs()

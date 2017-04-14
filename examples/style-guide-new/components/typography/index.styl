@@ -37,28 +37,30 @@
 
 .size-examples
   position relative
+  margin-top 60px
 
   .size-example
     display flex
     flex-direction row
     justify-content space-between
     border-bottom 1px dashed grey-200
-    padding-bottom 20px
+    padding-bottom 30px
     margin-bottom 30px
     width 835px
     
     .text-example
       padding-bottom 10px
+    
+    &:hover
+      .size-class
+        color mp-blue
       
   .size-class
     transform scale(1.5)
     color grey-200
     text-align  right
     font-weight weight-bold
-    margin: 6px 40px 0 0
-    
-    &:hover
-      color mp-blue
+    margin 6px 40px 0 0
       
 .mp-font-size-xl
   font-size-xl()

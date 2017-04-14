@@ -11,13 +11,13 @@ include ../mixins.jade
     //- +section-nav-item('Legacy')
   .divider 
   .section-content
-    section.icon-section
-      .subsection-title Mixpanel Icons
+    section.ui-icons
+      .subsection-title UI Icons
       .subsection-description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id massa et libero condimentum dignissim at ut odio. Aliquam placerat libero metus, et fringilla nisl dictum vitae. Sed at lacus eu risus fermentum consequat.
       .indent-container
         .icons
-          for icon in Object.keys(SVG_ICONS)
-            .icon.common-example 
+          each icon in Object.keys(SVG_ICONS)
+            .icon.common-example
               svg-icon(attrs={icon})
               .icon-name= icon
         .code-snippet
@@ -38,16 +38,22 @@ include ../mixins.jade
                 | 4
                 br
                 | 5
+                br
+                | 6
               pre
-                span.grey-500  /* Common Icons */
+                span.grey-500  /* Standalone */
                 br
-                b  line of code
+                b  .container-class
                 br
-                span.mp-red     more code 
-                b s'more lines
+                span.mp-purple     svg-icon(attrs={
+                span.mp-red 'icon-name'
+                span.mp-purple }) 
                 br
-                b  continued...
                 br
-                span.mp-red     again with color
-                span.mp-purple (almost over)
-                b The end
+                span.grey-500  /* Button declaration */
+                br
+                b  mp-button
+                span.mp-purple (attrs={icon: 
+                span.mp-red 'x'
+                span.mp-purple })
+                b .mp-button-with-icon 

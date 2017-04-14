@@ -15,7 +15,7 @@ include ../mixins.jade
   .section-content
     section.basic-buttons
       .subsection-title Basic MP-Buttons
-      .subsection-description These pill shape buttons are used when there is a focused action. The confirmation intent should always be placed on the right of the cancellation button, when present.  Respective containers included for visual reference. 
+      .subsection-description These pill shape buttons are used when there is a clear CTA. The confirmation intent should always be placed to the right of the cancellation button, when present.  Respective containers included for visual reference. 
       .indent-container
         .example-block
           .call-out.first-call-out
@@ -112,7 +112,7 @@ include ../mixins.jade
     .section-content
       section.button-bars
       .subsection-title Button Bars
-      .subsection-description Button bars are used in tandem with ui-cards to lead the user through a linear flow or to complete a form.  TYPE 03 bar corners can be used to modify card content.
+      .subsection-description Button bars are used in tandem with ui-cards to lead the user through a linear flow or to complete a form.
       .indent-container
         .example-block.half
           .call-out.first-call-out
@@ -244,45 +244,33 @@ include ../mixins.jade
                 | 8
                 br
                 | 9
-                br
-                | 10
-                br
-                | 11
               pre
-                span.grey-500  /* Square Large Toggle */
+                span.grey-500 /* Square Large Toggle */
                 br
-                b mp-toggle
-                span.mp-red .custom-class 
+                span.mp-red mp-toggle
+                b .custom-class 
                 span.mp-purple (attrs={'square: true, large: true, selected: 'option1'})
                 br
-                b   mp-toggle-option
+                b  mp-toggle-option
                 span.mp-purple (attrs={value: 'option1'})
                 b Apples
                 br
-                b   mp-toggle-option
+                b  mp-toggle-option
                 span.mp-purple (attrs={value: 'option2'})
                 b Oranges
                 br
-                b   mp-toggle-option
-                span.mp-purple (attrs={value: 'option3'})
-                b Bananas
                 br
+                span.grey-500 /* Round Blue Small Toggle */
                 br
-                span.grey-500  /* Round Blue Small Toggle */
-                br
-                b  mp-toggle
-                span.mp-red .custom-class 
+                span.mp-red mp-toggle
+                b .custom-class 
                 span.mp-purple (attrs={blue: true, small: true, selected: 'option1'})
                 br
-                b   mp-toggle-option
+                b  mp-toggle-option
                 span.mp-purple (attrs={value: 'option1'})
                 b Apples
                 br
-                b   mp-toggle-option
+                b  mp-toggle-option
                 span.mp-purple (attrs={value: 'option2'})
                 b Oranges
-                br
-                b   mp-toggle-option
-                span.mp-purple (attrs={value: 'option3'})
-                b Bananas
                 br

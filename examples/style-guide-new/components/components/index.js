@@ -3,7 +3,7 @@ import { Component } from 'panel';
 import template from './index.jade';
 import './index.styl';
 
-document.registerElement('contextual-section', class extends Component {
+document.registerElement('components-section', class extends Component {
   get config() {
     return {
       helpers: {

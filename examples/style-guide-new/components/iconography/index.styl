@@ -9,19 +9,19 @@
     display flex
     flex-direction row
     padding-bottom 10px
-    svg-icon-style(grey-900, blue-100)
     width 135px
     height 135px
     position relative
     margin 0 20px 50px 0
     align-items center
+    svg-icon-style(grey-700, blue-100) // - this line is causing issues
     padding 0
 
     svg-icon
       margin 0 auto
       min-height 22px
       min-width 22px
-      transform scale(1.25)
+      transform scale(1.33)
       
     .icon-name
       position absolute
@@ -39,6 +39,12 @@
       background #FFFFFF
       border 1px solid mp-blue
       box-shadow 0 2px 4px 0 rgba(0,0,0,0.07)
+      color blue-300
+      fill blue-300
       
     .icon-name
       color mp-blue
+      
+.common-example
+  border-radius 0px !important
+  

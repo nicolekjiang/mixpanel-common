@@ -20,5 +20,136 @@ include ../mixins.jade
         .example-block
           .call-out.first-call-out
             strong.icon +
-            strong Square: 
-            p Search Field
+            strong Search: 
+            p Square
+          .common-example
+            //- insert component for square search field with icon
+        .example-block
+          .call-out
+            strong Field Error
+          .common-example
+             //- insert component for square search field with error state visible
+        .example-block
+          .call-out.first-call-out
+            strong.icon +
+            strong Field + Button Large 
+          .common-example
+            mp-input-group(
+              attrs={placeholder: "Type a name...", busy: inputGroupSaving}
+              on={
+                change: $helpers.handleNamerChange,
+                submit: $helpers.handleNamerSubmit,
+              }
+            )
+        .example-block
+          .call-out.first-call-out
+            strong.icon +
+            strong Search: 
+            p Round Dark
+          .floating-example-bar.align-right.blue-bar
+            //- insert component for round search field dark
+        .example-block
+          .call-out.first-call-out
+            strong.icon +
+            strong Search: 
+            p Round Light
+          .common-example
+            //- insert component for round search field light
+        .code-snippet
+          .call-out.first-call-out
+            strong.icon +
+            strong Example Code
+          .snippet-container.min.max
+            .snippet-header
+              label Jade
+            .code-field
+              pre
+                | 1
+                br
+                | 2
+                br
+                | 3
+                br
+                | 4
+                br
+                | 5
+                br
+                | 6
+                br
+                | 7
+                br
+                | 8
+                br
+                | 9
+              pre
+                span.grey-500  /* Square field w/ icon */
+                br
+                b   code
+                span.mp-red  code more
+                br
+                b   code
+                span.mp-red  code more
+                br
+                br
+                span.grey-500  /* Square field w/ button */
+                br
+                b   code
+                span.mp-purple codez +
+                span.mp-red  more codes 
+                b  again, code.
+                br
+                br
+                span.grey-500  /* Round field on dark */
+                br
+                b   code
+                span.mp-red  codecode
+                span.mp-purple (attrs={all-the-codez}) 
+                b code
+      .divider 
+        label 5.2
+      .section-content
+        section.form-inputs
+        .subsection-title Form Inputs
+        .subsection-description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id massa et libero condimentum dignissim at ut odio. Aliquam placerat libero metus, et fringilla nisl dictum vitae. Sed at lacus eu risus fermentum consequat.
+       .indent-container
+        .example-block
+          .call-out.first-call-out
+            strong.icon +
+            strong Checklists & Radios 
+          .example-card
+          //- insert .example-card with checklist and radio list components
+        .code-snippet
+          .call-out.first-call-out
+            strong.icon +
+            strong Example Code
+          .snippet-container.min.max
+            .snippet-header
+              label Jade
+            .code-field
+              pre
+                | 1
+                br
+                | 2
+                br
+                | 3
+              pre
+                span.grey-500  /* Square field w/ icon */
+                br
+                b   code
+                span.mp-red  code more
+                br
+                b   code
+                span.mp-red  code more
+      .divider 
+        label 5.3
+      .section-content
+        section.modals-dialogues
+        .subsection-title Modals & Dialogues
+        .subsection-description These UI components are containers that will interrupt the current flow, by displaying on top of the page content.
+       .indent-container
+        .example-block
+          .call-out.first-call-out
+            strong.icon +
+            strong Modals
+            //- insert modal with blue header bar component (visible)         
+            .desc Modals have blue header bars and should be presented when the user needs to complete a task that the current interface does not support. For example: a button to invite teammates might present a modal including a search field and a list of names to choose from. These are specifically great for presenting new flows while preserving the state of content.
