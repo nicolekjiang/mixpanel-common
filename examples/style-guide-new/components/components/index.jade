@@ -41,20 +41,22 @@ include ../mixins.jade
                 submit: $helpers.handleNamerSubmit,
               }
             )
-        .example-block
-          .call-out.first-call-out
-            strong.icon +
-            strong Search: 
-            p Round Dark
-          .floating-example-bar.align-right.blue-bar
-            //- insert component for round search field dark
-        .example-block
-          .call-out.first-call-out
-            strong.icon +
-            strong Search: 
-            p Round Light
-          .common-example
-            //- insert component for round search field light
+
+        //- .example-block
+        //-   .call-out.first-call-out
+        //-     strong.icon +
+        //-     strong Search: 
+        //-     p Round Dark
+        //-   .floating-example-bar.align-right.blue-bar
+        //-     //- insert component for round search field dark
+        //- .example-block
+        //-   .call-out.first-call-out
+        //-     strong.icon +
+        //-     strong Search: 
+        //-     p Round Light
+        //-   .common-example
+        //-     //- insert component for round search field light
+
         .code-snippet
           .call-out.first-call-out
             strong.icon +
@@ -153,3 +155,103 @@ include ../mixins.jade
             strong Modals
             //- insert modal with blue header bar component (visible)         
             .desc Modals have blue header bars and should be presented when the user needs to complete a task that the current interface does not support. For example: a button to invite teammates might present a modal including a search field and a list of names to choose from. These are specifically great for presenting new flows while preserving the state of content.
+            .demo-divider
+              a View Demo
+        .example-block
+          .call-out.first-call-out
+            strong.icon +
+            strong Dialogues
+            //- insert modal with blue header bar component (visible)         
+            .desc Dialogues are used when a decision is required. An example would be any time a user makes a potentially irreversable action, you could display a dialogue to get confirmation and explain the reprocussions.
+            .demo-divider
+              a View Demo
+        .code-snippet
+          .call-out.first-call-out
+            strong.icon +
+            strong Example Code
+          .snippet-container.min.max
+            .snippet-header
+              label Jade
+            .code-field
+              pre
+                | 1
+                br
+                | 2
+                br
+                | 3
+              pre
+                span.grey-500  /* Square field w/ icon */
+                br
+                b   code
+                span.mp-red  code more
+                br
+                b   code
+                span.mp-red  code more
+      .divider 
+        label 5.4
+      .section-content
+        section.popups-alerts
+        .subsection-title Pop-Ups & Alerts
+        .subsection-description These UI components are containers that will interrupt the current flow, by displaying on top of the page content.
+       .indent-container
+        .example-block
+          .call-out.first-call-out
+            strong.icon +
+            strong Pop-Up: 
+            p Upsell
+          .common-example
+            //- insert component
+        .example-block
+          .call-out
+            strong Pop-Up:
+            p Warning
+          .common-example
+             //- insert component
+        .example-block
+          .call-out.first-call-out
+            strong.icon +
+            strong Pop-up:
+            p Unspecified
+          .common-example
+             //- insert component
+        .example-block
+          .call-out.first-call-out
+            strong.icon +
+            strong Toast
+          .common-example
+             //- insert component
+        .code-snippet
+          .call-out.first-call-out
+            strong.icon +
+            strong Example Code
+          .snippet-container.min.max
+            .snippet-header
+              label Jade
+            .code-field
+              pre
+                | 1
+                br
+                | 2
+                br
+                | 3
+              pre
+                span.grey-500  /* Square field w/ icon */
+                br
+                b   code
+                span.mp-red  code more
+                br
+                b   code
+                span.mp-red  code more
+      .divider 
+        label 5.5
+      .section-content
+        section.contextual-elements
+        .subsection-title Contextual Elements
+        .subsection-description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id massa et libero condimentum dignissim at ut odio. Aliquam placerat libero metus, et fringilla nisl dictum vitae. Sed at lacus eu risus fermentum consequat.
+       .indent-container
+        .example-block
+          .call-out.first-call-out
+            strong.icon +
+            strong Tooltip
+          .common-example
+             mp-tooltip Tooltip
