@@ -38725,7 +38725,7 @@
 	    var host = window.location.host;
 	    var isDev = /([a-zA-Z0-9]+).dev.mixpanel.org/.test(host);
 	    if (isDev) {
-	      config.api_host = host; // eslint-disable-line camelcase
+	      config.api_host = window.location.protocol + '//host'; // eslint-disable-line camelcase
 	    }
 	  }
 
