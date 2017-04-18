@@ -38719,16 +38719,19 @@
 	    token = '9c4e9a6caf9f429a7e3821141fc769b7'; // Project 132990 Mixpanel Dev
 	    config.debug = true;
 
-	    // if the current host is a devbox or staging server, tell the js lib to use
-	    // it as the app and api host for js lib requests instead of using production
+	    // Use local api when running on a devbox
 	    // Note: we cannot rely on APP_ENV since a js app can be running on any host
 	    // (e.g. stand-alone mode)
 	    var host = window.location.host;
-	    var hostIsDevOrStage = /([a-zA-Z0-9]+)(.dev)?.mixpanel.(com|org)/.test(host);
-	    if (hostIsDevOrStage) {
-	      Object.assign(config, {
-	        app_host: host, // eslint-disable-line camelcase
-	        app_api: host });
+	    var isDev = /([a-zA-Z0-9]+).dev.mixpanel.org/.test(host);
+	    if (isDev) {
+	      config.api_host = window.location.protocol + '//' + host; // eslint-disable-line camelcase
+	    }
+
+	    // Use local app or staging app when running on devbox or staging server
+	    var isStage = /stage([0-9]+).mixpanel.com/.test(host);
+	    if (isDev || isStage) {
+	      config.app_host = window.location.protocol + '//' + host; // eslint-disable-line camelcase
 	    }
 	  }
 
