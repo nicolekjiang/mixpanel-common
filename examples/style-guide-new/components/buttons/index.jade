@@ -4,6 +4,7 @@ include ../mixins.jade
   .section-title
     .title-text Buttons
     .title-section 4.1
+  //- Section nav feature postponed for next pass
   //- .section-nav
     //- +section-nav-item('Show All')
     //- +section-nav-item('Basics')
@@ -37,7 +38,7 @@ include ../mixins.jade
             strong Caution
           .common-example
             mp-button.mp-button-red Delete
-        .example-block
+        .example-block.full-width
           .call-out.first-call-out
             strong.icon +
             strong Disabled
@@ -57,25 +58,29 @@ include ../mixins.jade
             .blue-vertical-seperator
             mp-button.mp-button-secondary.mp-button-on-blue(attrs={disabled: true}) Disabled
             mp-button.mp-button-primary.mp-button-on-blue(attrs={disabled: true}) Disabled
-
-        //- .example-block
-        //-   .call-out.first-call-out
-        //-     strong.icon +
-        //-     strong Small Button: 
-        //-     p Primary
-        //-   .common-example
-        //-     //- insert blue small button
-        //-   .common-example
-        //-   //- insert blue small button + icon
-        //- .example-block
-        //-   .call-out
-        //-     strong Small Button: 
-        //-     p Secondary
-        //-   .common-example
-        //-     //- insert white small button
-        //-   .common-example
-        //-   //- insert white small button + icon
-          
+        .example-block
+          .call-out.first-call-out
+            strong.icon +
+            strong TYPE 04: 
+            p Small Buttons
+          .common-example
+            mp-button.mp-button-primary(attrs={size: 'small'}) Primary (SM)
+            mp-button.mp-button-primary(attrs={size: 'small', icon: 'plus'}) Icon
+            mp-button.mp-button-primary(attrs={size: 'small', disabled: true}) disabled
+        .example-block
+          .call-out
+            strong Secondary
+          .common-example
+            mp-button.mp-button-secondary(attrs={size: 'small'}) Secondary (SM)
+            mp-button.mp-button-secondary(attrs={size: 'small', icon: 'logout'}) Icon
+            mp-button.mp-button-secondary(attrs={size: 'small', disabled: true}) disabled
+        .example-block
+          .call-out
+            strong Caution
+          .common-example
+            mp-button.mp-button-red(attrs={size: 'small'}) Caution (SM)
+            mp-button.mp-button-red(attrs={size: 'small', icon: 'trashcan'}) Icon
+            mp-button.mp-button-red(attrs={size: 'small', disabled: true}) disabled
         .code-snippet
           .call-out.first-call-out
             strong.icon +
@@ -102,30 +107,46 @@ include ../mixins.jade
                 | 8
                 br
                 | 9
+                br
+                | 10
+                br
+                | 11
+                br
+                | 12
               pre
                 span.grey-500  /* Basic buttons */
                 br
                 b   mp-button
                 span.mp-red .mp-button-primary
+                b  Button text
                 br
                 b   mp-button
                 span.mp-red .mp-button-secondary
+                b  Button text
                 br
                 br
                 span.grey-500  /* Buttons with icon */
                 br
                 b   mp-button
                 span.mp-purple (attrs={icon: 'x'})
-                span.mp-red .mp-button-secondary.mp-button-with-icon 
-                b  Cancel
+                span.mp-red .mp-button-secondary.mp-button-with-icon
+                b  Button text
                 br
                 br
-                span.grey-500  /* Disabled buttons */
+                span.grey-500  /* Small buttons */
                 br
                 b   mp-button
                 span.mp-red .mp-button-secondary
-                span.mp-purple (attrs={disabled: true}) 
-                b Secondary disabled
+                span.mp-purple (attrs={size: 'small'})
+                b  Button text
+                br
+                br
+                span.grey-500  /* Disabled buttons */ 
+                br
+                b   mp-button
+                span.mp-red .mp-button-red
+                span.mp-purple (attrs={disabled: true})
+                b  Button text
     .divider 
       label 4.2
     .section-content
@@ -237,6 +258,16 @@ include ../mixins.jade
             mp-toggle.max-width-toggle(attrs={large: true, selected: 'option2'})
               mp-toggle-option(attrs={value: 'option1'}) All
               mp-toggle-option(attrs={value: 'option2'}) Your Reports
+        //- Pending Addition: Minimal Toggle component
+        //- .example-block
+        //-   .call-out.first-call-out
+        //-     strong.icon +
+        //-     strong Toggle Minimal
+        //-   .floating-example-bar
+        //-     mp-toggle.mp-class-name-toggle(
+        //-       attrs={selected: 'option1'})
+        //-       mp-toggle-option(attrs={value: 'option1'}) All
+        //-       mp-toggle-option(attrs={value: 'option2'}) Your Reports
         .code-snippet
           .call-out.first-call-out
             strong.icon +
@@ -293,3 +324,28 @@ include ../mixins.jade
                 span.mp-purple (attrs={value: 'option2'})
                 b Oranges
                 br
+      .divider 
+        label 4.4
+      .section-content
+        section.toggle-buttons
+        .subsection-title Drop Buttons
+        .subsection-description Use a drop button when the user needs to choose from a finite set of options. For example: these can be used to present a list of people properites, or events the user is tracking. Making a selection would cause the drop down to close.
+        .indent-container
+          .example-block
+            .call-out.first-call-out
+              strong.icon +
+              strong Type 01: 
+              p Basic Text
+            .common-example
+              //- Text + Down Caret (icon) drop menu
+          .example-block
+            .call-out
+              strong Overflow Menu
+            .common-example
+              //- Insert overflow icon with drop menu
+          .example-block.full-width
+            .call-out.first-call-out
+              strong.icon +
+              strong Query Builder
+            .common-example
+              //- Insert Query Builder text-link drop-down

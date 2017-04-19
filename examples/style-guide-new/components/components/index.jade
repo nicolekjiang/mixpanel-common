@@ -4,6 +4,7 @@ include ../mixins.jade
   .section-title
     .title-text Components
     .title-section 5.1
+  //- Section nav feature postponed for next pass
   //- .section-nav
   //-   +section-nav-item('Show All')
   //-   +section-nav-item('Basics')
@@ -29,10 +30,11 @@ include ../mixins.jade
             strong Field Error
           .common-example
              //- insert component for square search field with error state visible
-        .example-block
+        .example-block.full-width
           .call-out.first-call-out
             strong.icon +
-            strong Field + Button Large 
+            strong Field: 
+            p large button
           .common-example
             mp-input-group(
               attrs={placeholder: "Type a name...", busy: inputGroupSaving}
@@ -41,7 +43,16 @@ include ../mixins.jade
                 submit: $helpers.handleNamerSubmit,
               }
             )
+        //- Pending Addition: square field + small buttons inset
+        //- .example-block
+        //-   .call-out.first-call-out
+        //-     strong.icon +
+        //-     strong Field: 
+        //-     p small buttons 
+        //-   .common-example
+        //-     //- Insert square field + two small buttons
 
+        //- Pending Addition: round search field variations
         //- .example-block
         //-   .call-out.first-call-out
         //-     strong.icon +
@@ -56,6 +67,15 @@ include ../mixins.jade
         //-     p Round Light
         //-   .common-example
         //-     //- insert component for round search field light
+
+        //- Pending Addition: Minimal search field
+        //- .example-block
+        //-   .call-out.first-call-out
+        //-     strong.icon +
+        //-     strong Search: 
+        //-     p Minimal
+        //-   .floating-example-bar
+        //-     //- insert component for IRB search field
 
         .code-snippet
           .call-out.first-call-out
@@ -119,7 +139,7 @@ include ../mixins.jade
             strong.icon +
             strong Checklists & Radios 
           .example-card
-          //- insert .example-card with checklist and radio list components
+          //- insert checklist and radio list components
         .code-snippet
           .call-out.first-call-out
             strong.icon +
@@ -152,19 +172,26 @@ include ../mixins.jade
         .example-block
           .call-out.first-call-out
             strong.icon +
-            strong Modals
-            //- insert modal with blue header bar component (visible)         
-            .desc Modals have blue header bars and should be presented when the user needs to complete a task that the current interface does not support. For example: a button to invite teammates might present a modal including a search field and a list of names to choose from. These are specifically great for presenting new flows while preserving the state of content.
-            .demo-divider
-              a View Demo
+            strong Modals 
+          .example-card.long    
+            .example-card-header 
+              b Modal Header Text   
+          p.desc Modals have blue header bars and should be presented when the user needs to complete a task that the current interface does not support. For example: a button to invite teammates might present a modal including a search field and a list of names to choose from. These are specifically great for presenting new flows while preserving the state of content.
+          .demo-divider
+            a View Demo
+            //- Make modal appear when clicked
         .example-block
           .call-out.first-call-out
             strong.icon +
             strong Dialogues
-            //- insert modal with blue header bar component (visible)         
-            .desc Dialogues are used when a decision is required. An example would be any time a user makes a potentially irreversable action, you could display a dialogue to get confirmation and explain the reprocussions.
-            .demo-divider
-              a View Demo
+          .example-card.narrow
+            .example-card-footer
+              mp-button.mp-button-secondary(attrs={size: 'small'}) Cancel
+              mp-button.mp-button-primary(attrs={size: 'small'}) Delete
+          p.desc Dialogues are used when a decision is required. An example would be any time a user makes a potentially irreversable action, you could display a dialogue to get confirmation and explain the reprocussions.
+          .demo-divider
+            a View Demo
+            //- Make dialogue appear when clicked
         .code-snippet
           .call-out.first-call-out
             strong.icon +
@@ -203,23 +230,32 @@ include ../mixins.jade
             //- insert component
         .example-block
           .call-out
-            strong Pop-Up:
+            strong Pop-Up: 
             p Warning
           .common-example
              //- insert component
-        .example-block
+        .example-block.full-width
           .call-out.first-call-out
             strong.icon +
-            strong Pop-up:
+            strong Pop-up: 
             p Unspecified
           .common-example
              //- insert component
-        .example-block
+        .example-block.full-width
           .call-out.first-call-out
             strong.icon +
             strong Toast
           .common-example
-             //- insert component
+            mp-toast(attrs={cta: 'undo', hide: false}) Insert toast message here
+        .example-block.full-width
+          .call-out.first-call-out
+            strong.icon +
+            strong Onboarding Dialogues
+          //- Insert onboarding dialogue BOTTOM
+          //- Insert onboarding dialogue LEFT
+        .example-block.full-width
+          //- Insert onboarding dialogue RIGHT
+          //- Insert onboarding dialogue TOP
         .code-snippet
           .call-out.first-call-out
             strong.icon +
@@ -252,6 +288,18 @@ include ../mixins.jade
         .example-block
           .call-out.first-call-out
             strong.icon +
-            strong Tooltip
+            strong Hover-tip
           .common-example
-             mp-tooltip Tooltip
+             //- Insert tooltip component, showing without hover
+        .example-block
+          .call-out
+            strong Warning-Tip
+          .common-example
+             //- Insert tooltip RED component, showing without hover
+        .example-block
+          .call-out
+            strong Just the tips
+          .common-example
+            //- Insert tooltip LEFT component, showing without hover
+            //- Insert tooltip DOWN component, showing without hover
+            //- Insert tooltip RIGHT component, showing without hover
