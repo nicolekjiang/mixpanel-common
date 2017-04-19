@@ -1,5 +1,5 @@
 - const proxyAttrs = {'modal-type': 'popup'};
-- ['closeable', 'open'].forEach(attr => proxyAttrs[attr] = $component.getAttribute(attr));
+- ['closeable', 'not-fullscreen', 'open'].forEach(attr => proxyAttrs[attr] = $component.getAttribute(attr));
 mp-modal(attrs=proxyAttrs)
   .mp-alert-container
     .mp-alert-body
