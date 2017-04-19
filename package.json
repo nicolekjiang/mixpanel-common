@@ -1,7 +1,7 @@
 {
   "name": "mixpanel-common",
   "main": "build/index.js",
-  "version": "0.63.0",
+  "version": "0.66.0",
   "description": "Mixpanel shared JS",
   "scripts": {
     "build": "node build.js",
@@ -73,7 +73,7 @@
   },
   "dependencies": {
     "lodash": "^4.17.4",
-    "mixpanel-browser": "2.9.16",
+    "mixpanel-browser": "2.11.1",
     "moment": "^2.17.1",
     "panel": "0.10.0",
     "pikaday": "git://github.com/dbushell/Pikaday.git#a1704adef06e985a448cd8ab313dee5a5787a228",
