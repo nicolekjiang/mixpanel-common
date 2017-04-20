@@ -3,7 +3,7 @@
 mp-modal(attrs=proxyAttrs)
   .mp-alert-container
     .mp-alert-body
-      .mp-alert-icon
+      .mp-alert-icon(class={'large-icon': $component.getAttribute('large-icon')})
         svg-icon(attrs={icon: 'alert'})
       .mp-alert-copy
         content
