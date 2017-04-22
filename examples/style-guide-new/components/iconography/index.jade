@@ -4,16 +4,23 @@ include ../mixins.jade
   .section-title
     .title-text Iconography
     .title-section 3.1
+  .section-modifier
+    .zoom-toggle
+      li 1x
+      li.zoom-selected 2x
+  .divider 
   //- .section-nav
     //- +section-nav-item('Show All')
     //- +section-nav-item('UI')
     //- +section-nav-item('Marketing')
     //- +section-nav-item('Legacy')
-  .divider 
   .section-content
     section.ui-icons
       .subsection-title UI Icons
-      .subsection-description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id massa et libero condimentum dignissim at ut odio. Aliquam placerat libero metus, et fringilla nisl dictum vitae. Sed at lacus eu risus fermentum consequat.
+      .subsection-description 
+        span.grey-500 Icons are generally 16x16 in measure, but to account for a possible ascenders and descenders they're saved on a canvas with 3px of padding, resulting in a 22x22 footprint. There may be times when you need a smaller or larger icon. 
+        span.bold Do not resize the 16x16 icon 
+        span.grey-500 to meet your needs; request a new one from your designer.
       .indent-container
         .icons
           each icon in Object.keys(SVG_ICONS)

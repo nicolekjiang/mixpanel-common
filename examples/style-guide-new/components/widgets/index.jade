@@ -1,5 +1,36 @@
+include ../mixins.jade
+
 .section
   .section-title
     .title-text Widgets
     .title-section 6.1
+  //- Section nav feature postponed for next pass
+  //- .section-nav
+  //-   +section-nav-item('Show All')
+  //-   +section-nav-item('Basics')
+  //-   +section-nav-item('Bars')
+  //-   +section-nav-item('Dropdowns')
+  //-   +section-nav-item('Toggles')
+  //-   +section-nav-item('Misc')
+  .divider 
   .section-content
+    section.widgets
+      .subsection-title Widgets
+      .subsection-description A handfull of components that have been pre-composed as ready-to-use interface elements.
+      .indent-container
+        .example-block
+          .call-out.first-call-out
+            strong.icon +
+            strong Bookmarks 
+          //- .floating-example-bar.align-right.grey-bar
+          //-   .bookmarks-widget
+          //-     mp-bookmarks-widget(
+          //-       attrs={
+          //-         'bookmarks': JSON.stringify(bookmarks),
+          //-         'create-disabled': false,
+          //-         'saving': savingBookmark,
+          //-         'selected-bookmark-id': selectedBookmarkId,
+          //-         'user-id': 1,
+          //-         'has-write-permissions': true,
+          //-       }
+          //-     )

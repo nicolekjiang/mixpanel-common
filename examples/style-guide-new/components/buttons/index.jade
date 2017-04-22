@@ -343,9 +343,62 @@ include ../mixins.jade
               strong Overflow Menu
             .common-example
               //- Insert overflow icon with drop menu
-          .example-block.full-width
+          
+          //- Pending Addition: Small circle button with icon / text
+          //- .example-block.full-width
+          //-   .call-out.first-call-out
+          //-     strong.icon +
+          //-     strong Query Builder
+          //-   .common-example
+          //-     //- Insert Query Builder text-link drop-down
+          
+          .code-snippet
             .call-out.first-call-out
               strong.icon +
-              strong Query Builder
-            .common-example
-              //- Insert Query Builder text-link drop-down
+              strong Example Code
+            .snippet-container.min.max
+              .snippet-header
+                label Jade
+              .code-field
+                pre
+                  | 1
+                  br
+                  | 2
+                  br
+                  | 3
+                  br
+                  | 4
+                  br
+                  | 5
+                  br
+                  | 6
+                  br
+                  | 7
+                  br
+                  | 8
+                  br
+                  | 9
+                pre
+                  span.grey-500  /* Square field w/ icon */
+                  br
+                  b   code
+                  span.mp-red  code more
+                  br
+                  b   code
+                  span.mp-red  code more
+                  br
+                  br
+                  span.grey-500  /* Square field w/ button */
+                  br
+                  b   code
+                  span.mp-purple codez +
+                  span.mp-red  more codes 
+                  b  again, code.
+                  br
+                  br
+                  span.grey-500  /* Round field on dark */
+                  br
+                  b   code
+                  span.mp-red  codecode
+                  span.mp-purple (attrs={all-the-codez}) 
+                  b code
