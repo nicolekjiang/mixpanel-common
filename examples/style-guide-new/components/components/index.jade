@@ -349,7 +349,7 @@ include ../mixins.jade
             //- Insert tooltip RED component, showing without hover
         .example-block
           .call-out
-            strong Directional Tips
+            strong Just Tips
           .common-example
             //- Insert tooltip LEFT component, showing without hover
             //- Insert tooltip DOWN component, showing without hover
@@ -392,3 +392,25 @@ include ../mixins.jade
             strong Spinner(s)
           .common-example.spinner-zoom
             mp-spinner
+        .code-snippet
+          .call-out.first-call-out
+            strong.icon +
+            strong Example Code
+          .snippet-container.min.max
+            .snippet-header
+              label Jade
+            .code-field
+              pre
+                | 1
+                br
+                | 2
+                br
+                | 3
+              pre
+                span.grey-500  /* Square field w/ icon */
+                br
+                b   code
+                span.mp-red  code more
+                br
+                b   code
+                span.mp-red  code more
