@@ -16,7 +16,7 @@ include ../mixins.jade
     - const colorGroups = $helpers.getColorGroups()
     section.ui-colors
       .subsection-title Mixpanel UI Colors
-      .subsection-description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id massa et libero condimentum dignissim at ut odio. Aliquam placerat libero metus, et fringilla nisl dictum vitae. Sed at lacus eu risus fermentum consequat.
+      .subsection-description Mixpanel User Interface is primarily created with the blue and grey palettes. This limited selection provides constraint and visual continuity across our UI. When using lighter values (50-300) be especially conscious of creating contrast that is too low for visibility standards.
       .indent-container
         .color-chips
           for color in colorGroups['Mixpanel UI Colors']
@@ -66,7 +66,7 @@ include ../mixins.jade
     .section-content
       section.data-viz-colors
       .subsection-title Data Visualization
-      .subsection-description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id massa et libero condimentum dignissim at ut odio. Aliquam placerat libero metus, et fringilla nisl dictum vitae. Sed at lacus eu risus fermentum consequat.
+      .subsection-description These colors have been selected for info-graphics based on their high visibility / contrast and adherance to accessibility standards. When necessary, these colors can be used in varying degrees of opacity to account for lack of gadiation in selection. Think: Retention and Signal heat maps.
       .indent-container
         .color-chips
           for color in colorGroups['Data Visualization']
@@ -82,7 +82,7 @@ include ../mixins.jade
       .section-content
         section.color-library
       .subsection-title Color Library
-      .subsection-description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id massa et libero condimentum dignissim at ut odio. Aliquam placerat libero metus, et fringilla nisl dictum vitae. Sed at lacus eu risus fermentum consequat.
+      .subsection-description Mixpanel Colors (mp-) are the 500 value from our color library, with the exception of mp-blue (300). Design recommends that you stick with the primary values (500), and utilize other values as accents, in order to maintain a consistent look and feel across all of our products.
       .indent-container
         .color-library
           for colorGroup in Object.keys(colorLibrary)
