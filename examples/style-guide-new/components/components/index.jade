@@ -210,14 +210,61 @@ include ../mixins.jade
                 | 2
                 br
                 | 3
+                br
+                | 4
+                br
+                | 5
+                br
+                | 6
+                br
+                | 7
+                br
+                | 8
+                br
+                | 9
+                br
+                | 10
+                br
+                | 11
+                br
+                | 12
+                br
+                | 13
               pre
-                span.grey-500  /* Square field w/ icon */
+                span.grey-500  /* Modal with button-bar */
                 br
-                b   code
-                span.mp-red  code more
+                span.mp-red   mp-modal.modal(
+                span.mp-purple attrs={closeable: true, open: open.modal}
+                span.mp-red )
                 br
-                b   code
-                span.mp-red  code more
+                b     div
+                br
+                span.mp-red       .mp-modal-content
+                br
+                span.mp-red         .mp-modal-title
+                b  Modal title text here
+                br
+                span.mp-red         .mp-modal-subtitle
+                b  Modal subtext here
+                br
+                span.mp-red        mp-button-bar.mp-button-bar-primary
+                span.mp-purple (attrs={'arrow-next': true})
+                b Button CTA
+                br
+                br
+                span.grey-500  /* Dialogue */
+                br
+                span.mp-red   mp-confirm(
+                span.mp-purple attrs={open: open.confirm}
+                span.mp-red )
+                br
+                b     div
+                br
+                span.mp-red       .mp-confirm-title
+                b  Dialogue title text
+                br
+                span.mp-red       .mp-confirm-description
+                b  Dialogue subtext here
       .divider 
         label 5.4
       .section-content
