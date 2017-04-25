@@ -38514,10 +38514,14 @@
 	        switch (_this2.state.visibility) {
 	          case VISIBILITY_OPENING:
 	            _this2.update({ visibility: VISIBILITY_OPEN });
+	            document.body.addEventListener('keydown', _this2.maybeCloseOnEscape);
+	            document.addEventListener('click', _this2.clickOutsideListener);
 	            _this2.dispatchEvent(new CustomEvent('change', { detail: { state: _this2.state.visibility } }));
 	            break;
 	          case VISIBILITY_CLOSING:
 	            _this2.update({ visibility: VISIBILITY_CLOSED });
+	            document.body.removeEventListener('keydown', _this2.maybeCloseOnEscape);
+	            document.removeEventListener('click', _this2.clickOutsideListener);
 	            _this2.dispatchEvent(new CustomEvent('change', { detail: { state: _this2.state.visibility } }));
 	            break;
 	        }
@@ -38530,7 +38534,6 @@
 	          _this2._closeMenu();
 	        }
 	      };
-	      document.body.addEventListener('keydown', this.maybeCloseOnEscape);
 
 	      // close when the user clicks outside of the menu
 	      this.clickOutsideListener = function (e) {
@@ -38538,7 +38541,6 @@
 	          _this2._closeMenu();
 	        }
 	      };
-	      document.addEventListener('click', this.clickOutsideListener);
 	    }
 	  }, {
 	    key: 'detachedCallback',
