@@ -1,0 +1,24 @@
+.resize-input(class={'with-icon': !!$component.getAttribute('icon')})
+  input(
+    attrs={
+      placeholder: value,
+    }
+    props={
+      maxLength: 50,
+      type: `text`,
+      value: pendingText,
+    }
+    style={
+      width: `${inputWidth}px`,
+    }
+    on={
+      blur: $helpers.blurredInput,
+      focus: $helpers.focusedInput,
+      input: $helpers.updatedInput,
+    }
+    hook={
+      insert: $helpers.inserted,
+    }
+  )
+  if $component.getAttribute('icon')
+    svg-icon(attrs={icon: $component.getAttribute('icon')})

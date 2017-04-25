@@ -1,0 +1,68 @@
+@import '../../stylesheets/defaults'
+
+placeholder()
+  &::placeholder
+    {block}
+  &::-webkit-input-placeholder
+    {block}
+  &:-moz-placeholder
+    {block}
+  &::-moz-placeholder
+    {block}
+  &:-ms-input-placeholder
+    {block}
+
+.resize-input
+  position relative
+  svg-icon-style(grey-700, size: 18px)
+
+  // reset input styles
+  input
+    background none
+    border 0
+    border-radius 0
+    box-sizing border-box
+    cursor pointer
+    display inline-block
+    font-family Arial
+    font-size 13px
+    line-height 1
+    margin 0
+    padding 0
+    vertical-align middle
+    white-space normal
+
+    &:focus
+      outline 0
+
+  // customize input styles
+  input
+    border-bottom 1px dotted blue-300
+    color mp-blue
+    display inline-flex
+    font-family family-helvetica
+    font-size-large()
+    font-weight weight-medium
+    +placeholder()
+      color mp-blue !important // @stylint ignore
+
+    &:hover
+      border-bottom 1px solid mp-blue
+
+    &:focus
+      border-bottom 1px solid mp-blue
+      cursor text
+      +placeholder()
+        color grey-500 !important // @stylint ignore
+
+  &.with-icon input:focus
+      padding-left 22px
+
+  svg-icon
+    display none
+    left 0
+    position absolute
+    top 9px
+
+  input:focus + svg-icon
+    display block
