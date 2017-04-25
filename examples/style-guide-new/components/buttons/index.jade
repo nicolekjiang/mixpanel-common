@@ -21,27 +21,26 @@ include ../mixins.jade
         .example-block
           .call-out.first-call-out
             strong.icon +
-            strong TYPE 01: 
-            p Text Only
+            strong .mp-button-primary
           .common-example
             mp-button.mp-button-secondary Secondary
             mp-button.mp-button-primary Primary
         .example-block
           .call-out
-            strong TYPE 02: 
-            p Icon & Text
+            strong .mp-button-with-icon
           .common-example
             mp-button(attrs={icon: 'x'}).mp-button-secondary.mp-button-with-icon Cancel
             mp-button(attrs={icon: 'plus'}).mp-button-primary.mp-button-with-icon Create
         .example-block        
           .call-out
-            strong Caution
+            strong .mp-button-red
           .common-example
             mp-button.mp-button-red Delete
         .example-block.full-width
           .call-out.first-call-out
             strong.icon +
-            strong Disabled
+            strong .mp-button-secondary 
+            p (attrs={disabled: true})
           .common-example
             mp-button.mp-button-secondary(attrs={disabled: true}) Secondary
             mp-button.mp-button-primary(attrs={disabled: true}) Primary
@@ -49,8 +48,7 @@ include ../mixins.jade
         .example-block
           .call-out.first-call-out
             strong.icon +
-            strong TYPE 03: 
-            p Dark Background
+            strong .mp-button-on-blue
             .desc For use when background color is causing contrast that is too high or too low.
           .floating-example-bar.align-right.blue-bar
             mp-button.mp-button-secondary.mp-button-on-blue Secondary
@@ -61,22 +59,23 @@ include ../mixins.jade
         .example-block
           .call-out.first-call-out
             strong.icon +
-            strong TYPE 04: 
-            p Small Buttons
+            strong .mp-button-primary
           .common-example
             mp-button.mp-button-primary(attrs={size: 'small'}) Primary (SM)
             mp-button.mp-button-primary(attrs={size: 'small', icon: 'plus'}) Icon
             mp-button.mp-button-primary(attrs={size: 'small', disabled: true}) disabled
         .example-block
           .call-out
-            strong Secondary
+            strong .mp-button-secondary 
+            p (attrs={size: 'small'})
           .common-example
             mp-button.mp-button-secondary(attrs={size: 'small'}) Secondary (SM)
             mp-button.mp-button-secondary(attrs={size: 'small', icon: 'logout'}) Icon
             mp-button.mp-button-secondary(attrs={size: 'small', disabled: true}) disabled
         .example-block
           .call-out
-            strong Caution
+            strong .mp-button-red 
+            p (attrs={disabled: true})
           .common-example
             mp-button.mp-button-red(attrs={size: 'small'}) Caution (SM)
             mp-button.mp-button-red(attrs={size: 'small', icon: 'trashcan'}) Icon
@@ -157,18 +156,17 @@ include ../mixins.jade
         .example-block.half
           .call-out.first-call-out
             strong.icon +
-            strong TYPE 01: 
-            p Text & Arrow
-          .example-card.narrow.mp-button-bar-container
-            mp-button-bar.mp-button-bar-primary(attrs={'arrow-next': true}) Button-bar icon
-        .example-block.half
-          .call-out
-            strong TYPE 02: 
-            p Text only
+            strong .mp-button-bar-primary 
           .example-card.narrow.truncated.mp-button-bar-container
             mp-button-bar.mp-button-bar-primary Button-bar primary
           .example-card.narrow.truncated.mp-button-bar-container
             mp-button-bar.mp-button-bar-secondary Button-bar secondary
+        .example-block.half
+          .call-out
+            strong .mp-button-bar 
+            p (attrs={'arrow-next': true})
+          .example-card.narrow.mp-button-bar-container
+            mp-button-bar.mp-button-bar-primary(attrs={'arrow-next': true}) Button-bar icon
         .code-snippet
           .call-out.first-call-out
             strong.icon +
@@ -210,8 +208,8 @@ include ../mixins.jade
         .example-block
           .call-out.first-call-out
             strong.icon +
-            strong Toggle Square: 
-            p Large
+            strong  mp-toggle
+            p .inline-toggle
           .common-example
             mp-toggle.inline-toggle(attrs={square: true, large: true, selected: 'option1'})
               mp-toggle-option(attrs={value: 'option1'}) Apples
@@ -219,8 +217,8 @@ include ../mixins.jade
               mp-toggle-option(attrs={value: 'option3'}) Bananans
         .example-block
           .call-out
-            strong Toggle Square: 
-            p Small
+            strong .inline-toggle 
+            p (attrs={square: true, small: true}) 
           .common-example
             mp-toggle.inline-toggle(attrs={square: true, small: true, selected: 'option1'})
               mp-toggle-option(attrs={value: 'option1'}) Pears
@@ -229,8 +227,8 @@ include ../mixins.jade
         .example-block
           .call-out.first-call-out
             strong.icon +
-            strong Toggle Round: 
-            p Light / Small
+            strong mp-toggle
+            p .custom-width-class
           .common-example   
             mp-toggle.max-width-toggle(attrs={selected: 'option2'})
               mp-toggle-option(attrs={value: 'option1'}) Label
@@ -241,8 +239,8 @@ include ../mixins.jade
         .example-block
           .call-out.first-call-out
             strong.icon +
-            strong Toggle Round: 
-            p Dark / Small
+            strong .custom-width-class 
+            p attrs={blue: true})
           .floating-example-bar.blue-bar
             mp-toggle.full-width-toggle(
               attrs={blue: true, selected: 'option1'})
@@ -252,12 +250,13 @@ include ../mixins.jade
         .example-block
           .call-out.first-call-out
             strong.icon +
-            strong Toggle Round: 
-            p Large
+            strong .custom-width-class 
+            p (attrs={large: true})
           .common-example
             mp-toggle.max-width-toggle(attrs={large: true, selected: 'option2'})
               mp-toggle-option(attrs={value: 'option1'}) All
               mp-toggle-option(attrs={value: 'option2'}) Your Reports
+
         //- Pending Addition: Minimal Toggle component
         //- .example-block
         //-   .call-out.first-call-out
@@ -268,6 +267,7 @@ include ../mixins.jade
         //-       attrs={selected: 'option1'})
         //-       mp-toggle-option(attrs={value: 'option1'}) All
         //-       mp-toggle-option(attrs={value: 'option2'}) Your Reports
+        
         .code-snippet
           .call-out.first-call-out
             strong.icon +
@@ -301,11 +301,11 @@ include ../mixins.jade
                 b .custom-class 
                 span.mp-purple (attrs={'square: true, large: true, selected: 'option1'})
                 br
-                b  mp-toggle-option
+                b   mp-toggle-option
                 span.mp-purple (attrs={value: 'option1'})
                 b Apples
                 br
-                b  mp-toggle-option
+                b   mp-toggle-option
                 span.mp-purple (attrs={value: 'option2'})
                 b Oranges
                 br
@@ -316,11 +316,11 @@ include ../mixins.jade
                 b .custom-class 
                 span.mp-purple (attrs={blue: true, small: true, selected: 'option1'})
                 br
-                b  mp-toggle-option
+                b   mp-toggle-option
                 span.mp-purple (attrs={value: 'option1'})
                 b Apples
                 br
-                b  mp-toggle-option
+                b   mp-toggle-option
                 span.mp-purple (attrs={value: 'option2'})
                 b Oranges
                 br

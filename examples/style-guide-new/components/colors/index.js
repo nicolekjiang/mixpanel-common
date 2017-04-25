@@ -9,12 +9,12 @@ const COLOR_GROUPS = {
 };
 
 const COLOR_LIBRARIES = {
-  'MP-red': ['red-700', 'mp-red', 'red-300', 'red-200', 'red-100'],
-  'MP-orange': ['orange-700', 'mp-orange', 'orange-300', 'orange-200', 'orange-100'],
-  'MP-yellow': ['yellow-700', 'mp-yellow', 'yellow-300', 'yellow-200', 'yellow-100'],
-  'MP-green': ['green-700', 'mp-green', 'green-300', 'green-200', 'green-100'],
-  'MP-blue': ['blue-900', 'blue-700', 'blue-500', 'mp-blue', 'blue-100'],
-  'MP-purple': ['purple-700', 'mp-purple', 'purple-300', 'purple-200', 'purple-100'],
+  'mp-red': ['red-700', 'mp-red', 'red-300', 'red-200', 'red-100'],
+  'mp-orange': ['orange-700', 'mp-orange', 'orange-300', 'orange-200', 'orange-100'],
+  'mp-yellow': ['yellow-700', 'mp-yellow', 'yellow-300', 'yellow-200', 'yellow-100'],
+  'mp-green': ['green-700', 'mp-green', 'green-300', 'green-200', 'green-100'],
+  'mp-blue': ['blue-900', 'blue-700', 'blue-500', 'mp-blue', 'blue-100'],
+  'mp-purple': ['purple-700', 'mp-purple', 'purple-300', 'purple-200', 'purple-100'],
 };
 
 document.registerElement('color-section', class extends Component {
