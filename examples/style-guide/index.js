@@ -8,6 +8,7 @@ import '../../build/index';
 import COLORS from '../../build/stylesheets/mixins/colors.json';
 import { SVG_ICONS } from '../../build/components/svg-icon';
 import { extend } from '../../build/util';
+import ItemsMenu from '../../build/widgets/items-menu';
 import bookmarks from './bookmark-data.json';
 
 import template from './index.jade';
@@ -27,11 +28,13 @@ document.registerElement(`style-guide`, class extends Component {
           confirm: false,
           confirmDelete: false,
           menu: false,
+          itemMenu: false,
           modal: false,
           popup: false,
           tagSelector: false,
           tutorialTooltip: {},
         },
+        itemsMenuSearchFilter: ``,
         savingBookmark: false,
         selectedBookmarkId: null,
         tagSelectorLoadState: `idle`,
@@ -82,6 +85,125 @@ document.registerElement(`style-guide`, class extends Component {
           textEl.textContent = this.helpers.getElementStr(el);
           const parentEl = el.parentElement;
           parentEl.insertBefore(textEl, parentEl.childNodes[0]);
+        },
+
+        handleItemsMenuFocus: () => {
+          this.state.open.itemsMenu = true;
+          this.update();
+        },
+
+        handleItemsMenuBlur: () => {
+          this.state.open.itemsMenu = false;
+          this.update();
+        },
+
+        handleItemsMenuInput: ev => {
+          this.update({itemsMenuSearchFilter: ev.target.value});
+        },
+
+        handleItemsMenuKeydown: ev => {
+          if (Object.values(ItemsMenu.NAVIGATION_KEY_CODES).indexOf(ev.keyCode) !== -1) {
+            ev.preventDefault();
+            ev.stopPropagation();
+
+            const eventsMenuEl = ev.target.parentNode.querySelector(`mp-items-menu`);
+            // There's a bug in chromnium where it's not possible to set keyCode on KeyboardEvent,
+            // so use a CustomEvent instead
+            const clonedEvent = new Event(ev.type, ev);
+            clonedEvent.keyCode = ev.keyCode;
+            eventsMenuEl.dispatchEvent(clonedEvent);
+          }
+        },
+
+        getItemsMenuSections: () => {
+          const sections = [{
+            label: `Recently Viewed`,
+            items: [{
+              itemType: `event`,
+              name: `$top_events`,
+              isSelected: true,
+              hasPropertiesPill: true,
+            }, {
+              itemType: `event`,
+              name: `[Collect everything] Clicked cancel edit elements`,
+              hasPropertiesPill: true,
+              isPropertiesPillDisabled: true,
+              hasCaret: true,
+            }],
+          }, {
+            label: `Events`,
+            items: [{
+              itemType: `event`,
+              name: `$all_events`,
+              isSelected: true,
+              hasCaret: true,
+              isDisabled: true,
+            }, {
+              itemType: `event`,
+              name: `$top_events`,
+              isSelected: true,
+              isDisabled: true,
+              hasPropertiesPill: true,
+            }, {
+              itemType: `event`,
+              name: `[Collect everything] Clicked cancel edit elements`,
+              isDisabled: true,
+            }, {
+              itemType: `event`,
+              name: `All: Add to shortlist v3`,
+              custom: true,
+            }, {
+              itemType: `event`,
+              name: `$autotrack_pageview`,
+              is_collect_everything_event: true,
+            }, {
+              itemType: `event`,
+              name: `Viewed report`,
+            }],
+          }, {
+            items: [{
+              icon: `profile`,
+              label: `All People`,
+            }],
+          }, {
+            items: [{
+              itemType: `property`,
+              name: `Device Model`,
+              type: `string`,
+            }, {
+              itemType: `property`,
+              name: `Device Pixel Ratio (is it retina?)`,
+              type: `number`,
+            }, {
+              itemType: `property`,
+              name: `Email`,
+              type: `string`,
+            }, {
+              itemType: `property`,
+              name: `Error`,
+              type: `boolean`,
+            }, {
+              itemType: `property`,
+              name: `User Ids`,
+              type: `list`,
+            }, {
+              itemType: `property`,
+              name: `Created`,
+              type: `datetime`,
+            }],
+          }, {
+            label: `Loading section`,
+            isLoading: true,
+            items: [],
+          }];
+
+          // Duplicate the menu to make it longer to trigger pagination
+          return [
+            ...sections,
+            ...sections,
+            ...sections,
+            ...sections,
+          ];
         },
 
         handleBookmarksMenuSubmit: e => {
