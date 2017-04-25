@@ -219,6 +219,26 @@
         div
           .text AHHH DANGER DANGER There is currently an error
 
+    p.relative-position
+      button(on={click: () => $helpers.openModal('alert-not-fullscreen')}) Open not-fullscreen alert
+
+      mp-alert(
+        attrs={id: 'alert', closeable: true, open: open['alert-not-fullscreen'], 'not-fullscreen': true}
+        on={change: e => $helpers.handleModalChange('alert-not-fullscreen', e.detail.state)}
+      )
+        div
+          .text I am not fixed position!
+
+    p
+      button(on={click: () => $helpers.openModal('alert-large-icon')}) Open large icon alert
+
+      mp-alert(
+        attrs={id: 'alert', closeable: true, open: open['alert-large-icon'], 'large-icon': true}
+        on={change: e => $helpers.handleModalChange('alert-large-icon', e.detail.state)}
+      )
+        div
+          .text I should have a large icon, centered vertically
+
   .section.toggles
     h1 Toggles
     p One element out of a set of two or more is always selected.
