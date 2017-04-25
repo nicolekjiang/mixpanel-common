@@ -1,9 +1,9 @@
 - const proxyAttrs = {'modal-type': 'popup'};
-- ['closeable', 'open'].forEach(attr => proxyAttrs[attr] = $component.getAttribute(attr));
+- ['closeable', 'not-fullscreen', 'open'].forEach(attr => proxyAttrs[attr] = $component.getAttribute(attr));
 mp-modal(attrs=proxyAttrs)
   .mp-alert-container
     .mp-alert-body
-      .mp-alert-icon
+      .mp-alert-icon(class={'large-icon': $component.isAttributeEnabled('large-icon')})
         svg-icon(attrs={icon: 'alert'})
       .mp-alert-copy
         content
