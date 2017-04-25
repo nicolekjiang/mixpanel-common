@@ -7,8 +7,10 @@ placeholder()
     {block}
   &:-moz-placeholder
     {block}
+    opacity 1
   &::-moz-placeholder
     {block}
+    opacity 1
   &:-ms-input-placeholder
     {block}
 
@@ -17,7 +19,7 @@ placeholder()
   svg-icon-style(grey-700, size: 18px)
 
   // reset input styles
-  input
+  input[type='text']
     background none
     border 0
     border-radius 0
@@ -36,7 +38,7 @@ placeholder()
       outline 0
 
   // customize input styles
-  input
+  input[type='text']
     border-bottom 1px dotted blue-300
     color mp-blue
     display inline-flex
