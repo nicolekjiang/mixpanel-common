@@ -21,16 +21,16 @@ include ../mixins.jade
         .example-block
           .call-out.first-call-out
             strong.icon +
-            strong Bookmarks 
-          //- .floating-example-bar.align-right.grey-bar
-          //-   .bookmarks-widget
-          //-     mp-bookmarks-widget(
-          //-       attrs={
-          //-         'bookmarks': JSON.stringify(bookmarks),
-          //-         'create-disabled': false,
-          //-         'saving': savingBookmark,
-          //-         'selected-bookmark-id': selectedBookmarkId,
-          //-         'user-id': 1,
-          //-         'has-write-permissions': true,
-          //-       }
-          //-     )
+            strong mp-bookmarks-widget 
+          .floating-example-bar.align-right.grey-bar
+            .bookmarks-widget
+              mp-bookmarks-widget(
+                attrs={
+                  'bookmarks': JSON.stringify(bookmarks),
+                  'create-disabled': false,
+                  'saving': savingBookmark,
+                  'selected-bookmark-id': selectedBookmarkId,
+                  'user-id': 1,
+                  'has-write-permissions': true,
+                }
+              )

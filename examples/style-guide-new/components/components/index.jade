@@ -123,8 +123,8 @@ include ../mixins.jade
             span.bold presenting new flows 
             span.mp-font-size-large while preserving the state of content.
           .demo-divider
-            a View Demo
-            //- Make mp-modal appear when clicked
+            //- this not working...
+            a(on={click: () => $helpers.openModal('modal')}) View Demo 
         .example-block
           .call-out.first-call-out
             strong.icon +
@@ -137,8 +137,8 @@ include ../mixins.jade
             span.bold a decision is required.
             span.mp-font-size-large  An example would be any time a user makes a potentially irreversable action, you could display a dialogue to get confirmation and explain the reprocussions.
           .demo-divider
-            a View Demo
-            //- Make mp-confirm appear when clicked
+            //- this not working...
+            a(on={click: () => $helpers.openModal('confirm')}) View Demo 
         .code-snippet
           .call-out.first-call-out
             strong.icon +
