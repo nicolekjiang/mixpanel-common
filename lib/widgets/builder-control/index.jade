@@ -1,0 +1,38 @@
+.resize-input(class={
+  'with-icon': $component.getAttribute('icon'),
+  'active': $component.isAttributeEnabled('active'),
+  'theme-primary': $component.getAttribute('theme') === 'primary' || !$component.getAttribute('theme'),
+  'theme-secondary': $component.getAttribute('theme') === 'secondary',
+})
+  if $component.isAttributeEnabled('active') && $component.getAttribute('type') === 'input'
+    input(
+      attrs={
+        autofocus: true,
+        placeholder: $component.getAttribute('value'),
+        type: 'text',
+      }
+      props={
+        maxLength: 50,
+        value: pendingText,
+      }
+      style={
+        width: `${inputWidth}px`,
+      }
+      on={
+        blur: $helpers.blurredInput,
+        focus: $helpers.focusedInput,
+        input: $helpers.updatedInput,
+      }
+      hook={
+        insert: $helpers.inserted,
+      }
+    )
+    if $component.getAttribute('icon')
+      svg-icon(attrs={icon: $component.getAttribute('icon')})
+  else
+    .label(on={click: $helpers.labelClicked})
+      for label, idx in $helpers.labelParts()
+        if idx > 0
+          span= ' '
+        span(class={muted: idx % 2 === 1}) #{label}
+

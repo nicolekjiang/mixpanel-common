@@ -1,0 +1,69 @@
+@import '../../stylesheets/defaults'
+
+.resize-input
+  border-bottom 1px dotted blue-300
+  display inline-flex
+  position relative
+  svg-icon-style(grey-700, size: 18px)
+
+  &:hover, &.active
+    border-bottom 1px solid mp-blue
+
+  .label
+    cursor pointer
+
+  &.theme-primary
+    .label, input[type='text']
+      color mp-blue
+      font-size-large()
+
+  &.theme-secondary
+    .label, input[type='text']
+      color grey-700
+      font-size-medium()
+
+      .muted
+        color grey-500
+
+    &:hover, &.active
+      .label
+        &, .muted
+          color mp-blue
+
+  // reset input styles
+  input[type='text']
+    background none
+    border 0
+    border-radius 0
+    box-sizing border-box
+    display inline-block
+    font-family Arial
+    font-size 13px
+    line-height 1
+    margin 0
+    padding 0
+    vertical-align middle
+    white-space normal
+
+    &:focus
+      outline 0
+
+  // customize input styles
+  .label, input[type='text']
+    display inline-block
+    font-family family-helvetica
+    font-weight weight-medium
+    line-height 16px
+    padding 10px 0
+
+    &::placeholder
+      color grey-500 !important // @stylint ignore
+
+  &.with-icon input
+    padding-left 24px
+
+  svg-icon
+    left 0
+    position absolute
+    top 9px
+

@@ -523,9 +523,73 @@
       }) Tooltip with arrow-align="right"
         mp-tutorial-tooltip(attrs={'arrow-align': 'right', placement: 'bottom', hide: !open.tutorialTooltip.bottom}) Tooltip with arrow-align="right"
 
-    h2 Edit input
+    h2 Builder control
+    div.builder-section
       div
-        mp-edit-input(attrs={value: 'Type in me plz', icon: 'search'})
+        mp-builder-control(
+          attrs={
+            icon: 'search',
+            value: builderControlInputValue,
+            type: 'input',
+            active: builderControlInputActive,
+            theme: 'primary',
+          },
+          on={
+            'label-click': () => $component.update({builderControlInputActive: !$component.state.builderControlButtonActive}),
+            'input-blur': e => {
+              if (e.detail.value) {
+                $component.update({builderControlInputValue: e.detail.value})
+              }
+              $component.update({builderControlInputActive: false})
+            },
+          }
+        )
+        span= ' '
+        span correlates with
+        span= ' '
+        mp-builder-control(
+          attrs={
+            label: JSON.stringify('2nd Week Retention'),
+            type: 'button',
+            active: builderControlButtonActive,
+            theme: 'primary',
+          },
+          on={'label-click': () => $component.update({builderControlButtonActive: !$component.state.builderControlButtonActive})}
+        )
+      div
+        span for
+        span= ' '
+        mp-builder-control(
+          attrs={
+            label: JSON.stringify('all users'),
+            type: 'button',
+            active: builderControlButtonActive2,
+            theme: 'secondary',
+          },
+          on={'label-click': () => $component.update({builderControlButtonActive2: !$component.state.builderControlButtonActive2})}
+        )
+        span= ' '
+        span and
+        span= ' '
+        mp-builder-control(
+          attrs={
+            label: JSON.stringify(['Email', 'includes', '@mixpanel.com']),
+            value: builderControlInputValue2,
+            type: 'input',
+            active: builderControlInputActive2,
+            theme: 'secondary',
+          },
+          on={
+            'label-click': () => $component.update({builderControlInputActive2: !$component.state.builderControlButtonActive2}),
+            'input-blur': e => {
+              if (e.detail.value) {
+                $component.update({builderControlInputValue2: e.detail.value})
+              }
+              $component.update({builderControlInputActive2: false})
+            },
+          }
+        )
+
 
     h2(style={position: 'relative'}) Upsell popups
       for feature, idx in ['custom-events', 'date-range', 'export-csv', 'filter-levels', 'bookmark-maximum', 'default']

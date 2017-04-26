@@ -19,6 +19,12 @@ document.registerElement(`style-guide`, class extends Component {
       defaultState: {
         blueToggleValue: `option1`,
         bookmarks,
+        builderControlButtonActive: false,
+        builderControlButtonActive2: false,
+        builderControlInputActive: false,
+        builderControlInputActive2: false,
+        builderControlInputValue: 'Top Events',
+        builderControlInputValue2: 'Email',
         COLORS,
         SVG_ICONS,
         inputGroupSaving: false,
