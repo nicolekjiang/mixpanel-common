@@ -4,17 +4,18 @@ include ../mixins.jade
   .section-title
     .title-text Typography
     .title-section 2.1
-  .section-nav
-    +section-nav-item('Show All')
-    +section-nav-item('Buttons')
-    +section-nav-item('Headers')
-    +section-nav-item('Copy')
-    +section-nav-item('Fields')
-    +section-nav-item('Labels')
+  //- .section-nav
+    //- +section-nav-item('Show All')
+    //- +section-nav-item('Buttons')
+    //- +section-nav-item('Headers')
+    //- +section-nav-item('Copy')
+    //- +section-nav-item('Fields')
+    //- +section-nav-item('Labels')
+  .divider 
   .section-content
     section.font-weight
       .subsection-title Type Family & Weight
-      .subsection-description You can use the appropriate markup (e.g. <label>) to specify which of the three weights to use. Each weight has a specific function in the MP type heirarchy.
+      .subsection-description Currently Mixpanel UI is limited to one typeface: Helvetica Neue. It was chosen because of its extensive inclusion across many operating systems. We have limited the weight selection to establish a clear information hierarchy. 
       .font-weight-examples
         .bold-example.mp-font-weight-bold
           .indent-container
@@ -31,14 +32,13 @@ include ../mixins.jade
               .code-snippet
                 .snippet-container.min.max
                   .snippet-header.mp-font-weight-regular
-                    label CSS:    <h1>,  <h2>,  <button>,  <label>,  <b>
+                    label Stylus
                   .code-field
                     pre
                       | 1
-                      b     #[span font-family:]  family-helvetica
-                      br
-                      | 2
-                      b     #[span font-weight:]  weight-bold
+                    pre
+                      span.mp-red font-weight
+                      b  weight-bold
         .medium-example.mp-font-weight-medium
           .indent-container
             .example-container
@@ -54,14 +54,13 @@ include ../mixins.jade
               .code-snippet
                 .snippet-container.min.max
                   .snippet-header.mp-font-weight-regular
-                    label CSS:    <h1>,  <h2>,  <button>,  <label>,  <b>
+                    label Stylus
                   .code-field
                     pre
                       | 1
-                      b     #[span font-family:]  family-helvetica
-                      br
-                      | 2
-                      b     #[span font-weight:]  weight-medium
+                    pre
+                      span.mp-red font-weight
+                      b  weight-medium
         .regular-example.mp-font-weight-regular
           .indent-container
             .example-container
@@ -77,19 +76,19 @@ include ../mixins.jade
               .code-snippet
                 .snippet-container.min.max
                   .snippet-header.mp-font-weight-regular
-                    label CSS:    <h1>,  <h2>,  <button>,  <label>,  <b>
+                    label Stylus
                   .code-field
                     pre
                       | 1
-                      b     #[span font-family:]  family-helvetica
-                      br
-                      | 2
-                      b     #[span font-weight:]  weight-regular
+                    pre
+                      span.mp-red font-weight
+                      b  weight-regular
+  .divider 
+    label 1.2
+  .section-content
     section.type-sizes
-      .divider 
-        label 1.2
       .subsection-title Type Sizes
-      .subsection-description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id massa et libero condimentum dignissim at ut odio. Aliquam placerat libero metus, et fringilla nisl dictum vitae. Sed at lacus eu risus fermentum consequat.
+      .subsection-description By limiting our font catalogue to just six sizes, we're able to reduce page load times and further reinforce UI patterns. Our baseline is 13px (default), and our smallest point size is ALL CAPS 11px. There will be instances where micro-copy is required, which has not been accounted for in common at this time.
       .indent-container
         .size-examples
           .size-example
@@ -113,40 +112,56 @@ include ../mixins.jade
           .size-example
             .left-example
               .text-example.mp-font-size-default Mixpanel bestows major data-viz insights f'n quickly.
-              .size-type.mp-font-size-medium 12px - Default
+              .size-type.mp-font-size-medium 13px - Default
             .right-example
               .size-class.mp-font-size-default .mp-font-size-default
+          .size-example
+            .left-example
+              .text-example.mp-font-size-small Mixpanel bestows major data-viz insights f'n quickly.
+              .size-type.mp-font-size-medium 12px - Small
+            .right-example
+              .size-class.mp-font-size-small .mp-font-size-small
           .size-example
             .left-example
               .text-example.mp-font-size-xs Mixpanel bestows major data-viz insights f'n quickly.
               .size-type.mp-font-size-medium 11px - Extra small
             .right-example
               .size-class.mp-font-size-xs .MP-FONT-SIZE-XS
-      .code-snippet
-        .call-out
-          strong.icon +
-          strong Example Code
-        .snippet-container.min.max
-          .snippet-header
-            label Stylus
-          .code-field
-            pre
-              | 1    /* Color Declarations */
-              br
-              | 2
-              br
-              | 3
-              b     mp-red   =
-              span  #E4567B
-              br
-              | 4
-              b     mp-blue  =
-              span  #4BA8FF
-              br
-              | 5
-              b     blue-900 =
-              span  #2687E3
-              br
-              | 6
-              b     blue-700 =
-              span  #3391E9
+          .code-snippet
+            .call-out.first-call-out
+              strong.icon +
+              strong Example Code
+            .snippet-container.min.max
+              .snippet-header
+                label Jade
+              .code-field
+                pre
+                  | 1
+                  br
+                  | 2
+                  br
+                  | 3
+                  br
+                  | 4
+                  br
+                  | 5
+                  br
+                  | 6
+                pre
+                  span.grey-500  /* Type size declarations */
+                  br
+                  b  .class-name
+                  span.mp-red  font-size-xl()
+                  br
+                  b  .class-name
+                  span.mp-red  font-size-large()
+                  br
+                  b  .class-name
+                  span.mp-red  font-size-medium()
+                  br
+                  b  .class-name
+                  span.mp-red  font-size-default()
+                  span.grey-500  //- or leave undefined
+                  br
+                  b  .class-name
+                  span.mp-red  font-size-xs()

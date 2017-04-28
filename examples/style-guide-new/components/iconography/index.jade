@@ -4,46 +4,63 @@ include ../mixins.jade
   .section-title
     .title-text Iconography
     .title-section 3.1
-  .section-nav
-    +section-nav-item('Show All')
-    +section-nav-item('UI')
-    +section-nav-item('Marketing')
-    +section-nav-item('Legacy')
+  .section-modifier
+    .zoom-toggle
+      li 1x
+      li.zoom-selected 2x
+  .divider 
+  //- .section-nav
+    //- +section-nav-item('Show All')
+    //- +section-nav-item('UI')
+    //- +section-nav-item('Marketing')
+    //- +section-nav-item('Legacy')
   .section-content
-    section.icon-section
-      .subsection-title Mixpanel Icons
-      .subsection-description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id massa et libero condimentum dignissim at ut odio. Aliquam placerat libero metus, et fringilla nisl dictum vitae. Sed at lacus eu risus fermentum consequat.
+    section.ui-icons
+      .subsection-title UI Icons
+      .subsection-description 
+        span.grey-500 Icons measure 16x16 px, but to account for a possible ascenders and descenders they're saved on a canvas with 3px of padding, resulting in a 22x22 footprint. There may be times when you need a smaller or larger icon. 
+        span.bold Do not resize the 16x16 icon 
+        span.grey-500 to meet your needs; request a new one from your designer.
       .indent-container
         .icons
-          for icon in Object.keys(SVG_ICONS)
-            .icon
+          each icon in Object.keys(SVG_ICONS)
+            .icon.common-example
               svg-icon(attrs={icon})
               .icon-name= icon
-      .code-snippet
-        .call-out
-          strong.icon +
-          strong Example Code
-        .snippet-container.min.max
-          .snippet-header
-            label Stylus
-          .code-field
-            pre
-              | 1    /* Color Declarations */
-              br
-              | 2
-              br
-              | 3
-              b     mp-red   =
-              span  #E4567B
-              br
-              | 4
-              b     mp-blue  =
-              span  #4BA8FF
-              br
-              | 5
-              b     blue-900 =
-              span  #2687E3
-              br
-              | 6
-              b     blue-700 =
-              span  #3391E9
+        .code-snippet
+          .call-out.first-call-out
+            strong.icon +
+            strong Example Code
+          .snippet-container.min.max
+            .snippet-header
+              label Jade
+            .code-field
+              pre
+                | 1
+                br
+                | 2
+                br
+                | 3
+                br
+                | 4
+                br
+                | 5
+                br
+                | 6
+              pre
+                span.grey-500  /* Standalone */
+                br
+                b  .container-class
+                br
+                span.mp-purple     svg-icon(attrs={
+                span.mp-red 'icon-name'
+                span.mp-purple }) 
+                br
+                br
+                span.grey-500  /* Button declaration */
+                br
+                b  mp-button
+                span.mp-purple (attrs={icon: 
+                span.mp-red 'x'
+                span.mp-purple })
+                b .mp-button-with-icon 

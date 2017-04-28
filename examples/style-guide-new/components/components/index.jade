@@ -1,0 +1,373 @@
+include ../mixins.jade
+
+.section
+  .section-title
+    .title-text Components
+    .title-section 5.1
+  //- Section nav feature postponed for next pass
+  //- .section-nav
+  //-   +section-nav-item('Show All')
+  //-   +section-nav-item('Basics')
+  //-   +section-nav-item('Bars')
+  //-   +section-nav-item('Dropdowns')
+  //-   +section-nav-item('Toggles')
+  //-   +section-nav-item('Misc')
+  .divider 
+  .section-content
+    section.input-fields
+      .subsection-title Input Fields
+      .subsection-description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id massa et libero condimentum dignissim at ut odio. Aliquam placerat libero metus, et fringilla nisl dictum vitae. Sed at lacus eu risus fermentum consequat. 
+      .indent-container
+        .example-block
+          .call-out.first-call-out
+            strong.icon +
+            strong Search: 
+            p Square
+          .common-example
+            //- Component: .mp-icon-input
+
+        //- Pending Addition: error state for square field
+        //- .example-block
+        //-   .call-out
+        //-     strong Field Error
+        //-   .common-example
+        //-      //- Insert component
+
+        .example-block.full-width
+          .call-out.first-call-out
+            strong.icon +
+            strong mp-input-group
+          .common-example
+            mp-input-group(
+              attrs={placeholder: "Type a name...", busy: inputGroupSaving}
+              on={
+                change: $helpers.handleNamerChange,
+                submit: $helpers.handleNamerSubmit,
+              }
+            )
+        //- Pending Addition: square field + small buttons inset
+        //- .example-block
+        //-   .call-out.first-call-out
+        //-     strong.icon +
+        //-     strong Field: 
+        //-     p small buttons 
+        //-   .common-example
+        //-     //- Insert square field + two small buttons
+
+        //- Pending Addition: round search field variations
+        //- .example-block
+        //-   .call-out.first-call-out
+        //-     strong.icon +
+        //-     strong Search: 
+        //-     p Round Dark
+        //-   .floating-example-bar.align-right.blue-bar
+        //-     //- insert component for round search field dark
+        //- .example-block
+        //-   .call-out.first-call-out
+        //-     strong.icon +
+        //-     strong Search: 
+        //-     p Round Light
+        //-   .common-example
+        //-     //- insert component for round search field light
+
+        //- Pending Addition: Minimal search field
+        //- .example-block
+        //-   .call-out.first-call-out
+        //-     strong.icon +
+        //-     strong Search: 
+        //-     p Minimal
+        //-   .floating-example-bar
+        //-     //- insert component for IRB search field
+
+        .code-snippet
+          .call-out.first-call-out
+            strong.icon +
+            strong Example Code
+          .snippet-container.min.max
+            .snippet-header
+              label Jade
+            .code-field
+              pre
+                | 1
+                br
+                | 2
+                br
+                | 3
+                br
+                | 4
+              pre
+                span.grey-500  /* Square field w/ icon */
+                br
+                br
+                span.grey-500  /* Square field w/ button */
+                br
+                span.mp-red  mp-input-group
+                span.mp-purple (attrs={placeholder: "text here", busy: inputGroupSaving})
+     
+      .divider 
+        label 5.3
+      .section-content
+        section.modals-dialogues
+        .subsection-title Modals & Dialogues
+        .subsection-description These UI components are containers that will interrupt the current flow, by displaying on top of the page content.
+       .indent-container
+        .example-block
+          .call-out.first-call-out
+            strong.icon +
+            strong mp-modal
+            p .modal 
+          .example-card.long    
+            .example-card-header 
+              b Modal Header Text   
+          p.desc.mp-font-size-large Modals have blue header bars and should be presented when the user needs to complete a task that the current interface does not support. For example: a button to invite teammates might present a modal including a search field and a list of names to choose from. These are specifically great for 
+            span.bold presenting new flows 
+            span.mp-font-size-large while preserving the state of content.
+          .demo-divider
+            //- this not working...
+            a(on={click: () => $helpers.openModal('modal')}) View Demo 
+        .example-block
+          .call-out.first-call-out
+            strong.icon +
+            strong mp-confirm
+          .example-card.narrow
+            .example-card-footer
+              mp-button.mp-button-secondary(attrs={size: 'small'}) Cancel
+              mp-button.mp-button-primary(attrs={size: 'small'}) Delete
+          p.desc.mp-font-size-large Dialogues are used when 
+            span.bold a decision is required.
+            span.mp-font-size-large  An example would be any time a user makes a potentially irreversable action, you could display a dialogue to get confirmation and explain the reprocussions.
+          .demo-divider
+            //- this not working...
+            a(on={click: () => $helpers.openModal('confirm')}) View Demo 
+        .code-snippet
+          .call-out.first-call-out
+            strong.icon +
+            strong Example Code
+          .snippet-container.min.max
+            .snippet-header
+              label Jade
+            .code-field
+              pre
+                | 1
+                br
+                | 2
+                br
+                | 3
+                br
+                | 4
+                br
+                | 5
+                br
+                | 6
+                br
+                | 7
+                br
+                | 8
+                br
+                | 9
+                br
+                | 10
+                br
+                | 11
+                br
+                | 12
+                br
+                | 13
+              pre
+                span.grey-500  /* Modal with button-bar */
+                br
+                span.mp-red   mp-modal.modal(
+                span.mp-purple attrs={closeable: true, open: open.modal}
+                span.mp-red )
+                br
+                b     div
+                br
+                span.mp-red       .mp-modal-content
+                br
+                span.mp-red         .mp-modal-title
+                b  Modal title text here
+                br
+                span.mp-red         .mp-modal-subtitle
+                b  Modal subtext here
+                br
+                span.mp-red        mp-button-bar.mp-button-bar-primary
+                span.mp-purple (attrs={'arrow-next': true})
+                b Button CTA
+                br
+                br
+                span.grey-500  /* Dialogue */
+                br
+                span.mp-red   mp-confirm(
+                span.mp-purple attrs={open: open.confirm}
+                span.mp-red )
+                br
+                b     div
+                br
+                span.mp-red       .mp-confirm-title
+                b  Dialogue title text
+                br
+                span.mp-red       .mp-confirm-description
+                b  Dialogue subtext here
+      .divider 
+        label 5.4
+      .section-content
+        section.popups-alerts
+        .subsection-title Pop-Ups & Alerts
+        .subsection-description These UI components are containers that will interrupt the current flow, by displaying on top of the page content.
+       .indent-container
+        .example-block
+          .call-out.first-call-out
+            strong.icon +
+            strong mp-upsell-popup
+          .common-example
+            //- Component: mp-upsell-popup
+        .example-block
+          .call-out
+            strong mp-alert
+          .common-example
+            //- Component: mp-alert
+        
+        //- Pending Addition: dark warning with atomic bomb icon
+        //- .example-block.full-width
+        //-   .call-out.first-call-out
+        //-     strong.icon +
+        //-     strong Pop-up: 
+        //-     p Unspecified
+        //-   .common-example
+        //-      //- Insert component
+
+        .example-block.full-width
+          .call-out.first-call-out
+            strong.icon +
+            strong mp-toast
+          .common-example
+            mp-toast(attrs={cta: 'undo', hide: false}) Insert toast message here
+        .example-block.full-width
+          .call-out.first-call-out
+            strong.icon +
+            strong mp-tutorial-tooltip
+            .example-block.full-width
+              //- Component: mp-tutorial-tooltip
+            .demo-divider
+              a Down
+              a Left
+              a Right
+              a Up
+        .code-snippet
+          .call-out.first-call-out
+            strong.icon +
+            strong Example Code
+          .snippet-container.min.max
+            .snippet-header
+              label Jade
+            .code-field
+              pre
+                | 1
+              pre
+                span.grey-500  /* Square field w/ icon */
+      .divider 
+        label 5.5
+      .section-content
+        section.contextual-elements
+        .subsection-title Contextual Elements
+        .subsection-description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id massa et libero condimentum dignissim at ut odio. Aliquam placerat libero metus, et fringilla nisl dictum vitae. Sed at lacus eu risus fermentum consequat.
+       .indent-container
+        .example-block
+          .call-out.first-call-out
+            strong.icon +
+            strong mp-tooltip
+          .common-example
+            //- Component: mp-tooltip
+
+        //- Pending Addition: Warning tooltip
+        //- .example-block
+        //-   .call-out
+        //-     strong Warning-Tip
+        //-   .common-example
+        //-     //- Insert mp-tooltip red
+
+        .example-block
+          .call-out
+            strong mp-tooltip 
+            p (attrs={placement: 'left'})
+          .common-example
+            //- Component: mp-tooltip(attrs={placement: 'left'})
+            //- Component: mp-tooltip(attrs={placement: 'bottom'})
+            //- Component: mp-tooltip(attrs={placement: 'right'})
+
+        //- Pending Addition: Extended data hover-tips
+        //- .example-block
+        //-   .call-out.first-call-out
+        //-     strong.icon +
+        //-     strong Hover: 
+        //-     p Extended
+        //-   .common-example
+        //-     //- Insert tooltip component, showing without hover
+        //-   .call-out
+        //-     strong Hover: 
+        //-     p Complete
+        //-   .common-example
+        //-     //- Insert tooltip component, showing without hover
+        //-   .call-out
+        //-     strong Hover: 
+        //-     p Metadata
+        //-   .common-example
+        //-     //- Insert tooltip component, showing without hover
+
+        .example-block.full-width
+          .call-out.first-call-out
+            strong.icon +
+            strong mp-tag
+          .common-example
+            mp-tag(
+              attrs={
+                clickable: true,
+                'tag-name': 'Segmentation',
+                removable: true
+              }
+            )
+        .example-block.full-width
+          .call-out.first-call-out
+            strong.icon +
+            strong mp-spinner
+          .common-example.spinner-zoom
+            mp-spinner
+        .code-snippet
+          .call-out.first-call-out
+            strong.icon +
+            strong Example Code
+          .snippet-container.min.max
+            .snippet-header
+              label Jade
+            .code-field
+              pre
+                | 1
+                br
+                | 2
+                br
+                | 3
+                br
+                | 4
+                br
+                | 5
+                br
+                | 6
+                br
+                | 7
+                br
+                | 8
+              pre
+                span.grey-500  /* Tooltips */
+                br
+                br
+                span.grey-500  /* Tags */
+                br
+                span.mp-red  mp-tag
+                span.mp-purple (attrs={clickable: true, 'tag-name': 'Name', removable: true})
+                br
+                br
+                span.grey-500  /* Spinner(s) */
+                br
+                b  .custom-size-class
+                br
+                span.mp-red     mp-spinner
