@@ -13,8 +13,8 @@ import './components/colors';
 import './components/typography';
 import './components/iconography';
 import './components/buttons';
-import './components/contextual';
-import './components/resources';
+import './components/components';
+import './components/widgets';
 
 import template from './index.jade';
 import './index.styl';
@@ -25,7 +25,7 @@ document.registerElement('style-guide', class extends Component {
       defaultState: {
         COLORS,
         SVG_ICONS,
-        sectionOpen: null,
+        sectionOpen: 'buttons',
         subSectionOpen: null,
         sectionFilter: null,
       },

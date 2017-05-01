@@ -3,7 +3,7 @@ import { Component } from 'panel';
 import template from './index.jade';
 import './index.styl';
 
-document.registerElement('resources-section', class extends Component {
+document.registerElement('widgets-section', class extends Component {
   get config() {
     return {
       helpers: {
