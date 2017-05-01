@@ -216,7 +216,9 @@ section
   border-radius 6px
   font-size-medium()
   margin-top 30px
-  position relative
+  width 90%
+  display inline-flex
+  flex-direction column
 
 .snippet-header
   color grey-700
@@ -236,8 +238,7 @@ section
   font-weight 500
   margin 0 0 0 45px
   padding 15px
-  // white-space nowrap
-  // overflow scroll
+  display inline-flex
   pre
     color grey-900
     display inline-block
@@ -246,8 +247,11 @@ section
     margin -2px 0 0 -45px
     white-space pre-wrap
     &:nth-child(2n)
-      margin-left 45px
-      // white-space nowrap
+      overflow scroll
+      white-space nowrap
+      margin-left 40px
+      width 100%
+
 pre
   span.mp-red
     color mp-red
