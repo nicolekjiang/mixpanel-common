@@ -155,28 +155,6 @@ icon-size(size=none, pos-left=0, pos-top=0)
           box-shadow none
           content-color(alpha(white, 0.6))
 
-    &.purple
-      border-color purple-700
-      content-color(white)
-      &.small
-        background-color mp-purple
-      &.large
-        background-image linear-gradient(0deg, mp-purple 0, purple-300 100%)
-
-      &:hover{not-disabled}
-        &.small
-          background-color purple-300
-        &.large
-          background-image linear-gradient(0deg, purple-300 0, purple-300 100%)
-
-      &:active{not-disabled}, &.active{not-disabled}
-        box-shadow 0 1px 1px 0 alpha(black, 0.0), inset 0 2px 2px 0 alpha(black, 0.2)
-        content-color(alpha(white, 0.6))
-        &.small
-          background-color mp-purple
-        &.large
-          background-image linear-gradient(0deg, mp-purple 0, purple-300 100%)
-
     &.red
       border-color red-700
       content-color(white)
@@ -186,6 +164,7 @@ icon-size(size=none, pos-left=0, pos-top=0)
         background-image linear-gradient(0deg, mp-red 0, red-300 100%)
 
       &:hover{not-disabled}
+        box-shadow 0 1.5px 2.5px 0 alpha(black, 0.3)
         &.small
           background-color red-300
         &.large
