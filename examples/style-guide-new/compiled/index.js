@@ -17975,8 +17975,11 @@
 	      }
 
 	      if (!this.isRange) {
+	        this.picker.setStartRange(null);
+	        this.picker.setEndRange(null);
 	        this.picker.setDate(this.selectedDate ? this.parseDate(this.selectedDate) : null, /* preventOnSelect= */true);
 	      } else {
+	        this.picker.setDate(null);
 	        this.picker.setStartRange(this.selectedFromDate ? this.parseDate(this.selectedFromDate) : null);
 	        this.picker.setEndRange(this.selectedToDate ? this.parseDate(this.selectedToDate) : null);
 	      }
