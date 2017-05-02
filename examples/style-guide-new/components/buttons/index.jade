@@ -335,12 +335,32 @@ include ../mixins.jade
             .call-out
               strong Drop Button
             .common-example
-              //- Text + Down Caret (icon) drop menu
+              .drop-menu-button(on={click: () => $helpers.toggleMenu('dropMenu')})
+                svg-icon(attrs={icon: 'caret-down'})
+              .drop-menu-container
+                mp-drop-menu(
+                  attrs={open: open.dropMenu}
+                  on={change: e => $helpers.handleModalChange('dropMenu', e.detail.state)}
+                )
+                  .text-container
+                    mp-list-item Drop menu option 1
+                    mp-list-item Drop menu option 2
+                    mp-list-item Drop menu option 3
           .example-block
             .call-out
               strong Overflow Menu
             .common-example
-              //- Insert overflow icon with drop menu
+              .overflow-menu-button(on={click: () => $helpers.toggleMenu('overflowMenu')})
+                svg-icon(attrs={icon: 'ellipsis'})
+              .drop-menu-container
+                mp-drop-menu(
+                  attrs={open: open.overflowMenu}
+                  on={change: e => $helpers.handleModalChange('overflowMenu', e.detail.state)}
+                )
+                  .text-container
+                    mp-list-item Overflow option 1
+                    mp-list-item Overflow option 2
+                    mp-list-item Overflow option 3
           
           //- Pending Addition: Small circle button with icon / text
           //- .example-block.full-width

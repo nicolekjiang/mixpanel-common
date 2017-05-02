@@ -24,7 +24,7 @@ include ../mixins.jade
             strong Search: 
             p Square
           .common-example
-            //- Component: .mp-icon-input
+            input(attrs={type: 'text', placeholder: "I'm a placeholder"})
 
         //- Pending Addition: error state for square field
         //- .example-block
@@ -116,6 +116,7 @@ include ../mixins.jade
             strong.icon +
             strong mp-modal
             p .modal 
+          //- TODO not what the modal looks like
           .example-card.long    
             .example-card-header 
               b Modal Header Text   
@@ -124,7 +125,20 @@ include ../mixins.jade
             span.mp-font-size-large while preserving the state of content.
           .demo-divider
             //- this not working...
-            a(on={click: () => $helpers.openModal('modal')}) View Demo 
+            a(on={click: () => $helpers.openModal('modal')}) View Demo
+            mp-modal.modal(
+              attrs={closeable: true, open: open.modal}
+              on={change: e => $helpers.handleModalChange('modal', e.detail.state)}
+            )
+              div
+                //- TODO needs styling
+                .mp-modal-content
+                  .mp-modal-title Easily track events
+                  .mp-modal-subtitle Click on any element on your page (e.g. the buy button) to create an event and access all historical data for that event.
+                mp-button-bar.mp-button-bar-primary(
+                  on={click: () => $helpers.closeModal('modal')}
+                  attrs={'arrow-next': true}
+                ) Create your first event
         .example-block
           .call-out.first-call-out
             strong.icon +
@@ -139,6 +153,16 @@ include ../mixins.jade
           .demo-divider
             //- this not working...
             a(on={click: () => $helpers.openModal('confirm')}) View Demo 
+            mp-confirm(
+              attrs={open: open.confirm}
+              on={
+                change: e => $helpers.handleModalChange('confirm', e.detail.state),
+                submit: e => console.log(e.detail),
+              }
+            )
+              div
+                .mp-confirm-title Unsaved changes
+                .mp-confirm-description If you navigate away from this page you will lose your changes. Would you like to continue?
         .code-snippet
           .call-out.first-call-out
             strong.icon +
@@ -220,12 +244,54 @@ include ../mixins.jade
             strong.icon +
             strong mp-upsell-popup
           .common-example
+            for feature in ['custom-events', 'date-range', 'export-csv', 'filter-levels', 'bookmark-maximum', 'default']
+              mp-button.mp-button-secondary(
+                attrs={size: 'small'} 
+                on={click: () => $helpers.openModal(feature)}
+              ) #{feature}
+              mp-upsell-popup(
+                attrs={feature, open: open[feature]} 
+                style={position: 'absolute', left: '0px'}
+                on={change: e => $helpers.handleModalChange(feature, e.detail.state)}
+              )
             //- Component: mp-upsell-popup
-        .example-block
+        .example-block.full-width
           .call-out
             strong mp-alert
           .common-example
-            //- Component: mp-alert
+            mp-button.mp-button-secondary(
+              attrs={size: 'small'}
+              on={click: () => $helpers.openModal('alert')}
+            ) Open alert
+            mp-alert(
+              attrs={id: 'alert', closeable: true, open: open['alert']}
+              on={change: e => $helpers.handleModalChange('alert', e.detail.state)}
+              style={position: 'absolute'}
+            )
+              div
+                .text Basic Alert Message
+            mp-button.mp-button-secondary(
+              attrs={size: 'small'}
+              on={click: () => $helpers.openModal('alert-not-fullscreen')}
+            ) Open alert not fullscreen
+            mp-alert(
+              attrs={id: 'alert-not-fullscreen', closeable: true, open: open['alert-not-fullscreen'], 'not-fullscreen': true}
+              on={change: e => $helpers.handleModalChange('alert-not-fullscreen', e.detail.state)}
+              style={position: 'absolute'}
+            )
+              div
+                .text Alert Not Fullscreen
+            mp-button.mp-button-secondary(
+              attrs={size: 'small'}
+              on={click: () => $helpers.openModal('alert-large-icon')}
+            ) Alert large icon
+            mp-alert(
+              attrs={id: 'alert-large-icon', closeable: true, open: open['alert-large-icon']}
+              on={change: e => $helpers.handleModalChange('alert-large-icon', e.detail.state)}
+              style={position: 'absolute'}
+            )
+              div
+                .text Alert Large Icon
         
         //- Pending Addition: dark warning with atomic bomb icon
         //- .example-block.full-width
@@ -249,10 +315,49 @@ include ../mixins.jade
             .example-block.full-width
               //- Component: mp-tutorial-tooltip
             .demo-divider
-              a Down
-              a Left
-              a Right
-              a Up
+              a(
+                on={click: () => $helpers.toggleTutorialTooltip('bottom')}
+                style={position: 'relative'}
+              ) Down
+                mp-tutorial-tooltip(
+                  attrs={
+                    hide: !open.tutorialTooltip.bottom,
+                    placement: 'bottom',
+                    'num-steps': 4,
+                  }
+                ) Bottom Tooltip with 4 steps
+              a(
+                on={click: () => $helpers.toggleTutorialTooltip('left')}
+                style={position: 'relative'}
+              ) Left
+                mp-tutorial-tooltip(
+                  attrs={
+                    hide: !open.tutorialTooltip.left,
+                    placement: 'left',
+                    'num-steps': 4,
+                  }
+                ) Left Tooltip with 4 steps
+              a(
+                on={click: () => $helpers.toggleTutorialTooltip('right')}
+                style={position: 'relative'}
+              ) Right
+                mp-tutorial-tooltip(
+                  attrs={
+                    hide: !open.tutorialTooltip.right,
+                    placement: 'right',
+                    'num-steps': 4,
+                  }
+                ) Right Tooltip with 4 steps
+              a(
+                on={click: () => $helpers.toggleTutorialTooltip('top')}
+                style={position: 'relative'}
+              ) Top
+                mp-tutorial-tooltip(
+                  attrs={
+                    hide: !open.tutorialTooltip.top,
+                    'num-steps': 4,
+                  }
+                ) Default Top Tooltip with 4 steps
         .code-snippet
           .call-out.first-call-out
             strong.icon +
@@ -271,14 +376,6 @@ include ../mixins.jade
         section.contextual-elements
         .subsection-title Contextual Elements
         .subsection-description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id massa et libero condimentum dignissim at ut odio. Aliquam placerat libero metus, et fringilla nisl dictum vitae. Sed at lacus eu risus fermentum consequat.
-       .indent-container
-        .example-block
-          .call-out.first-call-out
-            strong.icon +
-            strong mp-tooltip
-          .common-example
-            //- Component: mp-tooltip
-
         //- Pending Addition: Warning tooltip
         //- .example-block
         //-   .call-out
@@ -291,9 +388,26 @@ include ../mixins.jade
             strong mp-tooltip 
             p (attrs={placement: 'left'})
           .common-example
-            //- Component: mp-tooltip(attrs={placement: 'left'})
-            //- Component: mp-tooltip(attrs={placement: 'bottom'})
-            //- Component: mp-tooltip(attrs={placement: 'right'})
+            .tooltips-container
+              a.tooltip-container Default (placement 'top') tooltip
+                mp-tooltip Tooltip above the element
+
+              a.tooltip-container Placement 'bottom' tooltip
+                mp-tooltip(attrs={placement: 'bottom'}) Tooltip below the element
+
+              a.tooltip-container Placement 'left' tooltip
+                mp-tooltip(attrs={placement: 'left'}) Tooltip on the left side of element
+
+              a.tooltip-container Placement 'right' tooltip
+                mp-tooltip(attrs={placement: 'right'}) Tooltip on the right side of element
+
+              a.tooltip-container Multi-line tooltip
+                mp-tooltip.multiline
+                  span This is a long tooltip with text that spans multiple lines
+
+              a.tooltip-container.position-relative Tooltip with non-statically positioned parent element
+                mp-tooltip
+                  span A tooltip
 
         //- Pending Addition: Extended data hover-tips
         //- .example-block

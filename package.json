@@ -14,7 +14,8 @@
     "test": "npm run lint && npm run build-test && wct --plugin local",
     "test-p": "npm run build-test && wct --plugin local --persistent",
     "test-sauce": "npm run lint && npm run build-test && wct --plugin sauce",
-    "unit-test": "npm run lint && mocha --require babel-core/register test/util/"
+    "unit-test": "npm run lint && mocha --require babel-core/register test/util/",
+    "validate": "npm ls"
   },
   "repository": {
     "type": "git",
