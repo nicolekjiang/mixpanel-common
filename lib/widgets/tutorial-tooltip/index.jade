@@ -1,7 +1,8 @@
+- const arrowAlign = $component.getAttribute('arrow-align')
 - const hide = $component.isAttributeEnabled('hide')
 - const hideFooter = $component.isAttributeEnabled('hide-footer')
 - const placement = $component.getAttribute('placement')
-- const arrowAlign = $component.getAttribute('arrow-align')
+- const showNext = $component.isAttributeEnabled('next-button')
 
 .mp-tutorial-tooltip-stage
   if !hide
@@ -19,8 +20,14 @@
           svg-icon(attrs={icon: 'x'})
       if !$component.isAttributeEnabled('hide-footer')
         .mp-tutorial-tooltip-footer
+          - const steps = $helpers.getSteps()
           ul.mp-tutorial-tooltip-steps
-            each step in $helpers.getSteps()
+            each step in steps
               li.mp-tutorial-tooltip-step(class={
                 'mp-tutorial-tooltip-active': step === currStep,
               })
+          if showNext
+            if currStep < steps.length - 1
+              .mp-tutorial-tooltip-next(on={click: $helpers.next}) next
+            else
+              .mp-tutorial-tooltip-done(on={click: $helpers.close}) ok, got it
