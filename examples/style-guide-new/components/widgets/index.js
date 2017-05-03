@@ -9,6 +9,7 @@ document.registerElement('widgets-section', class extends Component {
   get config() {
     return {
       defaultState: {
+        currentBookmark: `default`,
         bookmarks,
         savingBookmark: false,
         selectedBookmarkId: null,
@@ -86,6 +87,12 @@ document.registerElement('widgets-section', class extends Component {
           this.state.open.tagSelector = false;
           this.update();
         },
+        toggleBookmarkType: type => {
+          const bookmark = this.el.querySelector(`mp-bookmarks-widget`);
+          setTimeout(() => bookmark.setAttribute(`open`, true), 200);
+          const currentBookmark = type;
+          this.update({currentBookmark});
+        }
       },
       template,
     };
