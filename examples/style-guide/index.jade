@@ -399,16 +399,17 @@
             keydown: $helpers.handleItemsMenuKeydown,
           }
         )
-        if open.itemsMenu
-          .drop-menu-container
-            mp-drop-menu(
-              attrs={open: true}
-              on={change: e => $helpers.handleModalChange('itemMenu', e.detail.state)}
+        .drop-menu-container
+          mp-drop-menu(
+            attrs={open: open.itemsMenu}
+            on={change: e => $helpers.handleModalChange('itemMenu', e.detail.state)}
+          )
+            mp-items-menu(
+              attrs={
+                'search-filter': itemsMenuSearchFilter,
+                'sections': JSON.stringify($helpers.getItemsMenuSections()),
+              },
             )
-              mp-items-menu(
-                attrs={'search-filter': itemsMenuSearchFilter},
-                props={sections: $helpers.getItemsMenuSections()}
-              )
 
     p
       h2 Regular Bookmark
