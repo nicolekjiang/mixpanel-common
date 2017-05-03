@@ -3,10 +3,13 @@
 )
   - const sections = $helpers.getSections()
   if !sections.length
-    li.list-option.list-empty Your search returned no results
+    if searchFilter
+      li.list-option.list-empty Your search returned no results
+    else if emptyMessage
+      li.list-option.list-empty= emptyMessage
   else
     each section, idx in sections
-      if idx
+      if idx > 0
         .section-divider
       if section.label
         .section-label= section.label
