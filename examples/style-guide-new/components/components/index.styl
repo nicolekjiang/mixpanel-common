@@ -2,14 +2,14 @@
 @import '../../../../build/stylesheets/mixins/common.styl'
 
 .common-example
-  mp-toast
+  mp-toast, mp-upsell-popup, mp-alert
     margin 10px 10px 0 10px !important
 
 .example-block	
   > p.desc
     margin 25px 0 35px 0
     padding 0
-    font-size-xl()  //- this line isn't working. Added class to markup instead.
+    font-size-large()
 
 .spinner-zoom
   width 75px
@@ -24,6 +24,11 @@
 mp-tooltip.multiline span
   max-width 200px
 
+.tooltip-example.placement-left
+  margin-right 15px
+.tooltip-example.placement-bottom
+  margin-right 15px
+  
 .tutorial-tooltips-container
   position relative
   display flex
@@ -87,3 +92,6 @@ mp-tooltip.multiline span
     margin-top -5px
     right 100%
     top 50%
+
+.tooltips-container
+  display inline-flex !important
