@@ -32,12 +32,16 @@ include ../mixins.jade
                 'user-id': 1,
                 'has-write-permissions': true,
                 'open': true,
+                'over-free-limit': currentBookmark == 'pricing' ? true : false,
               }
               on={
                 change: $helpers.handleBookmarksMenuChange,
                 submit: $helpers.handleBookmarksMenuSubmit,
               }
             )
+        .demo-divider
+          a(on={click: () => $helpers.toggleBookmarkType('default')}) Default
+          a(on={click: () => $helpers.toggleBookmarkType('pricing')}) Pricing restricted
         .example-block.full-width
           .call-out.first-call-out
             strong mp-tag-selector
