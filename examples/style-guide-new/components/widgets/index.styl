@@ -1,0 +1,48 @@
+@import '../../../../build/stylesheets/defaults/index.css'
+@import '../../../../build/stylesheets/mixins/common.styl'
+
+.bookmarks-widget
+  background-color grey-100
+  border 1px solid grey-300
+  display flex
+  flex-direction row
+  height 54px
+  justify-content flex-end
+  margin-bottom 420px
+  width 90%
+
+  mp-bookmarks-widget
+    border-left 1px solid grey-200
+    border-right 1px solid grey-200
+    margin-right 20px
+
+.tag-selector-container
+  position relative
+  margin-bottom 250px
+
+  mp-drop-menu
+    top 40px
+
+  .title
+    padding-top 20px
+
+    .header
+      display flex
+      margin-left 18px
+      svg-icon-style(base-color: green-300)
+
+      .header-text
+        color grey-900
+        display inline-block
+        font-size-large()
+        font-weight weight-bold
+        line-height 1.12
+        margin auto 0
+        padding-left 10px
+
+    .subtext
+      color grey-500
+      font-size-default()
+      font-weight weight-medium
+      line-height 1.5
+      margin 0 0 20px 50px

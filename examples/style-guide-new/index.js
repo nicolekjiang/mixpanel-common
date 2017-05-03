@@ -25,18 +25,19 @@ document.registerElement('style-guide', class extends Component {
       defaultState: {
         COLORS,
         SVG_ICONS,
-        sectionOpen: 'components',
+        sectionOpen: 'widgets',
         subSectionOpen: null,
         sectionFilter: null,
         open: {
+          alert: true,
+          confirm: false,
           dropMenu: false,
           modal: false,
-          confirm: false,
-          alert: true,
-          upsell: true,
+          tagSelector: true,
           tutorialTooltip: {
             top: true,
           },
+          upsell: true,
         },
       },
       helpers: {
