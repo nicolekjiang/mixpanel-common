@@ -32,8 +32,11 @@ document.registerElement('style-guide', class extends Component {
           dropMenu: false,
           modal: false,
           confirm: false,
-          alert: false,
-          tutorialTooltip: {},
+          alert: true,
+          upsell: true,
+          tutorialTooltip: {
+            top: true,
+          },
         },
       },
       helpers: {

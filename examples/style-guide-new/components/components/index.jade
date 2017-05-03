@@ -154,7 +154,6 @@ include ../mixins.jade
             span.bold a decision is required.
             span.mp-font-size-large  An example would be any time a user makes a potentially irreversable action, you could display a dialogue to get confirmation and explain the reprocussions.
           .demo-divider
-            //- this not working...
             a(on={click: () => $helpers.openModal('confirm')}) View Demo 
             mp-confirm(
               attrs={open: open.confirm}
@@ -247,23 +246,32 @@ include ../mixins.jade
             strong.icon +
             strong mp-upsell-popup
           .common-example(style={width: '280px', height: '76px'})
+            a(
+              on={click: () => $helpers.openModal('upsell')}
+              style={position: 'absolute'}
+            ) Re-Open
             mp-upsell-popup(
-              attrs={feature: 'default', open: true} 
+              attrs={feature: 'default', open: open.upsell} 
               style={position: 'relative'}
-              on={change: e => $helpers.handleModalChange(feature, e.detail.state)}
+              on={change: e => $helpers.handleModalChange('upsell', e.detail.state)}
             )
         .example-block
           .call-out
             strong mp-alert
           .common-example
+            a(
+              on={click: () => $helpers.openModal('alert')}
+              style={position: 'absolute'}
+            ) Re-Open
             mp-alert(
               attrs={
                 id: 'alert-not-fullscreen', 
                 closeable: true, 
-                open: true, 
+                open: open.alert, 
                 'not-fullscreen': true, 
               }
               style={position: 'relative'}
+              on={change: e => $helpers.handleModalChange('alert', e.detail.state)}
             )
               div
                 .text Alert Not Fullscreen
@@ -288,86 +296,55 @@ include ../mixins.jade
             strong mp-tutorial-tooltip
             .example-block.full-width
               .tutorial-tooltips-container
-                .tutorial-tooltip-container
-                  .tutorial-tooltip-focus(style={top: '-90px'})
-                    mp-tutorial-tooltip(
-                      attrs={
-                        hide: false,
-                        placement: 'bottom',
-                        'num-steps': 4,
-                      }
-                    ) Bottom Tooltip with 4 steps
-                .tutorial-tooltip-container
-                  .tutorial-tooltip-focus(style={left: '224px'})
-                    mp-tutorial-tooltip(
-                      attrs={
-                        hide: false,
-                        placement: 'left',
-                        'num-steps': 4,
-                      }
-                    ) Left Tooltip with 4 steps
-                .tutorial-tooltip-container
-                  .tutorial-tooltip-focus(style={left: '-222px'})
-                    mp-tutorial-tooltip(
-                      attrs={
-                        hide: false,
-                        placement: 'right',
-                        'num-steps': 4,
-                      }
-                    ) Right Tooltip with 4 steps
-                .tutorial-tooltip-container
-                  .tutorial-tooltip-focus(style={top: '90px'})
-                    mp-tutorial-tooltip(
-                      attrs={
-                        hide: false,
-                        'num-steps': 4,
-                      }
-                    ) Default Top Tooltip with 4 steps
-                //- Component: mp-tutorial-tooltip
+                .tutorial-tooltip-focus(style={top: '-90px'})
+                  mp-tutorial-tooltip(
+                    attrs={
+                      hide: !open.tutorialTooltip.bottom,
+                      placement: 'bottom',
+                      'num-steps': 4,
+                    }
+                  ) Bottom Tooltip with 4 steps
+                .tutorial-tooltip-focus(style={left: '224px'})
+                  mp-tutorial-tooltip(
+                    attrs={
+                      hide: !open.tutorialTooltip.left,
+                      placement: 'left',
+                      'num-steps': 4,
+                    }
+                  ) Left Tooltip with 4 steps
+                .tutorial-tooltip-focus(style={left: '-222px'})
+                  mp-tutorial-tooltip(
+                    attrs={
+                      hide: !open.tutorialTooltip.right,
+                      placement: 'right',
+                      'num-steps': 4,
+                    }
+                  ) Right Tooltip with 4 steps
+                .tutorial-tooltip-focus(style={top: '90px'})
+                  mp-tutorial-tooltip(
+                    attrs={
+                      hide: !open.tutorialTooltip.top,
+                      'num-steps': 4,
+                    }
+                  ) Default Top Tooltip with 4 steps
+              //- Component: mp-tutorial-tooltip
             .demo-divider
               a(
                 on={click: () => $helpers.toggleTutorialTooltip('bottom')}
                 style={position: 'relative'}
               ) Down
-                mp-tutorial-tooltip(
-                  attrs={
-                    hide: !open.tutorialTooltip.bottom,
-                    placement: 'bottom',
-                    'num-steps': 4,
-                  }
-                ) Bottom Tooltip with 4 steps
               a(
                 on={click: () => $helpers.toggleTutorialTooltip('left')}
                 style={position: 'relative'}
               ) Left
-                mp-tutorial-tooltip(
-                  attrs={
-                    hide: !open.tutorialTooltip.left,
-                    placement: 'left',
-                    'num-steps': 4,
-                  }
-                ) Left Tooltip with 4 steps
               a(
                 on={click: () => $helpers.toggleTutorialTooltip('right')}
                 style={position: 'relative'}
               ) Right
-                mp-tutorial-tooltip(
-                  attrs={
-                    hide: !open.tutorialTooltip.right,
-                    placement: 'right',
-                    'num-steps': 4,
-                  }
-                ) Right Tooltip with 4 steps
               a(
                 on={click: () => $helpers.toggleTutorialTooltip('top')}
                 style={position: 'relative'}
               ) Top
-                mp-tutorial-tooltip(
-                  attrs={
-                    hide: !open.tutorialTooltip.top,
-                    'num-steps': 4,
-                  }
-                ) Default Top Tooltip with 4 steps
         .code-snippet
           .call-out.first-call-out
             strong.icon +
