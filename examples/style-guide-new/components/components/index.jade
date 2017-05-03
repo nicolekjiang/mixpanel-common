@@ -327,7 +327,6 @@ include ../mixins.jade
                       'num-steps': 4,
                     }
                   ) Default Top Tooltip with 4 steps
-              //- Component: mp-tutorial-tooltip
             .demo-divider
               a(
                 on={click: () => $helpers.toggleTutorialTooltip('bottom')}
@@ -372,29 +371,18 @@ include ../mixins.jade
 
         .example-block
           .call-out
+            strong mp-tooltip
+          .common-example
+            .tooltips-container
+              .tooltip-example tooltip above the element
+
+        .example-block
+          .call-out
             strong mp-tooltip 
             p (attrs={placement: 'left'})
           .common-example
             .tooltips-container
-              a.tooltip-container Default (placement 'top') tooltip
-                mp-tooltip Tooltip above the element
-
-              a.tooltip-container Placement 'bottom' tooltip
-                mp-tooltip(attrs={placement: 'bottom'}) Tooltip below the element
-
-              a.tooltip-container Placement 'left' tooltip
-                mp-tooltip(attrs={placement: 'left'}) Tooltip on the left side of element
-
-              a.tooltip-container Placement 'right' tooltip
-                mp-tooltip(attrs={placement: 'right'}) Tooltip on the right side of element
-
-              a.tooltip-container Multi-line tooltip
-                mp-tooltip.multiline
-                  span This is a long tooltip with text that spans multiple lines
-
-              a.tooltip-container.position-relative Tooltip with non-statically positioned parent element
-                mp-tooltip
-                  span A tooltip
+              .tooltip-example.placement-left tooltip left of the element
 
         //- Pending Addition: Extended data hover-tips
         //- .example-block
