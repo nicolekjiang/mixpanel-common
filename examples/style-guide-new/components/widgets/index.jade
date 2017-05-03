@@ -44,6 +44,7 @@ include ../mixins.jade
           a(on={click: () => $helpers.toggleBookmarkType('pricing')}) Pricing restricted
         .example-block.full-width
           .call-out.first-call-out
+            strong.icon +
             strong mp-tag-selector
           .tag-selector-container
             mp-button.mp-button-secondary(on={click: $helpers.toggleTagSelector}) Edit tags
@@ -70,32 +71,33 @@ include ../mixins.jade
     .subsection-title Calendar Widgets
     .subsection-description These UI components are containers that will interrupt the current flow, by displaying on top of the page content.
     .indent-container
-      .example-block.full-width
-        .call-out.first-call-out
-          strong.icon +
-          strong mp-calendar 
-          p single calendar
-        .calendar-container
-          mp-calendar(
-            attrs={
-              'min-date': `2015-06-10`,
-              'max-date': `2016-01-20`,
-              'selected-date': `2016-01-15`,
-            }
-          )
-      .example-block.full-width
+      .example-block
         .call-out.first-call-out
           strong.icon +
           strong mp-calendar 
           p double calendar
-        .calendar-container
-         mp-calendar(
-           attrs={
-             'is-double-calendar': true,
-             'is-range': true,
-             'min-date': `2015-12-10`,
-             'max-date': `2016-03-20`,
-             'selected-from-date': `2015-12-25`,
-             'selected-to-date': `2016-03-15`,
-           }
-         )
+        .example-card
+          .calendar-container
+           mp-calendar(
+             attrs={
+               'is-double-calendar': true,
+               'is-range': true,
+               'min-date': `2015-12-10`,
+               'max-date': `2016-03-20`,
+               'selected-from-date': `2015-12-25`,
+               'selected-to-date': `2016-03-15`,
+             }
+           )
+      .example-block
+        .call-out
+          strong mp-calendar 
+          p single calendar
+        .example-card
+          .calendar-container
+            mp-calendar(
+              attrs={
+                'min-date': `2015-06-10`,
+                'max-date': `2016-01-20`,
+                'selected-date': `2016-01-15`,
+              }
+            )
