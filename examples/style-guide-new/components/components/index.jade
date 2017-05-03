@@ -134,7 +134,6 @@ include ../mixins.jade
               on={change: e => $helpers.handleModalChange('modal', e.detail.state)}
             )
               div
-                //- TODO needs styling
                 .mp-modal-content
                   .mp-modal-title Easily track events
                   .mp-modal-subtitle Click on any element on your page (e.g. the buy button) to create an event and access all historical data for that event.
@@ -371,6 +370,7 @@ include ../mixins.jade
 
         .example-block
           .call-out
+            strong.icon +
             strong mp-tooltip
           .common-example
             .tooltips-container
@@ -447,6 +447,11 @@ include ../mixins.jade
                 | 8
               pre
                 span.grey-500  /* Tooltips */
+                br
+                |  .tooltip-parent-div
+                br
+                span.mp-red     mp-tooltip
+                span.mp-purple (attrs={placement: 'top'}) Tooltip Text
                 br
                 br
                 span.grey-500  /* Tags */
