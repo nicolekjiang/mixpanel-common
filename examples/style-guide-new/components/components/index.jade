@@ -36,9 +36,8 @@ include ../mixins.jade
         //-   .common-example
         //-      //- Insert component
 
-        .example-block.full-width
-          .call-out.first-call-out
-            strong.icon +
+        .example-block
+          .call-out
             strong mp-input-group
           .common-example
             mp-input-group(
@@ -123,7 +122,7 @@ include ../mixins.jade
           .example-card.long    
             .example-card-header 
               b Modal Header Text   
-          p.desc.mp-font-size-large Modals have blue header bars and should be presented when the user needs to complete a task that the current interface does not support. For example: a button to invite teammates might present a modal including a search field and a list of names to choose from. These are specifically great for 
+          p.desc Modals have blue header bars and should be presented when the user needs to complete a task that the current interface does not support. For example: a button to invite teammates might present a modal including a search field and a list of names to choose from. These are specifically great for 
             span.bold presenting new flows 
             span.mp-font-size-large while preserving the state of content.
           .demo-divider
@@ -244,7 +243,7 @@ include ../mixins.jade
           .call-out.first-call-out
             strong.icon +
             strong mp-upsell-popup
-          .common-example(style={width: '280px', height: '76px'})
+          .common-example
             a(
               on={click: () => $helpers.openModal('upsell')}
               style={position: 'absolute'}
@@ -367,14 +366,14 @@ include ../mixins.jade
         //-     strong Warning-Tip
         //-   .common-example
         //-     //- Insert mp-tooltip red
-
+       .indent-container
         .example-block
           .call-out
             strong.icon +
             strong mp-tooltip
           .common-example
             .tooltips-container
-              .tooltip-example tooltip above the element
+              .tooltip-example.placement-top tooltip 
 
         .example-block
           .call-out
@@ -382,7 +381,9 @@ include ../mixins.jade
             p (attrs={placement: 'left'})
           .common-example
             .tooltips-container
-              .tooltip-example.placement-left tooltip left of the element
+              .tooltip-example.placement-left left
+              .tooltip-example.placement-bottom bottom
+              .tooltip-example.placement-right right
 
         //- Pending Addition: Extended data hover-tips
         //- .example-block
