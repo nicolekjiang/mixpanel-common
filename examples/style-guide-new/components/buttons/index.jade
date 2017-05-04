@@ -39,13 +39,12 @@ include ../mixins.jade
         .example-block.full-width
           .call-out.first-call-out
             strong.icon +
-            strong .mp-button-secondary 
-            p (attrs={disabled: true})
+            strong Disabled
           .common-example
             mp-button.mp-button-secondary(attrs={disabled: true}) Secondary
             mp-button.mp-button-primary(attrs={disabled: true}) Primary
             mp-button.mp-button-red(attrs={disabled: true}) Caution
-        .example-block
+        .example-block.full-width
           .call-out.first-call-out
             strong.icon +
             strong .mp-button-on-blue
@@ -67,7 +66,6 @@ include ../mixins.jade
         .example-block
           .call-out
             strong .mp-button-secondary 
-            p (attrs={size: 'small'})
           .common-example
             mp-button.mp-button-secondary(attrs={size: 'small'}) Secondary (SM)
             mp-button.mp-button-secondary(attrs={size: 'small', icon: 'logout'}) Icon
@@ -75,7 +73,6 @@ include ../mixins.jade
         .example-block
           .call-out
             strong .mp-button-red 
-            p (attrs={disabled: true})
           .common-example
             mp-button.mp-button-red(attrs={size: 'small'}) Caution (SM)
             mp-button.mp-button-red(attrs={size: 'small', icon: 'trashcan'}) Icon
@@ -164,7 +161,6 @@ include ../mixins.jade
         .example-block.half
           .call-out
             strong .mp-button-bar 
-            p (attrs={'arrow-next': true})
           .example-card.narrow.mp-button-bar-container
             mp-button-bar.mp-button-bar-primary(attrs={'arrow-next': true}) Button-bar icon
         .code-snippet
@@ -224,7 +220,7 @@ include ../mixins.jade
               mp-toggle-option(attrs={value: 'option1'}) Pears
               mp-toggle-option(attrs={value: 'option2'}) Peaches
               mp-toggle-option(attrs={value: 'option3'}) Plums
-        .example-block
+        .example-block.full-width
           .call-out.first-call-out
             strong.icon +
             strong mp-toggle
@@ -336,7 +332,7 @@ include ../mixins.jade
               strong Drop Button
             .common-example
               .drop-menu-button(on={click: () => $helpers.toggleMenu('dropMenu')})
-                a text here
+                a Link text
                 svg-icon(attrs={icon: 'caret-down'})
               .drop-menu-container
                 mp-drop-menu(
