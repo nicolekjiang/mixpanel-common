@@ -12,9 +12,9 @@ include ../mixins.jade
   //-   +section-nav-item('Dropdowns')
   //-   +section-nav-item('Toggles')
   //-   +section-nav-item('Misc')
-  .divider 
+  .divider#input-fields 
   .section-content
-    section.input-fields
+    section
       .subsection-title Input Fields
       .subsection-description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id massa et libero condimentum dignissim at ut odio. Aliquam placerat libero metus, et fringilla nisl dictum vitae. Sed at lacus eu risus fermentum consequat. 
       .indent-container
@@ -24,7 +24,10 @@ include ../mixins.jade
             strong Search: 
             p Square
           .common-example
-            //- Component: .mp-icon-input
+            .mp-icon-input
+              .mp-icon
+                svg-icon(attrs={icon: "search"})
+              input(attrs={type: 'text', placeholder: 'Some placeholder text'})
 
         //- Pending Addition: error state for square field
         //- .example-block
@@ -33,9 +36,8 @@ include ../mixins.jade
         //-   .common-example
         //-      //- Insert component
 
-        .example-block.full-width
-          .call-out.first-call-out
-            strong.icon +
+        .example-block
+          .call-out
             strong mp-input-group
           .common-example
             mp-input-group(
@@ -104,10 +106,10 @@ include ../mixins.jade
                 span.mp-red  mp-input-group
                 span.mp-purple (attrs={placeholder: "text here", busy: inputGroupSaving})
      
-      .divider 
+      .divider#modals-dialogues
         label 5.3
       .section-content
-        section.modals-dialogues
+        section
         .subsection-title Modals & Dialogues
         .subsection-description These UI components are containers that will interrupt the current flow, by displaying on top of the page content.
        .indent-container
@@ -116,15 +118,28 @@ include ../mixins.jade
             strong.icon +
             strong mp-modal
             p .modal 
+          //- TODO not what the modal looks like
           .example-card.long    
             .example-card-header 
               b Modal Header Text   
-          p.desc.mp-font-size-large Modals have blue header bars and should be presented when the user needs to complete a task that the current interface does not support. For example: a button to invite teammates might present a modal including a search field and a list of names to choose from. These are specifically great for 
+          p.desc Modals have blue header bars and should be presented when the user needs to complete a task that the current interface does not support. For example: a button to invite teammates might present a modal including a search field and a list of names to choose from. These are specifically great for 
             span.bold presenting new flows 
             span.mp-font-size-large while preserving the state of content.
           .demo-divider
             //- this not working...
-            a(on={click: () => $helpers.openModal('modal')}) View Demo 
+            a(on={click: () => $helpers.openModal('modal')}) View Demo
+            mp-modal.modal(
+              attrs={closeable: true, open: open.modal}
+              on={change: e => $helpers.handleModalChange('modal', e.detail.state)}
+            )
+              div
+                .mp-modal-content
+                  .mp-modal-title Easily track events
+                  .mp-modal-subtitle Click on any element on your page (e.g. the buy button) to create an event and access all historical data for that event.
+                mp-button-bar.mp-button-bar-primary(
+                  on={click: () => $helpers.closeModal('modal')}
+                  attrs={'arrow-next': true}
+                ) Create your first event
         .example-block
           .call-out.first-call-out
             strong.icon +
@@ -137,8 +152,17 @@ include ../mixins.jade
             span.bold a decision is required.
             span.mp-font-size-large  An example would be any time a user makes a potentially irreversable action, you could display a dialogue to get confirmation and explain the reprocussions.
           .demo-divider
-            //- this not working...
             a(on={click: () => $helpers.openModal('confirm')}) View Demo 
+            mp-confirm(
+              attrs={open: open.confirm}
+              on={
+                change: e => $helpers.handleModalChange('confirm', e.detail.state),
+                submit: e => console.log(e.detail),
+              }
+            )
+              div
+                .mp-confirm-title Unsaved changes
+                .mp-confirm-description If you navigate away from this page you will lose your changes. Would you like to continue?
         .code-snippet
           .call-out.first-call-out
             strong.icon +
@@ -208,10 +232,10 @@ include ../mixins.jade
                 br
                 span.mp-red       .mp-confirm-description
                 |  Dialogue subtext here
-      .divider 
+      .divider#popups-alerts 
         label 5.4
       .section-content
-        section.popups-alerts
+        section
         .subsection-title Pop-Ups & Alerts
         .subsection-description These UI components are containers that will interrupt the current flow, by displaying on top of the page content.
        .indent-container
@@ -220,13 +244,35 @@ include ../mixins.jade
             strong.icon +
             strong mp-upsell-popup
           .common-example
-            //- Component: mp-upsell-popup
+            a(
+              on={click: () => $helpers.openModal('upsell')}
+              style={position: 'absolute'}
+            ) Re-Open
+            mp-upsell-popup(
+              attrs={feature: 'default', open: open.upsell} 
+              style={position: 'relative'}
+              on={change: e => $helpers.handleModalChange('upsell', e.detail.state)}
+            )
         .example-block
           .call-out
             strong mp-alert
           .common-example
-            //- Component: mp-alert
-        
+            a(
+              on={click: () => $helpers.openModal('alert')}
+              style={position: 'absolute'}
+            ) Re-Open
+            mp-alert(
+              attrs={
+                id: 'alert-not-fullscreen', 
+                closeable: true, 
+                open: open.alert, 
+                'not-fullscreen': true, 
+              }
+              style={position: 'relative'}
+              on={change: e => $helpers.handleModalChange('alert', e.detail.state)}
+            )
+              div
+                .text Alert Not Fullscreen
         //- Pending Addition: dark warning with atomic bomb icon
         //- .example-block.full-width
         //-   .call-out.first-call-out
@@ -247,12 +293,55 @@ include ../mixins.jade
             strong.icon +
             strong mp-tutorial-tooltip
             .example-block.full-width
-              //- Component: mp-tutorial-tooltip
+              .tutorial-tooltips-container
+                .tutorial-tooltip-focus(style={top: '-90px'})
+                  mp-tutorial-tooltip(
+                    attrs={
+                      hide: !open.tutorialTooltip.bottom,
+                      placement: 'bottom',
+                      'num-steps': 4,
+                    }
+                  ) Bottom Tooltip with 4 steps
+                .tutorial-tooltip-focus(style={left: '224px'})
+                  mp-tutorial-tooltip(
+                    attrs={
+                      hide: !open.tutorialTooltip.left,
+                      placement: 'left',
+                      'num-steps': 4,
+                    }
+                  ) Left Tooltip with 4 steps
+                .tutorial-tooltip-focus(style={left: '-222px'})
+                  mp-tutorial-tooltip(
+                    attrs={
+                      hide: !open.tutorialTooltip.right,
+                      placement: 'right',
+                      'num-steps': 4,
+                    }
+                  ) Right Tooltip with 4 steps
+                .tutorial-tooltip-focus(style={top: '90px'})
+                  mp-tutorial-tooltip(
+                    attrs={
+                      hide: !open.tutorialTooltip.top,
+                      'num-steps': 4,
+                    }
+                  ) Default Top Tooltip with 4 steps
             .demo-divider
-              a Down
-              a Left
-              a Right
-              a Up
+              a(
+                on={click: () => $helpers.toggleTutorialTooltip('bottom')}
+                style={position: 'relative'}
+              ) Down
+              a(
+                on={click: () => $helpers.toggleTutorialTooltip('left')}
+                style={position: 'relative'}
+              ) Left
+              a(
+                on={click: () => $helpers.toggleTutorialTooltip('right')}
+                style={position: 'relative'}
+              ) Right
+              a(
+                on={click: () => $helpers.toggleTutorialTooltip('top')}
+                style={position: 'relative'}
+              ) Top
         .code-snippet
           .call-out.first-call-out
             strong.icon +
@@ -265,35 +354,36 @@ include ../mixins.jade
                 | 1
               pre
                 span.grey-500  /* Square field w/ icon */
-      .divider 
+      .divider#contextual-elements 
         label 5.5
       .section-content
-        section.contextual-elements
+        section
         .subsection-title Contextual Elements
         .subsection-description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id massa et libero condimentum dignissim at ut odio. Aliquam placerat libero metus, et fringilla nisl dictum vitae. Sed at lacus eu risus fermentum consequat.
-       .indent-container
-        .example-block
-          .call-out.first-call-out
-            strong.icon +
-            strong mp-tooltip
-          .common-example
-            //- Component: mp-tooltip
-
         //- Pending Addition: Warning tooltip
         //- .example-block
         //-   .call-out
         //-     strong Warning-Tip
         //-   .common-example
         //-     //- Insert mp-tooltip red
+       .indent-container
+        .example-block
+          .call-out
+            strong.icon +
+            strong mp-tooltip
+          .common-example
+            .tooltips-container
+              .tooltip-example.placement-top tooltip 
 
         .example-block
           .call-out
             strong mp-tooltip 
             p (attrs={placement: 'left'})
           .common-example
-            //- Component: mp-tooltip(attrs={placement: 'left'})
-            //- Component: mp-tooltip(attrs={placement: 'bottom'})
-            //- Component: mp-tooltip(attrs={placement: 'right'})
+            .tooltips-container
+              .tooltip-example.placement-left left
+              .tooltip-example.placement-bottom bottom
+              .tooltip-example.placement-right right
 
         //- Pending Addition: Extended data hover-tips
         //- .example-block
@@ -358,6 +448,11 @@ include ../mixins.jade
                 | 8
               pre
                 span.grey-500  /* Tooltips */
+                br
+                |  .tooltip-parent-div
+                br
+                span.mp-red     mp-tooltip
+                span.mp-purple (attrs={placement: 'top'}) Tooltip Text
                 br
                 br
                 span.grey-500  /* Tags */

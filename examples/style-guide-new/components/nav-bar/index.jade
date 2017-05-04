@@ -14,90 +14,69 @@ mixin nav-section-header(number, label)
     +nav-section-header('01', 'Colors')
     if sectionOpen === 'colors'
       .sub-nav
-        .sub-nav-section
-          .sub-nav-label Mixpanel UI
+        .sub-nav-section(on={click: () => $helpers.jumpToNavigate('ui-colors')})
+          .sub-nav-label Mixpanel UI Colors
           .sub-nav-number 1.1
-        .sub-nav-section
+        .sub-nav-section(on={click: () => $helpers.jumpToNavigate('data-viz-colors')})
           .sub-nav-label Data Visualization
           .sub-nav-number 1.2
-        .sub-nav-section
-          .sub-nav-label Gradients
+        .sub-nav-section(on={click: () => $helpers.jumpToNavigate('color-library')})
+          .sub-nav-label Color Library
           .sub-nav-number 1.3
-        .sub-nav-section
-          .sub-nav-label Color Use
-          .sub-nav-number 1.4
-        .sub-nav-section
-          .sub-nav-label Hue Library
-          .sub-nav-number 1.5
     +nav-section-header('02', 'Typography')
     if sectionOpen === 'typography'
       .sub-nav
-        .sub-nav-section
-          .sub-nav-label Sizes
+        .sub-nav-section(on={click: () => $helpers.jumpToNavigate('font-weight')})
+          .sub-nav-label Type Family & Weight
           .sub-nav-number 2.1
-        .sub-nav-section
-          .sub-nav-label Weights
+        .sub-nav-section(on={click: () => $helpers.jumpToNavigate('font-sizes')})
+          .sub-nav-label Type Sizes
           .sub-nav-number 2.2
-        .sub-nav-section
-          .sub-nav-label Colors
-          .sub-nav-number 2.3
-        .sub-nav-section
-          .sub-nav-label Pairings
-          .sub-nav-number 2.4
     +nav-section-header('03', 'Iconography')
     if sectionOpen === 'iconography'
       .sub-nav
-        .sub-nav-section
+        .sub-nav-section(on={click: () => $helpers.jumpToNavigate('ui-icons')})
           .sub-nav-label UI Icons
           .sub-nav-number 3.1
-        .sub-nav-section
-          .sub-nav-label Legacy
-          .sub-nav-number 3.2
-        .sub-nav-section
-          .sub-nav-label Marketing
-          .sub-nav-number 3.3
     +nav-section-header('04', 'Buttons')
     if sectionOpen === 'buttons'
       .sub-nav
-        .sub-nav-section
-          .sub-nav-label Types
+        .sub-nav-section(on={click: () => $helpers.jumpToNavigate('basic-buttons')})
+          .sub-nav-label Basic MP Buttons
           .sub-nav-number 4.1
-        .sub-nav-section
-          .sub-nav-label Measure
+        .sub-nav-section(on={click: () => $helpers.jumpToNavigate('button-bars')})
+          .sub-nav-label Button Bars
           .sub-nav-number 4.2
-        .sub-nav-section
-          .sub-nav-label Color Use
+        .sub-nav-section(on={click: () => $helpers.jumpToNavigate('toggle-buttons')})
+          .sub-nav-label Toggle Buttons
           .sub-nav-number 4.3
-        .sub-nav-section
-          .sub-nav-label Interactions
+        .sub-nav-section(on={click: () => $helpers.jumpToNavigate('drop-buttons')})
+          .sub-nav-label Drop Buttons
           .sub-nav-number 4.4
     +nav-section-header('05', 'Components')
     if sectionOpen === 'components'
       .sub-nav
-        .sub-nav-section
-          .sub-nav-label Modals & Pop-ups
+        .sub-nav-section(on={click: () => $helpers.jumpToNavigate('input-fields')})
+          .sub-nav-label Input Fields
           .sub-nav-number 5.1
-        .sub-nav-section
-          .sub-nav-label Alerts
+        .sub-nav-section(on={click: () => $helpers.jumpToNavigate('modals-dialogues')})
+          .sub-nav-label Modals and Dialogues
           .sub-nav-number 5.2
-        .sub-nav-section
-          .sub-nav-label Hover Interactions
+        .sub-nav-section(on={click: () => $helpers.jumpToNavigate('popups-alerts')})
+          .sub-nav-label Popups & Alerts
           .sub-nav-number 5.3
-        .sub-nav-section
-          .sub-nav-label Links
+        .sub-nav-section(on={click: () => $helpers.jumpToNavigate('contextual-elements')})
+          .sub-nav-label Contextual Elements
           .sub-nav-number 5.4
     +nav-section-header('06', 'Widgets')
     if sectionOpen === 'widgets'
       .sub-nav
-        .sub-nav-section
-          .sub-nav-label Sticker Sheets
+        .sub-nav-section(on={click: () => $helpers.jumpToNavigate('widgets')})
+          .sub-nav-label Bookmark Widget
           .sub-nav-number 6.1
-        .sub-nav-section
-          .sub-nav-label Style Sheets
+        .sub-nav-section(on={click: () => $helpers.jumpToNavigate('tag-selector')})
+          .sub-nav-label Tag Selector
           .sub-nav-number 6.2
-        .sub-nav-section
-          .sub-nav-label UI Templates
+        .sub-nav-section(on={click: () => $helpers.jumpToNavigate('calendar-widget')})
+          .sub-nav-label Calendar
           .sub-nav-number 6.3
-        .sub-nav-section
-          .sub-nav-label Typefaces
-          .sub-nav-number 6.4

@@ -25,9 +25,20 @@ document.registerElement('style-guide', class extends Component {
       defaultState: {
         COLORS,
         SVG_ICONS,
-        sectionOpen: 'buttons',
+        sectionOpen: 'iconography',
         subSectionOpen: null,
         sectionFilter: null,
+        open: {
+          alert: true,
+          confirm: false,
+          dropMenu: false,
+          modal: false,
+          tagSelector: true,
+          tutorialTooltip: {
+            top: true,
+          },
+          upsell: true,
+        },
       },
       helpers: {
         navSectionChange: e => {
