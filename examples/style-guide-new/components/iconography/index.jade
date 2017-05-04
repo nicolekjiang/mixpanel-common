@@ -5,9 +5,19 @@ include ../mixins.jade
     .title-text Iconography
     .title-section 3.1
   .section-modifier
-    .zoom-toggle
-      li 1x
-      li.zoom-selected 2x
+    .zoom-toggles
+      li.zoom-toggle(
+        on={click: () => $helpers.changeIconSize('one')}
+        class={
+          'zoom-selected': iconSize == 'one',
+        }
+      ) 1x
+      li.zoom-toggle(
+        on={click: () => $helpers.changeIconSize('two')}
+        class={
+          'zoom-selected': iconSize == 'two',
+        }
+      ) 2x
   .divider 
   //- .section-nav
     //- +section-nav-item('Show All')
@@ -24,7 +34,12 @@ include ../mixins.jade
       .indent-container
         .icons
           each icon in Object.keys(SVG_ICONS)
-            .icon.common-example
+            .icon.common-example(
+              class={
+                'icon-small': iconSize == 'one',
+                'icon-large': iconSize == 'two',
+              }
+            )
               svg-icon(attrs={icon})
               .icon-name= icon
         .code-snippet
@@ -63,4 +78,4 @@ include ../mixins.jade
                 span.mp-purple (attrs={icon: 
                 span.mp-red 'x'
                 span.mp-purple })
-                | .mp-button-with-icon 
+                | .mp-button-with-icon

@@ -25,7 +25,7 @@ document.registerElement('style-guide', class extends Component {
       defaultState: {
         COLORS,
         SVG_ICONS,
-        sectionOpen: 'widgets',
+        sectionOpen: 'iconography',
         subSectionOpen: null,
         sectionFilter: null,
         open: {
