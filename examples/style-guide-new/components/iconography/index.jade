@@ -41,7 +41,7 @@ include ../mixins.jade
               }
             )
               svg-icon(attrs={icon})
-              .icon-name= icon
+              .icon-name(attrs={title: icon})= icon
         .code-snippet
           .call-out.first-call-out
             strong.icon +
