@@ -8,11 +8,15 @@ document.registerElement('iconography-section', class extends Component {
     return {
       defaultState: {
         sectionFilter: 'show all',
+        iconSize: 'two'
       },
       helpers: {
         sectionChange: e => {
           this.update({sectionFilter: e.currentTarget.dataset.filterName});
         },
+        changeIconSize: iconSize => {
+          this.update({iconSize})
+        }
       },
       template,
     };

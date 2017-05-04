@@ -12,9 +12,9 @@ include ../mixins.jade
   //-   +section-nav-item('Dropdowns')
   //-   +section-nav-item('Toggles')
   //-   +section-nav-item('Misc')
-  .divider 
+  .divider#input-fields 
   .section-content
-    section.input-fields
+    section
       .subsection-title Input Fields
       .subsection-description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id massa et libero condimentum dignissim at ut odio. Aliquam placerat libero metus, et fringilla nisl dictum vitae. Sed at lacus eu risus fermentum consequat. 
       .indent-container
@@ -123,10 +123,10 @@ include ../mixins.jade
                 span.mp-red  mp-input-group
                 span.mp-purple (attrs={placeholder: "text here", busy: inputGroupSaving})
      
-      .divider 
+      .divider#modals-dialogues
         label 5.3
       .section-content
-        section.modals-dialogues
+        section
         .subsection-title Modals & Dialogues
         .subsection-description These UI components are containers that will interrupt the current flow, by displaying on top of the page content.
        .indent-container
@@ -249,10 +249,10 @@ include ../mixins.jade
                 br
                 span.mp-red       .mp-confirm-description
                 |  Dialogue subtext here
-      .divider 
+      .divider#popups-alerts 
         label 5.4
       .section-content
-        section.popups-alerts
+        section
         .subsection-title Pop-Ups & Alerts
         .subsection-description These UI components are containers that will interrupt the current flow, by displaying on top of the page content.
        .indent-container
@@ -398,7 +398,7 @@ include ../mixins.jade
       .divider 
         label 5.5
       .section-content
-        section.contextual-elements
+        section
         .subsection-title Contextual Elements
         .subsection-description Use these design elements to inform the user when interactions or intent aren't immediately clear. Tooltips are great for providing extra descriptions on hover, while tags are descriptors that can be used as a visual reminder of a setting.
         //- Pending Addition: Warning tooltip

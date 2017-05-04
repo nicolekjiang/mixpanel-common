@@ -12,7 +12,11 @@ document.registerElement('nav-bar', class extends Component {
           if (sectionOpen === this.state.sectionOpen) {
             sectionOpen = null;
           }
+          window.scrollTo(0, 0);
           this.update({sectionOpen});
+        },
+        jumpToNavigate: section => {
+          window.location.hash = section;
         }
       },
       template,

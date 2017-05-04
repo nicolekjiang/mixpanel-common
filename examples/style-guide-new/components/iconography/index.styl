@@ -6,34 +6,36 @@
   flex-wrap wrap
   margin-top 45px
   
+  .icon-large
+    height 135px
+    svg-icon-style(size: 30px)
+    width 135px
+
+  .icon-small
+    height 50px
+    svg-icon-style(size: 20px)
+    width 50px
+
   .icon
+    align-items center
     display flex
     flex-direction row
-    padding-bottom 10px
-    width 135px
-    height 135px
-    position relative
+    justify-content center
     margin 0 20px 50px 0
-    align-items center
-    svg-icon-style(grey-700, blue-100) // - this line is causing issues
     padding 0
+    position relative
+    svg-icon-style(grey-700, blue-100)
 
-    svg-icon
-      margin 0 auto
-      min-height 22px
-      min-width 22px
-      transform scale(1.33)
-      
     .icon-name
-      position absolute
       bottom -30px
-      left 5%
-      text-align center
-      white-space nowrap
-      overflow hidden
-      text-overflow ellipsis
-      width 90%
       font-size-medium()
+      left 5%
+      overflow hidden
+      position absolute
+      text-align center
+      text-overflow ellipsis
+      white-space nowrap
+      width 90%
   
   :hover
     &.icon 
@@ -49,20 +51,22 @@
 .common-example
   border-radius 0px !important
 
-.zoom-toggle
-  list-style-type none
+.zoom-toggles
+  align-items baseline
   display inline-flex
-  width 89%
   flex-direction row-reverse
+  list-style-type none
   position relative
   top 1px
+  width 89%
   z-index 100
-  align-items baseline
   > li
     margin-left 15px
     padding 15px
   .zoom-selected
+    border-bottom 2px solid mp-blue
     color grey-700
     font-weight weight-bold
-    border-bottom 2px solid mp-blue
-  
+
+  .zoom-toggle
+    cursor pointer

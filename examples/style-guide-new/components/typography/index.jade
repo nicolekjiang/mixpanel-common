@@ -11,9 +11,9 @@ include ../mixins.jade
     //- +section-nav-item('Copy')
     //- +section-nav-item('Fields')
     //- +section-nav-item('Labels')
-  .divider 
+  .divider#font-weight
   .section-content
-    section.font-weight
+    section
       .subsection-title Type Family & Weight
       .subsection-description Currently Mixpanel UI is limited to one typeface: Helvetica Neue. It was chosen because of its extensive inclusion across many operating systems. We have limited the weight selection to establish a clear information hierarchy. 
       .font-weight-examples
@@ -83,10 +83,10 @@ include ../mixins.jade
                     pre
                       span.mp-red font-weight
                       |  weight-regular
-  .divider 
+  .divider#font-sizes
     label 1.2
   .section-content
-    section.type-sizes
+    section
       .subsection-title Type Sizes
       .subsection-description By limiting our font catalogue to just six sizes, we're able to reduce page load times and further reinforce UI patterns. Our baseline is 13px (default), and our smallest point size is ALL CAPS 11px. There will be instances where micro-copy is required, which has not been accounted for in common at this time.
       .indent-container

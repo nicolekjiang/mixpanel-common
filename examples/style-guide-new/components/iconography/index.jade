@@ -5,17 +5,27 @@ include ../mixins.jade
     .title-text Iconography
     .title-section 3.1
   .section-modifier
-    .zoom-toggle
-      li 1x
-      li.zoom-selected 2x
-  .divider 
+    .zoom-toggles
+      li.zoom-toggle(
+        on={click: () => $helpers.changeIconSize('one')}
+        class={
+          'zoom-selected': iconSize == 'one',
+        }
+      ) 1x
+      li.zoom-toggle(
+        on={click: () => $helpers.changeIconSize('two')}
+        class={
+          'zoom-selected': iconSize == 'two',
+        }
+      ) 2x
+  .divider#ui-icons
   //- .section-nav
     //- +section-nav-item('Show All')
     //- +section-nav-item('UI')
     //- +section-nav-item('Marketing')
     //- +section-nav-item('Legacy')
   .section-content
-    section.ui-icons
+    section
       .subsection-title UI Icons
       .subsection-description 
         span.grey-500 Icons measure 16x16 px, but to account for a possible ascenders and descenders they're saved on a canvas with 3px of padding, resulting in a 22x22 footprint. There may be times when you need a smaller or larger icon. 
@@ -24,9 +34,14 @@ include ../mixins.jade
       .indent-container
         .icons
           each icon in Object.keys(SVG_ICONS)
-            .icon.common-example
+            .icon.common-example(
+              class={
+                'icon-small': iconSize == 'one',
+                'icon-large': iconSize == 'two',
+              }
+            )
               svg-icon(attrs={icon})
-              .icon-name= icon
+              .icon-name(attrs={title: icon})= icon
         .code-snippet
           .call-out.first-call-out
             strong.icon +
@@ -63,4 +78,4 @@ include ../mixins.jade
                 span.mp-purple (attrs={icon: 
                 span.mp-red 'x'
                 span.mp-purple })
-                | .mp-button-with-icon 
+                | .mp-button-with-icon

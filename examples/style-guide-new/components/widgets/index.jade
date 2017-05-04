@@ -12,9 +12,9 @@ include ../mixins.jade
   //-   +section-nav-item('Dropdowns')
   //-   +section-nav-item('Toggles')
   //-   +section-nav-item('Misc')
-  .divider 
+  .divider#widgets
   .section-content
-    section.widgets
+    section
       .subsection-title Widgets
       .subsection-description A handfull of components that have been pre-composed as ready-to-use interface elements.
       .indent-container
@@ -42,7 +42,8 @@ include ../mixins.jade
         .demo-divider
           a(on={click: () => $helpers.toggleBookmarkType('default')}) Default
           a(on={click: () => $helpers.toggleBookmarkType('pricing')}) Pricing restricted
-        .example-block.full-width
+
+        .example-block.full-width#tag-selector
           .call-out.first-call-out
             strong.icon +
             strong mp-tag-selector
@@ -65,9 +66,9 @@ include ../mixins.jade
                   save: $helpers.handleTagSelectorSave,
                 }
               )
-  .divider 
+  .divider#calendar-widget
   .section-content
-    section.calendar-widget
+    section
     .subsection-title Calendar Widgets
     .subsection-description These UI components are containers that will interrupt the current flow, by displaying on top of the page content.
     .indent-container
