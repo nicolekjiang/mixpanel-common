@@ -18,14 +18,14 @@ include ../mixins.jade
           'zoom-selected': iconSize == 'two',
         }
       ) 2x
-  .divider 
+  .divider#ui-icons
   //- .section-nav
     //- +section-nav-item('Show All')
     //- +section-nav-item('UI')
     //- +section-nav-item('Marketing')
     //- +section-nav-item('Legacy')
   .section-content
-    section.ui-icons
+    section
       .subsection-title UI Icons
       .subsection-description 
         span.grey-500 Icons measure 16x16 px, but to account for a possible ascenders and descenders they're saved on a canvas with 3px of padding, resulting in a 22x22 footprint. There may be times when you need a smaller or larger icon. 

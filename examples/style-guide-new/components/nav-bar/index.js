@@ -13,6 +13,9 @@ document.registerElement('nav-bar', class extends Component {
             sectionOpen = null;
           }
           this.update({sectionOpen});
+        },
+        jumpToNavigate: section => {
+          window.location.hash = section;
         }
       },
       template,

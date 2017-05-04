@@ -12,9 +12,9 @@ include ../mixins.jade
     //- +section-nav-item('Dropdowns')
     //- +section-nav-item('Toggles')
     //- +section-nav-item('Misc')
-  .divider 
+  .divider#basic-buttons
   .section-content
-    section.basic-buttons
+    section
       .subsection-title Basic MP-Buttons
       .subsection-description These rectangle buttons are used when there is a clear CTA. Confirmation intents should always be placed to the right of cancellation buttons, when present.  Respective containers included for visual reference. 
       .indent-container
@@ -146,10 +146,10 @@ include ../mixins.jade
                 span.mp-red .mp-button-red
                 span.mp-purple (attrs={disabled: true})
                 |  Button text
-    .divider 
+    .divider#button-bars
       label 4.2
     .section-content
-      section.button-bars
+      section
       .subsection-title Button Bars
       .subsection-description Button bars are used in tandem with ui-cards (modals and dialogues) to lead the user through a linear flow or to complete a form.
       .indent-container
@@ -198,10 +198,10 @@ include ../mixins.jade
                 span.mp-red     mp-button-bar.mp-button-bar-primary
                 span.mp-purple (attrs={'arrow-next': true}) 
                 | Button text
-    .divider 
+    .divider#toggle-buttons
       label 4.3
     .section-content
-      section.toggle-buttons
+      section
       .subsection-title Toggle Buttons
       .subsection-description Toggles can be used to sort lists or to force a single selection from a finite list of viewing options.
       .indent-container
@@ -324,10 +324,10 @@ include ../mixins.jade
                 span.mp-purple (attrs={value: 'option2'})
                 | Oranges
                 br
-      .divider 
+      .divider#drop-buttons
         label 4.4
       .section-content
-        section.toggle-buttons
+        section
         .subsection-title Drop Buttons
         .subsection-description Use a drop button when the user needs to choose from a finite set of options. For example: these can be used to present a list of people properites, or events the user is tracking. Making a selection would cause the drop down to close.
         .indent-container

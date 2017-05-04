@@ -7,38 +7,35 @@
   margin-top 45px
   
   .icon-large
-    width 135px
     height 135px
+    svg-icon-style(size: 30px)
+    width 135px
 
   .icon-small
-    width 50px
     height 50px
-    svg-icon-style(size: 16px)
+    svg-icon-style(size: 20px)
+    width 50px
 
   .icon
+    align-items center
     display flex
     flex-direction row
-    padding-bottom 10px
-    position relative
+    justify-content center
     margin 0 20px 50px 0
-    align-items center
-    svg-icon-style(grey-700, blue-100)
     padding 0
-    
-    svg-icon
-      margin 0 auto
-      transform scale(1.33)
+    position relative
+    svg-icon-style(grey-700, blue-100)
 
     .icon-name
-      position absolute
       bottom -30px
-      left 5%
-      text-align center
-      white-space nowrap
-      overflow hidden
-      text-overflow ellipsis
-      width 90%
       font-size-medium()
+      left 5%
+      overflow hidden
+      position absolute
+      text-align center
+      text-overflow ellipsis
+      white-space nowrap
+      width 90%
   
   :hover
     &.icon 
@@ -55,21 +52,21 @@
   border-radius 0px !important
 
 .zoom-toggles
-  list-style-type none
+  align-items baseline
   display inline-flex
-  width 89%
   flex-direction row-reverse
+  list-style-type none
   position relative
   top 1px
+  width 89%
   z-index 100
-  align-items baseline
   > li
     margin-left 15px
     padding 15px
   .zoom-selected
+    border-bottom 2px solid mp-blue
     color grey-700
     font-weight weight-bold
-    border-bottom 2px solid mp-blue
 
   .zoom-toggle
     cursor pointer
