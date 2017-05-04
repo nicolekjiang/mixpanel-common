@@ -23,6 +23,7 @@
               focused: isFocused,
               selected: item.isSelected,
               selectable: isSelectable,
+              uppercase: item.isUppercase,
             }
             on={
               click: isSelectable ? ev => {
@@ -35,10 +36,16 @@
               mouseenter: () => $helpers.handleMouseenterItem(item),
             }
           )
-            +screen-option(item.label, {
-              icon: item.icon,
-              matches: item.matches,
-            })
+            if item.hasOwnProperty(`icon`)
+              .option-icon
+                - const icon = item.icon
+                svg-icon(attrs={icon, empty: !icon})
+            .option-label
+              if item.matches
+                each substr, si in item.matches
+                  span.substr(class={'matches-search': !(si % 2)})= substr
+              else
+                span.label= item.label
             if item.hasPropertiesPill
               .secondary-action.pill(
                 class={
@@ -66,15 +73,3 @@
       if section.isLoading
         .loading-items
           mp-spinner
-
-mixin screen-option(label, options)
-  - options = options || {}
-  - const icon = options.icon
-  .option-icon
-    svg-icon(attrs={icon, empty: !icon})
-  .option-label
-    if options.matches
-      each substr, si in options.matches
-        span.substr(class={'matches-search': !(si % 2)})= substr
-    else
-      span.label= label

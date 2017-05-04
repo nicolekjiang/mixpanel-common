@@ -117,6 +117,10 @@ document.registerElement(`style-guide`, class extends Component {
 
         getItemsMenuSections: () => {
           const sections = [{
+            label: `Loading section`,
+            isLoading: true,
+            items: [],
+          }, {
             label: `Recently Viewed`,
             items: [{
               itemType: `event`,
@@ -192,9 +196,21 @@ document.registerElement(`style-guide`, class extends Component {
               type: `datetime`,
             }],
           }, {
-            label: `Loading section`,
-            isLoading: true,
-            items: [],
+            label: `Non-icon items`,
+            items: [{
+              label: `Last 96 hours`,
+            }, {
+              label: `Last 30 days`,
+            }],
+          }, {
+            label: `Uppercase items`,
+            items: [{
+              isUppercase: true,
+              label: `Events`,
+            }, {
+              isUppercase: true,
+              label: `People`,
+            }],
           }];
 
           // Duplicate the menu to make it longer to trigger pagination
