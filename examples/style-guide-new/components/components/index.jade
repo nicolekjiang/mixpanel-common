@@ -97,8 +97,25 @@ include ../mixins.jade
                 | 3
                 br
                 | 4
+                br
+                | 5
+                br
+                | 6
+                br
+                | 7
+                br
+                | 8
               pre
                 span.grey-500  /* Square field w/ icon */
+                br
+                span.mp-red .mp-icon-input
+                br
+                |   .mp-icon
+                br
+                |      svg-icon(attrs={icon: "search"})
+                br
+                |    input
+                span.mp-purple (attrs={type: 'text', placeholder: 'Some placeholder text'})
                 br
                 br
                 span.grey-500  /* Square field w/ button */
@@ -243,10 +260,10 @@ include ../mixins.jade
           .call-out.first-call-out
             strong.icon +
             strong mp-upsell-popup
-          .common-example
+          .common-example(style={padding: '15px 20px 25px 25px', width: '310px', height: '100px'})
             a(
               on={click: () => $helpers.openModal('upsell')}
-              style={position: 'absolute'}
+              style={position: 'absolute', left: '200px'}
             ) Re-Open
             mp-upsell-popup(
               attrs={feature: 'default', open: open.upsell} 
@@ -256,10 +273,10 @@ include ../mixins.jade
         .example-block
           .call-out
             strong mp-alert
-          .common-example
+           .common-example(style={padding: '20px 15px 30px 15px'})
             a(
               on={click: () => $helpers.openModal('alert')}
-              style={position: 'absolute'}
+              style={position: 'absolute', left: '565px'}
             ) Re-Open
             mp-alert(
               attrs={
@@ -273,6 +290,7 @@ include ../mixins.jade
             )
               div
                 .text Alert Not Fullscreen
+
         //- Pending Addition: dark warning with atomic bomb icon
         //- .example-block.full-width
         //-   .call-out.first-call-out
@@ -352,8 +370,31 @@ include ../mixins.jade
             .code-field
               pre
                 | 1
+                br
+                | 2
+                br
+                | 3
+                br
+                | 4
+                br
+                | 5
+                br
+                | 6
               pre
-                span.grey-500  /* Square field w/ icon */
+                span.grey-500  /* Popup & Alert */
+                br
+                br
+                span.grey-500  /* Toast */
+                br
+                br
+                span.grey-500  /* Tutorial tooltips */
+                br
+                | .tutorial-tooltips-container
+                br
+                span.mp-red    mp-tutorial-tool-tip(
+                span.mp-purple attrs={placement: 'bottom','num-steps': 4}
+                span.mp-red )
+                | Tooltip text
       .divider 
         label 5.5
       .section-content

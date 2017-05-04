@@ -346,7 +346,7 @@ include ../mixins.jade
           .example-block
             .call-out
               strong Overflow Menu
-            .common-example
+            .common-example(style={width: '23px'})
               .overflow-menu-button(on={click: () => $helpers.toggleMenu('overflowMenu')})
                 svg-icon(attrs={icon: 'ellipsis'})
               .drop-menu-container
