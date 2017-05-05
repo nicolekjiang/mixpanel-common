@@ -496,11 +496,11 @@
           }
           on={
             next: $helpers.incrementTooltipStep,
-            close: () => $helpers.toggleTutorialTooltip('next'),
+            close: $helpers.closeTutorialNextTooltip,
           }
-        ) 
+        )
           mp-button.mp-button-red(
-            attrs={size: 'small'} 
+            attrs={size: 'small'}
             on={click: $helpers.resetTooltipStep}
           ) click to reset the tooltip to step 0
           p You are on step #{tooltipStep}. Press NEXT to go to the next step.
