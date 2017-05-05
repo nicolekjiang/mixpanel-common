@@ -41,8 +41,29 @@ include ../mixins.jade
             )
         .demo-divider
           a(on={click: () => $helpers.toggleBookmarkType('default')}) Default
-          a(on={click: () => $helpers.toggleBookmarkType('pricing')}) Pricing restricted
-        .example-block.full-width#tag-selector
+          a(on={click: () => $helpers.toggleBookmarkType('pricing')}) Pricing Restricted
+        .code-snippet
+          .call-out.first-call-out
+            strong.icon +
+            strong Example Code
+          .snippet-container.min.max
+            .snippet-header
+              label Jade
+            .code-field
+              pre
+                | 1
+                br
+                | 2
+                br
+                | 3
+              pre
+                span.grey-500  /* Bookmarks Widget */
+                br
+                br
+                span.grey-500  /* Pricing Restricted */
+      .divider#tag-selector
+        label 6.2            
+        .example-block.full-width
           .call-out.first-call-out
             strong.icon +
             strong mp-tag-selector

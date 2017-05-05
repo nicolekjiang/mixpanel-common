@@ -16,6 +16,11 @@ body
 h1, strong, .bold
   font-weight weight-bold
 
+a
+  color grey-700
+  :hover
+    color blue-300
+
 .style-guide-title
   color grey-900
   display flex
@@ -68,7 +73,7 @@ h1, strong, .bold
     margin 0 10px 3px 10px
 
 .section-content
-  margin-top 40px
+  margin 40px 0 0 0
 
 .section-container
   display flex
@@ -216,7 +221,7 @@ section
   border 1px solid grey-200
   border-radius 6px
   font-size-medium()
-  margin-top 30px
+  margin-top 10px
   width 90%
   display inline-flex
   flex-direction column
@@ -273,17 +278,20 @@ pre
   margin 0
 
 .example-block
-  display inline-block
+  display inline-flex
   margin 0 15px 10px 0
+  flex-direction column
   &.half
     width 40%
+    display inline-table
   
 .floating-example-bar
   background #FFFFFF
+  width 80%
   box-shadow 0px 8px 22px 0px rgba(0,0,0,0.23)
   padding 15px 20px
-  min-width 850px
-  margin-top 40px
+  min-width 740px
+  margin-top 10px
   &.align-right
     text-align right
   &.blue-bar
@@ -312,7 +320,7 @@ pre
   &.narrow
     display inline-flex
     width auto
-    max-width 49%
+    max-width 30%
     min-width 365px
     align-items flex-end
   &.truncated
@@ -320,6 +328,7 @@ pre
     min-height 90px
   &.long
     min-width 560px
+    max-width 40%
     
 .example-card-footer
     border-top 1px solid grey-200
@@ -353,7 +362,6 @@ pre
   padding-bottom 15px
   
   a
-    color mp-blue
     margin-left 45px
     
 .section-modifier

@@ -16,7 +16,7 @@ include ../mixins.jade
   .section-content
     section
       .subsection-title Input Fields
-      .subsection-description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id massa et libero condimentum dignissim at ut odio. Aliquam placerat libero metus, et fringilla nisl dictum vitae. Sed at lacus eu risus fermentum consequat. 
+      .subsection-description Input fields can exist with or without icons embedded and come in two flavors: with button, and without. The field with button combination is used when space is limited, or when the CTA is strictly associated with the input string.
       .indent-container
         .example-block
           .call-out.first-call-out
@@ -97,8 +97,26 @@ include ../mixins.jade
                 | 3
                 br
                 | 4
+                br
+                | 5
+                br
+                | 6
+                br
+                | 7
+                br
+                | 8
               pre
                 span.grey-500  /* Square field w/ icon */
+                br
+                span.mp-red .mp-icon-input
+                br
+                |   .mp-icon
+                br
+                span.mp-red      svg-icon
+                span.mp-purple (attrs={icon: "search"})
+                br
+                |    input
+                span.mp-purple (attrs={type: 'text', placeholder: 'Some placeholder text'})
                 br
                 br
                 span.grey-500  /* Square field w/ button */
@@ -244,35 +262,11 @@ include ../mixins.jade
             strong.icon +
             strong mp-upsell-popup
           .common-example
-            a(
-              on={click: () => $helpers.openModal('upsell')}
-              style={position: 'absolute'}
-            ) Re-Open
-            mp-upsell-popup(
-              attrs={feature: 'default', open: open.upsell} 
-              style={position: 'relative'}
-              on={change: e => $helpers.handleModalChange('upsell', e.detail.state)}
-            )
         .example-block
           .call-out
             strong mp-alert
           .common-example
-            a(
-              on={click: () => $helpers.openModal('alert')}
-              style={position: 'absolute'}
-            ) Re-Open
-            mp-alert(
-              attrs={
-                id: 'alert-not-fullscreen', 
-                closeable: true, 
-                open: open.alert, 
-                'not-fullscreen': true, 
-              }
-              style={position: 'relative'}
-              on={change: e => $helpers.handleModalChange('alert', e.detail.state)}
-            )
-              div
-                .text Alert Not Fullscreen
+
         //- Pending Addition: dark warning with atomic bomb icon
         //- .example-block.full-width
         //-   .call-out.first-call-out
@@ -352,14 +346,60 @@ include ../mixins.jade
             .code-field
               pre
                 | 1
+                br
+                | 2
+                br
+                | 3
+                br
+                | 4
+                br
+                | 5
+                br
+                | 6
+                br
+                | 7
+                br
+                | 8
+                br
+                | 9
+                br
+                | 10
+                br
+                | 11
               pre
-                span.grey-500  /* Square field w/ icon */
-      .divider#contextual-elements 
+                span.grey-500 /* Popup & Alert */
+                br
+                span.mp-red  mp-alert(
+                span.mp-purple attrs={id: 'alert', closeable: true, open: open['alert-large-icon'], 'large-icon': true}
+                span.mp-red )
+                br
+                |    div
+                br
+                |      Alert text here
+                br
+                br
+                span.grey-500 /* Toast */
+                br
+                span.mp-red  mp-toast(
+                span.mp-purple   attrs={cta: toast.cta, hide: toast.closed}
+                span.mp-red )=
+                |  Toast message
+                br
+                br
+                span.grey-500 /* Tutorial tooltips */
+                br
+                | .tutorial-tooltips-container
+                br
+                span.mp-red   mp-tutorial-tool-tip(
+                span.mp-purple attrs={placement: 'bottom','num-steps': 4}
+                span.mp-red )
+                |  Tooltip text
+      .divider 
         label 5.5
       .section-content
         section
         .subsection-title Contextual Elements
-        .subsection-description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id massa et libero condimentum dignissim at ut odio. Aliquam placerat libero metus, et fringilla nisl dictum vitae. Sed at lacus eu risus fermentum consequat.
+        .subsection-description Use these design elements to inform the user when interactions or intent aren't immediately clear. Tooltips are great for providing extra descriptions on hover, while tags are descriptors that can be used as a visual reminder of a setting.
         //- Pending Addition: Warning tooltip
         //- .example-block
         //-   .call-out
@@ -446,6 +486,10 @@ include ../mixins.jade
                 | 7
                 br
                 | 8
+                br
+                | 9
+                br
+                | 10
               pre
                 span.grey-500  /* Tooltips */
                 br

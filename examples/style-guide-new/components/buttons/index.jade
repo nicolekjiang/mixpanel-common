@@ -39,13 +39,12 @@ include ../mixins.jade
         .example-block.full-width
           .call-out.first-call-out
             strong.icon +
-            strong .mp-button-secondary 
-            p (attrs={disabled: true})
+            strong Disabled
           .common-example
             mp-button.mp-button-secondary(attrs={disabled: true}) Secondary
             mp-button.mp-button-primary(attrs={disabled: true}) Primary
             mp-button.mp-button-red(attrs={disabled: true}) Caution
-        .example-block
+        .example-block.full-width
           .call-out.first-call-out
             strong.icon +
             strong .mp-button-on-blue
@@ -67,7 +66,6 @@ include ../mixins.jade
         .example-block
           .call-out
             strong .mp-button-secondary 
-            p (attrs={size: 'small'})
           .common-example
             mp-button.mp-button-secondary(attrs={size: 'small'}) Secondary (SM)
             mp-button.mp-button-secondary(attrs={size: 'small', icon: 'logout'}) Icon
@@ -75,7 +73,6 @@ include ../mixins.jade
         .example-block
           .call-out
             strong .mp-button-red 
-            p (attrs={disabled: true})
           .common-example
             mp-button.mp-button-red(attrs={size: 'small'}) Caution (SM)
             mp-button.mp-button-red(attrs={size: 'small', icon: 'trashcan'}) Icon
@@ -164,7 +161,6 @@ include ../mixins.jade
         .example-block.half
           .call-out
             strong .mp-button-bar 
-            p (attrs={'arrow-next': true})
           .example-card.narrow.mp-button-bar-container
             mp-button-bar.mp-button-bar-primary(attrs={'arrow-next': true}) Button-bar icon
         .code-snippet
@@ -224,7 +220,7 @@ include ../mixins.jade
               mp-toggle-option(attrs={value: 'option1'}) Pears
               mp-toggle-option(attrs={value: 'option2'}) Peaches
               mp-toggle-option(attrs={value: 'option3'}) Plums
-        .example-block
+        .example-block.full-width
           .call-out.first-call-out
             strong.icon +
             strong mp-toggle
@@ -336,7 +332,7 @@ include ../mixins.jade
               strong Drop Button
             .common-example
               .drop-menu-button(on={click: () => $helpers.toggleMenu('dropMenu')})
-                a text here
+                a Link text
                 svg-icon(attrs={icon: 'caret-down'})
               .drop-menu-container
                 mp-drop-menu(
@@ -350,7 +346,7 @@ include ../mixins.jade
           .example-block
             .call-out
               strong Overflow Menu
-            .common-example
+            .common-example(style={width: '23px'})
               .overflow-menu-button(on={click: () => $helpers.toggleMenu('overflowMenu')})
                 svg-icon(attrs={icon: 'ellipsis'})
               .drop-menu-container
@@ -385,8 +381,50 @@ include ../mixins.jade
                   | 2
                   br
                   | 3
+                  br
+                  | 4
+                  br
+                  | 5
+                  br
+                  | 6
+                  br
+                  | 7
+                  br
+                  | 8
+                  br
+                  | 9
+                  br
+                  | 10
+                  br
+                  | 11
+                  br
+                  | 12
                 pre
-                  span.grey-500  /* Basic Text Drop */
+                  span.grey-500  /* Drop Menu */
                   br
+                  span.mp-red .overflow-menu-button
+                  span.mp-purple (on={click: () => $helpers.toggleMenu('overflowMenu')})
                   br
-                  span.grey-500  /* Overflow */
+                  |   svg-icon(attrs={icon: 'ellipsis'})
+                  br
+                  span.mp-red     .drop-menu-container
+                  br
+                  span.mp-red       mp-drop-menu(
+                  br
+                  span.mp-purple        attrs={open: open.overflowMenu}
+                  br
+                  span.mp-purple        on={change: e => $helpers.handleModalChange('overflowMenu', e.detail.state)}
+                  br
+                  span.mp-red       (
+                  br
+                  |     .text-container
+                  br
+                  span.mp-red       mp-list-item 
+                  | Overflow option 1
+                  br
+                  span.mp-red       mp-list-item 
+                  | Overflow option 2
+                  br
+                  span.mp-red       mp-list-item 
+                  | Overflow option 3
+                  br
