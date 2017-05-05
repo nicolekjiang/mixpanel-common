@@ -5,6 +5,7 @@
 - report: mixpanel-specific app utilities
 - stylesheets: default CSS and importable Stylus mixins
 - util: data manipulation utilities
+- widgets: composed pre-styled web components
 
 ### Style guide
 
@@ -20,7 +21,7 @@
 ### Release Log
 
 #### 0.50.1
- - renamePropertyValue param signature change to (value, header) - header is a new optional field. 
-    If header is $event / $country_code / $mp_country_code, then value will be expanded. 
-    Otherwise it will be passed through.  
- 
+ - renamePropertyValue param signature change to (value, header) - header is a new optional field.
+    If header is $event / $country_code / $mp_country_code, then value will be expanded.
+    Otherwise it will be passed through.
+
