@@ -483,6 +483,28 @@
           'num-steps': 4,
         }) Tooltip with placement="bottom"
 
+      mp-button.tutorial-tooltip-container.bottom.position-relative(on={
+        click: () => $helpers.toggleTutorialTooltip('next'),
+      }) Tooltip with next buttons
+        mp-tutorial-tooltip(
+          attrs={
+            hide: !open.tutorialTooltip.next,
+            placement: 'bottom',
+            'curr-step': tooltipStep,
+            'num-steps': 4,
+            'next-button': true,
+          }
+          on={
+            next: $helpers.incrementTooltipStep,
+            close: $helpers.closeTutorialNextTooltip,
+          }
+        )
+          mp-button.mp-button-red(
+            attrs={size: 'small'}
+            on={click: $helpers.resetTooltipStep}
+          ) click to reset the tooltip to step 0
+          p You are on step #{tooltipStep}. Press NEXT to go to the next step.
+
       mp-button.tutorial-tooltip-container.left.position-relative(on={
         click: () => $helpers.toggleTutorialTooltip('left'),
       }) Tooltip with placement="left"

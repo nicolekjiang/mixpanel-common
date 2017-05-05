@@ -40,6 +40,7 @@ document.registerElement(`style-guide`, class extends Component {
           allTags: new Set([`my tag`, `another tag`, `our tag`, `his tag`, `my dashboard`]),
         },
         toasts: [],
+        tooltipStep: 0,
       },
       helpers: {
         blueToggleChanged: ev => this.update({blueToggleValue: ev.detail.selected}),
@@ -70,13 +71,22 @@ document.registerElement(`style-guide`, class extends Component {
           this.update();
         },
 
+        closeTutorialNextTooltip: () => {
+          this.update({tooltipStep: 0});
+          this.helpers.toggleTutorialTooltip('next');
+        },
+        incrementTooltipStep: () => this.update({tooltipStep: this.state.tooltipStep + 1}),
+        resetTooltipStep: e => {
+          e.stopPropagation();
+          this.update({tooltipStep: 0});
+        },
+
         getElementStr: el => {
           const attributesStr = Array.from(el.attributes).map(attribute => {
             return `${attribute.nodeName}="${attribute.nodeValue}"`
           }).join(` `);
           return `<${el.tagName.toLowerCase()} ${attributesStr}>`;
         },
-
         handleInsertComponent: el => {
           const textEl = document.createElement(`div`);
           textEl.textContent = this.helpers.getElementStr(el);

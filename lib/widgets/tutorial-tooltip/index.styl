@@ -190,7 +190,10 @@ $tooltip-distance = 12px
     border-radius 0 0 8px 8px
     border-top 1px solid blue-900
     bottom 0
+    display flex
+    flex-direction row
     height 42px
+    justify-content space-between
     position absolute
     width 100%
 
@@ -222,3 +225,13 @@ $tooltip-distance = 12px
             position absolute
             top -3px
             width 4px
+
+    .next, .done
+      color blue-100
+      cursor pointer
+      font-weight bold
+      padding 12px 25px 17px 0
+      text-transform uppercase
+
+      &:hover
+        color white
