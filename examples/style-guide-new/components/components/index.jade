@@ -16,7 +16,7 @@ include ../mixins.jade
   .section-content
     section
       .subsection-title Input Fields
-      .subsection-description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id massa et libero condimentum dignissim at ut odio. Aliquam placerat libero metus, et fringilla nisl dictum vitae. Sed at lacus eu risus fermentum consequat. 
+      .subsection-description Input fields can exist with or without icons embedded and come in two flavors: with button, and without. The field with button combination is used when space is limited, or when the CTA is strictly associated with the input string.
       .indent-container
         .example-block
           .call-out.first-call-out
@@ -112,7 +112,8 @@ include ../mixins.jade
                 br
                 |   .mp-icon
                 br
-                |      svg-icon(attrs={icon: "search"})
+                span.mp-red      svg-icon
+                span.mp-purple (attrs={icon: "search"})
                 br
                 |    input
                 span.mp-purple (attrs={type: 'text', placeholder: 'Some placeholder text'})
@@ -260,36 +261,11 @@ include ../mixins.jade
           .call-out.first-call-out
             strong.icon +
             strong mp-upsell-popup
-          .common-example(style={padding: '15px 20px 25px 25px', width: '310px', height: '100px'})
-            a(
-              on={click: () => $helpers.openModal('upsell')}
-              style={position: 'absolute', left: '200px'}
-            ) Re-Open
-            mp-upsell-popup(
-              attrs={feature: 'default', open: open.upsell} 
-              style={position: 'relative'}
-              on={change: e => $helpers.handleModalChange('upsell', e.detail.state)}
-            )
+          .common-example
         .example-block
           .call-out
             strong mp-alert
-           .common-example(style={padding: '20px 15px 30px 15px'})
-            a(
-              on={click: () => $helpers.openModal('alert')}
-              style={position: 'absolute', left: '565px'}
-            ) Re-Open
-            mp-alert(
-              attrs={
-                id: 'alert-not-fullscreen', 
-                closeable: true, 
-                open: open.alert, 
-                'not-fullscreen': true, 
-              }
-              style={position: 'relative'}
-              on={change: e => $helpers.handleModalChange('alert', e.detail.state)}
-            )
-              div
-                .text Alert Not Fullscreen
+          .common-example
 
         //- Pending Addition: dark warning with atomic bomb icon
         //- .example-block.full-width
@@ -380,21 +356,44 @@ include ../mixins.jade
                 | 5
                 br
                 | 6
+                br
+                | 7
+                br
+                | 8
+                br
+                | 9
+                br
+                | 10
+                br
+                | 11
               pre
-                span.grey-500  /* Popup & Alert */
+                span.grey-500 /* Popup & Alert */
+                br
+                span.mp-red  mp-alert(
+                span.mp-purple attrs={id: 'alert', closeable: true, open: open['alert-large-icon'], 'large-icon': true}
+                span.mp-red )
+                br
+                |    div
+                br
+                |      Alert text here
                 br
                 br
-                span.grey-500  /* Toast */
+                span.grey-500 /* Toast */
+                br
+                span.mp-red  mp-toast(
+                span.mp-purple   attrs={cta: toast.cta, hide: toast.closed}
+                span.mp-red )=
+                |  Toast message
                 br
                 br
-                span.grey-500  /* Tutorial tooltips */
+                span.grey-500 /* Tutorial tooltips */
                 br
                 | .tutorial-tooltips-container
                 br
-                span.mp-red    mp-tutorial-tool-tip(
+                span.mp-red   mp-tutorial-tool-tip(
                 span.mp-purple attrs={placement: 'bottom','num-steps': 4}
                 span.mp-red )
-                | Tooltip text
+                |  Tooltip text
       .divider 
         label 5.5
       .section-content
