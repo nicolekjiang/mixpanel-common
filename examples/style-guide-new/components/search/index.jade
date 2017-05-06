@@ -1,0 +1,14 @@
+.search-page
+  .mp-search
+    .mp-icon
+      svg-icon(attrs={icon: "search"})
+    input(
+      attrs={type: 'text', placeholder: 'Search'}
+      on={keyup: e => $helpers.inputKeyDown(e)}
+    )
+  = $component.child('color-section')
+  = $component.child('typography-section')
+  = $component.child('iconography-section')
+  = $component.child('buttons-section')
+  = $component.child('components-section')
+  = $component.child('widgets-section')

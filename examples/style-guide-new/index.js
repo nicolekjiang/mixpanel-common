@@ -7,13 +7,15 @@ import { Component } from 'panel';
 import '../../build/index';
 import COLORS from '../../build/stylesheets/mixins/colors.json';
 import { SVG_ICONS } from '../../build/components/svg-icon';
+import searchTerms from './search-terms.json'
 
-import './components/nav-bar';
-import './components/colors';
-import './components/typography';
-import './components/iconography';
 import './components/buttons';
+import './components/colors';
 import './components/components';
+import './components/iconography';
+import './components/nav-bar';
+import './components/search'
+import './components/typography';
 import './components/widgets';
 
 import template from './index.jade';
@@ -39,6 +41,12 @@ document.registerElement('style-guide', class extends Component {
           },
           upsell: true,
         },
+        searchTerm: null,
+        searchSections: [],
+        sectionFilter: null,
+        sectionOpen: 'search',
+        subSectionOpen: null,
+        SVG_ICONS,
       },
       helpers: {
         navSectionChange: e => {
@@ -50,6 +58,25 @@ document.registerElement('style-guide', class extends Component {
         }
       },
       template,
-    };
+    }
+  }
+
+  matchSearchTerms(searchTerm) {
+    if (searchTerm) {
+      const sections = Object.keys(searchTerms);
+      const searchSections = [];
+      for (let x = 0; x < sections.length; x++) {
+        let sectionName = sections[x]
+        for (let i = 0; i < searchTerms[sectionName].length; i++) {
+          if (searchTerms[sectionName][i].includes(searchTerm)) {
+            searchSections.push(sectionName);
+            break;
+          }
+        }
+      }
+      this.update({searchSections});
+    } else {
+      this.update({searchSections: []});
+    }
   }
 });

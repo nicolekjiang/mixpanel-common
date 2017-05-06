@@ -9,9 +9,6 @@ document.registerElement('components-section', class extends Component {
   get config() {
     return {
       helpers: {
-        sectionChange: e => {
-          this.update({sectionFilter: e.currentTarget.dataset.filterName});
-        },
         openModal: key => {
           this.state.open[key] = true;
           this.update();
@@ -28,6 +25,13 @@ document.registerElement('components-section', class extends Component {
               },
             }),
           });
+        },
+        hideSectionOnSearch: sectionId => {
+          const sectionKeywords = sectionId.split('-').join(' ');
+          if (this.state.sectionOpen != 'search' || sectionKeywords.includes(this.state.searchTerm)) {
+            return false
+          }
+          return true;
         },
       },
       template,

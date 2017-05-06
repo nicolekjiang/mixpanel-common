@@ -92,7 +92,14 @@ document.registerElement('widgets-section', class extends Component {
           setTimeout(() => bookmark.setAttribute(`open`, true), 200);
           const currentBookmark = type;
           this.update({currentBookmark});
-        }
+        },
+        hideSectionOnSearch: sectionId => {
+          const sectionKeywords = sectionId.split('-').join(' ');
+          if (this.state.sectionOpen != 'search' || sectionKeywords.includes(this.state.searchTerm)) {
+            return false
+          }
+          return true;
+        },
       },
       template,
     };

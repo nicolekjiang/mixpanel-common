@@ -1,7 +1,0 @@
-mixin section-nav-item(text)
-  - const name = text.toLowerCase();
-  .nav-item(
-    on={click: $helpers.sectionChange}
-    class={selected: sectionFilter === name}
-    attrs={'data-filter-name': name}
-  )= text

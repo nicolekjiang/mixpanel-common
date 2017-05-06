@@ -1,81 +1,85 @@
-include ../mixins.jade
-
 .section
-  .section-title
-    .title-text Iconography
-    .title-section 3.1
-  .section-modifier
-    .zoom-toggles
-      li.zoom-toggle(
-        on={click: () => $helpers.changeIconSize('one')}
-        class={
-          'zoom-selected': iconSize == 'one',
-        }
-      ) 1x
-      li.zoom-toggle(
-        on={click: () => $helpers.changeIconSize('two')}
-        class={
-          'zoom-selected': iconSize == 'two',
-        }
-      ) 2x
-  .divider#ui-icons
-  //- .section-nav
-    //- +section-nav-item('Show All')
-    //- +section-nav-item('UI')
-    //- +section-nav-item('Marketing')
-    //- +section-nav-item('Legacy')
-  .section-content
-    section
-      .subsection-title UI Icons
-      .subsection-description 
-        span.grey-500 Icons measure 16x16 px, but to account for a possible ascenders and descenders they're saved on a canvas with 3px of padding, resulting in a 22x22 footprint. There may be times when you need a smaller or larger icon. 
-        span.bold Do not resize the 16x16 icon 
-        span.grey-500 to meet your needs; request a new one from your designer.
-      .indent-container
-        .icons
-          each icon in Object.keys(SVG_ICONS)
-            .icon.common-example(
-              class={
-                'icon-small': iconSize == 'one',
-                'icon-large': iconSize == 'two',
-              }
-            )
-              svg-icon(attrs={icon})
-              .icon-name(attrs={title: icon})= icon
-        .code-snippet
-          .call-out.first-call-out
-            strong.icon +
-            strong Example Code
-          .snippet-container.min.max
-            .snippet-header
-              label Jade
-            .code-field
-              pre
-                | 1
-                br
-                | 2
-                br
-                | 3
-                br
-                | 4
-                br
-                | 5
-                br
-                | 6
-              pre
-                span.grey-500  /* Standalone */
-                br
-                |  .container-class
-                br
-                span.mp-purple     svg-icon(attrs={
-                span.mp-red 'icon-name'
-                span.mp-purple }) 
-                br
-                br
-                span.grey-500  /* Button declaration */
-                br
-                |  mp-button
-                span.mp-purple (attrs={icon: 
-                span.mp-red 'x'
-                span.mp-purple })
-                | .mp-button-with-icon
+  .section-title-container(class={
+    'no-match': sectionOpen === 'search',
+  })
+    .section-title
+      .title-text Iconography
+      .title-section 3.1
+  .sub-section-container#ui-icons(class={
+    'no-match': !searchSections.includes('ui-icons'),
+  })
+    .section-modifier
+      .zoom-toggles
+        li.zoom-toggle(
+          on={click: () => $helpers.changeIconSize('one')}
+          class={
+            'zoom-selected': iconSize == 'one',
+          }
+        ) 1x
+        li.zoom-toggle(
+          on={click: () => $helpers.changeIconSize('two')}
+          class={
+            'zoom-selected': iconSize == 'two',
+          }
+        ) 2x
+    .divider
+    //- .section-nav
+      //- +section-nav-item('Show All')
+      //- +section-nav-item('UI')
+      //- +section-nav-item('Marketing')
+      //- +section-nav-item('Legacy')
+    .section-content
+      section
+        .subsection-title UI Icons
+        .subsection-description 
+          span.grey-500 Icons measure 16x16 px, but to account for a possible ascenders and descenders they're saved on a canvas with 3px of padding, resulting in a 22x22 footprint. There may be times when you need a smaller or larger icon. 
+          span.bold Do not resize the 16x16 icon 
+          span.grey-500 to meet your needs; request a new one from your designer.
+        .indent-container
+          .icons
+            each icon in Object.keys(SVG_ICONS)
+              .icon.common-example(
+                class={
+                  'icon-small': iconSize == 'one',
+                  'icon-large': iconSize == 'two',
+                }
+              )
+                svg-icon(attrs={icon})
+                .icon-name(attrs={title: icon})= icon
+          .code-snippet
+            .call-out.first-call-out
+              strong.icon +
+              strong Example Code
+            .snippet-container.min.max
+              .snippet-header
+                label Jade
+              .code-field
+                pre
+                  | 1
+                  br
+                  | 2
+                  br
+                  | 3
+                  br
+                  | 4
+                  br
+                  | 5
+                  br
+                  | 6
+                pre
+                  span.grey-500  /* Standalone */
+                  br
+                  |  .container-class
+                  br
+                  span.mp-purple     svg-icon(attrs={
+                  span.mp-red 'icon-name'
+                  span.mp-purple }) 
+                  br
+                  br
+                  span.grey-500  /* Button declaration */
+                  br
+                  |  mp-button
+                  span.mp-purple (attrs={icon: 
+                  span.mp-red 'x'
+                  span.mp-purple })
+                  | .mp-button-with-icon

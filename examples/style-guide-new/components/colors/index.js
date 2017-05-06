@@ -21,18 +21,17 @@ document.registerElement('color-section', class extends Component {
   get config() {
     return {
       helpers: {
-        sectionChange: e => {
-          this.update({sectionFilter: e.currentTarget.dataset.filterName});
-        },
         getColorGroups: () => COLOR_GROUPS,
         getColorLibraries: () => COLOR_LIBRARIES,
+        hideSectionOnSearch: sectionId => {
+          const sectionKeywords = sectionId.split('-').join(' ');
+          if (this.state.sectionOpen != 'search' || sectionKeywords.includes(this.state.searchTerm)) {
+            return false
+          }
+          return true;
+        },
       },
       template,
     };
-  }
-
-  attachedCallback() {
-    super.attachedCallback(...arguments);
-    this.update({sectionFilter: 'show all'})
   }
 });
