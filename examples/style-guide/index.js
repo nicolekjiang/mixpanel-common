@@ -2,12 +2,12 @@ import 'babel-polyfill';
 
 import 'webcomponents.js/webcomponents';
 
-import { Component } from 'panel';
+import {Component} from 'panel';
 
 import '../../build/index';
 import COLORS from '../../build/stylesheets/mixins/colors.json';
-import { SVG_ICONS } from '../../build/components/svg-icon';
-import { extend } from '../../build/util';
+import {SVG_ICONS} from '../../build/components/svg-icon';
+import {extend} from '../../build/util';
 import ItemsMenu from '../../build/widgets/items-menu';
 import bookmarks from './bookmark-data.json';
 
@@ -76,7 +76,7 @@ document.registerElement(`style-guide`, class extends Component {
 
         closeTutorialNextTooltip: () => {
           this.update({tooltipStep: 0});
-          this.helpers.toggleTutorialTooltip('next');
+          this.helpers.toggleTutorialTooltip(`next`);
         },
         incrementTooltipStep: () => this.update({tooltipStep: this.state.tooltipStep + 1}),
         resetTooltipStep: e => {
@@ -86,7 +86,7 @@ document.registerElement(`style-guide`, class extends Component {
 
         getElementStr: el => {
           const attributesStr = Array.from(el.attributes).map(attribute => {
-            return `${attribute.nodeName}="${attribute.nodeValue}"`
+            return `${attribute.nodeName}="${attribute.nodeValue}"`;
           }).join(` `);
           return `<${el.tagName.toLowerCase()} ${attributesStr}>`;
         },

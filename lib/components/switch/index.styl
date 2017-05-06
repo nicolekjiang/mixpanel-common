@@ -1,0 +1,39 @@
+@import '../../stylesheets/defaults'
+
+switch-width = 34px
+switch-height = 18px
+switch-border = 2px
+toggle-size = switch-height - (switch-border * 2)
+
++host-styles(mp-switch)
+  display inline-block
+
+.mp-switch
+  background-color grey-200
+  border-radius 10px
+  cursor pointer
+  height switch-height
+  position relative
+  width switch-width
+
+  &.disabled
+    cursor default
+
+  &:after
+    background-color white
+    border-radius 50%
+    content ''
+    display block
+    height toggle-size
+    left 0
+    margin switch-border
+    position absolute
+    top 0
+    transition transform 150ms, background-color 150ms
+    width toggle-size
+
+  &.switch-on
+    background-color mp-green
+
+    &:after
+      transform translateX(switch-width - toggle-size - (switch-border * 2))

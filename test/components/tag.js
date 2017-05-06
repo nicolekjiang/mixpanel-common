@@ -1,5 +1,4 @@
-/* global beforeEach, describe, it */
-import expect from 'expect.js';
+/* eslint-env jasmine, mocha */
 import '../../lib/components/tag';
 
 describe(`Test tag component`, () => {

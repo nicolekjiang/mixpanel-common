@@ -1,4 +1,4 @@
-/* global beforeEach, describe, it */
+/* eslint-env jasmine, mocha */
 import expect from 'expect.js';
 import padStart from 'lodash/padStart';
 import moment from 'moment';
@@ -90,7 +90,7 @@ describe(`Test mp-calendar`, function() {
       if (this.calendar) {
         this.calendar.parentNode.removeChild(this.calendar);
       }
-      
+
       document.body.innerHTML = ``;
       this.calendar = document.createElement(`mp-calendar`);
       Object.keys(attributes).forEach(key => this.calendar.setAttribute(key, attributes[key]));
