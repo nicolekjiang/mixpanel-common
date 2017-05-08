@@ -7,22 +7,21 @@ document.registerElement('iconography-section', class extends Component {
   get config() {
     return {
       defaultState: {
-        sectionFilter: 'show all',
         iconSize: 'two'
       },
       helpers: {
-        sectionChange: e => {
-          this.update({sectionFilter: e.currentTarget.dataset.filterName});
-        },
         changeIconSize: iconSize => {
           this.update({iconSize})
-        }
+        },
+        hideSectionOnSearch: sectionId => {
+          const sectionKeywords = sectionId.split('-').join(' ');
+          if (this.state.sectionOpen != 'search' || sectionKeywords.includes(this.state.searchTerm)) {
+            return false
+          }
+          return true;
+        },
       },
       template,
     };
-  }
-
-  attachedCallback() {
-    super.attachedCallback(...arguments);
   }
 });

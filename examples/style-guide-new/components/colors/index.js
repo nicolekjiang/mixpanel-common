@@ -21,18 +21,54 @@ document.registerElement('color-section', class extends Component {
   get config() {
     return {
       helpers: {
-        sectionChange: e => {
-          this.update({sectionFilter: e.currentTarget.dataset.filterName});
-        },
         getColorGroups: () => COLOR_GROUPS,
         getColorLibraries: () => COLOR_LIBRARIES,
+        hideSectionOnSearch: sectionId => {
+          const sectionKeywords = sectionId.split('-').join(' ');
+          if (this.state.sectionOpen != 'search' || sectionKeywords.includes(this.state.searchTerm)) {
+            return false
+          }
+          return true;
+        },
+        showAllColors: (colorType, colors = null) => {
+          let showAll = true;
+          if (this.state.sectionOpen == 'search') {
+            if (colorType == 'colorGroup') {
+              colors.forEach(color => {
+                if (color.includes(this.state.searchTerm) ||
+                    this.state.COLORS[color].includes(this.state.searchTerm)) {
+                  showAll = false;
+                }
+              });
+            } else if (colorType == 'colorLibrary') {
+              const colorLibrayKeys = Object.keys(COLOR_LIBRARIES);
+              colorLibrayKeys.forEach(colorCategory => {
+                COLOR_LIBRARIES[colorCategory].forEach(color => {
+                  if (color.includes(this.state.searchTerm) ||
+                      this.state.COLORS[color].includes(this.state.searchTerm)) {
+                    showAll = false;
+                  }
+                })
+              })
+            }
+          }
+          return showAll
+        },
+        showColorLibraries: colorGroup => {
+          let show = false;
+          const colors = COLOR_LIBRARIES[colorGroup];
+          if (colorGroup.includes(this.state.searchTerm)) {
+            show = true;
+          }
+          colors.forEach(color => {
+            if (color.includes(this.state.searchTerm)) {
+              show = true;
+            }
+          })
+          return show;
+        }
       },
       template,
     };
-  }
-
-  attachedCallback() {
-    super.attachedCallback(...arguments);
-    this.update({sectionFilter: 'show all'})
   }
 });

@@ -9,9 +9,6 @@ document.registerElement('components-section', class extends Component {
   get config() {
     return {
       helpers: {
-        sectionChange: e => {
-          this.update({sectionFilter: e.currentTarget.dataset.filterName});
-        },
         openModal: key => {
           this.state.open[key] = true;
           this.update();
@@ -21,13 +18,16 @@ document.registerElement('components-section', class extends Component {
           this.update();
         },
         toggleTutorialTooltip: name => {
-          this.update({
-            open: extend(open, {
-              tutorialTooltip: {
-                [name]: !this.state.open.tutorialTooltip[name],
-              },
-            }),
-          });
+          this.state.open.tutorialTooltip = {};
+          this.state.open.tutorialTooltip[name] = true;
+          this.update();
+        },
+        hideSectionOnSearch: sectionId => {
+          const sectionKeywords = sectionId.split('-').join(' ');
+          if (this.state.sectionOpen != 'search' || sectionKeywords.includes(this.state.searchTerm)) {
+            return false
+          }
+          return true;
         },
       },
       template,

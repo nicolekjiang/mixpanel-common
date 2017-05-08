@@ -6,13 +6,7 @@ import './index.styl';
 document.registerElement('buttons-section', class extends Component {
   get config() {
     return {
-      defaultState: {
-        sectionFilter: 'show all',
-      },
       helpers: {
-        sectionChange: e => {
-          this.update({sectionFilter: e.currentTarget.dataset.filterName});
-        },
         handleModalChange: (key, state) => {
           this.state.open[key] = state === `open`;
           this.update();
@@ -21,12 +15,15 @@ document.registerElement('buttons-section', class extends Component {
           this.state.open[key] = !this.state.open[key];
           this.update();
         },
+        hideSectionOnSearch: sectionId => {
+          const sectionKeywords = sectionId.split('-').join(' ');
+          if (this.state.sectionOpen != 'search' || sectionKeywords.includes(this.state.searchTerm)) {
+            return false
+          }
+          return true;
+        },
       },
       template,
     };
-  }
-
-  attachedCallback() {
-    super.attachedCallback(...arguments);
   }
 });
