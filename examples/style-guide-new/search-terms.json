@@ -79,7 +79,9 @@
     "mp-turquoise",
     "#24D2EF",
     "mp-ultramarine",
-    "#106ECA"
+    "#106ECA",
+    "mp-orange",
+    "mp-yellow"
   ],
   "color-library": [
     "#19B264",

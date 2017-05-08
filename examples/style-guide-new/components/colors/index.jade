@@ -17,7 +17,7 @@
       .indent-container
         .color-chips
           for color in colorGroups['Mixpanel UI Colors']
-            if (sectionOpen == 'search' && color.includes(searchTerm)) || sectionOpen == 'colors'
+            if $helpers.showAllColors('colorGroup', colorGroups['Mixpanel UI Colors']) || color.includes(searchTerm)
               .swatch
                 .swatch-color(style={'background-color': COLORS[color]})
                 .swatch-label
@@ -71,7 +71,7 @@
       .indent-container
         .color-chips
           for color in colorGroups['Data Visualization']
-            if (sectionOpen == 'search' && color.includes(searchTerm)) || sectionOpen == 'colors'
+            if $helpers.showAllColors('colorGroup', colorGroups['Data Visualization']) || color.includes(searchTerm)
               .swatch
                 .swatch-color(style={'background-color': COLORS[color]})
                 .swatch-label
@@ -91,12 +91,13 @@
       .indent-container
         .color-library
           for colorGroup in Object.keys(colorLibrary)
-            if (sectionOpen == 'search' && colorGroup.includes(searchTerm)) || sectionOpen == 'colors'
+            if $helpers.showAllColors('colorLibrary') || $helpers.showColorLibraries(colorGroup)
               .color-group-container
                 strong.color-group-title= colorGroup
                 .color-group
                   for color in colorLibrary[colorGroup]
-                    .color-segment(style={'background-color': COLORS[color]})
-                      .color-segment-hex= COLORS[color]
-                      .color-segment-name= color
+                    if $helpers.showAllColors('colorGroup', colorLibrary[colorGroup]) || color.includes(searchTerm)
+                      .color-segment(style={'background-color': COLORS[color]})
+                        .color-segment-hex= COLORS[color]
+                        .color-segment-name= color
 
