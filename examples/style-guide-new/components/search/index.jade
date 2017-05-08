@@ -1,10 +1,7 @@
 .search-page
-  .mp-search
-    .mp-icon
-      svg-icon(attrs={icon: "search"})
-    input(
-      attrs={type: 'text', placeholder: 'Search'}
-      on={keyup: e => $helpers.inputKeyDown(e)}
+  .section-title
+    input.title-text(
+      on={keyup: e => $helpers.inputKeyUp(e)}
     )
   = $component.child('color-section')
   = $component.child('typography-section')

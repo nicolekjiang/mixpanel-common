@@ -7,7 +7,7 @@ document.registerElement('search-section', class extends Component {
   get config() {
     return {
       helpers: {
-        inputKeyDown: e => {
+        inputKeyUp: e => {
           let searchTerm = e.target.value.length > 0 ? e.target.value.toLowerCase() : null;
           this.update({searchTerm});
           this.app.matchSearchTerms(searchTerm);
@@ -18,10 +18,12 @@ document.registerElement('search-section', class extends Component {
   }
   attachedCallback() {
     super.attachedCallback(...arguments);
-    setTimeout(() => this.el.querySelector('.mp-search input').focus(), 100);
+    const searchInput = this.el.querySelector('input.title-text');
+    searchInput.value = this.state.searchTermPrompt;
+    searchInput.focus();
   }
   detachedCallback() {
     super.detachedCallback(...arguments);
-    this.update({searchTerm: null});
+    this.update({searchTerm: null, searchTermPrompt: null});
   }
 });
