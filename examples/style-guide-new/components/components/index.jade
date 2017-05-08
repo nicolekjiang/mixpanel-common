@@ -76,7 +76,6 @@
           //-     p Minimal
           //-   .floating-example-bar
           //-     //- insert component for IRB search field
-
           .code-snippet
             .call-out.first-call-out
               strong.icon +
@@ -93,8 +92,26 @@
                   | 3
                   br
                   | 4
+                  br
+                  | 5
+                  br
+                  | 6
+                  br
+                  | 7
+                  br
+                  | 8
                 pre
                   span.grey-500  /* Square field w/ icon */
+                  br
+                  span.mp-red .mp-icon-input
+                  br
+                  |   .mp-icon
+                  br
+                  span.mp-red      svg-icon
+                  span.mp-purple (attrs={icon: "search"})
+                  br
+                  |    input
+                  span.mp-purple (attrs={type: 'text', placeholder: 'Some placeholder text'})
                   br
                   br
                   span.grey-500  /* Square field w/ button */
@@ -282,7 +299,6 @@
       //-     p Unspecified
       //-   .common-example
       //-      //- Insert component
-
       .example-block.full-width
         .call-out.first-call-out
           strong.icon +
