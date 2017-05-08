@@ -1,0 +1,12 @@
+.search-page
+  .section-title
+    input.title-text(
+      on={keyup: e => $helpers.inputKeyUp(e)}
+    )
+  = $component.child('color-section')
+  = $component.child('typography-section')
+  = $component.child('iconography-section')
+  = $component.child('buttons-section')
+  = $component.child('components-section')
+  = $component.child('widgets-section')
+  

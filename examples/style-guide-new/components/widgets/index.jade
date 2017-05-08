@@ -1,124 +1,102 @@
-include ../mixins.jade
-
 .section
-  .section-title
-    .title-text Widgets
-    .title-section 6.1
-  //- Section nav feature postponed for next pass
-  //- .section-nav
-  //-   +section-nav-item('Show All')
-  //-   +section-nav-item('Basics')
-  //-   +section-nav-item('Bars')
-  //-   +section-nav-item('Dropdowns')
-  //-   +section-nav-item('Toggles')
-  //-   +section-nav-item('Misc')
-  .divider#widgets
-  .section-content
-    section
-      .subsection-title Widgets
-      .subsection-description A handfull of components that have been pre-composed as ready-to-use interface elements.
-      .indent-container
-        .example-block.full-width
-          .call-out.first-call-out
-            strong.icon +
-            strong mp-bookmarks-widget
-          .bookmarks-widget
-            mp-bookmarks-widget(
-              attrs={
-                'bookmarks': JSON.stringify(bookmarks),
-                'create-disabled': false,
-                'saving': savingBookmark,
-                'selected-bookmark-id': selectedBookmarkId,
-                'user-id': 1,
-                'has-write-permissions': true,
-                'open': true,
-                'over-free-limit': currentBookmark == 'pricing' ? true : false,
-              }
-              on={
-                change: $helpers.handleBookmarksMenuChange,
-                submit: $helpers.handleBookmarksMenuSubmit,
-              }
-            )
-        .demo-divider
-          a(on={click: () => $helpers.toggleBookmarkType('default')}) Default
-          a(on={click: () => $helpers.toggleBookmarkType('pricing')}) Pricing Restricted
-        .code-snippet
-          .call-out.first-call-out
-            strong.icon +
-            strong Example Code
-          .snippet-container.min.max
-            .snippet-header
-              label Jade
-            .code-field
-              pre
-                | 1
-                br
-                | 2
-                br
-                | 3
-              pre
-                span.grey-500  /* Bookmarks Widget */
-                br
-                br
-                span.grey-500  /* Pricing Restricted */
-      .divider#tag-selector
-        label 6.2            
-        .example-block.full-width
-          .call-out.first-call-out
-            strong.icon +
-            strong mp-tag-selector
-          .tag-selector-container
-            mp-button.mp-button-secondary(on={click: $helpers.toggleTagSelector}) Edit tags
-            mp-drop-menu(attrs={open: open.tagSelector} on={change: $helpers.handleTagSelectorDropMenuChange})
-              .title
-                .header
-                  svg-icon(attrs={icon: "check-success"})
-                  .header-text Added to company dashboard
-                .subtext Viewed report by type
-              mp-tag-selector(
+  .section-title-container(class={
+    'no-match': sectionOpen === 'search',
+  })
+    .section-title
+      .title-text Widgets
+      .title-section 6.1
+  .sub-section-container#widgets(class={
+    'no-match': !searchSections.includes('widgets'),
+  })
+    .divider
+    .section-content
+      section
+        .subsection-title Widgets
+        .subsection-description A handfull of components that have been pre-composed as ready-to-use interface elements.
+        .indent-container
+          .example-block.full-width
+            .call-out.first-call-out
+              strong.icon +
+              strong mp-bookmarks-widget
+            .bookmarks-widget
+              mp-bookmarks-widget(
                 attrs={
-                  'selected-tags': JSON.stringify(tagSelectorData.selectedTags),
-                  'all-tags': JSON.stringify(tagSelectorData.allTags),
-                  'saving': tagSelectorData.saving,
+                  'bookmarks': JSON.stringify(bookmarks),
+                  'create-disabled': false,
+                  'saving': savingBookmark,
+                  'selected-bookmark-id': selectedBookmarkId,
+                  'user-id': 1,
+                  'has-write-permissions': true,
+                  'open': sectionOpen != 'search',
+                  'over-free-limit': currentBookmark == 'pricing' ? true : false,
                 }
                 on={
-                  change: $helpers.handleTagSelectorChange,
-                  save: $helpers.handleTagSelectorSave,
+                  change: $helpers.handleBookmarksMenuChange,
+                  submit: $helpers.handleBookmarksMenuSubmit,
                 }
               )
-  .divider#calendar-widget
-  .section-content
-    section
-    .subsection-title Calendar Widgets
-    .subsection-description These UI components are containers that will interrupt the current flow, by displaying on top of the page content.
-    .indent-container
-      .example-block
-        .call-out.first-call-out
-          strong.icon +
-          strong mp-calendar 
-          p double calendar
-        .example-card
-          .calendar-container
-           mp-calendar(
-             attrs={
-               'is-double-calendar': true,
-               'is-range': true,
-               'min-date': `2015-12-10`,
-               'max-date': `2016-03-20`,
-               'selected-from-date': `2015-12-25`,
-               'selected-to-date': `2016-03-15`,
-             }
-           )
-      .example-block
-        .call-out
-          strong mp-calendar 
-          p single calendar
-        .example-card
-          .calendar-container
-            mp-calendar(
-              attrs={
-                'min-date': `2015-06-10`,
-                'max-date': `2016-01-20`,
-                'selected-date': `2016-01-15`,
-              }
-            )
+          .demo-divider
+            a(on={click: () => $helpers.toggleBookmarkType('default')}) Default
+            a(on={click: () => $helpers.toggleBookmarkType('pricing')}) Pricing restricted
+          .example-block.full-width#tag-selector
+            .call-out.first-call-out
+              strong.icon +
+              strong mp-tag-selector
+            .tag-selector-container
+              mp-button.mp-button-secondary(on={click: $helpers.toggleTagSelector}) Edit tags
+              mp-drop-menu(attrs={open: open.tagSelector} on={change: $helpers.handleTagSelectorDropMenuChange})
+                .title
+                  .header
+                    svg-icon(attrs={icon: "check-success"})
+                    .header-text Added to company dashboard
+                  .subtext Viewed report by type
+                mp-tag-selector(
+                  attrs={
+                    'selected-tags': JSON.stringify(tagSelectorData.selectedTags),
+                    'all-tags': JSON.stringify(tagSelectorData.allTags),
+                    'saving': tagSelectorData.saving,
+                  }
+                  on={
+                    change: $helpers.handleTagSelectorChange,
+                    save: $helpers.handleTagSelectorSave,
+                  }
+                )
+  .sub-section-container#calendar-widget(class={
+    'no-match': !searchSections.includes('calendar-widget'),
+  })
+    .divider
+    .section-content
+      section
+      .subsection-title Calendar Widgets
+      .subsection-description These UI components are containers that will interrupt the current flow, by displaying on top of the page content.
+      .indent-container
+        .example-block
+          .call-out.first-call-out
+            strong.icon +
+            strong mp-calendar 
+            p double calendar
+          .example-card
+            .calendar-container
+             mp-calendar(
+               attrs={
+                 'is-double-calendar': true,
+                 'is-range': true,
+                 'min-date': `2015-12-10`,
+                 'max-date': `2016-03-20`,
+                 'selected-from-date': `2015-12-25`,
+                 'selected-to-date': `2016-03-15`,
+               }
+             )
+        .example-block
+          .call-out
+            strong mp-calendar 
+            p single calendar
+          .example-card
+            .calendar-container
+              mp-calendar(
+                attrs={
+                  'min-date': `2015-06-10`,
+                  'max-date': `2016-01-20`,
+                  'selected-date': `2016-01-15`,
+                }
+              )

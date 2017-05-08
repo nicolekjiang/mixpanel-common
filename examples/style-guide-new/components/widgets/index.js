@@ -92,7 +92,7 @@ document.registerElement('widgets-section', class extends Component {
           setTimeout(() => bookmark.setAttribute(`open`, true), 200);
           const currentBookmark = type;
           this.update({currentBookmark});
-        }
+        },
       },
       template,
     };
