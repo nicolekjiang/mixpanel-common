@@ -9,7 +9,7 @@ document.registerElement('search-section', class extends Component {
       helpers: {
         inputKeyUp: e => {
           if (e.target.value.length == 0) {
-            this.update({sectionOpen: this.state.previousSectionOpen})
+            this.update({sectionOpen: this.state.previousSectionOpen});
           } else {
             let searchTerm = e.target.value.toLowerCase();
             this.update({searchTerm});

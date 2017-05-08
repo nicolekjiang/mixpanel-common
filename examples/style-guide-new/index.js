@@ -111,7 +111,7 @@ document.registerElement('style-guide', class extends Component {
         if (this.isCharacterKeyPress(e)) {
           this.update({searchTermPrompt: e.key.toUpperCase()});
         }
-      }
+      };
     }
     document.body.addEventListener(`keypress`, this.enterSearchMode);
   }

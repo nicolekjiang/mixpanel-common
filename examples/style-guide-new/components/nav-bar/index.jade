@@ -71,7 +71,7 @@ mixin nav-section-header(number, label)
     +nav-section-header('06', 'Widgets')
     if sectionOpen === 'widgets'
       .sub-nav
-        .sub-nav-section(on={click: () => $helpers.jumpToNavigate('widgets')})
+        .sub-nav-section(on={click: () => $helpers.jumpToNavigate('bookmarks')})
           .sub-nav-label Bookmark Widget
           .sub-nav-number 6.1
         .sub-nav-section(on={click: () => $helpers.jumpToNavigate('tag-selector')})

@@ -5,8 +5,8 @@
     .section-title
       .title-text Bookmarks
       .title-section 6.1
-  .sub-section-container#widgets(class={
-    'no-match': !searchSections.includes('widgets'),
+  .sub-section-container#bookmarks(class={
+    'no-match': !searchSections.includes('bookmarks'),
   })
     .divider
     .section-content
@@ -112,6 +112,9 @@
                   br
                   span.mp-red     }
                   span.mp-purple )
+  .sub-section-container#tag-selector(class={
+    'no-match': !searchSections.includes('tag-selector'),
+  })
     .divider#tag-selector
        label 6.2    
      .section-content
