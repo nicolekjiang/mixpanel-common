@@ -2,7 +2,7 @@
 @import '../../../../build/stylesheets/mixins/common.styl'
 
 .common-example
-  mp-toast, mp-upsell-popup, mp-alert
+  mp-toast, mp-alert
     margin 10px 10px 0 10px !important
 
 .example-block	
@@ -44,6 +44,21 @@ mp-tooltip.multiline span
 
 .mp-modal-content
   text-align left
+
+.mp-popup-example
+  padding 20px
+  border-radius 3px
+  box-shadow 0 8px 22px 0 (rgba(0, 0, 0, 0.37))
+  background-color #FFFFFF
+  width 203px
+  height 17px
+  margin 5px 5px 10px 5px !important
+  color grey-500
+  display inline-flex
+  &.mp-icon
+    fill blue-300
+  
+upsell-popup-example
 
 .tooltip-example
   align-items center

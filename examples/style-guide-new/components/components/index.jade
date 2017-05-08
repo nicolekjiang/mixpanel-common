@@ -369,8 +369,54 @@
           .code-field
             pre
               | 1
+              br
+              | 2
+              br
+              | 3
+              br
+              | 4
+              br
+              | 5
+              br
+              | 6
+              br
+              | 7
+              br
+              | 8
+              br
+              | 9
+              br
+              | 10
+              br
+              | 11
             pre
-              span.grey-500  /* Square field w/ icon */
+              span.grey-500 /* Popup & Alert */
+              br
+              span.mp-red  mp-alert(
+              span.mp-purple attrs={id: 'alert', closeable: true, open: open['alert-large-icon'], 'large-icon': true}
+              span.mp-red )
+              br
+              |    div
+              br
+              |      Alert text here
+              br
+              br
+              span.grey-500 /* Toast */
+              br
+              span.mp-red  mp-toast(
+              span.mp-purple   attrs={cta: toast.cta, hide: toast.closed}
+              span.mp-red )=
+              |  Toast message
+              br
+              br
+              span.grey-500 /* Tutorial tooltips */
+              br
+              | .tutorial-tooltips-container
+              br
+              span.mp-red   mp-tutorial-tool-tip(
+              span.mp-purple attrs={placement: 'bottom','num-steps': 4}
+              span.mp-red )
+              |  Tooltip text
   .sub-section-container#contextual-elements(class={
     'no-match': !searchSections.includes('contextual-elements'),
   })
@@ -394,7 +440,6 @@
         .common-example
           .tooltips-container
             .tooltip-example.placement-top tooltip 
-
       .example-block
         .call-out
           strong mp-tooltip 
