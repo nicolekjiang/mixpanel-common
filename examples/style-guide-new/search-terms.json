@@ -1,5 +1,6 @@
 {
   "basic-buttons": [
+    "components",
     "buttons",
     "basic",
     "red",
@@ -11,18 +12,21 @@
     "blue button"
   ],
   "button-bars": [
+    "components",
     "buttons bars",
     "button bars",
     "mp-button-bar-primary",
     "mp-button-bar-secondary"
   ],
   "toggle-buttons": [
+    "components",
     "toggle buttons",
     "toggles buttons",
     "mp-toggle",
     "inline-toggle"
   ],
   "drop-buttons": [
+    "components",
     "mp-drop-menu",
     "drop",
     "buttons"
@@ -142,11 +146,13 @@
     "yellow-700"
   ],
   "input-fields": [
+    "components",
     "input fields",
     "search",
     "mp-input-group"
   ],
   "modals-dialogues": [
+    "components",
     "modals",
     "popups",
     "dialogues",
@@ -155,6 +161,7 @@
     "mp-confirm"
   ],
   "popups-alerts": [
+    "components",
     "upsell",
     "alerts",
     "popups",
@@ -166,6 +173,7 @@
     "mp-tutorial-tooltip"
   ],
   "contextual-elements": [
+    "components",
     "tooltip",
     "tags",
     "mp-tooltip",
@@ -293,6 +301,7 @@
     "extra large"
   ],
   "widgets": [
+    "components",
     "widgets",
     "bookmarks",
     "edit tags",
@@ -301,6 +310,7 @@
     "mp-bookmarks-widget"
   ],
   "calendar-widget": [
+    "components",
     "calendar widgets",
     "one month",
     "time",
