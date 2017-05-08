@@ -244,20 +244,20 @@
         .call-out.first-call-out
           strong.icon +
           strong mp-upsell-popup
-        .common-example
+        .common-example(style={width: '269px', height: '68px'})
           a(
             on={click: () => $helpers.openModal('upsell')}
             style={position: 'absolute'}
           ) Re-Open
           mp-upsell-popup(
             attrs={feature: 'default', open: open.upsell} 
-            style={position: 'relative'}
+            style={position: 'relative', left: '-17px', top: '-5px'}
             on={change: e => $helpers.handleModalChange('upsell', e.detail.state)}
           )
       .example-block
         .call-out
           strong mp-alert
-        .common-example
+        .common-example(style={width: '283px', height: '40px'})
           a(
             on={click: () => $helpers.openModal('alert')}
             style={position: 'absolute'}
@@ -269,7 +269,7 @@
               open: open.alert, 
               'not-fullscreen': true, 
             }
-            style={position: 'relative'}
+            style={position: 'relative', left: '-19px', top: '-5px'}
             on={change: e => $helpers.handleModalChange('alert', e.detail.state)}
           )
             div

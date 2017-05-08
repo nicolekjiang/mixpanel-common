@@ -18,13 +18,8 @@ document.registerElement('components-section', class extends Component {
           this.update();
         },
         toggleTutorialTooltip: name => {
-          this.update({
-            open: extend(open, {
-              tutorialTooltip: {
-                [name]: !this.state.open.tutorialTooltip[name],
-              },
-            }),
-          });
+          this.state.open.tutorialTooltip[name] = !this.state.open.tutorialTooltip[name];
+          this.update();
         },
         hideSectionOnSearch: sectionId => {
           const sectionKeywords = sectionId.split('-').join(' ');
