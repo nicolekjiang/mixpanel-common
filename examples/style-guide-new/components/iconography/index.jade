@@ -38,14 +38,15 @@
         .indent-container
           .icons
             each icon in Object.keys(SVG_ICONS)
-              .icon.common-example(
-                class={
-                  'icon-small': iconSize == 'one',
-                  'icon-large': iconSize == 'two',
-                }
-              )
-                svg-icon(attrs={icon})
-                .icon-name(attrs={title: icon})= icon
+              if (sectionOpen == 'search' && icon.includes(searchTerm)) || sectionOpen == 'iconography'
+                .icon.common-example(
+                  class={
+                    'icon-small': iconSize == 'one',
+                    'icon-large': iconSize == 'two',
+                  }
+                )
+                  svg-icon(attrs={icon})
+                  .icon-name(attrs={title: icon})= icon
           .code-snippet
             .call-out.first-call-out
               strong.icon +

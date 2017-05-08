@@ -18,7 +18,8 @@ document.registerElement('components-section', class extends Component {
           this.update();
         },
         toggleTutorialTooltip: name => {
-          this.state.open.tutorialTooltip[name] = !this.state.open.tutorialTooltip[name];
+          this.state.open.tutorialTooltip = {};
+          this.state.open.tutorialTooltip[name] = true;
           this.update();
         },
         hideSectionOnSearch: sectionId => {

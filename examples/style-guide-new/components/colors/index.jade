@@ -17,11 +17,12 @@
       .indent-container
         .color-chips
           for color in colorGroups['Mixpanel UI Colors']
-            .swatch
-              .swatch-color(style={'background-color': COLORS[color]})
-              .swatch-label
-                .color-name= color
-                .color-hex= COLORS[color]
+            if (sectionOpen == 'search' && color.includes(searchTerm)) || sectionOpen == 'colors'
+              .swatch
+                .swatch-color(style={'background-color': COLORS[color]})
+                .swatch-label
+                  .color-name= color
+                  .color-hex= COLORS[color]
         .code-snippet
           .call-out.first-call-out
             strong.icon +
@@ -70,11 +71,12 @@
       .indent-container
         .color-chips
           for color in colorGroups['Data Visualization']
-            .swatch
-              .swatch-color(style={'background-color': COLORS[color]})
-              .swatch-label
-                .color-name= color
-                .color-hex= COLORS[color]
+            if (sectionOpen == 'search' && color.includes(searchTerm)) || sectionOpen == 'colors'
+              .swatch
+                .swatch-color(style={'background-color': COLORS[color]})
+                .swatch-label
+                  .color-name= color
+                  .color-hex= COLORS[color]
   .sub-section-container#color-library(class={
     'no-match': !searchSections.includes('color-library'),
   })
@@ -89,11 +91,12 @@
       .indent-container
         .color-library
           for colorGroup in Object.keys(colorLibrary)
-            .color-group-container
-              strong.color-group-title= colorGroup
-              .color-group
-                for color in colorLibrary[colorGroup]
-                  .color-segment(style={'background-color': COLORS[color]})
-                    .color-segment-hex= COLORS[color]
-                    .color-segment-name= color
+            if (sectionOpen == 'search' && colorGroup.includes(searchTerm)) || sectionOpen == 'colors'
+              .color-group-container
+                strong.color-group-title= colorGroup
+                .color-group
+                  for color in colorLibrary[colorGroup]
+                    .color-segment(style={'background-color': COLORS[color]})
+                      .color-segment-hex= COLORS[color]
+                      .color-segment-name= color
 
