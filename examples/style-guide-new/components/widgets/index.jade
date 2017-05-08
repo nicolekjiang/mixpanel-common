@@ -3,7 +3,7 @@
     'no-match': sectionOpen === 'search',
   })
     .section-title
-      .title-text Widgets
+      .title-text Bookmarks
       .title-section 6.1
   .sub-section-container#widgets(class={
     'no-match': !searchSections.includes('widgets'),
@@ -38,6 +38,32 @@
           .demo-divider
             a(on={click: () => $helpers.toggleBookmarkType('default')}) Default
             a(on={click: () => $helpers.toggleBookmarkType('pricing')}) Pricing restricted
+          .code-snippet
+            .call-out.first-call-out
+              strong.icon +
+              strong Example Code
+            .snippet-container.min.max
+              .snippet-header
+                label Jade
+              .code-field
+                pre
+                  | 1
+                  br
+                  | 2
+                  br
+                  | 3
+                pre
+                  span.grey-500  /* Bookmarks Widget */
+                  br
+                  br
+                  span.grey-500  /* Pricing Restricted */
+    .divider#tag-selector
+       label 6.2    
+     .section-content
+       section
+         .subsection-title Tag Selector
+         .subsection-description These UI components are containers that will interrupt the current flow, by displaying on top of the page content.
+        .indent-container       
           .example-block.full-width#tag-selector
             .call-out.first-call-out
               strong.icon +
@@ -61,6 +87,25 @@
                     save: $helpers.handleTagSelectorSave,
                   }
                 )
+          .code-snippet
+            .call-out.first-call-out
+              strong.icon +
+              strong Example Code
+            .snippet-container.min.max
+              .snippet-header
+                label Jade
+              .code-field
+                pre
+                  | 1
+                  br
+                  | 2
+                  br
+                  | 3
+                pre
+                  span.grey-500  /* Bookmarks Widget */
+                  br
+                  br
+                  span.grey-500  /* Pricing Restricted */
   .sub-section-container#calendar-widget(class={
     'no-match': !searchSections.includes('calendar-widget'),
   })
