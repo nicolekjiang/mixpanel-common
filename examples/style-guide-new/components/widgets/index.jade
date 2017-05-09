@@ -3,10 +3,10 @@
     'no-match': sectionOpen === 'search',
   })
     .section-title
-      .title-text Widgets
+      .title-text Bookmarks
       .title-section 6.1
-  .sub-section-container#widgets(class={
-    'no-match': !searchSections.includes('widgets'),
+  .sub-section-container#bookmarks(class={
+    'no-match': !searchSections.includes('bookmarks'),
   })
     .divider
     .section-content
@@ -38,6 +38,90 @@
           .demo-divider
             a(on={click: () => $helpers.toggleBookmarkType('default')}) Default
             a(on={click: () => $helpers.toggleBookmarkType('pricing')}) Pricing restricted
+          .code-snippet
+            .call-out.first-call-out
+              strong.icon +
+              strong Example Code
+            .snippet-container.min.max
+              .snippet-header
+                label Jade
+              .code-field
+                pre
+                  | 1
+                  br
+                  | 2
+                  br
+                  | 3
+                  br
+                  | 4
+                  br
+                  | 5
+                  br
+                  | 6
+                  br
+                  | 7
+                  br
+                  | 8
+                  br
+                  | 9
+                  br
+                  | 10
+                  br
+                  | 11
+                  br
+                  | 12
+                  br
+                  | 13
+                  br
+                  | 14
+                  br
+                  | 15
+                  br
+                  | 16
+                pre
+                  span.grey-500  /* Bookmarks Widget */
+                  br
+                  span.mp-red  mp-bookmarks-widget
+                  span.mp-purple (
+                  br
+                  span.mp-purple     attrs={
+                  br
+                  |      'bookmarks': JSON.stringify(bookmarks),
+                  br
+                  |      'create-disabled': false,
+                  br
+                  |      'saving': savingBookmark,
+                  br
+                  |      'selected-bookmark-id': selectedBookmarkId,
+                  br
+                  |      'user-id': 1,
+                  br
+                  |      'has-write-permissions': true,
+                  br
+                  |      'open': true,
+                  br
+                  |      'over-free-limit': currentBookmark == 'pricing' ? true : false,
+                  br
+                  span.mp-purple     }
+                  br
+                  span.mp-red     on={
+                  br
+                  |       change: $helpers.handleBookmarksMenuChange,
+                  br
+                  |       submit: $helpers.handleBookmarksMenuSubmit,
+                  br
+                  span.mp-red     }
+                  span.mp-purple )
+  .sub-section-container#tag-selector(class={
+    'no-match': !searchSections.includes('tag-selector'),
+  })
+    .divider#tag-selector
+       label 6.2    
+     .section-content
+       section
+         .subsection-title Tag Selector
+         .subsection-description These UI components are containers that will interrupt the current flow, by displaying on top of the page content.
+        .indent-container       
           .example-block.full-width#tag-selector
             .call-out.first-call-out
               strong.icon +
@@ -61,6 +145,77 @@
                     save: $helpers.handleTagSelectorSave,
                   }
                 )
+          .code-snippet
+            .call-out.first-call-out
+              strong.icon +
+              strong Example Code
+            .snippet-container.min.max
+              .snippet-header
+                label Jade
+              .code-field
+                pre
+                  | 1
+                  br
+                  | 2
+                  br
+                  | 3
+                  br
+                  | 4
+                  br
+                  | 5
+                  br
+                  | 6
+                  br
+                  | 7
+                  br
+                  | 8
+                  br
+                  | 9
+                  br
+                  | 10
+                  br
+                  | 11
+                  br
+                  | 12
+                  br
+                  | 13
+                  br
+                  | 14
+                  br
+                  | 15
+                pre
+                  span.grey-500  /* Tag Selector */
+                  br
+                  span.mp-red  .tag-selector-container
+                  br
+                  |    mp-buton.mp-button-secondary
+                  span.mp-red (on={click: $helpers.toggleTagSelector})
+                  |  Edit tags
+                  br
+                  |      mp-drop-menu
+                  span.mp-purple (attrs={open: open.tagSelector} on={change: $helpers.handleTagSelectorDropMenuChange})
+                  br
+                  span.mp-red        mp-tag-selector(
+                  br
+                  span.mp-purple         attrs={
+                  br
+                  |           'selected-tags': JSON.stringify(tagSelectorData.selectedTags),
+                  br
+                  |           'all-tags': JSON.stringify(tagSelectorData.allTags),
+                  br
+                  |           'saving': tagSelectorData.saving,
+                  br
+                  span.mp-purple         }
+                  br
+                  span.mp-purple         on={
+                  br
+                  |            change: $helpers.handleTagSelectorChange,
+                  br
+                  |            save: $helpers.handleTagSelectorSave,
+                  br
+                  span.mp-purple         }
+                  br
+                  span.mp-red       )
   .sub-section-container#calendar-widget(class={
     'no-match': !searchSections.includes('calendar-widget'),
   })
@@ -100,3 +255,59 @@
                   'selected-date': `2016-01-15`,
                 }
               )
+        .code-snippet
+          .call-out.first-call-out
+            strong.icon +
+            strong Example Code
+          .snippet-container.min.max
+            .snippet-header
+              label Jade
+            .code-field
+              pre
+                | 1
+                br
+                | 2
+                br
+                | 3
+                br
+                | 4
+                br
+                | 5
+                br
+                | 6
+                br
+                | 7
+                br
+                | 8
+                br
+                | 9
+                br
+                | 10
+                br
+                | 11
+                br
+                | 12
+              pre
+                span.grey-500  /* Calendar Widget */
+                br
+                span.mp-red .calendar-container
+                br
+                span.mp-red    mp-calendar(
+                br
+                span.mp-purple      attrs={
+                br
+                |       'is-double-calendar': true,
+                br
+                |        'is-range': true,
+                br
+                |        'min-date': `2015-12-10`,
+                br
+                |         'max-date': `2016-03-20`,
+                br
+                |        'selected-from-date': `2015-12-25`,
+                br
+                |        'selected-to-date': `2016-03-15`,
+                br
+                span.mp-purple      }
+                br
+                span.mp-red    )

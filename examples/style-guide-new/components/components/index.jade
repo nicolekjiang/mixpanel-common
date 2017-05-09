@@ -76,7 +76,6 @@
           //-     p Minimal
           //-   .floating-example-bar
           //-     //- insert component for IRB search field
-
           .code-snippet
             .call-out.first-call-out
               strong.icon +
@@ -93,8 +92,26 @@
                   | 3
                   br
                   | 4
+                  br
+                  | 5
+                  br
+                  | 6
+                  br
+                  | 7
+                  br
+                  | 8
                 pre
                   span.grey-500  /* Square field w/ icon */
+                  br
+                  span.mp-red .mp-icon-input
+                  br
+                  |   .mp-icon
+                  br
+                  span.mp-red      svg-icon
+                  span.mp-purple (attrs={icon: "search"})
+                  br
+                  |    input
+                  span.mp-purple (attrs={type: 'text', placeholder: 'Some placeholder text'})
                   br
                   br
                   span.grey-500  /* Square field w/ button */
@@ -282,7 +299,6 @@
       //-     p Unspecified
       //-   .common-example
       //-      //- Insert component
-
       .example-block.full-width
         .call-out.first-call-out
           strong.icon +
@@ -353,8 +369,54 @@
           .code-field
             pre
               | 1
+              br
+              | 2
+              br
+              | 3
+              br
+              | 4
+              br
+              | 5
+              br
+              | 6
+              br
+              | 7
+              br
+              | 8
+              br
+              | 9
+              br
+              | 10
+              br
+              | 11
             pre
-              span.grey-500  /* Square field w/ icon */
+              span.grey-500 /* Popup & Alert */
+              br
+              span.mp-red  mp-alert(
+              span.mp-purple attrs={id: 'alert', closeable: true, open: open['alert-large-icon'], 'large-icon': true}
+              span.mp-red )
+              br
+              |    div
+              br
+              |      Alert text here
+              br
+              br
+              span.grey-500 /* Toast */
+              br
+              span.mp-red  mp-toast(
+              span.mp-purple   attrs={cta: toast.cta, hide: toast.closed}
+              span.mp-red )=
+              |  Toast message
+              br
+              br
+              span.grey-500 /* Tutorial tooltips */
+              br
+              | .tutorial-tooltips-container
+              br
+              span.mp-red   mp-tutorial-tool-tip(
+              span.mp-purple attrs={placement: 'bottom','num-steps': 4}
+              span.mp-red )
+              |  Tooltip text
   .sub-section-container#contextual-elements(class={
     'no-match': !searchSections.includes('contextual-elements'),
   })
@@ -378,7 +440,6 @@
         .common-example
           .tooltips-container
             .tooltip-example.placement-top tooltip 
-
       .example-block
         .call-out
           strong mp-tooltip 
@@ -388,7 +449,6 @@
             .tooltip-example.placement-left left
             .tooltip-example.placement-bottom bottom
             .tooltip-example.placement-right right
-
       //- Pending Addition: Extended data hover-tips
       //- .example-block
       //-   .call-out.first-call-out

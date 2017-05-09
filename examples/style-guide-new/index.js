@@ -26,6 +26,7 @@ document.registerElement('style-guide', class extends Component {
     return {
       defaultState: {
         COLORS,
+        previousSectionOpen: null,
         SVG_ICONS,
         sectionOpen: 'colors',
         subSectionOpen: null,
@@ -94,7 +95,9 @@ document.registerElement('style-guide', class extends Component {
   }
 
   isCharacterKeyPress(e) {
-    if ((65 <= e.which && e.which <= 90) || (97 <= e.which && e.which <= 122)) {
+    if ((48 <= e.which && e.which <= 57) || 
+        (65 <= e.which && e.which <= 90) || 
+        (97 <= e.which && e.which <= 122)) {
       return true
     }
     return false;
@@ -103,10 +106,15 @@ document.registerElement('style-guide', class extends Component {
   attachedCallback() {
     super.attachedCallback(...arguments);
     this.enterSearchMode = e => {
-      const sectionOpen = this.state.sectionOpen;
-      this.update({sectionOpen: 'search'});
-      if (sectionOpen != 'search' && this.isCharacterKeyPress(e)) {
-        this.update({searchTermPrompt: e.key});
+      if (this.isCharacterKeyPress(e)) {
+        const sectionOpen = this.state.sectionOpen;
+        this.update({sectionOpen: 'search'});
+        if (sectionOpen != 'search') {
+          this.update({previousSectionOpen: sectionOpen});
+          if (this.isCharacterKeyPress(e)) {
+            this.update({searchTermPrompt: e.key.toUpperCase()});
+          }
+        };
       }
     }
     document.body.addEventListener(`keypress`, this.enterSearchMode);
