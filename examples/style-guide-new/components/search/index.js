@@ -8,9 +8,13 @@ document.registerElement('search-section', class extends Component {
     return {
       helpers: {
         inputKeyUp: e => {
-          let searchTerm = e.target.value.length > 0 ? e.target.value.toLowerCase() : null;
-          this.update({searchTerm});
-          this.app.matchSearchTerms(searchTerm);
+          if (e.target.value.length == 0) {
+            this.update({sectionOpen: this.state.previousSectionOpen});
+          } else {
+            let searchTerm = e.target.value.toLowerCase();
+            this.update({searchTerm});
+            this.app.matchSearchTerms(searchTerm);
+          }
         },
       },
       template,

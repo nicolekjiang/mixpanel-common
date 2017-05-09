@@ -300,14 +300,18 @@
     "extra small",
     "extra large"
   ],
-  "widgets": [
+  "bookmarks": [
     "components",
     "widgets",
     "bookmarks",
+    "mp-bookmarks-widget"
+  ],
+  "tag-selector": [
+    "components",
+    "widgets",
     "edit tags",
     "tag selector",
-    "mp-tag-selector",
-    "mp-bookmarks-widget"
+    "mp-tag-selector"
   ],
   "calendar-widget": [
     "components",
