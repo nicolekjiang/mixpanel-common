@@ -12,7 +12,7 @@
     .section-content
       section
         .subsection-title Input Fields
-        .subsection-description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id massa et libero condimentum dignissim at ut odio. Aliquam placerat libero metus, et fringilla nisl dictum vitae. Sed at lacus eu risus fermentum consequat. 
+        .subsection-description Input fields can exist with or without icons embedded and come in two flavors: with button, and without. The field with button combination is used when space is limited, or when the CTA is strictly associated with the input string. 
         .indent-container
           .example-block
             .call-out.first-call-out
@@ -261,23 +261,23 @@
         .call-out.first-call-out
           strong.icon +
           strong mp-upsell-popup
-        .common-example(style={width: '269px', height: '68px'})
+        .common-example(style={width: '300px', height: '100px'})
           a(
             on={click: () => $helpers.openModal('upsell')}
-            style={position: 'absolute'}
+            style={position: 'absolute', left: '190px'}
           ) Re-Open
           mp-upsell-popup(
             attrs={feature: 'default', open: open.upsell} 
-            style={position: 'relative', left: '-17px', top: '-5px'}
+            style={position: 'relative', left: '7px'}
             on={change: e => $helpers.handleModalChange('upsell', e.detail.state)}
           )
       .example-block
         .call-out
           strong mp-alert
-        .common-example(style={width: '283px', height: '40px'})
+        .common-example(style={width: '320px', height: '60px'})
           a(
             on={click: () => $helpers.openModal('alert')}
-            style={position: 'absolute'}
+            style={position: 'absolute', left: '540px'}
           ) Re-Open
           mp-alert(
             attrs={
@@ -286,7 +286,7 @@
               open: open.alert, 
               'not-fullscreen': true, 
             }
-            style={position: 'relative', left: '-19px', top: '-5px'}
+            style={position: 'relative', left: '-2px', top: '-5px'}
             on={change: e => $helpers.handleModalChange('alert', e.detail.state)}
           )
             div

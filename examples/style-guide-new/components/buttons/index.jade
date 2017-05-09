@@ -357,7 +357,7 @@
                 attrs={open: open.dropMenu}
                 on={change: e => $helpers.handleModalChange('dropMenu', e.detail.state)}
               )
-                .text-container
+                .text-container(style={width: '160px'})
                   mp-list-item Drop menu option 1
                   mp-list-item Drop menu option 2
                   mp-list-item Drop menu option 3
@@ -365,17 +365,19 @@
           .call-out
             strong Overflow Menu
           .common-example
-            .overflow-menu-button(on={click: () => $helpers.toggleMenu('overflowMenu')})
-              svg-icon(attrs={icon: 'ellipsis'})
-            .drop-menu-container
-              mp-drop-menu(
-                attrs={open: open.overflowMenu}
-                on={change: e => $helpers.handleModalChange('overflowMenu', e.detail.state)}
-              )
-                .text-container
-                  mp-list-item Overflow option 1
-                  mp-list-item Overflow option 2
-                  mp-list-item Overflow option 3
+            .example-card.long.truncated(style={margin: '10px'})
+              .example-card-header.grey
+                .overflow-menu-button(on={click: () => $helpers.toggleMenu('overflowMenu')})
+                  svg-icon(attrs={icon: 'ellipsis'})
+                .drop-menu-container
+                  mp-drop-menu(
+                    attrs={open: open.overflowMenu}
+                    on={change: e => $helpers.handleModalChange('overflowMenu', e.detail.state)}
+                  )
+                    .text-container
+                      mp-list-item Overflow option 1
+                      mp-list-item Overflow option 2
+                      mp-list-item Overflow option 3
         
         //- Pending Addition: Small circle button with icon / text
         //- .example-block.full-width
@@ -399,8 +401,34 @@
                 | 2
                 br
                 | 3
+                br
+                | 4
+                br
+                | 5
+                br
+                | 6
+                br
+                | 7
+                br
+                | 8
+                br
+                | 9
               pre
                 span.grey-500  /* Basic Text Drop */
                 br
+                span.mp-red  .drop-menu-button
+                span.mp-purple (on={click: () => $helpers.toggleMenu('dropMenu')})
                 br
-                span.grey-500  /* Overflow */
+                |     a Text here
+                br
+                |     svg-icon(attrs={icon: 'caret-down'})
+                br
+                span.mp-red  .drop-menu-container
+                br
+                span.mp-red     mp-drop-menu(
+                br
+                span.mp-purple       attrs={open: open.dropMenu} 
+                br
+                span.mp-purple       on={change: e => $helpers.handleModalChange('dropMenu', e.detail.state)} 
+                br
+                span.mp-red     )
