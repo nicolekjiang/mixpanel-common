@@ -1,3 +1,5 @@
+/* global describe, it */
+
 import expect from 'expect.js';
 
 import {
@@ -21,9 +23,7 @@ import {
   nestedObjectDepth,
   nestedObjectRolling,
 
-  truncateToElement,
   binarySearch,
-  truncateToWidth
 } from '../../lib/util';
 import {
   Cache,
@@ -496,7 +496,7 @@ describe(`sum()`, function() {
 describe(`truncateMiddle()`, function() {
   it(`works when string.length is len+1`, function() {
     expect(truncateMiddle(`frogs`, 4)).to.eql(`f...`);
-  })
+  });
 
   it(`only truncates if necessary`, function() {
     expect(truncateMiddle(`mixpanel`, 8)).to.eql(`mixpanel`);
@@ -579,11 +579,11 @@ describe(`immutableSplice()`, function() {
 
 describe(`removeByIndex()`, function() {
   it(`removes items by positive index`, function() {
-    expect(removeByIndex([`a`, `b`, `c`, `d`, `e`], 2)).to.eql([`a`,`b`,`d`,`e`]);
+    expect(removeByIndex([`a`, `b`, `c`, `d`, `e`], 2)).to.eql([`a`, `b`, `d`, `e`]);
   });
 
   it(`removes items by negative index`, function() {
-    expect(removeByIndex([`a`, `b`, `c`, `d`, `e`], -2)).to.eql([`a`,`b`,`c`,`e`]);
+    expect(removeByIndex([`a`, `b`, `c`, `d`, `e`], -2)).to.eql([`a`, `b`, `c`, `e`]);
   });
 
   it(`throws an exception if index is out of range`, function() {
@@ -690,7 +690,7 @@ describe(`unique()`, function() {
     it(`removes duplicate arrays from an array`, function() {
       const hash = getHashFunc([1, 3]);
       expect(unique([
-        [1, 2, 3, 4, 5], [1, 3, 4, 2, 5], [2, 2, 4, 4 ,5],
+        [1, 2, 3, 4, 5], [1, 3, 4, 2, 5], [2, 2, 4, 4, 5],
       ], {hash})).to.eql([
         [1, 2, 3, 4, 5], [1, 3, 4, 2, 5],
       ]);
@@ -793,27 +793,5 @@ describe(`nestedObjectRolling`, function() {
 describe(`binarySearch`, function() {
   it(`finds the first positive value in a range`, function() {
     expect(binarySearch(0, 50, n => n - 10)).to.eql(10);
-  });
-});
-
-describe(`truncateToWidth`, function() {
-  it(`finds the largest truncation which fits in the given space and font`, function() {
-    expect(truncateToWidth(`abcdefghijklmnopqrstuvwxyz`, `12px Arial`, 35)).to.eql(`ab...z`)
-    expect(truncateToWidth(`abcdefghijklmnopqrstuvwxyz`, `12px Arial`, 25)).to.eql(`a...z`)
-    expect(truncateToWidth(`abcdefghijklmnopqrstuvwxyz`, `22px Arial`, 35)).to.eql(`ab`)
-  });
-});
-
-describe(`truncateToElement`, function() {
-  it(`finds the largest truncation which fits in the given element, taking account of font / padding`, function() {
-    var elem = document.createElement(`div`);
-    document.body.appendChild(elem);
-    elem.style.width = `35px`;
-    elem.style.font = `12px Arial`;
-    elem.style.padding = `0px`;
-    expect(truncateToElement(`abcdefghijklmnopqrstuvwxyz`, elem)).to.eql(`ab...z`)
-    elem.style.padding = `10px`;
-    expect(truncateToElement(`abcdefghijklmnopqrstuvwxyz`, elem)).to.eql(`ab...z`)
-    document.body.removeChild(elem);
   });
 });
