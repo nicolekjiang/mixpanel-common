@@ -1,174 +1,171 @@
 .section
-  .section-title-container(class={
-    'no-match': sectionOpen === 'search',
-  })
-    .section-title
-      .title-text Typography
-      .title-section 2.1
-    //- .section-nav
-      //- +section-nav-item('Show All')
-      //- +section-nav-item('Buttons')
-      //- +section-nav-item('Headers')
-      //- +section-nav-item('Copy')
-      //- +section-nav-item('Fields')
-      //- +section-nav-item('Labels')
-  .sub-section-container#font-weight(class={
-    'no-match': !searchSections.includes('font-weight'),
-  })
-    .divider
-    .section-content
-      section
-        .subsection-title Type Family & Weight
-        .subsection-description Currently Mixpanel UI is limited to one typeface: Helvetica Neue. It was chosen because of its extensive inclusion across many operating systems. We have limited the weight selection to establish a clear information hierarchy. 
-        .font-weight-examples
-          .bold-example.mp-font-weight-bold
-            .indent-container
-              .example-container
+  if sectionOpen == 'typography'
+    .section-title-container
+      .section-title
+        .title-text Typography
+        .title-section 2.1
+      //- .section-nav
+        //- +section-nav-item('Show All')
+        //- +section-nav-item('Buttons')
+        //- +section-nav-item('Headers')
+        //- +section-nav-item('Copy')
+        //- +section-nav-item('Fields')
+        //- +section-nav-item('Labels')
+  if sectionOpen == 'typography' || searchSections.includes('font-weight')
+    .sub-section-container#font-weight
+      .divider
+      .section-content
+        section
+          .subsection-title Type Family & Weight
+          .subsection-description Currently Mixpanel UI is limited to one typeface: Helvetica Neue. It was chosen because of its extensive inclusion across many operating systems. We have limited the weight selection to establish a clear information hierarchy. 
+          .font-weight-examples
+            .bold-example.mp-font-weight-bold
+              .indent-container
+                .example-container
+                  .left-example
+                    .font-header.mp-font-size-medium.mp-font-weight-regular Helvetica Neue
+                    .large-example Aa
+                  .text-example.mp-font-size-xl Mixpanel data-viz backflows juicy Q4 graphs
+                  .right-example-container.mp-font-size-medium
+                    .right-example
+                      .weight.mp-font-weight-bold Bold
+                      .weight-value.mp-font-size-medium.mp-font-weight-regular Weight: 600
+                .code-container
+                  .code-snippet
+                    .snippet-container.min.max
+                      .snippet-header.mp-font-weight-regular
+                        label Stylus
+                      .code-field
+                        pre
+                          | 1
+                        pre
+                          span.mp-red font-weight
+                          |  weight-bold
+            .medium-example.mp-font-weight-medium
+              .indent-container
+                .example-container
+                  .left-example
+                    .font-header.mp-font-size-medium.mp-font-weight-regular Helvetica Neue
+                    .large-example Aa
+                  .text-example.mp-font-size-xl Mixpanel data-viz backflows juicy Q4 graphs
+                  .right-example-container.mp-font-size-medium
+                    .right-example
+                      .weight.mp-font-weight-bold Medium
+                      .weight-value.mp-font-size-medium.mp-font-weight-regular Weight: 500
+                .code-container
+                  .code-snippet
+                    .snippet-container.min.max
+                      .snippet-header.mp-font-weight-regular
+                        label Stylus
+                      .code-field
+                        pre
+                          | 1
+                        pre
+                          span.mp-red font-weight
+                          |  weight-medium
+            .regular-example.mp-font-weight-regular
+              .indent-container
+                .example-container
+                  .left-example
+                    .font-header.mp-font-size-medium.mp-font-weight-regular Helvetica Neue
+                    .large-example Aa
+                  .text-example.mp-font-size-xl Mixpanel data-viz backflows juicy Q4 graphs
+                  .right-example-container.mp-font-size-medium
+                    .right-example
+                      .weight.mp-font-weight-bold Regular
+                      .weight-value.mp-font-size-medium.mp-font-weight-regular Weight: 400
+                .code-container
+                  .code-snippet
+                    .snippet-container.min.max
+                      .snippet-header.mp-font-weight-regular
+                        label Stylus
+                      .code-field
+                        pre
+                          | 1
+                        pre
+                          span.mp-red font-weight
+                          |  weight-regular
+  if sectionOpen == 'typography' || searchSections.includes('font-sizes')
+    .sub-section-container#font-sizes
+      .divider
+        label 1.2
+      .section-content
+        section
+          .subsection-title Type Sizes
+          .subsection-description By limiting our font catalogue to just six sizes, we're able to reduce page load times and further reinforce UI patterns. Our baseline is 13px (default), and our smallest point size is ALL CAPS 11px. There will be instances where micro-copy is required, which has not been accounted for in common at this time.
+          .indent-container
+            .size-examples
+              .size-example
                 .left-example
-                  .font-header.mp-font-size-medium.mp-font-weight-regular Helvetica Neue
-                  .large-example Aa
-                .text-example.mp-font-size-xl Mixpanel data-viz backflows juicy Q4 graphs
-                .right-example-container.mp-font-size-medium
-                  .right-example
-                    .weight.mp-font-weight-bold Bold
-                    .weight-value.mp-font-size-medium.mp-font-weight-regular Weight: 600
-              .code-container
-                .code-snippet
-                  .snippet-container.min.max
-                    .snippet-header.mp-font-weight-regular
-                      label Stylus
-                    .code-field
-                      pre
-                        | 1
-                      pre
-                        span.mp-red font-weight
-                        |  weight-bold
-          .medium-example.mp-font-weight-medium
-            .indent-container
-              .example-container
+                  .text-example.mp-font-size-xl Mixpanel bestows major data-viz insights f'n quickly.
+                  .size-type.mp-font-size-medium 18px - Extra Large
+                .right-example
+                  .size-class.mp-font-size-xl .mp-font-size-xl
+              .size-example
                 .left-example
-                  .font-header.mp-font-size-medium.mp-font-weight-regular Helvetica Neue
-                  .large-example Aa
-                .text-example.mp-font-size-xl Mixpanel data-viz backflows juicy Q4 graphs
-                .right-example-container.mp-font-size-medium
-                  .right-example
-                    .weight.mp-font-weight-bold Medium
-                    .weight-value.mp-font-size-medium.mp-font-weight-regular Weight: 500
-              .code-container
-                .code-snippet
-                  .snippet-container.min.max
-                    .snippet-header.mp-font-weight-regular
-                      label Stylus
-                    .code-field
-                      pre
-                        | 1
-                      pre
-                        span.mp-red font-weight
-                        |  weight-medium
-          .regular-example.mp-font-weight-regular
-            .indent-container
-              .example-container
+                  .text-example.mp-font-size-large Mixpanel bestows major data-viz insights f'n quickly.
+                  .size-type.mp-font-size-medium 16px - Large
+                .right-example
+                  .size-class.mp-font-size-large .mp-font-size-large
+              .size-example
                 .left-example
-                  .font-header.mp-font-size-medium.mp-font-weight-regular Helvetica Neue
-                  .large-example Aa
-                .text-example.mp-font-size-xl Mixpanel data-viz backflows juicy Q4 graphs
-                .right-example-container.mp-font-size-medium
-                  .right-example
-                    .weight.mp-font-weight-bold Regular
-                    .weight-value.mp-font-size-medium.mp-font-weight-regular Weight: 400
-              .code-container
-                .code-snippet
-                  .snippet-container.min.max
-                    .snippet-header.mp-font-weight-regular
-                      label Stylus
-                    .code-field
-                      pre
-                        | 1
-                      pre
-                        span.mp-red font-weight
-                        |  weight-regular
-  .sub-section-container#font-sizes(class={
-    'no-match': !searchSections.includes('font-sizes'),
-  })
-    .divider
-      label 1.2
-    .section-content
-      section
-        .subsection-title Type Sizes
-        .subsection-description By limiting our font catalogue to just six sizes, we're able to reduce page load times and further reinforce UI patterns. Our baseline is 13px (default), and our smallest point size is ALL CAPS 11px. There will be instances where micro-copy is required, which has not been accounted for in common at this time.
-        .indent-container
-          .size-examples
-            .size-example
-              .left-example
-                .text-example.mp-font-size-xl Mixpanel bestows major data-viz insights f'n quickly.
-                .size-type.mp-font-size-medium 18px - Extra Large
-              .right-example
-                .size-class.mp-font-size-xl .mp-font-size-xl
-            .size-example
-              .left-example
-                .text-example.mp-font-size-large Mixpanel bestows major data-viz insights f'n quickly.
-                .size-type.mp-font-size-medium 16px - Large
-              .right-example
-                .size-class.mp-font-size-large .mp-font-size-large
-            .size-example
-              .left-example
-                .text-example.mp-font-size-medium Mixpanel bestows major data-viz insights f'n quickly.
-                .size-type.mp-font-size-medium 14px - Medium
-              .right-example
-                .size-class.mp-font-size-medium .mp-font-size-medium
-            .size-example
-              .left-example
-                .text-example.mp-font-size-default Mixpanel bestows major data-viz insights f'n quickly.
-                .size-type.mp-font-size-medium 13px - Default
-              .right-example
-                .size-class.mp-font-size-default .mp-font-size-default
-            .size-example
-              .left-example
-                .text-example.mp-font-size-small Mixpanel bestows major data-viz insights f'n quickly.
-                .size-type.mp-font-size-medium 12px - Small
-              .right-example
-                .size-class.mp-font-size-small .mp-font-size-small
-            .size-example
-              .left-example
-                .text-example.mp-font-size-xs Mixpanel bestows major data-viz insights f'n quickly.
-                .size-type.mp-font-size-medium 11px - Extra small
-              .right-example
-                .size-class.mp-font-size-xs .MP-FONT-SIZE-XS
-            .code-snippet
-              .call-out.first-call-out
-                strong.icon +
-                strong Example Code
-              .snippet-container.min.max
-                .snippet-header
-                  label Jade
-                .code-field
-                  pre
-                    | 1
-                    br
-                    | 2
-                    br
-                    | 3
-                    br
-                    | 4
-                    br
-                    | 5
-                    br
-                    | 6
-                  pre
-                    span.grey-500  /* Type size declarations */
-                    br
-                    |  .class-name
-                    span.mp-red  font-size-xl()
-                    br
-                    |  .class-name
-                    span.mp-red  font-size-large()
-                    br
-                    |  .class-name
-                    span.mp-red  font-size-medium()
-                    br
-                    |  .class-name
-                    span.mp-red  font-size-default()
-                    span.grey-500  //- or leave undefined
-                    br
-                    |  .class-name
-                    span.mp-red  font-size-xs()
+                  .text-example.mp-font-size-medium Mixpanel bestows major data-viz insights f'n quickly.
+                  .size-type.mp-font-size-medium 14px - Medium
+                .right-example
+                  .size-class.mp-font-size-medium .mp-font-size-medium
+              .size-example
+                .left-example
+                  .text-example.mp-font-size-default Mixpanel bestows major data-viz insights f'n quickly.
+                  .size-type.mp-font-size-medium 13px - Default
+                .right-example
+                  .size-class.mp-font-size-default .mp-font-size-default
+              .size-example
+                .left-example
+                  .text-example.mp-font-size-small Mixpanel bestows major data-viz insights f'n quickly.
+                  .size-type.mp-font-size-medium 12px - Small
+                .right-example
+                  .size-class.mp-font-size-small .mp-font-size-small
+              .size-example
+                .left-example
+                  .text-example.mp-font-size-xs Mixpanel bestows major data-viz insights f'n quickly.
+                  .size-type.mp-font-size-medium 11px - Extra small
+                .right-example
+                  .size-class.mp-font-size-xs .MP-FONT-SIZE-XS
+              .code-snippet
+                .call-out.first-call-out
+                  strong.icon +
+                  strong Example Code
+                .snippet-container.min.max
+                  .snippet-header
+                    label Jade
+                  .code-field
+                    pre
+                      | 1
+                      br
+                      | 2
+                      br
+                      | 3
+                      br
+                      | 4
+                      br
+                      | 5
+                      br
+                      | 6
+                    pre
+                      span.grey-500  /* Type size declarations */
+                      br
+                      |  .class-name
+                      span.mp-red  font-size-xl()
+                      br
+                      |  .class-name
+                      span.mp-red  font-size-large()
+                      br
+                      |  .class-name
+                      span.mp-red  font-size-medium()
+                      br
+                      |  .class-name
+                      span.mp-red  font-size-default()
+                      span.grey-500  //- or leave undefined
+                      br
+                      |  .class-name
+                      span.mp-red  font-size-xs()

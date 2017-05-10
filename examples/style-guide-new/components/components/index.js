@@ -1,5 +1,7 @@
 import { Component } from 'panel';
 
+import exampleBlockTerms from './component-search-terms.json'
+
 import { extend } from '../../../../build/util';
 
 import template from './index.jade';
@@ -22,13 +24,25 @@ document.registerElement('components-section', class extends Component {
           this.state.open.tutorialTooltip[name] = true;
           this.update();
         },
-        hideSectionOnSearch: sectionId => {
-          const sectionKeywords = sectionId.split('-').join(' ');
-          if (this.state.sectionOpen != 'search' || sectionKeywords.includes(this.state.searchTerm)) {
-            return false
+        showExampleblock: exampleName => {
+          let match = true;
+          if (this.state.sectionOpen == 'search'){
+            const exampleTerms = exampleBlockTerms[exampleName];
+            const searchTerms = this.state.searchTerm.split(' ');
+            searchTerms.forEach(t => {
+              let partialMatch = false;
+              exampleTerms.forEach(e => {
+                if (e.includes(t)) {
+                  partialMatch = true;
+                }
+              });
+              if (!partialMatch) {
+                match = false;
+              }
+            });
           }
-          return true;
-        },
+          return match;
+        }
       },
       template,
     };
