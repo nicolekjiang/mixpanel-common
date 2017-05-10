@@ -77,38 +77,38 @@
                     br
                     | 16
                   pre
-                    span.grey-500  /* Bookmarks Widget */
+                    span.grey-500 //- Bookmarks Widget
                     br
-                    span.mp-red  mp-bookmarks-widget
+                    span.mp-red mp-bookmarks-widget
                     span.mp-purple (
                     br
-                    span.mp-purple     attrs={
+                    span.mp-purple   attrs={
                     br
-                    |       'bookmarks': JSON.stringify(bookmarks),
+                    |     'bookmarks': JSON.stringify(bookmarks),
                     br
-                    |       'create-disabled': false,
+                    |     'create-disabled': false,
                     br
-                    |       'saving': savingBookmark,
+                    |     'saving': savingBookmark,
                     br
-                    |       'selected-bookmark-id': selectedBookmarkId,
+                    |     'selected-bookmark-id': selectedBookmarkId,
                     br
-                    |       'user-id': 1,
+                    |     'user-id': 1,
                     br
-                    |       'has-write-permissions': true,
+                    |     'has-write-permissions': true,
                     br
-                    |       'open': true,
+                    |     'open': true,
                     br
-                    |       'over-free-limit': currentBookmark == 'pricing' ? true : false,
+                    |     'over-free-limit': currentBookmark == 'pricing' ? true : false,
                     br
-                    span.mp-purple     }
+                    span.mp-purple   }
                     br
-                    span.mp-red     on={
+                    span.mp-red   on={
                     br
-                    |       change: $helpers.handleBookmarksMenuChange,
+                    |     change: $helpers.handleBookmarksMenuChange,
                     br
-                    |       submit: $helpers.handleBookmarksMenuSubmit,
+                    |     submit: $helpers.handleBookmarksMenuSubmit,
                     br
-                    span.mp-red     }
+                    span.mp-red   }
                     span.mp-purple )
   if sectionOpen == 'widgets' || searchSections.includes('tag-selector')
     .sub-section-container#tag-selector
@@ -181,18 +181,18 @@
                     br
                     | 15
                   pre
-                    span.grey-500  /* Tag Selector */
+                    span.grey-500 //- Tag Selector
                     br
-                    span.mp-red  .tag-selector-container
+                    span.mp-red .tag-selector-container
                     br
-                    |    mp-buton.mp-button-secondary
+                    |   mp-buton.mp-button-secondary
                     span.mp-red (on={click: $helpers.toggleTagSelector})
                     |  Edit tags
                     br
-                    |      mp-drop-menu
+                    |     mp-drop-menu
                     span.mp-purple (attrs={open: open.tagSelector} on={change: $helpers.handleTagSelectorDropMenuChange})
                     br
-                    span.mp-red        mp-tag-selector(
+                    span.mp-red       mp-tag-selector(
                     br
                     span.mp-purple         attrs={
                     br
@@ -284,26 +284,26 @@
                   br
                   | 12
                 pre
-                  span.grey-500  /* Calendar Widget */
+                  span.grey-500 //- Calendar Widget
                   br
                   span.mp-red .calendar-container
                   br
-                  span.mp-red    mp-calendar(
+                  span.mp-red   mp-calendar(
                   br
-                  span.mp-purple      attrs={
+                  span.mp-purple     attrs={
                   br
                   |       'is-double-calendar': true,
                   br
-                  |        'is-range': true,
+                  |       'is-range': true,
                   br
-                  |        'min-date': `2015-12-10`,
+                  |       'min-date': `2015-12-10`,
                   br
-                  |        'max-date': `2016-03-20`,
+                  |       'max-date': `2016-03-20`,
                   br
-                  |        'selected-from-date': `2015-12-25`,
+                  |       'selected-from-date': `2015-12-25`,
                   br
-                  |        'selected-to-date': `2016-03-15`,
+                  |       'selected-to-date': `2016-03-15`,
                   br
-                  span.mp-purple      }
+                  span.mp-purple     }
                   br
-                  span.mp-red    )
+                  span.mp-red   )
