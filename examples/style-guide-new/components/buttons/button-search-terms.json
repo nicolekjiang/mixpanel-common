@@ -1,0 +1,115 @@
+{
+  "button-primary": [
+    "blue",
+    "icon",
+    "buttons",
+    "primary",
+    "mp-buttons-primary",
+    "disabled"
+  ],
+  "button-secondary": [
+    "buttons",
+    "icon",
+    "white",
+    "mp-buttons-with-icon",
+    "mp-buttons-secondary",
+    "disabled"
+  ],
+  "button-red": [
+    "red",
+    "icon",
+    "buttons",
+    "mp-buttons-red",
+    "mp-buttons-with-icon",
+    "disabled"
+  ],
+  "button-on-blue": [
+    "buttons",
+    "on",
+    "blue",
+    "mp-buttons-on-blue"
+  ],
+  "button-primary-small": [
+    "blue",
+    "icon",
+    "buttons",
+    "primary",
+    "mp-buttons-primary",
+    "disabled",
+    "small"
+  ],
+  "button-secondary-small": [
+    "buttons",
+    "icon",
+    "white",
+    "mp-buttons-with-icon",
+    "mp-buttons-secondary",
+    "disabled",
+    "small"
+  ],
+  "button-red-small": [
+    "red",
+    "icon",
+    "buttons",
+    "mp-buttons-red",
+    "mp-buttons-with-icon",
+    "disabled",
+    "small"
+  ],
+  "button-bar-primary": [
+    "primary",
+    "icon",
+    "blue",
+    "buttons",
+    "bar",
+    "mp-button-bar-primary"
+  ],
+  "button-bar-secondary": [
+    "secondary",
+    "icon",
+    "white",
+    "buttons",
+    "bar",
+    "mp-button-bar-primary"
+  ],
+  "inline-toggle-large": [
+    "buttons",
+    "toggle",
+    "large",
+    "inline",
+    "mp-toggle",
+    "inline-toggle",
+    "white"
+  ],
+  "inline-toggle-small": [
+    "buttons",
+    "toggle",
+    "small",
+    "inline",
+    "mp-toggle",
+    "inline-toggle",
+    "white"
+  ],
+  "max-width-toggle": [
+    "buttons",
+    "toggle",
+    "mp-toggle",
+    "max-width-toggle",
+    "white"
+  ],
+  "full-width-toggle-blue": [
+    "buttons",
+    "toggle",
+    "mp-toggle",
+    "full-width-toggle",
+    "blue"
+  ],
+  "max-width-toggle-large":[
+    "buttons",
+    "toggle",
+    "mp-toggle",
+    "max-width-toggle",
+    "large",
+    "white"
+  ]
+}

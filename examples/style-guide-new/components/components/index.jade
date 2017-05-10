@@ -1,532 +1,536 @@
 .section
-  .section-title-container(class={
-    'no-match': sectionOpen === 'search',
-  })
-    .section-title
-      .title-text Components
-      .title-section 5.1
-  .sub-section-container#input-fields(class={
-    'no-match': !searchSections.includes('input-fields'),
-  })
-    .divider
-    .section-content
-      section
-        .subsection-title Input Fields
-        .subsection-description Input fields can exist with or without icons embedded and come in two flavors: with button, and without. The field with button combination is used when space is limited, or when the CTA is strictly associated with the input string. 
-        .indent-container
+  if sectionOpen == 'components'
+    .section-title-container
+      .section-title
+        .title-text Components
+        .title-section 5.1
+  if sectionOpen == 'components' || searchSections.includes('input-fields')
+    .sub-section-container#input-fields
+      .divider
+      .section-content
+        section
+          .subsection-title Input Fields
+          .subsection-description Input fields can exist with or without icons embedded and come in two flavors: with button, and without. The field with button combination is used when space is limited, or when the CTA is strictly associated with the input string. 
+          .indent-container
+            if $helpers.showExampleblock('input-icon')
+              .example-block#input-icon
+                .call-out.first-call-out
+                  strong.icon +
+                  strong Search: 
+                  p Square
+                .common-example
+                  .mp-icon-input
+                    .mp-icon
+                      svg-icon(attrs={icon: "search"})
+                    input(attrs={type: 'text', placeholder: 'Some placeholder text'})
+
+            //- Pending Addition: error state for square field
+            //- .example-block
+            //-   .call-out
+            //-     strong Field Error
+            //-   .common-example
+            //-      //- Insert component
+            if $helpers.showExampleblock('input-group')
+              .example-block#input-group
+                .call-out
+                  strong mp-input-group
+                .common-example
+                  mp-input-group(
+                    attrs={placeholder: "Type a name...", busy: inputGroupSaving}
+                    on={
+                      change: $helpers.handleNamerChange,
+                      submit: $helpers.handleNamerSubmit,
+                    }
+                  )
+            //- Pending Addition: square field + small buttons inset
+            //- .example-block
+            //-   .call-out.first-call-out
+            //-     strong.icon +
+            //-     strong Field: 
+            //-     p small buttons 
+            //-   .common-example
+            //-     //- Insert square field + two small buttons
+
+            //- Pending Addition: round search field variations
+            //- .example-block
+            //-   .call-out.first-call-out
+            //-     strong.icon +
+            //-     strong Search: 
+            //-     p Round Dark
+            //-   .floating-example-bar.align-right.blue-bar
+            //-     //- insert component for round search field dark
+            //- .example-block
+            //-   .call-out.first-call-out
+            //-     strong.icon +
+            //-     strong Search: 
+            //-     p Round Light
+            //-   .common-example
+            //-     //- insert component for round search field light
+
+            //- Pending Addition: Minimal search field
+            //- .example-block
+            //-   .call-out.first-call-out
+            //-     strong.icon +
+            //-     strong Search: 
+            //-     p Minimal
+            //-   .floating-example-bar
+            //-     //- insert component for IRB search field
+            .code-snippet
+              .call-out.first-call-out
+                strong.icon +
+                strong Example Code
+              .snippet-container.min.max
+                .snippet-header
+                  label Jade
+                .code-field
+                  pre
+                    | 1
+                    br
+                    | 2
+                    br
+                    | 3
+                    br
+                    | 4
+                    br
+                    | 5
+                    br
+                    | 6
+                    br
+                    | 7
+                    br
+                    | 8
+                  pre
+                    span.grey-500  /* Square field w/ icon */
+                    br
+                    span.mp-red .mp-icon-input
+                    br
+                    |   .mp-icon
+                    br
+                    span.mp-red      svg-icon
+                    span.mp-purple (attrs={icon: "search"})
+                    br
+                    |    input
+                    span.mp-purple (attrs={type: 'text', placeholder: 'Some placeholder text'})
+                    br
+                    br
+                    span.grey-500  /* Square field w/ button */
+                    br
+                    span.mp-red  mp-input-group
+                    span.mp-purple (attrs={placeholder: "text here", busy: inputGroupSaving})
+  if sectionOpen == 'components' || searchSections.includes('modals-dialogues')
+    .sub-section-container#modals-dialogues
+      .divider
+        label 5.3
+      .section-content
+        section
+        .subsection-title Modals & Dialogues
+        .subsection-description These UI components are containers that will interrupt the current flow, by displaying on top of the page content.
+       .indent-container
+        if $helpers.showExampleblock('modal')
+          .example-block#modal
+            .call-out.first-call-out
+              strong.icon +
+              strong mp-modal
+              p .modal 
+            //- TODO not what the modal looks like
+            .example-card.long    
+              .example-card-header 
+                b Modal Header Text   
+            p.desc Modals have blue header bars and should be presented when the user needs to complete a task that the current interface does not support. For example: a button to invite teammates might present a modal including a search field and a list of names to choose from. These are specifically great for 
+              span.bold presenting new flows 
+              span.mp-font-size-large while preserving the state of content.
+            .demo-divider
+              //- this not working...
+              a(on={click: () => $helpers.openModal('modal')}) View Demo
+              mp-modal.modal(
+                attrs={closeable: true, open: open.modal}
+                on={change: e => $helpers.handleModalChange('modal', e.detail.state)}
+              )
+                div
+                  .mp-modal-content
+                    .mp-modal-title Easily track events
+                    .mp-modal-subtitle Click on any element on your page (e.g. the buy button) to create an event and access all historical data for that event.
+                  mp-button-bar.mp-button-bar-primary(
+                    on={click: () => $helpers.closeModal('modal')}
+                    attrs={'arrow-next': true}
+                  ) Create your first event
+        if $helpers.showExampleblock('modal-confirm')
           .example-block
             .call-out.first-call-out
               strong.icon +
-              strong Search: 
-              p Square
-            .common-example
-              .mp-icon-input
-                .mp-icon
-                  svg-icon(attrs={icon: "search"})
-                input(attrs={type: 'text', placeholder: 'Some placeholder text'})
-
-          //- Pending Addition: error state for square field
-          //- .example-block
-          //-   .call-out
-          //-     strong Field Error
-          //-   .common-example
-          //-      //- Insert component
-
-          .example-block
-            .call-out
-              strong mp-input-group
-            .common-example
-              mp-input-group(
-                attrs={placeholder: "Type a name...", busy: inputGroupSaving}
+              strong mp-confirm
+            .example-card.narrow
+              .example-card-footer
+                mp-button.mp-button-secondary(attrs={size: 'small'}) Cancel
+                mp-button.mp-button-primary(attrs={size: 'small'}) Delete
+            p.desc.mp-font-size-large Dialogues are used when 
+              span.bold a decision is required.
+              span.mp-font-size-large  An example would be any time a user makes a potentially irreversable action, you could display a dialogue to get confirmation and explain the reprocussions.
+            .demo-divider
+              a(on={click: () => $helpers.openModal('confirm')}) View Demo 
+              mp-confirm(
+                attrs={open: open.confirm}
                 on={
-                  change: $helpers.handleNamerChange,
-                  submit: $helpers.handleNamerSubmit,
+                  change: e => $helpers.handleModalChange('confirm', e.detail.state),
+                  submit: e => console.log(e.detail),
                 }
               )
-          //- Pending Addition: square field + small buttons inset
-          //- .example-block
-          //-   .call-out.first-call-out
-          //-     strong.icon +
-          //-     strong Field: 
-          //-     p small buttons 
-          //-   .common-example
-          //-     //- Insert square field + two small buttons
-
-          //- Pending Addition: round search field variations
-          //- .example-block
-          //-   .call-out.first-call-out
-          //-     strong.icon +
-          //-     strong Search: 
-          //-     p Round Dark
-          //-   .floating-example-bar.align-right.blue-bar
-          //-     //- insert component for round search field dark
-          //- .example-block
-          //-   .call-out.first-call-out
-          //-     strong.icon +
-          //-     strong Search: 
-          //-     p Round Light
-          //-   .common-example
-          //-     //- insert component for round search field light
-
-          //- Pending Addition: Minimal search field
-          //- .example-block
-          //-   .call-out.first-call-out
-          //-     strong.icon +
-          //-     strong Search: 
-          //-     p Minimal
-          //-   .floating-example-bar
-          //-     //- insert component for IRB search field
-          .code-snippet
+                div
+                  .mp-confirm-title Unsaved changes
+                  .mp-confirm-description If you navigate away from this page you will lose your changes. Would you like to continue?
+        .code-snippet
+          .call-out.first-call-out
+            strong.icon +
+            strong Example Code
+          .snippet-container.min.max
+            .snippet-header
+              label Jade
+            .code-field
+              pre
+                | 1
+                br
+                | 2
+                br
+                | 3
+                br
+                | 4
+                br
+                | 5
+                br
+                | 6
+                br
+                | 7
+                br
+                | 8
+                br
+                | 9
+                br
+                | 10
+                br
+                | 11
+                br
+                | 12
+                br
+                | 13
+              pre
+                span.grey-500  /* Modal with button-bar */
+                br
+                span.mp-red   mp-modal.modal(
+                span.mp-purple attrs={closeable: true, open: open.modal}
+                span.mp-red )
+                br
+                |     div
+                br
+                span.mp-red       .mp-modal-content
+                br
+                span.mp-red         .mp-modal-title
+                |  Modal title text here
+                br
+                span.mp-red         .mp-modal-subtitle
+                |  Modal subtext here
+                br
+                span.mp-red        mp-button-bar.mp-button-bar-primary
+                span.mp-purple (attrs={'arrow-next': true})
+                | Button CTA
+                br
+                br
+                span.grey-500  /* Dialogue */
+                br
+                span.mp-red   mp-confirm(
+                span.mp-purple attrs={open: open.confirm}
+                span.mp-red )
+                br
+                |     div
+                br
+                span.mp-red       .mp-confirm-title
+                |  Dialogue title text
+                br
+                span.mp-red       .mp-confirm-description
+                |  Dialogue subtext here
+  if sectionOpen == 'components' || searchSections.includes('popups-alerts')
+    .sub-section-container#popups-alerts
+      .divider
+        label 5.4
+      .section-content
+        section
+        .subsection-title Pop-Ups & Alerts
+        .subsection-description These UI components are containers that will interrupt the current flow, by displaying on top of the page content.
+       .indent-container
+        if $helpers.showExampleblock('upsell-popup')
+          .example-block
             .call-out.first-call-out
               strong.icon +
-              strong Example Code
-            .snippet-container.min.max
-              .snippet-header
-                label Jade
-              .code-field
-                pre
-                  | 1
-                  br
-                  | 2
-                  br
-                  | 3
-                  br
-                  | 4
-                  br
-                  | 5
-                  br
-                  | 6
-                  br
-                  | 7
-                  br
-                  | 8
-                pre
-                  span.grey-500  /* Square field w/ icon */
-                  br
-                  span.mp-red .mp-icon-input
-                  br
-                  |   .mp-icon
-                  br
-                  span.mp-red      svg-icon
-                  span.mp-purple (attrs={icon: "search"})
-                  br
-                  |    input
-                  span.mp-purple (attrs={type: 'text', placeholder: 'Some placeholder text'})
-                  br
-                  br
-                  span.grey-500  /* Square field w/ button */
-                  br
-                  span.mp-red  mp-input-group
-                  span.mp-purple (attrs={placeholder: "text here", busy: inputGroupSaving})
-  .sub-section-container#modals-dialogues(class={
-    'no-match': !searchSections.includes('modals-dialogues'),
-  })
-    .divider
-      label 5.3
-    .section-content
-      section
-      .subsection-title Modals & Dialogues
-      .subsection-description These UI components are containers that will interrupt the current flow, by displaying on top of the page content.
-     .indent-container
-      .example-block
-        .call-out.first-call-out
-          strong.icon +
-          strong mp-modal
-          p .modal 
-        //- TODO not what the modal looks like
-        .example-card.long    
-          .example-card-header 
-            b Modal Header Text   
-        p.desc Modals have blue header bars and should be presented when the user needs to complete a task that the current interface does not support. For example: a button to invite teammates might present a modal including a search field and a list of names to choose from. These are specifically great for 
-          span.bold presenting new flows 
-          span.mp-font-size-large while preserving the state of content.
-        .demo-divider
-          //- this not working...
-          a(on={click: () => $helpers.openModal('modal')}) View Demo
-          mp-modal.modal(
-            attrs={closeable: true, open: open.modal}
-            on={change: e => $helpers.handleModalChange('modal', e.detail.state)}
-          )
-            div
-              .mp-modal-content
-                .mp-modal-title Easily track events
-                .mp-modal-subtitle Click on any element on your page (e.g. the buy button) to create an event and access all historical data for that event.
-              mp-button-bar.mp-button-bar-primary(
-                on={click: () => $helpers.closeModal('modal')}
-                attrs={'arrow-next': true}
-              ) Create your first event
-      .example-block
-        .call-out.first-call-out
-          strong.icon +
-          strong mp-confirm
-        .example-card.narrow
-          .example-card-footer
-            mp-button.mp-button-secondary(attrs={size: 'small'}) Cancel
-            mp-button.mp-button-primary(attrs={size: 'small'}) Delete
-        p.desc.mp-font-size-large Dialogues are used when 
-          span.bold a decision is required.
-          span.mp-font-size-large  An example would be any time a user makes a potentially irreversable action, you could display a dialogue to get confirmation and explain the reprocussions.
-        .demo-divider
-          a(on={click: () => $helpers.openModal('confirm')}) View Demo 
-          mp-confirm(
-            attrs={open: open.confirm}
-            on={
-              change: e => $helpers.handleModalChange('confirm', e.detail.state),
-              submit: e => console.log(e.detail),
-            }
-          )
-            div
-              .mp-confirm-title Unsaved changes
-              .mp-confirm-description If you navigate away from this page you will lose your changes. Would you like to continue?
-      .code-snippet
-        .call-out.first-call-out
-          strong.icon +
-          strong Example Code
-        .snippet-container.min.max
-          .snippet-header
-            label Jade
-          .code-field
-            pre
-              | 1
-              br
-              | 2
-              br
-              | 3
-              br
-              | 4
-              br
-              | 5
-              br
-              | 6
-              br
-              | 7
-              br
-              | 8
-              br
-              | 9
-              br
-              | 10
-              br
-              | 11
-              br
-              | 12
-              br
-              | 13
-            pre
-              span.grey-500  /* Modal with button-bar */
-              br
-              span.mp-red   mp-modal.modal(
-              span.mp-purple attrs={closeable: true, open: open.modal}
-              span.mp-red )
-              br
-              |     div
-              br
-              span.mp-red       .mp-modal-content
-              br
-              span.mp-red         .mp-modal-title
-              |  Modal title text here
-              br
-              span.mp-red         .mp-modal-subtitle
-              |  Modal subtext here
-              br
-              span.mp-red        mp-button-bar.mp-button-bar-primary
-              span.mp-purple (attrs={'arrow-next': true})
-              | Button CTA
-              br
-              br
-              span.grey-500  /* Dialogue */
-              br
-              span.mp-red   mp-confirm(
-              span.mp-purple attrs={open: open.confirm}
-              span.mp-red )
-              br
-              |     div
-              br
-              span.mp-red       .mp-confirm-title
-              |  Dialogue title text
-              br
-              span.mp-red       .mp-confirm-description
-              |  Dialogue subtext here
-  .sub-section-container#popups-alerts(class={
-    'no-match': !searchSections.includes('popups-alerts'),
-  })
-    .divider
-      label 5.4
-    .section-content
-      section
-      .subsection-title Pop-Ups & Alerts
-      .subsection-description These UI components are containers that will interrupt the current flow, by displaying on top of the page content.
-     .indent-container
-      .example-block
-        .call-out.first-call-out
-          strong.icon +
-          strong mp-upsell-popup
-        .common-example(style={width: '300px', height: '100px'})
-          a(
-            on={click: () => $helpers.openModal('upsell')}
-            style={position: 'absolute', left: '190px'}
-          ) Re-Open
-          mp-upsell-popup(
-            attrs={feature: 'default', open: open.upsell} 
-            style={position: 'relative', left: '7px'}
-            on={change: e => $helpers.handleModalChange('upsell', e.detail.state)}
-          )
-      .example-block
-        .call-out
-          strong mp-alert
-        .common-example(style={width: '320px', height: '60px'})
-          a(
-            on={click: () => $helpers.openModal('alert')}
-            style={position: 'absolute', left: '540px'}
-          ) Re-Open
-          mp-alert(
-            attrs={
-              id: 'alert-not-fullscreen', 
-              closeable: true, 
-              open: open.alert, 
-              'not-fullscreen': true, 
-            }
-            style={position: 'relative', left: '-2px', top: '-5px'}
-            on={change: e => $helpers.handleModalChange('alert', e.detail.state)}
-          )
-            div
-              .text Alert Not Fullscreen
-      //- Pending Addition: dark warning with atomic bomb icon
-      //- .example-block.full-width
-      //-   .call-out.first-call-out
-      //-     strong.icon +
-      //-     strong Pop-up: 
-      //-     p Unspecified
-      //-   .common-example
-      //-      //- Insert component
-      .example-block.full-width
-        .call-out.first-call-out
-          strong.icon +
-          strong mp-toast
-        .common-example
-          mp-toast(attrs={cta: 'undo', hide: false}) Insert toast message here
-      .example-block.full-width
-        .call-out.first-call-out
-          strong.icon +
-          strong mp-tutorial-tooltip
+              strong mp-upsell-popup
+            .common-example(style={width: '300px', height: '100px'})
+              a(
+                on={click: () => $helpers.openModal('upsell')}
+                style={position: 'absolute', left: '190px'}
+              ) Re-Open
+              mp-upsell-popup(
+                attrs={feature: 'default', open: open.upsell} 
+                style={position: 'relative', left: '7px'}
+                on={change: e => $helpers.handleModalChange('upsell', e.detail.state)}
+              )
+        if $helpers.showExampleblock('alert')
+          .example-block
+            .call-out
+              strong mp-alert
+            .common-example(style={width: '320px', height: '60px'})
+              a(
+                on={click: () => $helpers.openModal('alert')}
+                style={position: 'absolute', left: '540px'}
+              ) Re-Open
+              mp-alert(
+                attrs={
+                  id: 'alert-not-fullscreen', 
+                  closeable: true, 
+                  open: open.alert, 
+                  'not-fullscreen': true, 
+                }
+                style={position: 'relative', left: '-2px', top: '-5px'}
+                on={change: e => $helpers.handleModalChange('alert', e.detail.state)}
+              )
+                div
+                  .text Alert Not Fullscreen
+        //- Pending Addition: dark warning with atomic bomb icon
+        //- .example-block.full-width
+        //-   .call-out.first-call-out
+        //-     strong.icon +
+        //-     strong Pop-up: 
+        //-     p Unspecified
+        //-   .common-example
+        //-      //- Insert component
+        if $helpers.showExampleblock('toasts')
           .example-block.full-width
-            .tutorial-tooltips-container
-              .tutorial-tooltip-focus(style={top: '-90px'})
-                mp-tutorial-tooltip(
-                  attrs={
-                    hide: !open.tutorialTooltip.bottom,
-                    placement: 'bottom',
-                    'num-steps': 4,
-                  }
-                ) Bottom Tooltip with 4 steps
-              .tutorial-tooltip-focus(style={left: '224px'})
-                mp-tutorial-tooltip(
-                  attrs={
-                    hide: !open.tutorialTooltip.left,
-                    placement: 'left',
-                    'num-steps': 4,
-                  }
-                ) Left Tooltip with 4 steps
-              .tutorial-tooltip-focus(style={left: '-222px'})
-                mp-tutorial-tooltip(
-                  attrs={
-                    hide: !open.tutorialTooltip.right,
-                    placement: 'right',
-                    'num-steps': 4,
-                  }
-                ) Right Tooltip with 4 steps
-              .tutorial-tooltip-focus(style={top: '90px'})
-                mp-tutorial-tooltip(
-                  attrs={
-                    hide: !open.tutorialTooltip.top,
-                    'num-steps': 4,
-                  }
-                ) Default Top Tooltip with 4 steps
-          .demo-divider
-            a(
-              on={click: () => $helpers.toggleTutorialTooltip('bottom')}
-              style={position: 'relative'}
-            ) Down
-            a(
-              on={click: () => $helpers.toggleTutorialTooltip('left')}
-              style={position: 'relative'}
-            ) Left
-            a(
-              on={click: () => $helpers.toggleTutorialTooltip('right')}
-              style={position: 'relative'}
-            ) Right
-            a(
-              on={click: () => $helpers.toggleTutorialTooltip('top')}
-              style={position: 'relative'}
-            ) Top
-      .code-snippet
-        .call-out.first-call-out
-          strong.icon +
-          strong Example Code
-        .snippet-container.min.max
-          .snippet-header
-            label Jade
-          .code-field
-            pre
-              | 1
-              br
-              | 2
-              br
-              | 3
-              br
-              | 4
-              br
-              | 5
-              br
-              | 6
-              br
-              | 7
-              br
-              | 8
-              br
-              | 9
-              br
-              | 10
-              br
-              | 11
-            pre
-              span.grey-500 /* Popup & Alert */
-              br
-              span.mp-red  mp-alert(
-              span.mp-purple attrs={id: 'alert', closeable: true, open: open['alert-large-icon'], 'large-icon': true}
-              span.mp-red )
-              br
-              |    div
-              br
-              |      Alert text here
-              br
-              br
-              span.grey-500 /* Toast */
-              br
-              span.mp-red  mp-toast(
-              span.mp-purple   attrs={cta: toast.cta, hide: toast.closed}
-              span.mp-red )=
-              |  Toast message
-              br
-              br
-              span.grey-500 /* Tutorial tooltips */
-              br
-              | .tutorial-tooltips-container
-              br
-              span.mp-red    mp-tutorial-tool-tip(
-              span.mp-purple attrs={placement: 'bottom','num-steps': 4}
-              span.mp-red )
-              |  Tooltip text
-  .sub-section-container#contextual-elements(class={
-    'no-match': !searchSections.includes('contextual-elements'),
-  })
-    .divider
-      label 5.5
-    .section-content
-      section
-      .subsection-title Contextual Elements
-      .subsection-description Use these design elements to inform the user when interactions or intent aren't immediately clear. Tooltips are great for providing extra descriptions on hover, while tags are descriptors that can be used as a visual reminder of a setting.
-      //- Pending Addition: Warning tooltip
-      //- .example-block
-      //-   .call-out
-      //-     strong Warning-Tip
-      //-   .common-example
-      //-     //- Insert mp-tooltip red
-     .indent-container
-      .example-block
-        .call-out
-          strong.icon +
-          strong mp-tooltip
-        .common-example
-          .tooltips-container
-            .tooltip-example.placement-top tooltip 
-      .example-block
-        .call-out
-          strong mp-tooltip 
-          p (attrs={placement: 'left'})
-        .common-example
-          .tooltips-container
-            .tooltip-example.placement-left left
-            .tooltip-example.placement-bottom bottom
-            .tooltip-example.placement-right right
-      //- Pending Addition: Extended data hover-tips
-      //- .example-block
-      //-   .call-out.first-call-out
-      //-     strong.icon +
-      //-     strong Hover: 
-      //-     p Extended
-      //-   .common-example
-      //-     //- Insert tooltip component, showing without hover
-      //-   .call-out
-      //-     strong Hover: 
-      //-     p Complete
-      //-   .common-example
-      //-     //- Insert tooltip component, showing without hover
-      //-   .call-out
-      //-     strong Hover: 
-      //-     p Metadata
-      //-   .common-example
-      //-     //- Insert tooltip component, showing without hover
-
-      .example-block.full-width
-        .call-out.first-call-out
-          strong.icon +
-          strong mp-tag
-        .common-example
-          mp-tag(
-            attrs={
-              clickable: true,
-              'tag-name': 'Segmentation',
-              removable: true
-            }
-          )
-      .example-block.full-width
-        .call-out.first-call-out
-          strong.icon +
-          strong mp-spinner
-        .common-example.spinner-zoom
-          mp-spinner
-      .code-snippet
-        .call-out.first-call-out
-          strong.icon +
-          strong Example Code
-        .snippet-container.min.max
-          .snippet-header
-            label Jade
-          .code-field
-            pre
-              | 1
-              br
-              | 2
-              br
-              | 3
-              br
-              | 4
-              br
-              | 5
-              br
-              | 6
-              br
-              | 7
-              br
-              | 8
-            pre
-              span.grey-500  /* Tooltips */
-              br
-              |  .tooltip-parent-div
-              br
-              span.mp-red     mp-tooltip
-              span.mp-purple (attrs={placement: 'top'}) Tooltip Text
-              br
-              br
-              span.grey-500  /* Tags */
-              br
-              span.mp-red  mp-tag
-              span.mp-purple (attrs={clickable: true, 'tag-name': 'Name', removable: true})
-              br
-              br
-              span.grey-500  /* Spinner(s) */
-              br
-              |  .custom-size-class
-              br
-              span.mp-red     mp-spinner
+            .call-out.first-call-out
+              strong.icon +
+              strong mp-toast
+            .common-example
+              mp-toast(attrs={cta: 'undo', hide: false}) Insert toast message here
+        if $helpers.showExampleblock('tutorial-tooltip')
+          .example-block.full-width
+            .call-out.first-call-out
+              strong.icon +
+              strong mp-tutorial-tooltip
+              .example-block.full-width
+                .tutorial-tooltips-container
+                  .tutorial-tooltip-focus(style={top: '-90px'})
+                    mp-tutorial-tooltip(
+                      attrs={
+                        hide: !open.tutorialTooltip.bottom,
+                        placement: 'bottom',
+                        'num-steps': 4,
+                      }
+                    ) Bottom Tooltip with 4 steps
+                  .tutorial-tooltip-focus(style={left: '224px'})
+                    mp-tutorial-tooltip(
+                      attrs={
+                        hide: !open.tutorialTooltip.left,
+                        placement: 'left',
+                        'num-steps': 4,
+                      }
+                    ) Left Tooltip with 4 steps
+                  .tutorial-tooltip-focus(style={left: '-222px'})
+                    mp-tutorial-tooltip(
+                      attrs={
+                        hide: !open.tutorialTooltip.right,
+                        placement: 'right',
+                        'num-steps': 4,
+                      }
+                    ) Right Tooltip with 4 steps
+                  .tutorial-tooltip-focus(style={top: '90px'})
+                    mp-tutorial-tooltip(
+                      attrs={
+                        hide: !open.tutorialTooltip.top,
+                        'num-steps': 4,
+                      }
+                    ) Default Top Tooltip with 4 steps
+              .demo-divider
+                a(
+                  on={click: () => $helpers.toggleTutorialTooltip('bottom')}
+                  style={position: 'relative'}
+                ) Down
+                a(
+                  on={click: () => $helpers.toggleTutorialTooltip('left')}
+                  style={position: 'relative'}
+                ) Left
+                a(
+                  on={click: () => $helpers.toggleTutorialTooltip('right')}
+                  style={position: 'relative'}
+                ) Right
+                a(
+                  on={click: () => $helpers.toggleTutorialTooltip('top')}
+                  style={position: 'relative'}
+                ) Top
+        .code-snippet
+          .call-out.first-call-out
+            strong.icon +
+            strong Example Code
+          .snippet-container.min.max
+            .snippet-header
+              label Jade
+            .code-field
+              pre
+                | 1
+                br
+                | 2
+                br
+                | 3
+                br
+                | 4
+                br
+                | 5
+                br
+                | 6
+                br
+                | 7
+                br
+                | 8
+                br
+                | 9
+                br
+                | 10
+                br
+                | 11
+              pre
+                span.grey-500 /* Popup & Alert */
+                br
+                span.mp-red  mp-alert(
+                span.mp-purple attrs={id: 'alert', closeable: true, open: open['alert-large-icon'], 'large-icon': true}
+                span.mp-red )
+                br
+                |    div
+                br
+                |      Alert text here
+                br
+                br
+                span.grey-500 /* Toast */
+                br
+                span.mp-red  mp-toast(
+                span.mp-purple   attrs={cta: toast.cta, hide: toast.closed}
+                span.mp-red )=
+                |  Toast message
+                br
+                br
+                span.grey-500 /* Tutorial tooltips */
+                br
+                | .tutorial-tooltips-container
+                br
+                span.mp-red    mp-tutorial-tool-tip(
+                span.mp-purple attrs={placement: 'bottom','num-steps': 4}
+                span.mp-red )
+                |  Tooltip text
+  if sectionOpen == 'components' || searchSections.includes('contextual-elements')
+    .sub-section-container#contextual-elements
+      .divider
+        label 5.5
+      .section-content
+        section
+        .subsection-title Contextual Elements
+        .subsection-description Use these design elements to inform the user when interactions or intent aren't immediately clear. Tooltips are great for providing extra descriptions on hover, while tags are descriptors that can be used as a visual reminder of a setting.
+        //- Pending Addition: Warning tooltip
+        //- .example-block
+        //-   .call-out
+        //-     strong Warning-Tip
+        //-   .common-example
+        //-     //- Insert mp-tooltip red
+       .indent-container
+        if $helpers.showExampleblock('tooltip')
+          .example-block
+            .call-out
+              strong.icon +
+              strong mp-tooltip
+            .common-example
+              .tooltips-container
+                .tooltip-example.placement-top tooltip 
+          .example-block
+            .call-out
+              strong mp-tooltip 
+              p (attrs={placement: 'left'})
+            .common-example
+              .tooltips-container
+                .tooltip-example.placement-left left
+                .tooltip-example.placement-bottom bottom
+                .tooltip-example.placement-right right
+        //- Pending Addition: Extended data hover-tips
+        //- .example-block
+        //-   .call-out.first-call-out
+        //-     strong.icon +
+        //-     strong Hover: 
+        //-     p Extended
+        //-   .common-example
+        //-     //- Insert tooltip component, showing without hover
+        //-   .call-out
+        //-     strong Hover: 
+        //-     p Complete
+        //-   .common-example
+        //-     //- Insert tooltip component, showing without hover
+        //-   .call-out
+        //-     strong Hover: 
+        //-     p Metadata
+        //-   .common-example
+        //-     //- Insert tooltip component, showing without hover
+        if $helpers.showExampleblock('tags')
+          .example-block.full-width
+            .call-out.first-call-out
+              strong.icon +
+              strong mp-tag
+            .common-example
+              mp-tag(
+                attrs={
+                  clickable: true,
+                  'tag-name': 'Segmentation',
+                  removable: true
+                }
+              )
+        if $helpers.showExampleblock('spinner')
+          .example-block.full-width
+            .call-out.first-call-out
+              strong.icon +
+              strong mp-spinner
+            .common-example.spinner-zoom
+              mp-spinner
+        .code-snippet
+          .call-out.first-call-out
+            strong.icon +
+            strong Example Code
+          .snippet-container.min.max
+            .snippet-header
+              label Jade
+            .code-field
+              pre
+                | 1
+                br
+                | 2
+                br
+                | 3
+                br
+                | 4
+                br
+                | 5
+                br
+                | 6
+                br
+                | 7
+                br
+                | 8
+              pre
+                span.grey-500  /* Tooltips */
+                br
+                |  .tooltip-parent-div
+                br
+                span.mp-red     mp-tooltip
+                span.mp-purple (attrs={placement: 'top'}) Tooltip Text
+                br
+                br
+                span.grey-500  /* Tags */
+                br
+                span.mp-red  mp-tag
+                span.mp-purple (attrs={clickable: true, 'tag-name': 'Name', removable: true})
+                br
+                br
+                span.grey-500  /* Spinner(s) */
+                br
+                |  .custom-size-class
+                br
+                span.mp-red     mp-spinner

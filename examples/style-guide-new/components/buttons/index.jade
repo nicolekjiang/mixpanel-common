@@ -1,90 +1,295 @@
 .section
-  .section-title-container(class={
-    'no-match': sectionOpen === 'search',
-  })
-    .section-title
-      .title-text Buttons
-      .title-section 4.1
-    //- Section nav feature postponed for next pass
-    //- .section-nav
-      //- +section-nav-item('Show All')
-      //- +section-nav-item('Basics')
-      //- +section-nav-item('Bars')
-      //- +section-nav-item('Dropdowns')
-      //- +section-nav-item('Toggles')
-      //- +section-nav-item('Misc')
-  .sub-section-container#basic-buttons(class={
-    'no-match': !searchSections.includes('basic-buttons'),
-  })
-    .divider
-    .section-content
-      section
-        .buttons
-        .subsection-title Basic MP-Buttons
-        .subsection-description These rectangle buttons are used when there is a clear CTA. Confirmation intents should always be placed to the right of cancellation buttons, when present.  Respective containers included for visual reference.
+  if sectionOpen == 'buttons'
+    .section-title-container
+      .section-title
+        .title-text Buttons
+        .title-section 4.1
+      //- Section nav feature postponed for next pass
+      //- .section-nav
+        //- +section-nav-item('Show All')
+        //- +section-nav-item('Basics')
+        //- +section-nav-item('Bars')
+        //- +section-nav-item('Dropdowns')
+        //- +section-nav-item('Toggles')
+        //- +section-nav-item('Misc')
+  if sectionOpen == 'buttons' || searchSections.includes('basic-buttons')
+    .sub-section-container#basic-buttons
+      .divider
+      .section-content
+        section
+          .buttons
+          .subsection-title Basic MP-Buttons
+          .subsection-description These rectangle buttons are used when there is a clear CTA. Confirmation intents should always be placed to the right of cancellation buttons, when present.  Respective containers included for visual reference.
+          .indent-container
+            if $helpers.showExampleblock('button-primary')
+              .example-block#button-primary
+                .call-out.first-call-out
+                  strong.icon +
+                  strong .mp-button-primary
+                .common-example
+                  mp-button.mp-button-primary Primary
+                  mp-button(attrs={icon: 'plus'}).mp-button-primary.mp-button-with-icon Primary
+                  mp-button.mp-button-primary(attrs={disabled: true}) Primary
+            if $helpers.showExampleblock('button-red')
+              .example-block#button-red
+                .call-out
+                  strong .mp-button-red
+                .common-example
+                  mp-button.mp-button-red Delete
+                  mp-button(attrs={icon: 'x'}).mp-button-red.mp-button-with-icon Delete
+                  mp-button.mp-button-red(attrs={disabled: true}) Delete
+            if $helpers.showExampleblock('button-secondary')
+              .example-block.full-width#button-secondary
+                .call-out.first-call-out
+                  strong.icon +
+                  strong .mp-button-secondary 
+                  p (attrs={disabled: true})
+                .common-example
+                  mp-button.mp-button-secondary Secondary
+                  mp-button(attrs={icon: 'plus'}).mp-button-secondary.mp-button-with-icon Secondary
+                  mp-button.mp-button-secondary(attrs={disabled: true}) Secondary
+            if $helpers.showExampleblock('button-on-blue')
+              .example-block#button-on-blue
+                .call-out.first-call-out
+                  strong.icon +
+                  strong .mp-button-on-blue
+                  .desc For use when background color is causing contrast that is too high or too low.
+                .floating-example-bar.align-right.blue-bar
+                  mp-button.mp-button-secondary.mp-button-on-blue Secondary
+                  mp-button.mp-button-primary.mp-button-on-blue Primary
+                  .blue-vertical-seperator
+                  mp-button.mp-button-secondary.mp-button-on-blue(attrs={disabled: true}) Disabled
+                  mp-button.mp-button-primary.mp-button-on-blue(attrs={disabled: true}) Disabled
+            if $helpers.showExampleblock('button-primary-small')
+              .example-block#button-primary-small
+                .call-out.first-call-out
+                  strong.icon +
+                  strong .mp-button-primary
+                  p (attrs={size: 'small'})
+                .common-example
+                  mp-button.mp-button-primary(attrs={size: 'small'}) Primary (SM)
+                  mp-button.mp-button-primary(attrs={size: 'small', icon: 'plus'}) Icon
+                  mp-button.mp-button-primary(attrs={size: 'small', disabled: true}) disabled
+            if $helpers.showExampleblock('button-secondary-small')
+              .example-block#button-secondary-small
+                .call-out
+                  strong .mp-button-secondary
+                  p (attrs={size: 'small'})
+                .common-example
+                  mp-button.mp-button-secondary(attrs={size: 'small'}) Secondary (SM)
+                  mp-button.mp-button-secondary(attrs={size: 'small', icon: 'logout'}) Icon
+                  mp-button.mp-button-secondary(attrs={size: 'small', disabled: true}) disabled
+            if $helpers.showExampleblock('button-red-small')
+              .example-block#button-red-small
+                .call-out
+                  strong .mp-button-red
+                  p (attrs={size: 'small'})
+                .common-example
+                  mp-button.mp-button-red(attrs={size: 'small'}) Caution (SM)
+                  mp-button.mp-button-red(attrs={size: 'small', icon: 'trashcan'}) Icon
+                  mp-button.mp-button-red(attrs={size: 'small', disabled: true}) disabled
+            .code-snippet
+              .call-out.first-call-out
+                strong.icon +
+                strong Example Code
+              .snippet-container.min.max
+                .snippet-header
+                  label Jade
+                .code-field
+                  pre
+                    | 1
+                    br
+                    | 2
+                    br
+                    | 3
+                    br
+                    | 4
+                    br
+                    | 5
+                    br
+                    | 6
+                    br
+                    | 7
+                    br
+                    | 8
+                    br
+                    | 9
+                    br
+                    | 10
+                    br
+                    | 11
+                    br
+                    | 12
+                  pre
+                    span.grey-500  /* Basic buttons */
+                    br
+                    |   mp-button
+                    span.mp-red .mp-button-primary
+                    |  Button text
+                    br
+                    |   mp-button
+                    span.mp-red .mp-button-secondary
+                    |  Button text
+                    br
+                    br
+                    span.grey-500  /* Buttons with icon */
+                    br
+                    |   mp-button
+                    span.mp-purple (attrs={icon: 'x'})
+                    span.mp-red .mp-button-secondary.mp-button-with-icon
+                    |  Button text
+                    br
+                    br
+                    span.grey-500  /* Small buttons */
+                    br
+                    |   mp-button
+                    span.mp-red .mp-button-secondary
+                    span.mp-purple (attrs={size: 'small'})
+                    |  Button text
+                    br
+                    br
+                    span.grey-500  /* Disabled buttons */ 
+                    br
+                    |   mp-button
+                    span.mp-red .mp-button-red
+                    span.mp-purple (attrs={disabled: true})
+                    |  Button text
+   if sectionOpen == 'buttons' || searchSections.includes('button-bars')
+    .sub-section-container#button-bars
+      .divider
+        label 4.2
+      .section-content
+        section
+        .subsection-title Button Bars
+        .subsection-description Button bars are used in tandem with ui-cards (modals and dialogues) to lead the user through a linear flow or to complete a form.
         .indent-container
-          .example-block
+          if $helpers.showExampleblock('button-bar-primary')
+            .example-block.full-width
+              .call-out.first-call-out
+                strong.icon +
+                strong .mp-button-bar-primary 
+              .example-card.narrow.truncated.mp-button-bar-container
+                mp-button-bar.mp-button-bar-primary Button-bar primary
+              .example-card.narrow.truncated.mp-button-bar-container
+                mp-button-bar.mp-button-bar-primary(attrs={'arrow-next': true}) Button-bar icon
+          if $helpers.showExampleblock('button-bar-secondary')
+            .example-block.full-width
+              .call-out
+                strong.icon +
+                strong .mp-button-bar-secondary
+                p (attrs={'arrow-next': true})
+              .example-card.narrow.truncated.mp-button-bar-container
+                mp-button-bar.mp-button-bar-secondary Button-bar secondary
+              .example-card.narrow.truncated.mp-button-bar-container
+                mp-button-bar.mp-button-bar-secondary(attrs={'arrow-next': true}) Button-bar icon
+          .code-snippet
             .call-out.first-call-out
               strong.icon +
-              strong .mp-button-primary
-            .common-example
-              mp-button.mp-button-secondary Secondary
-              mp-button.mp-button-primary Primary
-          .example-block
-            .call-out
-              strong .mp-button-with-icon
-            .common-example
-              mp-button(attrs={icon: 'x'}).mp-button-secondary.mp-button-with-icon Cancel
-              mp-button(attrs={icon: 'plus'}).mp-button-primary.mp-button-with-icon Create
-          .example-block        
-            .call-out
-              strong .mp-button-red
-            .common-example
-              mp-button.mp-button-red Delete
-          .example-block.full-width
-            .call-out.first-call-out
-              strong.icon +
-              strong .mp-button-secondary 
-              p (attrs={disabled: true})
-            .common-example
-              mp-button.mp-button-secondary(attrs={disabled: true}) Secondary
-              mp-button.mp-button-primary(attrs={disabled: true}) Primary
-              mp-button.mp-button-red(attrs={disabled: true}) Caution
-          .example-block
-            .call-out.first-call-out
-              strong.icon +
-              strong .mp-button-on-blue
-              .desc For use when background color is causing contrast that is too high or too low.
-            .floating-example-bar.align-right.blue-bar
-              mp-button.mp-button-secondary.mp-button-on-blue Secondary
-              mp-button.mp-button-primary.mp-button-on-blue Primary
-              .blue-vertical-seperator
-              mp-button.mp-button-secondary.mp-button-on-blue(attrs={disabled: true}) Disabled
-              mp-button.mp-button-primary.mp-button-on-blue(attrs={disabled: true}) Disabled
-          .example-block
-            .call-out.first-call-out
-              strong.icon +
-              strong .mp-button-primary
-            .common-example
-              mp-button.mp-button-primary(attrs={size: 'small'}) Primary (SM)
-              mp-button.mp-button-primary(attrs={size: 'small', icon: 'plus'}) Icon
-              mp-button.mp-button-primary(attrs={size: 'small', disabled: true}) disabled
-          .example-block
-            .call-out
-              strong .mp-button-secondary 
-              p (attrs={size: 'small'})
-            .common-example
-              mp-button.mp-button-secondary(attrs={size: 'small'}) Secondary (SM)
-              mp-button.mp-button-secondary(attrs={size: 'small', icon: 'logout'}) Icon
-              mp-button.mp-button-secondary(attrs={size: 'small', disabled: true}) disabled
-          .example-block
-            .call-out
-              strong .mp-button-red 
-              p (attrs={disabled: true})
-            .common-example
-              mp-button.mp-button-red(attrs={size: 'small'}) Caution (SM)
-              mp-button.mp-button-red(attrs={size: 'small', icon: 'trashcan'}) Icon
-              mp-button.mp-button-red(attrs={size: 'small', disabled: true}) disabled
+              strong Example Code
+            .snippet-container.min.max
+              .snippet-header
+                label Jade
+              .code-field
+                pre
+                  | 1
+                  br
+                  | 2
+                  br
+                  | 3
+                  br
+                  | 4
+                  br
+                  | 5
+                pre
+                  span.grey-500  /* Button bars */
+                  br
+                  |  .mp-button-bar-container
+                  br
+                  span.mp-red     mp-button-bar.mp-button-bar-secondary 
+                  | Button text
+                  br
+                  |  .mp-button-bar-container
+                  br
+                  span.mp-red     mp-button-bar.mp-button-bar-primary
+                  span.mp-purple (attrs={'arrow-next': true}) 
+                  | Button text
+   if sectionOpen == 'buttons' || searchSections.includes('toggle-buttons')
+    .sub-section-container#toggle-buttons
+      .divider
+        label 4.3
+      .section-content
+        section
+        .subsection-title Toggle Buttons
+        .subsection-description Toggles can be used to sort lists or to force a single selection from a finite list of viewing options.
+        .indent-container
+          if $helpers.showExampleblock('inline-toggle-large')
+            .example-block#inline-toggle-large
+              .call-out.first-call-out
+                strong.icon +
+                strong  mp-toggle
+                p .inline-toggle
+              .common-example
+                mp-toggle.inline-toggle(attrs={square: true, large: true, selected: 'option1'})
+                  mp-toggle-option(attrs={value: 'option1'}) Apples
+                  mp-toggle-option(attrs={value: 'option2'}) Oranges
+                  mp-toggle-option(attrs={value: 'option3'}) Bananas
+          if $helpers.showExampleblock('inline-toggle-small')
+            .example-block#inline-toggle-small
+              .call-out
+                strong .inline-toggle 
+                p (attrs={square: true, small: true}) 
+              .common-example
+                mp-toggle.inline-toggle(attrs={square: true, small: true, selected: 'option1'})
+                  mp-toggle-option(attrs={value: 'option1'}) Pears
+                  mp-toggle-option(attrs={value: 'option2'}) Peaches
+                  mp-toggle-option(attrs={value: 'option3'}) Plums
+          if $helpers.showExampleblock('max-width-toggle')
+            .example-block#max-width-toggle
+              .call-out.first-call-out
+                strong.icon +
+                strong mp-toggle
+                p .max-width-toggle
+              .common-example   
+                mp-toggle.max-width-toggle(attrs={selected: 'option2'})
+                  mp-toggle-option(attrs={value: 'option1'}) Label
+                  mp-toggle-option(attrs={value: 'option2'}) Label
+                  mp-toggle-option(attrs={value: 'option3'}) Label   
+                  mp-toggle-option(attrs={value: 'option4'}) Label
+                  mp-toggle-option(attrs={value: 'option5'}) Label
+          if $helpers.showExampleblock('full-width-toggle-blue')
+            .example-block#full-width-toggle-blue
+              .call-out.first-call-out
+                strong.icon +
+                strong .full-width-toggle
+                p attrs={blue: true})
+              .floating-example-bar.blue-bar
+                mp-toggle.full-width-toggle(
+                  attrs={blue: true, selected: 'option1'})
+                  mp-toggle-option(attrs={value: 'option1'}) Option One
+                  mp-toggle-option(attrs={value: 'option2'}) Option Two
+                  mp-toggle-option(attrs={value: 'option3'}) Option Three
+          if $helpers.showExampleblock('max-width-toggle-large')
+            .example-block
+              .call-out.first-call-out
+                strong.icon +
+                strong .custom-width-class 
+                p (attrs={large: true})
+              .common-example
+                mp-toggle.max-width-toggle(attrs={large: true, selected: 'option2'})
+                  mp-toggle-option(attrs={value: 'option1'}) All
+                  mp-toggle-option(attrs={value: 'option2'}) Your Reports
+
+          //- Pending Addition: Minimal Toggle component
+          //- .example-block
+          //-   .call-out.first-call-out
+          //-     strong.icon +
+          //-     strong Toggle Minimal
+          //-   .floating-example-bar
+          //-     mp-toggle.mp-class-name-toggle(
+          //-       attrs={selected: 'option1'})
+          //-       mp-toggle-option(attrs={value: 'option1'}) All
+          //-       mp-toggle-option(attrs={value: 'option2'}) Your Reports
+          
           .code-snippet
             .call-out.first-call-out
               strong.icon +
@@ -111,324 +316,129 @@
                   | 8
                   br
                   | 9
-                  br
-                  | 10
-                  br
-                  | 11
-                  br
-                  | 12
                 pre
-                  span.grey-500  /* Basic buttons */
+                  span.grey-500 /* Square Large Toggle */
                   br
-                  |   mp-button
-                  span.mp-red .mp-button-primary
-                  |  Button text
+                  span.mp-red mp-toggle
+                  | .custom-class 
+                  span.mp-purple (attrs={'square: true, large: true, selected: 'option1'})
                   br
-                  |   mp-button
-                  span.mp-red .mp-button-secondary
-                  |  Button text
+                  |   mp-toggle-option
+                  span.mp-purple (attrs={value: 'option1'})
+                  | Apples
                   br
-                  br
-                  span.grey-500  /* Buttons with icon */
-                  br
-                  |   mp-button
-                  span.mp-purple (attrs={icon: 'x'})
-                  span.mp-red .mp-button-secondary.mp-button-with-icon
-                  |  Button text
+                  |   mp-toggle-option
+                  span.mp-purple (attrs={value: 'option2'})
+                  | Oranges
                   br
                   br
-                  span.grey-500  /* Small buttons */
+                  span.grey-500 /* Round Blue Small Toggle */
                   br
-                  |   mp-button
-                  span.mp-red .mp-button-secondary
-                  span.mp-purple (attrs={size: 'small'})
-                  |  Button text
+                  span.mp-red mp-toggle
+                  | .custom-class 
+                  span.mp-purple (attrs={blue: true, small: true, selected: 'option1'})
                   br
+                  |   mp-toggle-option
+                  span.mp-purple (attrs={value: 'option1'})
+                  | Apples
                   br
-                  span.grey-500  /* Disabled buttons */ 
+                  |   mp-toggle-option
+                  span.mp-purple (attrs={value: 'option2'})
+                  | Oranges
                   br
-                  |   mp-button
-                  span.mp-red .mp-button-red
-                  span.mp-purple (attrs={disabled: true})
-                  |  Button text
-  .sub-section-container#button-bars(class={
-    'no-match': !searchSections.includes('button-bars'),
-  })
-    .divider
-      label 4.2
-    .section-content
-      section
-      .subsection-title Button Bars
-      .subsection-description Button bars are used in tandem with ui-cards (modals and dialogues) to lead the user through a linear flow or to complete a form.
-      .indent-container
-        .example-block.half
-          .call-out.first-call-out
-            strong.icon +
-            strong .mp-button-bar-primary 
-          .example-card.narrow.truncated.mp-button-bar-container
-            mp-button-bar.mp-button-bar-primary Button-bar primary
-          .example-card.narrow.truncated.mp-button-bar-container
-            mp-button-bar.mp-button-bar-secondary Button-bar secondary
-        .example-block.half
-          .call-out
-            strong .mp-button-bar 
-            p (attrs={'arrow-next': true})
-          .example-card.narrow.mp-button-bar-container
-            mp-button-bar.mp-button-bar-primary(attrs={'arrow-next': true}) Button-bar icon
-        .code-snippet
-          .call-out.first-call-out
-            strong.icon +
-            strong Example Code
-          .snippet-container.min.max
-            .snippet-header
-              label Jade
-            .code-field
-              pre
-                | 1
-                br
-                | 2
-                br
-                | 3
-                br
-                | 4
-                br
-                | 5
-              pre
-                span.grey-500  /* Button bars */
-                br
-                |  .mp-button-bar-container
-                br
-                span.mp-red     mp-button-bar.mp-button-bar-secondary 
-                | Button text
-                br
-                |  .mp-button-bar-container
-                br
-                span.mp-red     mp-button-bar.mp-button-bar-primary
-                span.mp-purple (attrs={'arrow-next': true}) 
-                | Button text
-  .sub-section-container#toggle-buttons(class={
-    'no-match': !searchSections.includes('toggle-buttons'),
-  })
-    .divider
-      label 4.3
-    .section-content
-      section
-      .subsection-title Toggle Buttons
-      .subsection-description Toggles can be used to sort lists or to force a single selection from a finite list of viewing options.
-      .indent-container
-        .example-block
-          .call-out.first-call-out
-            strong.icon +
-            strong  mp-toggle
-            p .inline-toggle
-          .common-example
-            mp-toggle.inline-toggle(attrs={square: true, large: true, selected: 'option1'})
-              mp-toggle-option(attrs={value: 'option1'}) Apples
-              mp-toggle-option(attrs={value: 'option2'}) Oranges
-              mp-toggle-option(attrs={value: 'option3'}) Bananans
-        .example-block
-          .call-out
-            strong .inline-toggle 
-            p (attrs={square: true, small: true}) 
-          .common-example
-            mp-toggle.inline-toggle(attrs={square: true, small: true, selected: 'option1'})
-              mp-toggle-option(attrs={value: 'option1'}) Pears
-              mp-toggle-option(attrs={value: 'option2'}) Peaches
-              mp-toggle-option(attrs={value: 'option3'}) Plums
-        .example-block
-          .call-out.first-call-out
-            strong.icon +
-            strong mp-toggle
-            p .custom-width-class
-          .common-example   
-            mp-toggle.max-width-toggle(attrs={selected: 'option2'})
-              mp-toggle-option(attrs={value: 'option1'}) Label
-              mp-toggle-option(attrs={value: 'option2'}) Label
-              mp-toggle-option(attrs={value: 'option3'}) Label   
-              mp-toggle-option(attrs={value: 'option4'}) Label
-              mp-toggle-option(attrs={value: 'option5'}) Label
-        .example-block
-          .call-out.first-call-out
-            strong.icon +
-            strong .custom-width-class 
-            p attrs={blue: true})
-          .floating-example-bar.blue-bar
-            mp-toggle.full-width-toggle(
-              attrs={blue: true, selected: 'option1'})
-              mp-toggle-option(attrs={value: 'option1'}) Option One
-              mp-toggle-option(attrs={value: 'option2'}) Option Two
-              mp-toggle-option(attrs={value: 'option3'}) Option Three
-        .example-block
-          .call-out.first-call-out
-            strong.icon +
-            strong .custom-width-class 
-            p (attrs={large: true})
-          .common-example
-            mp-toggle.max-width-toggle(attrs={large: true, selected: 'option2'})
-              mp-toggle-option(attrs={value: 'option1'}) All
-              mp-toggle-option(attrs={value: 'option2'}) Your Reports
-
-        //- Pending Addition: Minimal Toggle component
-        //- .example-block
-        //-   .call-out.first-call-out
-        //-     strong.icon +
-        //-     strong Toggle Minimal
-        //-   .floating-example-bar
-        //-     mp-toggle.mp-class-name-toggle(
-        //-       attrs={selected: 'option1'})
-        //-       mp-toggle-option(attrs={value: 'option1'}) All
-        //-       mp-toggle-option(attrs={value: 'option2'}) Your Reports
-        
-        .code-snippet
-          .call-out.first-call-out
-            strong.icon +
-            strong Example Code
-          .snippet-container.min.max
-            .snippet-header
-              label Jade
-            .code-field
-              pre
-                | 1
-                br
-                | 2
-                br
-                | 3
-                br
-                | 4
-                br
-                | 5
-                br
-                | 6
-                br
-                | 7
-                br
-                | 8
-                br
-                | 9
-              pre
-                span.grey-500 /* Square Large Toggle */
-                br
-                span.mp-red mp-toggle
-                | .custom-class 
-                span.mp-purple (attrs={'square: true, large: true, selected: 'option1'})
-                br
-                |   mp-toggle-option
-                span.mp-purple (attrs={value: 'option1'})
-                | Apples
-                br
-                |   mp-toggle-option
-                span.mp-purple (attrs={value: 'option2'})
-                | Oranges
-                br
-                br
-                span.grey-500 /* Round Blue Small Toggle */
-                br
-                span.mp-red mp-toggle
-                | .custom-class 
-                span.mp-purple (attrs={blue: true, small: true, selected: 'option1'})
-                br
-                |   mp-toggle-option
-                span.mp-purple (attrs={value: 'option1'})
-                | Apples
-                br
-                |   mp-toggle-option
-                span.mp-purple (attrs={value: 'option2'})
-                | Oranges
-                br
-  .sub-section-container#drop-buttons(class={
-    'no-match': !searchSections.includes('drop-buttons'),
-  })
-    .divider
-      label 4.4
-    .section-content
-      section
-      .subsection-title Drop Buttons
-      .subsection-description Use a drop button when the user needs to choose from a finite set of options. For example: these can be used to present a list of people properites, or events the user is tracking. Making a selection would cause the drop down to close.
-      .indent-container
-        .example-block
-          .call-out
-            strong Drop Button
-          .common-example
-            .drop-menu-button(on={click: () => $helpers.toggleMenu('dropMenu')})
-              a text here
-              svg-icon(attrs={icon: 'caret-down'})
-            .drop-menu-container
-              mp-drop-menu(
-                attrs={open: open.dropMenu}
-                on={change: e => $helpers.handleModalChange('dropMenu', e.detail.state)}
-              )
-                .text-container(style={width: '160px'})
-                  mp-list-item Drop menu option 1
-                  mp-list-item Drop menu option 2
-                  mp-list-item Drop menu option 3
-        .example-block
-          .call-out
-            strong Overflow Menu
-          .common-example
-            .example-card.long.truncated(style={margin: '10px'})
-              .example-card-header.grey
-                .overflow-menu-button(on={click: () => $helpers.toggleMenu('overflowMenu')})
-                  svg-icon(attrs={icon: 'ellipsis'})
-                .drop-menu-container
-                  mp-drop-menu(
-                    attrs={open: open.overflowMenu}
-                    on={change: e => $helpers.handleModalChange('overflowMenu', e.detail.state)}
-                  )
-                    .text-container
-                      mp-list-item Overflow option 1
-                      mp-list-item Overflow option 2
-                      mp-list-item Overflow option 3
-        
-        //- Pending Addition: Small circle button with icon / text
-        //- .example-block.full-width
-        //-   .call-out.first-call-out
-        //-     strong.icon +
-        //-     strong Query Builder
-        //-   .common-example
-        //-     //- Insert Query Builder text-link drop-down
-        
-        .code-snippet
-          .call-out.first-call-out
-            strong.icon +
-            strong Example Code
-          .snippet-container.min.max
-            .snippet-header
-              label Jade
-            .code-field
-              pre
-                | 1
-                br
-                | 2
-                br
-                | 3
-                br
-                | 4
-                br
-                | 5
-                br
-                | 6
-                br
-                | 7
-                br
-                | 8
-                br
-                | 9
-              pre
-                span.grey-500  /* Basic Text Drop */
-                br
-                span.mp-red  .drop-menu-button
-                span.mp-purple (on={click: () => $helpers.toggleMenu('dropMenu')})
-                br
-                |     a Text here
-                br
-                |     svg-icon(attrs={icon: 'caret-down'})
-                br
-                span.mp-red  .drop-menu-container
-                br
-                span.mp-red     mp-drop-menu(
-                br
-                span.mp-purple       attrs={open: open.dropMenu} 
-                br
-                span.mp-purple       on={change: e => $helpers.handleModalChange('dropMenu', e.detail.state)} 
-                br
-                span.mp-red     )
+   if sectionOpen == 'buttons' || searchSections.includes('drop-buttons')
+    .sub-section-container#drop-buttons
+      .divider
+        label 4.4
+      .section-content
+        section
+        .subsection-title Drop Buttons
+        .subsection-description Use a drop button when the user needs to choose from a finite set of options. For example: these can be used to present a list of people properites, or events the user is tracking. Making a selection would cause the drop down to close.
+        .indent-container
+          .example-block
+            .call-out
+              strong Drop Button
+            .common-example
+              .drop-menu-button(on={click: () => $helpers.toggleMenu('dropMenu')})
+                a text here
+                svg-icon(attrs={icon: 'caret-down'})
+              .drop-menu-container
+                mp-drop-menu(
+                  attrs={open: open.dropMenu}
+                  on={change: e => $helpers.handleModalChange('dropMenu', e.detail.state)}
+                )
+                  .text-container(style={width: '160px'})
+                    mp-list-item Drop menu option 1
+                    mp-list-item Drop menu option 2
+                    mp-list-item Drop menu option 3
+          .example-block
+            .call-out
+              strong Overflow Menu
+            .common-example
+              .example-card.long.truncated(style={margin: '10px'})
+                .example-card-header.grey
+                  .overflow-menu-button(on={click: () => $helpers.toggleMenu('overflowMenu')})
+                    svg-icon(attrs={icon: 'ellipsis'})
+                  .drop-menu-container
+                    mp-drop-menu(
+                      attrs={open: open.overflowMenu}
+                      on={change: e => $helpers.handleModalChange('overflowMenu', e.detail.state)}
+                    )
+                      .text-container
+                        mp-list-item Overflow option 1
+                        mp-list-item Overflow option 2
+                        mp-list-item Overflow option 3
+          
+          //- Pending Addition: Small circle button with icon / text
+          //- .example-block.full-width
+          //-   .call-out.first-call-out
+          //-     strong.icon +
+          //-     strong Query Builder
+          //-   .common-example
+          //-     //- Insert Query Builder text-link drop-down
+          
+          .code-snippet
+            .call-out.first-call-out
+              strong.icon +
+              strong Example Code
+            .snippet-container.min.max
+              .snippet-header
+                label Jade
+              .code-field
+                pre
+                  | 1
+                  br
+                  | 2
+                  br
+                  | 3
+                  br
+                  | 4
+                  br
+                  | 5
+                  br
+                  | 6
+                  br
+                  | 7
+                  br
+                  | 8
+                  br
+                  | 9
+                pre
+                  span.grey-500  /* Basic Text Drop */
+                  br
+                  span.mp-red  .drop-menu-button
+                  span.mp-purple (on={click: () => $helpers.toggleMenu('dropMenu')})
+                  br
+                  |     a Text here
+                  br
+                  |     svg-icon(attrs={icon: 'caret-down'})
+                  br
+                  span.mp-red  .drop-menu-container
+                  br
+                  span.mp-red     mp-drop-menu(
+                  br
+                  span.mp-purple       attrs={open: open.dropMenu} 
+                  br
+                  span.mp-purple       on={change: e => $helpers.handleModalChange('dropMenu', e.detail.state)} 
+                  br
+                  span.mp-red     )
