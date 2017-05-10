@@ -101,22 +101,22 @@
                   br
                   | 8
                 pre
-                  span.grey-500  /* Square field w/ icon */
+                  span.grey-500 //- Square field w/ icon
                   br
                   span.mp-red .mp-icon-input
                   br
                   |   .mp-icon
                   br
-                  span.mp-red      svg-icon
+                  span.mp-red     svg-icon
                   span.mp-purple (attrs={icon: "search"})
                   br
-                  |    input
+                  |   input
                   span.mp-purple (attrs={type: 'text', placeholder: 'Some placeholder text'})
                   br
                   br
-                  span.grey-500  /* Square field w/ button */
+                  span.grey-500 //- Square field w/ button
                   br
-                  span.mp-red  mp-input-group
+                  span.mp-red mp-input-group
                   span.mp-purple (attrs={placeholder: "text here", busy: inputGroupSaving})
   .sub-section-container#modals-dialogues(class={
     'no-match': !searchSections.includes('modals-dialogues'),
@@ -140,8 +140,10 @@
         p.desc Modals have blue header bars and should be presented when the user needs to complete a task that the current interface does not support. For example: a button to invite teammates might present a modal including a search field and a list of names to choose from. These are specifically great for 
           span.bold presenting new flows 
           span.mp-font-size-large while preserving the state of content.
+        .variation-tags
+          | Pre-Defined Types:
+          li modal
         .demo-divider
-          //- this not working...
           a(on={click: () => $helpers.openModal('modal')}) View Demo
           mp-modal.modal(
             attrs={closeable: true, open: open.modal}
@@ -166,6 +168,10 @@
         p.desc.mp-font-size-large Dialogues are used when 
           span.bold a decision is required.
           span.mp-font-size-large  An example would be any time a user makes a potentially irreversable action, you could display a dialogue to get confirmation and explain the reprocussions.
+        .variation-tags
+          | Pre-Defined Types:
+          li confirm
+          li confirmDelete
         .demo-divider
           a(on={click: () => $helpers.openModal('confirm')}) View Demo 
           mp-confirm(
@@ -212,40 +218,44 @@
               | 12
               br
               | 13
-            pre
-              span.grey-500  /* Modal with button-bar */
               br
-              span.mp-red   mp-modal.modal(
+              | 14
+            pre
+              span.grey-500 //- Modal with button-bar
+              br
+              span.mp-red mp-modal.modal(
               span.mp-purple attrs={closeable: true, open: open.modal}
               span.mp-red )
               br
-              |     div
+              |   div
               br
-              span.mp-red       .mp-modal-content
+              span.mp-red     .mp-modal-content
               br
-              span.mp-red         .mp-modal-title
+              span.mp-red       .mp-modal-title
               |  Modal title text here
               br
-              span.mp-red         .mp-modal-subtitle
+              span.mp-red       .mp-modal-subtitle
               |  Modal subtext here
               br
-              span.mp-red        mp-button-bar.mp-button-bar-primary
+              span.mp-red     mp-button-bar.mp-button-bar-primary
               span.mp-purple (attrs={'arrow-next': true})
               | Button CTA
               br
               br
-              span.grey-500  /* Dialogue */
+              span.grey-500 //- Dialogue
               br
-              span.mp-red   mp-confirm(
+              span.grey-500 //- Variations: 'confirm', 'confirmDelete'
+              br
+              span.mp-red mp-confirm(
               span.mp-purple attrs={open: open.confirm}
               span.mp-red )
               br
-              |     div
+              |   div
               br
-              span.mp-red       .mp-confirm-title
+              span.mp-red     .mp-confirm-title
               |  Dialogue title text
               br
-              span.mp-red       .mp-confirm-description
+              span.mp-red     .mp-confirm-description
               |  Dialogue subtext here
   .sub-section-container#popups-alerts(class={
     'no-match': !searchSections.includes('popups-alerts'),
@@ -389,31 +399,35 @@
               | 10
               br
               | 11
-            pre
-              span.grey-500 /* Popup & Alert */
               br
-              span.mp-red  mp-alert(
+              | 12
+            pre
+              span.grey-500 //- Popup & Alert
+              br
+              span.grey-500 //- Variations: 'alert', 'popup', 'alert-not-fullscreen', 'alert-large-icon'
+              br
+              span.mp-red   mp-alert(
               span.mp-purple attrs={id: 'alert', closeable: true, open: open['alert-large-icon'], 'large-icon': true}
               span.mp-red )
               br
-              |    div
+              |     div
               br
-              |      Alert text here
+              |       Alert text here
               br
               br
-              span.grey-500 /* Toast */
+              span.grey-500 //- Toast
               br
-              span.mp-red  mp-toast(
-              span.mp-purple   attrs={cta: toast.cta, hide: toast.closed}
+              span.mp-red   mp-toast(
+              span.mp-purple attrs={cta: toast.cta, hide: toast.closed}
               span.mp-red )=
               |  Toast message
               br
               br
-              span.grey-500 /* Tutorial tooltips */
+              span.grey-500 //- Tutorial tooltips
               br
-              | .tutorial-tooltips-container
+              |   .tutorial-tooltips-container
               br
-              span.mp-red    mp-tutorial-tool-tip(
+              span.mp-red     mp-tutorial-tool-tip(
               span.mp-purple attrs={placement: 'bottom','num-steps': 4}
               span.mp-red )
               |  Tooltip text
@@ -510,23 +524,31 @@
               | 7
               br
               | 8
-            pre
-              span.grey-500  /* Tooltips */
               br
-              |  .tooltip-parent-div
+              | 9
+              br
+              | 10
+              br
+              | 11
+            pre
+              span.grey-500 //- Tooltips
+              br
+              span.grey-500 //- Variations: 'top', 'left, 'bottom', 'right'
+              br
+              |   .tooltip-parent-div
               br
               span.mp-red     mp-tooltip
               span.mp-purple (attrs={placement: 'top'}) Tooltip Text
               br
               br
-              span.grey-500  /* Tags */
+              span.grey-500 //- Tags
               br
-              span.mp-red  mp-tag
+              span.mp-red   mp-tag
               span.mp-purple (attrs={clickable: true, 'tag-name': 'Name', removable: true})
               br
               br
-              span.grey-500  /* Spinner(s) */
+              span.grey-500 //- Spinner(s)
               br
-              |  .custom-size-class
+              |   .custom-size-class
               br
               span.mp-red     mp-spinner
