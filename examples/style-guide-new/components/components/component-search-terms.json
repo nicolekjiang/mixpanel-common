@@ -1,0 +1,72 @@
+{
+  "input-icon": [
+    "input",
+    "icon",
+    "search",
+    "square",
+    "components",
+    "mp-icon-input"
+  ],
+  "input-group": [
+    "input",
+    "search",
+    "components",
+    "mp-input-group"
+  ],
+  "modal": [
+    "modal",
+    "mp-modal",
+    "closeable",
+    "components",
+    "popup"
+  ],
+  "modal-confirm": [
+    "modal",
+    "closeable",
+    "components",
+    "popup",
+    "mp-confirm"
+  ],
+  "upsell-popup": [
+    "components",
+    "upsells",
+    "popups",
+    "mp-upsell-popup"
+  ],
+  "alert": [
+    "components",
+    "alerts",
+    "popups",
+    "mp-alert"
+  ],
+  "toasts": [
+    "toasts",
+    "components",
+    "popups",
+    "mp-toast"
+  ],
+  "tutorial-tooltip": [
+    "mp-tutorial-tooltip",
+    "components",
+    "popups"
+  ],
+  "tooltip": [
+    "mp-tooltip",
+    "components",
+    "popups",
+    "left",
+    "right",
+    "up",
+    "down"
+  ],
+  "tags": [
+    "components",
+    "tags",
+    "mp-tag"
+  ],
+  "spinner": [
+    "mp-spinner",
+    "spinner",
+    "components"
+  ]
+}

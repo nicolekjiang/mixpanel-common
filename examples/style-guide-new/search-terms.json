@@ -1,17 +1,23 @@
 {
   "basic-buttons": [
+    "icon",
     "components",
     "buttons",
     "basic",
     "red",
     "blue",
     "mp-button-primary",
-    "mp-button-bar-secondary",
+    "mp-button-secondary",
     "mp-button-red",
     ".mp-button-on-blue",
-    "blue button"
+    "blue button",
+    "small",
+    "white"
   ],
   "button-bars": [
+    "icon",
+    "blue",
+    "white",
     "components",
     "buttons bars",
     "button bars",
@@ -23,7 +29,13 @@
     "toggle buttons",
     "toggles buttons",
     "mp-toggle",
-    "inline-toggle"
+    "inline-toggle",
+    "small",
+    "large",
+    "max-width-toggle",
+    "blue",
+    "white",
+    "full-width-toggle"
   ],
   "drop-buttons": [
     "components",
@@ -146,10 +158,13 @@
     "yellow-700"
   ],
   "input-fields": [
+    "icon",
     "components",
     "input fields",
     "search",
-    "mp-input-group"
+    "mp-input-group",
+    "square",
+    "mp-icon-input"
   ],
   "modals-dialogues": [
     "components",
@@ -158,7 +173,8 @@
     "dialogues",
     "mp-modal",
     "confirm modal",
-    "mp-confirm"
+    "mp-confirm",
+    "closable"
   ],
   "popups-alerts": [
     "components",
@@ -179,7 +195,11 @@
     "mp-tooltip",
     "mp-tag",
     "spinner",
-    "mp-spinner"
+    "mp-spinner",
+    "left",
+    "right",
+    "up",
+    "down"
   ],
   "ui-icons": [
     "icons",
@@ -283,6 +303,7 @@
     "weight-regular"
   ],
   "font-sizes": [
+    "font",
     "typography",
     "type",
     "sizes",

@@ -23,13 +23,6 @@ document.registerElement('color-section', class extends Component {
       helpers: {
         getColorGroups: () => COLOR_GROUPS,
         getColorLibraries: () => COLOR_LIBRARIES,
-        hideSectionOnSearch: sectionId => {
-          const sectionKeywords = sectionId.split('-').join(' ');
-          if (this.state.sectionOpen != 'search' || sectionKeywords.includes(this.state.searchTerm)) {
-            return false
-          }
-          return true;
-        },
         showAllColors: (colorType, colors = null) => {
           let showAll = true;
           if (this.state.sectionOpen == 'search') {

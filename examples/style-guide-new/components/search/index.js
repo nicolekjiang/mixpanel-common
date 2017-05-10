@@ -25,6 +25,12 @@ document.registerElement('search-section', class extends Component {
     const searchInput = this.el.querySelector('input.title-text');
     searchInput.value = this.state.searchTermPrompt;
     searchInput.focus();
+    this.clearSearch = e => {
+      if (e.which == 27) {
+        this.update({sectionOpen: this.state.previousSectionOpen});
+      }
+    };
+    this.addEventListener(`keydown`, this.clearSearch);
   }
   detachedCallback() {
     super.detachedCallback(...arguments);
