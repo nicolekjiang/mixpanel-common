@@ -378,7 +378,34 @@
         )
 
   .section.widgets
+
     h1 Widgets
+
+    p
+      h2 Items menus
+      .items-menu
+        input(
+          attrs={placeholder: `Click to open menu`}
+          on={
+            click: ev => ev.stopPropagation(),
+            focus: $helpers.handleItemsMenuFocus,
+            blur: $helpers.handleItemsMenuBlur,
+            input: $helpers.handleItemsMenuInput,
+            keydown: $helpers.handleItemsMenuKeydown,
+          }
+        )
+        .drop-menu-container
+          mp-drop-menu(
+            attrs={open: open.itemsMenu}
+            on={change: e => $helpers.handleModalChange('itemMenu', e.detail.state)}
+          )
+            mp-items-menu(
+              attrs={
+                'search-filter': itemsMenuSearchFilter,
+                'sections': JSON.stringify($helpers.getItemsMenuSections()),
+              },
+            )
+
     p
       h2 Regular Bookmark
       .bookmarks-widget

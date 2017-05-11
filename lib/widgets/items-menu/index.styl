@@ -1,0 +1,197 @@
+@import '../../stylesheets/defaults'
+
+ellipsis()
+  overflow hidden
+  text-overflow ellipsis
+  white-space nowrap
+
+span.substr.matches-search
+  color grey-900
+  font-weight 600
+
+.drop-menu-screen
+  display flex
+  flex-direction column
+
++host-styles('mp-items-menu')
+  display block
+  overflow auto
+
+.screen-list-container
+  .loading-items
+    align-items center
+    display flex
+    height 80px
+    justify-content center
+
+    mp-spinner
+      height 30px
+      width 30px
+
+  .section-divider
+    border-top 1px solid grey-150
+    margin 0 10px
+
+  .section-label
+    color grey-700
+    font-size 11px
+    font-weight weight-bold
+    margin 20px 18px 0
+    text-transform uppercase
+
+  ul.screen-options-list
+    overflow visible
+
+ul.screen-options-list
+  flex 1 1 auto
+  margin 0 10px
+  overflow auto
+  padding 0
+
+  &:empty
+    border-bottom none
+
+  & + ul.screen-options-list
+    border-top 1px solid grey-150
+    margin-top 2px
+    padding-top 2px
+
+  .matches-search
+    color mp-blue
+
+li.list-option
+  align-items center
+  border-radius 3px
+  color grey-700
+  display flex
+  font-size 12px
+  font-weight weight-medium
+  height 30px
+  justify-content flex-end
+
+  &:first-child
+    margin-top 10px
+
+  &:last-child
+    margin-bottom 10px
+
+  &.uppercase
+    font-size 11px
+    text-transform uppercase
+    font-weight weight-bold
+    line-height 11px
+
+  &.selected
+    color grey-900
+    cursor default
+    font-weight weight-bold
+
+    .option-icon
+      svg-icon-style(grey-900)
+
+  &.disabled
+    opacity 0.2
+    pointer-events none
+
+  &.focused
+    background-color grey-100
+
+    &.selectable
+      color mp-blue
+      cursor pointer
+
+      .option-icon
+        svg-icon-style(mp-blue)
+
+  /* secondary-action */
+  .secondary-action
+    align-items center
+    cursor pointer
+    display none
+    flex 0
+    margin 0 5px 0 10px
+    opacity 0
+
+    &.caret
+      height 18px
+      position relative
+      svg-icon-style(mp-blue, size: 16px, speed: 0s)
+      top 1px
+
+    &.pill
+      background-color white
+      border-radius 40px
+      color grey-500
+      font-size 11px
+      font-weight weight-bold
+      height 18px
+      line-height 12px
+      padding 0 5px 0 10px
+      transition background-color 0.1s
+
+      &.focused
+        background-color mp-blue
+        color white
+
+      /* pill-caret */
+      .pill-caret
+        right -2px
+        svg-icon-style(grey-500, size: 16px, speed: 0s, pos-top: 1px)
+        top 0
+
+      &.focused
+        .pill-caret
+          svg-icon-style(white, speed: 0s, pos-top: 1px)
+      /* end pill-caret */
+
+      &.disabled
+        opacity 0.2
+        pointer-events none
+
+  &.focused
+    .secondary-action
+      display flex
+      opacity 1
+  /* end secondary-action */
+
+  &.list-empty
+    pointer-events none
+    justify-content center
+
+  .option-label
+    ellipsis()
+    flex 1 1
+    padding-left 8px
+    padding-right 8px
+
+  .option-icon
+    display flex
+    padding-left 5px
+    svg-icon-style(grey-700)
+
+.screen-title
+  align-items center
+  box-shadow 0 1px 3px 0 rgba(grey-500, 0.37), 0 1px 0 0 grey-150
+  color grey-700
+  display flex
+  flex none
+  font-size 11px
+  font-weight weight-bold
+  height 48px
+  position relative
+
+  .title-button
+    cursor pointer
+    padding 10px
+    position absolute
+    svg-icon-style(grey-500, grey-700)
+
+    &.close-button
+      right 0
+
+  .title-label
+    ellipsis()
+    padding 0 30px
+    text-align center
+    text-transform uppercase
+    width 100%

@@ -1,0 +1,63 @@
+.screen-list-container(
+  hook={postpatch: $helpers.handlePostPatch}
+)
+  - const sections = $helpers.getSections()
+  if !sections.length
+    if searchFilter
+      li.list-option.list-empty Your search returned no results
+    else if emptyMessage
+      li.list-option.list-empty= emptyMessage
+  else
+    each section, idx in sections
+      if idx > 0
+        .section-divider
+      if section.label
+        .section-label= section.label
+      ul.screen-options-list
+        each item in section.items
+          - const isSelectable = !item.isDisabled && (!item.isSelected || item.hasCaret)
+          - const isFocused = focusedItemIndex === item.index
+          li.list-option(
+            class={
+              disabled: item.isDisabled,
+              focused: isFocused,
+              selected: item.isSelected,
+              selectable: isSelectable,
+              uppercase: item.isUppercase,
+            }
+            on={
+              click: isSelectable ? ev => $helpers.handleClickItem(item) : null,
+              mouseenter: () => $helpers.handleMouseenterItem(item),
+            }
+          )
+            if item.hasOwnProperty(`icon`)
+              .option-icon
+                - const icon = item.icon
+                svg-icon(attrs={icon, empty: !icon})
+            .option-label
+              if item.matches
+                each substr, si in item.matches
+                  span.substr(class={'matches-search': !(si % 2)})= substr
+              else
+                span.label= item.label
+            if item.hasPropertiesPill
+              .secondary-action.pill(
+                class={
+                  focused: isFocused && isPropertiesPillFocused,
+                  disabled: item.isPropertiesPillDisabled,
+                }
+                on={
+                  click: !item.isPropertiesPillDisabled ? () => $helpers.handleClickPropertiesPill(item) : null,
+                  mouseenter: () => $helpers.handleMouseenterPropertiesPill(item),
+                  mouseleave: () => $helpers.handleMouseleavePropertiesPill(item),
+                }
+              )
+                span Properties
+                .pill-caret
+                  svg-icon(attrs={icon: `caret-right`})
+            else if item.hasCaret
+              .secondary-action.caret
+                svg-icon(attrs={icon: `caret-right`})
+      if section.isLoading
+        .loading-items
+          mp-spinner
