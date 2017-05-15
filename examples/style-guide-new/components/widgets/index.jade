@@ -2,15 +2,15 @@
   if sectionOpen == 'widgets'
     .section-title-container
       .section-title
-        .title-text Bookmarks
+        .title-text Widgets
         .title-section 6.1
   if sectionOpen == 'widgets' || searchSections.includes('bookmarks')
     .sub-section-container#bookmarks
       .divider
       .section-content
         section
-          .subsection-title Widgets
-          .subsection-description A handfull of components that have been pre-composed as ready-to-use interface elements.
+          .subsection-title Bookmarks
+          .subsection-description A drop menu that accomodates search, browse, removal, and creation of bookmarked reports.
           .indent-container
             .example-block.full-width
               .call-out.first-call-out
@@ -117,7 +117,7 @@
        .section-content
          section
            .subsection-title Tag Selector
-           .subsection-description These UI components are containers that will interrupt the current flow, by displaying on top of the page content.
+           .subsection-description Add, remove, and create new tags for a given dashboard.
           .indent-container       
             .example-block.full-width#tag-selector
               .call-out.first-call-out
@@ -219,7 +219,7 @@
       .section-content
         section
         .subsection-title Calendar Widgets
-        .subsection-description These UI components are containers that will interrupt the current flow, by displaying on top of the page content.
+        .subsection-description For choosing dates and date ranges. Usually embedded in drop menus, card elements, and modals.
         .indent-container
           .example-block
             .call-out.first-call-out
@@ -307,3 +307,50 @@
                   span.mp-purple     }
                   br
                   span.mp-red   )
+  if sectionOpen == 'widgets' || searchSections.includes('items-menu')
+    .sub-section-container#calendar-widget
+      .divider
+      .section-content
+        section
+        .subsection-title Items Menu
+        .subsection-description A drop menu that lists events for query builders.
+        .indent-container
+          .example-block
+            .call-out.first-call-out
+              strong.icon +
+              strong itemsMenu
+            //- TODO: Add to search & Add to left Nav sub item
+            //- .items-menu
+            //-   .mp-input(
+            //-     attrs={placeholder: `Click to open menu`}
+            //-     on={
+            //-       click: ev => ev.stopPropagation(),
+            //-       focus: $helpers.handleItemsMenuFocus,
+            //-       blur: $helpers.handleItemsMenuBlur,
+            //-       input: $helpers.handleItemsMenuInput,
+            //-       keydown: $helpers.handleItemsMenuKeydown,
+            //-     }
+            //-   )
+            //-   .drop-menu-container
+            //-     mp-drop-menu(
+            //-       attrs={open: open.itemsMenu}
+            //-       on={change: e => $helpers.handleModalChange('itemMenu', e.detail.state)}
+            //-     )
+            //-       mp-items-menu(
+            //-         attrs={
+            //-           'search-filter': itemsMenuSearchFilter,
+            //-           'sections': JSON.stringify($helpers.getItemsMenuSections()),
+            //-         },
+            //-       )
+          .code-snippet
+            .call-out.first-call-out
+              strong.icon +
+              strong Example Code
+            .snippet-container.min.max
+              .snippet-header
+                label Jade
+              .code-field
+                pre
+                  | 1
+                pre
+                  span.grey-500 //- Items Menu
