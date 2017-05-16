@@ -342,5 +342,11 @@
     "single calendar",
     "double calendar",
     "mp-calendar"
+  ],
+  "items-menu": [
+    "components",
+    "widgets",
+    "items menu widgets",
+    "mp-items-menu"
   ]
 }

@@ -307,3 +307,43 @@
                   span.mp-purple     }
                   br
                   span.mp-red   )
+  if sectionOpen == 'widgets' || searchSections.includes('items-menu')
+    .sub-section-container#items-menu
+      .divider
+      .section-content
+        section
+        .subsection-title Items menu
+        .subsection-description For displaying a scrollable, searchable, and keyboard navigable list of items
+        .indent-container
+          .example-block
+            .call-out.first-call-out
+              strong.icon +
+              strong mp-items-menu
+            .items-menu-container
+              .mp-icon-input
+                .mp-icon
+                  svg-icon(attrs={icon: 'search'})
+                input(
+                  attrs={
+                    type: 'text',
+                    placeholder: 'Click to open menu',
+                  }
+                  on={
+                    click: ev => ev.stopPropagation(),
+                    focus: $helpers.handleItemsMenuFocus,
+                    blur: $helpers.handleItemsMenuBlur,
+                    input: $helpers.handleItemsMenuInput,
+                    keydown: $helpers.handleItemsMenuKeydown,
+                  }
+                )
+              .drop-menu-container
+                mp-drop-menu(
+                  attrs={open: itemsMenuOpen}
+                  on={change: $helpers.handleItemsMenuModalChange}
+                )
+                  mp-items-menu(
+                    attrs={
+                      'search-filter': itemsMenuSearchFilter,
+                      'sections': JSON.stringify($helpers.getItemsMenuSections()),
+                    },
+                  )
