@@ -11,6 +11,7 @@ document.registerElement('widgets-section', class extends Component {
       defaultState: {
         currentBookmark: `default`,
         bookmarks,
+        itemsMenuOpen: false,
         savingBookmark: false,
         selectedBookmarkId: null,
         tagSelectorLoadState: `idle`,
@@ -92,6 +93,141 @@ document.registerElement('widgets-section', class extends Component {
           setTimeout(() => bookmark.setAttribute(`open`, true), 200);
           const currentBookmark = type;
           this.update({currentBookmark});
+        },
+        handleItemsMenuModalChange: ev => {
+          const state = ev.detail.state;
+          this.update({itemsMenuOpen: state === `open`});
+        },
+        handleItemsMenuFocus: () => {
+          this.update({itemsMenuOpen: true});
+        },
+        handleItemsMenuBlur: () => {
+          this.update({itemsMenuOpen: false});
+        },
+        handleItemsMenuInput: ev => {
+          this.update({itemsMenuSearchFilter: ev.target.value});
+        },
+        handleItemsMenuKeydown: ev => {
+          if (Object.values(ItemsMenu.NAVIGATION_KEY_CODES).indexOf(ev.keyCode) !== -1) {
+            ev.preventDefault();
+            ev.stopPropagation();
+
+            const eventsMenuEl = ev.target.parentNode.querySelector(`mp-items-menu`);
+            // There's a bug in chromnium where it's not possible to set keyCode on KeyboardEvent,
+            // so use a CustomEvent instead
+            const clonedEvent = new Event(ev.type, ev);
+            clonedEvent.keyCode = ev.keyCode;
+            eventsMenuEl.dispatchEvent(clonedEvent);
+          }
+        },
+        getItemsMenuSections: () => {
+          const sections = [{
+            label: `Loading section`,
+            isLoading: true,
+            items: [],
+          }, {
+            label: `Recently Viewed`,
+            items: [{
+              label: `Top Events`,
+              icon: `star-top-events`,
+              isSelected: true,
+              hasPropertiesPill: true,
+            }, {
+              label: `[Collect everything] Clicked cancel edit elements`,
+              icon: `event`,
+              hasPropertiesPill: true,
+              isPropertiesPillDisabled: true,
+              hasCaret: true,
+            }],
+          }, {
+            label: `Events`,
+            items: [{
+              label: `All Events`,
+              icon: `star-top-events`,
+              isSelected: true,
+              hasCaret: true,
+              isDisabled: true,
+            }, {
+              label: `Top Events`,
+              icon: `star-top-events`,
+              isSelected: true,
+              isDisabled: true,
+              hasPropertiesPill: true,
+            }, {
+              label: `[Collect everything] Clicked cancel edit elements`,
+              icon: `event`,
+              isDisabled: true,
+            }, {
+              label: `All: Add to shortlist v3`,
+              icon: `custom-events`,
+            }, {
+              label: `$autotrack_pageview`,
+              icon: `autotrack`,
+            }, {
+              label: `First App Open`,
+              icon: `pretrack`,
+            }, {
+              label: `Viewed report`,
+              icon: null,
+            }],
+          }, {
+            items: [{
+              icon: `profile`,
+              label: `All People`,
+            }],
+          }, {
+            items: [{
+              label: `Device Model`,
+              icon: `type-text`,
+            }, {
+              label: `Device Pixel Ratio (is it retina?)`,
+              icon: `type-number`,
+            }, {
+              label: `Email`,
+              icon: `type-text`,
+            }, {
+              label: `Error`,
+              icon: `type-boolean`,
+            }, {
+              label: `User Ids`,
+              icon: `type-list`,
+            }, {
+              label: `Created`,
+              icon: `type-date`,
+            }],
+          }, {
+            label: `Non-icon items`,
+            items: [{
+              label: `Last 96 hours`,
+            }, {
+              label: `Last 30 days`,
+            }],
+          }, {
+            label: `Uppercase items`,
+            items: [{
+              isUppercase: true,
+              label: `Events`,
+            }, {
+              isUppercase: true,
+              label: `People`,
+            }],
+          }, {
+            label: `Sorted items`,
+            items: [{
+              label: `Events`,
+            }, {
+              isUppercase: true,
+              label: `People`,
+            }],
+          }];
+
+          // Duplicate the menu to make it longer to trigger pagination
+          return [
+            ...sections,
+            ...sections,
+            ...sections,
+            ...sections,
+          ];
         },
       },
       template,
