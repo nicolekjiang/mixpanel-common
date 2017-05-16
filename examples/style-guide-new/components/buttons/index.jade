@@ -220,8 +220,18 @@
       .section-content
         section
         .subsection-title Toggle Buttons
-        .subsection-description Toggles can be used to sort lists or to force a single selection from a finite list of viewing options.
+        .subsection-description Toggle sets can be used to sort lists or to force a single selection from a finite list of viewing options. The basic toggle switch can be used to enable or disable settings / states from within menus.
         .indent-container
+          if $helpers.showExampleblock('toggle-switch')
+            .example-block.full-width#toggle-switch
+              .call-out.first-call-out
+                strong.icon +
+                strong  mp-switch 
+                p (attrs={on: true})
+              .common-example
+                mp-switch
+                .example-divider
+                mp-switch(attrs={on: true})
           if $helpers.showExampleblock('inline-toggle-large')
             .example-block#inline-toggle-large
               .call-out.first-call-out
@@ -316,7 +326,19 @@
                   | 8
                   br
                   | 9
+                  br
+                  | 10
+                  br
+                  | 11
+                  br
+                  | 12
                 pre
+                  span.grey-500 //- Toggle Swich
+                  br
+                  span.mp-red mp-switch
+                  span.mp-purple (attrs={on: 'true'})
+                  br
+                  br
                   span.grey-500 //- Square Large Toggle
                   br
                   span.mp-red mp-toggle
@@ -345,6 +367,7 @@
                   |   mp-toggle-option
                   span.mp-purple (attrs={value: 'option2'})
                   | Oranges
+
    if sectionOpen == 'buttons' || searchSections.includes('drop-buttons')
     .sub-section-container#drop-buttons
       .divider
