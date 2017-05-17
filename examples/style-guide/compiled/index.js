@@ -261,6 +261,9 @@
 	                label: '$autotrack_pageview',
 	                icon: 'autotrack'
 	              }, {
+	                label: 'First App Open',
+	                icon: 'pretrack'
+	              }, {
 	                label: 'Viewed report',
 	                icon: null
 	              }]
@@ -46003,6 +46006,8 @@
 	    return 'autotrack';
 	  } else if (mpEvent.custom) {
 	    return 'custom-events';
+	  } else if (mpEvent.name.startsWith('$ae_')) {
+	    return 'pretrack';
 	  } else {
 	    return 'event';
 	  }
@@ -47929,6 +47934,8 @@
 
 	var _function = __webpack_require__(474);
 
+	var _registerElement = __webpack_require__(322);
+
 	var _string = __webpack_require__(476);
 
 	var _index = __webpack_require__(528);
@@ -48222,9 +48229,6 @@
 	  return ItemsMenu;
 	}(_panel.Component);
 
-	exports.default = ItemsMenu;
-
-
 	ItemsMenu.NAVIGATION_KEY_CODES = ItemsMenu.prototype.NAVIGATION_KEY_CODES = {
 	  TAB: 9,
 	  ENTER: 13,
@@ -48235,7 +48239,7 @@
 	ItemsMenu.ITEM_TYPE_EVENT = ItemsMenu.prototype.ITEM_TYPE_EVENT = 'event';
 	ItemsMenu.ITEM_TYPE_PROPERTY = ItemsMenu.prototype.ITEM_TYPE_PROPERTY = 'property';
 
-	document.registerElement('mp-items-menu', ItemsMenu);
+	exports.default = (0, _registerElement.registerMPElement)('mp-items-menu', ItemsMenu);
 
 /***/ },
 /* 528 */

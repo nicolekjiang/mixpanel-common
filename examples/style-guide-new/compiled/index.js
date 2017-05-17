@@ -45808,6 +45808,8 @@
 	    return 'autotrack';
 	  } else if (mpEvent.custom) {
 	    return 'custom-events';
+	  } else if (mpEvent.name.startsWith('$ae_')) {
+	    return 'pretrack';
 	  } else {
 	    return 'event';
 	  }
@@ -47734,6 +47736,8 @@
 
 	var _function = __webpack_require__(474);
 
+	var _registerElement = __webpack_require__(322);
+
 	var _string = __webpack_require__(476);
 
 	var _index = __webpack_require__(528);
@@ -48027,9 +48031,6 @@
 	  return ItemsMenu;
 	}(_panel.Component);
 
-	exports.default = ItemsMenu;
-
-
 	ItemsMenu.NAVIGATION_KEY_CODES = ItemsMenu.prototype.NAVIGATION_KEY_CODES = {
 	  TAB: 9,
 	  ENTER: 13,
@@ -48040,7 +48041,7 @@
 	ItemsMenu.ITEM_TYPE_EVENT = ItemsMenu.prototype.ITEM_TYPE_EVENT = 'event';
 	ItemsMenu.ITEM_TYPE_PROPERTY = ItemsMenu.prototype.ITEM_TYPE_PROPERTY = 'property';
 
-	document.registerElement('mp-items-menu', ItemsMenu);
+	exports.default = (0, _registerElement.registerMPElement)('mp-items-menu', ItemsMenu);
 
 /***/ },
 /* 528 */
@@ -49812,6 +49813,12 @@
 			"single calendar",
 			"double calendar",
 			"mp-calendar"
+		],
+		"items-menu": [
+			"components",
+			"widgets",
+			"items menu widgets",
+			"mp-items-menu"
 		]
 	};
 
@@ -50012,6 +50019,12 @@
 			"max-width-toggle",
 			"large",
 			"white"
+		],
+		"toggle-switch": [
+			"buttons",
+			"toggle",
+			"switch",
+			"mp-switch"
 		]
 	};
 
@@ -51347,7 +51360,7 @@
 	                }
 	              }, function () {
 	                var __jade_nodes = [];
-	                __jade_nodes = __jade_nodes.concat("Toggles can be used to sort lists or to force a single selection from a finite list of viewing options.");;
+	                __jade_nodes = __jade_nodes.concat("Toggle sets can be used to sort lists or to force a single selection from a finite list of viewing options. The basic toggle switch can be used to enable or disable settings / states from within menus.");;
 	                return __jade_nodes;
 	              }.call(this).filter(Boolean)));
 	              __jade_nodes = __jade_nodes.concat(h("div", {
@@ -51640,7 +51653,8 @@
 	                  var __jade_nodes = [];
 	                  __jade_nodes = __jade_nodes.concat(h("div", {
 	                    "class": {
-	                      'example-block': true
+	                      'example-block': true,
+	                      'full-width': true
 	                    },
 	                    "props": {
 	                      id: 'full-width-toggle-blue'
@@ -51804,6 +51818,87 @@
 	                    return __jade_nodes;
 	                  }.call(this).filter(Boolean)));;
 	                  return __jade_nodes;
+	                }.call(this) : undefined);
+	                __jade_nodes = __jade_nodes.concat($helpers.showExampleblock('toggle-switch') ? function () {
+	                  var __jade_nodes = [];
+	                  __jade_nodes = __jade_nodes.concat(h("div", {
+	                    "class": {
+	                      'example-block': true,
+	                      'full-width': true
+	                    },
+	                    "props": {
+	                      id: 'toggle-switch'
+	                    }
+	                  }, function () {
+	                    var __jade_nodes = [];
+	                    __jade_nodes = __jade_nodes.concat(h("div", {
+	                      "class": {
+	                        'call-out': true,
+	                        'first-call-out': true
+	                      }
+	                    }, function () {
+	                      var __jade_nodes = [];
+	                      __jade_nodes = __jade_nodes.concat(h("strong", {
+	                        "class": {
+	                          'icon': true
+	                        }
+	                      }, function () {
+	                        var __jade_nodes = [];
+	                        __jade_nodes = __jade_nodes.concat("+");;
+	                        return __jade_nodes;
+	                      }.call(this).filter(Boolean)));
+	                      __jade_nodes = __jade_nodes.concat(h("strong", function () {
+	                        var __jade_nodes = [];
+	                        __jade_nodes = __jade_nodes.concat(" mp-switch ");;
+	                        return __jade_nodes;
+	                      }.call(this).filter(Boolean)));
+	                      __jade_nodes = __jade_nodes.concat(h("p", function () {
+	                        var __jade_nodes = [];
+	                        __jade_nodes = __jade_nodes.concat("(attrs={on: true})");;
+	                        return __jade_nodes;
+	                      }.call(this).filter(Boolean)));;
+	                      return __jade_nodes;
+	                    }.call(this).filter(Boolean)));
+	                    __jade_nodes = __jade_nodes.concat(h("div", {
+	                      "class": {
+	                        'floating-example-bar': true
+	                      }
+	                    }, function () {
+	                      var __jade_nodes = [];
+	                      __jade_nodes = __jade_nodes.concat(h("div", {
+	                        "class": {
+	                          'example-bar-line-item': true
+	                        }
+	                      }, function () {
+	                        var __jade_nodes = [];
+	                        __jade_nodes = __jade_nodes.concat("The default toggle-switch is off.");
+	                        __jade_nodes = __jade_nodes.concat(h("mp-switch"));;
+	                        return __jade_nodes;
+	                      }.call(this).filter(Boolean)));
+	                      __jade_nodes = __jade_nodes.concat(h("div", {
+	                        "class": {
+	                          'example-bar-divider': true
+	                        }
+	                      }));
+	                      __jade_nodes = __jade_nodes.concat(h("div", {
+	                        "class": {
+	                          'example-bar-line-item': true
+	                        }
+	                      }, function () {
+	                        var __jade_nodes = [];
+	                        __jade_nodes = __jade_nodes.concat("You can use the attribute on: true, as well.");
+	                        __jade_nodes = __jade_nodes.concat(h("mp-switch", {
+	                          "attrs": {
+	                            on: true
+	                          }
+	                        }));;
+	                        return __jade_nodes;
+	                      }.call(this).filter(Boolean)));;
+	                      return __jade_nodes;
+	                    }.call(this).filter(Boolean)));;
+	                    return __jade_nodes;
+	                  }.call(this).filter(Boolean)));;
+	                  return __jade_nodes;
 	                }.call(this) : undefined); /*  Pending Addition: Minimal Toggle component */
 	                /*  .example-block */
 	                /*    .call-out.first-call-out */
@@ -51889,7 +51984,13 @@
 	                        __jade_nodes = __jade_nodes.concat(h("br"));
 	                        __jade_nodes = __jade_nodes.concat("8");
 	                        __jade_nodes = __jade_nodes.concat(h("br"));
-	                        __jade_nodes = __jade_nodes.concat("9");;
+	                        __jade_nodes = __jade_nodes.concat("9");
+	                        __jade_nodes = __jade_nodes.concat(h("br"));
+	                        __jade_nodes = __jade_nodes.concat("10");
+	                        __jade_nodes = __jade_nodes.concat(h("br"));
+	                        __jade_nodes = __jade_nodes.concat("11");
+	                        __jade_nodes = __jade_nodes.concat(h("br"));
+	                        __jade_nodes = __jade_nodes.concat("12");;
 	                        return __jade_nodes;
 	                      }.call(this).filter(Boolean)));
 	                      __jade_nodes = __jade_nodes.concat(h("pre", function () {
@@ -52001,7 +52102,37 @@
 	                          __jade_nodes = __jade_nodes.concat("(attrs={value: 'option2'})");;
 	                          return __jade_nodes;
 	                        }.call(this).filter(Boolean)));
-	                        __jade_nodes = __jade_nodes.concat("Oranges");;
+	                        __jade_nodes = __jade_nodes.concat("Oranges");
+	                        __jade_nodes = __jade_nodes.concat(h("br"));
+	                        __jade_nodes = __jade_nodes.concat(h("br"));
+	                        __jade_nodes = __jade_nodes.concat(h("span", {
+	                          "class": {
+	                            'grey-500': true
+	                          }
+	                        }, function () {
+	                          var __jade_nodes = [];
+	                          __jade_nodes = __jade_nodes.concat("//- Toggle Swich");;
+	                          return __jade_nodes;
+	                        }.call(this).filter(Boolean)));
+	                        __jade_nodes = __jade_nodes.concat(h("br"));
+	                        __jade_nodes = __jade_nodes.concat(h("span", {
+	                          "class": {
+	                            'mp-red': true
+	                          }
+	                        }, function () {
+	                          var __jade_nodes = [];
+	                          __jade_nodes = __jade_nodes.concat("mp-switch");;
+	                          return __jade_nodes;
+	                        }.call(this).filter(Boolean)));
+	                        __jade_nodes = __jade_nodes.concat(h("span", {
+	                          "class": {
+	                            'mp-purple': true
+	                          }
+	                        }, function () {
+	                          var __jade_nodes = [];
+	                          __jade_nodes = __jade_nodes.concat("(attrs={on: 'true'})");;
+	                          return __jade_nodes;
+	                        }.call(this).filter(Boolean)));;
 	                        return __jade_nodes;
 	                      }.call(this).filter(Boolean)));;
 	                      return __jade_nodes;
@@ -53869,12 +54000,7 @@
 	                        }.call(this).filter(Boolean)));
 	                        __jade_nodes = __jade_nodes.concat(h("strong", function () {
 	                          var __jade_nodes = [];
-	                          __jade_nodes = __jade_nodes.concat("Search: ");;
-	                          return __jade_nodes;
-	                        }.call(this).filter(Boolean)));
-	                        __jade_nodes = __jade_nodes.concat(h("p", function () {
-	                          var __jade_nodes = [];
-	                          __jade_nodes = __jade_nodes.concat("Square");;
+	                          __jade_nodes = __jade_nodes.concat(".mp-icon-input ");;
 	                          return __jade_nodes;
 	                        }.call(this).filter(Boolean)));;
 	                        return __jade_nodes;
@@ -57358,6 +57484,37 @@
 	                  return __jade_nodes;
 	                }.call(this).filter(Boolean)));;
 	                return __jade_nodes;
+	              }.call(this).filter(Boolean)));
+	              __jade_nodes = __jade_nodes.concat(h("div", {
+	                "on": {
+	                  click: function click() {
+	                    return $helpers.jumpToNavigate('items-menu');
+	                  }
+	                },
+	                "class": {
+	                  'sub-nav-section': true
+	                }
+	              }, function () {
+	                var __jade_nodes = [];
+	                __jade_nodes = __jade_nodes.concat(h("div", {
+	                  "class": {
+	                    'sub-nav-label': true
+	                  }
+	                }, function () {
+	                  var __jade_nodes = [];
+	                  __jade_nodes = __jade_nodes.concat("Items Menu");;
+	                  return __jade_nodes;
+	                }.call(this).filter(Boolean)));
+	                __jade_nodes = __jade_nodes.concat(h("div", {
+	                  "class": {
+	                    'sub-nav-number': true
+	                  }
+	                }, function () {
+	                  var __jade_nodes = [];
+	                  __jade_nodes = __jade_nodes.concat("6.4");;
+	                  return __jade_nodes;
+	                }.call(this).filter(Boolean)));;
+	                return __jade_nodes;
 	              }.call(this).filter(Boolean)));;
 	              return __jade_nodes;
 	            }.call(this).filter(Boolean)));;
@@ -58901,6 +59058,7 @@
 	        defaultState: {
 	          currentBookmark: 'default',
 	          bookmarks: _bookmarkData2.default,
+	          itemsMenuOpen: false,
 	          savingBookmark: false,
 	          selectedBookmarkId: null,
 	          tagSelectorLoadState: 'idle',
@@ -58987,6 +59145,136 @@
 	            }, 200);
 	            var currentBookmark = type;
 	            _this2.update({ currentBookmark: currentBookmark });
+	          },
+	          handleItemsMenuModalChange: function handleItemsMenuModalChange(ev) {
+	            var state = ev.detail.state;
+	            _this2.update({ itemsMenuOpen: state === 'open' });
+	          },
+	          handleItemsMenuFocus: function handleItemsMenuFocus() {
+	            _this2.update({ itemsMenuOpen: true });
+	          },
+	          handleItemsMenuBlur: function handleItemsMenuBlur() {
+	            _this2.update({ itemsMenuOpen: false });
+	          },
+	          handleItemsMenuInput: function handleItemsMenuInput(ev) {
+	            _this2.update({ itemsMenuSearchFilter: ev.target.value });
+	          },
+	          handleItemsMenuKeydown: function handleItemsMenuKeydown(ev) {
+	            if (Object.values(ItemsMenu.NAVIGATION_KEY_CODES).indexOf(ev.keyCode) !== -1) {
+	              ev.preventDefault();
+	              ev.stopPropagation();
+
+	              var eventsMenuEl = ev.target.parentNode.querySelector('mp-items-menu');
+	              // There's a bug in chromnium where it's not possible to set keyCode on KeyboardEvent,
+	              // so use a CustomEvent instead
+	              var clonedEvent = new Event(ev.type, ev);
+	              clonedEvent.keyCode = ev.keyCode;
+	              eventsMenuEl.dispatchEvent(clonedEvent);
+	            }
+	          },
+	          getItemsMenuSections: function getItemsMenuSections() {
+	            var sections = [{
+	              label: 'Loading section',
+	              isLoading: true,
+	              items: []
+	            }, {
+	              label: 'Recently Viewed',
+	              items: [{
+	                label: 'Top Events',
+	                icon: 'star-top-events',
+	                isSelected: true,
+	                hasPropertiesPill: true
+	              }, {
+	                label: '[Collect everything] Clicked cancel edit elements',
+	                icon: 'event',
+	                hasPropertiesPill: true,
+	                isPropertiesPillDisabled: true,
+	                hasCaret: true
+	              }]
+	            }, {
+	              label: 'Events',
+	              items: [{
+	                label: 'All Events',
+	                icon: 'star-top-events',
+	                isSelected: true,
+	                hasCaret: true,
+	                isDisabled: true
+	              }, {
+	                label: 'Top Events',
+	                icon: 'star-top-events',
+	                isSelected: true,
+	                isDisabled: true,
+	                hasPropertiesPill: true
+	              }, {
+	                label: '[Collect everything] Clicked cancel edit elements',
+	                icon: 'event',
+	                isDisabled: true
+	              }, {
+	                label: 'All: Add to shortlist v3',
+	                icon: 'custom-events'
+	              }, {
+	                label: '$autotrack_pageview',
+	                icon: 'autotrack'
+	              }, {
+	                label: 'First App Open',
+	                icon: 'pretrack'
+	              }, {
+	                label: 'Viewed report',
+	                icon: null
+	              }]
+	            }, {
+	              items: [{
+	                icon: 'profile',
+	                label: 'All People'
+	              }]
+	            }, {
+	              items: [{
+	                label: 'Device Model',
+	                icon: 'type-text'
+	              }, {
+	                label: 'Device Pixel Ratio (is it retina?)',
+	                icon: 'type-number'
+	              }, {
+	                label: 'Email',
+	                icon: 'type-text'
+	              }, {
+	                label: 'Error',
+	                icon: 'type-boolean'
+	              }, {
+	                label: 'User Ids',
+	                icon: 'type-list'
+	              }, {
+	                label: 'Created',
+	                icon: 'type-date'
+	              }]
+	            }, {
+	              label: 'Non-icon items',
+	              items: [{
+	                label: 'Last 96 hours'
+	              }, {
+	                label: 'Last 30 days'
+	              }]
+	            }, {
+	              label: 'Uppercase items',
+	              items: [{
+	                isUppercase: true,
+	                label: 'Events'
+	              }, {
+	                isUppercase: true,
+	                label: 'People'
+	              }]
+	            }, {
+	              label: 'Sorted items',
+	              items: [{
+	                label: 'Events'
+	              }, {
+	                isUppercase: true,
+	                label: 'People'
+	              }]
+	            }];
+
+	            // Duplicate the menu to make it longer to trigger pagination
+	            return [].concat(sections, sections, sections, sections);
 	          }
 	        },
 	        template: _index2.default
@@ -59110,7 +59398,7 @@
 
 	function _jade_template_fn(locals) {
 	  locals = locals || {};;;
-	  var result_of_with = function ($helpers, JSON, bookmarks, currentBookmark, open, savingBookmark, searchSections, sectionOpen, selectedBookmarkId, tagSelectorData) {
+	  var result_of_with = function ($helpers, JSON, bookmarks, currentBookmark, itemsMenuOpen, itemsMenuSearchFilter, open, savingBookmark, searchSections, sectionOpen, selectedBookmarkId, tagSelectorData) {
 	    var h = __webpack_require__(299).h;
 	    return {
 	      value: h("div", {
@@ -59139,7 +59427,7 @@
 	                }
 	              }, function () {
 	                var __jade_nodes = [];
-	                __jade_nodes = __jade_nodes.concat("Bookmarks");;
+	                __jade_nodes = __jade_nodes.concat("Widgets");;
 	                return __jade_nodes;
 	              }.call(this).filter(Boolean)));
 	              __jade_nodes = __jade_nodes.concat(h("div", {
@@ -59187,7 +59475,7 @@
 	                  }
 	                }, function () {
 	                  var __jade_nodes = [];
-	                  __jade_nodes = __jade_nodes.concat("Widgets");;
+	                  __jade_nodes = __jade_nodes.concat("Bookmarks");;
 	                  return __jade_nodes;
 	                }.call(this).filter(Boolean)));
 	                __jade_nodes = __jade_nodes.concat(h("div", {
@@ -59196,7 +59484,7 @@
 	                  }
 	                }, function () {
 	                  var __jade_nodes = [];
-	                  __jade_nodes = __jade_nodes.concat("A handfull of components that have been pre-composed as ready-to-use interface elements.");;
+	                  __jade_nodes = __jade_nodes.concat("A drop menu that accomodates search, browse, removal, and creation of bookmarked reports.");;
 	                  return __jade_nodes;
 	                }.call(this).filter(Boolean)));
 	                __jade_nodes = __jade_nodes.concat(h("div", {
@@ -59549,7 +59837,7 @@
 	                  }
 	                }, function () {
 	                  var __jade_nodes = [];
-	                  __jade_nodes = __jade_nodes.concat("These UI components are containers that will interrupt the current flow, by displaying on top of the page content.");;
+	                  __jade_nodes = __jade_nodes.concat("Add, remove, and create new tags for a given dashboard.");;
 	                  return __jade_nodes;
 	                }.call(this).filter(Boolean)));;
 	                return __jade_nodes;
@@ -59934,7 +60222,7 @@
 	                }
 	              }, function () {
 	                var __jade_nodes = [];
-	                __jade_nodes = __jade_nodes.concat("These UI components are containers that will interrupt the current flow, by displaying on top of the page content.");;
+	                __jade_nodes = __jade_nodes.concat("For choosing dates and date ranges. Usually embedded in drop menus, card elements, and modals.");;
 	                return __jade_nodes;
 	              }.call(this).filter(Boolean)));
 	              __jade_nodes = __jade_nodes.concat(h("div", {
@@ -60225,11 +60513,166 @@
 	            return __jade_nodes;
 	          }.call(this).filter(Boolean)));;
 	          return __jade_nodes;
+	        }.call(this) : undefined);
+	        __jade_nodes = __jade_nodes.concat(sectionOpen == 'widgets' || searchSections.includes('items-menu') ? function () {
+	          var __jade_nodes = [];
+	          __jade_nodes = __jade_nodes.concat(h("div", {
+	            "class": {
+	              'sub-section-container': true
+	            },
+	            "props": {
+	              id: 'items-menu'
+	            }
+	          }, function () {
+	            var __jade_nodes = [];
+	            __jade_nodes = __jade_nodes.concat(h("div", {
+	              "class": {
+	                'divider': true
+	              }
+	            }));
+	            __jade_nodes = __jade_nodes.concat(h("div", {
+	              "class": {
+	                'section-content': true
+	              }
+	            }, function () {
+	              var __jade_nodes = [];
+	              __jade_nodes = __jade_nodes.concat(h("section"));
+	              __jade_nodes = __jade_nodes.concat(h("div", {
+	                "class": {
+	                  'subsection-title': true
+	                }
+	              }, function () {
+	                var __jade_nodes = [];
+	                __jade_nodes = __jade_nodes.concat("Items menu");;
+	                return __jade_nodes;
+	              }.call(this).filter(Boolean)));
+	              __jade_nodes = __jade_nodes.concat(h("div", {
+	                "class": {
+	                  'subsection-description': true
+	                }
+	              }, function () {
+	                var __jade_nodes = [];
+	                __jade_nodes = __jade_nodes.concat("For displaying a scrollable, searchable, and keyboard navigable list of items");;
+	                return __jade_nodes;
+	              }.call(this).filter(Boolean)));
+	              __jade_nodes = __jade_nodes.concat(h("div", {
+	                "class": {
+	                  'indent-container': true
+	                }
+	              }, function () {
+	                var __jade_nodes = [];
+	                __jade_nodes = __jade_nodes.concat(h("div", {
+	                  "class": {
+	                    'example-block': true
+	                  }
+	                }, function () {
+	                  var __jade_nodes = [];
+	                  __jade_nodes = __jade_nodes.concat(h("div", {
+	                    "class": {
+	                      'call-out': true,
+	                      'first-call-out': true
+	                    }
+	                  }, function () {
+	                    var __jade_nodes = [];
+	                    __jade_nodes = __jade_nodes.concat(h("strong", {
+	                      "class": {
+	                        'icon': true
+	                      }
+	                    }, function () {
+	                      var __jade_nodes = [];
+	                      __jade_nodes = __jade_nodes.concat("+");;
+	                      return __jade_nodes;
+	                    }.call(this).filter(Boolean)));
+	                    __jade_nodes = __jade_nodes.concat(h("strong", function () {
+	                      var __jade_nodes = [];
+	                      __jade_nodes = __jade_nodes.concat("mp-items-menu");;
+	                      return __jade_nodes;
+	                    }.call(this).filter(Boolean)));;
+	                    return __jade_nodes;
+	                  }.call(this).filter(Boolean)));
+	                  __jade_nodes = __jade_nodes.concat(h("div", {
+	                    "class": {
+	                      'items-menu-container': true
+	                    }
+	                  }, function () {
+	                    var __jade_nodes = [];
+	                    __jade_nodes = __jade_nodes.concat(h("div", {
+	                      "class": {
+	                        'mp-icon-input': true
+	                      }
+	                    }, function () {
+	                      var __jade_nodes = [];
+	                      __jade_nodes = __jade_nodes.concat(h("div", {
+	                        "class": {
+	                          'mp-icon': true
+	                        }
+	                      }, function () {
+	                        var __jade_nodes = [];
+	                        __jade_nodes = __jade_nodes.concat(h("svg-icon", {
+	                          "attrs": {
+	                            icon: 'search'
+	                          }
+	                        }));;
+	                        return __jade_nodes;
+	                      }.call(this).filter(Boolean)));
+	                      __jade_nodes = __jade_nodes.concat(h("input", {
+	                        "attrs": {
+	                          type: 'text',
+	                          placeholder: 'Click to open menu'
+	                        },
+	                        "on": {
+	                          click: function click(ev) {
+	                            return ev.stopPropagation();
+	                          },
+	                          focus: $helpers.handleItemsMenuFocus,
+	                          blur: $helpers.handleItemsMenuBlur,
+	                          input: $helpers.handleItemsMenuInput,
+	                          keydown: $helpers.handleItemsMenuKeydown
+	                        }
+	                      }));;
+	                      return __jade_nodes;
+	                    }.call(this).filter(Boolean)));
+	                    __jade_nodes = __jade_nodes.concat(h("div", {
+	                      "class": {
+	                        'drop-menu-container': true
+	                      }
+	                    }, function () {
+	                      var __jade_nodes = [];
+	                      __jade_nodes = __jade_nodes.concat(h("mp-drop-menu", {
+	                        "attrs": {
+	                          open: itemsMenuOpen
+	                        },
+	                        "on": {
+	                          change: $helpers.handleItemsMenuModalChange
+	                        }
+	                      }, function () {
+	                        var __jade_nodes = [];
+	                        __jade_nodes = __jade_nodes.concat(h("mp-items-menu", {
+	                          "attrs": {
+	                            'search-filter': itemsMenuSearchFilter,
+	                            'sections': JSON.stringify($helpers.getItemsMenuSections())
+	                          }
+	                        }));;
+	                        return __jade_nodes;
+	                      }.call(this).filter(Boolean)));;
+	                      return __jade_nodes;
+	                    }.call(this).filter(Boolean)));;
+	                    return __jade_nodes;
+	                  }.call(this).filter(Boolean)));;
+	                  return __jade_nodes;
+	                }.call(this).filter(Boolean)));;
+	                return __jade_nodes;
+	              }.call(this).filter(Boolean)));;
+	              return __jade_nodes;
+	            }.call(this).filter(Boolean)));;
+	            return __jade_nodes;
+	          }.call(this).filter(Boolean)));;
+	          return __jade_nodes;
 	        }.call(this) : undefined);;
 	        return __jade_nodes;
 	      }.call(this).filter(Boolean))
 	    };
-	  }.call(this, "$helpers" in locals ? locals.$helpers : typeof $helpers !== "undefined" ? $helpers : undefined, "JSON" in locals ? locals.JSON : typeof JSON !== "undefined" ? JSON : undefined, "bookmarks" in locals ? locals.bookmarks : typeof bookmarks !== "undefined" ? bookmarks : undefined, "currentBookmark" in locals ? locals.currentBookmark : typeof currentBookmark !== "undefined" ? currentBookmark : undefined, "open" in locals ? locals.open : typeof open !== "undefined" ? open : undefined, "savingBookmark" in locals ? locals.savingBookmark : typeof savingBookmark !== "undefined" ? savingBookmark : undefined, "searchSections" in locals ? locals.searchSections : typeof searchSections !== "undefined" ? searchSections : undefined, "sectionOpen" in locals ? locals.sectionOpen : typeof sectionOpen !== "undefined" ? sectionOpen : undefined, "selectedBookmarkId" in locals ? locals.selectedBookmarkId : typeof selectedBookmarkId !== "undefined" ? selectedBookmarkId : undefined, "tagSelectorData" in locals ? locals.tagSelectorData : typeof tagSelectorData !== "undefined" ? tagSelectorData : undefined);
+	  }.call(this, "$helpers" in locals ? locals.$helpers : typeof $helpers !== "undefined" ? $helpers : undefined, "JSON" in locals ? locals.JSON : typeof JSON !== "undefined" ? JSON : undefined, "bookmarks" in locals ? locals.bookmarks : typeof bookmarks !== "undefined" ? bookmarks : undefined, "currentBookmark" in locals ? locals.currentBookmark : typeof currentBookmark !== "undefined" ? currentBookmark : undefined, "itemsMenuOpen" in locals ? locals.itemsMenuOpen : typeof itemsMenuOpen !== "undefined" ? itemsMenuOpen : undefined, "itemsMenuSearchFilter" in locals ? locals.itemsMenuSearchFilter : typeof itemsMenuSearchFilter !== "undefined" ? itemsMenuSearchFilter : undefined, "open" in locals ? locals.open : typeof open !== "undefined" ? open : undefined, "savingBookmark" in locals ? locals.savingBookmark : typeof savingBookmark !== "undefined" ? savingBookmark : undefined, "searchSections" in locals ? locals.searchSections : typeof searchSections !== "undefined" ? searchSections : undefined, "sectionOpen" in locals ? locals.sectionOpen : typeof sectionOpen !== "undefined" ? sectionOpen : undefined, "selectedBookmarkId" in locals ? locals.selectedBookmarkId : typeof selectedBookmarkId !== "undefined" ? selectedBookmarkId : undefined, "tagSelectorData" in locals ? locals.tagSelectorData : typeof tagSelectorData !== "undefined" ? tagSelectorData : undefined);
 	  if (result_of_with) return result_of_with.value;
 	}
 	module.exports = _jade_template_fn;
@@ -60269,7 +60712,7 @@
 	exports.i(__webpack_require__(547), "");
 
 	// module
-	exports.push([module.id, ".bookmarks-widget {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  height: 54px;\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n  margin-bottom: 500px;\n  min-width: 740px;\n  width: 80%;\n  border: 1px solid #d8e0e6;\n}\n.bookmarks-widget mp-bookmarks-widget {\n  border-left: 1px solid #d8e0e6;\n  border-right: 1px solid #d8e0e6;\n  margin-right: 20px;\n}\n.tag-selector-container {\n  position: relative;\n  margin-bottom: 290px;\n}\n.tag-selector-container mp-drop-menu {\n  top: 40px;\n}\n.tag-selector-container .title {\n  padding-top: 20px;\n}\n.tag-selector-container .title .header {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  margin-left: 18px;\n}\n.tag-selector-container .title .header svg-icon svg {\n  left: 0;\n  top: 0;\n}\n.tag-selector-container .title .header svg-icon svg,\n.tag-selector-container .title .header svg-icon path {\n  color: #39d183;\n  fill: #39d183;\n  transition: 0.2s;\n}\n.tag-selector-container .title .header .header-text {\n  color: #4c6072;\n  display: inline-block;\n  font-size: 16px;\n  font-weight: 600;\n  line-height: 1.12;\n  margin: auto 0;\n  padding-left: 10px;\n}\n.tag-selector-container .title .subtext {\n  color: #9bacbf;\n  font-size: 13px;\n  font-weight: 500;\n  line-height: 1.5;\n  margin: 0 0 20px 50px;\n}\n", ""]);
+	exports.push([module.id, ".bookmarks-widget {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  height: 54px;\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n  margin-bottom: 500px;\n  min-width: 740px;\n  width: 80%;\n  border: 1px solid #d8e0e6;\n}\n.bookmarks-widget mp-bookmarks-widget {\n  border-left: 1px solid #d8e0e6;\n  border-right: 1px solid #d8e0e6;\n  margin-right: 20px;\n}\n.tag-selector-container {\n  position: relative;\n  margin-bottom: 290px;\n}\n.tag-selector-container mp-drop-menu {\n  top: 40px;\n}\n.tag-selector-container .title {\n  padding-top: 20px;\n}\n.tag-selector-container .title .header {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  margin-left: 18px;\n}\n.tag-selector-container .title .header svg-icon svg {\n  left: 0;\n  top: 0;\n}\n.tag-selector-container .title .header svg-icon svg,\n.tag-selector-container .title .header svg-icon path {\n  color: #39d183;\n  fill: #39d183;\n  transition: 0.2s;\n}\n.tag-selector-container .title .header .header-text {\n  color: #4c6072;\n  display: inline-block;\n  font-size: 16px;\n  font-weight: 600;\n  line-height: 1.12;\n  margin: auto 0;\n  padding-left: 10px;\n}\n.tag-selector-container .title .subtext {\n  color: #9bacbf;\n  font-size: 13px;\n  font-weight: 500;\n  line-height: 1.5;\n  margin: 0 0 20px 50px;\n}\n.items-menu-container .mp-icon-input {\n  margin-bottom: 20px;\n}\n.items-menu-container .drop-menu-container {\n  position: relative;\n}\n.items-menu-container .drop-menu-container mp-items-menu {\n  width: 320px;\n  height: 300px;\n}\n", ""]);
 
 	// exports
 
@@ -60416,7 +60859,7 @@
 	exports.i(__webpack_require__(547), "");
 
 	// module
-	exports.push([module.id, "* {\n  font-smoothing: antialiased;\n  -webkit-font-smoothing: antialiased;\n}\nbody {\n  background-color: #fcfcfc;\n  font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;\n  color: #6d859e;\n  font-size: 13px;\n  font-stretch: normal;\n  font-weight: weight-default;\n}\nh1,\nstrong,\n.bold {\n  font-weight: 600;\n}\na {\n  color: #6d859e;\n}\na :hover {\n  color: #4ba8ff;\n}\n.style-guide-title {\n  color: #4c6072;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  font-size: 24px;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  left: 150px;\n  position: relative;\n  position: relative;\n  top: 100px;\n  width: calc(100% - 150px);\n}\n.version-bar {\n  background-color: #fff;\n  border-left: 1px solid #d8e0e6;\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  width: 75px;\n  z-index: 1000;\n}\n.version-label {\n  color: #9bacbf;\n  font-size: 16px;\n  height: 75px;\n  width: 285px;\n  position: absolute;\n  top: 160px;\n  right: -75px;\n  -webkit-transform: rotate(90deg);\n          transform: rotate(90deg);\n}\n.version-label strong {\n  color: #4ba8ff;\n}\n.version-label * {\n  display: inline-block;\n}\n.logo {\n  background: url(" + __webpack_require__(582) + ") no-repeat top center;\n  background-size: contain;\n  height: 90px;\n  margin: 0 auto;\n  margin-left: -115px;\n  width: 100%;\n}\n.decoration {\n  height: 3px;\n  width: 40px;\n  background-color: #d8e0e6;\n  margin: 0 10px 3px 10px;\n}\n.section-content {\n  margin: 40px 0 0 0;\n}\n.section-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  left: 345px;\n  position: relative;\n  top: 185px;\n  width: calc(100% - 350px);\n}\n.section-title {\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  font-weight: 600;\n  padding: 0px 0px 15px 0px;\n  width: 100%;\n}\n.section-title .title-text {\n  color: #4c6072;\n  font-size: 64px;\n}\n.section-title .title-section {\n  color: #bdc9d6;\n  font-size: 24px;\n  height: 60px;\n  padding-left: 10px;\n  position: relative;\n  top: 16px;\n}\n.indent-container {\n  margin: 20px 0 60px 50px;\n}\n.divider {\n  border-top: 1px solid #d8e0e6;\n  margin: 0 30px 0x 0;\n  position: relative;\n  width: 90%;\n}\n.divider sup {\n  color: #9bacbf;\n  right: -30px;\n  position: absolute;\n  top: -10px;\n}\n.divider label {\n  color: #bdc9d6;\n  font-weight: 600;\n  position: absolute;\n  right: -30px;\n  top: -10px;\n}\n.section {\n  position: relative;\n  width: 70vw;\n  -webkit-animation: fadeContentIn 500ms forwards;\n          animation: fadeContentIn 500ms forwards;\n}\n.subsection-title {\n  color: #4c6072;\n  font-weight: 500;\n  font-size: 24px;\n}\n.subsection-description {\n  padding: 16px 0px 10px 0px;\n  font-size: 16px;\n  font-weight: weight-default;\n  max-width: 900px;\n  line-height: 24px;\n}\n.section-nav {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  list-style-type: none;\n  overflow-x: scroll;\n  padding: 0 0 30px 0;\n  position: relative;\n  white-space: nowrap;\n  width: 100%;\n}\n.section-nav .nav-item {\n  color: #4c6072;\n  cursor: pointer;\n  font-size: 16px;\n  font-weight: 500;\n  margin: 30px 30px 0 0;\n  padding: 10px 30px;\n}\n.section-nav .nav-item:hover {\n  color: #4ba8ff;\n}\n.section-nav .nav-item.selected {\n  background-color: #4ba8ff;\n  border-radius: 30px;\n  color: #fff;\n}\n.code-snippet {\n  max-width: 90%;\n  left: -60px;\n  padding-left: 15px;\n  position: relative;\n  margin-left: 50px;\n}\n.code-snippet .first-call-out {\n  margin-left: -15px;\n}\n.call-out {\n  color: #9bacbf;\n  margin: 40px 0 20px 0;\n  font-size: 16px;\n}\n.call-out.extra {\n  margin-top: 30px;\n}\n.call-out label {\n  text-transform: none;\n}\n.call-out p {\n  line-height: 4px;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  text-transform: none;\n  margin: 0;\n}\n.call-out .icon {\n  font-size: 14pt;\n  position: relative;\n  top: -1px;\n  left: -20px;\n}\n.desc {\n  width: 80%;\n  padding-left: 14px;\n  margin-top: 6px;\n  line-height: 24px;\n}\n.first-call-out {\n  margin-left: -10px;\n}\n.snippet-container {\n  background-color: #f9fafc;\n  border: 1px solid #d8e0e6;\n  border-radius: 6px;\n  font-size: 14px;\n  margin-top: 10px;\n  width: 90%;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n}\n.snippet-header {\n  color: #6d859e;\n  border-bottom: 1px solid #d8e0e6;\n  border-radius: 6px 6px 0px 0px;\n  padding: 15px;\n  margin-right: 0;\n}\n.snippet-header label {\n  text-transform: uppercase;\n  letter-spacing: 1.2px;\n}\n.code-field {\n  background-color: #fff;\n  border-left: 1px solid #d8e0e6;\n  border-radius: 0px 0px 6px 0px;\n  font-family: monospace;\n  font-weight: 500;\n  margin: 0 0 0 45px;\n  padding: 15px;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n}\n.code-field pre {\n  color: #4c6072;\n  display: inline-block;\n  letter-spacing: 1.5px;\n  line-height: 20px;\n  margin: -2px 0 0 -45px;\n  white-space: pre-wrap;\n}\n.code-field pre:nth-child(2n) {\n  overflow: scroll;\n  white-space: pre;\n  margin-left: 40px;\n  width: 100%;\n}\npre span.mp-red {\n  color: #e4567b;\n}\npre span.mp-purple {\n  color: #9270e2;\n}\npre span.mp-green {\n  color: #2dc376;\n}\npre span.grey-500 {\n  color: #9bacbf;\n}\npre span.mp-orange {\n  color: #f1842b;\n}\n.common-example {\n  border: 1px dashed #bdc9d6;\n  border-radius: 4px;\n  min-height: 40px;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  margin: 0;\n}\n.example-block {\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  margin: 0 15px 10px 0;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n}\n.example-block.half {\n  width: 40%;\n  display: inline-table;\n}\n.floating-example-bar {\n  background: #fff;\n  width: 80%;\n  box-shadow: 0px 8px 22px 0px rgba(0,0,0,0.23);\n  padding: 15px 20px;\n  min-width: 740px;\n  margin-top: 10px;\n}\n.floating-example-bar.align-right {\n  text-align: right;\n}\n.floating-example-bar.blue-bar {\n  background: #4ba8ff;\n}\n.floating-example-bar.grey-bar {\n  background: #f9fafc;\n}\n.blue-vertical-seperator {\n  border-left: 1px solid rgba(255,255,255,0.15);\n  border-right: 1px solid #3391e9;\n  height: 48px;\n  display: inline-block;\n  vertical-align: middle;\n  margin-left: 30px;\n}\n.example-card {\n  background: #fff;\n  border-radius: 6px;\n  border: 1px solid #edf3f7;\n  box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.14);\n  display: inline-block;\n  margin: 0 30px 20px 0;\n  position: relative;\n  min-height: 200px;\n  box-sizing: border-box;\n}\n.example-card.narrow {\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  width: auto;\n  max-width: 30%;\n  min-width: 365px;\n  -webkit-box-align: end;\n      -ms-flex-align: end;\n          align-items: flex-end;\n}\n.example-card.truncated {\n  height: 90px;\n  min-height: 90px;\n}\n.example-card.long {\n  min-width: 560px;\n  max-width: 40%;\n}\n.example-card-footer {\n  border-top: 1px solid #d8e0e6;\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  padding: 10px 15px;\n  text-align: right;\n}\n.example-card-footer :last-child {\n  margin-left: 10px;\n}\n.example-card-header {\n  border-bottom: 1px solid #3b99f0;\n  border-radius: 6px 6px 0 0;\n  position: absolute;\n  top: 0;\n  left: -1px;\n  right: -1px;\n  background-color: #4ba8ff;\n  text-align: center;\n  color: #fff;\n  padding: 20px 0;\n}\n.example-card-header b {\n  font-size: 18px;\n}\n.example-card-header.grey {\n  background-color: #edf3f7;\n  border-bottom: 1px solid #d8e0e6;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n  padding-right: 20px;\n}\n.demo-divider {\n  border-bottom: 1px dashed #bdc9d6;\n  width: 80%;\n  text-align: right;\n  padding-bottom: 15px;\n}\n.demo-divider a {\n  margin-left: 45px;\n}\n.section-modifier {\n  margin-top: -45px;\n}\n@-webkit-keyframes fadeContentIn {\n  from {\n    -webkit-transform: translateY(30px);\n            transform: translateY(30px);\n    opacity: 0;\n  }\n  to {\n    opacity: 1;\n  }\n}\n@keyframes fadeContentIn {\n  from {\n    -webkit-transform: translateY(30px);\n            transform: translateY(30px);\n    opacity: 0;\n  }\n  to {\n    opacity: 1;\n  }\n}\n", ""]);
+	exports.push([module.id, "* {\n  font-smoothing: antialiased;\n  -webkit-font-smoothing: antialiased;\n}\nbody {\n  background-color: #fcfcfc;\n  font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;\n  color: #6d859e;\n  font-size: 13px;\n  font-stretch: normal;\n  font-weight: weight-default;\n}\nh1,\nstrong,\n.bold {\n  font-weight: 600;\n}\na {\n  color: #6d859e;\n}\na :hover {\n  color: #4ba8ff;\n}\n.style-guide-title {\n  color: #4c6072;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  font-size: 24px;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  left: 150px;\n  position: relative;\n  position: relative;\n  top: 100px;\n  width: calc(100% - 150px);\n}\n.version-bar {\n  background-color: #fff;\n  border-left: 1px solid #d8e0e6;\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  width: 75px;\n  z-index: 1000;\n}\n.version-label {\n  color: #9bacbf;\n  font-size: 16px;\n  height: 75px;\n  width: 285px;\n  position: absolute;\n  top: 160px;\n  right: -75px;\n  -webkit-transform: rotate(90deg);\n          transform: rotate(90deg);\n}\n.version-label strong {\n  color: #4ba8ff;\n}\n.version-label * {\n  display: inline-block;\n}\n.logo {\n  background: url(" + __webpack_require__(582) + ") no-repeat top center;\n  background-size: contain;\n  height: 90px;\n  margin: 0 auto;\n  margin-left: -115px;\n  width: 100%;\n}\n.decoration {\n  height: 3px;\n  width: 40px;\n  background-color: #d8e0e6;\n  margin: 0 10px 3px 10px;\n}\n.section-content {\n  margin: 40px 0 0 0;\n}\n.section-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  left: 345px;\n  position: relative;\n  top: 185px;\n  width: calc(100% - 350px);\n}\n.section-title {\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  font-weight: 600;\n  padding: 0px 0px 15px 0px;\n  width: 100%;\n}\n.section-title .title-text {\n  color: #4c6072;\n  font-size: 64px;\n}\n.section-title .title-section {\n  color: #bdc9d6;\n  font-size: 24px;\n  height: 60px;\n  padding-left: 10px;\n  position: relative;\n  top: 16px;\n}\n.indent-container {\n  margin: 20px 0 60px 50px;\n}\n.divider {\n  border-top: 1px solid #d8e0e6;\n  margin: 0 30px 0x 0;\n  position: relative;\n  width: 90%;\n}\n.divider sup {\n  color: #9bacbf;\n  right: -30px;\n  position: absolute;\n  top: -10px;\n}\n.divider label {\n  color: #bdc9d6;\n  font-weight: 600;\n  position: absolute;\n  right: -30px;\n  top: -10px;\n}\n.section {\n  position: relative;\n  width: 70vw;\n  -webkit-animation: fadeContentIn 500ms forwards;\n          animation: fadeContentIn 500ms forwards;\n}\n.subsection-title {\n  color: #4c6072;\n  font-weight: 500;\n  font-size: 24px;\n}\n.subsection-description {\n  padding: 16px 0px 10px 0px;\n  font-size: 16px;\n  font-weight: weight-default;\n  max-width: 900px;\n  line-height: 24px;\n}\n.section-nav {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  list-style-type: none;\n  overflow-x: scroll;\n  padding: 0 0 30px 0;\n  position: relative;\n  white-space: nowrap;\n  width: 100%;\n}\n.section-nav .nav-item {\n  color: #4c6072;\n  cursor: pointer;\n  font-size: 16px;\n  font-weight: 500;\n  margin: 30px 30px 0 0;\n  padding: 10px 30px;\n}\n.section-nav .nav-item:hover {\n  color: #4ba8ff;\n}\n.section-nav .nav-item.selected {\n  background-color: #4ba8ff;\n  border-radius: 30px;\n  color: #fff;\n}\n.code-snippet {\n  max-width: 90%;\n  left: -60px;\n  padding-left: 15px;\n  position: relative;\n  margin-left: 50px;\n}\n.code-snippet .first-call-out {\n  margin-left: -15px;\n}\n.call-out {\n  color: #9bacbf;\n  margin: 40px 0 20px 0;\n  font-size: 16px;\n}\n.call-out.extra {\n  margin-top: 30px;\n}\n.call-out label {\n  text-transform: none;\n}\n.call-out p {\n  line-height: 4px;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  text-transform: none;\n  margin: 0;\n}\n.call-out .icon {\n  font-size: 14pt;\n  position: relative;\n  top: -1px;\n  left: -20px;\n}\n.desc {\n  width: 80%;\n  padding-left: 14px;\n  margin-top: 6px;\n  line-height: 24px;\n}\n.first-call-out {\n  margin-left: -10px;\n}\n.snippet-container {\n  background-color: #f9fafc;\n  border: 1px solid #d8e0e6;\n  border-radius: 6px;\n  font-size: 14px;\n  margin-top: 10px;\n  width: 90%;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n}\n.snippet-header {\n  color: #6d859e;\n  border-bottom: 1px solid #d8e0e6;\n  border-radius: 6px 6px 0px 0px;\n  padding: 15px;\n  margin-right: 0;\n}\n.snippet-header label {\n  text-transform: uppercase;\n  letter-spacing: 1.2px;\n}\n.code-field {\n  background-color: #fff;\n  border-left: 1px solid #d8e0e6;\n  border-radius: 0px 0px 6px 0px;\n  font-family: monospace;\n  font-weight: 500;\n  margin: 0 0 0 45px;\n  padding: 15px;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n}\n.code-field pre {\n  color: #4c6072;\n  display: inline-block;\n  letter-spacing: 1.5px;\n  line-height: 20px;\n  margin: -2px 0 0 -45px;\n  white-space: pre-wrap;\n}\n.code-field pre:nth-child(2n) {\n  overflow: scroll;\n  white-space: pre;\n  margin-left: 40px;\n  width: 100%;\n}\npre span.mp-red {\n  color: #e4567b;\n}\npre span.mp-purple {\n  color: #9270e2;\n}\npre span.mp-green {\n  color: #2dc376;\n}\npre span.grey-500 {\n  color: #9bacbf;\n}\npre span.mp-orange {\n  color: #f1842b;\n}\n.common-example {\n  border: 1px dashed #bdc9d6;\n  border-radius: 4px;\n  min-height: 40px;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  margin: 0;\n}\n.example-block {\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  margin: 0 15px 10px 0;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n}\n.example-block.half {\n  width: 40%;\n  display: inline-table;\n}\n.floating-example-bar {\n  background: #fff;\n  width: 80%;\n  box-shadow: 0px 8px 22px 0px rgba(0,0,0,0.23);\n  padding: 15px 20px;\n  min-width: 740px;\n  margin-top: 10px;\n}\n.floating-example-bar.align-right {\n  text-align: right;\n}\n.floating-example-bar.blue-bar {\n  background: #4ba8ff;\n}\n.floating-example-bar.grey-bar {\n  background: #f9fafc;\n}\n.floating-example-bar .example-bar-divider {\n  margin: 0 15px;\n  border-bottom: 1px solid #e5eaef;\n  height: 1px;\n}\n.floating-example-bar .example-bar-line-item {\n  padding: 15px;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  width: 96%;\n}\n.blue-vertical-seperator {\n  border-left: 1px solid rgba(255,255,255,0.15);\n  border-right: 1px solid #3391e9;\n  height: 48px;\n  display: inline-block;\n  vertical-align: middle;\n  margin-left: 30px;\n}\n.example-card {\n  background: #fff;\n  border-radius: 6px;\n  border: 1px solid #edf3f7;\n  box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.14);\n  display: inline-block;\n  margin: 0 30px 20px 0;\n  position: relative;\n  min-height: 200px;\n  box-sizing: border-box;\n}\n.example-card.narrow {\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  width: auto;\n  max-width: 30%;\n  min-width: 365px;\n  -webkit-box-align: end;\n      -ms-flex-align: end;\n          align-items: flex-end;\n}\n.example-card.truncated {\n  height: 90px;\n  min-height: 90px;\n}\n.example-card.long {\n  min-width: 560px;\n  max-width: 40%;\n}\n.example-card-footer {\n  border-top: 1px solid #d8e0e6;\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  padding: 10px 15px;\n  text-align: right;\n}\n.example-card-footer :last-child {\n  margin-left: 10px;\n}\n.example-card-header {\n  border-bottom: 1px solid #3b99f0;\n  border-radius: 6px 6px 0 0;\n  position: absolute;\n  top: 0;\n  left: -1px;\n  right: -1px;\n  background-color: #4ba8ff;\n  text-align: center;\n  color: #fff;\n  padding: 20px 0;\n}\n.example-card-header b {\n  font-size: 18px;\n}\n.example-card-header.grey {\n  background-color: #edf3f7;\n  border-bottom: 1px solid #d8e0e6;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n  padding-right: 20px;\n}\n.demo-divider {\n  border-bottom: 1px dashed #bdc9d6;\n  width: 80%;\n  text-align: right;\n  padding-bottom: 15px;\n}\n.demo-divider a {\n  margin-left: 45px;\n}\n.section-modifier {\n  margin-top: -45px;\n}\n@-webkit-keyframes fadeContentIn {\n  from {\n    -webkit-transform: translateY(30px);\n            transform: translateY(30px);\n    opacity: 0;\n  }\n  to {\n    opacity: 1;\n  }\n}\n@keyframes fadeContentIn {\n  from {\n    -webkit-transform: translateY(30px);\n            transform: translateY(30px);\n    opacity: 0;\n  }\n  to {\n    opacity: 1;\n  }\n}\n", ""]);
 
 	// exports
 

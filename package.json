@@ -1,7 +1,7 @@
 {
   "name": "mixpanel-common",
   "main": "build/index.js",
-  "version": "0.75.1",
+  "version": "0.75.2",
   "description": "Mixpanel shared JS",
   "scripts": {
     "build": "node build.js",
