@@ -11,6 +11,14 @@
 
 [https://mixpanel.github.io/mixpanel-common/examples/style-guide/index.html](https://mixpanel.github.io/mixpanel-common/examples/style-guide/index.html)
 
+#### publish
+
+```sh
+npm run publish-styleguide
+```
+
+Publishes the styleguide to a special branch called `gh-pages` that can be used to display the styleguide on github pages.
+
 ### Local development of components
 
 - Install dependencies: `npm install`
