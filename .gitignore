@@ -3,6 +3,8 @@ build
 examples/index.css
 node_modules
 npm-debug.log
+/examples/style-guide-new/compiled
+/examples/style-guide/compiled
 /components
 /report
 /stylesheets
