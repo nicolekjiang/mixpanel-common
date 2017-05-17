@@ -1,0 +1,597 @@
+.style-guide
+
+  .section
+    h1 Colors
+    p.item-palette.color-palette.mp-font-list-item
+      each color in Object.keys(COLORS)
+        .list-block
+          .square(style={'background-color': COLORS[color]})
+          .label
+            = color
+            mp-tooltip= COLORS[color]
+
+  .section
+    h1 Icons
+    p.item-palette.icon-palette
+      each icon in Object.keys(SVG_ICONS)
+        .list-block
+          svg-icon(attrs={icon})
+          .label= icon
+      .list-block
+        svg-icon(attrs={empty: true})
+        .label <empty>
+
+  .section
+    h1 Typography
+
+    h2 Sizes
+    p.mp-font-size-xl .mp-font-size-xl | Mixpanel helps you learn from your data
+    p.mp-font-size-large .mp-font-size-large | Mixpanel helps you learn from your data
+    p.mp-font-size-medium .mp-font-size-medium | Mixpanel helps you learn from your data
+    p.mp-font-size-default .mp-font-size-default | Mixpanel helps you learn from your data
+    p.mp-font-size-xs .mp-font-size-xs | Mixpanel helps you learn from your data
+
+    h2 Weights
+    p.mp-font-weight-regular .mp-font-weight-regular | Mixpanel helps you learn from your data
+    p.mp-font-weight-medium .mp-font-weight-medium | Mixpanel helps you learn from your data
+    p.mp-font-weight-bold .mp-font-weight-bold | Mixpanel helps you learn from your data
+
+    h2 Utility classes
+    p.mp-font-paragraph .mp-font-paragraph
+      p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dignissim sodales rhoncus. Cras rutrum nisl et sapien efficitur tempus. Sed sagittis sed lorem in efficitur. Morbi sollicitudin interdum sapien, vitae semper odio dapibus non. Aenean id massa id nunc cursus varius. Suspendisse congue leo ac ante egestas molestie. Phasellus nec arcu in dolor tincidunt ornare a sed nunc. Proin et dapibus augue, sit amet fermentum risus. Integer ornare convallis nulla, in condimentum lectus efficitur et. Fusce facilisis, ex vitae consequat scelerisque, enim nibh fringilla ligula, a bibendum orci lorem id felis. Mauris eget augue nibh. Ut quis pharetra velit. Donec tempor ante id risus porttitor venenatis. Proin id dictum arcu, pulvinar iaculis augue. Aliquam in nunc vitae urna feugiat condimentum.
+    p
+      responsive truncated text
+      mp-truncated-text(attrs={title: "browser text measurement is used to truncate this text so it can even handle strangely-sized characters like ﷽﷽﷽﷽﷽﷽. Text will be re-truncated to fit the actual width of the containing element"})
+
+
+  .section.buttons
+    h1 Buttons
+    p
+      mp-button.mp-button-primary .mp-button-primary
+      mp-button.mp-button-primary(attrs={disabled: true}) disabled
+      mp-button.mp-button-primary(attrs={size: 'small'}) .mp-button-primary
+      mp-button.mp-button-primary(attrs={size: 'small', disabled: true}) disabled
+    p
+      mp-button.mp-button-secondary .mp-button-secondary
+      mp-button.mp-button-secondary(attrs={disabled: true}) disabled
+      mp-button.mp-button-secondary(attrs={size: 'small'}) .mp-button-secondary
+      mp-button.mp-button-secondary(attrs={size: 'small', disabled: true}) disabled
+    p
+      mp-button.mp-button-red .mp-button-red
+      mp-button.mp-button-red(attrs={disabled: true}) disabled
+      mp-button.mp-button-red(attrs={size: 'small'}) .mp-button-red
+      mp-button.mp-button-red(attrs={size: 'small', disabled: true}) disabled
+    p.button-field
+      mp-button.mp-button-primary.mp-button-on-blue primary on-blue
+      mp-button.mp-button-primary.mp-button-on-blue(attrs={disabled: true}) disabled
+      mp-button.mp-button-primary.mp-button-on-blue(attrs={size: 'small'}) primary on-blue
+      mp-button.mp-button-primary.mp-button-on-blue(attrs={size: 'small', disabled: true}) disabled
+    p.button-field
+      mp-button.mp-button-secondary.mp-button-on-blue secondary on-blue
+      mp-button.mp-button-secondary.mp-button-on-blue(attrs={disabled: true}) disabled
+      mp-button.mp-button-secondary.mp-button-on-blue(attrs={size: 'small'}) secondary on-blue
+      mp-button.mp-button-secondary.mp-button-on-blue(attrs={size: 'small', disabled: true}) disabled
+
+    h1 Buttons w/ icons
+    p
+      mp-button.mp-button-secondary(attrs={icon: 'x'}) Close
+      mp-button.mp-button-secondary(attrs={icon: 'logout'}) Exit
+      mp-button.mp-button-primary(attrs={icon: 'plus'}) Create
+      mp-button.mp-button-red(attrs={icon: 'trashcan'}) Delete
+      mp-button.mp-button-secondary(attrs={size: 'small', icon: 'x'}) Close
+      mp-button.mp-button-secondary(attrs={size: 'small', icon: 'logout'}) Exit
+      mp-button.mp-button-primary(attrs={size: 'small', icon: 'plus'}) Create
+      mp-button.mp-button-red(attrs={size: 'small', icon: 'trashcan'}) Delete
+    p.button-field
+      mp-button.mp-button-primary.mp-button-on-blue(attrs={icon: 'plus'}) Create
+      mp-button.mp-button-primary.mp-button-on-blue(attrs={icon: 'plus', disabled: true}) Create
+      mp-button.mp-button-primary.mp-button-on-blue(attrs={size: 'small', icon: 'plus'}) Create
+      mp-button.mp-button-primary.mp-button-on-blue(attrs={size: 'small', icon: 'plus', disabled: true}) Create
+    p.button-field
+      mp-button.mp-button-secondary.mp-button-on-blue(attrs={icon: 'x'}) Cancel
+      mp-button.mp-button-secondary.mp-button-on-blue(attrs={icon: 'x', disabled: true}) Cancel
+      mp-button.mp-button-secondary.mp-button-on-blue(attrs={size: 'small', icon: 'x'}) Cancel
+      mp-button.mp-button-secondary.mp-button-on-blue(attrs={size: 'small', icon: 'x', disabled: true}) Cancel
+
+  .section.button-bars
+    h1 Button bar
+    p.button-bar-container
+      mp-button-bar.mp-button-bar-secondary I'm a button bar
+    p.button-bar-container
+      mp-button-bar.mp-button-bar-secondary(attrs={disabled: true}) I'm a disabled button bar
+    p.button-bar-container
+      mp-button-bar.mp-button-bar-primary(attrs={'arrow-next': true}) Next step
+    p.button-bar-container
+      mp-button-bar.mp-button-bar-primary(attrs={'arrow-next': true, disabled: true}) Next step
+
+  .section.forms
+    h1 Forms
+    h2 Input
+    p
+      input(attrs={type: 'text', placeholder: "I'm a placeholder"})
+    h2 Input with icon
+    p
+      .mp-icon-input
+        .mp-icon
+          svg-icon(attrs={icon: "search"})
+        input(attrs={type: 'text', placeholder: 'Some placeholder text'})
+
+    h2 Input group
+    p
+      mp-input-group(
+        attrs={placeholder: "Type a name...", busy: inputGroupSaving}
+        on={
+          change: $helpers.handleNamerChange,
+          submit: $helpers.handleNamerSubmit,
+        }
+      )
+
+  .section.menus
+    h1 Menus
+    p
+      button(on={click: $helpers.toggleMenu}) Open Menu
+      .drop-menu-container
+        mp-drop-menu(
+          attrs={open: open.menu}
+          on={change: e => $helpers.handleModalChange('menu', e.detail.state)}
+        )
+          .text-container
+            mp-list-item there is text here
+            mp-list-item there is text here
+            mp-list-item there is text here
+
+  .section.modals
+    h1 Modals
+    p
+      button(on={click: () => $helpers.openModal('modal')}) Open modal
+
+      mp-modal.modal(
+        attrs={closeable: true, open: open.modal}
+        on={change: e => $helpers.handleModalChange('modal', e.detail.state)}
+      )
+        div
+          .mp-modal-content
+            .mp-modal-title Easily track events
+            .mp-modal-subtitle Click on any element on your page (e.g. the buy button) to create an event and access all historical data for that event.
+          mp-button-bar.mp-button-bar-primary(
+            on={click: () => $helpers.closeModal('modal')}
+            attrs={'arrow-next': true}
+          ) Create your first event
+
+    p
+      button(on={click: () => $helpers.openModal('popup')}) Open popup
+
+      mp-modal.popup(
+        attrs={'modal-type': 'popup', closeable: true, open: open.popup}
+        on={change: e => $helpers.handleModalChange('popup', e.detail.state)}
+      )
+        div
+          .mp-modal-content
+            .mp-modal-title Easily track events
+            .mp-modal-subtitle Click on any element on your page (e.g. the buy button) to create an event and access all historical data for that event.
+          mp-button-bar.mp-button-bar-primary(
+            on={click: () => $helpers.closeModal('popup')}
+          ) Create your first event
+
+
+    p
+      button(on={click: () => $helpers.openModal('confirm')}) Open confirm
+
+      mp-confirm(
+        attrs={open: open.confirm}
+        on={
+          change: e => $helpers.handleModalChange('confirm', e.detail.state),
+          submit: e => console.log(e.detail),
+        }
+      )
+        div
+          .mp-confirm-title Unsaved changes
+          .mp-confirm-description If you navigate away from this page you will lose your changes. Would you like to continue?
+
+
+    p
+      button(on={click: () => $helpers.openModal('confirmDelete')}) Open confirm-delete
+
+      mp-confirm-delete(
+        attrs={id: 'confirmDelete', 'delete-button-label': 'Delete it', closeable: true, open: open.confirmDelete}
+        on={
+          change: e => $helpers.handleModalChange('confirmDelete', e.detail.state),
+          submit: e => console.log(e.detail),
+        }
+      )
+        div
+          .mp-confirm-delete-title Delete Bookmark
+          .mp-confirm-delete-description Are you sure you want to delete this bookmark?
+
+
+    p
+      button(on={click: () => $helpers.openModal('alert')}) Open alert
+
+      mp-alert(
+        attrs={id: 'alert', closeable: true, open: open['alert']}
+        on={change: e => $helpers.handleModalChange('alert', e.detail.state)}
+      )
+        div
+          .text AHHH DANGER DANGER There is currently an error
+
+    p.relative-position
+      button(on={click: () => $helpers.openModal('alert-not-fullscreen')}) Open not-fullscreen alert
+
+      mp-alert(
+        attrs={id: 'alert', closeable: true, open: open['alert-not-fullscreen'], 'not-fullscreen': true}
+        on={change: e => $helpers.handleModalChange('alert-not-fullscreen', e.detail.state)}
+      )
+        div
+          .text I am not fixed position!
+
+    p
+      button(on={click: () => $helpers.openModal('alert-large-icon')}) Open large icon alert
+
+      mp-alert(
+        attrs={id: 'alert', closeable: true, open: open['alert-large-icon'], 'large-icon': true}
+        on={change: e => $helpers.handleModalChange('alert-large-icon', e.detail.state)}
+      )
+        div
+          .text I should have a large icon, centered vertically
+
+  .section.toggles
+    h1 Toggles
+    p One element out of a set of two or more is always selected.
+    mp-toggle.inline-toggle(
+      attrs={blue: true, selected: blueToggleValue}
+      on={select: $helpers.blueToggleChanged}
+    )
+      mp-toggle-option(attrs={value: 'option1'}) Longer Option 1
+      mp-toggle-option(attrs={value: 'option2'}) Opt2
+    span.toggle-val Selected: #{blueToggleValue}
+
+    mp-toggle.full-width-toggle(attrs={selected: 'option1'})
+      mp-toggle-option(attrs={value: 'option1'}) Super long option text
+      mp-toggle-option(attrs={value: 'option2'}) Short
+      mp-toggle-option(attrs={value: 'option3'}) Medium text here
+
+    mp-toggle.full-width-toggle(attrs={large: true, selected: 'option2'})
+      mp-toggle-option(attrs={value: 'option1'}) Longer Option 1
+      mp-toggle-option(attrs={value: 'option2'}) Longer Option 2
+
+    h4 Square toggle
+    mp-toggle.inline-toggle(attrs={square: true, large: true, selected: 'all'})
+      mp-toggle-option(attrs={value: 'all'}) All
+      mp-toggle-option(attrs={value: 'events'}) Events
+      mp-toggle-option(attrs={value: 'people'}) People
+      mp-toggle-option(attrs={value: 'things'}) Things
+      mp-toggle-option(attrs={value: 'other'}) Other
+
+    h4 Small/square toggle
+    mp-toggle.inline-toggle(attrs={square: true, small: true, selected: 'people'})
+      mp-toggle-option(attrs={value: 'all'}) All
+      mp-toggle-option(attrs={value: 'events'}) Events
+      mp-toggle-option(attrs={value: 'people'}) People
+      mp-toggle-option(attrs={value: 'things'}) Things
+      mp-toggle-option(attrs={value: 'other'}) Other
+
+  .section
+    h1 Switches
+    p Default is switch is off and clickable.
+    mp-switch
+
+  .section
+    h1 Spinners
+    mp-spinner
+
+  .section
+    button(on={click: $helpers.addToast}) Add some toast
+    .toast-container
+      for toast in toasts
+        mp-toast(
+          attrs={
+            cta: toast.cta,
+            hide: toast.closed,
+          }
+          on={
+            action: () => alert('undo please'),
+            close: () => $helpers.closeToast(toast),
+          }
+        )= toast.message
+
+
+  .section.tooltips
+    h1 Tooltips
+
+    .tooltips-container
+      a.tooltip-container Default (placement 'top') tooltip
+        mp-tooltip Tooltip above the element
+
+      a.tooltip-container Placement 'bottom' tooltip
+        mp-tooltip(attrs={placement: 'bottom'}) Tooltip below the element
+
+      a.tooltip-container Placement 'left' tooltip
+        mp-tooltip(attrs={placement: 'left'}) Tooltip on the left side of element
+
+      a.tooltip-container Placement 'right' tooltip
+        mp-tooltip(attrs={placement: 'right'}) Tooltip on the right side of element
+
+      a.tooltip-container Multi-line tooltip
+        mp-tooltip.multiline
+          span This is a long tooltip with text that spans multiple lines
+
+      a.tooltip-container.position-relative Tooltip with non-statically positioned parent element
+        mp-tooltip
+          span A tooltip
+
+  .section.calendars
+    h1 Calendars
+
+    h2 Single date
+    .calendar-group.single-calendar
+      .calendar-container
+        mp-calendar(
+          hook={insert: vnode => $helpers.handleInsertComponent(vnode.elm)}
+        )
+
+      .calendar-container
+        mp-calendar(
+          attrs={
+            'min-date': `2015-06-10`,
+            'max-date': `2016-01-20`,
+            'selected-date': `2016-01-15`,
+          }
+          hook={insert: vnode => $helpers.handleInsertComponent(vnode.elm)}
+        )
+
+    h2 Date range
+    .calendar-group.double-calendar
+      .calendar-container
+        mp-calendar(
+          attrs={
+            'is-double-calendar': true,
+            'is-range': true,
+            'min-date': `2015-12-10`,
+            'max-date': `2016-03-20`,
+            'selected-from-date': `2015-12-25`,
+            'selected-to-date': `2016-03-15`,
+          }
+          hook={insert: vnode => $helpers.handleInsertComponent(vnode.elm)}
+        )
+
+      .calendar-container
+        mp-calendar(
+          attrs={
+            'is-double-calendar': true,
+            'is-range': true,
+            'min-date': `2015-12-10`,
+            'max-date': `2016-01-20`,
+            'is-from-date-focused': true,
+            'selected-from-date': `2015-12-25`,
+            'selected-to-date': `2016-01-16`,
+          }
+          hook={insert: vnode => $helpers.handleInsertComponent(vnode.elm)}
+        )
+
+      .calendar-container
+        mp-calendar(
+          attrs={
+            'is-double-calendar': true,
+            'is-range': true,
+            'min-date': `2015-12-10`,
+            'max-date': `2016-01-20`,
+            'is-to-date-focused': true,
+            'selected-from-date': `2015-12-25`,
+            'selected-to-date': `2016-01-16`,
+          }
+          hook={insert: vnode => $helpers.handleInsertComponent(vnode.elm)}
+        )
+
+  .section.widgets
+
+    h1 Widgets
+
+    p
+      h2 Items menus
+      .items-menu
+        input(
+          attrs={placeholder: `Click to open menu`}
+          on={
+            click: ev => ev.stopPropagation(),
+            focus: $helpers.handleItemsMenuFocus,
+            blur: $helpers.handleItemsMenuBlur,
+            input: $helpers.handleItemsMenuInput,
+            keydown: $helpers.handleItemsMenuKeydown,
+          }
+        )
+        .drop-menu-container
+          mp-drop-menu(
+            attrs={open: open.itemsMenu}
+            on={change: e => $helpers.handleModalChange('itemMenu', e.detail.state)}
+          )
+            mp-items-menu(
+              attrs={
+                'search-filter': itemsMenuSearchFilter,
+                'sections': JSON.stringify($helpers.getItemsMenuSections()),
+              },
+            )
+
+    p
+      h2 Regular Bookmark
+      .bookmarks-widget
+        mp-bookmarks-widget(
+          attrs={
+            'bookmarks': JSON.stringify(bookmarks),
+            'create-disabled': false,
+            'saving': savingBookmark,
+            'selected-bookmark-id': selectedBookmarkId,
+            'user-id': 1,
+            'has-write-permissions': true,
+          }
+          on={
+            change: $helpers.handleBookmarksMenuChange,
+            submit: $helpers.handleBookmarksMenuSubmit,
+          }
+        )
+      h2 Free Plan Restricted Bookmark
+      .bookmarks-widget
+        mp-bookmarks-widget(
+          attrs={
+            'bookmarks': JSON.stringify(bookmarks),
+            'create-disabled': false,
+            'saving': savingBookmark,
+            'selected-bookmark-id': selectedBookmarkId,
+            'user-id': 1,
+            'has-write-permissions': true,
+            'over-free-limit': true,
+          }
+          on={
+            change: $helpers.handleBookmarksMenuChange,
+            submit: $helpers.handleBookmarksMenuSubmit,
+          }
+        )
+
+    h2 tag-selector widget
+    .tag-selector-container
+      mp-button.mp-button-secondary(on={click: $helpers.toggleTagSelector}) Edit tags
+      mp-drop-menu(attrs={open: open.tagSelector} on={change: $helpers.handleTagSelectorDropMenuChange})
+        .title
+          .header
+            svg-icon(attrs={icon: "check-success"})
+            .header-text Added to company dashboard
+          .subtext Viewed report by type
+        mp-tag-selector(
+          attrs={
+            'selected-tags': JSON.stringify(tagSelectorData.selectedTags),
+            'all-tags': JSON.stringify(tagSelectorData.allTags),
+            'saving': tagSelectorData.saving,
+          }
+          on={
+            change: $helpers.handleTagSelectorChange,
+            save: $helpers.handleTagSelectorSave,
+          }
+        )
+
+    h2 Tags
+    .tags-container
+      mp-tag(
+        attrs={
+          clickable: true,
+          'tag-name': 'Segmentation',
+          removable: true,
+        },
+      )
+      mp-tag(
+        attrs={
+          clickable: true,
+          'tag-name': 'Retention',
+          removable: true,
+        },
+      )
+      mp-tag(
+        attrs={
+          clickable: true,
+          'tag-name': 'Funnels',
+          removable: true,
+        },
+      )
+
+    h2 Tutorial tooltip widgets
+    .tutorial-tooltips-container
+      mp-button.tutorial-tooltip-container.top.position-relative(on={
+        click: () => $helpers.toggleTutorialTooltip('top'),
+      }) Default (placement="top") tooltip
+        mp-tutorial-tooltip(attrs={hide: !open.tutorialTooltip.top}) Default (placement="top") tooltip
+
+      mp-button.tutorial-tooltip-container.top.position-relative(on={
+        click: () => $helpers.toggleTutorialTooltip('closeable'),
+      }) Tooltip w/ close button
+        mp-tutorial-tooltip(
+          attrs={closeable: true, hide: !open.tutorialTooltip.closeable}
+          on={close: () => alert('close clicked')}
+        ) I have a close button
+
+      mp-button.tutorial-tooltip-container.bottom.position-relative(on={
+        click: () => $helpers.toggleTutorialTooltip('bottom'),
+      }) Tooltip with placement="bottom"
+        mp-tutorial-tooltip(attrs={
+          hide: !open.tutorialTooltip.bottom,
+          placement: 'bottom',
+          'num-steps': 4,
+        }) Tooltip with placement="bottom"
+
+      mp-button.tutorial-tooltip-container.bottom.position-relative(on={
+        click: () => $helpers.toggleTutorialTooltip('next'),
+      }) Tooltip with next buttons
+        mp-tutorial-tooltip(
+          attrs={
+            hide: !open.tutorialTooltip.next,
+            placement: 'bottom',
+            'curr-step': tooltipStep,
+            'num-steps': 4,
+            'next-button': true,
+          }
+          on={
+            next: $helpers.incrementTooltipStep,
+            close: $helpers.closeTutorialNextTooltip,
+          }
+        )
+          mp-button.mp-button-red(
+            attrs={size: 'small'}
+            on={click: $helpers.resetTooltipStep}
+          ) click to reset the tooltip to step 0
+          p You are on step #{tooltipStep}. Press NEXT to go to the next step.
+
+      mp-button.tutorial-tooltip-container.left.position-relative(on={
+        click: () => $helpers.toggleTutorialTooltip('left'),
+      }) Tooltip with placement="left"
+        mp-tutorial-tooltip(attrs={
+          hide: !open.tutorialTooltip.left,
+          placement: 'left',
+          'num-steps': 4,
+          'curr-step': 1,
+        }) Tooltip with placement="left"
+
+      mp-button.tutorial-tooltip-container.right.position-relative(on={
+        click: () => $helpers.toggleTutorialTooltip('right'),
+      }) Tooltip with placement="right"
+        mp-tutorial-tooltip(attrs={
+          hide: !open.tutorialTooltip.right,
+          placement: 'right',
+          'num-steps': 4,
+          'curr-step': 2,
+        }) Tooltip with placement="right"
+
+      mp-button.tutorial-tooltip-container.center.position-relative(on={
+        click: () => $helpers.toggleTutorialTooltip('center'),
+      }) Tooltip with placement="center" (with overridden "top" positioning)
+        mp-tutorial-tooltip(attrs={
+          hide: !open.tutorialTooltip.center,
+          placement: 'center',
+          'num-steps': 4,
+          'curr-step': 3,
+        }) Tooltip with placement="center" (with overridden "top" positioning)
+
+      mp-button.tutorial-tooltip-container.top.position-relative(on={
+        click: () => $helpers.toggleTutorialTooltip('top'),
+      }) Tooltip with hide-footer="true"
+        mp-tutorial-tooltip(attrs={'hide-footer': true, placement: 'top', hide: !open.tutorialTooltip.top}) Tooltip with hide-footer="true"
+
+      mp-button.tutorial-tooltip-container.top.position-relative(on={
+        click: () => $helpers.toggleTutorialTooltip('left'),
+      }) Tooltip with arrow-align="top"
+        mp-tutorial-tooltip(attrs={'arrow-align': 'top', placement: 'left', hide: !open.tutorialTooltip.left}) Tooltip arrow-align="top"
+
+      mp-button.tutorial-tooltip-container.top.position-relative(on={
+        click: () => $helpers.toggleTutorialTooltip('right'),
+      }) Tooltip with arrow-align="bottom"
+        mp-tutorial-tooltip(attrs={'arrow-align': 'bottom', placement: 'right', hide: !open.tutorialTooltip.right}) Tooltip arrow-align="bottom"
+
+      mp-button.tutorial-tooltip-container.top.position-relative(on={
+        click: () => $helpers.toggleTutorialTooltip('top'),
+      }) Tooltip with arrow-align="left"
+        mp-tutorial-tooltip(attrs={'arrow-align': 'left', placement: 'top', hide: !open.tutorialTooltip.top}) Tooltip with arrow-align="left"
+
+      mp-button.tutorial-tooltip-container.top.position-relative(on={
+        click: () => $helpers.toggleTutorialTooltip('bottom'),
+      }) Tooltip with arrow-align="right"
+        mp-tutorial-tooltip(attrs={'arrow-align': 'right', placement: 'bottom', hide: !open.tutorialTooltip.bottom}) Tooltip with arrow-align="right"
+
+    h2(style={position: 'relative'}) Upsell popups
+      for feature, idx in ['custom-events', 'date-range', 'export-csv', 'filter-levels', 'bookmark-maximum', 'default']
+        mp-upsell-popup(attrs={feature, open: true} style={position: 'absolute', top: 100 * (idx + 1) + 'px', left: '0px'})

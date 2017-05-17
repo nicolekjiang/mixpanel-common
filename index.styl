@@ -1,0 +1,200 @@
+@import '../../build/stylesheets/defaults/index.css'
+@import '../../build/stylesheets/mixins/common.styl'
+
+.section
+  border-bottom 1px solid grey-100
+  padding 10px 20px
+
+  .item-palette
+    display flex
+    flex-flow column wrap
+    &.color-palette
+      height 180px
+    &.icon-palette
+      height 320px
+
+  .list-block
+    align-items center
+    display flex
+    margin 5px
+    svg-icon-style(grey-700, blue-100)
+
+    .square
+      display inline-block
+      vertical-align middle
+      margin-right 4px
+      width 20px
+      height 20px
+
+    .label
+      display inline-block
+      font-list-item()
+      margin-left 10px
+      vertical-align middle
+
+  &.buttons
+    mp-button
+      margin-right 4px
+      vertical-align middle
+
+    p.button-field
+      background mp-blue
+      display table
+      padding 10px
+
+  &.button-bars
+    .button-bar-container
+      max-width 600px
+
+  &.modals
+    .modal
+      width 500px
+    mp-confirm
+      width 480px
+    p
+      position relative
+
+  &.toggles
+    mp-toggle
+      margin-bottom 10px
+      &.inline-toggle
+        width 500px
+      &.full-width-toggle
+        display block
+
+    .toggle-val
+      margin-left 10px
+
+  &.tooltips
+    .tooltips-container
+      display flex
+      flex-direction column
+      align-items center
+
+      .tooltip-container
+        margin 5px 0
+
+        &.position-relative
+          position relative
+          left 100px
+          top 10px
+
+        mp-tooltip.multiline span
+          max-width 200px
+
+  &.calendars
+    .calendar-group
+      display flex
+      flex-wrap wrap
+
+      .calendar-container
+        display flex
+        flex-direction column
+        justify-content space-between
+        margin 10px
+
+      &.single-calendar
+        .calendar-container
+          width 240px
+
+      &.double-calendar
+        .calendar-container
+          width 492px
+
+  .toast-container
+    height 400px
+    display flex
+    flex-direction column
+    justify-content flex-end
+
+  &.menus
+    .drop-menu-container
+      position relative
+
+  &.forms
+    .mp-icon-input
+      icon-input()
+
+  &.widgets
+    padding-bottom 500px
+
+    .items-menu
+      input
+        margin-bottom 20px
+
+      .drop-menu-container
+        position relative
+
+        mp-items-menu
+          width 320px
+          height 300px
+
+    .bookmarks-widget
+      background-color grey-100
+      border 1px solid grey-300
+      display flex
+      height 54px
+      justify-content flex-end
+      width  100%
+
+      mp-bookmarks-widget
+        border-left 1px solid grey-200
+        border-right 1px solid grey-200
+        margin-right 50px
+
+    .tag-selector-container
+      position relative
+
+      mp-drop-menu
+        top 40px
+
+      .title
+        padding-top 20px
+
+        .header
+          display flex
+          margin-left 18px
+          svg-icon-style(base-color: green-300)
+
+          .header-text
+            color grey-900
+            display inline-block
+            font-size-large()
+            font-weight weight-bold
+            line-height 1.12
+            margin auto 0
+            padding-left 10px
+
+        .subtext
+          color grey-500
+          font-size-default()
+          font-weight weight-medium
+          line-height 1.5
+          margin 0 0 20px 50px
+
+    .tutorial-tooltips-container
+      display flex
+      flex-direction column
+      align-items center
+
+      .tutorial-tooltip-container
+        position relative
+        margin 20px
+
+        &.top
+          margin-top 200px
+
+        &.bottom
+          margin-bottom 200px
+
+        &.left
+          margin 100px
+
+        &.right
+          margin 100px
+
+        &.center
+          margin-bottom 200px
+
+          mp-tutorial-tooltip
+            top 40px
