@@ -169,9 +169,6 @@ document.registerElement(`style-guide`, class extends Component {
               label: `$autotrack_pageview`,
               icon: `autotrack`,
             }, {
-              label: `First App Open`,
-              icon: `pretrack`,
-            }, {
               label: `Viewed report`,
               icon: null,
             }],
