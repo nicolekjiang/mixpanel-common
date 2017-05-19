@@ -315,6 +315,14 @@
         mp-tooltip.multiline
           span This is a long tooltip with text that spans multiple lines
 
+      a.tooltip-container Tooltip with icon
+        mp-tooltip(attrs={icon: 'warning'})
+          span This is a tooltip with a warning icon.
+
+      a.tooltip-container Tooltip with white icon
+        mp-tooltip(attrs={icon: 'dashboard', 'icon-white': true})
+          span This is a tooltip with a dashboard icon.
+
       a.tooltip-container.position-relative Tooltip with non-statically positioned parent element
         mp-tooltip
           span A tooltip

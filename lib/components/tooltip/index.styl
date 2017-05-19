@@ -20,6 +20,8 @@
         visibility hidden
 
     .main
+      horizontal-padding = 18px
+
       align-items center
       background-color grey-900
       border-radius 3px
@@ -31,7 +33,7 @@
       font-size-default()
       font-weight bold
       justify-content center
-      padding 10px 18px
+      padding 10px horizontal-padding
       pointer-events auto
       position absolute
       text-transform initial
@@ -66,3 +68,8 @@
         margin-top -5px
         right 100%
         top 50%
+
+      .icon
+        margin-right horizontal-padding
+        &.icon-white svg path
+          fill white

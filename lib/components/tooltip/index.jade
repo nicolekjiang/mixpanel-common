@@ -15,4 +15,9 @@
       'top': `${topOffset}px`,
     }
   )
+    if icon
+      svg-icon.mp-tooltip-icon(
+        class={'mp-tooltip-icon-white': iconWhite}
+        attrs={icon}
+      )
     content
