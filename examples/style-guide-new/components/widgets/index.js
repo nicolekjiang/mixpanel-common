@@ -1,5 +1,6 @@
 import {Component} from 'panel';
 
+import alerts from './alert-data.json';
 import bookmarks from './bookmark-data.json';
 
 import template from './index.jade';
@@ -16,6 +17,8 @@ document.registerElement(`widgets-section`, class extends Component {
   get config() {
     return {
       defaultState: {
+        alerts,
+        alertDropdownOpen: false,
         currentBookmark: `default`,
         bookmarks,
         itemsMenuOpen: false,
@@ -253,6 +256,7 @@ document.registerElement(`widgets-section`, class extends Component {
             ...sections,
           ];
         },
+        toggleAlertDropdown: () => this.update({alertDropdownOpen: !this.state.alertDropdownOpen}),
       },
       template,
     };
