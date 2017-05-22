@@ -10,13 +10,13 @@
       .section-content
         section
           .subsection-title Input Fields
-          .subsection-description Input fields can exist with or without icons embedded and come in two flavors: with button, and without. The field with button combination is used when space is limited, or when the CTA is strictly associated with the input string. 
+          .subsection-description Input fields can exist with or without icons embedded and come in two flavors: with button, and without. The field with button combination is used when space is limited, or when the CTA is strictly associated with the input string.
           .indent-container
             if $helpers.showExampleblock('input-icon')
               .example-block#input-icon
                 .call-out.first-call-out
                   strong.icon +
-                  strong .mp-icon-input 
+                  strong .mp-icon-input
                 .common-example
                   .mp-icon-input
                     .mp-icon
@@ -45,8 +45,8 @@
             //- .example-block
             //-   .call-out.first-call-out
             //-     strong.icon +
-            //-     strong Field: 
-            //-     p small buttons 
+            //-     strong Field:
+            //-     p small buttons
             //-   .common-example
             //-     //- Insert square field + two small buttons
 
@@ -54,14 +54,14 @@
             //- .example-block
             //-   .call-out.first-call-out
             //-     strong.icon +
-            //-     strong Search: 
+            //-     strong Search:
             //-     p Round Dark
             //-   .floating-example-bar.align-right.blue-bar
             //-     //- insert component for round search field dark
             //- .example-block
             //-   .call-out.first-call-out
             //-     strong.icon +
-            //-     strong Search: 
+            //-     strong Search:
             //-     p Round Light
             //-   .common-example
             //-     //- insert component for round search field light
@@ -70,7 +70,7 @@
             //- .example-block
             //-   .call-out.first-call-out
             //-     strong.icon +
-            //-     strong Search: 
+            //-     strong Search:
             //-     p Minimal
             //-   .floating-example-bar
             //-     //- insert component for IRB search field
@@ -130,13 +130,13 @@
             .call-out.first-call-out
               strong.icon +
               strong mp-modal
-              p .modal 
+              p .modal
             //- TODO not what the modal looks like
-            .example-card.long    
-              .example-card-header 
-                b Modal Header Text   
-            p.desc Modals have blue header bars and should be presented when the user needs to complete a task that the current interface does not support. For example: a button to invite teammates might present a modal including a search field and a list of names to choose from. These are specifically great for 
-              span.bold presenting new flows 
+            .example-card.long
+              .example-card-header
+                b Modal Header Text
+            p.desc Modals have blue header bars and should be presented when the user needs to complete a task that the current interface does not support. For example: a button to invite teammates might present a modal including a search field and a list of names to choose from. These are specifically great for
+              span.bold presenting new flows
               span.mp-font-size-large while preserving the state of content.
             .variation-tags
               | Pre-Defined Types:
@@ -164,7 +164,7 @@
               .example-card-footer
                 mp-button.mp-button-secondary(attrs={size: 'small'}) Cancel
                 mp-button.mp-button-primary(attrs={size: 'small'}) Delete
-            p.desc.mp-font-size-large Dialogues are used when 
+            p.desc.mp-font-size-large Dialogues are used when
               span.bold a decision is required.
               span.mp-font-size-large  An example would be any time a user makes a potentially irreversable action, you could display a dialogue to get confirmation and explain the reprocussions.
             .variation-tags
@@ -172,7 +172,7 @@
               li confirm
               li confirmDelete
             .demo-divider
-              a(on={click: () => $helpers.openModal('confirm')}) View Demo 
+              a(on={click: () => $helpers.openModal('confirm')}) View Demo
               mp-confirm(
                 attrs={open: open.confirm}
                 on={
@@ -276,7 +276,7 @@
                 style={position: 'absolute', left: '190px'}
               ) Re-Open
               mp-upsell-popup(
-                attrs={feature: 'default', open: open.upsell} 
+                attrs={feature: 'default', open: open.upsell}
                 style={position: 'relative', left: '7px'}
                 on={change: e => $helpers.handleModalChange('upsell', e.detail.state)}
               )
@@ -291,10 +291,10 @@
               ) Re-Open
               mp-alert(
                 attrs={
-                  id: 'alert-not-fullscreen', 
-                  closeable: true, 
-                  open: open.alert, 
-                  'not-fullscreen': true, 
+                  id: 'alert-not-fullscreen',
+                  closeable: true,
+                  open: open.alert,
+                  'not-fullscreen': true,
                 }
                 style={position: 'relative', left: '-2px', top: '-5px'}
                 on={change: e => $helpers.handleModalChange('alert', e.detail.state)}
@@ -305,7 +305,7 @@
         //- .example-block.full-width
         //-   .call-out.first-call-out
         //-     strong.icon +
-        //-     strong Pop-up: 
+        //-     strong Pop-up:
         //-     p Unspecified
         //-   .common-example
         //-      //- Insert component
@@ -353,7 +353,7 @@
                         hide: !open.tutorialTooltip.top,
                         'num-steps': 4,
                       }
-                    ) Default Top Tooltip with 4 steps
+                    ) Default Top Tooltip with 4 steps is what goes in here but not what goes in there...
               .demo-divider
                 a(
                   on={click: () => $helpers.toggleTutorialTooltip('bottom')}
@@ -455,10 +455,10 @@
               strong mp-tooltip
             .common-example
               .tooltips-container
-                .tooltip-example.placement-top tooltip 
+                .tooltip-example.placement-top tooltip
           .example-block
             .call-out
-              strong mp-tooltip 
+              strong mp-tooltip
               p (attrs={placement: 'left'})
             .common-example
               .tooltips-container
@@ -469,17 +469,17 @@
         //- .example-block
         //-   .call-out.first-call-out
         //-     strong.icon +
-        //-     strong Hover: 
+        //-     strong Hover:
         //-     p Extended
         //-   .common-example
         //-     //- Insert tooltip component, showing without hover
         //-   .call-out
-        //-     strong Hover: 
+        //-     strong Hover:
         //-     p Complete
         //-   .common-example
         //-     //- Insert tooltip component, showing without hover
         //-   .call-out
-        //-     strong Hover: 
+        //-     strong Hover:
         //-     p Metadata
         //-   .common-example
         //-     //- Insert tooltip component, showing without hover
