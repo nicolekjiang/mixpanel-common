@@ -111,5 +111,11 @@
     "max-width-toggle",
     "large",
     "white"
+  ],
+  "toggle-switch":[
+    "buttons",
+    "toggle",
+    "switch",
+    "mp-switch"
   ]
 }
