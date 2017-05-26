@@ -3,6 +3,7 @@
   'toggle-large': $component.isAttributeEnabled(`large`),
   'toggle-small': $component.isAttributeEnabled(`small`),
   'toggle-square': $component.isAttributeEnabled(`square`),
+  'theme-lite': $component.getAttribute('theme') === 'lite',
 })
   for toggleOption in $helpers.toggleOptions()
     .mp-toggle-option(
