@@ -38965,7 +38965,7 @@
 /* 492 */
 /***/ function(module, exports) {
 
-	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } svg-icon[icon=type-boolean] #left-dot {   color: #fff;   fill: #fff; } svg-icon[icon=type-boolean] #right-dot {   color: #4c6072;   fill: #4c6072; } svg-icon[icon=lightning-bolt] #bolt, svg-icon[icon=lighting-bolt] #bolt {   color: #fff;   fill: #fff; } svg-icon[icon=alert] #circle, svg-icon[icon=alert] #stem {   color: #fff;   fill: #fff; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6d859e;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 13px;   font-stretch: normal;   font-weight: 400; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 13px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6d859e;   font-size: 14px;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 13px;   font-weight: 400;   padding: 8px;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus, input[type=text]:active, textarea:active {   border-color: #3391e9;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } mp-truncated-text {   display: inline-block;   white-space: nowrap;   width: 100%; } mp-toggle {   display: inline-block; } :host {   display: inline-block; } .mp-toggle {   background-color: #edf3f7;   border-radius: 50px;   box-shadow: inset 0 1px 0 0 #d8e0e6;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   height: 32px;   padding: 3px; } .mp-toggle .mp-toggle-option {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   background-color: #edf3f7;   border-radius: 50px;   color: #6d859e;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   -ms-flex-preferred-size: 0;       flex-basis: 0;   -webkit-box-flex: 1;       -ms-flex-positive: 1;           flex-grow: 1;   font-size: 11px;   font-weight: bold;   height: 100%;   -webkit-box-pack: center;       -ms-flex-pack: center;           justify-content: center;   text-align: center;   text-transform: uppercase;   transition: background-color 0.2s; } .mp-toggle .mp-toggle-option.mp-toggle-selected {   background-color: #fff;   box-shadow: 0 1px 0 0 rgba(0,0,0,0.05);   color: #4c6072; } .mp-toggle .mp-toggle-option:not(.mp-toggle-selected) {   cursor: pointer; } .mp-toggle .mp-toggle-option:not(.mp-toggle-selected):hover {   color: #4ba8ff; } .mp-toggle.toggle-blue {   background-color: #3391e9;   box-shadow: inset 0 1px 0 0 #2687e3; } .mp-toggle.toggle-blue .mp-toggle-option {   background-color: #3391e9;   color: #b6dcff; } .mp-toggle.toggle-blue .mp-toggle-option.mp-toggle-selected {   background-color: #6cb8ff;   color: #fff; } .mp-toggle.toggle-blue .mp-toggle-option:not(.mp-toggle-selected):hover {   color: #fff; } .mp-toggle.toggle-large {   height: 39px; } .mp-toggle.toggle-small {   height: 29px; } .mp-toggle.toggle-square {   background-color: #fff;   border-radius: 4px;   box-shadow: none;   box-sizing: border-box;   padding: 0; } .mp-toggle.toggle-square .mp-toggle-option {   background-color: #fff;   border: 1px solid #d8e0e6;   border-radius: 0;   border-right-width: 0; } .mp-toggle.toggle-square .mp-toggle-option:first-child {   border-radius: 3px 0 0 3px; } .mp-toggle.toggle-square .mp-toggle-option:last-child {   border-radius: 0 3px 3px 0;   border-right-width: 1px; } .mp-toggle.toggle-square .mp-toggle-option.mp-toggle-selected {   background-color: #4ba8ff;   border-color: #3b99f0;   border-right-width: 1px;   color: #fff; } .mp-toggle.toggle-square .mp-toggle-option.mp-toggle-selected + .mp-toggle-option {   border-left-width: 0; } ";
+	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } svg-icon[icon=type-boolean] #left-dot {   color: #fff;   fill: #fff; } svg-icon[icon=type-boolean] #right-dot {   color: #4c6072;   fill: #4c6072; } svg-icon[icon=lightning-bolt] #bolt, svg-icon[icon=lighting-bolt] #bolt {   color: #fff;   fill: #fff; } svg-icon[icon=alert] #circle, svg-icon[icon=alert] #stem {   color: #fff;   fill: #fff; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6d859e;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 13px;   font-stretch: normal;   font-weight: 400; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 13px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6d859e;   font-size: 14px;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 13px;   font-weight: 400;   padding: 8px;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus, input[type=text]:active, textarea:active {   border-color: #3391e9;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } mp-truncated-text {   display: inline-block;   white-space: nowrap;   width: 100%; } mp-toggle {   display: inline-block; } :host {   display: inline-block; } .mp-toggle {   background-color: #edf3f7;   border-radius: 50px;   box-shadow: inset 0 1px 0 0 #d8e0e6;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   height: 32px;   padding: 3px; } .mp-toggle .mp-toggle-option {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   background-color: #edf3f7;   border-radius: 50px;   color: #6d859e;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   -ms-flex-preferred-size: 0;       flex-basis: 0;   -webkit-box-flex: 1;       -ms-flex-positive: 1;           flex-grow: 1;   font-size: 11px;   font-weight: bold;   height: 100%;   -webkit-box-pack: center;       -ms-flex-pack: center;           justify-content: center;   text-align: center;   text-transform: uppercase;   transition: background-color 0.2s; } .mp-toggle .mp-toggle-option.mp-toggle-selected {   background-color: #fff;   box-shadow: 0 1px 0 0 rgba(0,0,0,0.05);   color: #4c6072; } .mp-toggle .mp-toggle-option:not(.mp-toggle-selected) {   cursor: pointer; } .mp-toggle .mp-toggle-option:not(.mp-toggle-selected):hover {   color: #4ba8ff; } .mp-toggle.toggle-blue {   background-color: #3391e9;   box-shadow: inset 0 1px 0 0 #2687e3; } .mp-toggle.toggle-blue .mp-toggle-option {   background-color: #3391e9;   color: #b6dcff; } .mp-toggle.toggle-blue .mp-toggle-option.mp-toggle-selected {   background-color: #6cb8ff;   color: #fff; } .mp-toggle.toggle-blue .mp-toggle-option:not(.mp-toggle-selected):hover {   color: #fff; } .mp-toggle.toggle-large {   height: 39px; } .mp-toggle.toggle-small {   height: 29px; } .mp-toggle.toggle-square {   background-color: #fff;   border-radius: 4px;   box-shadow: none;   box-sizing: border-box;   padding: 0; } .mp-toggle.toggle-square .mp-toggle-option {   background-color: #fff;   border: 1px solid #d8e0e6;   border-radius: 0;   border-right-width: 0; } .mp-toggle.toggle-square .mp-toggle-option:first-child {   border-radius: 3px 0 0 3px; } .mp-toggle.toggle-square .mp-toggle-option:last-child {   border-radius: 0 3px 3px 0;   border-right-width: 1px; } .mp-toggle.toggle-square .mp-toggle-option.mp-toggle-selected {   background-color: #4ba8ff;   border-color: #3b99f0;   border-right-width: 1px;   color: #fff; } .mp-toggle.toggle-square .mp-toggle-option.mp-toggle-selected + .mp-toggle-option {   border-left-width: 0; } .mp-toggle.theme-lite {   background-color: #fff;   border-bottom: 1px solid #d8e0e6;   border-radius: 0;   box-shadow: none;   box-sizing: border-box;   height: 39px;   padding: 0; } .mp-toggle.theme-lite .mp-toggle-option {   background-color: #fff;   border-radius: 0;   color: #9bacbf;   -ms-flex-preferred-size: auto;       flex-basis: auto;   margin-right: 10px; } .mp-toggle.theme-lite .mp-toggle-option:first-child {   margin-left: 10px; } .mp-toggle.theme-lite .mp-toggle-option.mp-toggle-selected {   border-bottom: 1px solid #4ba8ff;   color: #6d859e; } .mp-toggle.theme-lite .mp-toggle-option:not(.mp-toggle-selected):hover {   color: #4ba8ff; } ";
 
 
 /***/ },
@@ -38984,7 +38984,8 @@
 	          'toggle-blue': $component.isAttributeEnabled("blue"),
 	          'toggle-large': $component.isAttributeEnabled("large"),
 	          'toggle-small': $component.isAttributeEnabled("small"),
-	          'toggle-square': $component.isAttributeEnabled("square")
+	          'toggle-square': $component.isAttributeEnabled("square"),
+	          'theme-lite': $component.getAttribute('theme') === 'lite'
 	        }, {
 	          'mp-toggle': true
 	        })
@@ -51818,6 +51819,68 @@
 	            }, function () {
 	              var __jade_nodes = [];
 	              __jade_nodes = __jade_nodes.concat("Other");;
+	              return __jade_nodes;
+	            }.call(this).filter(Boolean)));;
+	            return __jade_nodes;
+	          }.call(this).filter(Boolean)));
+	          __jade_nodes = __jade_nodes.concat(h("h4", function () {
+	            var __jade_nodes = [];
+	            __jade_nodes = __jade_nodes.concat("Lite toggle (theme:'lite')");;
+	            return __jade_nodes;
+	          }.call(this).filter(Boolean)));
+	          __jade_nodes = __jade_nodes.concat(h("mp-toggle", {
+	            "attrs": {
+	              theme: 'lite',
+	              selected: 'events'
+	            },
+	            "class": {
+	              'inline-toggle': true
+	            }
+	          }, function () {
+	            var __jade_nodes = [];
+	            __jade_nodes = __jade_nodes.concat(h("mp-toggle-option", {
+	              "attrs": {
+	                value: 'all'
+	              }
+	            }, function () {
+	              var __jade_nodes = [];
+	              __jade_nodes = __jade_nodes.concat("All");;
+	              return __jade_nodes;
+	            }.call(this).filter(Boolean)));
+	            __jade_nodes = __jade_nodes.concat(h("mp-toggle-option", {
+	              "attrs": {
+	                value: 'events'
+	              }
+	            }, function () {
+	              var __jade_nodes = [];
+	              __jade_nodes = __jade_nodes.concat("Events");;
+	              return __jade_nodes;
+	            }.call(this).filter(Boolean)));
+	            __jade_nodes = __jade_nodes.concat(h("mp-toggle-option", {
+	              "attrs": {
+	                value: 'accounts'
+	              }
+	            }, function () {
+	              var __jade_nodes = [];
+	              __jade_nodes = __jade_nodes.concat("Accounts");;
+	              return __jade_nodes;
+	            }.call(this).filter(Boolean)));
+	            __jade_nodes = __jade_nodes.concat(h("mp-toggle-option", {
+	              "attrs": {
+	                value: 'contacts'
+	              }
+	            }, function () {
+	              var __jade_nodes = [];
+	              __jade_nodes = __jade_nodes.concat("Contacts");;
+	              return __jade_nodes;
+	            }.call(this).filter(Boolean)));
+	            __jade_nodes = __jade_nodes.concat(h("mp-toggle-option", {
+	              "attrs": {
+	                value: 'leads'
+	              }
+	            }, function () {
+	              var __jade_nodes = [];
+	              __jade_nodes = __jade_nodes.concat("Leads");;
 	              return __jade_nodes;
 	            }.call(this).filter(Boolean)));;
 	            return __jade_nodes;
