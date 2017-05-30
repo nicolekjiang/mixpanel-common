@@ -1,18 +1,20 @@
-import { Component } from 'panel';
+import {Component} from 'panel';
 
-import exampleBlockTerms from './component-search-terms.json'
-
-import { extend } from '../../../../build/util';
+import exampleBlockTerms from './component-search-terms.json';
 
 import template from './index.jade';
 import './index.styl';
 
-document.registerElement('components-section', class extends Component {
+document.registerElement(`components-section`, class extends Component {
   get config() {
     return {
       helpers: {
         openModal: key => {
           this.state.open[key] = true;
+          this.update();
+        },
+        closeModal: key => {
+          this.state.open[key] = false;
           this.update();
         },
         handleModalChange: (key, state) => {
@@ -26,9 +28,9 @@ document.registerElement('components-section', class extends Component {
         },
         showExampleblock: exampleName => {
           let match = true;
-          if (this.state.sectionOpen == 'search'){
+          if (this.state.sectionOpen === `search`) {
             const exampleTerms = exampleBlockTerms[exampleName];
-            const searchTerms = this.state.searchTerm.split(' ');
+            const searchTerms = this.state.searchTerm.split(` `);
             searchTerms.forEach(t => {
               let partialMatch = false;
               exampleTerms.forEach(e => {
@@ -42,7 +44,7 @@ document.registerElement('components-section', class extends Component {
             });
           }
           return match;
-        }
+        },
       },
       template,
     };

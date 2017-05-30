@@ -20,6 +20,11 @@
     "components",
     "popup"
   ],
+  "dialogue": [
+    "dialogue",
+    "confirm",
+    "mp-dialogue"
+  ],
   "modal-confirm": [
     "modal",
     "closeable",

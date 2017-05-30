@@ -180,12 +180,14 @@
         on={change: e => $helpers.handleModalChange('dialogue', e.detail.state)}
       )
         div
-          .mp-dialogue-content
-            .mp-dialogue-title Easily track events
-            .mp-dialogue-subtitle Click on any element on your page (e.g. the buy button) to create an event and access all historical data for that event.
-          mp-button-bar.mp-button-bar-primary(
-            on={click: () => $helpers.closeModal('dialogue')}
-          ) Create your first event
+          .mp-dialogue-container
+            .mp-dialogue-body
+              .mp-dialogue-text
+                .mp-dialogue-title Take an action
+                .mp-dialogue-subtitle Click on any element on your page (e.g. the buy button) to take an action.
+            .mp-dialogue-buttons
+              mp-button.mp-button-secondary(attrs={size: 'small'} on={click: () => $helpers.closeModal('dialogue')}) Cancel
+              mp-button.mp-button-primary(attrs={size: 'small'} on={click: () => $helpers.closeModal('dialogue')}) Ok
 
     p
       button(on={click: () => $helpers.openModal('confirm')}) Open confirm
