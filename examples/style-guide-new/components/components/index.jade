@@ -159,7 +159,7 @@
           .example-block
             .call-out.first-call-out
               strong.icon +
-              strong mp-confirm
+              strong mp-dialogue
             .example-card.narrow
               .example-card-footer
                 mp-button.mp-button-secondary(attrs={size: 'small'}) Cancel
@@ -169,20 +169,22 @@
               span.mp-font-size-large  An example would be any time a user makes a potentially irreversable action, you could display a dialogue to get confirmation and explain the reprocussions.
             .variation-tags
               | Pre-Defined Types:
-              li confirm
-              li confirmDelete
+              li dialogue
             .demo-divider
-              a(on={click: () => $helpers.openModal('confirm')}) View Demo
-              mp-confirm(
-                attrs={open: open.confirm}
-                on={
-                  change: e => $helpers.handleModalChange('confirm', e.detail.state),
-                  submit: e => console.log(e.detail),
-                }
+              a(on={click: () => $helpers.openModal('dialogue')}) View Demo
+              mp-dialogue.dialogue(
+                attrs={closeable: true, open: open.dialogue}
+                on={change: e => $helpers.handleModalChange('dialogue', e.detail.state)}
               )
                 div
-                  .mp-confirm-title Unsaved changes
-                  .mp-confirm-description If you navigate away from this page you will lose your changes. Would you like to continue?
+                  .mp-dialogue-container
+                    .mp-dialogue-body
+                      .mp-dialogue-text
+                        .mp-dialogue-title Dialogue title here
+                        .mp-dialogue-subtitle Dialogue subtitle here
+                    .mp-dialogue-buttons
+                      mp-button.mp-button-secondary(attrs={size: 'small'} on={click: () => $helpers.closeModal('dialogue')}) Cancel
+                      mp-button.mp-button-primary(attrs={size: 'small'} on={click: () => $helpers.closeModal('dialogue')}) Ok
         .code-snippet
           .call-out.first-call-out
             strong.icon +
@@ -245,33 +247,6 @@
                 span.mp-purple attrs={size: 'small'}
                 span.mp-red )
                 |  Ok
-        if $helpers.showExampleblock('dialogue')
-          .example-block#dialogue
-            .call-out.first-call-out
-              strong.icon +
-              strong mp-dialogue
-              p .dialogue
-            p.desc Dialogues have blue header bars and should be presented when the user needs to complete a task that the current interface does not support. For example: a button to invite teammates might present a modal including a search field and a list of names to choose from. These are specifically great for
-              span.bold  presenting new flows
-              span.mp-font-size-large  while preserving the state of content.
-            .variation-tags
-              | Pre-Defined Types:
-              li dialogue
-            .demo-divider
-              a(on={click: () => $helpers.openModal('dialogue')}) View Demo
-              mp-dialogue.dialogue(
-                attrs={closeable: true, open: open.dialogue}
-                on={change: e => $helpers.handleModalChange('dialogue', e.detail.state)}
-              )
-                div
-                  .mp-dialogue-container
-                    .mp-dialogue-body
-                      .mp-dialogue-text
-                        .mp-dialogue-title Dialogue title here
-                        .mp-dialogue-subtitle Dialogue subtitle here
-                    .mp-dialogue-buttons
-                      mp-button.mp-button-secondary(attrs={size: 'small'} on={click: () => $helpers.closeModal('dialogue')}) Cancel
-                      mp-button.mp-button-primary(attrs={size: 'small'} on={click: () => $helpers.closeModal('dialogue')}) Ok
 
   if sectionOpen == 'components' || searchSections.includes('popups-alerts')
     .sub-section-container#popups-alerts
