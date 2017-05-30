@@ -173,6 +173,19 @@
             on={click: () => $helpers.closeModal('popup')}
           ) Create your first event
 
+    p
+      button(on={click: () => $helpers.openModal('dialogue')}) Open dialogue
+      mp-dialogue.dialogue(
+        attrs={closeable: true, open: open.dialogue}
+        on={change: e => $helpers.handleModalChange('dialogue', e.detail.state)}
+      )
+        div
+          .mp-dialogue-content
+            .mp-dialogue-title Easily track events
+            .mp-dialogue-subtitle Click on any element on your page (e.g. the buy button) to create an event and access all historical data for that event.
+          mp-button-bar.mp-button-bar-primary(
+            on={click: () => $helpers.closeModal('dialogue')}
+          ) Create your first event
 
     p
       button(on={click: () => $helpers.openModal('confirm')}) Open confirm
