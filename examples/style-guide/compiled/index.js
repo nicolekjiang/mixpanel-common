@@ -35748,15 +35748,10 @@
 	      mDate = endOfDay ? mDate.endOf(UNITS.day) : mDate;
 
 	      // make dates like "12/31" parse to the most recent past instance of that date
-	      var fullYear = mDate.format('YYYY');
-	      var partialYear = mDate.format('YY');
-	      var month = mDate.format('MM');
-	      var day = mDate.format('DD');
-	      if ( // was the year specified?
-	      !dateString.includes(fullYear) || !dateString.replace(month, '').replace(day, '').includes(partialYear) // ensure we don't mistakenly match on month or day
-	      ) {
-	          mDate = mDate > (0, _moment2.default)().endOf(UNITS.day) ? mDate.subtract(1, UNITS.year + 's') : mDate;
-	        }
+	      // use "strict parsing" mode of moment to check whether dateString is of the form M/D, MM/DD, M.D, etc.
+	      if ((0, _moment2.default)(dateString, 'M D', true).isValid()) {
+	        mDate = mDate > (0, _moment2.default)().endOf(UNITS.day) ? mDate.subtract(1, UNITS.year + 's') : mDate;
+	      }
 
 	      date = new Date(mDate);
 	    }
