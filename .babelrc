@@ -1,6 +1,7 @@
 {
   "plugins": [
     "babel-plugin-import-glob",
+    ["inline-json-import", {}],
     ["babel-plugin-inline-import", {
       "extensions": [".svg"]
     }]
