@@ -319,24 +319,22 @@ describe(`formatDate`, function() {
 });
 
 describe(`relativeToAbsoluteDate`, function() {
-  it.skip(`converts a relative date integer and a unit to the expected Date object`, function() {
+  it(`converts a relative date integer and a unit to the expected Date object`, function() {
     const testCases = [
-      [5, `day`, date => date.setDate(date.getDate() - 5)],
-      [5, `month`, date => date.setMonth(date.getMonth() - 5)],
-      [5, `year`, date => date.setFullYear(date.getFullYear() - 5)],
-      [-100, `day`, date => date.setDate(date.getDate() + 100)],
-      [-100, `month`, date => date.setMonth(date.getMonth() + 100)],
-      [-100, `year`, date => date.setFullYear(date.getFullYear() + 100)],
-      [0, `day`, date => date],
-      [0, `month`, date => date],
-      [0, `year`, date => date],
+      [5, `day`, moment().subtract(5, `days`)],
+      [5, `month`, moment().subtract(5, `months`)],
+      [5, `year`, moment().subtract(5, `years`)],
+      [-100, `day`, moment().add(100, `days`)],
+      [-100, `month`, moment().add(100, `months`)],
+      [-100, `year`, moment().add(100, `years`)],
+      [0, `day`, moment()],
+      [0, `month`, moment()],
+      [0, `year`, moment()],
     ];
 
-    testCases.forEach(([value, unit, setExpected]) => {
+    testCases.forEach(([value, unit, expected]) => {
       const actual = relativeToAbsoluteDate(value, unit);
-      const expected = new Date();
-      setExpected(expected);
-      expect(actual.setHours(0, 0, 0, 0)).to.eql(expected.setHours(0, 0, 0, 0));
+      expect(actual.setHours(0, 0, 0, 0)).to.eql(expected.toDate().setHours(0, 0, 0, 0));
     });
   });
 
@@ -396,7 +394,7 @@ describe(`normalizeDateStrings`, function() {
     normalizeDateStrings(inputs).forEach(output => expect(output).to.eql(null));
   });
 
-  it.skip('allows utc offset to define the current moment', function() {
+  it(`allows utc offset to define the current moment`, function() {
     const oneDayFromNow = new Date();
     oneDayFromNow.setDate(oneDayFromNow.getDate() + 1);
     const inputDates = [CURRENT_DATE_TIME_ISO, moment(oneDayFromNow).format(DATE_TIME_FORMAT)];
