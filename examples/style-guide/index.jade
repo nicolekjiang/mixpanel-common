@@ -173,6 +173,21 @@
             on={click: () => $helpers.closeModal('popup')}
           ) Create your first event
 
+    p
+      button(on={click: () => $helpers.openModal('dialog')}) Open dialog
+      mp-dialog.dialog(
+        attrs={closeable: true, open: open.dialog}
+        on={change: e => $helpers.handleModalChange('dialog', e.detail.state)}
+      )
+        div
+          .mp-dialog-container
+            .mp-dialog-body
+              .mp-dialog-text
+                .mp-dialog-title Take an action
+                .mp-dialog-subtitle Click on any element on your page (e.g. the buy button) to take an action.
+            .mp-dialog-buttons
+              mp-button.mp-button-secondary(attrs={size: 'small'} on={click: () => $helpers.closeModal('dialog')}) Cancel
+              mp-button.mp-button-primary(attrs={size: 'small'} on={click: () => $helpers.closeModal('dialog')}) Ok
 
     p
       button(on={click: () => $helpers.openModal('confirm')}) Open confirm

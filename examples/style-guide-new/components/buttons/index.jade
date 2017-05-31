@@ -42,7 +42,7 @@
               .example-block.full-width#button-secondary
                 .call-out.first-call-out
                   strong.icon +
-                  strong .mp-button-secondary 
+                  strong .mp-button-secondary
                   p (attrs={disabled: true})
                 .common-example
                   mp-button.mp-button-secondary Secondary
@@ -148,7 +148,7 @@
                     |  Button text
                     br
                     br
-                    span.grey-500  //- Disabled buttons 
+                    span.grey-500  //- Disabled buttons
                     br
                     |   mp-button
                     span.mp-red .mp-button-red
@@ -161,13 +161,13 @@
       .section-content
         section
         .subsection-title Button Bars
-        .subsection-description Button bars are used in tandem with ui-cards (modals and dialogues) to lead the user through a linear flow or to complete a form.
+        .subsection-description Button bars are used in tandem with ui-cards (modals and dialogs) to lead the user through a linear flow or to complete a form.
         .indent-container
           if $helpers.showExampleblock('button-bar-primary')
             .example-block.full-width
               .call-out.first-call-out
                 strong.icon +
-                strong .mp-button-bar-primary 
+                strong .mp-button-bar-primary
               .example-card.narrow.truncated.mp-button-bar-container
                 mp-button-bar.mp-button-bar-primary Button-bar primary
               .example-card.narrow.truncated.mp-button-bar-container
@@ -205,13 +205,13 @@
                   br
                   |  .mp-button-bar-container
                   br
-                  span.mp-red     mp-button-bar.mp-button-bar-secondary 
+                  span.mp-red     mp-button-bar.mp-button-bar-secondary
                   | Button text
                   br
                   |  .mp-button-bar-container
                   br
                   span.mp-red     mp-button-bar.mp-button-bar-primary
-                  span.mp-purple (attrs={'arrow-next': true}) 
+                  span.mp-purple (attrs={'arrow-next': true})
                   | Button text
    if sectionOpen == 'buttons' || searchSections.includes('toggle-buttons')
     .sub-section-container#toggle-buttons
@@ -236,8 +236,8 @@
           if $helpers.showExampleblock('inline-toggle-small')
             .example-block#inline-toggle-small
               .call-out
-                strong .inline-toggle 
-                p (attrs={square: true, small: true}) 
+                strong .inline-toggle
+                p (attrs={square: true, small: true})
               .common-example
                 mp-toggle.inline-toggle(attrs={square: true, small: true, selected: 'option1'})
                   mp-toggle-option(attrs={value: 'option1'}) Pears
@@ -249,11 +249,11 @@
                 strong.icon +
                 strong mp-toggle
                 p .max-width-toggle
-              .common-example   
+              .common-example
                 mp-toggle.max-width-toggle(attrs={selected: 'option2'})
                   mp-toggle-option(attrs={value: 'option1'}) Label
                   mp-toggle-option(attrs={value: 'option2'}) Label
-                  mp-toggle-option(attrs={value: 'option3'}) Label   
+                  mp-toggle-option(attrs={value: 'option3'}) Label
                   mp-toggle-option(attrs={value: 'option4'}) Label
                   mp-toggle-option(attrs={value: 'option5'}) Label
           if $helpers.showExampleblock('full-width-toggle-blue')
@@ -272,7 +272,7 @@
             .example-block
               .call-out.first-call-out
                 strong.icon +
-                strong .custom-width-class 
+                strong .custom-width-class
                 p (attrs={large: true})
               .common-example
                 mp-toggle.max-width-toggle(attrs={large: true, selected: 'option2'})
@@ -282,7 +282,7 @@
             .example-block.full-width#toggle-switch
               .call-out.first-call-out
                 strong.icon +
-                strong  mp-switch 
+                strong  mp-switch
                 p (attrs={on: true})
               .floating-example-bar
                 .example-bar-line-item
@@ -303,7 +303,7 @@
           //-       attrs={selected: 'option1'})
           //-       mp-toggle-option(attrs={value: 'option1'}) All
           //-       mp-toggle-option(attrs={value: 'option2'}) Your Reports
-          
+
           .code-snippet
             .call-out.first-call-out
               strong.icon +
@@ -340,7 +340,7 @@
                   span.grey-500 //- Square Large Toggle
                   br
                   span.mp-red mp-toggle
-                  | .custom-class 
+                  | .custom-class
                   span.mp-purple (attrs={'square: true, large: true, selected: 'option1'})
                   br
                   |   mp-toggle-option
@@ -355,7 +355,7 @@
                   span.grey-500 //- Round Blue Small Toggle
                   br
                   span.mp-red mp-toggle
-                  | .custom-class 
+                  | .custom-class
                   span.mp-purple (attrs={blue: true, small: true, selected: 'option1'})
                   br
                   |   mp-toggle-option
@@ -414,7 +414,7 @@
                         mp-list-item Overflow option 1
                         mp-list-item Overflow option 2
                         mp-list-item Overflow option 3
-          
+
           //- Pending Addition: Small circle button with icon / text
           //- .example-block.full-width
           //-   .call-out.first-call-out
@@ -422,7 +422,7 @@
           //-     strong Query Builder
           //-   .common-example
           //-     //- Insert Query Builder text-link drop-down
-          
+
           .code-snippet
             .call-out.first-call-out
               strong.icon +
@@ -463,8 +463,8 @@
                   br
                   span.mp-red    mp-drop-menu(
                   br
-                  span.mp-purple      attrs={open: open.dropMenu} 
+                  span.mp-purple      attrs={open: open.dropMenu}
                   br
-                  span.mp-purple      on={change: e => $helpers.handleModalChange('dropMenu', e.detail.state)} 
+                  span.mp-purple      on={change: e => $helpers.handleModalChange('dropMenu', e.detail.state)}
                   br
                   span.mp-red    )

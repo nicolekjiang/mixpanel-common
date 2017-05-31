@@ -1,0 +1,107 @@
+@import '../../stylesheets/defaults'
+
++host-styles(mp-dialog)
+  width 400px
+
++prefix-classes('mp-dialog-')
+  .stage, .stage *
+    box-sizing border-box
+
+  .stage
+    bottom 0
+    left 0
+    min-width 100%
+    pointer-events none
+    position fixed
+    right 0
+    top 0
+    width inherit
+    z-index $z-overlay
+
+    .wrapper
+      align-items center
+      display flex
+      height 100%
+      justify-content center
+      min-width 100%
+      pointer-events none
+      position fixed
+      width inherit
+      z-index $z-modal
+
+      &.open
+        pointer-events auto
+
+      .main
+        background white
+        border 1px solid grey-100
+        border-radius 5px
+        box-shadow 0 1px 30px 0 alpha(black, 0.19)
+        opacity 0
+        pointer-events auto
+        position relative
+        transform scale(1.1, 1.1)
+        width inherit
+
+        &.in
+          opacity 1
+          transform scale(1, 1)
+          transition all (mp-fast)ms ease-out-quart
+
+        &.out
+          opacity 0
+          transform scale(1.1, 1.1)
+          transition all (mp-fast)ms ease-in-quart
+
+        .close-btn
+          cursor pointer
+          height 10px
+          position absolute
+          right 15px
+          top 15px
+
+          .close-icon svg
+            width 10px
+
+            path
+              fill grey-300
+
+          &:hover
+            .close-icon svg path
+              fill grey-200
+
+  +content-styles()
+    .content
+      padding 15px 30px
+
+    .container
+      display flex
+      flex-direction column
+
+      .body
+        display flex
+        flex-direction row
+        min-height 92px
+        padding 15px 30px 0 20px
+        text-align left
+
+      .buttons
+        border-top 1px solid grey-200
+        margin-top 15px
+        padding 15px 20px 15px 0
+        text-align right
+
+      mp-button
+        margin-left 15px
+        min-width 90px
+
+    .title
+      color grey-900
+      font-family family-helvetica
+      font-size-xl()
+      font-weight weight-bold
+      line-height 1.4
+
+    .subtitle
+      font-paragraph()
+      margin 12px 0

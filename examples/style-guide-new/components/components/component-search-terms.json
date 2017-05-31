@@ -20,12 +20,14 @@
     "components",
     "popup"
   ],
-  "modal-confirm": [
-    "modal",
+  "dialog": [
+    "dialog",
+    "confirm",
+    "mp-dialog",
     "closeable",
     "components",
-    "popup",
-    "mp-confirm"
+    "mp-confirm",
+    "mp-delete"
   ],
   "upsell-popup": [
     "components",

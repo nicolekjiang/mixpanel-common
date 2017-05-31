@@ -166,11 +166,11 @@
     "square",
     "mp-icon-input"
   ],
-  "modals-dialogues": [
+  "modals-dialogs": [
     "components",
     "modals",
     "popups",
-    "dialogues",
+    "dialogs",
     "mp-modal",
     "confirm modal",
     "mp-confirm",

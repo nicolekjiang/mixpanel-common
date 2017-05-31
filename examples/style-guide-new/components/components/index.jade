@@ -116,13 +116,13 @@
                     br
                     span.mp-red mp-input-group
                     span.mp-purple (attrs={placeholder: "text here", busy: inputGroupSaving})
-  if sectionOpen == 'components' || searchSections.includes('modals-dialogues')
-    .sub-section-container#modals-dialogues
+  if sectionOpen == 'components' || searchSections.includes('modals-dialogs')
+    .sub-section-container#modals-dialogs
       .divider
         label 5.3
       .section-content
         section
-        .subsection-title Modals & Dialogues
+        .subsection-title Modals & Dialogs
         .subsection-description These UI components are containers that will interrupt the current flow, by displaying on top of the page content.
        .indent-container
         if $helpers.showExampleblock('modal')
@@ -136,8 +136,8 @@
               .example-card-header
                 b Modal Header Text
             p.desc Modals have blue header bars and should be presented when the user needs to complete a task that the current interface does not support. For example: a button to invite teammates might present a modal including a search field and a list of names to choose from. These are specifically great for
-              span.bold presenting new flows
-              span.mp-font-size-large while preserving the state of content.
+              span.bold  presenting new flows
+              span.mp-font-size-large  while preserving the state of content.
             .variation-tags
               | Pre-Defined Types:
               li modal
@@ -155,107 +155,38 @@
                     on={click: () => $helpers.closeModal('modal')}
                     attrs={'arrow-next': true}
                   ) Create your first event
-        if $helpers.showExampleblock('modal-confirm')
-          .example-block
+        if $helpers.showExampleblock('dialog')
+          .example-block#dialog
             .call-out.first-call-out
               strong.icon +
-              strong mp-confirm
+              strong mp-dialog
+              p .dialog
             .example-card.narrow
               .example-card-footer
                 mp-button.mp-button-secondary(attrs={size: 'small'}) Cancel
                 mp-button.mp-button-primary(attrs={size: 'small'}) Delete
-            p.desc.mp-font-size-large Dialogues are used when
-              span.bold a decision is required.
-              span.mp-font-size-large  An example would be any time a user makes a potentially irreversable action, you could display a dialogue to get confirmation and explain the reprocussions.
+            p.desc.mp-font-size-large Dialogs are used when
+              span.bold  a decision is required.
+              span.mp-font-size-large  An example would be any time a user makes a potentially irreversable action, you could display a dialog to get confirmation and explain the repercussions.
             .variation-tags
               | Pre-Defined Types:
-              li confirm
-              li confirmDelete
+              li dialog
             .demo-divider
-              a(on={click: () => $helpers.openModal('confirm')}) View Demo
-              mp-confirm(
-                attrs={open: open.confirm}
-                on={
-                  change: e => $helpers.handleModalChange('confirm', e.detail.state),
-                  submit: e => console.log(e.detail),
-                }
+              a(on={click: () => $helpers.openModal('dialog')}) View Demo
+              mp-dialog.dialog(
+                attrs={closeable: true, open: open.dialog}
+                on={change: e => $helpers.handleModalChange('dialog', e.detail.state)}
               )
                 div
-                  .mp-confirm-title Unsaved changes
-                  .mp-confirm-description If you navigate away from this page you will lose your changes. Would you like to continue?
-        .code-snippet
-          .call-out.first-call-out
-            strong.icon +
-            strong Example Code
-          .snippet-container.min.max
-            .snippet-header
-              label Jade
-            .code-field
-              pre
-                | 1
-                br
-                | 2
-                br
-                | 3
-                br
-                | 4
-                br
-                | 5
-                br
-                | 6
-                br
-                | 7
-                br
-                | 8
-                br
-                | 9
-                br
-                | 10
-                br
-                | 11
-                br
-                | 12
-                br
-                | 13
-                br
-                | 14
-              pre
-                span.grey-500 //- Modal with button-bar
-                br
-                span.mp-red mp-modal.modal(
-                span.mp-purple attrs={closeable: true, open: open.modal}
-                span.mp-red )
-                br
-                |   div
-                br
-                span.mp-red     .mp-modal-content
-                br
-                span.mp-red       .mp-modal-title
-                |  Modal title text here
-                br
-                span.mp-red       .mp-modal-subtitle
-                |  Modal subtext here
-                br
-                span.mp-red     mp-button-bar.mp-button-bar-primary
-                span.mp-purple (attrs={'arrow-next': true})
-                | Button CTA
-                br
-                br
-                span.grey-500 //- Dialogue
-                br
-                span.grey-500 //- Variations: 'confirm', 'confirmDelete'
-                br
-                span.mp-red mp-confirm(
-                span.mp-purple attrs={open: open.confirm}
-                span.mp-red )
-                br
-                |   div
-                br
-                span.mp-red     .mp-confirm-title
-                |  Dialogue title text
-                br
-                span.mp-red     .mp-confirm-description
-                |  Dialogue subtext here
+                  .mp-dialog-container
+                    .mp-dialog-body
+                      .mp-dialog-text
+                        .mp-dialog-title Dialog title here
+                        .mp-dialog-subtitle Dialog subtitle here
+                    .mp-dialog-buttons
+                      mp-button.mp-button-secondary(attrs={size: 'small'} on={click: () => $helpers.closeModal('dialog')}) Cancel
+                      mp-button.mp-button-primary(attrs={size: 'small'} on={click: () => $helpers.closeModal('dialog')}) Ok
+
   if sectionOpen == 'components' || searchSections.includes('popups-alerts')
     .sub-section-container#popups-alerts
       .divider

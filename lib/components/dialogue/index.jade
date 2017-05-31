@@ -1,0 +1,18 @@
+.mp-dialog-stage
+  .mp-dialog-wrapper(class={'mp-dialog-open': open})
+    if open
+      .mp-dialog-main(
+        hook={
+          insert: $helpers.handleDialogInserted,
+          destroy: $helpers.handleDialogRemoved,
+        }
+        class={
+          delayed: {'mp-dialog-in': true},
+          remove: {'mp-dialog-out': true, delayRemove},
+        }
+      )
+        if $component.isAttributeEnabled('closeable')
+          .mp-dialog-close-btn(on={click: $helpers.closeClicked})
+            .mp-dialog-close-icon
+              include ../modal/close.svg
+        content
