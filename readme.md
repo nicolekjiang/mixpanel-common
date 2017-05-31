@@ -17,11 +17,7 @@
 - Start a server and build continuously: `npm start`
 - Open [http://localhost:8080/examples/style-guide/index.html](http://localhost:8080/examples/style-guide-new/index.html)
 
-
-### Release Log
-
-#### 0.50.1
- - renamePropertyValue param signature change to (value, header) - header is a new optional field.
-    If header is $event / $country_code / $mp_country_code, then value will be expanded.
-    Otherwise it will be passed through.
-
+### Testing with Saucelabs
+```sh
+SAUCE_USERNAME=<your username> SAUCE_ACCESS_KEY=<your access key> npm run test-sauce
+```
