@@ -42,6 +42,8 @@ const CONFIGS = [
           .replace(/"/g, '\\"');
         return 'module.exports = "' + css + '";\n';
       },
+
+      json: [passThrough, compileJsonToJs],
     },
   },
 
@@ -58,7 +60,7 @@ const CONFIGS = [
   {
     matches: /lib\/stylesheets\/mixins/,
     transpilers: {
-      json: passThrough,
+      json: [passThrough, compileJsonToJs],
       styl: passThrough,
     },
   },
@@ -81,6 +83,14 @@ function compileStylus(filename) {
     .render();
 }
 
+function compileJsonToJs(filename) {
+  const js = fs.readFileSync(filename).toString();
+  return {
+    filename: filename + '.js',
+    output: 'module.exports = ' + js + ';\n',
+  };
+}
+
 function transpileFile(filename) {
   const config = CONFIGS.find(config => config.matches.test(filename));
   if (!config) {
@@ -89,22 +99,26 @@ function transpileFile(filename) {
   }
 
   const ext = filename.split('.').pop();
-  const transpiler = config.transpilers[ext];
-  if (!transpiler) {
+  let transpilers = config.transpilers[ext];
+  if (!transpilers) {
     console.log(`No transpiler found for ${filename}`);
     return;
   }
 
-  let result = transpiler(filename);
-  if (result.filename) {
-    filename = result.filename;
-    result = result.output;
-  }
-  const outputFile = filename.replace(INPUT_DIR, OUTPUT_DIR);
-  ensureDir(path.dirname(outputFile));
+  transpilers = typeof transpilers === 'function' ? [transpilers] : transpilers;
+  transpilers.forEach(transpiler => {
+    const originalFilename = filename;
+    let result = transpiler(filename);
+    if (result.filename) {
+      filename = result.filename;
+      result = result.output;
+    }
+    const outputFile = filename.replace(INPUT_DIR, OUTPUT_DIR);
+    ensureDir(path.dirname(outputFile));
 
-  fs.writeFileSync(outputFile, result);
-  console.log(filename, '=>', outputFile);
+    fs.writeFileSync(outputFile, result);
+    console.log(originalFilename, '=>', outputFile);
+  });
 }
 
 function ensureDir(target) {
