@@ -16,12 +16,9 @@
               .example-block#input-icon
                 .call-out.first-call-out
                   strong.icon +
-                  strong .mp-icon-input
+                  strong mp-icon-input
                 .common-example
-                  .mp-icon-input
-                    .mp-icon
-                      svg-icon(attrs={icon: "search"})
-                    input(attrs={type: 'text', placeholder: 'Some placeholder text'})
+                  mp-icon-input(attrs={icon: 'search', placeholder: 'Some placeholder text'})
 
             //- Pending Addition: error state for square field
             //- .example-block
@@ -92,24 +89,11 @@
                     | 4
                     br
                     | 5
-                    br
-                    | 6
-                    br
-                    | 7
-                    br
-                    | 8
                   pre
                     span.grey-500 //- Square field w/ icon
                     br
-                    span.mp-red .mp-icon-input
-                    br
-                    |   .mp-icon
-                    br
-                    span.mp-red     svg-icon
-                    span.mp-purple (attrs={icon: "search"})
-                    br
-                    |   input
-                    span.mp-purple (attrs={type: 'text', placeholder: 'Some placeholder text'})
+                    span.mp-red mp-icon-input
+                    span.mp-purple (attrs={icon: 'search', placeholder: 'Some placeholder text'})
                     br
                     br
                     span.grey-500 //- Square field w/ button

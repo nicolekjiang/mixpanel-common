@@ -9,6 +9,7 @@ describe(`Test mp-items-menu`, function() {
     this.createItemsMenuWithItem = (item, cb) => {
       document.body.innerHTML = ``;
       const itemsMenu = document.createElement(`mp-items-menu`);
+      itemsMenu.setAttribute(`progressive`, true);
       itemsMenu.style.width = `300px`;
       document.body.appendChild(itemsMenu);
 

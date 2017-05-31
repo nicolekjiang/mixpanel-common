@@ -1,4 +1,5 @@
 .screen-list-container(
+  attrs={tabindex: 0}
   hook={postpatch: $helpers.handlePostPatch}
 )
   - const sections = $helpers.getSections()
@@ -26,7 +27,7 @@
               uppercase: item.isUppercase,
             }
             on={
-              click: isSelectable ? ev => $helpers.handleClickItem(item) : null,
+              click: isSelectable ? ev => $helpers.handleClickItem(item, ev.ctrlKey || ev.metaKey) : null,
               mouseenter: () => $helpers.handleMouseenterItem(item),
             }
           )

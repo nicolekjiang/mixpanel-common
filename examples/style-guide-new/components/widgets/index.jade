@@ -113,12 +113,12 @@
   if sectionOpen == 'widgets' || searchSections.includes('tag-selector')
     .sub-section-container#tag-selector
       .divider#tag-selector
-         label 6.2    
+         label 6.2
        .section-content
          section
            .subsection-title Tag Selector
            .subsection-description Add, remove, and create new tags for a given dashboard.
-          .indent-container       
+          .indent-container
             .example-block.full-width#tag-selector
               .call-out.first-call-out
                 strong.icon +
@@ -224,7 +224,7 @@
           .example-block
             .call-out.first-call-out
               strong.icon +
-              strong mp-calendar 
+              strong mp-calendar
               p double calendar
             .example-card
               .calendar-container
@@ -240,7 +240,7 @@
                )
           .example-block
             .call-out
-              strong mp-calendar 
+              strong mp-calendar
               p single calendar
             .example-card
               .calendar-container
@@ -343,7 +343,8 @@
                 )
                   mp-items-menu(
                     attrs={
+                      progressive: true,
                       'search-filter': itemsMenuSearchFilter,
-                      'sections': JSON.stringify($helpers.getItemsMenuSections()),
+                      sections: JSON.stringify($helpers.getItemsMenuSections()),
                     },
                   )

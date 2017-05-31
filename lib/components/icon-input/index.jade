@@ -1,0 +1,5 @@
+- const attrObj = Array.from($component.attributes).reduce((acc, attr) => { acc[attr.nodeName] = attr.nodeValue; return acc; }, {type: 'text'})
+.mp-icon-input
+  .mp-icon
+    svg-icon(attrs={icon: $component.getAttribute('icon')})
+  input(attrs=attrObj)
