@@ -319,7 +319,7 @@ describe(`formatDate`, function() {
 });
 
 describe(`relativeToAbsoluteDate`, function() {
-  it(`converts a relative date integer and a unit to the expected Date object`, function() {
+  it.skip(`converts a relative date integer and a unit to the expected Date object`, function() {
     const testCases = [
       [5, `day`, date => date.setDate(date.getDate() - 5)],
       [5, `month`, date => date.setMonth(date.getMonth() - 5)],
@@ -396,7 +396,7 @@ describe(`normalizeDateStrings`, function() {
     normalizeDateStrings(inputs).forEach(output => expect(output).to.eql(null));
   });
 
-  it('allows utc offset to define the current moment', function() {
+  it.skip('allows utc offset to define the current moment', function() {
     const oneDayFromNow = new Date();
     oneDayFromNow.setDate(oneDayFromNow.getDate() + 1);
     const inputDates = [CURRENT_DATE_TIME_ISO, moment(oneDayFromNow).format(DATE_TIME_FORMAT)];
