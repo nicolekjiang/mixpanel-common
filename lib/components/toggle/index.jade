@@ -7,6 +7,9 @@
 })
   for toggleOption in $helpers.toggleOptions()
     .mp-toggle-option(
-      class={'mp-toggle-selected': toggleOption.value === $component.value}
-      on={click: () => $helpers.selectOption(toggleOption.value)}
+      class={
+        'mp-toggle-selected': toggleOption.value === $component.value,
+        'mp-toggle-disabled': toggleOption.disabled,
+      }
+      on={click: () => toggleOption.disabled ? null : $helpers.selectOption(toggleOption.value)}
     )= toggleOption.text

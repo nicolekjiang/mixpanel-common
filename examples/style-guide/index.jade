@@ -293,6 +293,12 @@
       mp-toggle-option(attrs={value: 'contacts'}) Contacts
       mp-toggle-option(attrs={value: 'leads'}) Leads
 
+    h4 Lite mp-toggle-option(disabled:true)
+    mp-toggle.inline-toggle(attrs={theme: 'lite', selected: 'events'})
+      mp-toggle-option(attrs={value: 'all', disabled: false}) All
+      mp-toggle-option(attrs={value: 'events', disabled: false}) Events
+      mp-toggle-option(attrs={value: 'people', disabled: true}) People
+
   .section
     h1 Switches
     p Default is switch is off and clickable.
