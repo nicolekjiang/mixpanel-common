@@ -1,11 +1,18 @@
-import { Component } from 'panel';
+import {Component} from 'panel';
 
 import bookmarks from './bookmark-data.json';
 
 import template from './index.jade';
 import './index.styl';
 
-document.registerElement('widgets-section', class extends Component {
+const NAVIGATION_KEY_CODES = {
+  TAB: 9,
+  ENTER: 13,
+  UP_ARROW: 38,
+  DOWN_ARROW: 40,
+};
+
+document.registerElement(`widgets-section`, class extends Component {
   get config() {
     return {
       defaultState: {
@@ -61,6 +68,16 @@ document.registerElement('widgets-section', class extends Component {
           this.state.open.tagSelector = e.detail.state !== `closed`;
           this.update();
         },
+        handleItemFocus: ev => {
+          const item = ev.detail.item;
+          if (item.description) {
+            this.update({eventDefinition: {name: item.label, description: item.description}});
+          } else {
+            if (this.state.eventDefinition) {
+              this.update({eventDefinition: null});
+            }
+          }
+        },
         handleTagSelectorSave: e => {
           this.state.tagSelectorData.saving = true;
           this.update();
@@ -102,18 +119,18 @@ document.registerElement('widgets-section', class extends Component {
           this.update({itemsMenuOpen: true});
         },
         handleItemsMenuBlur: () => {
-          this.update({itemsMenuOpen: false});
+          this.update({itemsMenuOpen: false, eventDefinition: null});
         },
         handleItemsMenuInput: ev => {
           this.update({itemsMenuSearchFilter: ev.target.value});
         },
         handleItemsMenuKeydown: ev => {
-          if (Object.values(ItemsMenu.NAVIGATION_KEY_CODES).indexOf(ev.keyCode) !== -1) {
+          if (Object.values(NAVIGATION_KEY_CODES).indexOf(ev.keyCode) !== -1) {
             ev.preventDefault();
             ev.stopPropagation();
 
-            const eventsMenuEl = ev.target.parentNode.querySelector(`mp-items-menu`);
-            // There's a bug in chromnium where it's not possible to set keyCode on KeyboardEvent,
+            const eventsMenuEl = ev.target.parentNode.parentNode.querySelector(`mp-items-menu`);
+            // There's a bug in chromium where it's not possible to set keyCode on KeyboardEvent,
             // so use a CustomEvent instead
             const clonedEvent = new Event(ev.type, ev);
             clonedEvent.keyCode = ev.keyCode;
@@ -132,6 +149,7 @@ document.registerElement('widgets-section', class extends Component {
               icon: `star-top-events`,
               isSelected: true,
               hasPropertiesPill: true,
+              description: `These are your top events in the whole entire world.`,
             }, {
               label: `[Collect everything] Clicked cancel edit elements`,
               icon: `event`,
@@ -160,9 +178,11 @@ document.registerElement('widgets-section', class extends Component {
             }, {
               label: `All: Add to shortlist v3`,
               icon: `custom-events`,
+              description: `Sample description for an add to shortlist event.`,
             }, {
               label: `$autotrack_pageview`,
               icon: `autotrack`,
+              description: `A pageview, but tracked by autotrack.`,
             }, {
               label: `Viewed report`,
               icon: null,

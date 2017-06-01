@@ -347,4 +347,14 @@
                       'search-filter': itemsMenuSearchFilter,
                       sections: JSON.stringify($helpers.getItemsMenuSections()),
                     },
+                    on={
+                      focusItem: $helpers.handleItemFocus,
+                    }
+                  )
+                  mp-event-definition-tooltip(
+                    attrs={
+                      'event-definition': JSON.stringify(eventDefinition),
+                      'lexicon-url': `#`,
+                      open: !!eventDefinition,
+                    }
                   )
