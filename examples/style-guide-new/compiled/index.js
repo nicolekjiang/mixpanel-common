@@ -58,37 +58,37 @@
 
 	__webpack_require__(317);
 
-	var _colors = __webpack_require__(546);
+	var _colors = __webpack_require__(551);
 
 	var _colors2 = _interopRequireDefault(_colors);
 
 	var _svgIcon = __webpack_require__(483);
 
-	var _searchTerms = __webpack_require__(547);
+	var _searchTerms = __webpack_require__(552);
 
 	var _searchTerms2 = _interopRequireDefault(_searchTerms);
 
-	__webpack_require__(548);
+	__webpack_require__(553);
 
-	__webpack_require__(556);
-
-	__webpack_require__(560);
+	__webpack_require__(561);
 
 	__webpack_require__(565);
 
-	__webpack_require__(569);
+	__webpack_require__(570);
 
-	__webpack_require__(573);
+	__webpack_require__(574);
 
-	__webpack_require__(577);
+	__webpack_require__(578);
 
-	__webpack_require__(581);
+	__webpack_require__(582);
 
-	var _index = __webpack_require__(586);
+	__webpack_require__(586);
+
+	var _index = __webpack_require__(591);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	__webpack_require__(587);
+	__webpack_require__(592);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -164,7 +164,7 @@
 	            if (_this2.isCharacterKeyPress(e)) {
 	              _this2.update({ searchTermPrompt: e.key.toUpperCase() });
 	            }
-	          };
+	          }
 	        }
 	      };
 	      document.body.addEventListener('keypress', this.enterSearchMode);
@@ -46056,6 +46056,7 @@
 	exports.downloadData = downloadData;
 	exports.downloadLocalCSVData = downloadLocalCSVData;
 	exports.getIconForEvent = getIconForEvent;
+	exports.getDescriptionForEvent = getDescriptionForEvent;
 	exports.renameEvent = renameEvent;
 	exports.getIconForPropertyType = getIconForPropertyType;
 	exports.renameProperty = renameProperty;
@@ -46160,6 +46161,24 @@
 	  } else {
 	    return 'event';
 	  }
+	}
+
+	function getDescriptionForEvent(mpEvent, eventDefinitions) {
+	  var predicate = function predicate(definition) {
+	    return definition.name === mpEvent.name && !definition.collectEverythingEventId && !definition.customEventId;
+	  };
+	  if (mpEvent.is_collect_everything_event) {
+	    predicate = function predicate(definition) {
+	      return definition.collectEverythingEventId === mpEvent.id;
+	    };
+	  } else if (mpEvent.custom) {
+	    predicate = function predicate(definition) {
+	      return definition.customEventId === mpEvent.id;
+	    };
+	  }
+
+	  var eventDefinition = eventDefinitions.find(predicate);
+	  return eventDefinition ? eventDefinition.description : null;
 	}
 
 	function renameEvent(event) {
@@ -46589,11 +46608,13 @@
 
 	__webpack_require__(534);
 
-	__webpack_require__(537);
+	__webpack_require__(539);
 
-	__webpack_require__(540);
+	__webpack_require__(542);
 
-	__webpack_require__(543);
+	__webpack_require__(545);
+
+	__webpack_require__(548);
 
 /***/ },
 /* 528 */
@@ -48079,6 +48100,307 @@
 
 	var _panel = __webpack_require__(299);
 
+	var _registerElement = __webpack_require__(320);
+
+	__webpack_require__(535);
+
+	var _index = __webpack_require__(538);
+
+	var _index2 = _interopRequireDefault(_index);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	/**
+	 * We don't know the exact height of the tooltip at the time we position it, so this serves as an approximate placeholder.
+	 * Although this leads to imperfect vertical centering, it prevents the tooltip's vertical position from changing based
+	 * on its height, which is desired behavior.
+	 */
+	var TOOLTIP_HEIGHT_IN_PX = 152;
+
+	exports.default = (0, _registerElement.registerMPElement)('mp-event-definition-tooltip', function (_Component) {
+	  _inherits(_class, _Component);
+
+	  function _class() {
+	    _classCallCheck(this, _class);
+
+	    return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).apply(this, arguments));
+	  }
+
+	  _createClass(_class, [{
+	    key: 'attachedCallback',
+	    value: function attachedCallback() {
+	      _get(_class.prototype.__proto__ || Object.getPrototypeOf(_class.prototype), 'attachedCallback', this).apply(this, arguments);
+	      this.tooltip = document.createElement('mp-event-definition-tooltip-internal');
+	      this.tooltip.setAttribute('url', this.getAttribute('lexicon-url') || '#');
+	      document.body.appendChild(this.tooltip);
+	      this.positionElement = this.previousSibling;
+	    }
+	  }, {
+	    key: 'detachedCallback',
+	    value: function detachedCallback() {
+	      document.body.removeChild(this.tooltip);
+	      _get(_class.prototype.__proto__ || Object.getPrototypeOf(_class.prototype), 'detachedCallback', this).apply(this, arguments);
+	    }
+	  }, {
+	    key: 'attributeChangedCallback',
+	    value: function attributeChangedCallback(name, oldValue, newValue) {
+	      _get(_class.prototype.__proto__ || Object.getPrototypeOf(_class.prototype), 'attributeChangedCallback', this).apply(this, arguments);
+	      if (this.tooltip) {
+	        this.tooltip.setAttribute(name, newValue);
+	      }
+	      if (name === 'event-definition') {
+	        if (this.getJSONAttribute('event-definition') && this.positionElement) {
+	          var rect = this.positionElement.getBoundingClientRect();
+	          this.tooltip.style.left = rect.left + rect.width + document.body.scrollLeft + 10 + 'px';
+	          this.tooltip.style.top = rect.top + rect.height / 2 - TOOLTIP_HEIGHT_IN_PX / 2 + document.body.scrollTop + 'px';
+	        }
+	      }
+	    }
+	  }, {
+	    key: 'config',
+	    get: function get() {
+	      return {
+	        template: _index2.default,
+	        useShadowDom: true
+	      };
+	    }
+	  }]);
+
+	  return _class;
+	}(_panel.Component));
+
+/***/ },
+/* 535 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
+	var _panel = __webpack_require__(299);
+
+	var _registerElement = __webpack_require__(320);
+
+	var _timingJson = __webpack_require__(462);
+
+	var _timingJson2 = _interopRequireDefault(_timingJson);
+
+	var _index = __webpack_require__(536);
+
+	var _index2 = _interopRequireDefault(_index);
+
+	var _index3 = __webpack_require__(537);
+
+	var _index4 = _interopRequireDefault(_index3);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	exports.default = (0, _registerElement.registerMPElement)('mp-event-definition-tooltip-internal', function (_Component) {
+	  _inherits(_class, _Component);
+
+	  function _class() {
+	    _classCallCheck(this, _class);
+
+	    return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).apply(this, arguments));
+	  }
+
+	  _createClass(_class, [{
+	    key: 'attachedCallback',
+	    value: function attachedCallback() {
+	      if (!this.elementMoved) {
+	        this.elementMoved = true;
+	        document.body.appendChild(this);
+	      }
+
+	      _get(_class.prototype.__proto__ || Object.getPrototypeOf(_class.prototype), 'attachedCallback', this).apply(this, arguments);
+	    }
+	  }, {
+	    key: 'detachedCallback',
+	    value: function detachedCallback() {
+	      if (this.initialized) {
+	        _get(_class.prototype.__proto__ || Object.getPrototypeOf(_class.prototype), 'detachedCallback', this).apply(this, arguments);
+	      }
+	    }
+	  }, {
+	    key: 'attributeChangedCallback',
+	    value: function attributeChangedCallback(name) {
+	      _get(_class.prototype.__proto__ || Object.getPrototypeOf(_class.prototype), 'attributeChangedCallback', this).apply(this, arguments);
+	      if (name === 'event-definition') {
+	        var eventDefinition = this.getJSONAttribute('event-definition');
+	        if (eventDefinition) {
+	          this.update({ name: eventDefinition.name, description: eventDefinition.description });
+	        }
+	      } else if (name === 'open') {
+	        this.update({ open: this.isAttributeEnabled('open') });
+	      }
+	    }
+	  }, {
+	    key: 'config',
+	    get: function get() {
+	      return {
+	        css: _index4.default,
+	        template: _index2.default,
+	        defaultState: {
+	          delayRemove: _timingJson2.default['mp-fast'],
+	          open: false
+	        },
+	        useShadowDom: true
+	      };
+	    }
+	  }]);
+
+	  return _class;
+	}(_panel.Component));
+
+/***/ },
+/* 536 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	function _jade_template_fn(locals) {
+	  locals = locals || {};;;
+	  var result_of_with = function ($component, Object, delayRemove, description, name, open) {
+	    var h = __webpack_require__(299).h;
+	    var url = $component.getAttribute('url');
+	    return {
+	      value: h("div", {
+	        "class": {
+	          'mp-event-definition-wrapper': true
+	        }
+	      }, function () {
+	        var __jade_nodes = [];
+	        __jade_nodes = __jade_nodes.concat(open ? function () {
+	          var __jade_nodes = [];
+	          __jade_nodes = __jade_nodes.concat(h("div", {
+	            "class": Object.assign({}, {
+	              delayed: {
+	                'mp-event-definition-in': true
+	              },
+	              remove: {
+	                'mp-event-definition-out': true,
+	                delayRemove: delayRemove
+	              }
+	            }, {
+	              'mp-event-definition-tooltip': true
+	            })
+	          }, function () {
+	            var __jade_nodes = [];
+	            __jade_nodes = __jade_nodes.concat(h("div", {
+	              "class": {
+	                'mp-event-definition-container': true
+	              }
+	            }, function () {
+	              var __jade_nodes = [];
+	              __jade_nodes = __jade_nodes.concat(h("div", {
+	                "class": {
+	                  'mp-event-definition-name': true
+	                }
+	              }, [name || '']));
+	              __jade_nodes = __jade_nodes.concat(h("div", {
+	                "class": {
+	                  'mp-event-definition-description': true
+	                }
+	              }, [description || '']));;
+	              return __jade_nodes;
+	            }.call(this).filter(Boolean)));
+	            __jade_nodes = __jade_nodes.concat(h("div", {
+	              "class": {
+	                'mp-event-definition-learn-more': true
+	              }
+	            }, function () {
+	              var __jade_nodes = [];
+	              __jade_nodes = __jade_nodes.concat(h("span", function () {
+	                var __jade_nodes = [];
+	                __jade_nodes = __jade_nodes.concat(function () {
+	                  var __jade_nodes = [];
+	                  __jade_nodes = __jade_nodes.concat("Add definitions to your events with ");
+	                  __jade_nodes = __jade_nodes.concat(function () {
+	                    var __jade_nodes = [];
+	                    __jade_nodes = __jade_nodes.concat(h("a", {
+	                      "attrs": {
+	                        href: url
+	                      }
+	                    }, function () {
+	                      var __jade_nodes = [];
+	                      __jade_nodes = __jade_nodes.concat("Lexicon");;
+	                      return __jade_nodes;
+	                    }.call(this).filter(Boolean)));;
+	                    return __jade_nodes;
+	                  }.call(this));
+	                  __jade_nodes = __jade_nodes.concat(".");;
+	                  return __jade_nodes;
+	                }.call(this));;
+	                return __jade_nodes;
+	              }.call(this).filter(Boolean)));;
+	              return __jade_nodes;
+	            }.call(this).filter(Boolean)));;
+	            return __jade_nodes;
+	          }.call(this).filter(Boolean)));;
+	          return __jade_nodes;
+	        }.call(this) : undefined);;
+	        return __jade_nodes;
+	      }.call(this).filter(Boolean))
+	    };
+	  }.call(this, "$component" in locals ? locals.$component : typeof $component !== "undefined" ? $component : undefined, "Object" in locals ? locals.Object : typeof Object !== "undefined" ? Object : undefined, "delayRemove" in locals ? locals.delayRemove : typeof delayRemove !== "undefined" ? delayRemove : undefined, "description" in locals ? locals.description : typeof description !== "undefined" ? description : undefined, "name" in locals ? locals.name : typeof name !== "undefined" ? name : undefined, "open" in locals ? locals.open : typeof open !== "undefined" ? open : undefined);
+	  if (result_of_with) return result_of_with.value;
+	}
+	module.exports = _jade_template_fn;
+
+/***/ },
+/* 537 */
+/***/ function(module, exports) {
+
+	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } svg-icon[icon=type-boolean] #left-dot {   color: #fff;   fill: #fff; } svg-icon[icon=type-boolean] #right-dot {   color: #4c6072;   fill: #4c6072; } svg-icon[icon=lightning-bolt] #bolt, svg-icon[icon=lighting-bolt] #bolt {   color: #fff;   fill: #fff; } svg-icon[icon=alert] #circle, svg-icon[icon=alert] #stem {   color: #fff;   fill: #fff; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6d859e;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 13px;   font-stretch: normal;   font-weight: 400; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 13px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6d859e;   font-size: 14px;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 13px;   font-weight: 400;   padding: 8px;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus, input[type=text]:active, textarea:active {   border-color: #3391e9;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } mp-truncated-text {   display: inline-block;   white-space: nowrap;   width: 100%; } mp-event-definition-tooltip-internal {   display: block;   position: absolute;   z-index: 6000; } :host {   display: block;   position: absolute;   z-index: 6000; } .mp-event-definition-wrapper {   position: relative; } .mp-event-definition-tooltip {   background-color: #fff;   border-radius: 5px;   box-shadow: 0 1px 30px 0 rgba(0,0,0,0.19);   opacity: 0;   position: absolute;   -webkit-transform: translateX(-10px);           transform: translateX(-10px);   width: 340px; } .mp-event-definition-tooltip.mp-event-definition-in {   opacity: 1;   -webkit-transform: translateX(0);           transform: translateX(0);   transition: all 250ms cubic-bezier(0.165, 0.84, 0.44, 1); } .mp-event-definition-tooltip.mp-event-definition-out {   opacity: 0;   -webkit-transform: translateX(-10px);           transform: translateX(-10px);   transition: all 250ms cubic-bezier(0.895, 0.03, 0.685, 0.22); } .mp-event-definition-tooltip .mp-event-definition-container {   padding: 20px; } .mp-event-definition-tooltip .mp-event-definition-container .mp-event-definition-name {   color: #4c6072;   font-size: 13px;   font-weight: 600; } .mp-event-definition-tooltip .mp-event-definition-container .mp-event-definition-description {   color: #6d859e;   font-size: 12px;   margin-top: 10px; } .mp-event-definition-tooltip .mp-event-definition-learn-more {   border-top: 1px solid #e5eaef;   color: #6d859e;   font-size: 11px;   padding: 10px 20px; } .mp-event-definition-tooltip .mp-event-definition-learn-more a {   color: #3b99f0; } ";
+
+
+/***/ },
+/* 538 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	function _jade_template_fn(locals) {
+	  locals = locals || {};
+	  var h = __webpack_require__(299).h;
+	  return h("div");
+	}
+	module.exports = _jade_template_fn;
+
+/***/ },
+/* 539 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
+	var _panel = __webpack_require__(299);
+
 	var _util = __webpack_require__(484);
 
 	var _function = __webpack_require__(487);
@@ -48087,11 +48409,11 @@
 
 	var _string = __webpack_require__(492);
 
-	var _index = __webpack_require__(535);
+	var _index = __webpack_require__(540);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	var _index3 = __webpack_require__(536);
+	var _index3 = __webpack_require__(541);
 
 	var _index4 = _interopRequireDefault(_index3);
 
@@ -48136,19 +48458,23 @@
 	            _this2.handleClickItem(_this2.getFocusedItem());
 	          }
 	        } else if (ev.keyCode === _this2.NAVIGATION_KEY_CODES.UP_ARROW) {
-	          _this2.update({ focusedItemIndex: Math.max(_this2.state.focusedItemIndex - 1, 0) });
+	          _this2.focusItem(Math.max(_this2.state.focusedItemIndex - 1, 0));
 	          window.requestAnimationFrame(function () {
-	            _this2.focusItemIfNeeded();
+	            _this2.scrollToItemIfNeeded();
 	          });
 	        } else if (ev.keyCode === _this2.NAVIGATION_KEY_CODES.DOWN_ARROW) {
-	          _this2.update({
-	            focusedItemIndex: Math.min(_this2.state.focusedItemIndex + 1, _this2.getSectionsSize(_this2.getFilteredSections()) - 1)
-	          });
+	          _this2.focusItem(Math.min(_this2.state.focusedItemIndex + 1, _this2.getSectionsSize(_this2.getFilteredSections()) - 1));
 	          window.requestAnimationFrame(function () {
-	            _this2.focusItemIfNeeded();
+	            _this2.scrollToItemIfNeeded();
 	          });
 	        }
 	      };
+	    }
+	  }, {
+	    key: 'focusItem',
+	    value: function focusItem(focusedItemIndex) {
+	      this.update({ focusedItemIndex: focusedItemIndex });
+	      this.dispatchEvent(new CustomEvent('focusItem', { detail: { item: this.getFocusedItem() } }));
 	    }
 	  }, {
 	    key: 'attachedCallback',
@@ -48290,8 +48616,8 @@
 	      return focusedItem;
 	    }
 	  }, {
-	    key: 'focusItemIfNeeded',
-	    value: function focusItemIfNeeded() {
+	    key: 'scrollToItemIfNeeded',
+	    value: function scrollToItemIfNeeded() {
 	      var listEl = this;
 	      var focusedEl = this.el.querySelector('.list-option.focused');
 	      if (!focusedEl) {
@@ -48385,10 +48711,8 @@
 	          },
 
 	          handleMouseenterItem: function handleMouseenterItem(item) {
-	            _this7.update({
-	              isPropertiesPillFocused: false,
-	              focusedItemIndex: item.index
-	            });
+	            _this7.update({ isPropertiesPillFocused: false });
+	            _this7.focusItem(item.index);
 	          },
 
 	          handleClickItem: function handleClickItem(item, modifierKey) {
@@ -48428,14 +48752,14 @@
 	exports.default = (0, _registerElement.registerMPElement)('mp-items-menu', ItemsMenu);
 
 /***/ },
-/* 535 */
+/* 540 */
 /***/ function(module, exports) {
 
 	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } svg-icon[icon=type-boolean] #left-dot {   color: #fff;   fill: #fff; } svg-icon[icon=type-boolean] #right-dot {   color: #4c6072;   fill: #4c6072; } svg-icon[icon=lightning-bolt] #bolt, svg-icon[icon=lighting-bolt] #bolt {   color: #fff;   fill: #fff; } svg-icon[icon=alert] #circle, svg-icon[icon=alert] #stem {   color: #fff;   fill: #fff; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6d859e;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 13px;   font-stretch: normal;   font-weight: 400; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 13px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6d859e;   font-size: 14px;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 13px;   font-weight: 400;   padding: 8px;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus, input[type=text]:active, textarea:active {   border-color: #3391e9;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } mp-truncated-text {   display: inline-block;   white-space: nowrap;   width: 100%; } span.substr.matches-search {   color: #4c6072;   font-weight: 600; } .drop-menu-screen {   display: -webkit-box;   display: -ms-flexbox;   display: flex;   -webkit-box-orient: vertical;   -webkit-box-direction: normal;       -ms-flex-direction: column;           flex-direction: column; } mp-items-menu {   display: block;   overflow: auto; } :host {   display: block;   overflow: auto; } .screen-list-container .loading-items {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   height: 80px;   -webkit-box-pack: center;       -ms-flex-pack: center;           justify-content: center; } .screen-list-container .loading-items mp-spinner {   height: 30px;   width: 30px; } .screen-list-container .section-divider {   border-top: 1px solid #e5eaef;   margin: 0 10px; } .screen-list-container .section-label {   color: #6d859e;   font-size: 11px;   font-weight: 600;   margin: 20px 18px 0;   text-transform: uppercase; } .screen-list-container ul.screen-options-list {   overflow: visible; } ul.screen-options-list {   -webkit-box-flex: 1;       -ms-flex: 1 1 auto;           flex: 1 1 auto;   margin: 0 10px;   overflow: auto;   padding: 0; } ul.screen-options-list:empty {   border-bottom: none; } ul.screen-options-list + ul.screen-options-list {   border-top: 1px solid #e5eaef;   margin-top: 2px;   padding-top: 2px; } ul.screen-options-list .matches-search {   color: #4ba8ff; } li.list-option {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   border-radius: 3px;   color: #6d859e;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   font-size: 12px;   font-weight: 500;   height: 30px;   -webkit-box-pack: end;       -ms-flex-pack: end;           justify-content: flex-end; /* secondary-action */ /* end secondary-action */ } li.list-option:first-child {   margin-top: 10px; } li.list-option:last-child {   margin-bottom: 10px; } li.list-option.uppercase {   font-size: 11px;   text-transform: uppercase;   font-weight: 600;   line-height: 11px; } li.list-option.selected {   color: #4c6072;   cursor: default;   font-weight: 600; } li.list-option.selected .option-icon svg-icon svg {   left: 0;   top: 0; } li.list-option.selected .option-icon svg-icon svg, li.list-option.selected .option-icon svg-icon path {   color: #4c6072;   fill: #4c6072;   transition: 0.2s; } li.list-option.disabled {   opacity: 0.2;   pointer-events: none; } li.list-option.focused {   background-color: #edf3f7; } li.list-option.focused.selectable {   color: #4ba8ff;   cursor: pointer; } li.list-option.focused.selectable .option-icon svg-icon svg {   left: 0;   top: 0; } li.list-option.focused.selectable .option-icon svg-icon svg, li.list-option.focused.selectable .option-icon svg-icon path {   color: #4ba8ff;   fill: #4ba8ff;   transition: 0.2s; } li.list-option .secondary-action {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   cursor: pointer;   display: none;   -webkit-box-flex: 0;       -ms-flex: 0;           flex: 0;   margin: 0 5px 0 10px;   opacity: 0; } li.list-option .secondary-action.caret {   height: 18px;   position: relative;   top: 1px; } li.list-option .secondary-action.caret svg-icon {   height: 16px;   min-height: 16px;   min-width: 16px;   width: 16px; } li.list-option .secondary-action.caret svg-icon svg {   height: 16px;   min-height: 16px;   min-width: 16px;   width: 16px;   left: 0;   top: 0; } li.list-option .secondary-action.caret svg-icon svg, li.list-option .secondary-action.caret svg-icon path {   color: #4ba8ff;   fill: #4ba8ff;   transition: 0s; } li.list-option .secondary-action.pill {   background-color: #fff;   border-radius: 40px;   color: #9bacbf;   font-size: 11px;   font-weight: 600;   height: 18px;   line-height: 12px;   padding: 0 5px 0 10px;   transition: background-color 0.1s; /* pill-caret */ /* end pill-caret */ } li.list-option .secondary-action.pill.focused {   background-color: #4ba8ff;   color: #fff; } li.list-option .secondary-action.pill .pill-caret {   right: -2px;   top: 0; } li.list-option .secondary-action.pill .pill-caret svg-icon {   height: 16px;   min-height: 16px;   min-width: 16px;   width: 16px; } li.list-option .secondary-action.pill .pill-caret svg-icon svg {   height: 16px;   min-height: 16px;   min-width: 16px;   width: 16px;   left: 0;   top: 1px; } li.list-option .secondary-action.pill .pill-caret svg-icon svg, li.list-option .secondary-action.pill .pill-caret svg-icon path {   color: #9bacbf;   fill: #9bacbf;   transition: 0s; } li.list-option .secondary-action.pill.focused .pill-caret svg-icon svg {   left: 0;   top: 1px; } li.list-option .secondary-action.pill.focused .pill-caret svg-icon svg, li.list-option .secondary-action.pill.focused .pill-caret svg-icon path {   color: #fff;   fill: #fff;   transition: 0s; } li.list-option .secondary-action.pill.disabled {   opacity: 0.2;   pointer-events: none; } li.list-option.focused .secondary-action {   display: -webkit-box;   display: -ms-flexbox;   display: flex;   opacity: 1; } li.list-option.list-empty {   pointer-events: none;   -webkit-box-pack: center;       -ms-flex-pack: center;           justify-content: center; } li.list-option .option-label {   overflow: hidden;   text-overflow: ellipsis;   white-space: nowrap;   -webkit-box-flex: 1;       -ms-flex: 1 1;           flex: 1 1;   padding-left: 8px;   padding-right: 8px; } li.list-option .option-icon {   display: -webkit-box;   display: -ms-flexbox;   display: flex;   padding-left: 5px; } li.list-option .option-icon svg-icon svg {   left: 0;   top: 0; } li.list-option .option-icon svg-icon svg, li.list-option .option-icon svg-icon path {   color: #6d859e;   fill: #6d859e;   transition: 0.2s; } .screen-title {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   box-shadow: 0 1px 3px 0 rgba(155,172,191,0.37), 0 1px 0 0 #e5eaef;   color: #6d859e;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   -webkit-box-flex: 0;       -ms-flex: none;           flex: none;   font-size: 11px;   font-weight: 600;   height: 48px;   position: relative; } .screen-title .title-button {   cursor: pointer;   padding: 10px;   position: absolute; } .screen-title .title-button svg-icon svg {   left: 0;   top: 0; } .screen-title .title-button svg-icon svg, .screen-title .title-button svg-icon path {   color: #9bacbf;   fill: #9bacbf;   transition: 0.2s; } .screen-title .title-button:hover svg-icon svg, .screen-title .title-button:hover svg-icon path {   color: #6d859e;   fill: #6d859e; } .screen-title .title-button.close-button {   right: 0; } .screen-title .title-label {   overflow: hidden;   text-overflow: ellipsis;   white-space: nowrap;   padding: 0 30px;   text-align: center;   text-transform: uppercase;   width: 100%; } ";
 
 
 /***/ },
-/* 536 */
+/* 541 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -48686,7 +49010,7 @@
 	module.exports = _jade_template_fn;
 
 /***/ },
-/* 537 */
+/* 542 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48707,11 +49031,11 @@
 
 	var _function = __webpack_require__(487);
 
-	var _index = __webpack_require__(538);
+	var _index = __webpack_require__(543);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	var _index3 = __webpack_require__(539);
+	var _index3 = __webpack_require__(544);
 
 	var _index4 = _interopRequireDefault(_index3);
 
@@ -48938,14 +49262,14 @@
 	}(_panel.Component));
 
 /***/ },
-/* 538 */
+/* 543 */
 /***/ function(module, exports) {
 
 	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } svg-icon[icon=type-boolean] #left-dot {   color: #fff;   fill: #fff; } svg-icon[icon=type-boolean] #right-dot {   color: #4c6072;   fill: #4c6072; } svg-icon[icon=lightning-bolt] #bolt, svg-icon[icon=lighting-bolt] #bolt {   color: #fff;   fill: #fff; } svg-icon[icon=alert] #circle, svg-icon[icon=alert] #stem {   color: #fff;   fill: #fff; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6d859e;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 13px;   font-stretch: normal;   font-weight: 400; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 13px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6d859e;   font-size: 14px;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 13px;   font-weight: 400;   padding: 8px;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus, input[type=text]:active, textarea:active {   border-color: #3391e9;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } mp-truncated-text {   display: inline-block;   white-space: nowrap;   width: 100%; } mp-drop-menu {   border-radius: 5px;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   width: 340px; } :host {   border-radius: 5px;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   width: 340px; } .mp-tag-selector-container {   border-radius: inherit;   width: 100%; } .mp-tag-selector-container, .mp-tag-selector-container * {   box-sizing: border-box; } .mp-tag-selector-container .mp-tag-selector-top-input-wrapper {   margin: 0 auto;   margin-bottom: 20px;   padding: 0 20px; } .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   cursor: text;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   -webkit-box-orient: horizontal;   -webkit-box-direction: normal;       -ms-flex-direction: row;           flex-direction: row;   -ms-flex-wrap: wrap;       flex-wrap: wrap;   -webkit-box-pack: start;       -ms-flex-pack: start;           justify-content: flex-start;   min-height: 36px;   padding: 6px 6px 0;   position: relative;   width: 300px; } .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper input:focus::-webkit-contacts-auto-fill-button {   display: none;   height: 0;   margin: 0;   opacity: 0;   padding: 0;   width: 0; } .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper .mp-tag-selector-mp-icon {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   bottom: 0;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   left: 8px;   position: absolute;   top: -1px; } .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper .mp-tag-selector-mp-icon svg-icon svg {   left: 0;   top: 0; } .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper .mp-tag-selector-mp-icon svg-icon svg, .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper .mp-tag-selector-mp-icon svg-icon path {   color: #9bacbf;   fill: #9bacbf;   transition: 0.2s; } .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper mp-tag {   margin: 0 0 6px 4px; } .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper .mp-tag-selector-border {   border: 1px solid #d8e0e6;   border-radius: 5px;   height: 100%;   left: 0;   pointer-events: none;   position: absolute;   top: 0;   transition: border-color 0.25s;   width: 100%; } .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper .mp-tag-selector-border.mp-tag-selector-error {   border-color: #e4567b; } .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper:active .mp-tag-selector-border {   border-color: #3b99f0; } .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper .mp-tag-selector-search-input {   background-color: transparent;   border: 0;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 13px;   font-style: normal;   font-weight: 400;   height: auto;   line-height: 1.5;   margin-bottom: 7px;   margin-left: 6px;   max-width: 100%;   min-width: 0;   padding: 0; } .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper .mp-tag-selector-search-input.mp-tag-selector-empty {   padding-left: 24px;   padding-top: 1px; } .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper .mp-tag-selector-search-input:focus + .mp-tag-selector-border:not(.mp-tag-selector-loaded-error) {   border-color: #3b99f0; } .mp-tag-selector-container .mp-tag-selector-empty {   font-style: italic; } .mp-tag-selector-container .mp-tag-selector-hr {   background-color: #e5eaef;   height: 1px;   width: 100%; } .mp-tag-selector-container .mp-tag-selector-tag-list {   margin-bottom: 8px;   max-height: 280px;   overflow-y: auto; } .mp-tag-selector-container .mp-tag-selector-tag-list mp-list-item {   margin-left: 12px;   margin-right: 12px; } .mp-tag-selector-container .mp-tag-selector-tag-list mp-list-item svg-icon {   height: 16px;   min-height: 16px;   min-width: 16px;   width: 16px; } .mp-tag-selector-container .mp-tag-selector-tag-list mp-list-item svg-icon svg {   height: 16px;   min-height: 16px;   min-width: 16px;   width: 16px;   left: -3px;   top: -1px; } .mp-tag-selector-container .mp-tag-selector-tag-list mp-list-item svg-icon svg, .mp-tag-selector-container .mp-tag-selector-tag-list mp-list-item svg-icon path {   color: #6d859e;   fill: #6d859e;   transition: 0s; } .mp-tag-selector-container .mp-tag-selector-tag-list mp-list-item:last-child {   margin-bottom: 0; } .mp-tag-selector-container .mp-tag-selector-tag-list mp-list-item[active='true'] svg-icon, .mp-tag-selector-container .mp-tag-selector-tag-list mp-list-item:hover svg-icon {   height: 16px;   min-height: 16px;   min-width: 16px;   width: 16px; } .mp-tag-selector-container .mp-tag-selector-tag-list mp-list-item[active='true'] svg-icon svg, .mp-tag-selector-container .mp-tag-selector-tag-list mp-list-item:hover svg-icon svg {   height: 16px;   min-height: 16px;   min-width: 16px;   width: 16px;   left: -3px;   top: -1px; } .mp-tag-selector-container .mp-tag-selector-tag-list mp-list-item[active='true'] svg-icon svg, .mp-tag-selector-container .mp-tag-selector-tag-list mp-list-item:hover svg-icon svg, .mp-tag-selector-container .mp-tag-selector-tag-list mp-list-item[active='true'] svg-icon path, .mp-tag-selector-container .mp-tag-selector-tag-list mp-list-item:hover svg-icon path {   color: #4ba8ff;   fill: #4ba8ff;   transition: 0s; } .mp-tag-selector-container .mp-tag-selector-tag-list mp-list-item .mp-tag-selector-tag-list-item {   display: block; } .mp-tag-selector-create-tag-btn {   display: -webkit-box;   display: -ms-flexbox;   display: flex;   max-width: 100%;   overflow: hidden;   white-space: nowrap; } .mp-tag-selector-create-tag-btn .mp-tag-selector-copy {   color: #4c6072;   -webkit-box-flex: 0;       -ms-flex: none;           flex: none;   margin-right: 4px; } .mp-tag-selector-create-tag-btn .mp-tag-selector-label-name {   color: #3391e9;   -webkit-box-flex: 1;       -ms-flex: 1;           flex: 1;   overflow: hidden;   text-overflow: ellipsis; } .mp-tag-selector-search-input-dummy {   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 13px;   font-weight: 400;   padding: 0;   position: absolute;   visibility: hidden;   white-space: nowrap; } ";
 
 
 /***/ },
-/* 539 */
+/* 544 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -49236,7 +49560,7 @@
 	module.exports = _jade_template_fn;
 
 /***/ },
-/* 540 */
+/* 545 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49253,11 +49577,11 @@
 
 	var _registerElement = __webpack_require__(320);
 
-	var _index = __webpack_require__(541);
+	var _index = __webpack_require__(546);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	var _index3 = __webpack_require__(542);
+	var _index3 = __webpack_require__(547);
 
 	var _index4 = _interopRequireDefault(_index3);
 
@@ -49336,7 +49660,7 @@
 	}(_panel.Component));
 
 /***/ },
-/* 541 */
+/* 546 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49487,14 +49811,14 @@
 	module.exports = _jade_template_fn;
 
 /***/ },
-/* 542 */
+/* 547 */
 /***/ function(module, exports) {
 
 	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } svg-icon[icon=type-boolean] #left-dot {   color: #fff;   fill: #fff; } svg-icon[icon=type-boolean] #right-dot {   color: #4c6072;   fill: #4c6072; } svg-icon[icon=lightning-bolt] #bolt, svg-icon[icon=lighting-bolt] #bolt {   color: #fff;   fill: #fff; } svg-icon[icon=alert] #circle, svg-icon[icon=alert] #stem {   color: #fff;   fill: #fff; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6d859e;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 13px;   font-stretch: normal;   font-weight: 400; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 13px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6d859e;   font-size: 14px;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 13px;   font-weight: 400;   padding: 8px;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus, input[type=text]:active, textarea:active {   border-color: #3391e9;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } mp-truncated-text {   display: inline-block;   white-space: nowrap;   width: 100%; } mp-tutorial-tooltip {   color: rgba(255,255,255,0.64);   cursor: default;   font-weight: 500;   height: 172px;   position: absolute;   width: 424px;   z-index: 6000;   bottom: calc(100% + 12px);   left: calc(50% - 212px); } :host {   color: rgba(255,255,255,0.64);   cursor: default;   font-weight: 500;   height: 172px;   position: absolute;   width: 424px;   z-index: 6000;   bottom: calc(100% + 12px);   left: calc(50% - 212px); } mp-tutorial-tooltip[hide=\"true\"] {   pointer-events: none; } :host([hide=\"true\"]) {   pointer-events: none; } mp-tutorial-tooltip[placement=\"bottom\"] {   bottom: initial;   left: calc(50% - 212px);   top: calc(100% + 12px); } :host([placement=\"bottom\"]) {   bottom: initial;   left: calc(50% - 212px);   top: calc(100% + 12px); } mp-tutorial-tooltip[placement=\"left\"] {   bottom: initial;   left: initial;   right: calc(100% + 12px);   top: calc(50% - 86px); } :host([placement=\"left\"]) {   bottom: initial;   left: initial;   right: calc(100% + 12px);   top: calc(50% - 86px); } mp-tutorial-tooltip[placement=\"right\"] {   bottom: initial;   left: calc(100% + 12px);   top: calc(50% - 86px); } :host([placement=\"right\"]) {   bottom: initial;   left: calc(100% + 12px);   top: calc(50% - 86px); } mp-tutorial-tooltip[placement=\"center\"] {   bottom: initial;   left: calc(50% - 212px);   top: calc(50% - 86px); } :host([placement=\"center\"]) {   bottom: initial;   left: calc(50% - 212px);   top: calc(50% - 86px); } mp-tutorial-tooltip[arrow-align=\"top\"] {   bottom: initial;   top: calc(50% - 31px); } :host([arrow-align=\"top\"]) {   bottom: initial;   top: calc(50% - 31px); } mp-tutorial-tooltip[arrow-align=\"bottom\"] {   bottom: calc(50% - 24px);   top: initial; } :host([arrow-align=\"bottom\"]) {   bottom: calc(50% - 24px);   top: initial; } mp-tutorial-tooltip[arrow-align=\"left\"] {   left: calc(50% - 32px);   right: initial; } :host([arrow-align=\"left\"]) {   left: calc(50% - 32px);   right: initial; } mp-tutorial-tooltip[arrow-align=\"right\"] {   left: initial;   right: calc(50% - 36px); } :host([arrow-align=\"right\"]) {   left: initial;   right: calc(50% - 36px); } .mp-tutorial-tooltip-stage {   height: inherit; } .mp-tutorial-tooltip-wrapper {   background: #3391e9;   border-radius: 8px;   box-shadow: 0 16px 41px 0 rgba(18,82,143,0.37);   height: inherit;   opacity: 0; } .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-in {   opacity: 1;   transition: all 400ms cubic-bezier(0.165, 0.84, 0.44, 1); } .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-out {   opacity: 0;   transition: all 400ms cubic-bezier(0.895, 0.03, 0.685, 0.22); } .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-placement-bottom.mp-tutorial-tooltip-in, .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-placement-top.mp-tutorial-tooltip-in, .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-placement-left.mp-tutorial-tooltip-in, .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-placement-right.mp-tutorial-tooltip-in {   -webkit-transform: translate(0);           transform: translate(0); } .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-placement-top, .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-placement-top.mp-tutorial-tooltip-out {   -webkit-transform: translateY(-20px);           transform: translateY(-20px); } .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-placement-bottom, .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-placement-bottom.mp-tutorial-tooltip-out {   -webkit-transform: translateY(20px);           transform: translateY(20px); } .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-placement-left, .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-placement-left.mp-tutorial-tooltip-out {   -webkit-transform: translateX(-20px);           transform: translateX(-20px); } .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-placement-right, .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-placement-right.mp-tutorial-tooltip-out {   -webkit-transform: translateX(20px);           transform: translateX(20px); } .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-placement-center.mp-tutorial-tooltip-in {   -webkit-transform: scale(1);           transform: scale(1); } .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-placement-center, .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-placement-center.mp-tutorial-tooltip-out {   -webkit-transform: scale(0.95);           transform: scale(0.95); } .mp-tutorial-tooltip-wrapper::after {   border: 11px solid transparent;   content: '';   height: 0;   pointer-events: none;   position: absolute;   width: 0; } .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-placement-top::after {   border-top-color: #2687e3;   left: 50%;   margin-left: -11px;   top: 100%; } .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-placement-top.mp-tutorial-tooltip-hide-footer::after {   border-top-color: #3391e9; } .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-placement-bottom::after {   border-bottom-color: #3391e9;   bottom: 100%;   left: 50%;   margin-left: -11px; } .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-placement-left::after {   border-left-color: #3391e9;   left: 100%;   margin-top: -11px;   top: 50%; } .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-placement-right::after {   border-right-color: #3391e9;   margin-top: -11px;   right: 100%;   top: 50%; } .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-arrow-align-top.mp-tutorial-tooltip-placement-left::after, .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-arrow-align-top.mp-tutorial-tooltip-placement-right::after {   bottom: initial;   top: 32px; } .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-arrow-align-bottom.mp-tutorial-tooltip-placement-left::after, .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-arrow-align-bottom.mp-tutorial-tooltip-placement-right::after {   bottom: 13px;   top: initial; } .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-arrow-align-bottom.mp-tutorial-tooltip-placement-left:not(.mp-tutorial-tooltip-hide-footer)::after, .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-arrow-align-bottom.mp-tutorial-tooltip-placement-right:not(.mp-tutorial-tooltip-hide-footer)::after {   border-right-color: #2687e3; } .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-arrow-align-right.mp-tutorial-tooltip-placement-top::after, .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-arrow-align-right.mp-tutorial-tooltip-placement-bottom::after {   left: initial;   right: 23px; } .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-arrow-align-left.mp-tutorial-tooltip-placement-top::after, .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-arrow-align-left.mp-tutorial-tooltip-placement-bottom::after {   left: 32px;   right: initial; } .mp-tutorial-tooltip-close-btn {   cursor: pointer;   position: absolute;   right: 10px;   top: 10px; } .mp-tutorial-tooltip-close-btn svg-icon svg {   left: 0;   top: 0; } .mp-tutorial-tooltip-close-btn svg-icon svg, .mp-tutorial-tooltip-close-btn svg-icon path {   color: #6cb8ff;   fill: #6cb8ff;   transition: 0.2s; } .mp-tutorial-tooltip-close-btn:hover svg-icon svg, .mp-tutorial-tooltip-close-btn:hover svg-icon path {   color: #fff;   fill: #fff; } .mp-tutorial-tooltip-content {   padding: 23px 30px; } .mp-tutorial-tooltip-footer {   background: #2687e3;   border-radius: 0 0 8px 8px;   border-top: 1px solid #2687e3;   bottom: 0;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   -webkit-box-orient: horizontal;   -webkit-box-direction: normal;       -ms-flex-direction: row;           flex-direction: row;   height: 42px;   -webkit-box-pack: justify;       -ms-flex-pack: justify;           justify-content: space-between;   position: absolute;   width: 100%; } .mp-tutorial-tooltip-footer ul.mp-tutorial-tooltip-steps {   list-style: none;   margin: 0;   padding: 0;   padding-left: 30px; } .mp-tutorial-tooltip-footer ul.mp-tutorial-tooltip-steps li.mp-tutorial-tooltip-step {   background: #6cb8ff;   border-radius: 50%;   float: left;   height: 6px;   margin: 17px 14px 17px 0;   position: relative;   width: 6px; } .mp-tutorial-tooltip-footer ul.mp-tutorial-tooltip-steps li.mp-tutorial-tooltip-step.mp-tutorial-tooltip-active {   background: transparent; } .mp-tutorial-tooltip-footer ul.mp-tutorial-tooltip-steps li.mp-tutorial-tooltip-step.mp-tutorial-tooltip-active::after {   border: 4px solid #ffd209;   border-radius: 50%;   box-shadow: 0 2px 3px 0 rgba(19,102,179,0.66);   content: '';   height: 4px;   left: -3px;   position: absolute;   top: -3px;   width: 4px; } .mp-tutorial-tooltip-footer .mp-tutorial-tooltip-next, .mp-tutorial-tooltip-footer .mp-tutorial-tooltip-done {   color: #6cb8ff;   cursor: pointer;   font-size: 12px;   font-weight: bold;   padding: 13px 25px 17px 0;   text-transform: uppercase; } .mp-tutorial-tooltip-footer .mp-tutorial-tooltip-next:hover, .mp-tutorial-tooltip-footer .mp-tutorial-tooltip-done:hover {   color: #fff; } ";
 
 
 /***/ },
-/* 543 */
+/* 548 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49509,11 +49833,11 @@
 
 	var _registerElement = __webpack_require__(320);
 
-	var _index = __webpack_require__(544);
+	var _index = __webpack_require__(549);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	var _index3 = __webpack_require__(545);
+	var _index3 = __webpack_require__(550);
 
 	var _index4 = _interopRequireDefault(_index3);
 
@@ -49549,7 +49873,7 @@
 	}(_panel.Component));
 
 /***/ },
-/* 544 */
+/* 549 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49793,14 +50117,14 @@
 	module.exports = _jade_template_fn;
 
 /***/ },
-/* 545 */
+/* 550 */
 /***/ function(module, exports) {
 
 	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } svg-icon[icon=type-boolean] #left-dot {   color: #fff;   fill: #fff; } svg-icon[icon=type-boolean] #right-dot {   color: #4c6072;   fill: #4c6072; } svg-icon[icon=lightning-bolt] #bolt, svg-icon[icon=lighting-bolt] #bolt {   color: #fff;   fill: #fff; } svg-icon[icon=alert] #circle, svg-icon[icon=alert] #stem {   color: #fff;   fill: #fff; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6d859e;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 13px;   font-stretch: normal;   font-weight: 400; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 13px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6d859e;   font-size: 14px;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 13px;   font-weight: 400;   padding: 8px;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus, input[type=text]:active, textarea:active {   border-color: #3391e9;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } mp-truncated-text {   display: inline-block;   white-space: nowrap;   width: 100%; } mp-modal {   width: 285px; } .mp-upsell-popup-content {   box-shadow: 0 1px 30px 0 rgba(0,0,0,0.19);   display: -webkit-box;   display: -ms-flexbox;   display: flex;   padding: 20px; } .mp-upsell-popup-content .mp-upsell-popup-icon {   margin-right: 10px; } .mp-upsell-popup-content .mp-upsell-popup-icon svg {   height: 42px;   width: 53px; } .mp-upsell-popup-content .mp-upsell-popup-text {   color: #6d859e;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 14px;   font-weight: 400;   line-height: 18px;   margin: 3px 20px 0 0;   max-width: 180px;   text-shadow: 0 1px 0 rgba(255,255,255,0.5); } .mp-upsell-popup-content .mp-upsell-popup-text .mp-upsell-popup-upgrade-link {   color: #2687e3;   cursor: pointer;   font-weight: 600;   text-decoration: none; } .mp-upsell-popup-content .mp-upsell-popup-text .mp-upsell-popup-upgrade-link:hover {   color: #4ba8ff; } ";
 
 
 /***/ },
-/* 546 */
+/* 551 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -49853,7 +50177,7 @@
 	};
 
 /***/ },
-/* 547 */
+/* 552 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -50210,7 +50534,7 @@
 	};
 
 /***/ },
-/* 548 */
+/* 553 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -50219,15 +50543,15 @@
 
 	var _panel = __webpack_require__(299);
 
-	var _buttonSearchTerms = __webpack_require__(549);
+	var _buttonSearchTerms = __webpack_require__(554);
 
 	var _buttonSearchTerms2 = _interopRequireDefault(_buttonSearchTerms);
 
-	var _index = __webpack_require__(550);
+	var _index = __webpack_require__(555);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	__webpack_require__(551);
+	__webpack_require__(556);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -50290,7 +50614,7 @@
 	}(_panel.Component));
 
 /***/ },
-/* 549 */
+/* 554 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -50416,7 +50740,7 @@
 	};
 
 /***/ },
-/* 550 */
+/* 555 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -52995,16 +53319,16 @@
 	module.exports = _jade_template_fn;
 
 /***/ },
-/* 551 */
+/* 556 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(552);
+	var content = __webpack_require__(557);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(555)(content, {});
+	var update = __webpack_require__(560)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -53021,12 +53345,12 @@
 	}
 
 /***/ },
-/* 552 */
+/* 557 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(553)();
+	exports = module.exports = __webpack_require__(558)();
 	// imports
-	exports.i(__webpack_require__(554), "");
+	exports.i(__webpack_require__(559), "");
 
 	// module
 	exports.push([module.id, ".button-types {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n}\n.common-example {\n  padding: 15px;\n  margin: 15px 0 0 0;\n}\n.common-example :last-child {\n  margin-right: 0px;\n}\n.common-example mp-button {\n  margin-right: 15px;\n}\n.common-example .drop-menu-container {\n  left: -20px;\n  position: relative;\n  top: 7px;\n}\n.common-example .drop-menu-container .text-container {\n  width: 150px;\n}\n.drop-menu-button,\n.overflow-menu-button {\n  color: #6d859e;\n}\n.drop-menu-button svg-icon svg,\n.overflow-menu-button svg-icon svg {\n  left: 0;\n  top: 0;\n}\n.drop-menu-button svg-icon svg,\n.overflow-menu-button svg-icon svg,\n.drop-menu-button svg-icon path,\n.overflow-menu-button svg-icon path {\n  color: #6d859e;\n  fill: #6d859e;\n  transition: 0.2s;\n}\n.drop-menu-button:hover svg-icon svg,\n.overflow-menu-button:hover svg-icon svg,\n.drop-menu-button:hover svg-icon path,\n.overflow-menu-button:hover svg-icon path {\n  color: #6cb8ff;\n  fill: #6cb8ff;\n}\n.drop-menu-button a,\n.overflow-menu-button a {\n  vertical-align: super;\n  margin-right: 10px;\n  font-weight: 500;\n}\n.example-card mp-button-bar {\n  margin-bottom: -1px;\n}\nmp-toggle.inline-toggle {\n  min-width: 350px;\n}\nmp-toggle.max-width-toggle {\n  min-width: 600px;\n}\nmp-toggle.full-width-toggle {\n  min-width: 100%;\n}\n.example-block.full-width {\n  width: 100%;\n  display: inline-block;\n}\n", ""]);
@@ -53035,7 +53359,7 @@
 
 
 /***/ },
-/* 553 */
+/* 558 */
 /***/ function(module, exports) {
 
 	/*
@@ -53091,10 +53415,10 @@
 
 
 /***/ },
-/* 554 */
+/* 559 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(553)();
+	exports = module.exports = __webpack_require__(558)();
 	// imports
 
 
@@ -53105,7 +53429,7 @@
 
 
 /***/ },
-/* 555 */
+/* 560 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -53357,7 +53681,7 @@
 
 
 /***/ },
-/* 556 */
+/* 561 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -53366,11 +53690,11 @@
 
 	var _panel = __webpack_require__(299);
 
-	var _index = __webpack_require__(557);
+	var _index = __webpack_require__(562);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	__webpack_require__(558);
+	__webpack_require__(563);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -53463,7 +53787,7 @@
 	}(_panel.Component));
 
 /***/ },
-/* 557 */
+/* 562 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -54051,16 +54375,16 @@
 	module.exports = _jade_template_fn;
 
 /***/ },
-/* 558 */
+/* 563 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(559);
+	var content = __webpack_require__(564);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(555)(content, {});
+	var update = __webpack_require__(560)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -54077,10 +54401,10 @@
 	}
 
 /***/ },
-/* 559 */
+/* 564 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(553)();
+	exports = module.exports = __webpack_require__(558)();
 	// imports
 
 
@@ -54091,7 +54415,7 @@
 
 
 /***/ },
-/* 560 */
+/* 565 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -54100,15 +54424,15 @@
 
 	var _panel = __webpack_require__(299);
 
-	var _componentSearchTerms = __webpack_require__(561);
+	var _componentSearchTerms = __webpack_require__(566);
 
 	var _componentSearchTerms2 = _interopRequireDefault(_componentSearchTerms);
 
-	var _index = __webpack_require__(562);
+	var _index = __webpack_require__(567);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	__webpack_require__(563);
+	__webpack_require__(568);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -54180,7 +54504,7 @@
 	}(_panel.Component));
 
 /***/ },
-/* 561 */
+/* 566 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -54259,7 +54583,7 @@
 	};
 
 /***/ },
-/* 562 */
+/* 567 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -56368,16 +56692,16 @@
 	module.exports = _jade_template_fn;
 
 /***/ },
-/* 563 */
+/* 568 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(564);
+	var content = __webpack_require__(569);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(555)(content, {});
+	var update = __webpack_require__(560)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -56394,12 +56718,12 @@
 	}
 
 /***/ },
-/* 564 */
+/* 569 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(553)();
+	exports = module.exports = __webpack_require__(558)();
 	// imports
-	exports.i(__webpack_require__(554), "");
+	exports.i(__webpack_require__(559), "");
 
 	// module
 	exports.push([module.id, ".common-example mp-toast,\n.common-example mp-alert {\n  margin: 10px 10px 0 10px !important;\n}\n.example-block > p.desc {\n  margin: 25px 0 35px 0;\n  padding: 0;\n  font-size: 16px;\n}\n.spinner-zoom {\n  width: 75px;\n  height: 75px;\n}\n.spinner-zoom mp-spinner {\n  margin: 0 0 0 25px;\n  -webkit-transform: scale(3);\n          transform: scale(3);\n}\n.mp-icon-input {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  position: relative;\n}\n.mp-icon-input input {\n  padding: 6px;\n  padding-left: 36px;\n  padding-right: 18px;\n  width: 100%;\n}\n.mp-icon-input input:focus + .mp-icon svg-icon svg {\n  left: 0;\n  top: 0;\n}\n.mp-icon-input input:focus + .mp-icon svg-icon svg,\n.mp-icon-input input:focus + .mp-icon svg-icon path {\n  color: #6d859e;\n  fill: #6d859e;\n  transition: 0.2s;\n}\n.mp-icon-input .mp-icon {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  bottom: 0;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  left: 8px;\n  position: absolute;\n  top: 0;\n}\n.mp-icon-input .mp-icon svg-icon svg {\n  left: 0;\n  top: 0;\n}\n.mp-icon-input .mp-icon svg-icon svg,\n.mp-icon-input .mp-icon svg-icon path {\n  color: #9bacbf;\n  fill: #9bacbf;\n  transition: 0.2s;\n}\nmp-tooltip.multiline span {\n  max-width: 200px;\n}\n.tooltip-example.placement-left {\n  margin-right: 15px;\n}\n.tooltip-example.placement-bottom {\n  margin-right: 15px;\n}\n.tutorial-tooltips-container {\n  position: relative;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  flex-direction: column;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  height: 200px;\n  width: 450px;\n}\n.tutorial-tooltips-container .tutorial-tooltip-focus {\n  position: relative;\n}\n.mp-modal-content {\n  text-align: left;\n}\n.reminder {\n  background-color: #edf3f7;\n  width: 75%;\n  color: #6d859e;\n}\n.tooltip-example {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  background-color: #4c6072;\n  border-radius: 3px;\n  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16);\n  color: #fff;\n  cursor: default;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;\n  font-size: 13px;\n  font-weight: bold;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  padding: 10px 18px;\n  pointer-events: auto;\n  position: relative;\n  text-transform: initial;\n}\n.tooltip-example::after {\n  border: 5px solid transparent;\n  content: '';\n  height: 0;\n  position: absolute;\n  width: 0;\n}\n.tooltip-example.placement-top::after {\n  border-top-color: #4c6072;\n  left: 50%;\n  margin-left: -5px;\n  top: 100%;\n}\n.tooltip-example.placement-bottom::after {\n  border-bottom-color: #4c6072;\n  bottom: 100%;\n  left: 50%;\n  margin-left: -5px;\n}\n.tooltip-example.placement-left::after {\n  border-left-color: #4c6072;\n  left: 100%;\n  margin-top: -5px;\n  top: 50%;\n}\n.tooltip-example.placement-right::after {\n  border-right-color: #4c6072;\n  margin-top: -5px;\n  right: 100%;\n  top: 50%;\n}\n.tooltips-container {\n  display: -webkit-inline-box !important;\n  display: -ms-inline-flexbox !important;\n  display: inline-flex !important;\n}\n.variation-tags {\n  color: #6d859e;\n  font-weight: 600;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  margin-bottom: 20px;\n}\n.variation-tags li {\n  background-color: #edf3f7;\n  border-radius: 100px;\n  font-weight: 500;\n  padding: 5px 15px 6px 15px;\n  list-style-type: none;\n  margin-left: 15px;\n}\n", ""]);
@@ -56408,7 +56732,7 @@
 
 
 /***/ },
-/* 565 */
+/* 570 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -56417,11 +56741,11 @@
 
 	var _panel = __webpack_require__(299);
 
-	var _index = __webpack_require__(566);
+	var _index = __webpack_require__(571);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	__webpack_require__(567);
+	__webpack_require__(572);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -56463,7 +56787,7 @@
 	}(_panel.Component));
 
 /***/ },
-/* 566 */
+/* 571 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -56867,16 +57191,16 @@
 	module.exports = _jade_template_fn;
 
 /***/ },
-/* 567 */
+/* 572 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(568);
+	var content = __webpack_require__(573);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(555)(content, {});
+	var update = __webpack_require__(560)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -56893,10 +57217,10 @@
 	}
 
 /***/ },
-/* 568 */
+/* 573 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(553)();
+	exports = module.exports = __webpack_require__(558)();
 	// imports
 
 
@@ -56907,7 +57231,7 @@
 
 
 /***/ },
-/* 569 */
+/* 574 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -56916,11 +57240,11 @@
 
 	var _panel = __webpack_require__(299);
 
-	var _index = __webpack_require__(570);
+	var _index = __webpack_require__(575);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	__webpack_require__(571);
+	__webpack_require__(576);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -56967,7 +57291,7 @@
 	}(_panel.Component));
 
 /***/ },
-/* 570 */
+/* 575 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -57678,16 +58002,16 @@
 	module.exports = _jade_template_fn;
 
 /***/ },
-/* 571 */
+/* 576 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(572);
+	var content = __webpack_require__(577);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(555)(content, {});
+	var update = __webpack_require__(560)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -57704,10 +58028,10 @@
 	}
 
 /***/ },
-/* 572 */
+/* 577 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(553)();
+	exports = module.exports = __webpack_require__(558)();
 	// imports
 
 
@@ -57718,7 +58042,7 @@
 
 
 /***/ },
-/* 573 */
+/* 578 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57729,11 +58053,11 @@
 
 	var _panel = __webpack_require__(299);
 
-	var _index = __webpack_require__(574);
+	var _index = __webpack_require__(579);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	__webpack_require__(575);
+	__webpack_require__(580);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -57800,7 +58124,7 @@
 	}(_panel.Component));
 
 /***/ },
-/* 574 */
+/* 579 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -57849,16 +58173,16 @@
 	module.exports = _jade_template_fn;
 
 /***/ },
-/* 575 */
+/* 580 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(576);
+	var content = __webpack_require__(581);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(555)(content, {});
+	var update = __webpack_require__(560)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -57875,12 +58199,12 @@
 	}
 
 /***/ },
-/* 576 */
+/* 581 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(553)();
+	exports = module.exports = __webpack_require__(558)();
 	// imports
-	exports.i(__webpack_require__(554), "");
+	exports.i(__webpack_require__(559), "");
 
 	// module
 	exports.push([module.id, "input {\n  border: none;\n  background-color: #fcfcfc;\n}\n.search-page .section-title input {\n  font-weight: bold;\n}\n", ""]);
@@ -57889,7 +58213,7 @@
 
 
 /***/ },
-/* 577 */
+/* 582 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57898,11 +58222,11 @@
 
 	var _panel = __webpack_require__(299);
 
-	var _index = __webpack_require__(578);
+	var _index = __webpack_require__(583);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	__webpack_require__(579);
+	__webpack_require__(584);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -57934,7 +58258,7 @@
 	}(_panel.Component));
 
 /***/ },
-/* 578 */
+/* 583 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -59118,16 +59442,16 @@
 	module.exports = _jade_template_fn;
 
 /***/ },
-/* 579 */
+/* 584 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(580);
+	var content = __webpack_require__(585);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(555)(content, {});
+	var update = __webpack_require__(560)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -59144,10 +59468,10 @@
 	}
 
 /***/ },
-/* 580 */
+/* 585 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(553)();
+	exports = module.exports = __webpack_require__(558)();
 	// imports
 
 
@@ -59158,7 +59482,7 @@
 
 
 /***/ },
-/* 581 */
+/* 586 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59167,15 +59491,15 @@
 
 	var _panel = __webpack_require__(299);
 
-	var _bookmarkData = __webpack_require__(582);
+	var _bookmarkData = __webpack_require__(587);
 
 	var _bookmarkData2 = _interopRequireDefault(_bookmarkData);
 
-	var _index = __webpack_require__(583);
+	var _index = __webpack_require__(588);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	__webpack_require__(584);
+	__webpack_require__(589);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -59186,6 +59510,13 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var NAVIGATION_KEY_CODES = {
+	  TAB: 9,
+	  ENTER: 13,
+	  UP_ARROW: 38,
+	  DOWN_ARROW: 40
+	};
 
 	document.registerElement('widgets-section', function (_Component) {
 	  _inherits(_class, _Component);
@@ -59257,6 +59588,16 @@
 	            _this2.state.open.tagSelector = e.detail.state !== 'closed';
 	            _this2.update();
 	          },
+	          handleItemFocus: function handleItemFocus(ev) {
+	            var item = ev.detail.item;
+	            if (item.description) {
+	              _this2.update({ eventDefinition: { name: item.label, description: item.description } });
+	            } else {
+	              if (_this2.state.eventDefinition) {
+	                _this2.update({ eventDefinition: null });
+	              }
+	            }
+	          },
 	          handleTagSelectorSave: function handleTagSelectorSave(e) {
 	            _this2.state.tagSelectorData.saving = true;
 	            _this2.update();
@@ -59301,18 +59642,18 @@
 	            _this2.update({ itemsMenuOpen: true });
 	          },
 	          handleItemsMenuBlur: function handleItemsMenuBlur() {
-	            _this2.update({ itemsMenuOpen: false });
+	            _this2.update({ itemsMenuOpen: false, eventDefinition: null });
 	          },
 	          handleItemsMenuInput: function handleItemsMenuInput(ev) {
 	            _this2.update({ itemsMenuSearchFilter: ev.target.value });
 	          },
 	          handleItemsMenuKeydown: function handleItemsMenuKeydown(ev) {
-	            if (Object.values(ItemsMenu.NAVIGATION_KEY_CODES).indexOf(ev.keyCode) !== -1) {
+	            if (Object.values(NAVIGATION_KEY_CODES).indexOf(ev.keyCode) !== -1) {
 	              ev.preventDefault();
 	              ev.stopPropagation();
 
-	              var eventsMenuEl = ev.target.parentNode.querySelector('mp-items-menu');
-	              // There's a bug in chromnium where it's not possible to set keyCode on KeyboardEvent,
+	              var eventsMenuEl = ev.target.parentNode.parentNode.querySelector('mp-items-menu');
+	              // There's a bug in chromium where it's not possible to set keyCode on KeyboardEvent,
 	              // so use a CustomEvent instead
 	              var clonedEvent = new Event(ev.type, ev);
 	              clonedEvent.keyCode = ev.keyCode;
@@ -59330,7 +59671,8 @@
 	                label: 'Top Events',
 	                icon: 'star-top-events',
 	                isSelected: true,
-	                hasPropertiesPill: true
+	                hasPropertiesPill: true,
+	                description: 'These are your top events in the whole entire world.'
 	              }, {
 	                label: '[Collect everything] Clicked cancel edit elements',
 	                icon: 'event',
@@ -59358,10 +59700,12 @@
 	                isDisabled: true
 	              }, {
 	                label: 'All: Add to shortlist v3',
-	                icon: 'custom-events'
+	                icon: 'custom-events',
+	                description: 'Sample description for an add to shortlist event.'
 	              }, {
 	                label: '$autotrack_pageview',
-	                icon: 'autotrack'
+	                icon: 'autotrack',
+	                description: 'A pageview, but tracked by autotrack.'
 	              }, {
 	                label: 'Viewed report',
 	                icon: null
@@ -59430,7 +59774,7 @@
 	}(_panel.Component));
 
 /***/ },
-/* 582 */
+/* 587 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -59535,14 +59879,14 @@
 	];
 
 /***/ },
-/* 583 */
+/* 588 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	function _jade_template_fn(locals) {
 	  locals = locals || {};;;
-	  var result_of_with = function ($helpers, JSON, bookmarks, currentBookmark, itemsMenuOpen, itemsMenuSearchFilter, open, savingBookmark, searchSections, sectionOpen, selectedBookmarkId, tagSelectorData) {
+	  var result_of_with = function ($helpers, JSON, bookmarks, currentBookmark, eventDefinition, itemsMenuOpen, itemsMenuSearchFilter, open, savingBookmark, searchSections, sectionOpen, selectedBookmarkId, tagSelectorData) {
 	    var h = __webpack_require__(299).h;
 	    return {
 	      value: h("div", {
@@ -60795,6 +61139,16 @@
 	                            progressive: true,
 	                            'search-filter': itemsMenuSearchFilter,
 	                            sections: JSON.stringify($helpers.getItemsMenuSections())
+	                          },
+	                          "on": {
+	                            focusItem: $helpers.handleItemFocus
+	                          }
+	                        }));
+	                        __jade_nodes = __jade_nodes.concat(h("mp-event-definition-tooltip", {
+	                          "attrs": {
+	                            'event-definition': JSON.stringify(eventDefinition),
+	                            'lexicon-url': "#",
+	                            open: !!eventDefinition
 	                          }
 	                        }));;
 	                        return __jade_nodes;
@@ -60816,22 +61170,22 @@
 	        return __jade_nodes;
 	      }.call(this).filter(Boolean))
 	    };
-	  }.call(this, "$helpers" in locals ? locals.$helpers : typeof $helpers !== "undefined" ? $helpers : undefined, "JSON" in locals ? locals.JSON : typeof JSON !== "undefined" ? JSON : undefined, "bookmarks" in locals ? locals.bookmarks : typeof bookmarks !== "undefined" ? bookmarks : undefined, "currentBookmark" in locals ? locals.currentBookmark : typeof currentBookmark !== "undefined" ? currentBookmark : undefined, "itemsMenuOpen" in locals ? locals.itemsMenuOpen : typeof itemsMenuOpen !== "undefined" ? itemsMenuOpen : undefined, "itemsMenuSearchFilter" in locals ? locals.itemsMenuSearchFilter : typeof itemsMenuSearchFilter !== "undefined" ? itemsMenuSearchFilter : undefined, "open" in locals ? locals.open : typeof open !== "undefined" ? open : undefined, "savingBookmark" in locals ? locals.savingBookmark : typeof savingBookmark !== "undefined" ? savingBookmark : undefined, "searchSections" in locals ? locals.searchSections : typeof searchSections !== "undefined" ? searchSections : undefined, "sectionOpen" in locals ? locals.sectionOpen : typeof sectionOpen !== "undefined" ? sectionOpen : undefined, "selectedBookmarkId" in locals ? locals.selectedBookmarkId : typeof selectedBookmarkId !== "undefined" ? selectedBookmarkId : undefined, "tagSelectorData" in locals ? locals.tagSelectorData : typeof tagSelectorData !== "undefined" ? tagSelectorData : undefined);
+	  }.call(this, "$helpers" in locals ? locals.$helpers : typeof $helpers !== "undefined" ? $helpers : undefined, "JSON" in locals ? locals.JSON : typeof JSON !== "undefined" ? JSON : undefined, "bookmarks" in locals ? locals.bookmarks : typeof bookmarks !== "undefined" ? bookmarks : undefined, "currentBookmark" in locals ? locals.currentBookmark : typeof currentBookmark !== "undefined" ? currentBookmark : undefined, "eventDefinition" in locals ? locals.eventDefinition : typeof eventDefinition !== "undefined" ? eventDefinition : undefined, "itemsMenuOpen" in locals ? locals.itemsMenuOpen : typeof itemsMenuOpen !== "undefined" ? itemsMenuOpen : undefined, "itemsMenuSearchFilter" in locals ? locals.itemsMenuSearchFilter : typeof itemsMenuSearchFilter !== "undefined" ? itemsMenuSearchFilter : undefined, "open" in locals ? locals.open : typeof open !== "undefined" ? open : undefined, "savingBookmark" in locals ? locals.savingBookmark : typeof savingBookmark !== "undefined" ? savingBookmark : undefined, "searchSections" in locals ? locals.searchSections : typeof searchSections !== "undefined" ? searchSections : undefined, "sectionOpen" in locals ? locals.sectionOpen : typeof sectionOpen !== "undefined" ? sectionOpen : undefined, "selectedBookmarkId" in locals ? locals.selectedBookmarkId : typeof selectedBookmarkId !== "undefined" ? selectedBookmarkId : undefined, "tagSelectorData" in locals ? locals.tagSelectorData : typeof tagSelectorData !== "undefined" ? tagSelectorData : undefined);
 	  if (result_of_with) return result_of_with.value;
 	}
 	module.exports = _jade_template_fn;
 
 /***/ },
-/* 584 */
+/* 589 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(585);
+	var content = __webpack_require__(590);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(555)(content, {});
+	var update = __webpack_require__(560)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -60848,12 +61202,12 @@
 	}
 
 /***/ },
-/* 585 */
+/* 590 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(553)();
+	exports = module.exports = __webpack_require__(558)();
 	// imports
-	exports.i(__webpack_require__(554), "");
+	exports.i(__webpack_require__(559), "");
 
 	// module
 	exports.push([module.id, ".bookmarks-widget {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  height: 54px;\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n  margin-bottom: 500px;\n  min-width: 740px;\n  width: 80%;\n  border: 1px solid #d8e0e6;\n}\n.bookmarks-widget mp-bookmarks-widget {\n  border-left: 1px solid #d8e0e6;\n  border-right: 1px solid #d8e0e6;\n  margin-right: 20px;\n}\n.tag-selector-container {\n  position: relative;\n  margin-bottom: 290px;\n}\n.tag-selector-container mp-drop-menu {\n  top: 40px;\n}\n.tag-selector-container .title {\n  padding-top: 20px;\n}\n.tag-selector-container .title .header {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  margin-left: 18px;\n}\n.tag-selector-container .title .header svg-icon svg {\n  left: 0;\n  top: 0;\n}\n.tag-selector-container .title .header svg-icon svg,\n.tag-selector-container .title .header svg-icon path {\n  color: #39d183;\n  fill: #39d183;\n  transition: 0.2s;\n}\n.tag-selector-container .title .header .header-text {\n  color: #4c6072;\n  display: inline-block;\n  font-size: 16px;\n  font-weight: 600;\n  line-height: 1.12;\n  margin: auto 0;\n  padding-left: 10px;\n}\n.tag-selector-container .title .subtext {\n  color: #9bacbf;\n  font-size: 13px;\n  font-weight: 500;\n  line-height: 1.5;\n  margin: 0 0 20px 50px;\n}\n.items-menu-container .mp-icon-input {\n  margin-bottom: 20px;\n}\n.items-menu-container .drop-menu-container {\n  position: relative;\n}\n.items-menu-container .drop-menu-container mp-items-menu {\n  width: 320px;\n  height: 300px;\n}\n", ""]);
@@ -60862,7 +61216,7 @@
 
 
 /***/ },
-/* 586 */
+/* 591 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -60969,16 +61323,16 @@
 	module.exports = _jade_template_fn;
 
 /***/ },
-/* 587 */
+/* 592 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(588);
+	var content = __webpack_require__(593);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(555)(content, {});
+	var update = __webpack_require__(560)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -60995,21 +61349,21 @@
 	}
 
 /***/ },
-/* 588 */
+/* 593 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(553)();
+	exports = module.exports = __webpack_require__(558)();
 	// imports
-	exports.i(__webpack_require__(554), "");
+	exports.i(__webpack_require__(559), "");
 
 	// module
-	exports.push([module.id, "* {\n  font-smoothing: antialiased;\n  -webkit-font-smoothing: antialiased;\n}\nbody {\n  background-color: #fcfcfc;\n  font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;\n  color: #6d859e;\n  font-size: 13px;\n  font-stretch: normal;\n  font-weight: weight-default;\n}\nh1,\nstrong,\n.bold {\n  font-weight: 600;\n}\na {\n  color: #6d859e;\n}\na :hover {\n  color: #4ba8ff;\n}\n.style-guide-title {\n  color: #4c6072;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  font-size: 24px;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  left: 150px;\n  position: relative;\n  position: relative;\n  top: 100px;\n  width: calc(100% - 150px);\n}\n.version-bar {\n  background-color: #fff;\n  border-left: 1px solid #d8e0e6;\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  width: 75px;\n  z-index: 1000;\n}\n.version-label {\n  color: #9bacbf;\n  font-size: 16px;\n  height: 75px;\n  width: 285px;\n  position: absolute;\n  top: 160px;\n  right: -75px;\n  -webkit-transform: rotate(90deg);\n          transform: rotate(90deg);\n}\n.version-label strong {\n  color: #4ba8ff;\n}\n.version-label * {\n  display: inline-block;\n}\n.logo {\n  background: url(" + __webpack_require__(589) + ") no-repeat top center;\n  background-size: contain;\n  height: 90px;\n  margin: 0 auto;\n  margin-left: -115px;\n  width: 100%;\n}\n.decoration {\n  height: 3px;\n  width: 40px;\n  background-color: #d8e0e6;\n  margin: 0 10px 3px 10px;\n}\n.section-content {\n  margin: 40px 0 0 0;\n}\n.section-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  left: 345px;\n  position: relative;\n  top: 185px;\n  width: calc(100% - 350px);\n}\n.section-title {\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  font-weight: 600;\n  padding: 0px 0px 15px 0px;\n  width: 100%;\n}\n.section-title .title-text {\n  color: #4c6072;\n  font-size: 64px;\n}\n.section-title .title-section {\n  color: #bdc9d6;\n  font-size: 24px;\n  height: 60px;\n  padding-left: 10px;\n  position: relative;\n  top: 16px;\n}\n.indent-container {\n  margin: 20px 0 60px 50px;\n}\n.divider {\n  border-top: 1px solid #d8e0e6;\n  margin: 0 30px 0x 0;\n  position: relative;\n  width: 90%;\n}\n.divider sup {\n  color: #9bacbf;\n  right: -30px;\n  position: absolute;\n  top: -10px;\n}\n.divider label {\n  color: #bdc9d6;\n  font-weight: 600;\n  position: absolute;\n  right: -30px;\n  top: -10px;\n}\n.section {\n  position: relative;\n  width: 70vw;\n  -webkit-animation: fadeContentIn 500ms forwards;\n          animation: fadeContentIn 500ms forwards;\n}\n.subsection-title {\n  color: #4c6072;\n  font-weight: 500;\n  font-size: 24px;\n}\n.subsection-description {\n  padding: 16px 0px 10px 0px;\n  font-size: 16px;\n  font-weight: weight-default;\n  max-width: 900px;\n  line-height: 24px;\n}\n.section-nav {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  list-style-type: none;\n  overflow-x: scroll;\n  padding: 0 0 30px 0;\n  position: relative;\n  white-space: nowrap;\n  width: 100%;\n}\n.section-nav .nav-item {\n  color: #4c6072;\n  cursor: pointer;\n  font-size: 16px;\n  font-weight: 500;\n  margin: 30px 30px 0 0;\n  padding: 10px 30px;\n}\n.section-nav .nav-item:hover {\n  color: #4ba8ff;\n}\n.section-nav .nav-item.selected {\n  background-color: #4ba8ff;\n  border-radius: 30px;\n  color: #fff;\n}\n.code-snippet {\n  max-width: 90%;\n  left: -60px;\n  padding-left: 15px;\n  position: relative;\n  margin-left: 50px;\n}\n.code-snippet .first-call-out {\n  margin-left: -15px;\n}\n.call-out {\n  color: #9bacbf;\n  margin: 40px 0 20px 0;\n  font-size: 16px;\n}\n.call-out.extra {\n  margin-top: 30px;\n}\n.call-out label {\n  text-transform: none;\n}\n.call-out p {\n  line-height: 4px;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  text-transform: none;\n  margin: 0;\n}\n.call-out .icon {\n  font-size: 14pt;\n  position: relative;\n  top: -1px;\n  left: -20px;\n}\n.desc {\n  width: 80%;\n  padding-left: 14px;\n  margin-top: 6px;\n  line-height: 24px;\n}\n.first-call-out {\n  margin-left: -10px;\n}\n.snippet-container {\n  background-color: #f9fafc;\n  border: 1px solid #d8e0e6;\n  border-radius: 6px;\n  font-size: 14px;\n  margin-top: 10px;\n  width: 90%;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n}\n.snippet-header {\n  color: #6d859e;\n  border-bottom: 1px solid #d8e0e6;\n  border-radius: 6px 6px 0px 0px;\n  padding: 15px;\n  margin-right: 0;\n}\n.snippet-header label {\n  text-transform: uppercase;\n  letter-spacing: 1.2px;\n}\n.code-field {\n  background-color: #fff;\n  border-left: 1px solid #d8e0e6;\n  border-radius: 0px 0px 6px 0px;\n  font-family: monospace;\n  font-weight: 500;\n  margin: 0 0 0 45px;\n  padding: 15px;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n}\n.code-field pre {\n  color: #4c6072;\n  display: inline-block;\n  letter-spacing: 1.5px;\n  line-height: 20px;\n  margin: -2px 0 0 -45px;\n  white-space: pre-wrap;\n}\n.code-field pre:nth-child(2n) {\n  overflow-x: scroll;\n  white-space: pre;\n  margin-left: 40px;\n  width: 100%;\n}\npre span.mp-red {\n  color: #e4567b;\n}\npre span.mp-purple {\n  color: #9270e2;\n}\npre span.mp-green {\n  color: #2dc376;\n}\npre span.grey-500 {\n  color: #9bacbf;\n}\npre span.mp-orange {\n  color: #f1842b;\n}\n.common-example {\n  border: 1px dashed #bdc9d6;\n  border-radius: 4px;\n  min-height: 40px;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  margin: 0;\n}\n.example-block {\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  margin: 0 15px 10px 0;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n}\n.example-block.half {\n  width: 40%;\n  display: inline-table;\n}\n.floating-example-bar {\n  background: #fff;\n  width: 80%;\n  box-shadow: 0px 8px 22px 0px rgba(0,0,0,0.23);\n  padding: 15px 20px;\n  min-width: 740px;\n  margin-top: 10px;\n}\n.floating-example-bar.align-right {\n  text-align: right;\n}\n.floating-example-bar.blue-bar {\n  background: #4ba8ff;\n}\n.floating-example-bar.grey-bar {\n  background: #f9fafc;\n}\n.floating-example-bar .example-bar-divider {\n  margin: 0 15px;\n  border-bottom: 1px solid #e5eaef;\n  height: 1px;\n}\n.floating-example-bar .example-bar-line-item {\n  padding: 15px;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  width: 96%;\n}\n.blue-vertical-seperator {\n  border-left: 1px solid rgba(255,255,255,0.15);\n  border-right: 1px solid #3391e9;\n  height: 48px;\n  display: inline-block;\n  vertical-align: middle;\n  margin-left: 30px;\n}\n.example-card {\n  background: #fff;\n  border-radius: 6px;\n  border: 1px solid #edf3f7;\n  box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.14);\n  display: inline-block;\n  margin: 0 30px 20px 0;\n  position: relative;\n  min-height: 200px;\n  box-sizing: border-box;\n}\n.example-card.narrow {\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  width: auto;\n  max-width: 30%;\n  min-width: 365px;\n  -webkit-box-align: end;\n      -ms-flex-align: end;\n          align-items: flex-end;\n}\n.example-card.truncated {\n  height: 90px;\n  min-height: 90px;\n}\n.example-card.long {\n  min-width: 560px;\n  max-width: 40%;\n}\n.example-card-footer {\n  border-top: 1px solid #d8e0e6;\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  padding: 10px 15px;\n  text-align: right;\n}\n.example-card-footer :last-child {\n  margin-left: 10px;\n}\n.example-card-header {\n  border-bottom: 1px solid #3b99f0;\n  border-radius: 6px 6px 0 0;\n  position: absolute;\n  top: 0;\n  left: -1px;\n  right: -1px;\n  background-color: #4ba8ff;\n  text-align: center;\n  color: #fff;\n  padding: 20px 0;\n}\n.example-card-header b {\n  font-size: 18px;\n}\n.example-card-header.grey {\n  background-color: #edf3f7;\n  border-bottom: 1px solid #d8e0e6;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n  padding-right: 20px;\n}\n.demo-divider {\n  border-bottom: 1px dashed #bdc9d6;\n  width: 80%;\n  text-align: right;\n  padding-bottom: 15px;\n}\n.demo-divider a {\n  margin-left: 45px;\n}\n.section-modifier {\n  margin-top: -45px;\n}\n@-webkit-keyframes fadeContentIn {\n  from {\n    -webkit-transform: translateY(30px);\n            transform: translateY(30px);\n    opacity: 0;\n  }\n  to {\n    opacity: 1;\n  }\n}\n@keyframes fadeContentIn {\n  from {\n    -webkit-transform: translateY(30px);\n            transform: translateY(30px);\n    opacity: 0;\n  }\n  to {\n    opacity: 1;\n  }\n}\n", ""]);
+	exports.push([module.id, "* {\n  font-smoothing: antialiased;\n  -webkit-font-smoothing: antialiased;\n}\nbody {\n  background-color: #fcfcfc;\n  font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;\n  color: #6d859e;\n  font-size: 13px;\n  font-stretch: normal;\n  font-weight: weight-default;\n}\nh1,\nstrong,\n.bold {\n  font-weight: 600;\n}\na {\n  color: #6d859e;\n}\na :hover {\n  color: #4ba8ff;\n}\n.style-guide-title {\n  color: #4c6072;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  font-size: 24px;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  left: 150px;\n  position: relative;\n  position: relative;\n  top: 100px;\n  width: calc(100% - 150px);\n}\n.version-bar {\n  background-color: #fff;\n  border-left: 1px solid #d8e0e6;\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  width: 75px;\n  z-index: 1000;\n}\n.version-label {\n  color: #9bacbf;\n  font-size: 16px;\n  height: 75px;\n  width: 285px;\n  position: absolute;\n  top: 160px;\n  right: -75px;\n  -webkit-transform: rotate(90deg);\n          transform: rotate(90deg);\n}\n.version-label strong {\n  color: #4ba8ff;\n}\n.version-label * {\n  display: inline-block;\n}\n.logo {\n  background: url(" + __webpack_require__(594) + ") no-repeat top center;\n  background-size: contain;\n  height: 90px;\n  margin: 0 auto;\n  margin-left: -115px;\n  width: 100%;\n}\n.decoration {\n  height: 3px;\n  width: 40px;\n  background-color: #d8e0e6;\n  margin: 0 10px 3px 10px;\n}\n.section-content {\n  margin: 40px 0 0 0;\n}\n.section-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  left: 345px;\n  position: relative;\n  top: 185px;\n  width: calc(100% - 350px);\n}\n.section-title {\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  font-weight: 600;\n  padding: 0px 0px 15px 0px;\n  width: 100%;\n}\n.section-title .title-text {\n  color: #4c6072;\n  font-size: 64px;\n}\n.section-title .title-section {\n  color: #bdc9d6;\n  font-size: 24px;\n  height: 60px;\n  padding-left: 10px;\n  position: relative;\n  top: 16px;\n}\n.indent-container {\n  margin: 20px 0 60px 50px;\n}\n.divider {\n  border-top: 1px solid #d8e0e6;\n  margin: 0 30px 0x 0;\n  position: relative;\n  width: 90%;\n}\n.divider sup {\n  color: #9bacbf;\n  right: -30px;\n  position: absolute;\n  top: -10px;\n}\n.divider label {\n  color: #bdc9d6;\n  font-weight: 600;\n  position: absolute;\n  right: -30px;\n  top: -10px;\n}\n.section {\n  position: relative;\n  width: 70vw;\n  -webkit-animation: fadeContentIn 500ms forwards;\n          animation: fadeContentIn 500ms forwards;\n}\n.subsection-title {\n  color: #4c6072;\n  font-weight: 500;\n  font-size: 24px;\n}\n.subsection-description {\n  padding: 16px 0px 10px 0px;\n  font-size: 16px;\n  font-weight: weight-default;\n  max-width: 900px;\n  line-height: 24px;\n}\n.section-nav {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  list-style-type: none;\n  overflow-x: scroll;\n  padding: 0 0 30px 0;\n  position: relative;\n  white-space: nowrap;\n  width: 100%;\n}\n.section-nav .nav-item {\n  color: #4c6072;\n  cursor: pointer;\n  font-size: 16px;\n  font-weight: 500;\n  margin: 30px 30px 0 0;\n  padding: 10px 30px;\n}\n.section-nav .nav-item:hover {\n  color: #4ba8ff;\n}\n.section-nav .nav-item.selected {\n  background-color: #4ba8ff;\n  border-radius: 30px;\n  color: #fff;\n}\n.code-snippet {\n  max-width: 90%;\n  left: -60px;\n  padding-left: 15px;\n  position: relative;\n  margin-left: 50px;\n}\n.code-snippet .first-call-out {\n  margin-left: -15px;\n}\n.call-out {\n  color: #9bacbf;\n  margin: 40px 0 20px 0;\n  font-size: 16px;\n}\n.call-out.extra {\n  margin-top: 30px;\n}\n.call-out label {\n  text-transform: none;\n}\n.call-out p {\n  line-height: 4px;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  text-transform: none;\n  margin: 0;\n}\n.call-out .icon {\n  font-size: 14pt;\n  position: relative;\n  top: -1px;\n  left: -20px;\n}\n.desc {\n  width: 80%;\n  padding-left: 14px;\n  margin-top: 6px;\n  line-height: 24px;\n}\n.first-call-out {\n  margin-left: -10px;\n}\n.snippet-container {\n  background-color: #f9fafc;\n  border: 1px solid #d8e0e6;\n  border-radius: 6px;\n  font-size: 14px;\n  margin-top: 10px;\n  width: 90%;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n}\n.snippet-header {\n  color: #6d859e;\n  border-bottom: 1px solid #d8e0e6;\n  border-radius: 6px 6px 0px 0px;\n  padding: 15px;\n  margin-right: 0;\n}\n.snippet-header label {\n  text-transform: uppercase;\n  letter-spacing: 1.2px;\n}\n.code-field {\n  background-color: #fff;\n  border-left: 1px solid #d8e0e6;\n  border-radius: 0px 0px 6px 0px;\n  font-family: monospace;\n  font-weight: 500;\n  margin: 0 0 0 45px;\n  padding: 15px;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n}\n.code-field pre {\n  color: #4c6072;\n  display: inline-block;\n  letter-spacing: 1.5px;\n  line-height: 20px;\n  margin: -2px 0 0 -45px;\n  white-space: pre-wrap;\n}\n.code-field pre:nth-child(2n) {\n  overflow-x: scroll;\n  white-space: pre;\n  margin-left: 40px;\n  width: 100%;\n}\npre span.mp-red {\n  color: #e4567b;\n}\npre span.mp-purple {\n  color: #9270e2;\n}\npre span.mp-green {\n  color: #2dc376;\n}\npre span.grey-500 {\n  color: #9bacbf;\n}\npre span.mp-orange {\n  color: #f1842b;\n}\n.common-example {\n  border: 1px dashed #bdc9d6;\n  border-radius: 4px;\n  min-height: 40px;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  margin: 0;\n}\n.example-block {\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  margin: 0 15px 10px 0;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n}\n.example-block.half {\n  width: 40%;\n  display: inline-table;\n}\n.floating-example-bar {\n  background: #fff;\n  width: 80%;\n  box-shadow: 0px 8px 22px 0px rgba(0,0,0,0.23);\n  padding: 15px 20px;\n  min-width: 740px;\n  margin-top: 10px;\n}\n.floating-example-bar.align-right {\n  text-align: right;\n}\n.floating-example-bar.blue-bar {\n  background: #4ba8ff;\n}\n.floating-example-bar.grey-bar {\n  background: #f9fafc;\n}\n.floating-example-bar .example-bar-divider {\n  margin: 0 15px;\n  border-bottom: 1px solid #e5eaef;\n  height: 1px;\n}\n.floating-example-bar .example-bar-line-item {\n  padding: 15px;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  width: 96%;\n}\n.blue-vertical-seperator {\n  border-left: 1px solid rgba(255,255,255,0.15);\n  border-right: 1px solid #3391e9;\n  height: 48px;\n  display: inline-block;\n  vertical-align: middle;\n  margin-left: 30px;\n}\n.example-card {\n  background: #fff;\n  border-radius: 6px;\n  border: 1px solid #edf3f7;\n  box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.14);\n  display: inline-block;\n  margin: 0 30px 20px 0;\n  position: relative;\n  min-height: 200px;\n  box-sizing: border-box;\n}\n.example-card.narrow {\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  width: auto;\n  max-width: 30%;\n  min-width: 365px;\n  -webkit-box-align: end;\n      -ms-flex-align: end;\n          align-items: flex-end;\n}\n.example-card.truncated {\n  height: 90px;\n  min-height: 90px;\n}\n.example-card.long {\n  min-width: 560px;\n  max-width: 40%;\n}\n.example-card-footer {\n  border-top: 1px solid #d8e0e6;\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  padding: 10px 15px;\n  text-align: right;\n}\n.example-card-footer :last-child {\n  margin-left: 10px;\n}\n.example-card-header {\n  border-bottom: 1px solid #3b99f0;\n  border-radius: 6px 6px 0 0;\n  position: absolute;\n  top: 0;\n  left: -1px;\n  right: -1px;\n  background-color: #4ba8ff;\n  text-align: center;\n  color: #fff;\n  padding: 20px 0;\n}\n.example-card-header b {\n  font-size: 18px;\n}\n.example-card-header.grey {\n  background-color: #edf3f7;\n  border-bottom: 1px solid #d8e0e6;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n  padding-right: 20px;\n}\n.demo-divider {\n  border-bottom: 1px dashed #bdc9d6;\n  width: 80%;\n  text-align: right;\n  padding-bottom: 15px;\n}\n.demo-divider a {\n  margin-left: 45px;\n}\n.section-modifier {\n  margin-top: -45px;\n}\n@-webkit-keyframes fadeContentIn {\n  from {\n    -webkit-transform: translateY(30px);\n            transform: translateY(30px);\n    opacity: 0;\n  }\n  to {\n    opacity: 1;\n  }\n}\n@keyframes fadeContentIn {\n  from {\n    -webkit-transform: translateY(30px);\n            transform: translateY(30px);\n    opacity: 0;\n  }\n  to {\n    opacity: 1;\n  }\n}\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 589 */
+/* 594 */
 /***/ function(module, exports) {
 
 	module.exports = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMjMwcHgiIGhlaWdodD0iOTBweCIgdmlld0JveD0iMCAwIDIzMCA5MCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj4KICAgIDwhLS0gR2VuZXJhdG9yOiBTa2V0Y2ggMzkuMSAoMzE3MjApIC0gaHR0cDovL3d3dy5ib2hlbWlhbmNvZGluZy5jb20vc2tldGNoIC0tPgogICAgPHRpdGxlPm1wLWxvZ288L3RpdGxlPgogICAgPGRlc2M+Q3JlYXRlZCB3aXRoIFNrZXRjaC48L2Rlc2M+CiAgICA8ZGVmcz48L2RlZnM+CiAgICA8ZyBpZD0iUGFnZS0xIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj4KICAgICAgICA8ZyBpZD0ibXAtbG9nbyI+CiAgICAgICAgICAgIDxnIGlkPSJIZWFkZXIiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xMzcuMDAwMDAwLCAtMC41MDAwMDApIj4KICAgICAgICAgICAgICAgIDx0ZXh0IGlkPSJNaXhwYW5lbC1EZXNpZ24iIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2FOZXVlLCBIZWx2ZXRpY2EgTmV1ZSIgZm9udC1zaXplPSIzMSIgZm9udC13ZWlnaHQ9Im5vcm1hbCIgZmlsbD0iIzRDNjA3MiI+CiAgICAgICAgICAgICAgICAgICAgPHRzcGFuIHg9IjEzNi44ODE1IiB5PSI4NCI+TWl4cGFuZWwgRGVzaWduPC90c3Bhbj4KICAgICAgICAgICAgICAgIDwvdGV4dD4KICAgICAgICAgICAgICAgIDxnIGlkPSJHcm91cCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjAyLjAwMDAwMCwgMC41MDAwMDApIiBmaWxsPSIjNEJBOEZGIj4KICAgICAgICAgICAgICAgICAgICA8Y2lyY2xlIGlkPSJPdmFsLTUiIGN4PSIxMSIgY3k9IjExIiByPSIxMSI+PC9jaXJjbGU+CiAgICAgICAgICAgICAgICAgICAgPGNpcmNsZSBpZD0iT3ZhbC01LUNvcHkiIGN4PSI1MCIgY3k9IjExIiByPSI4Ij48L2NpcmNsZT4KICAgICAgICAgICAgICAgICAgICA8Y2lyY2xlIGlkPSJPdmFsLTUtQ29weS0yIiBjeD0iODEuNSIgY3k9IjExLjUiIHI9IjMuNSI+PC9jaXJjbGU+CiAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgIDwvZz4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPg=="
