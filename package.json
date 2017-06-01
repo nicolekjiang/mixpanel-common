@@ -8,7 +8,7 @@
     "build-examples": "npm run build && webpack --context examples --config examples/webpack.config.js",
     "build-test": "webpack --context test --config test/webpack.config.js",
     "deploy-design": "./deploy-design.sh",
-    "watch": "npm run build && concurrently 'node build.js -w' 'webpack --context examples --config examples/webpack.config.js -w'",
+    "watch": "npm run build && node build.js -w",
     "start": "npm run build && concurrently 'node build.js -w' 'webpack-dev-server --context examples --config examples/webpack.config.js --colors --inline'",
     "lint": "eslint lib && stylint lib",
     "prepublish": "npm run build",
