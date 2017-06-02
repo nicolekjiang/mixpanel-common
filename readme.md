@@ -9,7 +9,7 @@
 
 ### Style guide
 
-[https://mixpanel.github.io/mixpanel-common/examples/style-guide/index.html](https://mixpanel.github.io/mixpanel-common/examples/style-guide/index.html)
+[http://mixpanel.github.io/mixpanel-common/examples/style-guide-new/#](http://mixpanel.github.io/mixpanel-common/examples/style-guide-new/#)
 
 ### Local development of components
 
