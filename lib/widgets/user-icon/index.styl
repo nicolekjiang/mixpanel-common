@@ -1,0 +1,81 @@
+@import '../../stylesheets/defaults'
+
+$user-icon-size = 26px
+$default-background-color = #1e7171
+
++host-styles(mp-user-icon)
+  display inline-block
+
++prefix-classes('mp-user-icon-')
+  .container
+    background-color $default-background-color
+    border-radius 50%
+    color white
+    cursor default
+    font-family family-helvetica
+    font-size-xs()
+    font-weight weight-bold
+    height $user-icon-size
+    line-height $user-icon-size
+    overflow hidden
+    text-align center
+    text-transform uppercase
+    width $user-icon-size
+
+    mp-tooltip
+      z-index $z-tooltip
+
+    // @stylint off
+    .color-A
+      background-color #33bcbd
+    .color-B
+      background-color #2da9aa
+    .color-C
+      background-color #289697
+    .color-D
+      background-color #238384
+    .color-E
+      background-color #64ade8
+    .color-F
+      background-color #5a9bd1
+    .color-G
+      background-color #508bba
+    .color-H
+      background-color #4679a2
+    .color-I
+      background-color #3c688b
+    .color-J
+      background-color #a28ccb
+    .color-K
+      background-color #917db6
+    .color-L
+      background-color #826fa2
+    .color-M
+      background-color #71618d
+    .color-N
+      background-color #61547a
+    .color-O
+      background-color #d97b7f
+    .color-P
+      background-color #c36e72
+    .color-Q
+      background-color #ad6366
+    .color-R
+      background-color #985559
+    .color-S
+      background-color #e8bc65
+    .color-T
+      background-color #d0a95b
+    .color-U
+      background-color #b99651
+    .color-V
+      background-color #a28347
+    .color-W
+      background-color #f6893b
+    .color-X
+      background-color #dd7b35
+    .color-Y
+      background-color #c46e30
+    .color-Z
+      // use default
+    // @stylint on

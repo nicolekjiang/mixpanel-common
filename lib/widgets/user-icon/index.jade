@@ -1,0 +1,6 @@
+.mp-user-icon-container
+  if name
+    div(class={[`mp-user-icon-color-${name[0].toUpperCase()}`]: true})
+      = $helpers.nameToInitials(name)
+      if showTooltip
+        mp-tooltip= tooltipText || $helpers.getAbbreviatedName()

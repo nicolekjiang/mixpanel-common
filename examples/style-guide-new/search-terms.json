@@ -334,6 +334,15 @@
     "tag selector",
     "mp-tag-selector"
   ],
+  "user-icon": [
+    "components",
+    "widgets",
+    "user icon",
+    "icon",
+    "mp-user-icon",
+    "initials",
+    "user initials"
+  ],
   "calendar-widget": [
     "components",
     "calendar widgets",
