@@ -8,5 +8,11 @@
       .mp-event-definition-container
         .mp-event-definition-name= name
         .mp-event-definition-description= description
+        if verified
+          .mp-event-definition-verified
+            .mp-event-definition-verified-icon
+              svg-icon(attrs={icon: 'check-checkbox'})
+            .mp-event-definition-verified-text
+              = isMixpanelDefinition ? `This is a Mixpanel built-in event.` : $helpers.getVerifiedText()
       .mp-event-definition-learn-more
         span Add definitions to your events with #[a(attrs={href: url}) Lexicon].

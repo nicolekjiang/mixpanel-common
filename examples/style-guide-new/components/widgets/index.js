@@ -71,7 +71,8 @@ document.registerElement(`widgets-section`, class extends Component {
         handleItemFocus: ev => {
           const item = ev.detail.item;
           if (item.description) {
-            this.update({eventDefinition: {name: item.label, description: item.description}});
+            const {description, verified, isMixpanelDefinition, verifiedBy, verifiedDate} = item;
+            this.update({eventDefinition: {name: item.label, description, verified, isMixpanelDefinition, verifiedBy, verifiedDate}});
           } else {
             if (this.state.eventDefinition) {
               this.update({eventDefinition: null});
@@ -150,6 +151,8 @@ document.registerElement(`widgets-section`, class extends Component {
               isSelected: true,
               hasPropertiesPill: true,
               description: `These are your top events in the whole entire world.`,
+              verified: true,
+              isMixpanelDefinition: true,
             }, {
               label: `[Collect everything] Clicked cancel edit elements`,
               icon: `event`,
@@ -179,10 +182,14 @@ document.registerElement(`widgets-section`, class extends Component {
               label: `All: Add to shortlist v3`,
               icon: `custom-events`,
               description: `Sample description for an add to shortlist event.`,
+              verified: false,
             }, {
               label: `$autotrack_pageview`,
               icon: `autotrack`,
               description: `A pageview, but tracked by autotrack.`,
+              verified: true,
+              verifiedBy: `Jonathan Lack`,
+              verifiedDate: new Date(),
             }, {
               label: `Viewed report`,
               icon: null,

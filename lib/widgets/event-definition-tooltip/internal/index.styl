@@ -29,21 +29,39 @@
       transition all (mp-fast)ms ease-in-quart
 
     .container
-      padding 20px
+      padding 20px 20px 12px
 
       .name
-        color grey-900
-        font-size 13px
+        color grey-700
+        font-size-default()
         font-weight weight-bold
 
       .description
-        color grey-700
-        font-size 12px
+        color grey-500
+        font-size-small()
         margin-top 10px
+
+      .verified
+        display flex
+        margin-top 16px
+
+        .verified-icon
+          align-items center
+          background-color mp-green
+          border-radius 50%
+          display flex
+          height 12px
+          svg-icon-style(white, size: 12px)
+          width 12px
+
+        .verified-text
+          color grey-500
+          font-size 11px
+          margin-left 4px
 
     .learn-more
       border-top 1px solid grey-150
-      color grey-700
+      color grey-500
       font-size 11px
       padding 10px 20px
 
