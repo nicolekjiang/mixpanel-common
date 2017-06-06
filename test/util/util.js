@@ -817,3 +817,198 @@ describe(`truncateToElement`, function() {
     document.body.removeChild(elem);
   });
 });
+
+describe(`flattenNestedObjectToPath`, () => {
+  it(`convert 2d series object to segment values and paths`, () => {
+    const obj = flattenNestedObjectToPath(d2ResultsObj.series);
+    expect(obj).to.eql({
+      paths:{
+        'Mac OS X Chrome':[`Mac OS X`, `Chrome`],
+        'Mac OS X Firefox':[`Mac OS X`, `Firefox`],
+        'Mac OS X Opera':[`Mac OS X`, `Opera`],
+        'Mac OS X Safari':[`Mac OS X`, `Safari`],
+        'Windows Chrome':[`Windows`, `Chrome`],
+        'Windows Firefox':[`Windows`, `Firefox`],
+        'Windows Opera':[`Windows`, `Opera`],
+      },
+      values:{
+        'Mac OS X Chrome':{
+          '1472626800000':1990,
+          '1472630400000':2122,
+          '1472634000000':2035,
+        },
+        'Mac OS X Firefox':{
+          '1472626800000':56,
+          '1472630400000':93,
+          '1472634000000':82,
+        },
+        'Mac OS X Opera':{
+          '1472626800000':0,
+          '1472630400000':0,
+          '1472634000000':0,
+        },
+        'Mac OS X Safari':{
+          '1472626800000':329,
+          '1472630400000':459,
+          '1472634000000':579,
+        },
+        'Windows Chrome':{
+          '1472626800000':1300,
+          '1472630400000':1212,
+          '1472634000000':1162,
+        },
+        'Windows Firefox':{
+          '1472626800000':100,
+          '1472630400000':131,
+          '1472634000000':138,
+        },
+        'Windows Opera':{
+          '1472626800000':1,
+          '1472630400000':1,
+          '1472634000000':3,
+        },
+      },
+    });
+  });
+
+  it(`convert 2d series object to segment values and paths and flattens time values`, () => {
+    const obj = flattenNestedObjectToPath(d2ResultsObj.series, {flattenValues: true});
+    expect(obj).to.eql({
+      paths:{
+        'Mac OS X Chrome':[`Mac OS X`, `Chrome`],
+        'Mac OS X Firefox':[`Mac OS X`, `Firefox`],
+        'Mac OS X Opera':[`Mac OS X`, `Opera`],
+        'Mac OS X Safari':[`Mac OS X`, `Safari`],
+        'Windows Chrome':[`Windows`, `Chrome`],
+        'Windows Firefox':[`Windows`, `Firefox`],
+        'Windows Opera':[`Windows`, `Opera`],
+      },
+      values:{
+        'Mac OS X Chrome': 6147,
+        'Mac OS X Firefox': 231,
+        'Mac OS X Safari': 1367,
+        'Windows Chrome': 3674,
+        'Windows Firefox': 369,
+        'Windows Opera': 5,
+      },
+    });
+  });
+
+  it(`convert 3d series object to segment values and paths`, () => {
+    const obj = flattenNestedObjectToPath(d3ResultsObj.series);
+    expect(obj).to.eql({
+      'paths':{
+        'Viewed Report Mac OS X Chrome':[`Viewed Report`, `Mac OS X`, `Chrome`],
+        'Viewed Report Mac OS X Safari': [`Viewed Report`, `Mac OS X`, `Safari`],
+        'Viewed Report Windows Chrome': [`Viewed Report`, `Windows`, `Chrome`],
+        'Viewed Report Windows Firefox': [`Viewed Report`, `Windows`, `Firefox`],
+        'Viewed Report Windows Opera': [`Viewed Report`, `Windows`, `Opera`],
+        'Viewed Signup Linux Firefox': [`Viewed Signup`, `Linux`, `Firefox`],
+        'Viewed Signup Linux Safari': [`Viewed Signup`, `Linux`, `Safari`],
+        'Viewed Signup Windows Chrome': [`Viewed Signup`, `Windows`, `Chrome`],
+        'Viewed Signup Windows Firefox': [`Viewed Signup`, `Windows`, `Firefox`],
+      },
+      'values':{
+        'Viewed Report Mac OS X Chrome':{
+          '1472626800000':1990,
+          '1472630400000':2122,
+          '1472634000000':2035,
+        },
+        'Viewed Report Mac OS X Safari':{
+          '1472626800000':329,
+          '1472630400000':459,
+          '1472634000000':579,
+        },
+        'Viewed Report Windows Chrome':{
+          '1472626800000':1300,
+          '1472630400000':1212,
+          '1472634000000':1162,
+        },
+        'Viewed Report Windows Firefox':{
+          '1472626800000':100,
+          '1472630400000':131,
+          '1472634000000':138,
+        },
+        'Viewed Report Windows Opera':{
+          '1472626800000':1,
+          '1472630400000':1,
+          '1472634000000':3,
+        },
+        'Viewed Signup Linux Firefox':{
+          '1472626800000':56,
+          '1472630400000':93,
+          '1472634000000':82,
+        },
+        'Viewed Signup Linux Safari':{
+          '1472626800000':0,
+          '1472630400000':0,
+          '1472634000000':0,
+        },
+        'Viewed Signup Windows Chrome':{
+          '1472626800000':1300,
+          '1472630400000':1212,
+          '1472634000000':1162,
+        },
+        'Viewed Signup Windows Firefox':{
+          '1472626800000':100,
+          '1472630400000':131,
+          '1472634000000':138,
+        },
+      },
+    });
+  });
+
+  it(`convert 3d series object to segment values and paths and flattens time values`, () => {
+    const obj = flattenNestedObjectToPath(d3ResultsObj.series, {flattenValues: true});
+    expect(obj).to.eql({
+      'paths':{
+        'Viewed Report Mac OS X Chrome':[`Viewed Report`, `Mac OS X`, `Chrome`],
+        'Viewed Report Mac OS X Safari': [`Viewed Report`, `Mac OS X`, `Safari`],
+        'Viewed Report Windows Chrome': [`Viewed Report`, `Windows`, `Chrome`],
+        'Viewed Report Windows Firefox': [`Viewed Report`, `Windows`, `Firefox`],
+        'Viewed Report Windows Opera': [`Viewed Report`, `Windows`, `Opera`],
+        'Viewed Signup Linux Firefox': [`Viewed Signup`, `Linux`, `Firefox`],
+        'Viewed Signup Linux Safari': [`Viewed Signup`, `Linux`, `Safari`],
+        'Viewed Signup Windows Chrome': [`Viewed Signup`, `Windows`, `Chrome`],
+        'Viewed Signup Windows Firefox': [`Viewed Signup`, `Windows`, `Firefox`],
+      },
+      'values':{
+        'Viewed Report Mac OS X Chrome': 6147,
+        'Viewed Report Mac OS X Safari': 1367,
+        'Viewed Report Windows Chrome': 3674,
+        'Viewed Report Windows Firefox': 369,
+        'Viewed Report Windows Opera': 5,
+        'Viewed Signup Linux Firefox': 231,
+        'Viewed Signup Windows Chrome': 3674,
+        'Viewed Signup Windows Firefox': 369,
+      },
+    });
+  });
+
+
+  it(`handles a custom header formatting`, () => {
+    const obj = flattenNestedObjectToPath(d2ResultsObj.series, {
+      flattenValues: true,
+      formatHeader: keys => keys.map((key, idx) => `${idx + 1}) ${key}`).join(`, `),
+    });
+    expect(obj).to.eql({
+      paths: {
+        '1) Mac OS X, 2) Chrome': [ `Mac OS X`, `Chrome` ],
+        '1) Mac OS X, 2) Firefox': [ `Mac OS X`, `Firefox` ],
+        '1) Mac OS X, 2) Opera': [ `Mac OS X`, `Opera` ],
+        '1) Mac OS X, 2) Safari': [ `Mac OS X`, `Safari` ],
+        '1) Windows, 2) Chrome': [ `Windows`, `Chrome` ],
+        '1) Windows, 2) Firefox': [ `Windows`, `Firefox` ],
+        '1) Windows, 2) Opera': [ `Windows`, `Opera` ],
+      },
+      values: {
+        '1) Mac OS X, 2) Chrome': 6147,
+        '1) Mac OS X, 2) Firefox': 231,
+        '1) Mac OS X, 2) Safari': 1367,
+        '1) Windows, 2) Chrome': 3674,
+        '1) Windows, 2) Firefox': 369,
+        '1) Windows, 2) Opera': 5,
+      },
+    });
+  });
+});
