@@ -25,6 +25,8 @@
           for alert in alerts
             mp-smart-hub-alert(
               attrs={
+                'mixpanel-host': mixpanelHost,
+                'project-id': projectId,
                 'alert': JSON.stringify(alert),
               }
               on={

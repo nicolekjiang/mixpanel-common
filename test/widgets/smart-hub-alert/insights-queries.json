@@ -1,0 +1,429 @@
+[
+  {
+    "description": "Test minimal query",
+    "query": {
+      "dateRange": {
+        "to": "2016-09-01",
+        "from": "2016-01-02"
+      },
+      "timeUnit": "DAY",
+      "showClauses": [
+        {
+          "showEvent": {
+            "action": "TOTAL",
+            "event": "$top_events"
+          }
+        }
+      ],
+      "groupByProperties": [],
+      "propertyFilters": []
+    },
+    "urlParams": {
+      "displayOptions": {
+        "analysis": "linear",
+        "chartType": "line",
+        "plotStyle": "standard",
+        "value": "absolute"
+      },
+      "sections": {
+        "show": {
+          "clauses": [
+            {
+              "math": "total",
+              "resourceType": "all",
+              "value": {
+                "name": "$top_events"
+              }
+            }
+          ]
+        },
+        "group": {
+          "clauses": []
+        },
+        "filter": {
+          "clauses": []
+        },
+        "time": {
+          "clauses": [
+            {
+              "unit": "day",
+              "value": [
+                "2016-01-02",
+                "2016-09-01"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "description": "Test show clauses",
+    "query": {
+      "dateRange": {
+        "to": "2016-09-01",
+        "from": "2016-01-02"
+      },
+      "timeUnit": "DAY",
+      "showClauses": [
+        {
+          "showEvent": {
+            "action": "TOTAL",
+            "event": "show-event"
+          }
+        },
+        {
+          "showEventProperty": {
+            "action": "AVERAGE",
+            "event": "show-property-for-event",
+            "property": {
+              "source": "EVENTS",
+              "type": "STRING",
+              "name": "show-event-property"
+            }
+          }
+        },
+        {
+          "showPeopleProperty": {
+            "action": "AVERAGE",
+            "property": {
+              "source": "PEOPLE",
+              "type": "STRING",
+              "name": "show-people-property"
+            }
+          }
+        }
+      ],
+      "groupByProperties": [],
+      "propertyFilters": []
+    },
+    "urlParams": {
+      "displayOptions": {
+        "analysis": "linear",
+        "chartType": "line",
+        "plotStyle": "standard",
+        "value": "absolute"
+      },
+      "sections": {
+        "show": {
+          "clauses": [
+            {
+              "math": "total",
+              "resourceType": "all",
+              "value": {
+                "name": "show-event"
+              }
+            },
+            {
+              "math": "average",
+              "resourceType": "all",
+              "property": {
+                "name": "show-event-property",
+                "resourceType": "events",
+                "type": "string"
+              },
+              "value": {
+                "name": "show-property-for-event"
+              }
+            },
+            {
+              "math": "average",
+              "resourceType": "people",
+              "property": {
+                "name": "show-people-property",
+                "resourceType": "people",
+                "type": "string"
+              }
+            }
+          ]
+        },
+        "group": {
+          "clauses": []
+        },
+        "filter": {
+          "clauses": []
+        },
+        "time": {
+          "clauses": [
+            {
+              "unit": "day",
+              "value": [
+                "2016-01-02",
+                "2016-09-01"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "description": "Test groupby clauses",
+    "query": {
+      "dateRange": {
+        "to": "2016-09-01",
+        "from": "2016-01-02"
+      },
+      "timeUnit": "DAY",
+      "showClauses": [
+        {
+          "showEvent": {
+            "action": "TOTAL",
+            "event": "$top_events"
+          }
+        }
+      ],
+      "groupByProperties": [
+        {
+          "property": {
+            "source": "EVENTS",
+            "type": "NUMBER",
+            "typecast": "STRING",
+            "name": "number-to-string-prop"
+          }
+        },
+        {
+          "property": {
+            "source": "EVENTS",
+            "type": "DATE",
+            "name": "date-prop"
+          },
+          "time_unit": "HOUR"
+        }
+      ],
+      "propertyFilters": []
+    },
+    "urlParams": {
+      "displayOptions": {
+        "analysis": "linear",
+        "chartType": "line",
+        "plotStyle": "standard",
+        "value": "absolute"
+      },
+      "sections": {
+        "show": {
+          "clauses": [
+            {
+              "math": "total",
+              "resourceType": "all",
+              "value": {
+                "name": "$top_events"
+              }
+            }
+          ]
+        },
+        "group": {
+          "clauses": [
+            {
+              "propertyType": "number",
+              "typeCast": "string",
+              "resourceType": "events",
+              "value": "number-to-string-prop"
+            },
+            {
+              "propertyType": "datetime",
+              "typeCast": null,
+              "resourceType": "events",
+              "value": "date-prop"
+            }
+          ]
+        },
+        "filter": {
+          "clauses": []
+        },
+        "time": {
+          "clauses": [
+            {
+              "unit": "day",
+              "value": [
+                "2016-01-02",
+                "2016-09-01"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "description": "Test property filters",
+    "query": {
+      "dateRange": {
+        "to": "2016-09-01",
+        "from": "2016-01-02"
+      },
+      "timeUnit": "DAY",
+      "showClauses": [
+        {
+          "showEvent": {
+            "action": "TOTAL",
+            "event": "$top_events"
+          }
+        }
+      ],
+      "groupByProperties": [],
+      "propertyFilters": [
+        {
+          "property": {
+            "source": "EVENTS",
+            "type": "STRING",
+            "name": "string-property"
+          },
+          "stringFilter": {
+            "operator": "CONTAINS",
+            "operands": [
+              "string-operand-1",
+              "string-operand-2"
+            ]
+          }
+        },
+        {
+          "property": {
+            "source": "EVENTS",
+            "type": "NUMBER",
+            "name": "number-property"
+          },
+          "numberFilter": {
+            "operator": "BETWEEN",
+            "operand1": 10.5,
+            "operand2": 40
+          }
+        },
+        {
+          "property": {
+            "source": "EVENTS",
+            "type": "DATE",
+            "name": "date-property"
+          },
+          "absoluteDateFilter": {
+            "operator": "BETWEEN",
+            "operand1": "2017-06-01",
+            "operand2": "2017-06-07"
+          }
+        },
+        {
+          "property": {
+            "source": "EVENTS",
+            "type": "DATE",
+            "name": "date-property"
+          },
+          "relativeDateFilter": {
+            "operator": "LESS_THAN",
+            "timeUnit": "DAY",
+            "operand": 10
+          }
+        },
+        {
+          "property": {
+            "source": "EVENTS",
+            "type": "BOOLEAN",
+            "name": "boolean-property"
+          },
+          "booleanFilter": {
+            "operand": true
+          }
+        },
+        {
+          "property": {
+            "source": "EVENTS",
+            "type": "LIST",
+            "name": "lister-property"
+          },
+          "listFilter": {
+            "operator": "DOES_NOT_CONTAIN",
+            "operand": "list-filter-operand"
+          }
+        }
+      ],
+      "propertyFiltersOperator": "AND"
+    },
+    "urlParams": {
+      "displayOptions": {
+        "analysis": "linear",
+        "chartType": "line",
+        "plotStyle": "standard",
+        "value": "absolute"
+      },
+      "sections": {
+        "show": {
+          "clauses": [
+            {
+              "math": "total",
+              "resourceType": "all",
+              "value": {
+                "name": "$top_events"
+              }
+            }
+          ]
+        },
+        "group": {
+          "clauses": []
+        },
+        "filter": {
+          "clauses": [
+            {
+              "filterOperator": "contains",
+              "filterValue": "string-operand-1",
+              "value": "string-property",
+              "filterType": "string",
+              "resourceType": "events"
+            },
+            {
+              "filterOperator": "is between",
+              "filterValue": [
+                10.5,
+                40
+              ],
+              "value": "number-property",
+              "filterType": "number",
+              "resourceType": "events"
+            },
+            {
+              "filterOperator": "was between",
+              "filterValue": [
+                "2017-06-01",
+                "2017-06-07"
+              ],
+              "value": "date-property",
+              "filterType": "datetime",
+              "resourceType": "events"
+            },
+            {
+              "filterDateUnit": "day",
+              "filterOperator": "was in the",
+              "filterValue": 10,
+              "value": "date-property",
+              "filterType": "datetime",
+              "resourceType": "events"
+            },
+            {
+              "filterOperator": "is true",
+              "value": "boolean-property",
+              "filterType": "boolean",
+              "resourceType": "events"
+            },
+            {
+              "filterOperator": "does not contain",
+              "filterValue": "list-filter-operand",
+              "value": "lister-property",
+              "filterType": "list",
+              "resourceType": "events"
+            }
+          ],
+          "determiner": "all"
+        },
+        "time": {
+          "clauses": [
+            {
+              "unit": "day",
+              "value": [
+                "2016-01-02",
+                "2016-09-01"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+]

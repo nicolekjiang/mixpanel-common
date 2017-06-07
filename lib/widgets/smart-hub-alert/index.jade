@@ -1,6 +1,6 @@
 // TODO(mack): Use a anchor tag for link
-.mp-sh-alert-container(
-  on={click: $helpers.handleNavigateToReport}
+a.mp-sh-alert-container(
+  attrs={href: permalink}
   class={
     'mp-sh-alert-unread': !isRead,
     'mp-sh-alert-no-hover': $component.getAttribute('no-hover'),
