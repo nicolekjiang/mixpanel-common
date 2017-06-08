@@ -1,0 +1,38 @@
+// TODO(mack): Use a anchor tag for link
+.mp-sh-alert-container(
+  on={click: $helpers.handleNavigateToReport}
+  class={
+    'mp-sh-alert-unread': !isRead,
+    'mp-sh-alert-no-hover': $component.getAttribute('no-hover'),
+  }
+)
+  .mp-sh-alert-header
+    .mp-sh-alert-header-title
+      case type
+        when `ANOMALY`
+          .mp-sh-alert-header-icon
+            // TODO(mack): Need to figure out how to handle grouped alert
+            if !alert.groupedAlert && alert.alert.anomaly.direction === 'NEGATIVE'
+              include ./smart-hub-assets/anomaly-down.svg
+            else
+              include ./smart-hub-assets/anomaly-up.svg
+          .mp-sh-alert-header-text Anomaly detection
+    .mp-sh-alert-delete(on={click: ev => $helpers.handleRemoveAlert(ev, alertId)})
+      svg-icon(attrs={icon: 'x'})
+  .mp-sh-alert-message #{message}
+  .mp-sh-alert-footer
+    .mp-sh-alert-footer-time #{ingestedTimeStr}
+    .mp-sh-alert-footer-useful
+      if !markedUseful
+        .mp-sh-alert-footer-good(
+          on={click: ev => $helpers.handleSendFeedback(ev, true)}
+        ) 
+          include ./smart-hub-assets/thumbs-up.svg
+          .mp-sh-alert-footer-good-text Useful
+        .mp-sh-alert-footer-bad(
+          on={click: ev => $helpers.handleSendFeedback(ev, false)}
+        )
+          include ./smart-hub-assets/thumbs-down.svg
+          .mp-sh-alert-footer-bad-text Not useful
+      else if hasSentFeedback
+        .mp-sh-alert-footer-thank-you Thank you for your feedback

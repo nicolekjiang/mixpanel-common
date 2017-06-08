@@ -244,6 +244,7 @@
     "flag",
     "formula",
     "gripper",
+    "hubs-notif",
     "info-outline",
     "input",
     "label",
@@ -357,5 +358,12 @@
     "widgets",
     "items menu widgets",
     "mp-items-menu"
+  ],
+  "smart-hub": [
+    "alert",
+    "smarthub",
+    "global",
+    "widget",
+    "feedback"
   ]
 }

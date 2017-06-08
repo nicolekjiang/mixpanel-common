@@ -1,0 +1,38 @@
+.mp-sh-menu
+  mp-confirm-delete(
+    attrs={id: 'confirmDelete', 'delete-button-label': 'Delete it', closeable: true, open: confirmDeleteOpen}
+    on={
+      change: e => $helpers.handleModalChange('confirmDelete', e.detail.state),
+      submit: $helpers.clearAllAlerts,
+    }
+  )
+    div
+      .mp-confirm-delete-title Delete all Alerts
+      .mp-confirm-delete-description Are you sure you want to clear all alerts?
+  mp-drop-menu(attrs={open}, on={change: $helpers.handleDropMenuChange})
+    .mp-sh-menu-container(attrs={'slot-body': true})
+      .mp-sh-triangle-up
+        svg-icon(attrs={icon: 'triangle-up'})
+      .mp-sh-menu-header
+        .mp-sh-menu-title.mp-font-size-medium Automated insights
+        .mp-sh-menu-clear-all.mp-font-size-small(
+          on={click: $helpers.openConfirmDelete}
+          class={'mp-sh-hide-clear-all': alerts.length == 0}
+        ) Clear all
+      .mp-sh-menu-divider
+      .mp-sh-alerts-container
+        if alerts.length > 0
+          for alert in alerts
+            mp-smart-hub-alert(
+              attrs={
+                'alert': JSON.stringify(alert),
+              }
+              on={
+                sentFeedback: $helpers.handleSentFeedback,
+                removedAlert: $helpers.handleRemovedAlert,
+              }
+            )
+            .mp-sh-menu-divider
+        else
+          .mp-sh-alert-empty-state
+            .mp-sh-alert-emtpy-state-text There are currently no insights

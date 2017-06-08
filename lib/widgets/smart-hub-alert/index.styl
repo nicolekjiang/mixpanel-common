@@ -1,0 +1,114 @@
+@import '../../stylesheets/defaults'
+
++prefix-classes('mp-sh-alert-')
+  .unread
+    background-color grey-50
+
+  .container
+    cursor pointer
+    display flex
+    flex-direction column
+    height 135px
+    justify-content space-between
+    padding 0 20px
+    width 320px
+
+    &:hover:not(.no-hover)
+      background-color grey-50
+
+      .delete
+        display flex
+        svg-icon-style(grey-500, mp-red, size: 20px)
+
+    .header
+      display flex
+      height 20px
+      justify-content space-between
+      padding 15px 0
+      
+      .header-title
+        display flex
+
+        .header-icon
+          display flex
+          margin-right 6px
+          position relative
+          top -3px
+
+          .header-icon-background
+            border-radius 30px
+            height 17px
+            position absolute
+            width 17px
+
+          .header-icon-svg
+            left 1px
+            position relative
+            svg-icon-style(white, size: 15px)
+            top 1px
+
+        .header-text
+          color grey-900
+          font-weight weight-bold
+          font-size-default()
+    
+    .delete
+      display none
+
+    .message
+      color grey-700
+      font-weight weight-medium
+      text-align start
+      white-space normal
+    
+    .footer
+      display flex
+      flex-direction row
+      height 26px
+      justify-content space-between
+      padding 10px 0
+
+      .footer-time
+        color grey-500
+        display flex
+        flex-direction column
+        font-size-small()
+        justify-content center
+
+      .footer-useful
+        color mp-blue
+        cursor pointer
+        display flex
+        flex-direction row
+        font-size-small()
+
+        .footer-good
+          margin-right 15px
+        
+        .footer-good, .footer-bad
+          display flex
+          padding-bottom 1px
+
+          &:hover
+            border-bottom 1px solid mp-blue
+            padding-bottom 0
+          
+          .footer-good-text, .footer-bad-text
+            position relative
+            top 5px
+
+        .footer-thank-you
+          color grey-500
+          display flex
+          flex-direction column
+          font-size-small()
+          justify-content center
+
+.background-mp-yellow
+  background-color mp-yellow
+
+.background-mp-turquoise
+  background-color mp-turquoise
+
+.background-mp-aquamarine
+  background-color mp-aquamarine

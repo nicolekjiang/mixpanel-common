@@ -1,0 +1,782 @@
+[
+  {
+    "alert": {
+      "alertContentId": "alert-content-id-insights1",
+      "alertMetadata": {
+        "type": "ANOMALY",
+        "message": "spontaneous suppuration",
+        "readAtMs": "1490908189900",
+        "ingestedAtMs": "1490908189900",
+        "markedUsefulAtMs": "1490908189900"
+      },
+      "insightsQuery": {
+        "propertyFilters": [
+          {
+            "property": {
+              "source": "EVENT",
+              "type": "STRING",
+              "name": "special-prop"
+            },
+            "stringFilter": {
+              "operator": "CONTAINS",
+              "operands": [
+                "retinoblastoma"
+              ]
+            }
+          }
+        ],
+        "dateRange": {
+          "to": "2016-09-01",
+          "from": "2016-01-02"
+        },
+        "propertyFiltersOperator": "AND",
+        "groupByProperties": [
+          {
+            "source": "EVENT",
+            "type": "STRING",
+            "name": "special-prop"
+          }
+        ],
+        "timeUnit": "DAY",
+        "showClauses": [
+          {
+            "showEvent": {
+              "action": "TOTAL",
+              "event": "eventthing"
+            }
+          },
+          {
+            "showProperty": {
+              "action": "AVERAGE",
+              "property": {
+                "source": "EVENT",
+                "type": "STRING",
+                "name": "special-prop"
+              }
+            }
+          }
+        ]
+      },
+      "alertId": "insights-alert-id1",
+      "anomaly": {
+        "insightsDetails": {
+          "showClauseIdx": "4",
+          "propertyVals": [
+            "prop1",
+            "prop2"
+          ]
+        },
+        "direction": "POSITIVE",
+        "valueAtTimestamp": 900,
+        "anomalyId": "anomaly-id-insights1",
+        "anomalyTimestamp": "2017-09-02"
+      }
+    }
+  },
+  {
+    "alert": {
+      "alertContentId": "alert-content-id-retention1",
+      "alertMetadata": {
+        "type": "ANOMALY",
+        "message": "spontaneous suppuration",
+        "readAtMs": "1490908189900",
+        "ingestedAtMs": "1490908189900",
+        "markedUsefulAtMs": "1490908189900"
+      },
+      "retentionQuery": {
+        "bornEvent": "ras",
+        "propertyFilters": [
+          {
+            "property": {
+              "source": "EVENT",
+              "type": "STRING",
+              "name": "special-prop"
+            },
+            "stringFilter": {
+              "operator": "CONTAINS",
+              "operands": [
+                "retinoblastoma"
+              ]
+            }
+          }
+        ],
+        "bornPropertyFilters": [
+          {
+            "property": {
+              "source": "EVENT",
+              "type": "STRING",
+              "name": "special-prop"
+            },
+            "stringFilter": {
+              "operator": "CONTAINS",
+              "operands": [
+                "retinoblastoma"
+              ]
+            }
+          }
+        ],
+        "dateRange": {
+          "to": "2017-04-09",
+          "from": "2017-01-04"
+        },
+        "retentionType": "BIRTH",
+        "countType": "PERCENT",
+        "timeUnit": "DAY",
+        "event": "src"
+      },
+      "alertId": "retention-alert-id1",
+      "anomaly": {
+        "retentionDetails": {
+          "interval": "4"
+        },
+        "direction": "NEGATIVE",
+        "valueAtTimestamp": 0.93,
+        "anomalyId": "anomaly-id-retention1",
+        "anomalyTimestamp": "2017-09-02"
+      }
+    }
+  },
+  {
+    "alert": {
+      "alertContentId": "alert-content-id-funnel1",
+      "alertMetadata": {
+        "type": "ANOMALY",
+        "message": "spontaneous suppuration",
+        "readAtMs": "1490908189900",
+        "ingestedAtMs": "1490908189900",
+        "markedUsefulAtMs": "1490908189900"
+      },
+      "anomaly": {
+        "funnelsDetails": {
+          "isOverallConversion": true
+        },
+        "direction": "POSITIVE",
+        "valueAtTimestamp": 0.67,
+        "anomalyId": "anomaly-id-funnels1",
+        "anomalyTimestamp": "2017-09-02"
+      },
+      "funnelsQuery": {
+        "timeUnit": "HOUR",
+        "dateRange": {
+          "to": "2016-08-09",
+          "from": "2016-02-07"
+        },
+        "bookmarkId": 939,
+        "groupByProperty": {
+          "source": "EVENT",
+          "type": "STRING",
+          "name": "special-prop"
+        },
+        "propertyFilters": [
+          {
+            "property": {
+              "source": "EVENT",
+              "type": "STRING",
+              "name": "special-prop"
+            },
+            "stringFilter": {
+              "operator": "CONTAINS",
+              "operands": [
+                "retinoblastoma"
+              ]
+            }
+          }
+        ]
+      },
+      "alertId": "funnel-alert-id1"
+    }
+  },
+  {
+    "alert": {
+      "alertContentId": "alert-content-id-insights2",
+      "alertMetadata": {
+        "type": "ANOMALY",
+        "message": "spontaneous suppuration",
+        "readAtMs": "1490908189900",
+        "ingestedAtMs": "1490908189900",
+        "markedUsefulAtMs": "1490908189900"
+      },
+      "insightsQuery": {
+        "propertyFilters": [
+          {
+            "property": {
+              "source": "EVENT",
+              "type": "STRING",
+              "name": "special-prop"
+            },
+            "stringFilter": {
+              "operator": "CONTAINS",
+              "operands": [
+                "retinoblastoma"
+              ]
+            }
+          }
+        ],
+        "dateRange": {
+          "to": "2016-09-01",
+          "from": "2016-01-02"
+        },
+        "propertyFiltersOperator": "AND",
+        "groupByProperties": [
+          {
+            "source": "EVENT",
+            "type": "STRING",
+            "name": "special-prop"
+          }
+        ],
+        "timeUnit": "DAY",
+        "showClauses": [
+          {
+            "showEvent": {
+              "action": "TOTAL",
+              "event": "eventthing"
+            }
+          },
+          {
+            "showProperty": {
+              "action": "AVERAGE",
+              "property": {
+                "source": "EVENT",
+                "type": "STRING",
+                "name": "special-prop"
+              }
+            }
+          }
+        ]
+      },
+      "alertId": "insights-alert-id2",
+      "anomaly": {
+        "insightsDetails": {
+          "showClauseIdx": "4",
+          "propertyVals": [
+            "prop1",
+            "prop2"
+          ]
+        },
+        "direction": "POSITIVE",
+        "valueAtTimestamp": 875,
+        "anomalyId": "anomaly-id-insights2",
+        "anomalyTimestamp": "2017-09-02"
+      }
+    }
+  },
+  {
+    "alert": {
+      "alertContentId": "alert-content-id-retention2",
+      "alertMetadata": {
+        "type": "ANOMALY",
+        "message": "spontaneous suppuration",
+        "readAtMs": "1490908189900",
+        "ingestedAtMs": "1490908189900",
+        "markedUsefulAtMs": "1490908189900"
+      },
+      "retentionQuery": {
+        "bornEvent": "ras",
+        "propertyFilters": [
+          {
+            "property": {
+              "source": "EVENT",
+              "type": "STRING",
+              "name": "special-prop"
+            },
+            "stringFilter": {
+              "operator": "CONTAINS",
+              "operands": [
+                "retinoblastoma"
+              ]
+            }
+          }
+        ],
+        "bornPropertyFilters": [
+          {
+            "property": {
+              "source": "EVENT",
+              "type": "STRING",
+              "name": "special-prop"
+            },
+            "stringFilter": {
+              "operator": "CONTAINS",
+              "operands": [
+                "retinoblastoma"
+              ]
+            }
+          }
+        ],
+        "dateRange": {
+          "to": "2017-04-09",
+          "from": "2017-01-04"
+        },
+        "retentionType": "BIRTH",
+        "countType": "PERCENT",
+        "timeUnit": "DAY",
+        "event": "src"
+      },
+      "alertId": "retention-alert-id2",
+      "anomaly": {
+        "retentionDetails": {
+          "interval": "2"
+        },
+        "direction": "POSITIVE",
+        "valueAtTimestamp": 0.7,
+        "anomalyId": "anomaly-id-retention2",
+        "anomalyTimestamp": "2017-09-02"
+      }
+    }
+  },
+  {
+    "alert": {
+      "alertContentId": "alert-content-id-funnel2",
+      "alertMetadata": {
+        "type": "ANOMALY",
+        "message": "spontaneous suppuration",
+        "readAtMs": "1490908189900",
+        "ingestedAtMs": "1490908189900",
+        "markedUsefulAtMs": "1490908189900"
+      },
+      "anomaly": {
+        "funnelsDetails": {
+          "isOverallConversion": false,
+          "startStepIdx": "3"
+        },
+        "direction": "POSITIVE",
+        "valueAtTimestamp": 0.86,
+        "anomalyId": "anomaly-id-funnels2",
+        "anomalyTimestamp": "2017-09-02"
+      },
+      "funnelsQuery": {
+        "timeUnit": "HOUR",
+        "dateRange": {
+          "to": "2016-08-09",
+          "from": "2016-02-07"
+        },
+        "bookmarkId": 939,
+        "groupByProperty": {
+          "source": "EVENT",
+          "type": "STRING",
+          "name": "special-prop"
+        },
+        "propertyFilters": [
+          {
+            "property": {
+              "source": "EVENT",
+              "type": "STRING",
+              "name": "special-prop"
+            },
+            "stringFilter": {
+              "operator": "CONTAINS",
+              "operands": [
+                "retinoblastoma"
+              ]
+            }
+          }
+        ]
+      },
+      "alertId": "funnel-alert-id2"
+    }
+  },
+  {
+    "groupedAlert": {
+      "groupedAlertId": "group-alert-id-retention",
+      "alerts": [
+        {
+          "alertContentId": "alert-content-id-retention1",
+          "alertMetadata": {
+            "type": "ANOMALY",
+            "message": "spontaneous suppuration",
+            "readAtMs": "1490908189900",
+            "ingestedAtMs": "1490908189900",
+            "markedUsefulAtMs": "1490908189900"
+          },
+          "retentionQuery": {
+            "bornEvent": "ras",
+            "propertyFilters": [
+              {
+                "property": {
+                  "source": "EVENT",
+                  "type": "STRING",
+                  "name": "special-prop"
+                },
+                "stringFilter": {
+                  "operator": "CONTAINS",
+                  "operands": [
+                    "retinoblastoma"
+                  ]
+                }
+              }
+            ],
+            "bornPropertyFilters": [
+              {
+                "property": {
+                  "source": "EVENT",
+                  "type": "STRING",
+                  "name": "special-prop"
+                },
+                "stringFilter": {
+                  "operator": "CONTAINS",
+                  "operands": [
+                    "retinoblastoma"
+                  ]
+                }
+              }
+            ],
+            "dateRange": {
+              "to": "2017-04-09",
+              "from": "2017-01-04"
+            },
+            "retentionType": "BIRTH",
+            "countType": "PERCENT",
+            "timeUnit": "DAY",
+            "event": "src"
+          },
+          "alertId": "retention-alert-id1",
+          "anomaly": {
+            "retentionDetails": {
+              "interval": "4"
+            },
+            "direction": "POSITIVE",
+            "valueAtTimestamp": 0.93,
+            "anomalyId": "anomaly-id-retention1",
+            "anomalyTimestamp": "2017-09-02"
+          }
+        },
+        {
+          "alertContentId": "alert-content-id-retention2",
+          "alertMetadata": {
+            "type": "ANOMALY",
+            "message": "spontaneous suppuration",
+            "readAtMs": "1490908189900",
+            "ingestedAtMs": "1490908189900",
+            "markedUsefulAtMs": "1490908189900"
+          },
+          "retentionQuery": {
+            "bornEvent": "ras",
+            "propertyFilters": [
+              {
+                "property": {
+                  "source": "EVENT",
+                  "type": "STRING",
+                  "name": "special-prop"
+                },
+                "stringFilter": {
+                  "operator": "CONTAINS",
+                  "operands": [
+                    "retinoblastoma"
+                  ]
+                }
+              }
+            ],
+            "bornPropertyFilters": [
+              {
+                "property": {
+                  "source": "EVENT",
+                  "type": "STRING",
+                  "name": "special-prop"
+                },
+                "stringFilter": {
+                  "operator": "CONTAINS",
+                  "operands": [
+                    "retinoblastoma"
+                  ]
+                }
+              }
+            ],
+            "dateRange": {
+              "to": "2017-04-09",
+              "from": "2017-01-04"
+            },
+            "retentionType": "BIRTH",
+            "countType": "PERCENT",
+            "timeUnit": "DAY",
+            "event": "src"
+          },
+          "alertId": "retention-alert-id2",
+          "anomaly": {
+            "retentionDetails": {
+              "interval": "2"
+            },
+            "direction": "POSITIVE",
+            "valueAtTimestamp": 0.7,
+            "anomalyId": "anomaly-id-retention2",
+            "anomalyTimestamp": "2017-09-02"
+          }
+        }
+      ],
+      "alertMetadata": {
+        "type": "ANOMALY",
+        "message": "spontaneous suppuration",
+        "readAtMs": "1490908189900",
+        "ingestedAtMs": "1490908189900",
+        "markedUsefulAtMs": "1490908189900"
+      }
+    }
+  },
+  {
+    "groupedAlert": {
+      "groupedAlertId": "group-alert-id-funnel",
+      "alerts": [
+        {
+          "alertContentId": "alert-content-id-funnel1",
+          "alertMetadata": {
+            "type": "ANOMALY",
+            "message": "spontaneous suppuration",
+            "readAtMs": "1490908189900",
+            "ingestedAtMs": "1490908189900",
+            "markedUsefulAtMs": "1490908189900"
+          },
+          "anomaly": {
+            "funnelsDetails": {
+              "isOverallConversion": true
+            },
+            "direction": "POSITIVE",
+            "valueAtTimestamp": 0.67,
+            "anomalyId": "anomaly-id-funnels1",
+            "anomalyTimestamp": "2017-09-02"
+          },
+          "funnelsQuery": {
+            "timeUnit": "HOUR",
+            "dateRange": {
+              "to": "2016-08-09",
+              "from": "2016-02-07"
+            },
+            "bookmarkId": 939,
+            "groupByProperty": {
+              "source": "EVENT",
+              "type": "STRING",
+              "name": "special-prop"
+            },
+            "propertyFilters": [
+              {
+                "property": {
+                  "source": "EVENT",
+                  "type": "STRING",
+                  "name": "special-prop"
+                },
+                "stringFilter": {
+                  "operator": "CONTAINS",
+                  "operands": [
+                    "retinoblastoma"
+                  ]
+                }
+              }
+            ]
+          },
+          "alertId": "funnel-alert-id1"
+        },
+        {
+          "alertContentId": "alert-content-id-funnel2",
+          "alertMetadata": {
+            "type": "ANOMALY",
+            "message": "spontaneous suppuration",
+            "readAtMs": "1490908189900",
+            "ingestedAtMs": "1490908189900",
+            "markedUsefulAtMs": "1490908189900"
+          },
+          "anomaly": {
+            "funnelsDetails": {
+              "isOverallConversion": false,
+              "startStepIdx": "3"
+            },
+            "direction": "POSITIVE",
+            "valueAtTimestamp": 0.86,
+            "anomalyId": "anomaly-id-funnels2",
+            "anomalyTimestamp": "2017-09-02"
+          },
+          "funnelsQuery": {
+            "timeUnit": "HOUR",
+            "dateRange": {
+              "to": "2016-08-09",
+              "from": "2016-02-07"
+            },
+            "bookmarkId": 939,
+            "groupByProperty": {
+              "source": "EVENT",
+              "type": "STRING",
+              "name": "special-prop"
+            },
+            "propertyFilters": [
+              {
+                "property": {
+                  "source": "EVENT",
+                  "type": "STRING",
+                  "name": "special-prop"
+                },
+                "stringFilter": {
+                  "operator": "CONTAINS",
+                  "operands": [
+                    "retinoblastoma"
+                  ]
+                }
+              }
+            ]
+          },
+          "alertId": "funnel-alert-id2"
+        }
+      ],
+      "alertMetadata": {
+        "type": "ANOMALY",
+        "message": "spontaneous suppuration",
+        "readAtMs": "1490908189900",
+        "ingestedAtMs": "1490908189900",
+        "markedUsefulAtMs": "1490908189900"
+      }
+    }
+  },
+  {
+    "groupedAlert": {
+      "groupedAlertId": "group-alert-id-insights",
+      "alerts": [
+        {
+          "alertContentId": "alert-content-id-insights1",
+          "alertMetadata": {
+            "type": "ANOMALY",
+            "message": "spontaneous suppuration",
+            "readAtMs": "1490908189900",
+            "ingestedAtMs": "1490908189900",
+            "markedUsefulAtMs": "1490908189900"
+          },
+          "insightsQuery": {
+            "propertyFilters": [
+              {
+                "property": {
+                  "source": "EVENT",
+                  "type": "STRING",
+                  "name": "special-prop"
+                },
+                "stringFilter": {
+                  "operator": "CONTAINS",
+                  "operands": [
+                    "retinoblastoma"
+                  ]
+                }
+              }
+            ],
+            "dateRange": {
+              "to": "2016-09-01",
+              "from": "2016-01-02"
+            },
+            "propertyFiltersOperator": "AND",
+            "groupByProperties": [
+              {
+                "source": "EVENT",
+                "type": "STRING",
+                "name": "special-prop"
+              }
+            ],
+            "timeUnit": "DAY",
+            "showClauses": [
+              {
+                "showEvent": {
+                  "action": "TOTAL",
+                  "event": "eventthing"
+                }
+              },
+              {
+                "showProperty": {
+                  "action": "AVERAGE",
+                  "property": {
+                    "source": "EVENT",
+                    "type": "STRING",
+                    "name": "special-prop"
+                  }
+                }
+              }
+            ]
+          },
+          "alertId": "insights-alert-id1",
+          "anomaly": {
+            "insightsDetails": {
+              "showClauseIdx": "4",
+              "propertyVals": [
+                "prop1",
+                "prop2"
+              ]
+            },
+            "direction": "POSITIVE",
+            "valueAtTimestamp": 900,
+            "anomalyId": "anomaly-id-insights1",
+            "anomalyTimestamp": "2017-09-02"
+          }
+        },
+        {
+          "alertContentId": "alert-content-id-insights2",
+          "alertMetadata": {
+            "type": "ANOMALY",
+            "message": "spontaneous suppuration",
+            "readAtMs": "1490908189900",
+            "ingestedAtMs": "1490908189900",
+            "markedUsefulAtMs": "1490908189900"
+          },
+          "insightsQuery": {
+            "propertyFilters": [
+              {
+                "property": {
+                  "source": "EVENT",
+                  "type": "STRING",
+                  "name": "special-prop"
+                },
+                "stringFilter": {
+                  "operator": "CONTAINS",
+                  "operands": [
+                    "retinoblastoma"
+                  ]
+                }
+              }
+            ],
+            "dateRange": {
+              "to": "2016-09-01",
+              "from": "2016-01-02"
+            },
+            "propertyFiltersOperator": "AND",
+            "groupByProperties": [
+              {
+                "source": "EVENT",
+                "type": "STRING",
+                "name": "special-prop"
+              }
+            ],
+            "timeUnit": "DAY",
+            "showClauses": [
+              {
+                "showEvent": {
+                  "action": "TOTAL",
+                  "event": "eventthing"
+                }
+              },
+              {
+                "showProperty": {
+                  "action": "AVERAGE",
+                  "property": {
+                    "source": "EVENT",
+                    "type": "STRING",
+                    "name": "special-prop"
+                  }
+                }
+              }
+            ]
+          },
+          "alertId": "insights-alert-id2",
+          "anomaly": {
+            "insightsDetails": {
+              "showClauseIdx": "4",
+              "propertyVals": [
+                "prop1",
+                "prop2"
+              ]
+            },
+            "direction": "POSITIVE",
+            "valueAtTimestamp": 875,
+            "anomalyId": "anomaly-id-insights2",
+            "anomalyTimestamp": "2017-09-02"
+          }
+        }
+      ],
+      "alertMetadata": {
+        "type": "ANOMALY",
+        "message": "spontaneous suppuration",
+        "readAtMs": "1490908189900",
+        "ingestedAtMs": "1490908189900",
+        "markedUsefulAtMs": "1490908189900"
+      }
+    }
+  }
+]
