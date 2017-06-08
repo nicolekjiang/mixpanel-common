@@ -47570,7 +47570,7 @@
 	          handleDropMenuChange: function handleDropMenuChange(e) {
 	            e.stopImmediatePropagation();
 	            if (e.detail.state === 'open') {
-	              _this6.el.querySelector('.mp-bm-menu-search input').focus();
+	              _this6.el.querySelector('.mp-bm-menu-search').focus();
 	            } else if (e.detail.state === 'closed') {
 	              _this6.setAttribute('open', false);
 	            }
@@ -47841,6 +47841,9 @@
 	                "on": {
 	                  change: $helpers.stopPropagation,
 	                  input: $helpers.setFilterText
+	                },
+	                "class": {
+	                  'mp-bm-menu-search': true
 	                }
 	              }));
 	              __jade_nodes = __jade_nodes.concat(h("div", {
