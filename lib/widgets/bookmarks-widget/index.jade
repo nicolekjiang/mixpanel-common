@@ -38,7 +38,7 @@ mixin list-item(bookmark)
   .mp-bm-menu(attrs={tabindex: 0})
     mp-drop-menu(attrs={open} on={change: $helpers.handleDropMenuChange})
       .mp-bm-menu-container(attrs={'slot-body': true})
-        mp-icon-input(
+        mp-icon-input.mp-bm-menu-search(
           attrs={
             icon: 'search',
             placeholder: 'Search bookmarks...',
