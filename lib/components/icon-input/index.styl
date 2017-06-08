@@ -3,6 +3,24 @@
 +host-styles(mp-icon-input)
   display inline-block
 
-.mp-icon-input
-  icon-input(icon-color: grey-500, icon-size: 22px)
-  width 100%
++prefix-classes('mp-icon-input-')
+  .container
+    align-items center
+    display inline-flex
+    position relative
+    width 100%
+
+    input.input
+      padding 6px
+      padding-left 36px
+      padding-right 18px
+      width 100%
+
+    .icon
+      align-items center
+      bottom 0
+      display flex
+      left 8px
+      position absolute
+      svg-icon-style(grey-500)
+      top 0

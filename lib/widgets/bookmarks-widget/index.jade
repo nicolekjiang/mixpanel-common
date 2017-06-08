@@ -38,19 +38,16 @@ mixin list-item(bookmark)
   .mp-bm-menu(attrs={tabindex: 0})
     mp-drop-menu(attrs={open} on={change: $helpers.handleDropMenuChange})
       .mp-bm-menu-container(attrs={'slot-body': true})
-        .mp-bm-menu-search
-          .mp-bm-menu-mp-icon.mp-icon
-            svg-icon(attrs={icon: 'search'})
-          input(
-            attrs={
-              type: 'text',
-              placeholder: 'Search bookmarks...',
-            }
-            on={
-             change: $helpers.stopPropagation,
-             input: $helpers.setFilterText,
-            }
-          )
+        mp-icon-input(
+          attrs={
+            icon: 'search',
+            placeholder: 'Search bookmarks...',
+          }
+          on={
+            change: $helpers.stopPropagation,
+            input: $helpers.setFilterText,
+          }
+        )
         .mp-bm-menu-list
           if filteredBookmarks.length === 0
             mp-list-item(attrs={static: true})
