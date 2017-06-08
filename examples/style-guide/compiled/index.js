@@ -56,7 +56,7 @@
 
 	__webpack_require__(317);
 
-	var _colors = __webpack_require__(554);
+	var _colors = __webpack_require__(560);
 
 	var _colors2 = _interopRequireDefault(_colors);
 
@@ -68,15 +68,15 @@
 
 	var _itemsMenu2 = _interopRequireDefault(_itemsMenu);
 
-	var _bookmarkData = __webpack_require__(598);
+	var _bookmarkData = __webpack_require__(605);
 
 	var _bookmarkData2 = _interopRequireDefault(_bookmarkData);
 
-	var _index = __webpack_require__(599);
+	var _index = __webpack_require__(606);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	__webpack_require__(600);
+	__webpack_require__(607);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -36822,6 +36822,9 @@
 	    key: 'value',
 	    get: function get() {
 	      return this.el.querySelector('input').value;
+	    },
+	    set: function set(val) {
+	      this.el.querySelector('input').value = val;
 	    }
 	  }]);
 
@@ -36832,7 +36835,7 @@
 /* 469 */
 /***/ function(module, exports) {
 
-	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } svg-icon[icon=type-boolean] #left-dot {   color: #fff;   fill: #fff; } svg-icon[icon=type-boolean] #right-dot {   color: #4c6072;   fill: #4c6072; } svg-icon[icon=lightning-bolt] #bolt, svg-icon[icon=lighting-bolt] #bolt {   color: #fff;   fill: #fff; } svg-icon[icon=alert] #circle, svg-icon[icon=alert] #stem {   color: #fff;   fill: #fff; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6d859e;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 13px;   font-stretch: normal;   font-weight: 400; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 13px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6d859e;   font-size: 14px;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 13px;   font-weight: 400;   padding: 8px;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus, input[type=text]:active, textarea:active {   border-color: #3391e9;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } mp-truncated-text {   display: inline-block;   white-space: nowrap;   width: 100%; } mp-icon-input {   display: inline-block; } :host {   display: inline-block; } .mp-icon-input {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   position: relative;   width: 100%; } .mp-icon-input input {   padding: 6px;   padding-left: 36px;   padding-right: 18px;   width: 100%; } .mp-icon-input input:focus + .mp-icon svg-icon svg {   left: 0;   top: 0; } .mp-icon-input input:focus + .mp-icon svg-icon svg, .mp-icon-input input:focus + .mp-icon svg-icon path {   color: #6d859e;   fill: #6d859e;   transition: 0.2s; } .mp-icon-input .mp-icon {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   bottom: 0;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   left: 8px;   position: absolute;   top: 0; } .mp-icon-input .mp-icon svg-icon svg {   left: 0;   top: 0; } .mp-icon-input .mp-icon svg-icon svg, .mp-icon-input .mp-icon svg-icon path {   color: #9bacbf;   fill: #9bacbf;   transition: 0.2s; } ";
+	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } svg-icon[icon=type-boolean] #left-dot {   color: #fff;   fill: #fff; } svg-icon[icon=type-boolean] #right-dot {   color: #4c6072;   fill: #4c6072; } svg-icon[icon=lightning-bolt] #bolt, svg-icon[icon=lighting-bolt] #bolt {   color: #fff;   fill: #fff; } svg-icon[icon=alert] #circle, svg-icon[icon=alert] #stem {   color: #fff;   fill: #fff; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6d859e;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 13px;   font-stretch: normal;   font-weight: 400; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 13px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6d859e;   font-size: 14px;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 13px;   font-weight: 400;   padding: 8px;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus, input[type=text]:active, textarea:active {   border-color: #3391e9;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } mp-truncated-text {   display: inline-block;   white-space: nowrap;   width: 100%; } mp-icon-input {   display: inline-block; } :host {   display: inline-block; } .mp-icon-input-container {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   position: relative;   width: 100%; } .mp-icon-input-container input.mp-icon-input-input {   padding: 6px;   padding-left: 36px;   padding-right: 18px;   width: 100%; } .mp-icon-input-container .mp-icon-input-icon {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   bottom: 0;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   left: 8px;   position: absolute;   top: 0; } .mp-icon-input-container .mp-icon-input-icon svg-icon svg {   left: 0;   top: 0; } .mp-icon-input-container .mp-icon-input-icon svg-icon svg, .mp-icon-input-container .mp-icon-input-icon svg-icon path {   color: #9bacbf;   fill: #9bacbf;   transition: 0.2s; } ";
 
 
 /***/ },
@@ -36854,13 +36857,13 @@
 	    return {
 	      value: h("div", {
 	        "class": {
-	          'mp-icon-input': true
+	          'mp-icon-input-container': true
 	        }
 	      }, function () {
 	        var __jade_nodes = [];
 	        __jade_nodes = __jade_nodes.concat(h("div", {
 	          "class": {
-	            'mp-icon': true
+	            'mp-icon-input-icon': true
 	          }
 	        }, function () {
 	          var __jade_nodes = [];
@@ -36872,7 +36875,10 @@
 	          return __jade_nodes;
 	        }.call(this).filter(Boolean)));
 	        __jade_nodes = __jade_nodes.concat(h("input", {
-	          "attrs": attrObj
+	          "attrs": attrObj,
+	          "class": {
+	            'mp-icon-input-input': true
+	          }
 	        }));;
 	        return __jade_nodes;
 	      }.call(this).filter(Boolean))
@@ -37587,6 +37593,7 @@
 	var _iconMap_analysisLinear = '<?xml version="1.0" encoding="utf-8"?>\n<!-- Generated by IcoMoon.io -->\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22" viewBox="0 0 22 22">\n<path fill="#000" d="M18 12h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.553 0 1 0.448 1 1s-0.447 1-1 1z"></path>\n</svg>\n';
 	var _iconMap_analysisLogarithmic = '<?xml version="1.0" encoding="utf-8"?>\n<!-- Generated by IcoMoon.io -->\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22" viewBox="0 0 22 22">\n<path fill="#000" d="M18 4c-0.303 0-7.452 0.038-10.707 3.293-3.19 3.19-4.236 9.285-4.279 9.543-0.091 0.544 0.277 1.059 0.821 1.15 0.056 0.009 0.111 0.014 0.166 0.014 0.48 0 0.903-0.347 0.985-0.835 0.010-0.057 0.987-5.724 3.721-8.458 2.669-2.669 9.228-2.707 9.294-2.707 0.552 0 0.999-0.449 0.999-1-0.001-0.553-0.448-1-1-1z"></path>\n</svg>\n';
 	var _iconMap_analysisRolling = '<?xml version="1.0" encoding="utf-8"?>\n<!-- Generated by IcoMoon.io -->\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22" viewBox="0 0 22 22">\n<path fill="#000" d="M19.707 10.293c-0.234-0.235-2.36-2.293-4.707-2.293s-4.473 2.058-4.706 2.292c-0.479 0.475-2.004 1.708-3.294 1.708s-2.815-1.233-3.294-1.708c-0.391-0.389-1.025-0.387-1.414 0.003-0.389 0.391-0.389 1.022 0.001 1.412 0.234 0.235 2.36 2.293 4.707 2.293s4.473-2.058 4.706-2.291c0.479-0.476 2.004-1.709 3.294-1.709s2.815 1.233 3.294 1.709c0.391 0.387 1.023 0.388 1.414-0.004 0.389-0.391 0.389-1.022-0.001-1.412z"></path>\n</svg>\n';
+	var _iconMap_analysis = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">\n    <!-- Generator: Sketch 44.1 (41455) - http://www.bohemiancoding.com/sketch -->\n    <title>Analysis</title>\n    <desc>Created with Sketch.</desc>\n    <defs>\n        <linearGradient xmlns="http://www.w3.org/2000/svg" id="blue-gradient" x1="26.97%" x2="74.831%" y1="-36.06%" y2="116.846%">\n            <stop offset="0%" stop-color="#083BC1"></stop>\n            <stop offset="40.39%" stop-color="#0747C4"></stop>\n            <stop offset="100%" stop-color="#07B2D7"></stop>\n        </linearGradient>\n    </defs>\n    <g id="Navigation-icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">\n        <g id="Analysis" fill="#6D859E">\n            <path d="M12,9.999 L21,9.999 C21,5.03 16.971,1 12,1 L12,9.999 Z M10,3 C5.03,3 1,7.029 1,12 C1,16.97 5.03,21 10,21 C14.971,21 19.001,16.97 19.001,12 L10,12 L10,3 Z" id="analysis"></path>\n        </g>\n    </g>\n</svg>\n';
 	var _iconMap_arrowDown = '<?xml version="1.0" encoding="utf-8"?>\n<!-- Generated by IcoMoon.io -->\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22" viewBox="0 0 22 22">\n<path fill="#000" d="M15.853 11.853l-0.707-0.707c-0.195-0.195-0.512-0.195-0.707 0l-2.44 2.439v-8.085c0-0.277-0.223-0.5-0.5-0.5h-1c-0.276 0-0.5 0.223-0.5 0.5v8.085l-2.439-2.439c-0.195-0.195-0.512-0.195-0.707 0l-0.707 0.707c-0.195 0.195-0.195 0.512 0 0.707l4.146 4.147c0.391 0.39 1.024 0.39 1.415 0l4.146-4.147c0.195-0.195 0.195-0.512 0-0.707z"></path>\n</svg>\n';
 	var _iconMap_arrowLeft = '<?xml version="1.0" encoding="utf-8"?>\n<!-- Generated by IcoMoon.io -->\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22" viewBox="0 0 22 22">\n<path fill="#000" d="M16.5 10h-8.086l2.439-2.439c0.196-0.196 0.196-0.512 0-0.707l-0.706-0.707c-0.196-0.196-0.512-0.196-0.708 0l-4.146 4.146c-0.391 0.39-0.391 1.024 0 1.414l4.146 4.147c0.196 0.195 0.512 0.195 0.708 0l0.706-0.707c0.196-0.196 0.196-0.512 0-0.708l-2.439-2.439h8.086c0.276 0 0.5-0.224 0.5-0.5v-1c0-0.276-0.224-0.5-0.5-0.5z"></path>\n</svg>\n';
 	var _iconMap_arrowReturn = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n<svg viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">\n    <!-- Generator: Sketch 41.1 (35376) - http://www.bohemiancoding.com/sketch -->\n    <title>arrow-return</title>\n    <desc>Created with Sketch.</desc>\n    <defs></defs>\n    <g id="16-x-16" stroke="none" stroke-width="1" fill-rule="evenodd">\n        <g id="arrow-return">\n            <path d="M14.125,6.9397 L14.125,11.6057 L9.75,11.6057 L9.75,9.1087 L6,12.5367 L9.75,15.9997 L9.75,13.4847 L14.437,13.4847 C15.299,13.4847 16,12.8057 16,11.9417 L16,6.9397 C16,6.4207 15.58,5.9997 15.062,5.9997 C14.545,5.9997 14.125,6.4207 14.125,6.9397"></path>\n        </g>\n    </g>\n</svg>';
@@ -37608,6 +37615,7 @@
 	var _iconMap_customEvents = '<?xml version="1.0" encoding="utf-8"?>\n<!-- Generated by IcoMoon.io -->\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22" viewBox="0 0 22 22">\n<path fill="#000" d="M6 7c-0.551 0-1-0.449-1-1s0.449-1 1-1c0.551 0 1 0.449 1 1s-0.449 1-1 1v0zM6 3c-1.657 0-3 1.343-3 3s1.343 3 3 3c1.657 0 3-1.343 3-3s-1.343-3-3-3v0z"></path>\n<path fill="#000" d="M6 17c-0.551 0-1-0.449-1-1s0.449-1 1-1c0.551 0 1 0.449 1 1s-0.449 1-1 1zM6 13c-1.657 0-3 1.343-3 3s1.343 3 3 3c1.657 0 3-1.343 3-3s-1.343-3-3-3z"></path>\n<path fill="#000" d="M16 12c-0.551 0-1-0.449-1-1s0.449-1 1-1c0.551 0 1 0.449 1 1s-0.449 1-1 1zM16 8c-1.657 0-3 1.343-3 3s1.343 3 3 3c1.657 0 3-1.343 3-3s-1.343-3-3-3z"></path>\n<path fill="#000" d="M5 12h2v-2h-2z"></path>\n<path fill="#000" d="M10 9h2v-2h-2z"></path>\n<path fill="#000" d="M10 16h2v-2h-2z"></path>\n</svg>\n';
 	var _iconMap_dash = '<?xml version="1.0" encoding="utf-8"?>\n<!-- Generated by IcoMoon.io -->\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22" viewBox="0 0 22 22">\n<path fill="#000" d="M5 12h12v-2h-12z"></path>\n</svg>\n';
 	var _iconMap_dashboard2 = '<svg \n xmlns="http://www.w3.org/2000/svg"\n xmlns:xlink="http://www.w3.org/1999/xlink"\n width="22px" height="22px">\n<path fill-rule="evenodd"  fill-opacity="0" fill="rgb(255, 255, 255)"\n d="M-0.000,-0.000 L22.000,-0.000 L22.000,22.000 L-0.000,22.000 L-0.000,-0.000 Z"/>\n<path fill-rule="evenodd"  fill="rgb(109, 132, 158)"\n d="M16.998,3.000 L4.996,3.000 C3.893,3.000 2.995,3.897 2.995,5.000 L2.995,17.000 C2.995,18.103 3.893,19.000 4.996,19.000 L14.998,19.000 L14.998,19.000 L16.967,19.000 C18.070,19.000 18.967,18.102 18.967,17.000 L18.999,15.000 L18.999,5.000 C18.999,3.897 18.101,3.000 16.998,3.000 ZM12.998,7.000 L14.998,7.000 L14.998,13.000 L14.998,15.000 L12.998,15.000 L12.998,7.000 ZM9.997,9.000 L11.997,9.000 L11.997,15.000 L9.997,15.000 L9.997,9.000 ZM6.996,7.000 L8.997,7.000 L8.997,15.000 L6.996,15.000 L6.996,7.000 Z"/>\n</svg>\n';
+	var _iconMap_dashboard3 = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">\n    <!-- Generator: Sketch 44.1 (41455) - http://www.bohemiancoding.com/sketch -->\n    <title>Dashboard</title>\n    <desc>Created with Sketch.</desc>\n    <defs>\n        <linearGradient xmlns="http://www.w3.org/2000/svg" id="blue-gradient" x1="26.97%" x2="74.831%" y1="-36.06%" y2="116.846%">\n            <stop offset="0%" stop-color="#083BC1"></stop>\n            <stop offset="40.39%" stop-color="#0747C4"></stop>\n            <stop offset="100%" stop-color="#07B2D7"></stop>\n        </linearGradient>\n    </defs>\n    <g id="Navigation-icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">\n        <g id="Dashboard" fill="#6D859E">\n            <path d="M16,15 C16,15.552 15.551,16 15,16 C14.447,16 14,15.552 14,15 L14,9 C14,8.448 14.447,8 15,8 C15.551,8 16,8.448 16,9 L16,15 Z M11.999,15 C11.999,15.552 11.552,16 11,16 C10.447,16 10,15.552 10,15 L10,11 C10,10.448 10.447,9.999 11,9.999 C11.552,9.999 11.999,10.448 11.999,11 L11.999,15 Z M8,15 C8,15.552 7.551,16 7,16 C6.447,16 6,15.552 6,15 L6,7 C6,6.448 6.447,6 7,6 C7.551,6 8,6.448 8,7 L8,15 Z M18.999,2 L2.999,2 C1.895,2 1,2.895 1,3.999 L1,18 C1,19.104 1.895,20 2.999,20 L18.999,20 C20.105,20 21,19.104 21,18 L21,3.999 C21,2.895 20.105,2 18.999,2 L18.999,2 Z" id="dash"></path>\n        </g>\n    </g>\n</svg>\n';
 	var _iconMap_dashboardAddTo = '<?xml version="1.0" encoding="utf-8"?>\n<!-- Generated by IcoMoon.io -->\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22" viewBox="0 0 22 22">\n<path fill="#000" d="M15.023 13v2h-2.004v-8h2.004v6zM10.013 15v-6h2.004v6h-2.004zM7.008 15v-8h2.004v8h-2.004zM17.027 15h2.004v-10c0-1.103-0.899-2-2.004-2h-12.024c-1.105 0-2.004 0.897-2.004 2v12c0 1.103 0.899 2 2.004 2h10.020v-2h2.004v-2z"></path>\n<path fill="#000" d="M21.499 18.037h-1.54v-1.537c0-0.276-0.225-0.5-0.501-0.5h-0.928c-0.276 0-0.501 0.224-0.501 0.5v1.537h-1.54c-0.277 0-0.501 0.224-0.501 0.5v0.925c0 0.277 0.224 0.5 0.501 0.5h1.54v1.538c0 0.276 0.225 0.5 0.501 0.5h0.928c0.276 0 0.501-0.224 0.501-0.5v-1.538h1.54c0.277 0 0.501-0.223 0.501-0.5v-0.925c0-0.276-0.224-0.5-0.501-0.5z"></path>\n</svg>\n';
 	var _iconMap_dashboardConfirm = '<?xml version="1.0" encoding="utf-8"?>\n<!-- Generated by IcoMoon.io -->\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22" viewBox="0 0 22 22">\n<path fill="#000" d="M13 15v-8h2v8h-2zM10 15v-6h2v6h-2zM7 15v-8h2v8h-2zM17.178 17.66l0.407 0.408 0.069-0.069 0.346-0.345 1-1v-11.655c0-1.103-0.897-2-2-2h-12c-1.103 0-2 0.897-2 2v12c0 1.103 0.897 2 2 2h9.019c0.067-0.255 0.195-0.491 0.386-0.682l0.653-0.655c0.587-0.581 1.537-0.583 2.12-0.002v0z"></path>\n<path fill="#000" d="M21.854 17.231l-0.654-0.654c-0.196-0.196-0.512-0.196-0.707 0l-2.907 2.907-1.113-1.113c-0.195-0.195-0.512-0.195-0.707 0l-0.655 0.654c-0.195 0.195-0.195 0.512 0 0.707l1.464 1.464c0.001 0.001 0.001 0.002 0.002 0.003l0.654 0.655c0.098 0.097 0.226 0.146 0.355 0.146s0.256-0.049 0.354-0.146l0.654-0.655c0.001-0.001 0.002-0.002 0.003-0.004l3.257-3.257c0.195-0.195 0.195-0.512 0-0.707z"></path>\n</svg>\n';
 	var _iconMap_dashboard = '<?xml version="1.0" encoding="utf-8"?>\n<!-- Generated by IcoMoon.io -->\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22" viewBox="0 0 22 22">\n<path fill="#000" d="M15 10c-0.552 0-1-0.448-1-1s0.448-1 1-1c0.552 0 1 0.448 1 1s-0.448 1-1 1zM11 16c-1.657 0-3-1.343-3-3 0-1.304 0.837-2.403 2-2.816v-1.184c0-0.552 0.448-1 1-1s1 0.448 1 1v1.184c1.163 0.413 2 1.512 2 2.816 0 1.657-1.343 3-3 3zM7 10c-0.552 0-1-0.448-1-1s0.448-1 1-1c0.552 0 1 0.448 1 1s-0.448 1-1 1zM11 5c0.552 0 1 0.448 1 1s-0.448 1-1 1c-0.552 0-1-0.448-1-1s0.448-1 1-1zM11 3c-4.418 0-8 3.582-8 8s3.582 8 8 8c4.418 0 8-3.582 8-8s-3.582-8-8-8z"></path>\n<path fill="#000" d="M11 12c-0.552 0-1 0.448-1 1s0.448 1 1 1c0.552 0 1-0.448 1-1s-0.448-1-1-1z"></path>\n</svg>\n';
@@ -37623,6 +37631,7 @@
 	var _iconMap_flag = '<?xml version="1.0" encoding="utf-8"?>\n<!-- Generated by IcoMoon.io -->\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22" viewBox="0 0 22 22">\n<path fill="#000" d="M17 8h-2v2h2v2h-2v-2h-2v2h-2v-2h-2v2h-2v-2h-2v-2h2v-2h2v2h2v-2h2v2h2v-2h2v2zM18 4h-13c0-0.552-0.447-1-1-1s-1 0.448-1 1v14c0 0.552 0.447 1 1 1s1-0.448 1-1v-4h13c0.553 0 1-0.448 1-1v-8c0-0.552-0.447-1-1-1v0z"></path>\n<path fill="#000" d="M7 10h2v-2h-2z"></path>\n<path fill="#000" d="M11 10h2.001v-2h-2.001z"></path>\n</svg>\n';
 	var _iconMap_formula = '<?xml version="1.0" encoding="utf-8"?>\n<!-- Generated by IcoMoon.io -->\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22" viewBox="0 0 22 22">\n            <path d="M17.1529249,8.71253823 C17.5291882,8.71253823 17.692781,9.03311188 18.0854035,9.03311188 C18.5761818,9.03311188 19.0010924,8.64842349 19.0010924,8.18359169 C19.0010924,7.67067384 18.5598225,7.20626384 18.052685,7.20626384 C17.2837991,7.20626384 16.743943,7.59053042 15.4683501,9.41780027 C15.2066018,8.05536223 14.7515556,7.40873141 13.9366055,7.40873141 L12.181858,7.41210587 L10.3242194,7.41210587 L10.6135202,6.24243383 C11.0474715,4.50585258 11.6626663,3.51376147 12.2774306,3.51376147 C12.4582437,3.51376147 12.6028941,3.60234103 12.6028941,3.74406833 C12.6028941,3.99209111 12.3135932,4.08067067 12.3135932,4.48813667 C12.3135932,4.98460403 12.6933006,5.3739323 13.1995771,5.3739323 C13.7600975,5.3739323 14.1217236,4.96688812 14.1217236,4.41727301 C14.1217236,3.54919329 13.4165527,3 12.3316745,3 C11.1017154,3 10.2880568,3.46061373 9.67286193,4.20468206 C9.02193501,5.02003585 8.60606504,6.15385427 8.24443897,7.41210587 L6.90599202,7.41210587 L6.74326029,8.15617421 L8.08170724,8.15617421 C7.17764208,12.0540968 6.59860986,14.5883159 6.49012204,15.1020774 C5.92960164,17.7244543 5.58605688,18.4508067 4.86280475,18.4508067 C4.68199171,18.4508067 4.53691078,18.3799431 4.53691078,18.2382158 C4.53691078,17.990193 4.82664214,17.9370452 4.82664214,17.4941474 C4.82664214,16.980386 4.39226035,16.6256459 3.92214647,16.6256459 C3.43395128,16.6256459 3,17.0512496 3,17.6004429 C3,18.4508067 3.77749604,19 4.79047953,19 C5.58605688,19 6.2731464,18.7342613 6.85174811,18.185068 C7.50267503,17.5650111 7.91897551,16.7673732 8.47949591,15.1375092 C8.9676911,13.7020985 9.18466674,12.8517347 10.1976502,8.15617421 L12.7574462,8.15617421 C13.2305736,8.16882843 13.3640308,8.34345671 13.5052372,9.09722662 L13.9796562,11.5331646 L13.2602786,12.6712011 C12.9167338,13.2157545 12.7854291,13.3119266 12.4913927,13.3119266 C12.1478479,13.3119266 11.9678959,12.9592956 11.4771177,12.9592956 C10.9699802,12.9592956 10.5937169,13.3604345 10.5937169,13.8729305 C10.5937169,14.4339344 11.0026987,14.8186228 11.6243512,14.8186228 C12.4423149,14.8186228 12.8022189,14.4980491 13.7669856,12.9592956 L14.1596082,12.3345988 C14.5195122,14.1774755 14.9284941,14.8186228 15.7460273,14.8186228 C16.5312725,14.8186228 17.218362,14.2736476 18.2162777,12.8631235 L17.872733,12.6391437 C17.2347213,13.4401561 17.0711285,13.5844142 16.7766616,13.5844142 C16.4658354,13.5844142 16.3022426,13.3604345 16.1713684,12.7353158 L15.6478717,10.2188126 C16.1713684,9.30559949 16.7766616,8.71253823 17.1529249,8.71253823"></path>\n</svg>';
 	var _iconMap_gripper = '<?xml version="1.0" encoding="UTF-8"?>\n<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">\n    <!-- Generator: Sketch 43.2 (39069) - http://www.bohemiancoding.com/sketch -->\n    <title>gripper</title>\n    <desc>Created with Sketch.</desc>\n    <defs></defs>\n    <g id="16-x-16" stroke="none" stroke-width="1" fill-rule="evenodd">\n        <g id="gripper">\n            <g transform="translate(6.000000, 5.000000)" id="Shape">\n                <g>\n                    <path d="M3,0 L1,0 C0.448,0 0,0.448 0,1 L0,2 C0,2.552 0.448,3 1,3 L3,3 C3.552,3 4,2.552 4,2 L4,1 C4,0.448 3.552,0 3,0 Z"></path>\n                    <path d="M9,0 L7,0 C6.448,0 6,0.448 6,1 L6,2 C6,2.552 6.448,3 7,3 L9,3 C9.552,3 10,2.552 10,2 L10,1 C10,0.448 9.552,0 9,0 Z"></path>\n                    <path d="M3,5 L1,5 C0.448,5 0,5.448 0,6 L0,7 C0,7.552 0.448,8 1,8 L3,8 C3.552,8 4,7.552 4,7 L4,6 C4,5.448 3.552,5 3,5 Z"></path>\n                    <path d="M9,5 L7,5 C6.448,5 6,5.448 6,6 L6,7 C6,7.552 6.448,8 7,8 L9,8 C9.552,8 10,7.552 10,7 L10,6 C10,5.448 9.552,5 9,5 Z"></path>\n                    <path d="M3,10 L1,10 C0.448,10 0,10.448 0,11 L0,12 C0,12.552 0.448,13 1,13 L3,13 C3.552,13 4,12.552 4,12 L4,11 C4,10.448 3.552,10 3,10 Z"></path>\n                    <path d="M9,10 L7,10 C6.448,10 6,10.448 6,11 L6,12 C6,12.552 6.448,13 7,13 L9,13 C9.552,13 10,12.552 10,12 L10,11 C10,10.448 9.552,10 9,10 Z"></path>\n                </g>\n            </g>\n        </g>\n    </g>\n</svg>';
+	var _iconMap_hubsNotif = '<?xml version="1.0" encoding="UTF-8"?>\n<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">\n    <title>hub-notifs</title>\n    <desc>Anomaly Detection Notifications Icon</desc>\n    <defs></defs>\n    <g id="hub-notifs" stroke="none" stroke-width="1" fill-rule="evenodd">\n        <g id="16-x-16" fill-rule="nonzero" transform="translate(3.000000, 3.000000)">\n            <path d="M9.67619048,14.4761905 L7.00952381,14.4761905 C6.47619048,14.4761905 6.01904762,15.0857143 6.32380952,15.6190476 C6.78095238,16.3047619 7.54285714,16.7619048 8.38095238,16.7619048 C9.21904762,16.7619048 9.98095238,16.3047619 10.3619048,15.6190476 C10.6666667,15.0857143 10.2857143,14.4761905 9.67619048,14.4761905 Z" id="Shape"></path>\n            <path d="M15.847619,11.9619048 L15.5428571,11.5809524 C14.3238095,9.98095238 13.7142857,8.07619048 13.7142857,6.0952381 L13.7142857,5.56190476 C13.7142857,2.81904762 11.7333333,0.380952381 8.99047619,0.0761904762 C5.79047619,-0.304761905 3.04761905,2.20952381 3.04761905,5.33333333 L3.04761905,6.0952381 C3.04761905,8.07619048 2.43809524,9.98095238 1.21904762,11.5809524 L0.914285714,11.9619048 C0.761904762,12.1142857 0.685714286,12.4190476 0.761904762,12.5714286 C0.99047619,13.2571429 1.6,13.7142857 2.28571429,13.7142857 L14.4761905,13.7142857 C15.1619048,13.7142857 15.7714286,13.2571429 15.9238095,12.5714286 C16,12.3428571 15.9238095,12.1142857 15.847619,11.9619048 Z" id="Shape"></path>\n        </g>\n    </g>\n</svg>\n';
 	var _iconMap_infoOutline = '<?xml version="1.0" encoding="utf-8"?>\n<!-- Generated by IcoMoon.io -->\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22" viewBox="0 0 22 22">\n<path fill="#000" d="M11 17c-3.309 0-6-2.691-6-6s2.691-6 6-6c3.309 0 6 2.691 6 6s-2.691 6-6 6zM11 3c-4.411 0-8 3.589-8 8s3.589 8 8 8c4.411 0 8-3.589 8-8s-3.589-8-8-8z"></path>\n<path fill="#000" d="M11 10c-0.552 0-1 0.448-1 1v3c0 0.553 0.448 1 1 1s1-0.447 1-1v-3c0-0.552-0.448-1-1-1z"></path>\n<path fill="#000" d="M11.71 7.29c-0.050-0.040-0.1-0.090-0.15-0.12-0.060-0.040-0.12-0.070-0.18-0.090-0.060-0.030-0.12-0.050-0.18-0.060-0.33-0.070-0.67 0.040-0.91 0.27-0.18 0.19-0.29 0.45-0.29 0.71s0.11 0.52 0.29 0.71c0.19 0.18 0.45 0.29 0.71 0.29 0.060 0 0.13-0.010 0.2-0.020 0.060-0.010 0.12-0.030 0.18-0.060 0.060-0.020 0.12-0.050 0.18-0.090 0.050-0.040 0.1-0.080 0.15-0.12 0.090-0.1 0.16-0.21 0.21-0.33 0.060-0.12 0.080-0.25 0.080-0.38s-0.020-0.26-0.080-0.38c-0.050-0.12-0.12-0.23-0.21-0.33z"></path>\n</svg>\n';
 	var _iconMap_input = '<?xml version="1.0" encoding="utf-8"?>\n<!-- Generated by IcoMoon.io -->\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22" viewBox="0 0 22 22">\n<path fill="#000" d="M11 13h-6v-4h6v-2h-7c-0.553 0-1 0.448-1 1v6c0 0.552 0.447 1 1 1h7v-2z"></path>\n<path fill="#000" d="M18 7h-4v2h3v4h-3v2h4c0.553 0 1-0.448 1-1v-6c0-0.552-0.447-1-1-1z"></path>\n<path fill="#000" d="M12 17h1v-12h-1z"></path>\n<path fill="#000" d="M9 5h3v-1h-3z"></path>\n<path fill="#000" d="M13 5h3v-1h-3z"></path>\n<path fill="#000" d="M9 18h3v-1h-3z"></path>\n<path fill="#000" d="M13 18h3v-1h-3z"></path>\n</svg>\n';
 	var _iconMap_label = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n<svg viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">\n    <!-- Generator: Sketch 41.1 (35376) - http://www.bohemiancoding.com/sketch -->\n    <title>label</title>\n    <desc>Created with Sketch.</desc>\n    <defs></defs>\n    <g id="16-x-16" stroke="none" stroke-width="1" fill-rule="evenodd">\n        <g id="label">\n            <g id="label-tag" transform="translate(3.000000, 3.000000)">\n                <path d="M14.9738751,1.77635684e-15 L9.66487512,1.77635684e-15 C9.11987512,1.77635684e-15 8.59787512,0.216 8.21287512,0.6 L0.300875117,8.506 C-0.100124883,8.907 -0.100124883,9.555 0.299875117,9.956 L6.03487512,15.698 C6.43587512,16.1 7.08687512,16.1 7.48787512,15.699 L15.3998751,7.78 C15.7838751,7.396 15.9998751,6.874 15.9998751,6.331 L15.9998751,1.025 C15.9998751,0.459 15.5398751,1.77635684e-15 14.9738751,1.77635684e-15 M12.4998751,4.985 C11.6718751,4.985 10.9998751,4.313 10.9998751,3.485 C10.9998751,2.657 11.6718751,1.985 12.4998751,1.985 C13.3278751,1.985 13.9998751,2.657 13.9998751,3.485 C13.9998751,4.313 13.3278751,4.985 12.4998751,4.985"></path>\n            </g>\n        </g>\n    </g>\n</svg>';
@@ -37635,6 +37644,7 @@
 	var _iconMap_notificationEmail = '<?xml version="1.0" encoding="UTF-8"?>\n<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">\n    <!-- Generator: Sketch 43.2 (39069) - http://www.bohemiancoding.com/sketch -->\n    <title>notification-email</title>\n    <desc>Created with Sketch.</desc>\n    <defs></defs>\n    <g id="16-x-16" stroke="none" stroke-width="1" fill-rule="evenodd">\n        <g id="notification-email">\n            <g id="email-message" transform="translate(4.000000, 5.000000)">\n                <g>\n                    <path d="M0,0 L14,0 L14,12 L0,12 L0,0 Z M1.75,5.14285714 L1.75,6.85714286 L7,6.85714286 L7,5.14285714 L1.75,5.14285714 Z M1.75,7.71428571 L1.75,9.4285714 L7,9.4285714 L7,7.71428571 L1.75,7.71428571 Z M9.625,1.71428571 L9.625,4.28571429 L12.25,4.28571429 L12.25,1.71428571 L9.625,1.71428571 Z"></path>\n                </g>\n            </g>\n        </g>\n    </g>\n</svg>';
 	var _iconMap_openReport = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n<svg viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">\n    <!-- Generator: Sketch 41.1 (35376) - http://www.bohemiancoding.com/sketch -->\n    <title>open-report</title>\n    <desc>Created with Sketch.</desc>\n    <defs></defs>\n    <g id="16-x-16" stroke="none" stroke-width="1" fill-rule="evenodd">\n        <g id="open-report">\n            <g transform="translate(3.000000, 3.000000)">\n                <path d="M10.3181,2.318 C10.5111,2.511 10.5151,2.819 10.3121,3.022 L7.3731,5.961 C6.9831,6.351 6.9831,6.983 7.3671,7.367 L8.6331,8.633 C9.0201,9.02 9.6471,9.019 10.0391,8.627 L12.9781,5.688 C13.1741,5.492 13.4921,5.492 13.6821,5.682 L15.2991,7.299 C15.6861,7.686 16.0001,7.547 16.0001,7.003 L16.0001,0.997 C16.0001,0.446 15.5471,0 15.0031,0 L8.9971,0 C8.4461,0 8.3161,0.316 8.7011,0.701 L10.3181,2.318 Z M3.1671,13.333 C2.8911,13.333 2.6671,13.111 2.6671,12.835 L2.6671,3.208 C2.6671,2.933 2.8861,2.708 3.1681,2.705 L5.7421,2.679 C6.3001,2.674 6.7521,2.229 6.7521,1.676 L6.7521,0.996 C6.7521,0.447 6.3091,0.002 5.7561,0.002 L0.9961,0 C0.4461,0 0.0001,0.445 0.0001,1.001 L0.0001,14.999 C0.0001,15.552 0.4451,16 1.0011,16 L14.9991,16 C15.5521,16 16.0001,15.552 16.0001,15.002 L16.0001,10.331 C16.0001,9.78 15.5601,9.333 15.0071,9.333 L14.3261,9.333 C13.7781,9.333 13.3331,9.776 13.3331,10.342 L13.3331,12.84 C13.3331,13.111 13.1101,13.33 12.8331,13.33 L3.1671,13.333 Z"></path>\n            </g>\n        </g>\n    </g>\n</svg>';
 	var _iconMap_opportunity = '<?xml version="1.0" encoding="UTF-8"?>\n<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">\n    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->\n    <title>opportunity</title>\n    <desc>Created with Sketch.</desc>\n    <defs></defs>\n    <g id="16-x-16" stroke="none" stroke-width="1">\n        <g id="opportunity">\n            <g transform="translate(3.000000, 3.000000)" id="Shape">\n                <g>\n                    <path d="M3.844809,11.1080837 L3.34505329,10.6241932 C3.18606477,10.4702519 3.18606477,10.2208198 3.34505329,10.0668785 L3.844809,9.58298809 C4.00379752,9.42917818 4.00379752,9.1796147 3.844809,9.02580478 L3.34505329,8.54191433 C3.18606477,8.38797307 2.92845454,8.38797307 2.76946602,8.54191433 L2.26971031,9.02580478 C2.11085744,9.1796147 1.85311155,9.1796147 1.69425869,9.02580478 L1.19450298,8.54191433 C1.03551446,8.38797307 0.777904226,8.38797307 0.618915709,8.54191433 L0.119159995,9.02580478 C-0.039692867,9.1796147 -0.039692867,9.42917818 0.119159995,9.58298809 L0.618915709,10.0668785 C0.777904226,10.2208198 0.777904226,10.4702519 0.618915709,10.6241932 L0.119159995,11.1080837 C-0.039692867,11.2620249 -0.039692867,11.511457 0.119159995,11.6653983 L0.618915709,12.1492888 C0.777904226,12.3030987 1.03551446,12.3030987 1.19450298,12.1492888 L1.69425869,11.6653983 C1.85311155,11.511457 2.11085744,11.511457 2.26971031,11.6653983 L2.76946602,12.1492888 C2.92845454,12.3030987 3.18606477,12.3030987 3.34505329,12.1492888 L3.844809,11.6653983 C4.00379752,11.511457 4.00379752,11.2620249 3.844809,11.1080837" fill-rule="nonzero"></path>\n                    <path d="M13.0818288,3.15231513 L11.7252715,3.15231513 C11.2757084,3.15231513 10.9113371,2.79951118 10.9113371,2.36421993 L10.9113371,0.919378727 C10.9113371,0.484087478 10.5469658,0.131283526 10.0974027,0.131283526 L9.14781258,0.131283526 C8.69824949,0.131283526 8.3338782,0.484087478 8.3338782,0.919378727 L8.3338782,2.36421993 C8.3338782,2.79951118 7.9695069,3.15231513 7.51994381,3.15231513 L6.16338649,3.15231513 C5.7138234,3.15231513 5.3494521,3.50511908 5.3494521,3.94041033 L5.3494521,4.72850554 C5.3494521,5.16379679 5.7138234,5.51660074 6.16338649,5.51660074 L7.51994381,5.51660074 C7.9695069,5.51660074 8.3338782,5.86940469 8.3338782,6.30469594 L8.3338782,7.74953714 C8.3338782,8.18482839 8.69824949,8.53763234 9.14781258,8.53763234 L10.0974027,8.53763234 C10.5469658,8.53763234 10.9113371,8.18482839 10.9113371,7.74953714 L10.9113371,6.30469594 C10.9113371,5.86940469 11.2757084,5.51660074 11.7252715,5.51660074 L13.0818288,5.51660074 C13.5313919,5.51660074 13.8957632,5.16379679 13.8957632,4.72850554 L13.8957632,3.94041033 C13.8957632,3.50511908 13.5313919,3.15231513 13.0818288,3.15231513" fill-rule="nonzero"></path>\n                    <path d="M14.3830019,15.3172476 L13.8832462,14.8333571 C13.7242576,14.6794159 13.7242576,14.4299837 13.8832462,14.2760425 L14.3830019,13.792152 C14.5419904,13.6383421 14.5419904,13.3887786 14.3830019,13.2349687 L13.8832462,12.7510783 C13.7242576,12.597137 13.4666474,12.597137 13.3076589,12.7510783 L12.8079032,13.2349687 C12.6490503,13.3887786 12.3913044,13.3887786 12.2324516,13.2349687 L11.7326958,12.7510783 C11.5737073,12.597137 11.3160971,12.597137 11.1571086,12.7510783 L10.6573529,13.2349687 C10.4985,13.3887786 10.4985,13.6383421 10.6573529,13.792152 L11.1571086,14.2760425 C11.3160971,14.4299837 11.3160971,14.6794159 11.1571086,14.8333571 L10.6573529,15.3172476 C10.4985,15.4711889 10.4985,15.720621 10.6573529,15.8745622 L11.1571086,16.3584527 C11.3160971,16.5122626 11.5737073,16.5122626 11.7326958,16.3584527 L12.2324516,15.8745622 C12.3913044,15.720621 12.6490503,15.720621 12.8079032,15.8745622 L13.3076589,16.3584527 C13.4666474,16.5122626 13.7242576,16.5122626 13.8832462,16.3584527 L14.3830019,15.8745622 C14.5419904,15.720621 14.5419904,15.4711889 14.3830019,15.3172476" fill-rule="nonzero"></path>\n                </g>\n            </g>\n        </g>\n    </g>\n</svg>';
+	var _iconMap_plusLargeThin = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">\n    <!-- Generator: Sketch 44.1 (41455) - http://www.bohemiancoding.com/sketch -->\n    <title>plus-funnel</title>\n    <desc>Created with Sketch.</desc>\n    <defs></defs>\n    <g id="Navigation-icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">\n        <g id="plus-funnel" fill="#9BACBF">\n            <path d="M16.499,10.001 L12,10.001 L12,5.501 C12,5.225 11.775,5 11.499,5 L10.499,5 C10.223,5 9.999,5.225 9.999,5.501 L9.999,10.001 L5.499,10.001 C5.223,10.001 5,10.225 5,10.501 L5,11.501 C5,11.778 5.223,12 5.499,12 L9.999,12 L9.999,16.501 C9.999,16.777 10.223,17.001 10.499,17.001 L11.499,17.001 C11.775,17.001 12,16.777 12,16.501 L12,12 L16.499,12 C16.776,12 16.999,11.778 16.999,11.501 L16.999,10.501 C16.999,10.225 16.776,10.001 16.499,10.001" id="plus"></path>\n        </g>\n    </g>\n</svg>\n';
 	var _iconMap_plusLarge = '<?xml version="1.0" encoding="utf-8"?>\n<!-- Generated by IcoMoon.io -->\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22" viewBox="0 0 22 22">\n<path fill="#000" d="M17 9h-4v-4c0-0.552-0.448-1-1-1h-2c-0.552 0-1 0.448-1 1v4h-4c-0.552 0-1 0.448-1 1v2c0 0.552 0.448 1 1 1h4v4c0 0.552 0.448 1 1 1h2c0.552 0 1-0.448 1-1v-4h4c0.552 0 1-0.448 1-1v-2c0-0.552-0.448-1-1-1z"></path>\n</svg>\n';
 	var _iconMap_plusMedium = '<svg \n xmlns="http://www.w3.org/2000/svg"\n xmlns:xlink="http://www.w3.org/1999/xlink"\n width="22" height="22" viewbox="0 0 22 22">\n<path fill-rule="evenodd"  fill="#000" transform="translate(6 6)"\n d="M10.000,6.000 L6.000,6.000 L6.000,10.000 L4.000,10.000 L4.000,6.000 L0.000,6.000 L0.000,4.000 L4.000,4.000 L4.000,-0.000 L6.000,-0.000 L6.000,4.000 L10.000,4.000 L10.000,6.000 Z"/>\n</svg>\n';
 	var _iconMap_plus = '<?xml version="1.0" encoding="utf-8"?>\n<!-- Generated by IcoMoon.io -->\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22" viewBox="0 0 22 22">\n<path fill="#000" d="M14 10h-2v-2c0-0.552-0.448-1-1-1s-1 0.448-1 1v2h-2c-0.552 0-1 0.448-1 1s0.448 1 1 1h2v2c0 0.552 0.448 1 1 1s1-0.448 1-1v-2h2c0.552 0 1-0.448 1-1s-0.448-1-1-1z"></path>\n</svg>\n';
@@ -37643,6 +37653,7 @@
 	var _iconMap_refresh = '<?xml version="1.0" encoding="utf-8"?>\n<!-- Generated by IcoMoon.io -->\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22" viewBox="0 0 22 22">\n<path fill="#000" d="M16.657 5.343c-1.448-1.448-3.448-2.343-5.657-2.343-4.418 0-8 3.582-8 8s3.582 8 8 8c4.079 0 7.438-3.055 7.931-7h-3.032c-0.465 2.279-2.484 4-4.899 4-2.757 0-5-2.243-5-5s2.243-5 5-5c1.379 0 2.629 0.561 3.534 1.466l-2.534 2.534h7v-7l-2.343 2.343z"></path>\n</svg>\n';
 	var _iconMap_savedReports = '<?xml version="1.0" encoding="utf-8"?>\n<!-- Generated by IcoMoon.io -->\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22" viewBox="0 0 22 22">\n<path fill="#000" d="M14.928 11.279l-1.794 1.843 0.421 2.585c0.034 0.207-0.186 0.362-0.369 0.261l-2.186-1.212-2.187 1.212c-0.183 0.101-0.403-0.054-0.369-0.261l0.421-2.585-1.794-1.843c-0.142-0.147-0.060-0.394 0.142-0.425l2.467-0.377 1.092-2.333c0.091-0.193 0.365-0.193 0.455 0l1.092 2.333 2.467 0.377c0.202 0.031 0.285 0.278 0.142 0.425zM18 5h-5.586c-0.265 0-0.52-0.106-0.707-0.293l-1.414-1.414c-0.188-0.188-0.442-0.293-0.708-0.293h-5.585c-0.553 0-1 0.447-1 1v14c0 0.552 0.447 1 1 1h14c0.552 0 1-0.448 1-1v-12c0-0.553-0.448-1-1-1z"></path>\n</svg>\n';
 	var _iconMap_search = '<?xml version="1.0" encoding="utf-8"?>\n<!-- Generated by IcoMoon.io -->\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22" viewBox="0 0 22 22">\n<path fill="#000" d="M10 15c-2.757 0-5-2.243-5-5s2.243-5 5-5c2.757 0 5 2.243 5 5s-2.243 5-5 5zM18.707 17.293l-3-3c-0.037-0.037-0.084-0.053-0.124-0.083 0.886-1.172 1.417-2.627 1.417-4.21 0-3.866-3.134-7-7-7s-7 3.134-7 7c0 3.866 3.134 7 7 7 1.583 0 3.038-0.531 4.21-1.417 0.030 0.040 0.046 0.087 0.083 0.124l3 3c0.195 0.195 0.451 0.293 0.707 0.293s0.512-0.098 0.707-0.293c0.391-0.391 0.391-1.023 0-1.414z"></path>\n</svg>\n';
+	var _iconMap_setup = '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="20" viewBox="0 0 22 20">\n    <path fill="#FFF" fill-rule="evenodd" d="M16.043 11.121l5.529 3.286c.53.254.561.741.035 1.047l-2.479.297 1.728 3.011a.497.497 0 0 1-.177.677l-.849.492a.49.49 0 0 1-.671-.183l-1.727-3.011-1.495 2.012c-.526.305-.924.045-.883-.554l-.069-6.472c.043-.598.527-.856 1.058-.602zM6 6.999h10a1 1 0 0 1 0 2H6a1 1 0 1 1 0-2zM6 11h5a1 1 0 1 1 0 2H6a1 1 0 0 1 0-2zM6 1a1 1 0 1 0-.001 1.999A1 1 0 0 0 6 1zM3 1a1 1 0 1 0-.003 2A1 1 0 0 0 3 1zm17 10.148V4H1.999v12h11.019l.024 1.999H1.999A1.999 1.999 0 0 1 0 16V1.999A2 2 0 0 1 1.999 0H20a2 2 0 0 1 2 1.999v10.34l-2-1.191z"/>\n</svg>\n';
 	var _iconMap_sortAlphaAsc = '<?xml version="1.0" encoding="utf-8"?>\n<!-- Generated by IcoMoon.io -->\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22" viewBox="0 0 22 22">\n<path fill="#000" d="M11 12h2v-2h-2z"></path>\n<path fill="#000" d="M3.52 6l-3.52 9h2.73l0.46-1h3.69l0.46 1h2.73l-3.51-9h-3.040zM5.040 8l1.18 4h-2.37l1.19-4z"></path>\n<path fill="#000" d="M14.99 6v2h3.98l-3.98 5.099v1.901h7.009v-2h-3.839l3.829-5.099v-1.901z"></path>\n</svg>\n';
 	var _iconMap_sortAlphaDesc = '<?xml version="1.0" encoding="utf-8"?>\n<!-- Generated by IcoMoon.io -->\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22" viewBox="0 0 22 22">\n<path fill="#000" d="M9.010 12h2v-2h-2z"></path>\n<path fill="#000" d="M0 6v2h3.98l-3.98 5.099v1.901h7.010v-2h-3.84l3.83-5.099v-1.901z"></path>\n<path fill="#000" d="M15.531 6l-3.521 9h2.731l0.46-1h3.69l0.46 1h2.729l-3.51-9h-3.039zM17.049 8l1.181 4h-2.371l1.19-4z"></path>\n</svg>\n';
 	var _iconMap_sortValueAsc = '<?xml version="1.0" encoding="utf-8"?>\n<!-- Generated by IcoMoon.io -->\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22" viewBox="0 0 22 22">\n<path fill="#000" d="M3 8h5v-2h-5v2zM3 12h10v-2.001h-10v2.001zM3 16h15v-2h-15v2z"></path>\n</svg>\n';
@@ -37651,6 +37662,7 @@
 	var _iconMap_starTopEvents = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n<svg viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">\n    <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->\n    <title>star-top-events</title>\n    <desc>Created with Sketch.</desc>\n    <defs></defs>\n    <g id="16-x-16" stroke="none" stroke-width="1" fill-rule="evenodd">\n        <g id="star-top-events">\n            <g transform="translate(3.000000, 3.000000)">\n                <path d="M7.99982887,0 C7.21782887,0 6.50682887,0.456 6.18082887,1.168 L4.78082887,4.228 L1.71182887,4.674 C0.958828873,4.783 0.332828873,5.311 0.0978288727,6.035 C-0.137171127,6.759 0.0588288727,7.554 0.603828873,8.085 L2.80182887,10.228 L2.04882887,13.559 C1.87482887,14.33 2.17082887,15.13 2.80382887,15.603 C3.15682887,15.866 3.57782887,16 3.99982887,16 C4.33582887,16 4.67282887,15.916 4.97782887,15.744 L7.99982887,14.05 L11.0218289,15.744 C11.3268289,15.916 11.6638289,16 11.9998289,16 C12.4218289,16 12.8428289,15.866 13.1958289,15.603 C13.8288289,15.13 14.1248289,14.33 13.9508289,13.559 L13.1978289,10.228 L15.3958289,8.085 C15.9408289,7.554 16.1368289,6.759 15.9018289,6.035 C15.6668289,5.311 15.0408289,4.783 14.2878289,4.674 L11.2188289,4.228 L9.81882887,1.168 C9.49282887,0.456 8.78182887,0 7.99982887,0 M7.99982887,2 L9.62682887,5.555 C9.76882887,5.864 10.0568289,6.08 10.3928289,6.129 L13.9998289,6.653 L11.4008289,9.187 C11.1518289,9.429 11.0468289,9.784 11.1228289,10.123 L11.9998289,14 L8.48882887,12.031 C8.33682887,11.946 8.16882887,11.903 7.99982887,11.903 C7.83082887,11.903 7.66282887,11.946 7.51082887,12.031 L3.99982887,14 L4.87682887,10.123 C4.95282887,9.784 4.84782887,9.429 4.59882887,9.187 L1.99982887,6.653 L5.60682887,6.129 C5.94282887,6.08 6.23082887,5.864 6.37282887,5.555 L7.99982887,2"></path>\n            </g>\n        </g>\n    </g>\n</svg>';
 	var _iconMap_table = '<?xml version="1.0" encoding="utf-8"?>\n<!-- Generated by IcoMoon.io -->\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22" viewBox="0 0 22 22">\n<path fill="#000" d="M6 4h-2c-0.552 0-1 0.448-1 1v1c0 0.552 0.448 1 1 1h2c0.552 0 1-0.448 1-1v-1c0-0.552-0.448-1-1-1z"></path>\n<path fill="#000" d="M12 4h-2c-0.552 0-1 0.448-1 1v1c0 0.552 0.448 1 1 1h2c0.552 0 1-0.448 1-1v-1c0-0.552-0.448-1-1-1z"></path>\n<path fill="#000" d="M18 4h-2c-0.552 0-1 0.448-1 1v1c0 0.552 0.448 1 1 1h2c0.552 0 1-0.448 1-1v-1c0-0.552-0.448-1-1-1z"></path>\n<path fill="#000" d="M6 9h-2c-0.552 0-1 0.448-1 1v1c0 0.552 0.448 1 1 1h2c0.552 0 1-0.448 1-1v-1c0-0.552-0.448-1-1-1z"></path>\n<path fill="#000" d="M12 9h-2c-0.552 0-1 0.448-1 1v1c0 0.552 0.448 1 1 1h2c0.552 0 1-0.448 1-1v-1c0-0.552-0.448-1-1-1z"></path>\n<path fill="#000" d="M18 9h-2c-0.552 0-1 0.448-1 1v1c0 0.552 0.448 1 1 1h2c0.552 0 1-0.448 1-1v-1c0-0.552-0.448-1-1-1z"></path>\n<path fill="#000" d="M6 14h-2c-0.552 0-1 0.448-1 1v1c0 0.552 0.448 1 1 1h2c0.552 0 1-0.448 1-1v-1c0-0.552-0.448-1-1-1z"></path>\n<path fill="#000" d="M12 14h-2c-0.552 0-1 0.448-1 1v1c0 0.552 0.448 1 1 1h2c0.552 0 1-0.448 1-1v-1c0-0.552-0.448-1-1-1z"></path>\n<path fill="#000" d="M18 14h-2c-0.552 0-1 0.448-1 1v1c0 0.552 0.448 1 1 1h2c0.552 0 1-0.448 1-1v-1c0-0.552-0.448-1-1-1z"></path>\n</svg>\n';
 	var _iconMap_tag = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">\n    <!-- Generator: sketchtool 41 (35326) - http://www.bohemiancoding.com/sketch -->\n    <title>37BC1BD5-2085-42F1-A5D9-CF55A8657529</title>\n    <desc>Created with sketchtool.</desc>\n    <defs></defs>\n    <g id="Add-Report---Final" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">\n        <g id="Dashboard---Add-flow---Label-field-focused" transform="translate(-936.000000, -221.000000)" fill="#D8E0E7">\n            <g id="Add-Menu---input-focused" transform="translate(908.000000, 130.000000)">\n                <g id="Label-input" transform="translate(19.000000, 83.000000)">\n                    <path d="M24.4998751,15.985 C23.6718751,15.985 22.9998751,15.313 22.9998751,14.485 C22.9998751,13.657 23.6718751,12.985 24.4998751,12.985 C25.3278751,12.985 25.9998751,13.657 25.9998751,14.485 C25.9998751,15.313 25.3278751,15.985 24.4998751,15.985 M26.9738751,11 L21.6648751,11 C21.1198751,11 20.5978751,11.216 20.2128751,11.6 L12.3008751,19.506 C11.8998751,19.907 11.8998751,20.555 12.2998751,20.956 L18.0348751,26.698 C18.4358751,27.1 19.0868751,27.1 19.4878751,26.699 L27.3998751,18.78 C27.7838751,18.396 27.9998751,17.874 27.9998751,17.331 L27.9998751,12.025 C27.9998751,11.459 27.5398751,11 26.9738751,11" id="icon-/-label-copy"></path>\n                </g>\n            </g>\n        </g>\n    </g>\n</svg>\n';
+	var _iconMap_takeAction = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">\n    <!-- Generator: Sketch 44.1 (41455) - http://www.bohemiancoding.com/sketch -->\n    <title>Take action</title>\n    <desc>Created with Sketch.</desc>\n    <defs>\n        <linearGradient xmlns="http://www.w3.org/2000/svg" id="blue-gradient" x1="26.97%" x2="74.831%" y1="-36.06%" y2="116.846%">\n            <stop offset="0%" stop-color="#083BC1"></stop>\n            <stop offset="40.39%" stop-color="#0747C4"></stop>\n            <stop offset="100%" stop-color="#07B2D7"></stop>\n        </linearGradient>\n    </defs>\n    <g id="Navigation-icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">\n        <g id="take_action" fill="#6D859E">\n            <path d="M11,9 C9.895,9 9,9.895 9,11 C9,12.105 9.895,13 11,13 C12.105,13 13,12.105 13,11 C13,9.895 12.105,9 11,9 M11,19 C6.582,19 3,15.418 3,11 C3,6.582 6.582,3 11,3 C15.418,3 19,6.582 19,11 C19,15.418 15.418,19 11,19 M11,1 C5.477,1 1,5.477 1,11 C1,16.523 5.477,21 11,21 C16.523,21 21,16.523 21,11 C21,5.477 16.523,1 11,1 M11,15 C8.791,15 7,13.209 7,11 C7,8.791 8.791,7 11,7 C13.209,7 15,8.791 15,11 C15,13.209 13.209,15 11,15 M11,5 C7.686,5 5,7.686 5,11 C5,14.314 7.686,17 11,17 C14.314,17 17,14.314 17,11 C17,7.686 14.314,5 11,5" id="Page-1"></path>\n        </g>\n    </g>\n</svg>\n';
 	var _iconMap_trashcan = '<?xml version="1.0" encoding="utf-8"?>\n<!-- Generated by IcoMoon.io -->\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22" viewBox="0 0 22 22">\n<path fill="#000" d="M16.5 9h-11c-0.276 0-0.5 0.224-0.5 0.5v8.5c0 0.552 0.448 1 1 1h10c0.552 0 1-0.448 1-1v-8.5c0-0.276-0.224-0.5-0.5-0.5z"></path>\n<path fill="#000" d="M10 6v-1h2v1h-2zM17.001 6h-3v-2c0-0.552-0.448-1-1-1h-4c-0.553 0-1 0.448-1 1v2h-3c-0.553 0-1 0.448-1 1s0.447 1 1 1h12c0.552 0 1-0.448 1-1s-0.448-1-1-1v0z"></path>\n</svg>\n';
 	var _iconMap_triangleDown = '<?xml version="1.0" encoding="utf-8"?>\n<!-- Generated by IcoMoon.io -->\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22" viewBox="0 0 22 22">\n<path fill="#000" d="M7 8l4 6 4-6z"></path>\n</svg>\n';
 	var _iconMap_triangleLeft = '<?xml version="1.0" encoding="utf-8"?>\n<!-- Generated by IcoMoon.io -->\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22" viewBox="0 0 22 22">\n<path fill="#000" d="M14 7l-6 4.001 6 3.999z"></path>\n</svg>\n';
@@ -37662,6 +37674,7 @@
 	var _iconMap_typeList = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n<svg viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">\n    <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->\n    <title>type-list</title>\n    <desc>Created with Sketch.</desc>\n    <defs></defs>\n    <g id="16-x-16" stroke="none" stroke-width="1" fill-rule="evenodd">\n        <g id="type-list">\n            <g id="type_list" transform="translate(2.000000, 2.000000)">\n                <path d="M15,6.5 C15,6.8 14.8,7 14.5,7 L6.5,7 C6.2,7 6,6.8 6,6.5 L6,5.5 C6,5.2 6.2,5 6.5,5 L14.5,5 C14.8,5 15,5.2 15,5.5 L15,6.5 Z M15,9.5 C15,9.8 14.8,10 14.5,10 L6.5,10 C6.2,10 6,9.8 6,9.5 L6,8.5 C6,8.2 6.2,8 6.5,8 L14.5,8 C14.8,8 15,8.2 15,8.5 L15,9.5 Z M15,12.5 C15,12.8 14.8,13 14.5,13 L6.5,13 C6.2,13 6,12.8 6,12.5 L6,11.5 C6,11.2 6.2,11 6.5,11 L14.5,11 C14.8,11 15,11.2 15,11.5 L15,12.5 Z M5,6.5 C5,6.8 4.8,7 4.5,7 L3.5,7 C3.2,7 3,6.8 3,6.5 L3,5.5 C3,5.2 3.2,5 3.5,5 L4.5,5 C4.8,5 5,5.2 5,5.5 L5,6.5 Z M5,9.5 C5,9.8 4.8,10 4.5,10 L3.5,10 C3.2,10 3,9.8 3,9.5 L3,8.5 C3,8.2 3.2,8 3.5,8 L4.5,8 C4.8,8 5,8.2 5,8.5 L5,9.5 Z M5,12.5 C5,12.8 4.8,13 4.5,13 L3.5,13 C3.2,13 3,12.8 3,12.5 L3,11.5 C3,11.2 3.2,11 3.5,11 L4.5,11 C4.8,11 5,11.2 5,11.5 L5,12.5 Z M15,0 L3,0 C1.3,0 0,1.3 0,3 L0,15 C0,16.7 1.3,18 3,18 L15,18 C16.7,18 18,16.7 18,15 L18,3 C18,1.3 16.7,0 15,0 L15,0 Z" id="shape"></path>\n            </g>\n        </g>\n    </g>\n</svg>\n';
 	var _iconMap_typeNumber = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n<svg viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">\n    <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->\n    <title>type-number</title>\n    <desc>Created with Sketch.</desc>\n    <defs></defs>\n    <g id="16-x-16" stroke="none" stroke-width="1" fill-rule="evenodd">\n        <g id="type-number">\n            <g id="type_number" transform="translate(2.000000, 2.000000)">\n                <path d="M9.2002,4.8999 L10.0992,4.8999 L10.0992,11.6999 L11.5992,11.6999 L11.5992,13.0999 L6.6002,13.0999 L6.6002,11.6999 L8.2002,11.6999 L8.2002,6.5999 L6.7002,6.6999 L6.6002,5.3999 L9.2002,4.8999 Z M3.0002,17.9999 L15.0002,17.9999 C16.7002,17.9999 18.0002,16.6999 18.0002,14.9999 L18.0002,2.9999 C18.0002,1.2999 16.7002,-0.0001 15.0002,-0.0001 L3.0002,-0.0001 C1.3002,-0.0001 0.0002,1.2999 0.0002,2.9999 L0.0002,14.9999 C0.0002,16.6999 1.3002,17.9999 3.0002,17.9999 L3.0002,17.9999 Z" id="shape"></path>\n            </g>\n        </g>\n    </g>\n</svg>\n';
 	var _iconMap_typeText = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n<svg viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">\n    <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->\n    <title>type-text</title>\n    <desc>Created with Sketch.</desc>\n    <defs></defs>\n    <g id="16-x-16" stroke="none" stroke-width="1" fill-rule="evenodd">\n        <g id="type-text">\n            <g id="type_text" transform="translate(2.000000, 2.000000)">\n                <polygon id="center" points="8.1001 10.0996 9.9001 10.0996 9.0001 8.2006"></polygon>\n                <path d="M12.7998,13 L11.4998,13 C11.2998,13 11.1998,12.9 11.0998,12.7 L10.6998,11.8 L7.3998,11.8 L6.9998,12.7 C6.8998,12.9 6.7998,13 6.4998,13 L5.1998,13 C4.9998,13 4.9998,12.8 4.9998,12.7 L8.6998,4.7 C8.6998,4.6 8.7998,4.6 8.8998,4.6 L8.9998,4.6 C9.0998,4.6 9.1998,4.7 9.1998,4.7 L12.9008,12.7 C12.9998,12.8 12.9998,13 12.7998,13 M14.9998,0 L2.9998,0 C1.2998,0 -0.0002,1.3 -0.0002,3 L-0.0002,15 C-0.0002,16.7 1.2998,18 2.9998,18 L14.9998,18 C16.6998,18 17.9998,16.7 17.9998,15 L17.9998,3 C17.9998,1.3 16.6998,0 14.9998,0" id="shape"></path>\n            </g>\n        </g>\n    </g>\n</svg>\n';
+	var _iconMap_userGroups = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">\n    <!-- Generator: Sketch 44.1 (41455) - http://www.bohemiancoding.com/sketch -->\n    <title>User groups</title>\n    <desc>Created with Sketch.</desc>\n    <defs>\n        <linearGradient xmlns="http://www.w3.org/2000/svg" id="blue-gradient" x1="26.97%" x2="74.831%" y1="-36.06%" y2="116.846%">\n            <stop offset="0%" stop-color="#083BC1"></stop>\n            <stop offset="40.39%" stop-color="#0747C4"></stop>\n            <stop offset="100%" stop-color="#07B2D7"></stop>\n        </linearGradient>\n    </defs>\n    <g id="Navigation-icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">\n        <g id="User-groups" fill="#6D859E">\n            <path d="M14.0749446,13.999 L7.87581895,13.999 C5.1972099,13.999 2.91321275,15.646 2.04961184,17.95 C1.80891924,18.589 2.45765294,19.999 3.69933751,19.999 L18.3010108,19.999 C19.5127379,19.999 20.1645707,18.715 19.9641657,18.123 C19.1511825,15.728 16.8217327,13.999 14.0749446,13.999 Z M16.1399425,6.999 C16.1399425,4.238 13.829087,2 10.9758983,2 C8.12270964,2 5.81082108,4.238 5.81082108,6.999 C5.81082108,9.761 8.12270964,11.999 10.9758983,11.999 C13.829087,11.999 16.1399425,9.761 16.1399425,6.999 Z" id="user"></path>\n        </g>\n    </g>\n</svg>\n';
 	var _iconMap_valueAbsolute = '<?xml version="1.0" encoding="utf-8"?>\n<!-- Generated by IcoMoon.io -->\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22" viewBox="0 0 22 22">\n<path fill="#000" d="M13 4h2v3h2v1.999h-2v3h2v2.001h-2v3h-2v-3h-3.001v3h-1.999v-3h-2v-2.001h2v-3h-2v-1.999h2v-3h1.999v3h3.001v-3zM9.999 11.999h3.001v-3h-3.001v3z"></path>\n</svg>\n';
 	var _iconMap_valueRelative = '<?xml version="1.0" encoding="utf-8"?>\n<!-- Generated by IcoMoon.io -->\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22" viewBox="0 0 22 22">\n<path fill="#000" d="M15.784 4.089c-0.225-0.157-0.539-0.102-0.695 0.126l-9 13.001c-0.158 0.227-0.101 0.538 0.126 0.695 0.087 0.061 0.186 0.089 0.284 0.089 0.159 0 0.315-0.075 0.412-0.216l9-12.999c0.157-0.227 0.101-0.539-0.127-0.696z"></path>\n<path fill="#000" d="M14.5 16c-0.827 0-1.5-0.673-1.5-1.5s0.673-1.5 1.5-1.5c0.827 0 1.5 0.673 1.5 1.5s-0.673 1.5-1.5 1.5zM14.5 11c-1.93 0-3.5 1.57-3.5 3.5s1.57 3.5 3.5 3.5c1.93 0 3.5-1.57 3.5-3.5s-1.57-3.5-3.5-3.5z"></path>\n<path fill="#000" d="M6 7.5c0-0.827 0.673-1.5 1.5-1.5s1.5 0.673 1.5 1.5c0 0.827-0.673 1.5-1.5 1.5s-1.5-0.673-1.5-1.5zM11 7.5c0-1.93-1.57-3.5-3.5-3.5s-3.5 1.57-3.5 3.5c0 1.93 1.57 3.5 3.5 3.5s3.5-1.57 3.5-3.5z"></path>\n</svg>\n';
 	var _iconMap_xClearSearch = '<?xml version="1.0" encoding="UTF-8"?>\n<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">\n    <!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->\n    <title>x-clear-search</title>\n    <desc>Created with Sketch.</desc>\n    <defs></defs>\n    <g id="16-x-16" stroke="none" stroke-width="1" fill-rule="evenodd">\n        <g id="x-clear-search">\n            <g transform="translate(5.000000, 5.000000)">\n                <circle id="Oval" cx="6" cy="6" r="6"></circle>\n                <polygon id="x" fill="#FFFFFF" points="7.99165087 3.00003565 5.99998217 4.99170435 4.00795693 3.00003565 3 4.00834913 4.9916687 6.00001783 3 7.99168652 4.00795693 9 5.99998217 7.0083313 7.99165087 9 8.99996435 7.99168652 7.00829565 6.00001783 8.99996435 4.00834913"></polygon>\n            </g>\n        </g>\n    </g>\n</svg>';
@@ -37672,6 +37685,7 @@
 	  analysisLinear: _iconMap_analysisLinear,
 	  analysisLogarithmic: _iconMap_analysisLogarithmic,
 	  analysisRolling: _iconMap_analysisRolling,
+	  analysis: _iconMap_analysis,
 	  arrowDown: _iconMap_arrowDown,
 	  arrowLeft: _iconMap_arrowLeft,
 	  arrowReturn: _iconMap_arrowReturn,
@@ -37693,6 +37707,7 @@
 	  customEvents: _iconMap_customEvents,
 	  dash: _iconMap_dash,
 	  dashboard2: _iconMap_dashboard2,
+	  dashboard3: _iconMap_dashboard3,
 	  dashboardAddTo: _iconMap_dashboardAddTo,
 	  dashboardConfirm: _iconMap_dashboardConfirm,
 	  dashboard: _iconMap_dashboard,
@@ -37708,6 +37723,7 @@
 	  flag: _iconMap_flag,
 	  formula: _iconMap_formula,
 	  gripper: _iconMap_gripper,
+	  hubsNotif: _iconMap_hubsNotif,
 	  infoOutline: _iconMap_infoOutline,
 	  input: _iconMap_input,
 	  label: _iconMap_label,
@@ -37720,6 +37736,7 @@
 	  notificationEmail: _iconMap_notificationEmail,
 	  openReport: _iconMap_openReport,
 	  opportunity: _iconMap_opportunity,
+	  plusLargeThin: _iconMap_plusLargeThin,
 	  plusLarge: _iconMap_plusLarge,
 	  plusMedium: _iconMap_plusMedium,
 	  plus: _iconMap_plus,
@@ -37728,6 +37745,7 @@
 	  refresh: _iconMap_refresh,
 	  savedReports: _iconMap_savedReports,
 	  search: _iconMap_search,
+	  setup: _iconMap_setup,
 	  sortAlphaAsc: _iconMap_sortAlphaAsc,
 	  sortAlphaDesc: _iconMap_sortAlphaDesc,
 	  sortValueAsc: _iconMap_sortValueAsc,
@@ -37736,6 +37754,7 @@
 	  starTopEvents: _iconMap_starTopEvents,
 	  table: _iconMap_table,
 	  tag: _iconMap_tag,
+	  takeAction: _iconMap_takeAction,
 	  trashcan: _iconMap_trashcan,
 	  triangleDown: _iconMap_triangleDown,
 	  triangleLeft: _iconMap_triangleLeft,
@@ -37747,6 +37766,7 @@
 	  typeList: _iconMap_typeList,
 	  typeNumber: _iconMap_typeNumber,
 	  typeText: _iconMap_typeText,
+	  userGroups: _iconMap_userGroups,
 	  valueAbsolute: _iconMap_valueAbsolute,
 	  valueRelative: _iconMap_valueRelative,
 	  xClearSearch: _iconMap_xClearSearch,
@@ -46256,7 +46276,7 @@
 	exports.downloadData = downloadData;
 	exports.downloadLocalCSVData = downloadLocalCSVData;
 	exports.getIconForEvent = getIconForEvent;
-	exports.getDescriptionForEvent = getDescriptionForEvent;
+	exports.getDefinitionForEvent = getDefinitionForEvent;
 	exports.renameEvent = renameEvent;
 	exports.getIconForPropertyType = getIconForPropertyType;
 	exports.renameProperty = renameProperty;
@@ -46363,7 +46383,7 @@
 	  }
 	}
 
-	function getDescriptionForEvent(mpEvent, eventDefinitions) {
+	function getDefinitionForEvent(mpEvent, eventDefinitions) {
 	  var predicate = function predicate(definition) {
 	    return definition.name === mpEvent.name && !definition.collectEverythingEventId && !definition.customEventId;
 	  };
@@ -46378,7 +46398,7 @@
 	  }
 
 	  var eventDefinition = eventDefinitions.find(predicate);
-	  return eventDefinition ? eventDefinition.description : null;
+	  return eventDefinition ? eventDefinition : null;
 	}
 
 	function renameEvent(event) {
@@ -46817,6 +46837,10 @@
 	__webpack_require__(548);
 
 	__webpack_require__(551);
+
+	__webpack_require__(554);
+
+	__webpack_require__(557);
 
 /***/ },
 /* 528 */
@@ -48004,38 +48028,16 @@
 	              }
 	            }, function () {
 	              var __jade_nodes = [];
-	              __jade_nodes = __jade_nodes.concat(h("div", {
-	                "class": {
-	                  'mp-bm-menu-search': true
+	              __jade_nodes = __jade_nodes.concat(h("mp-icon-input", {
+	                "attrs": {
+	                  icon: 'search',
+	                  placeholder: 'Search bookmarks...'
+	                },
+	                "on": {
+	                  change: $helpers.stopPropagation,
+	                  input: $helpers.setFilterText
 	                }
-	              }, function () {
-	                var __jade_nodes = [];
-	                __jade_nodes = __jade_nodes.concat(h("div", {
-	                  "class": {
-	                    'mp-bm-menu-mp-icon': true,
-	                    'mp-icon': true
-	                  }
-	                }, function () {
-	                  var __jade_nodes = [];
-	                  __jade_nodes = __jade_nodes.concat(h("svg-icon", {
-	                    "attrs": {
-	                      icon: 'search'
-	                    }
-	                  }));;
-	                  return __jade_nodes;
-	                }.call(this).filter(Boolean)));
-	                __jade_nodes = __jade_nodes.concat(h("input", {
-	                  "attrs": {
-	                    type: 'text',
-	                    placeholder: 'Search bookmarks...'
-	                  },
-	                  "on": {
-	                    change: $helpers.stopPropagation,
-	                    input: $helpers.setFilterText
-	                  }
-	                }));;
-	                return __jade_nodes;
-	              }.call(this).filter(Boolean)));
+	              }));
 	              __jade_nodes = __jade_nodes.concat(h("div", {
 	                "class": {
 	                  'mp-bm-menu-list': true
@@ -48283,7 +48285,7 @@
 /* 533 */
 /***/ function(module, exports) {
 
-	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } svg-icon[icon=type-boolean] #left-dot {   color: #fff;   fill: #fff; } svg-icon[icon=type-boolean] #right-dot {   color: #4c6072;   fill: #4c6072; } svg-icon[icon=lightning-bolt] #bolt, svg-icon[icon=lighting-bolt] #bolt {   color: #fff;   fill: #fff; } svg-icon[icon=alert] #circle, svg-icon[icon=alert] #stem {   color: #fff;   fill: #fff; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6d859e;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 13px;   font-stretch: normal;   font-weight: 400; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 13px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6d859e;   font-size: 14px;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 13px;   font-weight: 400;   padding: 8px;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus, input[type=text]:active, textarea:active {   border-color: #3391e9;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } mp-truncated-text {   display: inline-block;   white-space: nowrap;   width: 100%; } mp-bookmarks-widget {   background-color: #edf3f7;   background-image: linear-gradient(#f9fafc 0, #edf3f7 100%);   box-shadow: 0 1px rgba(0,0,0,0.05);   box-sizing: border-box;   height: 54px;   width: 145px; } :host {   background-color: #edf3f7;   background-image: linear-gradient(#f9fafc 0, #edf3f7 100%);   box-shadow: 0 1px rgba(0,0,0,0.05);   box-sizing: border-box;   height: 54px;   width: 145px; } .mp-bm-container, .mp-bm-container * {   box-sizing: border-box; } .mp-bm-container {   color: #6d859e;   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   -webkit-box-orient: vertical;   -webkit-box-direction: normal;       -ms-flex-direction: column;           flex-direction: column;   height: 100%;   position: relative;   width: 100%; } .mp-bm-container mp-upsell-popup {   left: -460px;   position: absolute;   top: 86px; } .mp-bm-container .mp-bm-btn {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   cursor: pointer;   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 13px;   font-weight: 600;   height: 100%;   -webkit-box-pack: center;       -ms-flex-pack: center;           justify-content: center;   -webkit-user-select: none;      -moz-user-select: none;       -ms-user-select: none;           user-select: none;   width: 100%; } .mp-bm-container .mp-bm-btn svg-icon svg {   left: 0;   top: 0; } .mp-bm-container .mp-bm-btn svg-icon svg, .mp-bm-container .mp-bm-btn svg-icon path {   color: #6d859e;   fill: #6d859e;   transition: 0; } .mp-bm-container .mp-bm-btn:hover svg-icon svg, .mp-bm-container .mp-bm-btn:hover svg-icon path {   color: #4c6072;   fill: #4c6072; } .mp-bm-container .mp-bm-btn .mp-bm-btn-icon {   height: 22px;   margin-right: 4px; } .mp-bm-container .mp-bm-btn:hover {   background-color: rgba(255,255,255,0.35);   color: #4c6072; } .mp-bm-container .mp-bm-menu {   height: 0;   position: relative;   width: 100%; } .mp-bm-container .mp-bm-menu mp-drop-menu {   left: initial;   right: -8px;   top: -10px; } .mp-bm-menu-container, .mp-bm-menu-container * {   box-sizing: border-box; } .mp-bm-menu-container {   background-color: #fff;   border-radius: 5px;   width: 320px; } .mp-bm-menu-container.mp-bm-menu-open {   display: block; } .mp-bm-menu-container .mp-bm-menu-search {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   background-color: #fff;   border-bottom: 1px solid #e5eaef;   border-top-left-radius: 5px;   border-top-right-radius: 5px;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   height: 60px;   -webkit-box-pack: center;       -ms-flex-pack: center;           justify-content: center;   padding: 12px 15px;   width: 100%;   align-items: center;   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   position: relative; } .mp-bm-menu-container .mp-bm-menu-search input {   padding: 6px;   padding-left: 36px;   padding-right: 18px;   width: 100%; } .mp-bm-menu-container .mp-bm-menu-search input:focus + .mp-bm-menu-mp-icon svg-icon svg {   left: 0;   top: 0; } .mp-bm-menu-container .mp-bm-menu-search input:focus + .mp-bm-menu-mp-icon svg-icon svg, .mp-bm-menu-container .mp-bm-menu-search input:focus + .mp-bm-menu-mp-icon svg-icon path {   color: #6d859e;   fill: #6d859e;   transition: 0.2s; } .mp-bm-menu-container .mp-bm-menu-search .mp-bm-menu-mp-icon {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   bottom: 0;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   left: 8px;   position: absolute;   top: 0; } .mp-bm-menu-container .mp-bm-menu-search .mp-bm-menu-mp-icon svg-icon svg {   left: 0;   top: 0; } .mp-bm-menu-container .mp-bm-menu-search .mp-bm-menu-mp-icon svg-icon svg, .mp-bm-menu-container .mp-bm-menu-search .mp-bm-menu-mp-icon svg-icon path {   color: #9bacbf;   fill: #9bacbf;   transition: 0.2s; } .mp-bm-menu-container .mp-bm-menu-search .mp-bm-menu-mp-icon {   left: 24px;   top: -1px; } .mp-bm-menu-container .mp-bm-menu-list {   border-bottom-left-radius: 5px;   border-bottom-right-radius: 5px;   max-height: 360px;   overflow-x: hidden;   overflow-y: auto;   position: relative; } .mp-bm-menu-container .mp-bm-menu-list .mp-bm-menu-list-item-divider {   background-color: #edf3f7;   height: 1px;   margin: 10px; } .mp-bm-menu-container .mp-bm-menu-list mp-list-item:not([static]) {   height: 50px; } .mp-bm-menu-container .mp-bm-menu-list mp-list-item .mp-bm-menu-empty {   font-style: italic; } .mp-bm-menu-container .mp-bm-menu-list mp-list-item .mp-bm-menu-section-header {   color: #6d859e;   font-size: 11px;   text-transform: uppercase;   font-weight: 600; } .mp-bm-menu-container .mp-bm-menu-list mp-list-item .mp-bm-menu-bookmark-row {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   -webkit-box-flex: 1;       -ms-flex: 1;           flex: 1; } .mp-bm-menu-container .mp-bm-menu-list mp-list-item .mp-bm-menu-bookmark-row .mp-bm-menu-bookmark-details {   display: -webkit-box;   display: -ms-flexbox;   display: flex;   -webkit-box-flex: 1;       -ms-flex: 1;           flex: 1;   -webkit-box-orient: vertical;   -webkit-box-direction: normal;       -ms-flex-direction: column;           flex-direction: column;   min-width: 0; } .mp-bm-menu-container .mp-bm-menu-list mp-list-item .mp-bm-menu-bookmark-row .mp-bm-menu-bookmark-details .mp-bm-menu-name, .mp-bm-menu-container .mp-bm-menu-list mp-list-item .mp-bm-menu-bookmark-row .mp-bm-menu-bookmark-details .mp-bm-menu-creator {   font-size: 13px;   max-width: 260px;   overflow: hidden;   text-overflow: ellipsis;   white-space: nowrap; } .mp-bm-menu-container .mp-bm-menu-list mp-list-item .mp-bm-menu-bookmark-row .mp-bm-menu-bookmark-details .mp-bm-menu-name {   color: #6d859e;   font-weight: 500;   line-height: 14px;   margin-bottom: 4px; } .mp-bm-menu-container .mp-bm-menu-list mp-list-item .mp-bm-menu-bookmark-row .mp-bm-menu-bookmark-details .mp-bm-menu-creator {   color: #bdc9d6;   font-weight: 400; } .mp-bm-menu-container .mp-bm-menu-list mp-list-item .mp-bm-menu-delete-button {   -webkit-box-flex: 0;       -ms-flex: none;           flex: none;   height: 22px;   margin-right: 6px;   opacity: 0; } .mp-bm-menu-container .mp-bm-menu-list mp-list-item .mp-bm-menu-delete-button svg-icon svg {   left: 0;   top: 0; } .mp-bm-menu-container .mp-bm-menu-list mp-list-item .mp-bm-menu-delete-button svg-icon svg, .mp-bm-menu-container .mp-bm-menu-list mp-list-item .mp-bm-menu-delete-button svg-icon path {   color: #d8e0e6;   fill: #d8e0e6;   transition: 0.1s; } .mp-bm-menu-container .mp-bm-menu-list mp-list-item .mp-bm-menu-delete-button:hover svg-icon svg, .mp-bm-menu-container .mp-bm-menu-list mp-list-item .mp-bm-menu-delete-button:hover svg-icon path {   color: #e4567b;   fill: #e4567b; } .mp-bm-menu-container .mp-bm-menu-list mp-list-item:hover .mp-bm-menu-delete-button {   opacity: 1; } .mp-bm-menu-container .mp-bm-menu-list mp-list-item[active='true'] .mp-bm-menu-bookmark-row .mp-bm-menu-bookmark-details .mp-bm-menu-name {   color: #4ba8ff; } .mp-bm-menu-container .mp-bm-menu-list mp-list-item[active='true'] .mp-bm-menu-bookmark-row .mp-bm-menu-bookmark-details .mp-bm-menu-creator {   color: #9bacbf; } .mp-bm-menu-add {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   height: 50px;   -webkit-box-pack: center;       -ms-flex-pack: center;           justify-content: center;   position: relative;   width: 100%; } .mp-bm-menu-add mp-button-bar {   height: 100%; } .mp-bm-menu-add mp-button-bar .mp-bm-menu-over-free-text {   left: 13px;   position: relative; } .mp-bm-menu-add .mp-bm-menu-upsell-icon {   left: 72px;   position: absolute;   top: 15px; } .mp-bm-menu-add .mp-bm-menu-upsell-icon svg-icon svg {   left: 0;   top: 0; } .mp-bm-menu-add .mp-bm-menu-upsell-icon svg-icon svg, .mp-bm-menu-add .mp-bm-menu-upsell-icon svg-icon path {   color: #9270e2;   fill: #9270e2;   transition: 0.2s; } .mp-bm-menu-add mp-input-group {   border-top: 1px solid #d8e0e6;   height: 100%;   padding: 6px;   width: 100%; } .mp-bm-menu-add mp-upsell-popup {   position: fixed; } ";
+	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } svg-icon[icon=type-boolean] #left-dot {   color: #fff;   fill: #fff; } svg-icon[icon=type-boolean] #right-dot {   color: #4c6072;   fill: #4c6072; } svg-icon[icon=lightning-bolt] #bolt, svg-icon[icon=lighting-bolt] #bolt {   color: #fff;   fill: #fff; } svg-icon[icon=alert] #circle, svg-icon[icon=alert] #stem {   color: #fff;   fill: #fff; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6d859e;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 13px;   font-stretch: normal;   font-weight: 400; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 13px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6d859e;   font-size: 14px;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 13px;   font-weight: 400;   padding: 8px;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus, input[type=text]:active, textarea:active {   border-color: #3391e9;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } mp-truncated-text {   display: inline-block;   white-space: nowrap;   width: 100%; } mp-bookmarks-widget {   background-color: #edf3f7;   background-image: linear-gradient(#f9fafc 0, #edf3f7 100%);   box-shadow: 0 1px rgba(0,0,0,0.05);   box-sizing: border-box;   height: 54px;   width: 145px; } :host {   background-color: #edf3f7;   background-image: linear-gradient(#f9fafc 0, #edf3f7 100%);   box-shadow: 0 1px rgba(0,0,0,0.05);   box-sizing: border-box;   height: 54px;   width: 145px; } .mp-bm-container, .mp-bm-container * {   box-sizing: border-box; } .mp-bm-container {   color: #6d859e;   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   -webkit-box-orient: vertical;   -webkit-box-direction: normal;       -ms-flex-direction: column;           flex-direction: column;   height: 100%;   position: relative;   width: 100%; } .mp-bm-container mp-upsell-popup {   left: -460px;   position: absolute;   top: 86px; } .mp-bm-container .mp-bm-btn {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   cursor: pointer;   display: -webkit-inline-box;   display: -ms-inline-flexbox;   display: inline-flex;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 13px;   font-weight: 600;   height: 100%;   -webkit-box-pack: center;       -ms-flex-pack: center;           justify-content: center;   -webkit-user-select: none;      -moz-user-select: none;       -ms-user-select: none;           user-select: none;   width: 100%; } .mp-bm-container .mp-bm-btn svg-icon svg {   left: 0;   top: 0; } .mp-bm-container .mp-bm-btn svg-icon svg, .mp-bm-container .mp-bm-btn svg-icon path {   color: #6d859e;   fill: #6d859e;   transition: 0; } .mp-bm-container .mp-bm-btn:hover svg-icon svg, .mp-bm-container .mp-bm-btn:hover svg-icon path {   color: #4c6072;   fill: #4c6072; } .mp-bm-container .mp-bm-btn .mp-bm-btn-icon {   height: 22px;   margin-right: 4px; } .mp-bm-container .mp-bm-btn:hover {   background-color: rgba(255,255,255,0.35);   color: #4c6072; } .mp-bm-container .mp-bm-menu {   height: 0;   position: relative;   width: 100%; } .mp-bm-container .mp-bm-menu mp-drop-menu {   left: initial;   right: -8px;   top: -10px; } .mp-bm-menu-container, .mp-bm-menu-container * {   box-sizing: border-box; } .mp-bm-menu-container {   background-color: #fff;   border-radius: 5px;   width: 320px; } .mp-bm-menu-container.mp-bm-menu-open {   display: block; } .mp-bm-menu-container mp-icon-input {   border-bottom: 1px solid #e5eaef;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   height: 60px;   padding: 12px 15px; } .mp-bm-menu-container .mp-bm-menu-list {   border-bottom-left-radius: 5px;   border-bottom-right-radius: 5px;   max-height: 360px;   overflow-x: hidden;   overflow-y: auto;   position: relative; } .mp-bm-menu-container .mp-bm-menu-list .mp-bm-menu-list-item-divider {   background-color: #edf3f7;   height: 1px;   margin: 10px; } .mp-bm-menu-container .mp-bm-menu-list mp-list-item:not([static]) {   height: 50px; } .mp-bm-menu-container .mp-bm-menu-list mp-list-item .mp-bm-menu-empty {   font-style: italic; } .mp-bm-menu-container .mp-bm-menu-list mp-list-item .mp-bm-menu-section-header {   color: #6d859e;   font-size: 11px;   text-transform: uppercase;   font-weight: 600; } .mp-bm-menu-container .mp-bm-menu-list mp-list-item .mp-bm-menu-bookmark-row {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   -webkit-box-flex: 1;       -ms-flex: 1;           flex: 1; } .mp-bm-menu-container .mp-bm-menu-list mp-list-item .mp-bm-menu-bookmark-row .mp-bm-menu-bookmark-details {   display: -webkit-box;   display: -ms-flexbox;   display: flex;   -webkit-box-flex: 1;       -ms-flex: 1;           flex: 1;   -webkit-box-orient: vertical;   -webkit-box-direction: normal;       -ms-flex-direction: column;           flex-direction: column;   min-width: 0; } .mp-bm-menu-container .mp-bm-menu-list mp-list-item .mp-bm-menu-bookmark-row .mp-bm-menu-bookmark-details .mp-bm-menu-name, .mp-bm-menu-container .mp-bm-menu-list mp-list-item .mp-bm-menu-bookmark-row .mp-bm-menu-bookmark-details .mp-bm-menu-creator {   font-size: 13px;   max-width: 260px;   overflow: hidden;   text-overflow: ellipsis;   white-space: nowrap; } .mp-bm-menu-container .mp-bm-menu-list mp-list-item .mp-bm-menu-bookmark-row .mp-bm-menu-bookmark-details .mp-bm-menu-name {   color: #6d859e;   font-weight: 500;   line-height: 14px;   margin-bottom: 4px; } .mp-bm-menu-container .mp-bm-menu-list mp-list-item .mp-bm-menu-bookmark-row .mp-bm-menu-bookmark-details .mp-bm-menu-creator {   color: #bdc9d6;   font-weight: 400; } .mp-bm-menu-container .mp-bm-menu-list mp-list-item .mp-bm-menu-delete-button {   -webkit-box-flex: 0;       -ms-flex: none;           flex: none;   height: 22px;   margin-right: 6px;   opacity: 0; } .mp-bm-menu-container .mp-bm-menu-list mp-list-item .mp-bm-menu-delete-button svg-icon svg {   left: 0;   top: 0; } .mp-bm-menu-container .mp-bm-menu-list mp-list-item .mp-bm-menu-delete-button svg-icon svg, .mp-bm-menu-container .mp-bm-menu-list mp-list-item .mp-bm-menu-delete-button svg-icon path {   color: #d8e0e6;   fill: #d8e0e6;   transition: 0.1s; } .mp-bm-menu-container .mp-bm-menu-list mp-list-item .mp-bm-menu-delete-button:hover svg-icon svg, .mp-bm-menu-container .mp-bm-menu-list mp-list-item .mp-bm-menu-delete-button:hover svg-icon path {   color: #e4567b;   fill: #e4567b; } .mp-bm-menu-container .mp-bm-menu-list mp-list-item:hover .mp-bm-menu-delete-button {   opacity: 1; } .mp-bm-menu-container .mp-bm-menu-list mp-list-item[active='true'] .mp-bm-menu-bookmark-row .mp-bm-menu-bookmark-details .mp-bm-menu-name {   color: #4ba8ff; } .mp-bm-menu-container .mp-bm-menu-list mp-list-item[active='true'] .mp-bm-menu-bookmark-row .mp-bm-menu-bookmark-details .mp-bm-menu-creator {   color: #9bacbf; } .mp-bm-menu-add {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   height: 50px;   -webkit-box-pack: center;       -ms-flex-pack: center;           justify-content: center;   position: relative;   width: 100%; } .mp-bm-menu-add mp-button-bar {   height: 100%; } .mp-bm-menu-add mp-button-bar .mp-bm-menu-over-free-text {   left: 13px;   position: relative; } .mp-bm-menu-add .mp-bm-menu-upsell-icon {   left: 72px;   position: absolute;   top: 15px; } .mp-bm-menu-add .mp-bm-menu-upsell-icon svg-icon svg {   left: 0;   top: 0; } .mp-bm-menu-add .mp-bm-menu-upsell-icon svg-icon svg, .mp-bm-menu-add .mp-bm-menu-upsell-icon svg-icon path {   color: #9270e2;   fill: #9270e2;   transition: 0.2s; } .mp-bm-menu-add mp-input-group {   border-top: 1px solid #d8e0e6;   height: 100%;   padding: 6px;   width: 100%; } .mp-bm-menu-add mp-upsell-popup {   position: fixed; } ";
 
 
 /***/ },
@@ -49285,15 +49287,712 @@
 
 	var _registerElement = __webpack_require__(320);
 
-	var _string = __webpack_require__(492);
-
-	var _function = __webpack_require__(487);
-
 	var _index = __webpack_require__(543);
 
 	var _index2 = _interopRequireDefault(_index);
 
 	var _index3 = __webpack_require__(544);
+
+	var _index4 = _interopRequireDefault(_index3);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	exports.default = (0, _registerElement.registerMPElement)('mp-smart-hub-alert', function (_Component) {
+	  _inherits(_class, _Component);
+
+	  function _class() {
+	    _classCallCheck(this, _class);
+
+	    return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).apply(this, arguments));
+	  }
+
+	  _createClass(_class, [{
+	    key: 'generateTimeStr',
+	    value: function generateTimeStr(timestampMs) {
+	      var currentTimestamp = new Date().getTime();
+	      var timestampDiff = currentTimestamp - timestampMs;
+	      // TODO(mack): Use moment.js
+	      if (timestampDiff < 86400000) {
+	        var units = Math.floor(timestampDiff / 3600000);
+	        return units === 1 ? units + ' hour ago' : units + ' hours ago';
+	      } else {
+	        var _units = Math.floor(timestampDiff / 86400000);
+	        return _units === 1 ? _units + ' day ago' : _units + ' days ago';
+	      }
+	    }
+	  }, {
+	    key: 'generatePermalink',
+	    value: function generatePermalink() {
+	      // TODO(mack): Implement permalink generation
+	      return '';
+	    }
+	  }, {
+	    key: 'updateStateFromAlert',
+	    value: function updateStateFromAlert(smartHubAlert) {
+	      var alertId = void 0,
+	          alertMetadata = void 0,
+	          groupedAlertId = void 0,
+	          permalink = void 0;
+	      if (smartHubAlert.alert) {
+	        var alert = smartHubAlert.alert;
+	        alertMetadata = alert.alertMetadata;
+	        alertId = alert.alertId;
+	        permalink = this.generatePermalink([alert]);
+	      } else {
+	        var groupedAlert = smartHubAlert.groupedAlert;
+	        alertMetadata = groupedAlert.alertMetadata;
+	        groupedAlertId = groupedAlert.groupedAlertId;
+	        permalink = this.generatePermalink(groupedAlert.alerts);
+	      }
+	      this.update({
+	        alert: smartHubAlert,
+	        alertId: alertId,
+	        groupedAlertId: groupedAlertId,
+	        permalink: permalink,
+	        type: alertMetadata.type,
+	        isRead: !!alertMetadata.readAtMs,
+	        isMarkedUseful: !!alertMetadata.markedUsefulAtMs,
+	        message: alertMetadata.message,
+	        ingestedTimeStr: this.generateTimeStr(alertMetadata.ingestedAtMs)
+	      });
+	    }
+	  }, {
+	    key: 'attributeChangedCallback',
+	    value: function attributeChangedCallback(name) {
+	      _get(_class.prototype.__proto__ || Object.getPrototypeOf(_class.prototype), 'attributeChangedCallback', this).apply(this, arguments);
+	      if (name === 'alert') {
+	        var alert = this.getJSONAttribute('alert');
+	        this.updateStateFromAlert(alert);
+	      }
+	    }
+	  }, {
+	    key: 'config',
+	    get: function get() {
+	      var _this2 = this;
+
+	      return {
+	        css: _index4.default,
+	        template: _index2.default,
+	        useShadowDom: true,
+	        defaultState: {
+	          alert: null,
+	          alertId: null,
+	          groupedAlertId: null,
+	          permalink: '',
+	          type: '',
+	          hasSentFeedback: false,
+	          isRead: false,
+	          isMarkedUseful: false,
+	          message: '',
+	          ingestedTimeStr: ''
+	        },
+	        helpers: {
+	          handleNavigateToReport: function handleNavigateToReport() {
+	            window.location.href = _this2.state.permalink;
+	          },
+	          handleSendFeedback: function handleSendFeedback(ev, isMarkedUseful) {
+	            ev.stopPropagation();
+	            _this2.update({ hasSentFeedback: true, isMarkedUseful: isMarkedUseful });
+	            _this2.dispatchEvent(new CustomEvent('sentFeedback', {
+	              bubbles: true,
+	              detail: {
+	                alertId: _this2.state.alertId,
+	                groupedAlertId: _this2.state.groupedAlertId,
+	                isMarkedUseful: isMarkedUseful
+	              }
+	            }));
+	          },
+	          handleRemoveAlert: function handleRemoveAlert(ev) {
+	            ev.stopPropagation();
+	            _this2.dispatchEvent(new CustomEvent('removedAlert', {
+	              bubbles: true,
+	              detail: {
+	                alertId: _this2.state.alertId,
+	                groupedAlertId: _this2.state.groupedAlertId
+	              }
+	            }));
+	          }
+	        }
+	      };
+	    }
+	  }]);
+
+	  return _class;
+	}(_panel.Component));
+
+/***/ },
+/* 543 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	function _jade_template_fn(locals) {
+	  locals = locals || {};;;
+	  var result_of_with = function ($component, $helpers, Object, alert, alertId, hasSentFeedback, ingestedTimeStr, isRead, markedUseful, message, type) {
+	    var h = __webpack_require__(299).h;
+	    return {
+	      value: h("div", {
+	        "on": {
+	          click: $helpers.handleNavigateToReport
+	        },
+	        "class": Object.assign({}, {
+	          'mp-sh-alert-unread': !isRead,
+	          'mp-sh-alert-no-hover': $component.getAttribute('no-hover')
+	        }, {
+	          'mp-sh-alert-container': true
+	        })
+	      }, function () {
+	        var __jade_nodes = [];
+	        __jade_nodes = __jade_nodes.concat(h("div", {
+	          "class": {
+	            'mp-sh-alert-header': true
+	          }
+	        }, function () {
+	          var __jade_nodes = [];
+	          __jade_nodes = __jade_nodes.concat(h("div", {
+	            "class": {
+	              'mp-sh-alert-header-title': true
+	            }
+	          }, function () {
+	            var __jade_nodes = [];
+	            __jade_nodes = __jade_nodes.concat(type == "ANOMALY" ? function () {
+	              var __jade_nodes = [];
+	              __jade_nodes = __jade_nodes.concat(h("div", {
+	                "class": {
+	                  'mp-sh-alert-header-icon': true
+	                }
+	              }, function () {
+	                var __jade_nodes = []; /*  TODO(mack): Need to figure out how to handle grouped alert */
+	                __jade_nodes = __jade_nodes.concat(!alert.groupedAlert && alert.alert.anomaly.direction === 'NEGATIVE' ? function () {
+	                  var __jade_nodes = [];
+	                  __jade_nodes = __jade_nodes.concat(h('div', {
+	                    props: {
+	                      innerHTML: '<?xml version="1.0" encoding="UTF-8"?><svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">    <title>anomaly-down</title>    <desc>Created with Sketch.</desc>    <defs></defs>    <g id="anomaly-down" stroke="none" stroke-width="1" fill-rule="evenodd">        <g id="16-x-16" transform="translate(3.000000, 3.000000)">            <circle id="circle" fill="#FFC529" cx="8" cy="8" r="8"></circle>            <path d="M10.9122456,7.33950855 L8.42452122,4.92105894 C8.1899095,4.69298035 7.81009051,4.69298035 7.57547877,4.92105894 L5.08775439,7.33950855 C4.97074854,7.45325618 4.97074854,7.638169 5.08775439,7.75191663 L5.5119756,8.1643247 C5.62898145,8.27807233 5.81919096,8.27807233 5.93619681,8.1643247 L7.39966998,6.74160434 L7.39966998,11.4583394 C7.39966998,11.6193361 7.5340767,11.75 7.69968499,11.75 L8.29971498,11.75 C8.46592329,11.75 8.59972998,11.6193361 8.59972998,11.4583394 L8.59972998,6.74160434 L10.0638032,8.1643247 C10.180809,8.27807233 10.3710186,8.27807233 10.4880244,8.1643247 L10.9122456,7.75191663 C11.0292515,7.638169 11.0292515,7.45325618 10.9122456,7.33950855" id="arrow-up" fill="#FFFFFF" transform="translate(8.000000, 8.250000) rotate(180.000000) translate(-8.000000, -8.250000) "></path>        </g>    </g></svg>'
+	                    }
+	                  }));;
+	                  return __jade_nodes;
+	                }.call(this) : function () {
+	                  var __jade_nodes = [];
+	                  __jade_nodes = __jade_nodes.concat(h('div', {
+	                    props: {
+	                      innerHTML: '<?xml version="1.0" encoding="UTF-8"?><svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">    <title>anomaly-down</title>    <desc>Anomaly Down Icon</desc>    <defs></defs>    <g id="anomaly-down" stroke="none" stroke-width="1" fill-rule="evenodd">        <g id="16-x-16" transform="translate(3.000000, 3.000000)">            <circle id="circle" fill="#FFC529" cx="8" cy="8" r="8"></circle>            <path d="M10.9122456,7.33950855 L8.42452122,4.92105894 C8.1899095,4.69298035 7.81009051,4.69298035 7.57547877,4.92105894 L5.08775439,7.33950855 C4.97074854,7.45325618 4.97074854,7.638169 5.08775439,7.75191663 L5.5119756,8.1643247 C5.62898145,8.27807233 5.81919096,8.27807233 5.93619681,8.1643247 L7.39966998,6.74160434 L7.39966998,11.4583394 C7.39966998,11.6193361 7.5340767,11.75 7.69968499,11.75 L8.29971498,11.75 C8.46592329,11.75 8.59972998,11.6193361 8.59972998,11.4583394 L8.59972998,6.74160434 L10.0638032,8.1643247 C10.180809,8.27807233 10.3710186,8.27807233 10.4880244,8.1643247 L10.9122456,7.75191663 C11.0292515,7.638169 11.0292515,7.45325618 10.9122456,7.33950855" id="arrow-up" fill="#FFFFFF"></path>        </g>    </g></svg>'
+	                    }
+	                  }));;
+	                  return __jade_nodes;
+	                }.call(this));;
+	                return __jade_nodes;
+	              }.call(this).filter(Boolean)));
+	              __jade_nodes = __jade_nodes.concat(h("div", {
+	                "class": {
+	                  'mp-sh-alert-header-text': true
+	                }
+	              }, function () {
+	                var __jade_nodes = [];
+	                __jade_nodes = __jade_nodes.concat("Anomaly detection");;
+	                return __jade_nodes;
+	              }.call(this).filter(Boolean)));;
+	              return __jade_nodes;
+	            }.call(this) : undefined);;
+	            return __jade_nodes;
+	          }.call(this).filter(Boolean)));
+	          __jade_nodes = __jade_nodes.concat(h("div", {
+	            "on": {
+	              click: function click(ev) {
+	                return $helpers.handleRemoveAlert(ev, alertId);
+	              }
+	            },
+	            "class": {
+	              'mp-sh-alert-delete': true
+	            }
+	          }, function () {
+	            var __jade_nodes = [];
+	            __jade_nodes = __jade_nodes.concat(h("svg-icon", {
+	              "attrs": {
+	                icon: 'x'
+	              }
+	            }));;
+	            return __jade_nodes;
+	          }.call(this).filter(Boolean)));;
+	          return __jade_nodes;
+	        }.call(this).filter(Boolean)));
+	        __jade_nodes = __jade_nodes.concat(h("div", {
+	          "class": {
+	            'mp-sh-alert-message': true
+	          }
+	        }, function () {
+	          var __jade_nodes = [];
+	          __jade_nodes = __jade_nodes.concat("" + message + "");;
+	          return __jade_nodes;
+	        }.call(this).filter(Boolean)));
+	        __jade_nodes = __jade_nodes.concat(h("div", {
+	          "class": {
+	            'mp-sh-alert-footer': true
+	          }
+	        }, function () {
+	          var __jade_nodes = [];
+	          __jade_nodes = __jade_nodes.concat(h("div", {
+	            "class": {
+	              'mp-sh-alert-footer-time': true
+	            }
+	          }, function () {
+	            var __jade_nodes = [];
+	            __jade_nodes = __jade_nodes.concat("" + ingestedTimeStr + "");;
+	            return __jade_nodes;
+	          }.call(this).filter(Boolean)));
+	          __jade_nodes = __jade_nodes.concat(h("div", {
+	            "class": {
+	              'mp-sh-alert-footer-useful': true
+	            }
+	          }, function () {
+	            var __jade_nodes = [];
+	            __jade_nodes = __jade_nodes.concat(!markedUseful ? function () {
+	              var __jade_nodes = [];
+	              __jade_nodes = __jade_nodes.concat(h("div", {
+	                "on": {
+	                  click: function click(ev) {
+	                    return $helpers.handleSendFeedback(ev, true);
+	                  }
+	                },
+	                "class": {
+	                  'mp-sh-alert-footer-good': true
+	                }
+	              }, function () {
+	                var __jade_nodes = [];
+	                __jade_nodes = __jade_nodes.concat(" ");
+	                __jade_nodes = __jade_nodes.concat(h('div', {
+	                  props: {
+	                    innerHTML: '<?xml version="1.0" encoding="UTF-8"?><svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">    <title>thumbs-up</title>    <desc>Anamoly Detection Thumbs Up Icon</desc>    <defs></defs>    <g id="thumbs-up" stroke="none" stroke-width="1" fill-rule="evenodd">        <g id="16-x-16" fill-rule="nonzero" transform="translate(3.000000, 3.000000)">            <path d="M1.33333333,12.9999656 L1.33333333,7.99998471 C3.71668467,6.66127956 5.33339754,4.58605115 6.0471433,2.31392737 L6.09434927,2.15549385 C6.21939618,1.68325067 6.65293291,1.33333333 7.16669533,1.33333333 C7.78055643,1.33333333 8.27780899,1.83055532 8.27780899,2.44438584 C8.27780899,2.55833446 8.26099339,2.66956201 8.22754563,2.77479709 L7.87793404,5.08327314 C7.87793404,5.46660766 8.18874746,5.7777574 8.57241829,5.7777574 L13.5556142,5.7777574 C14.1694753,5.7777574 14.6666667,6.27494881 14.6666667,6.88884048 C14.6666667,7.50270158 14.1694753,7.99995414 13.5556142,7.99995414 C14.1694753,7.99995414 14.6666667,8.49714555 14.6666667,9.11103722 C14.6666667,9.72489832 14.1694753,10.222212 13.5556142,10.222212 L12.9999962,10.222212 C13.6138879,10.222212 14.1110793,10.719434 14.1110793,11.3333257 C14.1110793,11.9471562 13.6138879,12.4443782 12.9999962,12.4443782 L12.9029243,12.4443782 C13.1335426,12.6472966 13.2777899,12.9474092 13.2777899,13.2777593 C13.2777899,13.6361762 13.1082886,13.9554585 12.8442532,14.158377 C12.6554904,14.3026242 12.2192632,14.4276406 11.8834098,14.4832543 C11.0249276,14.6249334 10.1443405,14.6666361 9.24996465,14.6666361 C6.49147258,14.6666361 3.69167528,14.069346 1.33333333,12.9999656 Z M14.2513318,9.23289838 C14.0308386,9.29822156 13.7973302,9.33328747 13.5556142,9.33328747 L13.5556142,6.66662081 C14.5057424,6.66662081 15.329055,7.2083901 15.7335697,7.99993533 C15.903921,8.33327494 16,8.71091142 16,9.11103722 C16,9.73952919 15.7629405,10.3125699 15.3733342,10.7456087 C14.9943702,11.1668188 14.4710795,11.4555709 13.8812365,11.5340553 C13.8176005,11.5425227 13.7531899,11.5485427 13.6881023,11.5520176 C13.6442371,11.5543595 13.6000644,11.5555454 13.5556142,11.5555454 L12.9999962,11.5555454 L12.9999962,8.8888787 C13.1911264,8.8888787 13.3771246,8.91080181 13.5556142,8.95227112 C13.8042284,9.01003283 14.0382751,9.10571633 14.2513318,9.23289838 C14.8037848,9.56267983 15.2151093,10.1042445 15.3733342,10.7456087 C15.419776,10.9338603 15.4444126,11.1307099 15.4444126,11.3333257 C15.4444126,12.0673704 15.1210324,12.7257349 14.6089281,13.173758 C14.1790513,13.5498429 13.6161909,13.7777115 12.9999962,13.7777115 L12.9029243,13.7777115 L12.9029243,12.4443782 L13.7836987,11.4433716 C13.8171073,11.4727674 13.8496276,11.5030097 13.8812365,11.5340553 C14.3194913,11.9644997 14.5825458,12.549369 14.6089281,13.173758 C14.610388,13.2083105 14.6111232,13.2429841 14.6111232,13.2777593 C14.6111232,14.0453211 14.2534737,14.7569572 13.6538299,15.2177934 C13.2640393,15.5156606 12.6857512,15.7018847 12.1005189,15.7987928 C11.2338288,15.9418264 10.326097,15.9999694 9.24996465,15.9999694 C6.31735285,15.9999694 3.32796714,15.3684296 0.782702925,14.2142901 L0,13.8593767 L0,7.21963741 L0.680366905,6.83748197 C2.69872198,5.70379165 4.13965129,3.93719758 4.76932443,1.93319554 L4.8054369,1.81419826 C5.08665823,0.752157991 6.053029,0 7.16669533,0 C8.51692018,0 9.61114232,1.09415974 9.61114232,2.44438584 C9.61114232,2.65187057 9.58522818,2.85768098 9.5333117,3.05721524 L9.32322319,4.44442406 L13.5556142,4.44442406 C14.9058653,4.44442406 16,5.53857954 16,6.88884048 C16,7.28895713 15.903921,7.66659261 15.7335697,7.99993533 C15.4319651,8.59011397 14.8975448,9.04145163 14.2513318,9.23289838 Z" id="glove-outside" fill="#3391E9"></path>            <path d="M1.33666671,12.9999656 C3.69500866,14.069346 6.49480596,14.6666361 9.25329803,14.6666361 C10.1476739,14.6666361 11.028261,14.6249334 11.8867432,14.4832543 C12.2225966,14.4276406 12.6588238,14.3026242 12.8475866,14.158377 C13.111622,13.9554585 13.2811233,13.6361762 13.2811233,13.2777593 C13.2811233,12.9474092 13.136876,12.6472966 12.9062577,12.4443782 L13.0033296,12.4443782 C13.6172213,12.4443782 14.1144127,11.9471562 14.1144127,11.3333257 C14.1144127,10.719434 13.6172213,10.222212 13.0033296,10.222212 L13.5589476,10.222212 C14.1728087,10.222212 14.6700001,9.72489832 14.6700001,9.11103722 C14.6700001,8.49714555 14.1728087,7.99995414 13.5589476,7.99995414 C14.1728087,7.99995414 14.6700001,7.50270158 14.6700001,6.88884048 C14.6700001,6.27494881 14.1728087,5.7777574 13.5589476,5.7777574 L8.57575167,5.7777574 C8.19208084,5.7777574 7.88126742,5.46660766 7.88126742,5.08327314 L8.23087901,2.77479709 C8.26432677,2.66956201 8.28114237,2.55833446 8.28114237,2.44438584 C8.28114237,1.83055532 7.78388981,1.33333333 7.17002871,1.33333333 C6.65626629,1.33333333 6.22272956,1.68325067 6.09768265,2.15549385 L6.05047668,2.31392737 C5.33673092,4.58605115 3.72001805,6.66127956 1.33666671,7.99998471 L1.33666671,12.9999656 Z" id="glove-inside" fill="#FFFFFF"></path>        </g>    </g></svg>'
+	                  }
+	                }));
+	                __jade_nodes = __jade_nodes.concat(h("div", {
+	                  "class": {
+	                    'mp-sh-alert-footer-good-text': true
+	                  }
+	                }, function () {
+	                  var __jade_nodes = [];
+	                  __jade_nodes = __jade_nodes.concat("Useful");;
+	                  return __jade_nodes;
+	                }.call(this).filter(Boolean)));;
+	                return __jade_nodes;
+	              }.call(this).filter(Boolean)));
+	              __jade_nodes = __jade_nodes.concat(h("div", {
+	                "on": {
+	                  click: function click(ev) {
+	                    return $helpers.handleSendFeedback(ev, false);
+	                  }
+	                },
+	                "class": {
+	                  'mp-sh-alert-footer-bad': true
+	                }
+	              }, function () {
+	                var __jade_nodes = [];
+	                __jade_nodes = __jade_nodes.concat(h('div', {
+	                  props: {
+	                    innerHTML: '<?xml version="1.0" encoding="UTF-8"?><svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">    <title>thumbs-down</title>    <desc>Anamoly Detection Thumbs Down Icon</desc>    <defs></defs>    <g id="thumbs-down" stroke="none" stroke-width="1" fill-rule="evenodd">        <g id="16-x-16" fill-rule="nonzero" transform="translate(11.000000, 11.000000) rotate(180.000000) translate(-11.000000, -11.000000) translate(3.000000, 3.000000)">            <path d="M1.33333333,12.9999656 L1.33333333,7.99998471 C3.71668467,6.66127956 5.33339754,4.58605115 6.0471433,2.31392737 L6.09434927,2.15549385 C6.21939618,1.68325067 6.65293291,1.33333333 7.16669533,1.33333333 C7.78055643,1.33333333 8.27780899,1.83055532 8.27780899,2.44438584 C8.27780899,2.55833446 8.26099339,2.66956201 8.22754563,2.77479709 L7.87793404,5.08327314 C7.87793404,5.46660766 8.18874746,5.7777574 8.57241829,5.7777574 L13.5556142,5.7777574 C14.1694753,5.7777574 14.6666667,6.27494881 14.6666667,6.88884048 C14.6666667,7.50270158 14.1694753,7.99995414 13.5556142,7.99995414 C14.1694753,7.99995414 14.6666667,8.49714555 14.6666667,9.11103722 C14.6666667,9.72489832 14.1694753,10.222212 13.5556142,10.222212 L12.9999962,10.222212 C13.6138879,10.222212 14.1110793,10.719434 14.1110793,11.3333257 C14.1110793,11.9471562 13.6138879,12.4443782 12.9999962,12.4443782 L12.9029243,12.4443782 C13.1335426,12.6472966 13.2777899,12.9474092 13.2777899,13.2777593 C13.2777899,13.6361762 13.1082886,13.9554585 12.8442532,14.158377 C12.6554904,14.3026242 12.2192632,14.4276406 11.8834098,14.4832543 C11.0249276,14.6249334 10.1443405,14.6666361 9.24996465,14.6666361 C6.49147258,14.6666361 3.69167528,14.069346 1.33333333,12.9999656 Z M14.2513318,9.23289838 C14.0308386,9.29822156 13.7973302,9.33328747 13.5556142,9.33328747 L13.5556142,6.66662081 C14.5057424,6.66662081 15.329055,7.2083901 15.7335697,7.99993533 C15.903921,8.33327494 16,8.71091142 16,9.11103722 C16,9.73952919 15.7629405,10.3125699 15.3733342,10.7456087 C14.9943702,11.1668188 14.4710795,11.4555709 13.8812365,11.5340553 C13.8176005,11.5425227 13.7531899,11.5485427 13.6881023,11.5520176 C13.6442371,11.5543595 13.6000644,11.5555454 13.5556142,11.5555454 L12.9999962,11.5555454 L12.9999962,8.8888787 C13.1911264,8.8888787 13.3771246,8.91080181 13.5556142,8.95227112 C13.8042284,9.01003283 14.0382751,9.10571633 14.2513318,9.23289838 C14.8037848,9.56267983 15.2151093,10.1042445 15.3733342,10.7456087 C15.419776,10.9338603 15.4444126,11.1307099 15.4444126,11.3333257 C15.4444126,12.0673704 15.1210324,12.7257349 14.6089281,13.173758 C14.1790513,13.5498429 13.6161909,13.7777115 12.9999962,13.7777115 L12.9029243,13.7777115 L12.9029243,12.4443782 L13.7836987,11.4433716 C13.8171073,11.4727674 13.8496276,11.5030097 13.8812365,11.5340553 C14.3194913,11.9644997 14.5825458,12.549369 14.6089281,13.173758 C14.610388,13.2083105 14.6111232,13.2429841 14.6111232,13.2777593 C14.6111232,14.0453211 14.2534737,14.7569572 13.6538299,15.2177934 C13.2640393,15.5156606 12.6857512,15.7018847 12.1005189,15.7987928 C11.2338288,15.9418264 10.326097,15.9999694 9.24996465,15.9999694 C6.31735285,15.9999694 3.32796714,15.3684296 0.782702925,14.2142901 L0,13.8593767 L0,7.21963741 L0.680366905,6.83748197 C2.69872198,5.70379165 4.13965129,3.93719758 4.76932443,1.93319554 L4.8054369,1.81419826 C5.08665823,0.752157991 6.053029,0 7.16669533,0 C8.51692018,0 9.61114232,1.09415974 9.61114232,2.44438584 C9.61114232,2.65187057 9.58522818,2.85768098 9.5333117,3.05721524 L9.32322319,4.44442406 L13.5556142,4.44442406 C14.9058653,4.44442406 16,5.53857954 16,6.88884048 C16,7.28895713 15.903921,7.66659261 15.7335697,7.99993533 C15.4319651,8.59011397 14.8975448,9.04145163 14.2513318,9.23289838 Z" id="glove-outside" fill="#3391E9"></path>            <path d="M1.33666671,12.9999656 C3.69500866,14.069346 6.49480596,14.6666361 9.25329803,14.6666361 C10.1476739,14.6666361 11.028261,14.6249334 11.8867432,14.4832543 C12.2225966,14.4276406 12.6588238,14.3026242 12.8475866,14.158377 C13.111622,13.9554585 13.2811233,13.6361762 13.2811233,13.2777593 C13.2811233,12.9474092 13.136876,12.6472966 12.9062577,12.4443782 L13.0033296,12.4443782 C13.6172213,12.4443782 14.1144127,11.9471562 14.1144127,11.3333257 C14.1144127,10.719434 13.6172213,10.222212 13.0033296,10.222212 L13.5589476,10.222212 C14.1728087,10.222212 14.6700001,9.72489832 14.6700001,9.11103722 C14.6700001,8.49714555 14.1728087,7.99995414 13.5589476,7.99995414 C14.1728087,7.99995414 14.6700001,7.50270158 14.6700001,6.88884048 C14.6700001,6.27494881 14.1728087,5.7777574 13.5589476,5.7777574 L8.57575167,5.7777574 C8.19208084,5.7777574 7.88126742,5.46660766 7.88126742,5.08327314 L8.23087901,2.77479709 C8.26432677,2.66956201 8.28114237,2.55833446 8.28114237,2.44438584 C8.28114237,1.83055532 7.78388981,1.33333333 7.17002871,1.33333333 C6.65626629,1.33333333 6.22272956,1.68325067 6.09768265,2.15549385 L6.05047668,2.31392737 C5.33673092,4.58605115 3.72001805,6.66127956 1.33666671,7.99998471 L1.33666671,12.9999656 Z" id="glove-inside" fill="#FFFFFF"></path>        </g>    </g></svg>'
+	                  }
+	                }));
+	                __jade_nodes = __jade_nodes.concat(h("div", {
+	                  "class": {
+	                    'mp-sh-alert-footer-bad-text': true
+	                  }
+	                }, function () {
+	                  var __jade_nodes = [];
+	                  __jade_nodes = __jade_nodes.concat("Not useful");;
+	                  return __jade_nodes;
+	                }.call(this).filter(Boolean)));;
+	                return __jade_nodes;
+	              }.call(this).filter(Boolean)));;
+	              return __jade_nodes;
+	            }.call(this) : hasSentFeedback ? function () {
+	              var __jade_nodes = [];
+	              __jade_nodes = __jade_nodes.concat(h("div", {
+	                "class": {
+	                  'mp-sh-alert-footer-thank-you': true
+	                }
+	              }, function () {
+	                var __jade_nodes = [];
+	                __jade_nodes = __jade_nodes.concat("Thank you for your feedback");;
+	                return __jade_nodes;
+	              }.call(this).filter(Boolean)));;
+	              return __jade_nodes;
+	            }.call(this) : undefined);;
+	            return __jade_nodes;
+	          }.call(this).filter(Boolean)));;
+	          return __jade_nodes;
+	        }.call(this).filter(Boolean)));;
+	        return __jade_nodes;
+	      }.call(this).filter(Boolean))
+	    };
+	  }.call(this, "$component" in locals ? locals.$component : typeof $component !== "undefined" ? $component : undefined, "$helpers" in locals ? locals.$helpers : typeof $helpers !== "undefined" ? $helpers : undefined, "Object" in locals ? locals.Object : typeof Object !== "undefined" ? Object : undefined, "alert" in locals ? locals.alert : typeof alert !== "undefined" ? alert : undefined, "alertId" in locals ? locals.alertId : typeof alertId !== "undefined" ? alertId : undefined, "hasSentFeedback" in locals ? locals.hasSentFeedback : typeof hasSentFeedback !== "undefined" ? hasSentFeedback : undefined, "ingestedTimeStr" in locals ? locals.ingestedTimeStr : typeof ingestedTimeStr !== "undefined" ? ingestedTimeStr : undefined, "isRead" in locals ? locals.isRead : typeof isRead !== "undefined" ? isRead : undefined, "markedUseful" in locals ? locals.markedUseful : typeof markedUseful !== "undefined" ? markedUseful : undefined, "message" in locals ? locals.message : typeof message !== "undefined" ? message : undefined, "type" in locals ? locals.type : typeof type !== "undefined" ? type : undefined);
+	  if (result_of_with) return result_of_with.value;
+	}
+	module.exports = _jade_template_fn;
+
+/***/ },
+/* 544 */
+/***/ function(module, exports) {
+
+	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } svg-icon[icon=type-boolean] #left-dot {   color: #fff;   fill: #fff; } svg-icon[icon=type-boolean] #right-dot {   color: #4c6072;   fill: #4c6072; } svg-icon[icon=lightning-bolt] #bolt, svg-icon[icon=lighting-bolt] #bolt {   color: #fff;   fill: #fff; } svg-icon[icon=alert] #circle, svg-icon[icon=alert] #stem {   color: #fff;   fill: #fff; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6d859e;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 13px;   font-stretch: normal;   font-weight: 400; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 13px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6d859e;   font-size: 14px;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 13px;   font-weight: 400;   padding: 8px;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus, input[type=text]:active, textarea:active {   border-color: #3391e9;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } mp-truncated-text {   display: inline-block;   white-space: nowrap;   width: 100%; } .mp-sh-alert-unread {   background-color: #f9fafc; } .mp-sh-alert-container {   cursor: pointer;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   -webkit-box-orient: vertical;   -webkit-box-direction: normal;       -ms-flex-direction: column;           flex-direction: column;   height: 135px;   -webkit-box-pack: justify;       -ms-flex-pack: justify;           justify-content: space-between;   padding: 0 20px;   width: 320px; } .mp-sh-alert-container:hover:not(.mp-sh-alert-no-hover) {   background-color: #f9fafc; } .mp-sh-alert-container:hover:not(.mp-sh-alert-no-hover) .mp-sh-alert-delete {   display: -webkit-box;   display: -ms-flexbox;   display: flex; } .mp-sh-alert-container:hover:not(.mp-sh-alert-no-hover) .mp-sh-alert-delete svg-icon {   height: 20px;   min-height: 20px;   min-width: 20px;   width: 20px; } .mp-sh-alert-container:hover:not(.mp-sh-alert-no-hover) .mp-sh-alert-delete svg-icon svg {   height: 20px;   min-height: 20px;   min-width: 20px;   width: 20px;   left: 0;   top: 0; } .mp-sh-alert-container:hover:not(.mp-sh-alert-no-hover) .mp-sh-alert-delete svg-icon svg, .mp-sh-alert-container:hover:not(.mp-sh-alert-no-hover) .mp-sh-alert-delete svg-icon path {   color: #9bacbf;   fill: #9bacbf;   transition: 0.2s; } .mp-sh-alert-container:hover:not(.mp-sh-alert-no-hover) .mp-sh-alert-delete:hover svg-icon svg, .mp-sh-alert-container:hover:not(.mp-sh-alert-no-hover) .mp-sh-alert-delete:hover svg-icon path {   color: #e4567b;   fill: #e4567b; } .mp-sh-alert-container .mp-sh-alert-header {   display: -webkit-box;   display: -ms-flexbox;   display: flex;   height: 20px;   -webkit-box-pack: justify;       -ms-flex-pack: justify;           justify-content: space-between;   padding: 15px 0; } .mp-sh-alert-container .mp-sh-alert-header .mp-sh-alert-header-title {   display: -webkit-box;   display: -ms-flexbox;   display: flex; } .mp-sh-alert-container .mp-sh-alert-header .mp-sh-alert-header-title .mp-sh-alert-header-icon {   display: -webkit-box;   display: -ms-flexbox;   display: flex;   margin-right: 6px;   position: relative;   top: -3px; } .mp-sh-alert-container .mp-sh-alert-header .mp-sh-alert-header-title .mp-sh-alert-header-icon .mp-sh-alert-header-icon-background {   border-radius: 30px;   height: 17px;   position: absolute;   width: 17px; } .mp-sh-alert-container .mp-sh-alert-header .mp-sh-alert-header-title .mp-sh-alert-header-icon .mp-sh-alert-header-icon-svg {   left: 1px;   position: relative;   top: 1px; } .mp-sh-alert-container .mp-sh-alert-header .mp-sh-alert-header-title .mp-sh-alert-header-icon .mp-sh-alert-header-icon-svg svg-icon {   height: 15px;   min-height: 15px;   min-width: 15px;   width: 15px; } .mp-sh-alert-container .mp-sh-alert-header .mp-sh-alert-header-title .mp-sh-alert-header-icon .mp-sh-alert-header-icon-svg svg-icon svg {   height: 15px;   min-height: 15px;   min-width: 15px;   width: 15px;   left: 0;   top: 0; } .mp-sh-alert-container .mp-sh-alert-header .mp-sh-alert-header-title .mp-sh-alert-header-icon .mp-sh-alert-header-icon-svg svg-icon svg, .mp-sh-alert-container .mp-sh-alert-header .mp-sh-alert-header-title .mp-sh-alert-header-icon .mp-sh-alert-header-icon-svg svg-icon path {   color: #fff;   fill: #fff;   transition: 0.2s; } .mp-sh-alert-container .mp-sh-alert-header .mp-sh-alert-header-title .mp-sh-alert-header-text {   color: #4c6072;   font-weight: 600;   font-size: 13px; } .mp-sh-alert-container .mp-sh-alert-delete {   display: none; } .mp-sh-alert-container .mp-sh-alert-message {   color: #6d859e;   font-weight: 500;   text-align: start;   white-space: normal; } .mp-sh-alert-container .mp-sh-alert-footer {   display: -webkit-box;   display: -ms-flexbox;   display: flex;   -webkit-box-orient: horizontal;   -webkit-box-direction: normal;       -ms-flex-direction: row;           flex-direction: row;   height: 26px;   -webkit-box-pack: justify;       -ms-flex-pack: justify;           justify-content: space-between;   padding: 10px 0; } .mp-sh-alert-container .mp-sh-alert-footer .mp-sh-alert-footer-time {   color: #9bacbf;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   -webkit-box-orient: vertical;   -webkit-box-direction: normal;       -ms-flex-direction: column;           flex-direction: column;   font-size: 12px;   -webkit-box-pack: center;       -ms-flex-pack: center;           justify-content: center; } .mp-sh-alert-container .mp-sh-alert-footer .mp-sh-alert-footer-useful {   color: #4ba8ff;   cursor: pointer;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   -webkit-box-orient: horizontal;   -webkit-box-direction: normal;       -ms-flex-direction: row;           flex-direction: row;   font-size: 12px; } .mp-sh-alert-container .mp-sh-alert-footer .mp-sh-alert-footer-useful .mp-sh-alert-footer-good {   margin-right: 15px; } .mp-sh-alert-container .mp-sh-alert-footer .mp-sh-alert-footer-useful .mp-sh-alert-footer-good, .mp-sh-alert-container .mp-sh-alert-footer .mp-sh-alert-footer-useful .mp-sh-alert-footer-bad {   display: -webkit-box;   display: -ms-flexbox;   display: flex;   padding-bottom: 1px; } .mp-sh-alert-container .mp-sh-alert-footer .mp-sh-alert-footer-useful .mp-sh-alert-footer-good:hover, .mp-sh-alert-container .mp-sh-alert-footer .mp-sh-alert-footer-useful .mp-sh-alert-footer-bad:hover {   border-bottom: 1px solid #4ba8ff;   padding-bottom: 0; } .mp-sh-alert-container .mp-sh-alert-footer .mp-sh-alert-footer-useful .mp-sh-alert-footer-good .mp-sh-alert-footer-good-text, .mp-sh-alert-container .mp-sh-alert-footer .mp-sh-alert-footer-useful .mp-sh-alert-footer-bad .mp-sh-alert-footer-good-text, .mp-sh-alert-container .mp-sh-alert-footer .mp-sh-alert-footer-useful .mp-sh-alert-footer-good .mp-sh-alert-footer-bad-text, .mp-sh-alert-container .mp-sh-alert-footer .mp-sh-alert-footer-useful .mp-sh-alert-footer-bad .mp-sh-alert-footer-bad-text {   position: relative;   top: 5px; } .mp-sh-alert-container .mp-sh-alert-footer .mp-sh-alert-footer-useful .mp-sh-alert-footer-thank-you {   color: #9bacbf;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   -webkit-box-orient: vertical;   -webkit-box-direction: normal;       -ms-flex-direction: column;           flex-direction: column;   font-size: 12px;   -webkit-box-pack: center;       -ms-flex-pack: center;           justify-content: center; } .background-mp-yellow {   background-color: #ffd209; } .background-mp-turquoise {   background-color: #24d2ef; } .background-mp-aquamarine {   background-color: #6fe9aa; } ";
+
+
+/***/ },
+/* 545 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
+	var _panel = __webpack_require__(299);
+
+	var _registerElement = __webpack_require__(320);
+
+	var _index = __webpack_require__(546);
+
+	var _index2 = _interopRequireDefault(_index);
+
+	var _index3 = __webpack_require__(547);
+
+	var _index4 = _interopRequireDefault(_index3);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	exports.default = (0, _registerElement.registerMPElement)('mp-smart-hub-dropdown', function (_Component) {
+	  _inherits(_class, _Component);
+
+	  function _class() {
+	    _classCallCheck(this, _class);
+
+	    return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).apply(this, arguments));
+	  }
+
+	  _createClass(_class, [{
+	    key: '_removeAlert',
+	    value: function _removeAlert(params) {
+	      var alerts = void 0;
+	      if (params.alertId) {
+	        alerts = this.state.alerts.filter(function (alert) {
+	          return !!alert.groupedAlert || alert.alert.alertId !== params.alertId;
+	        });
+	      } else {
+	        alerts = this.state.alerts.filter(function (alert) {
+	          return !!alert.alert || alert.groupedAlert.groupedAlertId !== params.groupedAlertId;
+	        });
+	      }
+	      this.update({ alerts: alerts });
+	    }
+	  }, {
+	    key: 'attachedCallback',
+	    value: function attachedCallback() {
+	      _get(_class.prototype.__proto__ || Object.getPrototypeOf(_class.prototype), 'attachedCallback', this).apply(this, arguments);
+	      // TODO(mack): Check if it's necessary to do this in both attachedCallback and attributeChangedCallback
+	      // bootstrap the widget's state from attributes
+	      this.update({
+	        alerts: this.getJSONAttribute('alerts'),
+	        open: this.isAttributeEnabled('open')
+	      });
+	    }
+	  }, {
+	    key: 'attributeChangedCallback',
+	    value: function attributeChangedCallback(name) {
+	      _get(_class.prototype.__proto__ || Object.getPrototypeOf(_class.prototype), 'attributeChangedCallback', this).apply(this, arguments);
+	      if (this.initialized) {
+	        if (name === 'open') {
+	          var open = this.isAttributeEnabled('open');
+	          this.dispatchEvent(new CustomEvent('change', { detail: { open: open } }));
+	          this.update({ open: open });
+	        }
+	      }
+	    }
+	  }, {
+	    key: 'config',
+	    get: function get() {
+	      var _this2 = this;
+
+	      return {
+	        css: _index4.default,
+	        template: _index2.default,
+	        useShadowDom: true,
+	        defaultState: {
+	          alerts: [],
+	          open: false,
+	          confirmDeleteOpen: false
+	        },
+	        helpers: {
+	          clearAllAlerts: function clearAllAlerts(e) {
+	            if (e.detail.action === 'confirm') {
+	              _this2.update({ alerts: [], open: true });
+	              _this2.dispatchEvent(new CustomEvent('clearAllAlerts'));
+	            }
+	          },
+	          handleDropMenuChange: function handleDropMenuChange(e) {
+	            var open = e.detail.state === 'open';
+	            _this2.setAttribute('open', open);
+	          },
+	          handleModalChange: function handleModalChange(key, state) {
+	            _this2.state.confirmDeleteOpen = state === 'open';
+	            _this2.update();
+	          },
+	          handleSentFeedback: function handleSentFeedback(e) {
+	            if (!e.detail.isMarkedUseful) {
+	              _this2._removeAlert(e.detail);
+	            }
+	          },
+	          handleRemovedAlert: function handleRemovedAlert(e) {
+	            _this2._removeAlert(e.detail);
+	          },
+	          openConfirmDelete: function openConfirmDelete() {
+	            return _this2.update({ confirmDeleteOpen: true });
+	          }
+	        }
+	      };
+	    }
+	  }]);
+
+	  return _class;
+	}(_panel.Component));
+
+/***/ },
+/* 546 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	function _jade_template_fn(locals) {
+	  locals = locals || {};;;
+	  var result_of_with = function ($helpers, JSON, Object, alerts, confirmDeleteOpen, open) {
+	    var h = __webpack_require__(299).h;
+	    return {
+	      value: h("div", {
+	        "class": {
+	          'mp-sh-menu': true
+	        }
+	      }, function () {
+	        var __jade_nodes = [];
+	        __jade_nodes = __jade_nodes.concat(h("mp-confirm-delete", {
+	          "attrs": {
+	            id: 'confirmDelete',
+	            'delete-button-label': 'Delete it',
+	            closeable: true,
+	            open: confirmDeleteOpen
+	          },
+	          "on": {
+	            change: function change(e) {
+	              return $helpers.handleModalChange('confirmDelete', e.detail.state);
+	            },
+	            submit: $helpers.clearAllAlerts
+	          }
+	        }, function () {
+	          var __jade_nodes = [];
+	          __jade_nodes = __jade_nodes.concat(h("div", function () {
+	            var __jade_nodes = [];
+	            __jade_nodes = __jade_nodes.concat(h("div", {
+	              "class": {
+	                'mp-confirm-delete-title': true
+	              }
+	            }, function () {
+	              var __jade_nodes = [];
+	              __jade_nodes = __jade_nodes.concat("Delete all Alerts");;
+	              return __jade_nodes;
+	            }.call(this).filter(Boolean)));
+	            __jade_nodes = __jade_nodes.concat(h("div", {
+	              "class": {
+	                'mp-confirm-delete-description': true
+	              }
+	            }, function () {
+	              var __jade_nodes = [];
+	              __jade_nodes = __jade_nodes.concat("Are you sure you want to clear all alerts?");;
+	              return __jade_nodes;
+	            }.call(this).filter(Boolean)));;
+	            return __jade_nodes;
+	          }.call(this).filter(Boolean)));;
+	          return __jade_nodes;
+	        }.call(this).filter(Boolean)));
+	        __jade_nodes = __jade_nodes.concat(h("mp-drop-menu", {
+	          "attrs": {
+	            open: open
+	          },
+	          "on": {
+	            change: $helpers.handleDropMenuChange
+	          }
+	        }, function () {
+	          var __jade_nodes = [];
+	          __jade_nodes = __jade_nodes.concat(h("div", {
+	            "attrs": {
+	              'slot-body': true
+	            },
+	            "class": {
+	              'mp-sh-menu-container': true
+	            }
+	          }, function () {
+	            var __jade_nodes = [];
+	            __jade_nodes = __jade_nodes.concat(h("div", {
+	              "class": {
+	                'mp-sh-triangle-up': true
+	              }
+	            }, function () {
+	              var __jade_nodes = [];
+	              __jade_nodes = __jade_nodes.concat(h("svg-icon", {
+	                "attrs": {
+	                  icon: 'triangle-up'
+	                }
+	              }));;
+	              return __jade_nodes;
+	            }.call(this).filter(Boolean)));
+	            __jade_nodes = __jade_nodes.concat(h("div", {
+	              "class": {
+	                'mp-sh-menu-header': true
+	              }
+	            }, function () {
+	              var __jade_nodes = [];
+	              __jade_nodes = __jade_nodes.concat(h("div", {
+	                "class": {
+	                  'mp-sh-menu-title': true,
+	                  'mp-font-size-medium': true
+	                }
+	              }, function () {
+	                var __jade_nodes = [];
+	                __jade_nodes = __jade_nodes.concat("Automated insights");;
+	                return __jade_nodes;
+	              }.call(this).filter(Boolean)));
+	              __jade_nodes = __jade_nodes.concat(h("div", {
+	                "on": {
+	                  click: $helpers.openConfirmDelete
+	                },
+	                "class": Object.assign({}, {
+	                  'mp-sh-hide-clear-all': alerts.length == 0
+	                }, {
+	                  'mp-sh-menu-clear-all': true,
+	                  'mp-font-size-small': true
+	                })
+	              }, function () {
+	                var __jade_nodes = [];
+	                __jade_nodes = __jade_nodes.concat("Clear all");;
+	                return __jade_nodes;
+	              }.call(this).filter(Boolean)));;
+	              return __jade_nodes;
+	            }.call(this).filter(Boolean)));
+	            __jade_nodes = __jade_nodes.concat(h("div", {
+	              "class": {
+	                'mp-sh-menu-divider': true
+	              }
+	            }));
+	            __jade_nodes = __jade_nodes.concat(h("div", {
+	              "class": {
+	                'mp-sh-alerts-container': true
+	              }
+	            }, function () {
+	              var __jade_nodes = [];
+	              __jade_nodes = __jade_nodes.concat(alerts.length > 0 ? function () {
+	                var __jade_nodes = [];
+	                __jade_nodes = __jade_nodes.concat(alerts.reduce(function (__each_nodes, alert, $index) {
+	                  return __each_nodes.concat(function () {
+	                    var __jade_nodes = [];
+	                    __jade_nodes = __jade_nodes.concat(h("mp-smart-hub-alert", {
+	                      "attrs": {
+	                        'alert': JSON.stringify(alert)
+	                      },
+	                      "on": {
+	                        sentFeedback: $helpers.handleSentFeedback,
+	                        removedAlert: $helpers.handleRemovedAlert
+	                      }
+	                    }));
+	                    __jade_nodes = __jade_nodes.concat(h("div", {
+	                      "class": {
+	                        'mp-sh-menu-divider': true
+	                      }
+	                    }));;
+	                    return __jade_nodes;
+	                  }.call(this));
+	                }, []));;
+	                return __jade_nodes;
+	              }.call(this) : function () {
+	                var __jade_nodes = [];
+	                __jade_nodes = __jade_nodes.concat(h("div", {
+	                  "class": {
+	                    'mp-sh-alert-empty-state': true
+	                  }
+	                }, function () {
+	                  var __jade_nodes = [];
+	                  __jade_nodes = __jade_nodes.concat(h("div", {
+	                    "class": {
+	                      'mp-sh-alert-emtpy-state-text': true
+	                    }
+	                  }, function () {
+	                    var __jade_nodes = [];
+	                    __jade_nodes = __jade_nodes.concat("There are currently no insights");;
+	                    return __jade_nodes;
+	                  }.call(this).filter(Boolean)));;
+	                  return __jade_nodes;
+	                }.call(this).filter(Boolean)));;
+	                return __jade_nodes;
+	              }.call(this));;
+	              return __jade_nodes;
+	            }.call(this).filter(Boolean)));;
+	            return __jade_nodes;
+	          }.call(this).filter(Boolean)));;
+	          return __jade_nodes;
+	        }.call(this).filter(Boolean)));;
+	        return __jade_nodes;
+	      }.call(this).filter(Boolean))
+	    };
+	  }.call(this, "$helpers" in locals ? locals.$helpers : typeof $helpers !== "undefined" ? $helpers : undefined, "JSON" in locals ? locals.JSON : typeof JSON !== "undefined" ? JSON : undefined, "Object" in locals ? locals.Object : typeof Object !== "undefined" ? Object : undefined, "alerts" in locals ? locals.alerts : typeof alerts !== "undefined" ? alerts : undefined, "confirmDeleteOpen" in locals ? locals.confirmDeleteOpen : typeof confirmDeleteOpen !== "undefined" ? confirmDeleteOpen : undefined, "open" in locals ? locals.open : typeof open !== "undefined" ? open : undefined);
+	  if (result_of_with) return result_of_with.value;
+	}
+	module.exports = _jade_template_fn;
+
+/***/ },
+/* 547 */
+/***/ function(module, exports) {
+
+	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } svg-icon[icon=type-boolean] #left-dot {   color: #fff;   fill: #fff; } svg-icon[icon=type-boolean] #right-dot {   color: #4c6072;   fill: #4c6072; } svg-icon[icon=lightning-bolt] #bolt, svg-icon[icon=lighting-bolt] #bolt {   color: #fff;   fill: #fff; } svg-icon[icon=alert] #circle, svg-icon[icon=alert] #stem {   color: #fff;   fill: #fff; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6d859e;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 13px;   font-stretch: normal;   font-weight: 400; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 13px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6d859e;   font-size: 14px;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 13px;   font-weight: 400;   padding: 8px;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus, input[type=text]:active, textarea:active {   border-color: #3391e9;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } mp-truncated-text {   display: inline-block;   white-space: nowrap;   width: 100%; } .mp-sh-menu mp-drop-menu {   left: -257px;   top: 40px;   width: 300px; } .mp-sh-menu .mp-sh-menu-container {   position: relative; } .mp-sh-menu .mp-sh-menu-container .mp-sh-triangle-up {   left: 255px;   position: absolute;   top: -19px; } .mp-sh-menu .mp-sh-menu-container .mp-sh-triangle-up svg-icon {   height: 30px;   min-height: 30px;   min-width: 30px;   width: 30px; } .mp-sh-menu .mp-sh-menu-container .mp-sh-triangle-up svg-icon svg {   height: 30px;   min-height: 30px;   min-width: 30px;   width: 30px;   left: 0;   top: 0; } .mp-sh-menu .mp-sh-menu-container .mp-sh-triangle-up svg-icon svg, .mp-sh-menu .mp-sh-menu-container .mp-sh-triangle-up svg-icon path {   color: #fff;   fill: #fff;   transition: 0.2s; } .mp-sh-menu .mp-sh-menu-container .mp-sh-menu-header {   -webkit-box-align: end;       -ms-flex-align: end;           align-items: flex-end;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   -webkit-box-orient: horizontal;   -webkit-box-direction: normal;       -ms-flex-direction: row;           flex-direction: row;   -webkit-box-pack: justify;       -ms-flex-pack: justify;           justify-content: space-between;   padding: 15px 20px; } .mp-sh-menu .mp-sh-menu-container .mp-sh-menu-header .mp-sh-menu-title {   color: #4c6072;   font-weight: 600; } .mp-sh-menu .mp-sh-menu-container .mp-sh-menu-header .mp-sh-menu-clear-all {   color: #4ba8ff;   cursor: pointer; } .mp-sh-menu .mp-sh-menu-container .mp-sh-menu-header .mp-sh-hide-clear-all {   display: none; } .mp-sh-menu .mp-sh-menu-container .mp-sh-menu-divider, .mp-sh-menu .mp-sh-menu-container .mp-sh-alert-divider:not(:last-child) {   border-top: 1px solid #d8e0e6;   padding: 0;   position: relative;   width: 100%; } .mp-sh-menu .mp-sh-menu-container .mp-sh-alerts-container {   max-height: 510px;   overflow-y: scroll; } .mp-sh-menu .mp-sh-menu-container .mp-sh-alerts-container .mp-sh-alert-empty-state {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   color: #6d859e;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   -webkit-box-orient: horizontal;   -webkit-box-direction: normal;       -ms-flex-direction: row;           flex-direction: row;   font-weight: 500;   height: 100px;   -webkit-box-pack: center;       -ms-flex-pack: center;           justify-content: center;   width: 300px; } ";
+
+
+/***/ },
+/* 548 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
+	var _panel = __webpack_require__(299);
+
+	var _registerElement = __webpack_require__(320);
+
+	var _string = __webpack_require__(492);
+
+	var _function = __webpack_require__(487);
+
+	var _index = __webpack_require__(549);
+
+	var _index2 = _interopRequireDefault(_index);
+
+	var _index3 = __webpack_require__(550);
 
 	var _index4 = _interopRequireDefault(_index3);
 
@@ -49520,14 +50219,14 @@
 	}(_panel.Component));
 
 /***/ },
-/* 543 */
+/* 549 */
 /***/ function(module, exports) {
 
 	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } svg-icon[icon=type-boolean] #left-dot {   color: #fff;   fill: #fff; } svg-icon[icon=type-boolean] #right-dot {   color: #4c6072;   fill: #4c6072; } svg-icon[icon=lightning-bolt] #bolt, svg-icon[icon=lighting-bolt] #bolt {   color: #fff;   fill: #fff; } svg-icon[icon=alert] #circle, svg-icon[icon=alert] #stem {   color: #fff;   fill: #fff; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6d859e;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 13px;   font-stretch: normal;   font-weight: 400; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 13px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6d859e;   font-size: 14px;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 13px;   font-weight: 400;   padding: 8px;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus, input[type=text]:active, textarea:active {   border-color: #3391e9;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } mp-truncated-text {   display: inline-block;   white-space: nowrap;   width: 100%; } mp-drop-menu {   border-radius: 5px;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   width: 340px; } :host {   border-radius: 5px;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   width: 340px; } .mp-tag-selector-container {   border-radius: inherit;   width: 100%; } .mp-tag-selector-container, .mp-tag-selector-container * {   box-sizing: border-box; } .mp-tag-selector-container .mp-tag-selector-top-input-wrapper {   margin: 0 auto;   margin-bottom: 20px;   padding: 0 20px; } .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   cursor: text;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   -webkit-box-orient: horizontal;   -webkit-box-direction: normal;       -ms-flex-direction: row;           flex-direction: row;   -ms-flex-wrap: wrap;       flex-wrap: wrap;   -webkit-box-pack: start;       -ms-flex-pack: start;           justify-content: flex-start;   min-height: 36px;   padding: 6px 6px 0;   position: relative;   width: 300px; } .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper input:focus::-webkit-contacts-auto-fill-button {   display: none;   height: 0;   margin: 0;   opacity: 0;   padding: 0;   width: 0; } .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper .mp-tag-selector-mp-icon {   -webkit-box-align: center;       -ms-flex-align: center;           align-items: center;   bottom: 0;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   left: 8px;   position: absolute;   top: -1px; } .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper .mp-tag-selector-mp-icon svg-icon svg {   left: 0;   top: 0; } .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper .mp-tag-selector-mp-icon svg-icon svg, .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper .mp-tag-selector-mp-icon svg-icon path {   color: #9bacbf;   fill: #9bacbf;   transition: 0.2s; } .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper mp-tag {   margin: 0 0 6px 4px; } .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper .mp-tag-selector-border {   border: 1px solid #d8e0e6;   border-radius: 5px;   height: 100%;   left: 0;   pointer-events: none;   position: absolute;   top: 0;   transition: border-color 0.25s;   width: 100%; } .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper .mp-tag-selector-border.mp-tag-selector-error {   border-color: #e4567b; } .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper:active .mp-tag-selector-border {   border-color: #3b99f0; } .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper .mp-tag-selector-search-input {   background-color: transparent;   border: 0;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 13px;   font-style: normal;   font-weight: 400;   height: auto;   line-height: 1.5;   margin-bottom: 7px;   margin-left: 6px;   max-width: 100%;   min-width: 0;   padding: 0; } .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper .mp-tag-selector-search-input.mp-tag-selector-empty {   padding-left: 24px;   padding-top: 1px; } .mp-tag-selector-container .mp-tag-selector-top-input-wrapper .mp-tag-selector-input-wrapper .mp-tag-selector-search-input:focus + .mp-tag-selector-border:not(.mp-tag-selector-loaded-error) {   border-color: #3b99f0; } .mp-tag-selector-container .mp-tag-selector-empty {   font-style: italic; } .mp-tag-selector-container .mp-tag-selector-hr {   background-color: #e5eaef;   height: 1px;   width: 100%; } .mp-tag-selector-container .mp-tag-selector-tag-list {   margin-bottom: 8px;   max-height: 280px;   overflow-y: auto; } .mp-tag-selector-container .mp-tag-selector-tag-list mp-list-item {   margin-left: 12px;   margin-right: 12px; } .mp-tag-selector-container .mp-tag-selector-tag-list mp-list-item svg-icon {   height: 16px;   min-height: 16px;   min-width: 16px;   width: 16px; } .mp-tag-selector-container .mp-tag-selector-tag-list mp-list-item svg-icon svg {   height: 16px;   min-height: 16px;   min-width: 16px;   width: 16px;   left: -3px;   top: -1px; } .mp-tag-selector-container .mp-tag-selector-tag-list mp-list-item svg-icon svg, .mp-tag-selector-container .mp-tag-selector-tag-list mp-list-item svg-icon path {   color: #6d859e;   fill: #6d859e;   transition: 0s; } .mp-tag-selector-container .mp-tag-selector-tag-list mp-list-item:last-child {   margin-bottom: 0; } .mp-tag-selector-container .mp-tag-selector-tag-list mp-list-item[active='true'] svg-icon, .mp-tag-selector-container .mp-tag-selector-tag-list mp-list-item:hover svg-icon {   height: 16px;   min-height: 16px;   min-width: 16px;   width: 16px; } .mp-tag-selector-container .mp-tag-selector-tag-list mp-list-item[active='true'] svg-icon svg, .mp-tag-selector-container .mp-tag-selector-tag-list mp-list-item:hover svg-icon svg {   height: 16px;   min-height: 16px;   min-width: 16px;   width: 16px;   left: -3px;   top: -1px; } .mp-tag-selector-container .mp-tag-selector-tag-list mp-list-item[active='true'] svg-icon svg, .mp-tag-selector-container .mp-tag-selector-tag-list mp-list-item:hover svg-icon svg, .mp-tag-selector-container .mp-tag-selector-tag-list mp-list-item[active='true'] svg-icon path, .mp-tag-selector-container .mp-tag-selector-tag-list mp-list-item:hover svg-icon path {   color: #4ba8ff;   fill: #4ba8ff;   transition: 0s; } .mp-tag-selector-container .mp-tag-selector-tag-list mp-list-item .mp-tag-selector-tag-list-item {   display: block; } .mp-tag-selector-create-tag-btn {   display: -webkit-box;   display: -ms-flexbox;   display: flex;   max-width: 100%;   overflow: hidden;   white-space: nowrap; } .mp-tag-selector-create-tag-btn .mp-tag-selector-copy {   color: #4c6072;   -webkit-box-flex: 0;       -ms-flex: none;           flex: none;   margin-right: 4px; } .mp-tag-selector-create-tag-btn .mp-tag-selector-label-name {   color: #3391e9;   -webkit-box-flex: 1;       -ms-flex: 1;           flex: 1;   overflow: hidden;   text-overflow: ellipsis; } .mp-tag-selector-search-input-dummy {   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 13px;   font-weight: 400;   padding: 0;   position: absolute;   visibility: hidden;   white-space: nowrap; } ";
 
 
 /***/ },
-/* 544 */
+/* 550 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -49818,7 +50517,7 @@
 	module.exports = _jade_template_fn;
 
 /***/ },
-/* 545 */
+/* 551 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49835,11 +50534,11 @@
 
 	var _registerElement = __webpack_require__(320);
 
-	var _index = __webpack_require__(546);
+	var _index = __webpack_require__(552);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	var _index3 = __webpack_require__(547);
+	var _index3 = __webpack_require__(553);
 
 	var _index4 = _interopRequireDefault(_index3);
 
@@ -49919,7 +50618,7 @@
 	}(_panel.Component));
 
 /***/ },
-/* 546 */
+/* 552 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -50070,14 +50769,14 @@
 	module.exports = _jade_template_fn;
 
 /***/ },
-/* 547 */
+/* 553 */
 /***/ function(module, exports) {
 
 	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } svg-icon[icon=type-boolean] #left-dot {   color: #fff;   fill: #fff; } svg-icon[icon=type-boolean] #right-dot {   color: #4c6072;   fill: #4c6072; } svg-icon[icon=lightning-bolt] #bolt, svg-icon[icon=lighting-bolt] #bolt {   color: #fff;   fill: #fff; } svg-icon[icon=alert] #circle, svg-icon[icon=alert] #stem {   color: #fff;   fill: #fff; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6d859e;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 13px;   font-stretch: normal;   font-weight: 400; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 13px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6d859e;   font-size: 14px;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 13px;   font-weight: 400;   padding: 8px;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus, input[type=text]:active, textarea:active {   border-color: #3391e9;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } mp-truncated-text {   display: inline-block;   white-space: nowrap;   width: 100%; } mp-tutorial-tooltip {   color: rgba(255,255,255,0.64);   cursor: default;   font-weight: 500;   height: 172px;   position: absolute;   width: 424px;   z-index: 6000;   bottom: calc(100% + 12px);   left: calc(50% - 212px); } :host {   color: rgba(255,255,255,0.64);   cursor: default;   font-weight: 500;   height: 172px;   position: absolute;   width: 424px;   z-index: 6000;   bottom: calc(100% + 12px);   left: calc(50% - 212px); } mp-tutorial-tooltip[hide=\"true\"] {   pointer-events: none; } :host([hide=\"true\"]) {   pointer-events: none; } mp-tutorial-tooltip[placement=\"bottom\"] {   bottom: initial;   left: calc(50% - 212px);   top: calc(100% + 12px); } :host([placement=\"bottom\"]) {   bottom: initial;   left: calc(50% - 212px);   top: calc(100% + 12px); } mp-tutorial-tooltip[placement=\"left\"] {   bottom: initial;   left: initial;   right: calc(100% + 12px);   top: calc(50% - 86px); } :host([placement=\"left\"]) {   bottom: initial;   left: initial;   right: calc(100% + 12px);   top: calc(50% - 86px); } mp-tutorial-tooltip[placement=\"right\"] {   bottom: initial;   left: calc(100% + 12px);   top: calc(50% - 86px); } :host([placement=\"right\"]) {   bottom: initial;   left: calc(100% + 12px);   top: calc(50% - 86px); } mp-tutorial-tooltip[placement=\"center\"] {   bottom: initial;   left: calc(50% - 212px);   top: calc(50% - 86px); } :host([placement=\"center\"]) {   bottom: initial;   left: calc(50% - 212px);   top: calc(50% - 86px); } mp-tutorial-tooltip[arrow-align=\"top\"] {   bottom: initial;   top: calc(50% - 31px); } :host([arrow-align=\"top\"]) {   bottom: initial;   top: calc(50% - 31px); } mp-tutorial-tooltip[arrow-align=\"bottom\"] {   bottom: calc(50% - 24px);   top: initial; } :host([arrow-align=\"bottom\"]) {   bottom: calc(50% - 24px);   top: initial; } mp-tutorial-tooltip[arrow-align=\"left\"] {   left: calc(50% - 32px);   right: initial; } :host([arrow-align=\"left\"]) {   left: calc(50% - 32px);   right: initial; } mp-tutorial-tooltip[arrow-align=\"right\"] {   left: initial;   right: calc(50% - 36px); } :host([arrow-align=\"right\"]) {   left: initial;   right: calc(50% - 36px); } .mp-tutorial-tooltip-stage {   height: inherit; } .mp-tutorial-tooltip-wrapper {   background: #3391e9;   border-radius: 8px;   box-shadow: 0 16px 41px 0 rgba(18,82,143,0.37);   height: inherit;   opacity: 0; } .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-in {   opacity: 1;   transition: all 400ms cubic-bezier(0.165, 0.84, 0.44, 1); } .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-out {   opacity: 0;   transition: all 400ms cubic-bezier(0.895, 0.03, 0.685, 0.22); } .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-placement-bottom.mp-tutorial-tooltip-in, .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-placement-top.mp-tutorial-tooltip-in, .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-placement-left.mp-tutorial-tooltip-in, .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-placement-right.mp-tutorial-tooltip-in {   -webkit-transform: translate(0);           transform: translate(0); } .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-placement-top, .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-placement-top.mp-tutorial-tooltip-out {   -webkit-transform: translateY(-20px);           transform: translateY(-20px); } .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-placement-bottom, .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-placement-bottom.mp-tutorial-tooltip-out {   -webkit-transform: translateY(20px);           transform: translateY(20px); } .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-placement-left, .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-placement-left.mp-tutorial-tooltip-out {   -webkit-transform: translateX(-20px);           transform: translateX(-20px); } .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-placement-right, .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-placement-right.mp-tutorial-tooltip-out {   -webkit-transform: translateX(20px);           transform: translateX(20px); } .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-placement-center.mp-tutorial-tooltip-in {   -webkit-transform: scale(1);           transform: scale(1); } .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-placement-center, .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-placement-center.mp-tutorial-tooltip-out {   -webkit-transform: scale(0.95);           transform: scale(0.95); } .mp-tutorial-tooltip-wrapper::after {   border: 11px solid transparent;   content: '';   height: 0;   pointer-events: none;   position: absolute;   width: 0; } .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-placement-top::after {   border-top-color: #2687e3;   left: 50%;   margin-left: -11px;   top: 100%; } .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-placement-top.mp-tutorial-tooltip-hide-footer::after {   border-top-color: #3391e9; } .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-placement-bottom::after {   border-bottom-color: #3391e9;   bottom: 100%;   left: 50%;   margin-left: -11px; } .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-placement-left::after {   border-left-color: #3391e9;   left: 100%;   margin-top: -11px;   top: 50%; } .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-placement-right::after {   border-right-color: #3391e9;   margin-top: -11px;   right: 100%;   top: 50%; } .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-arrow-align-top.mp-tutorial-tooltip-placement-left::after, .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-arrow-align-top.mp-tutorial-tooltip-placement-right::after {   bottom: initial;   top: 32px; } .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-arrow-align-bottom.mp-tutorial-tooltip-placement-left::after, .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-arrow-align-bottom.mp-tutorial-tooltip-placement-right::after {   bottom: 13px;   top: initial; } .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-arrow-align-bottom.mp-tutorial-tooltip-placement-left:not(.mp-tutorial-tooltip-hide-footer)::after, .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-arrow-align-bottom.mp-tutorial-tooltip-placement-right:not(.mp-tutorial-tooltip-hide-footer)::after {   border-right-color: #2687e3; } .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-arrow-align-right.mp-tutorial-tooltip-placement-top::after, .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-arrow-align-right.mp-tutorial-tooltip-placement-bottom::after {   left: initial;   right: 23px; } .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-arrow-align-left.mp-tutorial-tooltip-placement-top::after, .mp-tutorial-tooltip-wrapper.mp-tutorial-tooltip-arrow-align-left.mp-tutorial-tooltip-placement-bottom::after {   left: 32px;   right: initial; } .mp-tutorial-tooltip-close-btn {   cursor: pointer;   position: absolute;   right: 10px;   top: 10px; } .mp-tutorial-tooltip-close-btn svg-icon svg {   left: 0;   top: 0; } .mp-tutorial-tooltip-close-btn svg-icon svg, .mp-tutorial-tooltip-close-btn svg-icon path {   color: #6cb8ff;   fill: #6cb8ff;   transition: 0.2s; } .mp-tutorial-tooltip-close-btn:hover svg-icon svg, .mp-tutorial-tooltip-close-btn:hover svg-icon path {   color: #fff;   fill: #fff; } .mp-tutorial-tooltip-content {   padding: 23px 30px; } .mp-tutorial-tooltip-footer {   background: #2687e3;   border-radius: 0 0 8px 8px;   border-top: 1px solid #2687e3;   bottom: 0;   display: -webkit-box;   display: -ms-flexbox;   display: flex;   -webkit-box-orient: horizontal;   -webkit-box-direction: normal;       -ms-flex-direction: row;           flex-direction: row;   height: 42px;   -webkit-box-pack: justify;       -ms-flex-pack: justify;           justify-content: space-between;   position: absolute;   width: 100%; } .mp-tutorial-tooltip-footer ul.mp-tutorial-tooltip-steps {   list-style: none;   margin: 0;   padding: 0;   padding-left: 30px; } .mp-tutorial-tooltip-footer ul.mp-tutorial-tooltip-steps li.mp-tutorial-tooltip-step {   background: #6cb8ff;   border-radius: 50%;   float: left;   height: 6px;   margin: 17px 14px 17px 0;   position: relative;   width: 6px; } .mp-tutorial-tooltip-footer ul.mp-tutorial-tooltip-steps li.mp-tutorial-tooltip-step.mp-tutorial-tooltip-active {   background: transparent; } .mp-tutorial-tooltip-footer ul.mp-tutorial-tooltip-steps li.mp-tutorial-tooltip-step.mp-tutorial-tooltip-active::after {   border: 4px solid #ffd209;   border-radius: 50%;   box-shadow: 0 2px 3px 0 rgba(19,102,179,0.66);   content: '';   height: 4px;   left: -3px;   position: absolute;   top: -3px;   width: 4px; } .mp-tutorial-tooltip-footer .mp-tutorial-tooltip-next, .mp-tutorial-tooltip-footer .mp-tutorial-tooltip-done {   color: #6cb8ff;   cursor: pointer;   font-size: 12px;   font-weight: bold;   padding: 13px 25px 17px 0;   text-transform: uppercase; } .mp-tutorial-tooltip-footer .mp-tutorial-tooltip-next:hover, .mp-tutorial-tooltip-footer .mp-tutorial-tooltip-done:hover {   color: #fff; } ";
 
 
 /***/ },
-/* 548 */
+/* 554 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -50092,11 +50791,11 @@
 
 	var _registerElement = __webpack_require__(320);
 
-	var _index = __webpack_require__(549);
+	var _index = __webpack_require__(555);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	var _index3 = __webpack_require__(550);
+	var _index3 = __webpack_require__(556);
 
 	var _index4 = _interopRequireDefault(_index3);
 
@@ -50132,7 +50831,7 @@
 	}(_panel.Component));
 
 /***/ },
-/* 549 */
+/* 555 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -50376,14 +51075,14 @@
 	module.exports = _jade_template_fn;
 
 /***/ },
-/* 550 */
+/* 556 */
 /***/ function(module, exports) {
 
 	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } svg-icon[icon=type-boolean] #left-dot {   color: #fff;   fill: #fff; } svg-icon[icon=type-boolean] #right-dot {   color: #4c6072;   fill: #4c6072; } svg-icon[icon=lightning-bolt] #bolt, svg-icon[icon=lighting-bolt] #bolt {   color: #fff;   fill: #fff; } svg-icon[icon=alert] #circle, svg-icon[icon=alert] #stem {   color: #fff;   fill: #fff; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6d859e;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 13px;   font-stretch: normal;   font-weight: 400; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 13px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6d859e;   font-size: 14px;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 13px;   font-weight: 400;   padding: 8px;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus, input[type=text]:active, textarea:active {   border-color: #3391e9;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } mp-truncated-text {   display: inline-block;   white-space: nowrap;   width: 100%; } mp-modal {   width: 285px; } .mp-upsell-popup-content {   box-shadow: 0 1px 30px 0 rgba(0,0,0,0.19);   display: -webkit-box;   display: -ms-flexbox;   display: flex;   padding: 20px; } .mp-upsell-popup-content .mp-upsell-popup-icon {   margin-right: 10px; } .mp-upsell-popup-content .mp-upsell-popup-icon svg {   height: 42px;   width: 53px; } .mp-upsell-popup-content .mp-upsell-popup-text {   color: #6d859e;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 14px;   font-weight: 400;   line-height: 18px;   margin: 3px 20px 0 0;   max-width: 180px;   text-shadow: 0 1px 0 rgba(255,255,255,0.5); } .mp-upsell-popup-content .mp-upsell-popup-text .mp-upsell-popup-upgrade-link {   color: #2687e3;   cursor: pointer;   font-weight: 600;   text-decoration: none; } .mp-upsell-popup-content .mp-upsell-popup-text .mp-upsell-popup-upgrade-link:hover {   color: #4ba8ff; } ";
 
 
 /***/ },
-/* 551 */
+/* 557 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -50402,11 +51101,11 @@
 
 	var _string = __webpack_require__(492);
 
-	var _index = __webpack_require__(552);
+	var _index = __webpack_require__(558);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	var _index3 = __webpack_require__(553);
+	var _index3 = __webpack_require__(559);
 
 	var _index4 = _interopRequireDefault(_index3);
 
@@ -50476,7 +51175,7 @@
 	}(_panel.Component));
 
 /***/ },
-/* 552 */
+/* 558 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -50519,14 +51218,14 @@
 	module.exports = _jade_template_fn;
 
 /***/ },
-/* 553 */
+/* 559 */
 /***/ function(module, exports) {
 
 	module.exports = "svg-icon {   display: inline-block;   height: 22px;   min-height: 22px;   min-width: 22px;   position: relative;   width: 22px; } svg-icon svg {   left: 0;   position: absolute;   top: 0; } svg-icon[icon=type-boolean] #left-dot {   color: #fff;   fill: #fff; } svg-icon[icon=type-boolean] #right-dot {   color: #4c6072;   fill: #4c6072; } svg-icon[icon=lightning-bolt] #bolt, svg-icon[icon=lighting-bolt] #bolt {   color: #fff;   fill: #fff; } svg-icon[icon=alert] #circle, svg-icon[icon=alert] #stem {   color: #fff;   fill: #fff; } * {   -webkit-font-smoothing: antialiased; } *:focus {   outline: 0; } *::-ms-clear {   height: 0;   width: 0; } body {   color: #6d859e;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 13px;   font-stretch: normal;   font-weight: 400; } a, .mp-link {   cursor: pointer;   text-decoration: none; } a, .mp-link, a:visited, .mp-link:visited {   color: #3b99f0; } a:hover, .mp-link:hover {   color: #4ba8ff; } .mp-font-size-xl {   font-size: 18px; } .mp-font-size-large {   font-size: 16px; } .mp-font-size-medium {   font-size: 14px; } .mp-font-size-default {   font-size: 13px; } .mp-font-size-xs {   font-size: 11px;   text-transform: uppercase; } .mp-font-weight-bold {   font-weight: 600; } .mp-font-weight-medium {   font-weight: 500; } .mp-font-weight-regular {   font-weight: 400; } .mp-font-paragraph {   color: #6d859e;   font-size: 14px;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-stretch: normal;   font-weight: 500;   line-height: 18px; } input[type=text], textarea {   border: 1px solid #d8e0e6;   border-radius: 5px;   box-sizing: border-box;   color: #4c6072;   display: inline-block;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 13px;   font-weight: 400;   padding: 8px;   transition: border-color 150ms ease-out; } input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]::-moz-placeholder, textarea::-moz-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]::placeholder, textarea::placeholder {   color: #9bacbf !important;   font-weight: weight-normal !important; } input[type=text]:focus, textarea:focus, input[type=text]:active, textarea:active {   border-color: #3391e9;   transition: border-color 200ms ease-in; } input[type=text] {   height: 36px; } mp-truncated-text {   display: inline-block;   white-space: nowrap;   width: 100%; } mp-user-icon {   display: inline-block; } :host {   display: inline-block; } .mp-user-icon-container {   background-color: #1e7171;   border-radius: 50%;   color: #fff;   cursor: default;   font-family: 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;   font-size: 11px;   text-transform: uppercase;   font-weight: 600;   height: 26px;   line-height: 26px;   overflow: hidden;   text-align: center;   text-transform: uppercase;   width: 26px; } .mp-user-icon-container mp-tooltip {   z-index: 6000; } .mp-user-icon-container .mp-user-icon-color-A {   background-color: #33bcbd; } .mp-user-icon-container .mp-user-icon-color-B {   background-color: #2da9aa; } .mp-user-icon-container .mp-user-icon-color-C {   background-color: #289697; } .mp-user-icon-container .mp-user-icon-color-D {   background-color: #238384; } .mp-user-icon-container .mp-user-icon-color-E {   background-color: #64ade8; } .mp-user-icon-container .mp-user-icon-color-F {   background-color: #5a9bd1; } .mp-user-icon-container .mp-user-icon-color-G {   background-color: #508bba; } .mp-user-icon-container .mp-user-icon-color-H {   background-color: #4679a2; } .mp-user-icon-container .mp-user-icon-color-I {   background-color: #3c688b; } .mp-user-icon-container .mp-user-icon-color-J {   background-color: #a28ccb; } .mp-user-icon-container .mp-user-icon-color-K {   background-color: #917db6; } .mp-user-icon-container .mp-user-icon-color-L {   background-color: #826fa2; } .mp-user-icon-container .mp-user-icon-color-M {   background-color: #71618d; } .mp-user-icon-container .mp-user-icon-color-N {   background-color: #61547a; } .mp-user-icon-container .mp-user-icon-color-O {   background-color: #d97b7f; } .mp-user-icon-container .mp-user-icon-color-P {   background-color: #c36e72; } .mp-user-icon-container .mp-user-icon-color-Q {   background-color: #ad6366; } .mp-user-icon-container .mp-user-icon-color-R {   background-color: #985559; } .mp-user-icon-container .mp-user-icon-color-S {   background-color: #e8bc65; } .mp-user-icon-container .mp-user-icon-color-T {   background-color: #d0a95b; } .mp-user-icon-container .mp-user-icon-color-U {   background-color: #b99651; } .mp-user-icon-container .mp-user-icon-color-V {   background-color: #a28347; } .mp-user-icon-container .mp-user-icon-color-W {   background-color: #f6893b; } .mp-user-icon-container .mp-user-icon-color-X {   background-color: #dd7b35; } .mp-user-icon-container .mp-user-icon-color-Y {   background-color: #c46e30; } ";
 
 
 /***/ },
-/* 554 */
+/* 560 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -50579,13 +51278,13 @@
 	};
 
 /***/ },
-/* 555 */,
-/* 556 */,
-/* 557 */,
-/* 558 */,
-/* 559 */,
-/* 560 */,
-/* 561 */
+/* 561 */,
+/* 562 */,
+/* 563 */,
+/* 564 */,
+/* 565 */,
+/* 566 */,
+/* 567 */
 /***/ function(module, exports) {
 
 	/*
@@ -50641,10 +51340,10 @@
 
 
 /***/ },
-/* 562 */
+/* 568 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(561)();
+	exports = module.exports = __webpack_require__(567)();
 	// imports
 
 
@@ -50655,7 +51354,7 @@
 
 
 /***/ },
-/* 563 */
+/* 569 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -50907,12 +51606,6 @@
 
 
 /***/ },
-/* 564 */,
-/* 565 */,
-/* 566 */,
-/* 567 */,
-/* 568 */,
-/* 569 */,
 /* 570 */,
 /* 571 */,
 /* 572 */,
@@ -50941,7 +51634,14 @@
 /* 595 */,
 /* 596 */,
 /* 597 */,
-/* 598 */
+/* 598 */,
+/* 599 */,
+/* 600 */,
+/* 601 */,
+/* 602 */,
+/* 603 */,
+/* 604 */,
+/* 605 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -51046,7 +51746,7 @@
 	];
 
 /***/ },
-/* 599 */
+/* 606 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -53985,16 +54685,16 @@
 	module.exports = _jade_template_fn;
 
 /***/ },
-/* 600 */
+/* 607 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(601);
+	var content = __webpack_require__(608);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(563)(content, {});
+	var update = __webpack_require__(569)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -54011,12 +54711,12 @@
 	}
 
 /***/ },
-/* 601 */
+/* 608 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(561)();
+	exports = module.exports = __webpack_require__(567)();
 	// imports
-	exports.i(__webpack_require__(562), "");
+	exports.i(__webpack_require__(568), "");
 
 	// module
 	exports.push([module.id, ".section {\n  border-bottom: 1px solid #edf3f7;\n  padding: 10px 20px;\n}\n.section .item-palette {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: column wrap;\n          flex-flow: column wrap;\n}\n.section .item-palette.color-palette {\n  height: 180px;\n}\n.section .item-palette.icon-palette {\n  height: 320px;\n}\n.section .list-block {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  margin: 5px;\n}\n.section .list-block svg-icon svg {\n  left: 0;\n  top: 0;\n}\n.section .list-block svg-icon svg,\n.section .list-block svg-icon path {\n  color: #6d859e;\n  fill: #6d859e;\n  transition: 0.2s;\n}\n.section .list-block:hover svg-icon svg,\n.section .list-block:hover svg-icon path {\n  color: #6cb8ff;\n  fill: #6cb8ff;\n}\n.section .list-block .square {\n  display: inline-block;\n  vertical-align: middle;\n  margin-right: 4px;\n  width: 20px;\n  height: 20px;\n}\n.section .list-block .label {\n  display: inline-block;\n  margin-left: 10px;\n  vertical-align: middle;\n}\n.section.buttons mp-button {\n  margin-right: 4px;\n  vertical-align: middle;\n}\n.section.buttons p.button-field {\n  background: #4ba8ff;\n  display: table;\n  padding: 10px;\n}\n.section.button-bars .button-bar-container {\n  max-width: 600px;\n}\n.section.modals .modal {\n  width: 500px;\n}\n.section.modals mp-confirm {\n  width: 480px;\n}\n.section.modals p {\n  position: relative;\n}\n.section.toggles mp-toggle {\n  margin-bottom: 10px;\n}\n.section.toggles mp-toggle.inline-toggle {\n  width: 500px;\n}\n.section.toggles mp-toggle.full-width-toggle {\n  display: block;\n}\n.section.toggles .toggle-val {\n  margin-left: 10px;\n}\n.section.tooltips .tooltips-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.section.tooltips .tooltips-container .tooltip-container {\n  margin: 5px 0;\n}\n.section.tooltips .tooltips-container .tooltip-container.position-relative {\n  position: relative;\n  left: 100px;\n  top: 10px;\n}\n.section.tooltips .tooltips-container .tooltip-container mp-tooltip.multiline span {\n  max-width: 200px;\n}\n.section.calendars .calendar-group {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n}\n.section.calendars .calendar-group .calendar-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  margin: 10px;\n}\n.section.calendars .calendar-group.single-calendar .calendar-container {\n  width: 240px;\n}\n.section.calendars .calendar-group.double-calendar .calendar-container {\n  width: 492px;\n}\n.section .toast-container {\n  height: 400px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n}\n.section.menus .drop-menu-container {\n  position: relative;\n}\n.section.forms .mp-icon-input {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  position: relative;\n}\n.section.forms .mp-icon-input input {\n  padding: 6px;\n  padding-left: 36px;\n  padding-right: 18px;\n  width: 100%;\n}\n.section.forms .mp-icon-input input:focus + .mp-icon svg-icon svg {\n  left: 0;\n  top: 0;\n}\n.section.forms .mp-icon-input input:focus + .mp-icon svg-icon svg,\n.section.forms .mp-icon-input input:focus + .mp-icon svg-icon path {\n  color: #6d859e;\n  fill: #6d859e;\n  transition: 0.2s;\n}\n.section.forms .mp-icon-input .mp-icon {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  bottom: 0;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  left: 8px;\n  position: absolute;\n  top: 0;\n}\n.section.forms .mp-icon-input .mp-icon svg-icon svg {\n  left: 0;\n  top: 0;\n}\n.section.forms .mp-icon-input .mp-icon svg-icon svg,\n.section.forms .mp-icon-input .mp-icon svg-icon path {\n  color: #9bacbf;\n  fill: #9bacbf;\n  transition: 0.2s;\n}\n.section.widgets {\n  padding-bottom: 500px;\n}\n.section.widgets .items-menu input {\n  margin-bottom: 20px;\n}\n.section.widgets .items-menu .drop-menu-container {\n  position: relative;\n}\n.section.widgets .items-menu .drop-menu-container mp-items-menu {\n  width: 320px;\n  height: 300px;\n}\n.section.widgets .bookmarks-widget {\n  background-color: #edf3f7;\n  border: 1px solid #bdc9d6;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 54px;\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n  width: 100%;\n}\n.section.widgets .bookmarks-widget mp-bookmarks-widget {\n  border-left: 1px solid #d8e0e6;\n  border-right: 1px solid #d8e0e6;\n  margin-right: 50px;\n}\n.section.widgets .tag-selector-container {\n  position: relative;\n}\n.section.widgets .tag-selector-container mp-drop-menu {\n  top: 40px;\n}\n.section.widgets .tag-selector-container .title {\n  padding-top: 20px;\n}\n.section.widgets .tag-selector-container .title .header {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  margin-left: 18px;\n}\n.section.widgets .tag-selector-container .title .header svg-icon svg {\n  left: 0;\n  top: 0;\n}\n.section.widgets .tag-selector-container .title .header svg-icon svg,\n.section.widgets .tag-selector-container .title .header svg-icon path {\n  color: #39d183;\n  fill: #39d183;\n  transition: 0.2s;\n}\n.section.widgets .tag-selector-container .title .header .header-text {\n  color: #4c6072;\n  display: inline-block;\n  font-size: 16px;\n  font-weight: 600;\n  line-height: 1.12;\n  margin: auto 0;\n  padding-left: 10px;\n}\n.section.widgets .tag-selector-container .title .subtext {\n  color: #9bacbf;\n  font-size: 13px;\n  font-weight: 500;\n  line-height: 1.5;\n  margin: 0 0 20px 50px;\n}\n.section.widgets .tutorial-tooltips-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.section.widgets .tutorial-tooltips-container .tutorial-tooltip-container {\n  position: relative;\n  margin: 20px;\n}\n.section.widgets .tutorial-tooltips-container .tutorial-tooltip-container.top {\n  margin-top: 200px;\n}\n.section.widgets .tutorial-tooltips-container .tutorial-tooltip-container.bottom {\n  margin-bottom: 200px;\n}\n.section.widgets .tutorial-tooltips-container .tutorial-tooltip-container.left {\n  margin: 100px;\n}\n.section.widgets .tutorial-tooltips-container .tutorial-tooltip-container.right {\n  margin: 100px;\n}\n.section.widgets .tutorial-tooltips-container .tutorial-tooltip-container.center {\n  margin-bottom: 200px;\n}\n.section.widgets .tutorial-tooltips-container .tutorial-tooltip-container.center mp-tutorial-tooltip {\n  top: 40px;\n}\n", ""]);
