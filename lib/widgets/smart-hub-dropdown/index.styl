@@ -1,0 +1,55 @@
+@import '../../stylesheets/defaults'
+
++prefix-classes('mp-sh-')
+  .menu
+    mp-drop-menu
+      left -257px
+      top 40px
+      width 300px
+
+    .menu-container
+      position relative
+
+      .triangle-up
+        left 255px
+        position absolute
+        svg-icon-style(white, size: 30px)
+        top -19px
+
+      .menu-header
+        align-items flex-end
+        display flex
+        flex-direction row
+        justify-content space-between
+        padding 15px 20px
+
+        .menu-title
+          color grey-900
+          font-weight weight-bold
+
+        .menu-clear-all
+          color mp-blue
+          cursor pointer
+        
+        .hide-clear-all
+          display none
+
+      .menu-divider, .alert-divider:not(:last-child)
+        border-top 1px solid grey-200
+        padding 0
+        position relative
+        width 100%
+
+      .alerts-container
+        max-height 510px
+        overflow-y scroll
+
+        .alert-empty-state
+          align-items center
+          color grey-700
+          display flex
+          flex-direction row
+          font-weight weight-medium
+          height 100px
+          justify-content center
+          width 300px
