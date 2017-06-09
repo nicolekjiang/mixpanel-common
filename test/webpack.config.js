@@ -4,7 +4,7 @@ var glob = require('glob');
 
 var webpackConfig = {
   entry: {
-    'suites': glob.sync(path.join(__dirname, '/!(build)/**.js')),
+    'suites': glob.sync(path.join(__dirname, '/!(build)/**/*.js')),
   },
   output: {
     filename: '[name].js',
