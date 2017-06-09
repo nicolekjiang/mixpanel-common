@@ -1,11 +1,11 @@
-import { Component } from 'panel';
+import {Component} from 'panel';
 
-import exampleBlockTerms from './button-search-terms.json'
+import exampleBlockTerms from './button-search-terms.json';
 
 import template from './index.jade';
 import './index.styl';
 
-document.registerElement('buttons-section', class extends Component {
+document.registerElement(`buttons-section`, class extends Component {
   get config() {
     return {
       helpers: {
@@ -19,9 +19,9 @@ document.registerElement('buttons-section', class extends Component {
         },
         showExampleblock: exampleName => {
           let match = true;
-          if (this.state.sectionOpen == 'search'){
+          if (this.state.sectionOpen == `search`) {
             const exampleTerms = exampleBlockTerms[exampleName];
-            const searchTerms = this.state.searchTerm.split(' ');
+            const searchTerms = this.state.searchTerm.split(` `);
             searchTerms.forEach(t => {
               let partialMatch = false;
               exampleTerms.forEach(e => {
@@ -35,7 +35,7 @@ document.registerElement('buttons-section', class extends Component {
             });
           }
           return match;
-        }
+        },
       },
       template,
     };

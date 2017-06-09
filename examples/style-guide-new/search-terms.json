@@ -357,7 +357,11 @@
     "components",
     "widgets",
     "items menu widgets",
-    "mp-items-menu"
+    "mp-items-menu",
+    "mp-event-definition-tooltip",
+    "event definition tooltip",
+    "lexicon",
+    "event description"
   ],
   "smart-hub": [
     "alert",

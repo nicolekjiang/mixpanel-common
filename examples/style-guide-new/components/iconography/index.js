@@ -1,20 +1,20 @@
-import { Component } from 'panel';
+import {Component} from 'panel';
 
 import template from './index.jade';
 import './index.styl';
 
-document.registerElement('iconography-section', class extends Component {
+document.registerElement(`iconography-section`, class extends Component {
   get config() {
     return {
+      template,
       defaultState: {
-        iconSize: 'two'
+        iconSize: `two`,
       },
       helpers: {
         changeIconSize: iconSize => {
-          this.update({iconSize})
+          this.update({iconSize});
         },
       },
-      template,
     };
   }
 });

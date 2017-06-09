@@ -1,11 +1,12 @@
-import { Component } from 'panel';
+import {Component} from 'panel';
 
 import template from './index.jade';
 import './index.styl';
 
-document.registerElement('nav-bar', class extends Component {
+document.registerElement(`nav-bar`, class extends Component {
   get config() {
     return {
+      template,
       helpers: {
         navSectionChange: e => {
           let sectionOpen = e.currentTarget.dataset.sectionName;
@@ -19,7 +20,6 @@ document.registerElement('nav-bar', class extends Component {
           window.location.hash = section;
         },
       },
-      template,
     };
   }
 });

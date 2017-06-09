@@ -8,6 +8,7 @@ import './index.styl';
 document.registerElement(`components-section`, class extends Component {
   get config() {
     return {
+      template,
       helpers: {
         openModal: key => {
           this.state.open[key] = true;
@@ -46,7 +47,6 @@ document.registerElement(`components-section`, class extends Component {
           return match;
         },
       },
-      template,
     };
   }
 });
