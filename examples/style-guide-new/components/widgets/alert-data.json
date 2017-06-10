@@ -1,10 +1,105 @@
 [
   {
     "alert": {
+      "alertContentId": "insights-basic",
+      "alertId": "insights-alert-id1",
+      "alertMetadata": {
+        "type": "ANOMALY",
+        "message": "Insights: basic with single event time series",
+        "readAtMs": "1490908189900",
+        "ingestedAtMs": "1490908189900",
+        "markedUsefulAtMs": "1490908189900"
+      },
+      "insightsQuery": {
+        "propertyFilters": [],
+        "dateRange": {
+          "from": "2016-09-01",
+          "to": "2016-09-25"
+        },
+        "timeUnit": "DAY",
+        "showClauses": [
+          {
+            "showEvent": {
+              "action": "TOTAL",
+              "event": "Viewed report"
+            }
+          }
+        ],
+        "groupByProperties": []
+      },
+      "anomaly": {
+        "insightsDetails": {
+          "showClauseIdx": 0,
+          "propertyVals": []
+        },
+        "direction": "POSITIVE",
+        "valueAtTimestamp": 105954,
+        "anomalyId": "anomaly-id-insights1",
+        "anomalyTimestamp": "2016-09-06"
+      }
+    }
+  },
+  {
+    "alert": {
+      "alertContentId": "insights-group-by",
+      "alertId": "insights-alert-id1",
+      "alertMetadata": {
+        "type": "ANOMALY",
+        "message": "Insights: single time series with two group by",
+        "readAtMs": "1490908189900",
+        "ingestedAtMs": "1490908189900",
+        "markedUsefulAtMs": "1490908189900"
+      },
+      "insightsQuery": {
+        "propertyFilters": [],
+        "dateRange": {
+          "from": "2016-09-01",
+          "to": "2016-09-25"
+        },
+        "timeUnit": "DAY",
+        "showClauses": [
+          {
+            "showEvent": {
+              "action": "TOTAL",
+              "event": "Viewed report"
+            }
+          }
+        ],
+        "groupByProperties": [
+          {
+            "property": {
+              "source": "EVENTS",
+              "type": "STRING",
+              "name": "$os"
+            }
+          },
+          {
+            "property": {
+              "source": "EVENTS",
+              "type": "STRING",
+              "name": "has_integrated_engage"
+            }
+          }
+        ]
+      },
+      "anomaly": {
+        "insightsDetails": {
+          "showClauseIdx": 0,
+          "propertyVals": ["Mac OS X", "true"]
+        },
+        "direction": "POSITIVE",
+        "valueAtTimestamp": 66814,
+        "anomalyId": "anomaly-id-insights1",
+        "anomalyTimestamp": "2016-09-06"
+      }
+    }
+  },
+  {
+    "alert": {
       "alertContentId": "alert-content-id-insights1",
       "alertMetadata": {
         "type": "ANOMALY",
-        "message": "spontaneous suppuration",
+        "message": "Insights with single event time series",
         "readAtMs": "1490908189900",
         "ingestedAtMs": "1490908189900",
         "markedUsefulAtMs": "1490908189900"
@@ -15,7 +110,7 @@
             "property": {
               "source": "EVENTS",
               "type": "STRING",
-              "name": "special-prop"
+              "name": "Viewed report"
             },
             "stringFilter": {
               "operator": "CONTAINS",
