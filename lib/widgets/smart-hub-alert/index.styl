@@ -1,11 +1,11 @@
 @import '../../stylesheets/defaults'
 
-+prefix-classes('mp-sh-alert-')
-  .unread
-    background-color grey-50
++host-styles('mp-smart-hub-alert')
+  display inline-block
 
++prefix-classes('mp-sh-alert-')
   .container
-    cursor pointer
+    background-color white
     display flex
     flex-direction column
     height 135px
@@ -13,12 +13,11 @@
     padding 0 20px
     width 320px
 
-    &:hover:not(.no-hover)
+    &.unread
       background-color grey-50
 
-      .delete
-        display flex
-        svg-icon-style(grey-500, mp-red, size: 20px)
+    &:hover.hoverable
+      background-color grey-50
 
     .header
       display flex
@@ -52,8 +51,10 @@
           font-weight weight-bold
           font-size-default()
     
-    .delete
-      display none
+    .remove
+      cursor pointer
+      display flex
+      svg-icon-style(grey-500, mp-red, size: 20px)
 
     .message
       color grey-700

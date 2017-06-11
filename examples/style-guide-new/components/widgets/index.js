@@ -1,6 +1,6 @@
 import {Component} from 'panel';
 
-import alerts from './alert-data.json';
+import smartHubAlerts from './smart-hub-alerts-data.json';
 import bookmarks from './bookmark-data.json';
 
 import template from './index.jade';
@@ -17,8 +17,8 @@ document.registerElement(`widgets-section`, class extends Component {
   get config() {
     return {
       defaultState: {
-        alerts,
-        alertDropdownOpen: false,
+        smartHubAlerts,
+        smartHubDropdownOpen: false,
         currentBookmark: `default`,
         bookmarks,
         itemsMenuOpen: false,
@@ -271,7 +271,7 @@ document.registerElement(`widgets-section`, class extends Component {
             ...sections,
           ];
         },
-        toggleAlertDropdown: () => this.update({alertDropdownOpen: !this.state.alertDropdownOpen}),
+        toggleSmartHubDropdown: () => this.update({smartHubDropdownOpen: !this.state.smartHubDropdownOpen}),
       },
       template,
     };

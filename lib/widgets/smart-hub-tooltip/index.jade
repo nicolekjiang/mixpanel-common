@@ -1,0 +1,13 @@
+.mp-sh-tooltip-container(
+  class={[`mp-sh-tooltip-placement-${placement}`]: true}
+)
+  mp-smart-hub-alert(
+    attrs={
+      'is-link': false,
+      'smart-hub-alert': JSON.stringify({alert}),
+    }
+    on={
+      sentFeedback: $helpers.handleSentFeedback,
+      removedAlert: $helpers.handleRemovedAlert,
+    }
+  )

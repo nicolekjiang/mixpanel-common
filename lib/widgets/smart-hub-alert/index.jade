@@ -1,23 +1,18 @@
 // TODO(mack): Use a anchor tag for link
-a.mp-sh-alert-container(
-  attrs={href: permalink}
-  class={
-    'mp-sh-alert-unread': !isRead,
-    'mp-sh-alert-no-hover': $component.getAttribute('no-hover'),
-  }
-)
+
+mixin alert-content()
   .mp-sh-alert-header
     .mp-sh-alert-header-title
       case type
         when `ANOMALY`
           .mp-sh-alert-header-icon
             // TODO(mack): Need to figure out how to handle grouped alert
-            if !alert.groupedAlert && alert.alert.anomaly.direction === 'NEGATIVE'
+            if !smartHubAlert.groupedAlert && smartHubAlert.alert.anomaly.direction === 'NEGATIVE'
               include ./smart-hub-assets/anomaly-down.svg
             else
               include ./smart-hub-assets/anomaly-up.svg
           .mp-sh-alert-header-text Anomaly detection
-    .mp-sh-alert-delete(on={click: ev => $helpers.handleRemoveAlert(ev, alertId)})
+    .mp-sh-alert-remove(on={click: ev => $helpers.handleRemoveAlert(ev, alertId)})
       svg-icon(attrs={icon: 'x'})
   .mp-sh-alert-message #{message}
   .mp-sh-alert-footer
@@ -26,7 +21,7 @@ a.mp-sh-alert-container(
       if !markedUseful
         .mp-sh-alert-footer-good(
           on={click: ev => $helpers.handleSendFeedback(ev, true)}
-        ) 
+        )
           include ./smart-hub-assets/thumbs-up.svg
           .mp-sh-alert-footer-good-text Useful
         .mp-sh-alert-footer-bad(
@@ -36,3 +31,19 @@ a.mp-sh-alert-container(
           .mp-sh-alert-footer-bad-text Not useful
       else if hasSentFeedback
         .mp-sh-alert-footer-thank-you Thank you for your feedback
+
+div
+  if isLink
+    a.mp-sh-alert-container(
+      attrs={href: permalink}
+      class={
+        'mp-sh-alert-unread': !isRead,
+        'mp-sh-alert-hoverable': true,
+      }
+    )
+      +alert-content()
+  else
+    .mp-sh-alert-container
+      +alert-content()
+
+

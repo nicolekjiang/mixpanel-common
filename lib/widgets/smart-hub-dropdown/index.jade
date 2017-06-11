@@ -17,17 +17,18 @@
         .mp-sh-menu-title.mp-font-size-medium Automated insights
         .mp-sh-menu-clear-all.mp-font-size-small(
           on={click: $helpers.openConfirmDelete}
-          class={'mp-sh-hide-clear-all': alerts.length == 0}
+          class={'mp-sh-hide-clear-all': smartHubAlerts.length == 0}
         ) Clear all
       .mp-sh-menu-divider
       .mp-sh-alerts-container
-        if alerts.length > 0
-          for alert in alerts
+        if smartHubAlerts.length > 0
+          for smartHubAlert in smartHubAlerts
             mp-smart-hub-alert(
               attrs={
                 'mixpanel-host': mixpanelHost,
                 'project-id': projectId,
-                'alert': JSON.stringify(alert),
+                'smart-hub-alert': JSON.stringify(smartHubAlert),
+                'is-link': true,
               }
               on={
                 sentFeedback: $helpers.handleSentFeedback,

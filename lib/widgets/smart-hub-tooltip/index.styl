@@ -1,0 +1,54 @@
+@import '../../stylesheets/defaults'
+
++host-styles('mp-smart-hub-tooltip')
+  display inline-block
+
++prefix-classes('mp-sh-tooltip-')
+  .container
+    border 1px solid grey-100
+    border-radius 5px
+    mp-box-shadow()
+    position relative
+
+    mp-smart-hub-alert
+      border-radius 5px
+      overflow hidden
+
+    &::after
+      border 5px solid transparent
+      content ''
+      height 0
+      position absolute
+      width 0
+
+    &.placement-top
+      margin-bottom 5px
+    &.placement-top::after
+      border-top-color white
+      left 50%
+      margin-left -5px
+      top 100%
+
+    &.placement-bottom
+      margin-top 5px
+    &.placement-bottom::after
+      border-bottom-color white
+      bottom 100%
+      left 50%
+      margin-left -5px
+
+    &.placement-left
+      margin-right 5px
+    &.placement-left::after
+      border-left-color white
+      left 100%
+      margin-top -5px
+      top 50%
+
+    &.placement-right
+      margin-left 5px
+    &.placement-right::after
+      border-right-color white
+      margin-top -5px
+      right 100%
+      top 50%

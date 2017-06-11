@@ -426,14 +426,21 @@
               strong.icon +
               strong mp-smart-hub-dropdown
             .example-card.alerts-example
-              .alert-button(on={click: $helpers.toggleAlertDropdown})
+              .alert-button(on={click: $helpers.toggleSmartHubDropdown})
                 svg-icon(attrs={icon: `hubs-notif`})
                 mp-smart-hub-dropdown(
                  attrs={
-                   'open': alertDropdownOpen,
-                   'alerts': JSON.stringify(alerts),
+                   'open': smartHubDropdownOpen,
+                   'smart-hub-alerts': JSON.stringify(smartHubAlerts),
                    //'mixpanel-host': `https://mixpanel.com`,
                    'mixpanel-host': `http://mack.dev.mixpanel.org`,
                    'project-id': 3,
                  }
                 )
+            .example-card.alerts-example
+              mp-smart-hub-tooltip(
+                attrs={
+                  'placement': `right`,
+                  'alert': JSON.stringify(smartHubAlerts[0].alert),
+                }
+              )
