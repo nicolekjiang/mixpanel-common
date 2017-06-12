@@ -358,19 +358,6 @@
                       open: !!eventDefinition,
                     }
                   )
-  if sectionOpen == 'widgets' || searchSections.includes('user-icon')
-    .sub-section-container#user-icon
-      .divider
-      .section-content
-        section
-        .subsection-title User icon
-        .subsection-description An icon representing a Mixpanel user having performed an action
-        .indent-container
-          .example-block
-            .call-out.first-call-out
-              strong.icon +
-              strong mp-user-icon
-            mp-user-icon(attrs={name: `Bob Loblaw`})
           .code-snippet
             .call-out.first-call-out
               strong.icon +
@@ -381,58 +368,6 @@
               .code-field
                 pre
                   | 1
-                  br
-                  | 2
-                  br
-                  | 3
-                  br
-                  | 4
-                  br
-                  | 5
-                  br
-                  | 6
-                  br
-                  | 7
-                  br
-                  | 8
                 pre
-                  span.grey-500 // User icon widget
-                  br
-                  span.mp-red mp-user-icon(
-                  br
-                  span.mp-purple   attrs={
-                  br
-                  |     name: `Bob Loblaw`,
-                  br
-                  |     'show-tooltip': true,
-                  br
-                  |     'tooltip-text': `Law blog`,
-                  br
-                  span.mp-purple   }
-                  br
-                  span.mp-red )
-  if sectionOpen == 'widgets' || searchSections.includes('smart-hub')
-    .sub-section-container#smart-hub
-      .divider
-      .section-content
-        section
-        .subsection-title Smart Hub Dropdown
-        .subsection-description For displaying alerts surfaced by our machine learning endpoints, used in reports and as smarthub global.
-        .indent-container
-          .example-block
-            .indent-container
-          .example-block
-            .call-out.first-call-out
-              strong.icon +
-              strong mp-smart-hub-dropdown
-            .example-card.alerts-example
-              .alert-button(on={click: $helpers.toggleAlertDropdown})
-                svg-icon(attrs={icon: `hubs-notif`})
-                mp-smart-hub-dropdown(
-                 attrs={
-                   'open': alertDropdownOpen,
-                   'alerts': JSON.stringify(alerts),
-                   'mixpanel-host': `https://mixpanel.com`,
-                   'project-id': 3,
-                 }
-                )
+                  //- TODO - make example code snippet
+                  span.grey-500 // Items Menu Widget

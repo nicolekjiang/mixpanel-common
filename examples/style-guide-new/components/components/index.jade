@@ -371,10 +371,9 @@
             .common-example
               .tooltips-container
                 .tooltip-example.placement-top tooltip
-          .example-block
+          .example-block  
             .call-out
-              strong mp-tooltip
-              p (attrs={placement: 'left'})
+              strong placement:
             .common-example
               .tooltips-container
                 .tooltip-example.placement-left left
@@ -411,6 +410,13 @@
                   removable: true
                 }
               )
+        if $helpers.showExampleblock('user-icon')
+          .example-block
+            .call-out.first-call-out
+              strong.icon +
+              strong mp-user-icon
+            .common-example(style={width: '30px'})
+              mp-user-icon(attrs={name: `Bob Loblaw`})
         if $helpers.showExampleblock('spinner')
           .example-block.full-width
             .call-out.first-call-out
@@ -448,6 +454,12 @@
                 | 10
                 br
                 | 11
+                br
+                | 12
+                br
+                | 13
+                br
+                | 14
               pre
                 span.grey-500 //- Tooltips
                 br
@@ -455,14 +467,24 @@
                 br
                 |   .tooltip-parent-div
                 br
-                span.mp-red     mp-tooltip
-                span.mp-purple (attrs={placement: 'top'}) Tooltip Text
+                span.mp-red     mp-tooltip(
+                span.mp-purple attrs={placement: 'top'}
+                span.mp-red )
+                | Tooltip Text
                 br
                 br
                 span.grey-500 //- Tags
                 br
-                span.mp-red   mp-tag
-                span.mp-purple (attrs={clickable: true, 'tag-name': 'Name', removable: true})
+                span.mp-red   mp-tag(
+                span.mp-purple attrs={clickable: true, 'tag-name': 'Name', removable: true}
+                span.mp-red )
+                br
+                br
+                span.grey-500 // User icon widget
+                br
+                span.mp-red   mp-user-icon(
+                span.mp-purple attrs={name: `Bob Loblaw`, 'show-tooltip': true, 'tooltip-text': `Law blog`}
+                span.mp-red )
                 br
                 br
                 span.grey-500 //- Spinner(s)
