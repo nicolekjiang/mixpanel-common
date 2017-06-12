@@ -13,7 +13,11 @@
       if idx > 0
         .section-divider
       if section.label
-        .section-label= section.label
+        .section-label
+          span.label= section.label
+          if section.datasetDisplayName
+            span.dataset-name= section.datasetDisplayName
+
       ul.screen-options-list
         each item in section.items
           - const isSelectable = !item.isDisabled && (!item.isSelected || item.hasCaret)
