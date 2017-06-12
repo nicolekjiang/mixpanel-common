@@ -172,6 +172,58 @@
   },
   {
     "alert": {
+      "alertContentId": "funnels-basic",
+      "alertMetadata": {
+        "type": "ANOMALY",
+        "message": "Funnels: single anomaly",
+        "readAtMs": "1490908189900",
+        "ingestedAtMs": "1490908189900",
+        "markedUsefulAtMs": "1490908189900"
+      },
+      "anomaly": {
+        "funnelsDetails": {
+          "startStepIdx": 0,
+          "isOverallConversion": false
+        },
+        "direction": "NEGATIVE",
+        "valueAtTimestamp": 71.62,
+        "anomalyId": "anomaly-id-funnels1",
+        "anomalyTimestamp": "2017-05-20"
+      },
+      "funnelsQuery": {
+        "timeUnit": "DAY",
+        "dateRange": {
+          "from": "2017-05-05",
+          "to": "2017-05-25"
+        },
+        "bookmarkId": 2540095,
+        "groupByProperty": {
+          "source": "EVENTS",
+          "name": "$os",
+          "type": "STRING"
+        },
+        "propertyFilters": [
+          {
+            "property": {
+              "source": "EVENTS",
+              "name": "$browser",
+              "type": "STRING"
+            },
+            "stringFilter": {
+              "operator": "EQUALS",
+              "operands": [
+                "Chrome",
+                "Firefox"
+              ]
+            }
+          }
+        ]
+      },
+      "alertId": "funnel-alert-id1"
+    }
+  },
+  {
+    "alert": {
       "alertContentId": "alert-content-id-retention1",
       "alertMetadata": {
         "type": "ANOMALY",
@@ -231,58 +283,6 @@
         "anomalyId": "anomaly-id-retention1",
         "anomalyTimestamp": "2017-09-02"
       }
-    }
-  },
-  {
-    "alert": {
-      "alertContentId": "alert-content-id-funnel1",
-      "alertMetadata": {
-        "type": "ANOMALY",
-        "message": "spontaneous suppuration",
-        "readAtMs": "1490908189900",
-        "ingestedAtMs": "1490908189900",
-        "markedUsefulAtMs": "1490908189900"
-      },
-      "anomaly": {
-        "funnelsDetails": {
-          "isOverallConversion": true
-        },
-        "direction": "POSITIVE",
-        "valueAtTimestamp": 0.67,
-        "anomalyId": "anomaly-id-funnels1",
-        "anomalyTimestamp": "2017-09-02"
-      },
-      "funnelsQuery": {
-        "timeUnit": "HOUR",
-        "dateRange": {
-          "from": "2017-05-10",
-          "to": "2017-05-15"
-        },
-        "bookmarkId": 2263164,
-        "groupByProperty": {
-          "source": "EVENTS",
-          "name": "special-prop",
-          "type": "NUMBER",
-          "typecast": "STRING"
-        },
-        "propertyFilters": [
-          {
-            "property": {
-              "source": "EVENTS",
-              "name": "special-prop",
-              "type": "NUMBER",
-              "typecast": "STRING"
-            },
-            "stringFilter": {
-              "operator": "CONTAINS",
-              "operands": [
-                "retinoblastoma"
-              ]
-            }
-          }
-        ]
-      },
-      "alertId": "funnel-alert-id1"
     }
   },
   {
