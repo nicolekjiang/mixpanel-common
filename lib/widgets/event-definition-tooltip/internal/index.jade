@@ -1,10 +1,12 @@
 - const url = $component.getAttribute('url')
 .mp-event-definition-wrapper
   if open
-    .mp-event-definition-tooltip(class={
-      delayed: {'mp-event-definition-in': true},
-      remove: {'mp-event-definition-out': true, delayRemove},
-    })
+    .mp-event-definition-tooltip(
+      class={
+        delayed: {'mp-event-definition-in': true},
+        remove: {'mp-event-definition-out': true, delayRemove},
+      }
+    )
       .mp-event-definition-container
         .mp-event-definition-name= name
         .mp-event-definition-description= description
@@ -15,4 +17,4 @@
             .mp-event-definition-verified-text
               = isMixpanelDefinition ? `This is a Mixpanel built-in event.` : $helpers.getVerifiedText()
       .mp-event-definition-learn-more
-        span Add definitions to your events with #[a(attrs={href: url}) Lexicon].
+        span Add descriptions to your events with #[a(attrs={href: url}) Lexicon].

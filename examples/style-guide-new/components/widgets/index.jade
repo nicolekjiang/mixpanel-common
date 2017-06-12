@@ -339,7 +339,7 @@
               .drop-menu-container
                 mp-drop-menu(
                   attrs={open: itemsMenuOpen}
-                  on={change: $helpers.handleItemsMenuModalChange}
+                  on={change: $helpers.handleItemsMenuChange}
                 )
                   mp-items-menu(
                     attrs={
@@ -428,8 +428,10 @@
                 svg-icon(attrs={icon: `hubs-notif`})
                 mp-smart-hub-dropdown(
                  attrs={
-                   open: alertDropdownOpen,
-                   alerts: JSON.stringify(alerts),
+                   'open': alertDropdownOpen,
+                   'alerts': JSON.stringify(alerts),
+                   'mixpanel-host': `https://mixpanel.com`,
+                   'project-id': 3,
                  }
                 )
           .code-snippet

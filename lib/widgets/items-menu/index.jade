@@ -32,7 +32,7 @@
             }
           )
             if item.hasOwnProperty(`icon`)
-              .option-icon
+              .option-icon(class={'verified': item.verified})
                 - const icon = item.icon
                 svg-icon(attrs={icon, empty: !icon})
             .option-label
