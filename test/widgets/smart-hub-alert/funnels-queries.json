@@ -1,0 +1,69 @@
+[
+  {
+    "description": "Test basic query",
+    "query": {
+      "timeUnit": "HOUR",
+      "dateRange": {
+        "from": "2017-05-10",
+        "to": "2017-05-15"
+      },
+      "bookmarkId": 939,
+      "groupByProperty": {
+        "source": "EVENTS",
+        "name": "special-prop",
+        "type": "NUMBER",
+        "typecast": "STRING"
+      },
+      "propertyFilters": [
+        {
+          "property": {
+            "source": "EVENTS",
+            "name": "special-prop",
+            "type": "NUMBER",
+            "typecast": "STRING"
+          },
+          "stringFilter": {
+            "operator": "CONTAINS",
+            "operands": [
+              "retinoblastoma"
+            ]
+          }
+        }
+      ]
+    },
+    "urlParams": {
+      "from_date": -15,
+      "to_date": -10,
+      "segment_type": "number",
+      "segfilters": {
+        "filters": [
+          {
+            "dropdown_tab_index": 0,
+            "property": {
+              "name": "special-prop",
+              "source": "properties",
+              "type": "number"
+            },
+            "selected_property_type": "number",
+            "type": "string",
+            "filter": {
+              "operator": "in",
+              "operand": "retinoblastoma"
+            }
+          },
+          {
+            "dropdown_tab_index": 0,
+            "property": {
+              "name": "special-prop",
+              "source": "properties",
+              "type": "number"
+            },
+            "selected_property_type": "number",
+            "type": "string"
+          }
+        ],
+        "op": "and"
+      }
+    }
+  }
+]

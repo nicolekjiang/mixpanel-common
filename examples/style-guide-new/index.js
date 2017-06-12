@@ -45,10 +45,6 @@ document.registerElement(`style-guide`, class extends Component {
         searchTermPrompt: null,
         searchTerm: null,
         searchSections: [],
-        sectionFilter: null,
-        sectionOpen: `colors`,
-        subSectionOpen: null,
-        SVG_ICONS,
       },
       helpers: {
         navSectionChange: e => {
@@ -109,7 +105,7 @@ document.registerElement(`style-guide`, class extends Component {
       if (this.isCharacterKeyPress(e)) {
         const sectionOpen = this.state.sectionOpen;
         this.update({sectionOpen: `search`});
-        if (sectionOpen != `search`) {
+        if (sectionOpen !== `search`) {
           this.update({previousSectionOpen: sectionOpen});
           if (this.isCharacterKeyPress(e)) {
             this.update({searchTermPrompt: e.key.toUpperCase()});

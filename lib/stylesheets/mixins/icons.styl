@@ -1,23 +1,45 @@
-svg-icon-style(base-color=null, hover-color=null, speed=0.2s, size=null, pos-left=0, pos-top=0)
+svg-icon-style(base-color=null, hover-color=null, speed=0.2s, size=22px, pos-left=0, pos-top=0)
   svg-icon
-    if size != null
+    display inline-block
+    height size
+    min-height size
+    min-width size
+    position relative
+    width size
+
+    &[icon=type-boolean]
+      #left-dot
+        color white
+        fill white
+      #right-dot
+        color grey-900
+        fill grey-900
+
+    &[icon=lightning-bolt], &[icon=lighting-bolt]
+      #bolt
+        color white
+        fill white
+
+    &[icon=alert]
+      #circle, #stem
+        color white
+        fill white
+
+    svg
       height size
+      left pos-left
       min-height size
       min-width size
-      width size
-    svg
-      if size != null
-        height size
-        min-height size
-        min-width size
-        width size
-      left pos-left
+      position absolute
       top pos-top
+      width size
+
     if base-color != null
       svg, path
         color base-color
         fill base-color
         transition speed
+
   if hover-color != null
     &:hover
       svg-icon

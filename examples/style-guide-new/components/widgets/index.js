@@ -115,15 +115,27 @@ document.registerElement(`widgets-section`, class extends Component {
           const currentBookmark = type;
           this.update({currentBookmark});
         },
-        handleItemsMenuModalChange: ev => {
+        handleItemsMenuChange: ev => {
           const state = ev.detail.state;
-          this.update({itemsMenuOpen: state === `open`});
+          switch (state) {
+            case `open`:
+              this.update({itemsMenuOpen: true});
+              break;
+            case `closed`:
+              this.update({itemsMenuOpen: false});
+              break;
+            case `closing`:
+              this.update({eventDefinition: null});
+              break;
+          }
         },
         handleItemsMenuFocus: () => {
           this.update({itemsMenuOpen: true});
         },
         handleItemsMenuBlur: () => {
-          this.update({itemsMenuOpen: false, eventDefinition: null});
+          if (!this.state.eventDefinition) {
+            this.update({itemsMenuOpen: false});
+          }
         },
         handleItemsMenuInput: ev => {
           this.update({itemsMenuSearchFilter: ev.target.value});
@@ -178,9 +190,12 @@ document.registerElement(`widgets-section`, class extends Component {
               isDisabled: true,
               hasPropertiesPill: true,
             }, {
-              label: `[Collect everything] Clicked cancel edit elements`,
+              label: `Clicked cancel edit elements`,
               icon: `event`,
-              isDisabled: true,
+              description: `Triggered when user cancels editing elements.`,
+              verified: true,
+              verifiedBy: `Tim Trefren`,
+              verifiedDate: `2017-06-06`,
             }, {
               label: `All: Add to shortlist v3`,
               icon: `custom-events`,
@@ -192,7 +207,7 @@ document.registerElement(`widgets-section`, class extends Component {
               description: `A pageview, but tracked by autotrack.`,
               verified: true,
               verifiedBy: `Jonathan Lack`,
-              verifiedDate: new Date(),
+              verifiedDate: `2017-01-01`,
             }, {
               label: `Viewed report`,
               icon: null,
@@ -207,7 +222,7 @@ document.registerElement(`widgets-section`, class extends Component {
               label: `Device Model`,
               icon: `type-text`,
             }, {
-              label: `Device Pixel Ratio (is it retina?)`,
+              label: `Device Pixel Ratio`,
               icon: `type-number`,
             }, {
               label: `Email`,

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 44.1 (41455) - http://www.bohemiancoding.com/sketch -->
+    <title>plus-funnel</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Navigation-icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="plus-funnel" fill="#9BACBF">
+            <path d="M16.499,10.001 L12,10.001 L12,5.501 C12,5.225 11.775,5 11.499,5 L10.499,5 C10.223,5 9.999,5.225 9.999,5.501 L9.999,10.001 L5.499,10.001 C5.223,10.001 5,10.225 5,10.501 L5,11.501 C5,11.778 5.223,12 5.499,12 L9.999,12 L9.999,16.501 C9.999,16.777 10.223,17.001 10.499,17.001 L11.499,17.001 C11.775,17.001 12,16.777 12,16.501 L12,12 L16.499,12 C16.776,12 16.999,11.778 16.999,11.501 L16.999,10.501 C16.999,10.225 16.776,10.001 16.499,10.001" id="plus"></path>
+        </g>
+    </g>
+</svg>

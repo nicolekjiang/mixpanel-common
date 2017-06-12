@@ -1,0 +1,280 @@
+[
+  {
+    "description": "Test minimal query",
+    "query": {
+      "event": "event",
+      "propertyFilters": [],
+      "bornPropertyFilters": [],
+      "dateRange": {
+        "from": "2017-05-10",
+        "to": "2017-05-15"
+      },
+      "retentionType": "COMPOUNDED",
+      "countType": "PERCENT",
+      "timeUnit": "DAY"
+    },
+    "urlParams": {
+      "event": "event",
+      "filters": [],
+      "percentage_view": true,
+      "retention_type": "compounded",
+      "date_range": {
+        "from": -15,
+        "to": -10
+      },
+      "date_unit": "day"
+    }
+  },
+  {
+    "description": "Test property filters",
+    "query": {
+      "bornEvent": "ras",
+      "propertyFilters": [
+        {
+          "property": {
+            "source": "EVENTS",
+            "type": "STRING",
+            "name": "string-property"
+          },
+          "stringFilter": {
+            "operator": "CONTAINS",
+            "operands": [
+              "string-operand-1",
+              "string-operand-2"
+            ]
+          }
+        },
+        {
+          "property": {
+            "source": "EVENTS",
+            "type": "NUMBER",
+            "name": "number-property"
+          },
+          "numberFilter": {
+            "operator": "BETWEEN",
+            "operand1": 10.5,
+            "operand2": 40
+          }
+        },
+        {
+          "property": {
+            "source": "EVENTS",
+            "type": "DATE",
+            "name": "date-property"
+          },
+          "absoluteDateFilter": {
+            "operator": "BETWEEN",
+            "operand1": "2017-06-01",
+            "operand2": "2017-06-07"
+          }
+        },
+        {
+          "property": {
+            "source": "EVENTS",
+            "type": "DATE",
+            "name": "date-property"
+          },
+          "relativeDateFilter": {
+            "operator": "LESS_THAN",
+            "timeUnit": "DAY",
+            "operand": 10
+          }
+        },
+        {
+          "property": {
+            "source": "EVENTS",
+            "type": "BOOLEAN",
+            "name": "boolean-property"
+          },
+          "booleanFilter": {
+            "operand": true
+          }
+        },
+        {
+          "property": {
+            "source": "EVENTS",
+            "type": "LIST",
+            "name": "lister-property"
+          },
+          "listFilter": {
+            "operator": "CONTAINS",
+            "operand": "list-filter-operand"
+          }
+        }
+      ],
+      "bornPropertyFilters": [],
+      "dateRange": {
+        "from": "2017-05-10",
+        "to": "2017-05-15"
+      },
+      "retentionType": "COMPOUNDED",
+      "countType": "COUNT",
+      "timeUnit": "DAY",
+      "event": "src"
+    },
+    "urlParams": {
+      "event": "src",
+      "filters": [
+        {
+          "dropdown_tab_index": 0,
+          "property": {
+            "name": "string-property",
+            "source": "properties",
+            "type": "string"
+          },
+          "selected_property_type": "string",
+          "type": "string",
+          "filter": {
+            "operator": "in",
+            "operand": "string-operand-1"
+          }
+        },
+        {
+          "dropdown_tab_index": 0,
+          "property": {
+            "name": "number-property",
+            "source": "properties",
+            "type": "number"
+          },
+          "selected_property_type": "number",
+          "type": "number",
+          "filter": {
+            "operator": "><",
+            "operand": [
+              "10.5",
+              "40"
+            ]
+          }
+        },
+        {
+          "dropdown_tab_index": 0,
+          "property": {
+            "name": "date-property",
+            "source": "properties",
+            "type": "datetime"
+          },
+          "selected_property_type": "datetime",
+          "type": "datetime",
+          "filter": {
+            "operator": "><",
+            "operand": [
+              "2017-06-01",
+              "2017-06-07"
+            ]
+          }
+        },
+        {
+          "dropdown_tab_index": 0,
+          "property": {
+            "name": "date-property",
+            "source": "properties",
+            "type": "datetime"
+          },
+          "selected_property_type": "datetime",
+          "type": "datetime",
+          "filter": {
+            "operator": "<",
+            "operand": 10,
+            "unit": "days"
+          }
+        },
+        {
+          "dropdown_tab_index": 0,
+          "property": {
+            "name": "boolean-property",
+            "source": "properties",
+            "type": "boolean"
+          },
+          "selected_property_type": "boolean",
+          "type": "boolean",
+          "filter": {
+            "operand": "true"
+          }
+        },
+        {
+          "dropdown_tab_index": 0,
+          "property": {
+            "name": "lister-property",
+            "source": "properties",
+            "type": "list"
+          },
+          "selected_property_type": "list",
+          "type": "list",
+          "filter": {
+            "operator": "in",
+            "operand": "list-filter-operand"
+          }
+        }
+      ],
+      "percentage_view": false,
+      "retention_type": "compounded",
+      "born_event": "ras",
+      "born_filters": [
+
+      ],
+      "date_range": {
+        "from": -15,
+        "to": -10
+      },
+      "date_unit": "day"
+    }
+  },
+  {
+    "description": "Test born property filters",
+    "query": {
+      "bornEvent": "born-event",
+      "propertyFilters": [],
+      "bornPropertyFilters": [
+        {
+          "property": {
+            "source": "EVENTS",
+            "type": "STRING",
+            "name": "special-prop"
+          },
+          "stringFilter": {
+            "operator": "CONTAINS",
+            "operands": [
+              "retinoblastoma"
+            ]
+          }
+        }
+      ],
+      "dateRange": {
+        "from": "2017-05-10",
+        "to": "2017-05-15"
+      },
+      "retentionType": "BIRTH",
+      "countType": "PERCENT",
+      "timeUnit": "DAY",
+      "event": "src"
+    },
+    "urlParams": {
+      "event": "src",
+      "filters": [],
+      "percentage_view": true,
+      "retention_type": "birth",
+      "born_event": "born-event",
+      "born_filters": [
+        {
+          "dropdown_tab_index": 0,
+          "property": {
+            "name": "special-prop",
+            "source": "properties",
+            "type": "string"
+          },
+          "selected_property_type": "string",
+          "type": "string",
+          "filter": {
+            "operator": "in",
+            "operand": "retinoblastoma"
+          }
+        }
+      ],
+      "date_range": {
+        "from": -15,
+        "to": -10
+      },
+      "date_unit": "day"
+    }
+  }
+]

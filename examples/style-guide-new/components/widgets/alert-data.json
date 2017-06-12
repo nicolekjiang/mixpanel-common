@@ -13,7 +13,7 @@
         "propertyFilters": [
           {
             "property": {
-              "source": "EVENT",
+              "source": "EVENTS",
               "type": "STRING",
               "name": "special-prop"
             },
@@ -32,9 +32,11 @@
         "propertyFiltersOperator": "AND",
         "groupByProperties": [
           {
-            "source": "EVENT",
-            "type": "STRING",
-            "name": "special-prop"
+            "property": {
+              "source": "EVENTS",
+              "type": "STRING",
+              "name": "special-prop"
+            }
           }
         ],
         "timeUnit": "DAY",
@@ -46,10 +48,10 @@
             }
           },
           {
-            "showProperty": {
+            "showPeopleProperty": {
               "action": "AVERAGE",
               "property": {
-                "source": "EVENT",
+                "source": "PEOPLE",
                 "type": "STRING",
                 "name": "special-prop"
               }
@@ -88,7 +90,7 @@
         "propertyFilters": [
           {
             "property": {
-              "source": "EVENT",
+              "source": "EVENTS",
               "type": "STRING",
               "name": "special-prop"
             },
@@ -103,7 +105,7 @@
         "bornPropertyFilters": [
           {
             "property": {
-              "source": "EVENT",
+              "source": "EVENTS",
               "type": "STRING",
               "name": "special-prop"
             },
@@ -158,21 +160,23 @@
       "funnelsQuery": {
         "timeUnit": "HOUR",
         "dateRange": {
-          "to": "2016-08-09",
-          "from": "2016-02-07"
+          "from": "2017-05-10",
+          "to": "2017-05-15"
         },
-        "bookmarkId": 939,
+        "bookmarkId": 2263164,
         "groupByProperty": {
-          "source": "EVENT",
-          "type": "STRING",
-          "name": "special-prop"
+          "source": "EVENTS",
+          "name": "special-prop",
+          "type": "NUMBER",
+          "typecast": "STRING"
         },
         "propertyFilters": [
           {
             "property": {
-              "source": "EVENT",
-              "type": "STRING",
-              "name": "special-prop"
+              "source": "EVENTS",
+              "name": "special-prop",
+              "type": "NUMBER",
+              "typecast": "STRING"
             },
             "stringFilter": {
               "operator": "CONTAINS",
@@ -200,7 +204,7 @@
         "propertyFilters": [
           {
             "property": {
-              "source": "EVENT",
+              "source": "EVENTS",
               "type": "STRING",
               "name": "special-prop"
             },
@@ -219,9 +223,11 @@
         "propertyFiltersOperator": "AND",
         "groupByProperties": [
           {
-            "source": "EVENT",
-            "type": "STRING",
-            "name": "special-prop"
+            "property": {
+              "source": "EVENTS",
+              "type": "STRING",
+              "name": "special-prop"
+            }
           }
         ],
         "timeUnit": "DAY",
@@ -233,10 +239,10 @@
             }
           },
           {
-            "showProperty": {
+            "showPeopleProperty": {
               "action": "AVERAGE",
               "property": {
-                "source": "EVENT",
+                "source": "PEOPLE",
                 "type": "STRING",
                 "name": "special-prop"
               }
@@ -275,7 +281,7 @@
         "propertyFilters": [
           {
             "property": {
-              "source": "EVENT",
+              "source": "EVENTS",
               "type": "STRING",
               "name": "special-prop"
             },
@@ -290,7 +296,7 @@
         "bornPropertyFilters": [
           {
             "property": {
-              "source": "EVENT",
+              "source": "EVENTS",
               "type": "STRING",
               "name": "special-prop"
             },
@@ -346,21 +352,23 @@
       "funnelsQuery": {
         "timeUnit": "HOUR",
         "dateRange": {
-          "to": "2016-08-09",
-          "from": "2016-02-07"
+          "from": "2017-05-10",
+          "to": "2017-05-15"
         },
-        "bookmarkId": 939,
+        "bookmarkId": 2263164,
         "groupByProperty": {
-          "source": "EVENT",
-          "type": "STRING",
-          "name": "special-prop"
+          "source": "EVENTS",
+          "name": "special-prop",
+          "type": "NUMBER",
+          "typecast": "STRING"
         },
         "propertyFilters": [
           {
             "property": {
-              "source": "EVENT",
-              "type": "STRING",
-              "name": "special-prop"
+              "source": "EVENTS",
+              "name": "special-prop",
+              "type": "NUMBER",
+              "typecast": "STRING"
             },
             "stringFilter": {
               "operator": "CONTAINS",
@@ -392,7 +400,7 @@
             "propertyFilters": [
               {
                 "property": {
-                  "source": "EVENT",
+                  "source": "EVENTS",
                   "type": "STRING",
                   "name": "special-prop"
                 },
@@ -407,7 +415,7 @@
             "bornPropertyFilters": [
               {
                 "property": {
-                  "source": "EVENT",
+                  "source": "EVENTS",
                   "type": "STRING",
                   "name": "special-prop"
                 },
@@ -453,7 +461,7 @@
             "propertyFilters": [
               {
                 "property": {
-                  "source": "EVENT",
+                  "source": "EVENTS",
                   "type": "STRING",
                   "name": "special-prop"
                 },
@@ -468,7 +476,7 @@
             "bornPropertyFilters": [
               {
                 "property": {
-                  "source": "EVENT",
+                  "source": "EVENTS",
                   "type": "STRING",
                   "name": "special-prop"
                 },
@@ -535,21 +543,23 @@
           "funnelsQuery": {
             "timeUnit": "HOUR",
             "dateRange": {
-              "to": "2016-08-09",
-              "from": "2016-02-07"
+              "from": "2017-05-10",
+              "to": "2017-05-15"
             },
-            "bookmarkId": 939,
+            "bookmarkId": 2263164,
             "groupByProperty": {
-              "source": "EVENT",
-              "type": "STRING",
-              "name": "special-prop"
+              "source": "EVENTS",
+              "name": "special-prop",
+              "type": "NUMBER",
+              "typecast": "STRING"
             },
             "propertyFilters": [
               {
                 "property": {
-                  "source": "EVENT",
-                  "type": "STRING",
-                  "name": "special-prop"
+                  "source": "EVENTS",
+                  "name": "special-prop",
+                  "type": "NUMBER",
+                  "typecast": "STRING"
                 },
                 "stringFilter": {
                   "operator": "CONTAINS",
@@ -584,21 +594,23 @@
           "funnelsQuery": {
             "timeUnit": "HOUR",
             "dateRange": {
-              "to": "2016-08-09",
-              "from": "2016-02-07"
+              "from": "2017-05-10",
+              "to": "2017-05-15"
             },
-            "bookmarkId": 939,
+            "bookmarkId": 2263164,
             "groupByProperty": {
-              "source": "EVENT",
-              "type": "STRING",
-              "name": "special-prop"
+              "source": "EVENTS",
+              "name": "special-prop",
+              "type": "NUMBER",
+              "typecast": "STRING"
             },
             "propertyFilters": [
               {
                 "property": {
-                  "source": "EVENT",
-                  "type": "STRING",
-                  "name": "special-prop"
+                  "source": "EVENTS",
+                  "name": "special-prop",
+                  "type": "NUMBER",
+                  "typecast": "STRING"
                 },
                 "stringFilter": {
                   "operator": "CONTAINS",
@@ -638,7 +650,7 @@
             "propertyFilters": [
               {
                 "property": {
-                  "source": "EVENT",
+                  "source": "EVENTS",
                   "type": "STRING",
                   "name": "special-prop"
                 },
@@ -657,9 +669,11 @@
             "propertyFiltersOperator": "AND",
             "groupByProperties": [
               {
-                "source": "EVENT",
-                "type": "STRING",
-                "name": "special-prop"
+                "property": {
+                  "source": "EVENTS",
+                  "type": "STRING",
+                  "name": "special-prop"
+                }
               }
             ],
             "timeUnit": "DAY",
@@ -671,10 +685,10 @@
                 }
               },
               {
-                "showProperty": {
+                "showPeopleProperty": {
                   "action": "AVERAGE",
                   "property": {
-                    "source": "EVENT",
+                    "source": "PEOPLE",
                     "type": "STRING",
                     "name": "special-prop"
                   }
@@ -710,7 +724,7 @@
             "propertyFilters": [
               {
                 "property": {
-                  "source": "EVENT",
+                  "source": "EVENTS",
                   "type": "STRING",
                   "name": "special-prop"
                 },
@@ -729,9 +743,11 @@
             "propertyFiltersOperator": "AND",
             "groupByProperties": [
               {
-                "source": "EVENT",
-                "type": "STRING",
-                "name": "special-prop"
+                "property": {
+                  "source": "EVENTS",
+                  "type": "STRING",
+                  "name": "special-prop"
+                }
               }
             ],
             "timeUnit": "DAY",
@@ -743,10 +759,10 @@
                 }
               },
               {
-                "showProperty": {
+                "showPeopleProperty": {
                   "action": "AVERAGE",
                   "property": {
-                    "source": "EVENT",
+                    "source": "PEOPLE",
                     "type": "STRING",
                     "name": "special-prop"
                   }
