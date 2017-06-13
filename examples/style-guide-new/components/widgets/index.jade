@@ -371,3 +371,40 @@
                 pre
                   //- TODO - make example code snippet
                   span.grey-500 // Items Menu Widget
+
+  if sectionOpen == 'widgets' || searchSections.includes('smart-hub')
+    .sub-section-container#smart-hub
+      .divider
+      .section-content
+        section
+        .subsection-title Smart Hub Dropdown
+        .subsection-description For displaying alerts surfaced by our machine learning endpoints, used in reports and as smarthub global.
+        .indent-container
+          .example-block
+            .call-out.first-call-out
+              strong.icon +
+              strong mp-smart-hub-dropdown
+            .floating-example-bar.alerts-example
+              .alert-button(on={click: $helpers.toggleAlertDropdown})
+                svg-icon(attrs={icon: `hubs-notif`})
+                mp-smart-hub-dropdown(
+                 attrs={
+                   'open': alertDropdownOpen,
+                   'alerts': JSON.stringify(alerts),
+                   'mixpanel-host': `https://mixpanel.com`,
+                   'project-id': 3,
+                 }
+                )
+          .code-snippet
+            .call-out.first-call-out
+              strong.icon +
+              strong Example Code
+            .snippet-container.min.max
+              .snippet-header
+                label Jade
+              .code-field
+                pre
+                  | 1
+                pre
+                  //- TODO - make example code snippet
+                  span.grey-500 // Smart Hub Dropdown
