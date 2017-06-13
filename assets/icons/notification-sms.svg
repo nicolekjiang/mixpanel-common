@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 44.1 (41455) - http://www.bohemiancoding.com/sketch -->
+    <title>notification-sms</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="16-x-16" stroke="none" stroke-width="1"fill-rule="evenodd">
+        <g id="notification-sms">
+            <g id="notifications-sms" transform="translate(3.000000, 3.000000)">
+                <path d="M11,7 C10.448,7 10,6.552 10,6 C10,5.448 10.448,5 11,5 C11.552,5 12,5.448 12,6 C12,6.552 11.552,7 11,7 M8,7 C7.448,7 7,6.552 7,6 C7,5.448 7.448,5 8,5 C8.552,5 9,5.448 9,6 C9,6.552 8.552,7 8,7 M5,7 C4.448,7 4,6.552 4,6 C4,5.448 4.448,5 5,5 C5.552,5 6,5.448 6,6 C6,6.552 5.552,7 5,7 M15,0 L1,0 C0.448,0 0,0.448 0,1 L0,11 C0,11.552 0.448,12 1,12 L3,12 L3,16 L8,12 L15,12 C15.552,12 16,11.552 16,11 L16,1 C16,0.448 15.552,0 15,0"></path>
+            </g>
+        </g>
+    </g>
+</svg>

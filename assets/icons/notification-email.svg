@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 43.2 (39069) - http://www.bohemiancoding.com/sketch -->
+    <!-- Generator: Sketch 44.1 (41455) - http://www.bohemiancoding.com/sketch -->
     <title>notification-email</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
@@ -8,7 +8,7 @@
         <g id="notification-email">
             <g id="email-message" transform="translate(4.000000, 5.000000)">
                 <g>
-                    <path d="M0,0 L14,0 L14,12 L0,12 L0,0 Z M1.75,5.14285714 L1.75,6.85714286 L7,6.85714286 L7,5.14285714 L1.75,5.14285714 Z M1.75,7.71428571 L1.75,9.4285714 L7,9.4285714 L7,7.71428571 L1.75,7.71428571 Z M9.625,1.71428571 L9.625,4.28571429 L12.25,4.28571429 L12.25,1.71428571 L9.625,1.71428571 Z"></path>
+                    <path d="M0,0 L14,0 L14,12 L0,12 L0,0 Z M1.75,5.14285714 L1.75,6.85714286 L7,6.85714286 L7,5.14285714 L1.75,5.14285714 Z M1.75,7.71428571 L1.75,9.4285714 L7,9.4285714 L7,7.71428571 L1.75,7.71428571 Z M9.625,1.71428571 L9.625,4.28571429 L12.25,4.28571429 L12.25,1.71428571 L9.625,1.71428571 Z" fill-rule="nonzero"></path>
                 </g>
             </g>
         </g>
