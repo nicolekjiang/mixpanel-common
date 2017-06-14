@@ -1,0 +1,9 @@
+.mp-sh-tooltip-internal-container(
+  class={[`mp-sh-tooltip-internal-placement-${placement}`]: true}
+)
+  mp-smart-hub-alert(
+    attrs={
+      'is-link': false,
+      'smart-hub-alert': JSON.stringify({alert}),
+    }
+  )

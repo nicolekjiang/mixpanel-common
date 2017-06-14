@@ -438,9 +438,17 @@
                  }
                 )
             .example-card.alerts-example
-              mp-smart-hub-tooltip(
-                attrs={
-                  'placement': `right`,
-                  'alert': JSON.stringify(smartHubAlerts[0].alert),
-                }
-              )
+                .anomaly-up(on={click: $helpers.handleClickAnomalyUp})
+                  include ../../../../lib/widgets/smart-hub-alert/smart-hub-assets/anomaly-up.svg
+                .anomaly-down(on={click: $helpers.handleClickAnomalyDown})
+                  include ../../../../lib/widgets/smart-hub-alert/smart-hub-assets/anomaly-down.svg
+                if smartHubTooltip
+                    mp-smart-hub-tooltip(
+                      attrs={
+                        'placement': smartHubTooltip.placement,
+                        'placement-left': `${smartHubTooltip.placementLeft}`,
+                        'placement-top': `${smartHubTooltip.placementTop}`,
+                        'alert': JSON.stringify(smartHubTooltip.alert),
+                      }
+                      on={removedAlert: $helpers.handleRemovedTooltipAlert}
+                    )

@@ -19,6 +19,7 @@ document.registerElement(`widgets-section`, class extends Component {
       defaultState: {
         smartHubAlerts,
         smartHubDropdownOpen: false,
+        smartHubTooltip: null,
         currentBookmark: `default`,
         bookmarks,
         itemsMenuOpen: false,
@@ -272,6 +273,27 @@ document.registerElement(`widgets-section`, class extends Component {
           ];
         },
         toggleSmartHubDropdown: () => this.update({smartHubDropdownOpen: !this.state.smartHubDropdownOpen}),
+        handleClickAnomalyUp: ev => {
+          const placementElRect = ev.target.getBoundingClientRect();
+          this.update({smartHubTooltip: {
+            placement: `top`,
+            placementLeft: document.body.scrollLeft + placementElRect.left + placementElRect.width / 2,
+            placementTop: document.body.scrollTop + placementElRect.top,
+            alert: this.state.smartHubAlerts[0].alert,
+          }});
+        },
+        handleClickAnomalyDown: ev => {
+          const placementElRect = ev.target.getBoundingClientRect();
+          this.update({smartHubTooltip: {
+            placement: `bottom`,
+            placementLeft: document.body.scrollLeft + placementElRect.left + placementElRect.width / 2,
+            placementTop: document.body.scrollTop + placementElRect.top + placementElRect.height,
+            alert: this.state.smartHubAlerts[1].alert,
+          }});
+        },
+        handleRemovedTooltipAlert: () => {
+          this.update({smartHubTooltip: null});
+        },
       },
       template,
     };
