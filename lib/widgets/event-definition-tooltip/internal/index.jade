@@ -15,6 +15,6 @@
             .mp-event-definition-verified-icon
               svg-icon(attrs={icon: 'check-checkbox'})
             .mp-event-definition-verified-text
-              = isMixpanelDefinition ? `This is a Mixpanel built-in event.` : $helpers.getVerifiedText()
+              = isMixpanelDefinition ? `This event is automatically tracked by Mixpanel.` : $helpers.getVerifiedText()
       .mp-event-definition-learn-more
         span Add descriptions to your events with #[a(attrs={href: url}) Lexicon].

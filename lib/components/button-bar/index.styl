@@ -40,14 +40,16 @@ content-color(color)
     user-select none
     width 100%
 
+    .content-wrapper
+      display flex
+      padding 0 12px
+
     .content
       align-items center
       display inline-flex
       justify-content center
       margin-top -2px
       max-width 100%
-      padding-left 12px
-      padding-right 12px
 
     +content-styles()
       svg-icon
@@ -61,7 +63,6 @@ content-color(color)
     .arrow-next
       height 22px
       margin-left 6px
-      margin-top 1px
       width 18px
 
     &.blue, &.primary

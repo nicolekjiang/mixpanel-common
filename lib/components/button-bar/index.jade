@@ -6,8 +6,9 @@
     'mp-button-bar-grey': $component.getAttribute('color') === 'grey',
   })
 )
-  .mp-button-bar-content
-    content
-  if $component.isAttributeEnabled('arrow-next')
-    .mp-button-bar-arrow-next
-      svg-icon(attrs={icon: 'arrow-right'})
+  .mp-button-bar-content-wrapper
+    .mp-button-bar-content
+      content
+    if $component.isAttributeEnabled('arrow-next')
+      .mp-button-bar-arrow-next
+        svg-icon(attrs={icon: 'arrow-right'})
