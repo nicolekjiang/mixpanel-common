@@ -223,66 +223,139 @@
     }
   },
   {
-    "alert": {
-      "alertContentId": "alert-content-id-retention1",
+    "groupedAlert": {
+      "groupedAlertId": "retention-two-intervals",
       "alertMetadata": {
         "type": "ANOMALY",
-        "message": "spontaneous suppuration",
+        "message": "Retention: two intervals",
         "readAtMs": "1490908189900",
         "ingestedAtMs": "1490908189900",
         "markedUsefulAtMs": "1490908189900"
       },
-      "retentionQuery": {
-        "bornEvent": "ras",
-        "propertyFilters": [
-          {
-            "property": {
-              "source": "EVENTS",
-              "type": "STRING",
-              "name": "special-prop"
+      "alerts": [
+        {
+          "alertContentId": "retention-single-interval-1",
+          "alertMetadata": {
+            "type": "ANOMALY",
+            "message": "Retention: single interval 1",
+            "readAtMs": "1490908189900",
+            "ingestedAtMs": "1490908189900",
+            "markedUsefulAtMs": "1490908189900"
+          },
+          "retentionQuery": {
+            "bornEvent": "$signup",
+            "bornPropertyFilters": [
+              {
+                "property": {
+                  "source": "EVENTS",
+                  "type": "STRING",
+                  "name": "$os"
+                },
+                "stringFilter": {
+                  "operator": "CONTAINS",
+                  "operands": [
+                    "Mac OS X"
+                  ]
+                }
+              }
+            ],
+            "event": "Viewed report",
+            "propertyFilters": [
+              {
+                "property": {
+                  "source": "EVENTS",
+                  "type": "STRING",
+                  "name": "$browser"
+                },
+                "stringFilter": {
+                  "operator": "EQUALS",
+                  "operands": [
+                    "Chrome"
+                  ]
+                }
+              }
+            ],
+            "dateRange": {
+              "from": "2016-09-01",
+              "to": "2016-09-25"
             },
-            "stringFilter": {
-              "operator": "CONTAINS",
-              "operands": [
-                "retinoblastoma"
-              ]
-            }
-          }
-        ],
-        "bornPropertyFilters": [
-          {
-            "property": {
-              "source": "EVENTS",
-              "type": "STRING",
-              "name": "special-prop"
+            "retentionType": "BIRTH",
+            "countType": "PERCENT",
+            "timeUnit": "DAY"
+          },
+          "alertId": "retention-alert-id1",
+          "anomaly": {
+            "retentionDetails": {
+              "interval": 6
             },
-            "stringFilter": {
-              "operator": "CONTAINS",
-              "operands": [
-                "retinoblastoma"
-              ]
-            }
+            "direction": "POSITIVE",
+            "valueAtTimestamp": 19.13,
+            "anomalyId": "anomaly-id-retention1",
+            "anomalyTimestamp": "2016-09-08"
           }
-        ],
-        "dateRange": {
-          "to": "2017-04-09",
-          "from": "2017-01-04"
         },
-        "retentionType": "BIRTH",
-        "countType": "PERCENT",
-        "timeUnit": "DAY",
-        "event": "src"
-      },
-      "alertId": "retention-alert-id1",
-      "anomaly": {
-        "retentionDetails": {
-          "interval": "4"
-        },
-        "direction": "NEGATIVE",
-        "valueAtTimestamp": 0.93,
-        "anomalyId": "anomaly-id-retention1",
-        "anomalyTimestamp": "2017-09-02"
-      }
+        {
+          "alertContentId": "retention-single-interval-2",
+          "alertMetadata": {
+            "type": "ANOMALY",
+            "message": "Retention: single interval 2",
+            "readAtMs": "1490908189900",
+            "ingestedAtMs": "1490908189900",
+            "markedUsefulAtMs": "1490908189900"
+          },
+          "retentionQuery": {
+            "bornEvent": "$signup",
+            "bornPropertyFilters": [
+              {
+                "property": {
+                  "source": "EVENTS",
+                  "type": "STRING",
+                  "name": "$os"
+                },
+                "stringFilter": {
+                  "operator": "CONTAINS",
+                  "operands": [
+                    "Mac OS X"
+                  ]
+                }
+              }
+            ],
+            "event": "Viewed report",
+            "propertyFilters": [
+              {
+                "property": {
+                  "source": "EVENTS",
+                  "type": "STRING",
+                  "name": "$browser"
+                },
+                "stringFilter": {
+                  "operator": "EQUALS",
+                  "operands": [
+                    "Chrome"
+                  ]
+                }
+              }
+            ],
+            "dateRange": {
+              "from": "2016-09-01",
+              "to": "2016-09-25"
+            },
+            "retentionType": "BIRTH",
+            "countType": "PERCENT",
+            "timeUnit": "DAY"
+          },
+          "alertId": "retention-alert-id1",
+          "anomaly": {
+            "retentionDetails": {
+              "interval": 13
+            },
+            "direction": "POSITIVE",
+            "valueAtTimestamp": 11.74,
+            "anomalyId": "anomaly-id-retention1",
+            "anomalyTimestamp": "2016-09-08"
+          }
+        }
+      ]
     }
   },
   {
